@@ -25,3 +25,6 @@ doc/
 # Ignore rbenv files
 .rbenv-gemsets
 .ruby-version
+
+# Ignore rspec-config
+.rspec
