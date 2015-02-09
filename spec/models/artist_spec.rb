@@ -15,7 +15,7 @@ RSpec.describe Artist, type: :model do
   end
 
   it "must have a unique name" do
-    clone = @artist.clone
+    clone = Artist.new(name: @artist.name)
     @artist.save!
     expect { clone.save! }.to raise_error
   end
