@@ -13,4 +13,10 @@ RSpec.describe Artist, type: :model do
     @artist.name = nil
     expect(@artist).not_to be_valid
   end
+
+  it "must have a unique name" do
+    clone = @artist.clone
+    @artist.save!
+    expect { clone.save! }.to raise_error
+  end
 end
