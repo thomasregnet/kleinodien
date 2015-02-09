@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Artist, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @artist = FactoryGirl.create(:artist)
+  end
+
+  it "is valid with with valid attributes" do
+    expect(@artist).to be_valid
+  end
 end
