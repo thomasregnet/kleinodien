@@ -25,4 +25,10 @@ RSpec.describe Artist, type: :model do
     @artist.save!
     expect { clone.save! }.to raise_error
   end
+
+  it "is unique with a disambiguation" do
+    clone = Artist.new(name: @artist.name, disambiguation: 'other one')
+    @artist.save!
+    expect { clone.save! }.not_to raise_error 
+  end
 end
