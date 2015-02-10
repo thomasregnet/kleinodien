@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ArtistCredit, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    FactoryGirl.create(:artist_credit)
+  end
+
+  it "is valid with valid attributes"
+
+  it "is not valid without a name"
 end
