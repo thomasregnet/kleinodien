@@ -19,4 +19,10 @@ RSpec.describe Artist, type: :model do
     @artist.save!
     expect { clone.save! }.to raise_error
   end
+
+  it "must have a case insensitive unique name" do
+    clone = Artist.new(name: @artist.name.upcase)
+    @artist.save!
+    expect { clone.save! }.to raise_error
+  end
 end
