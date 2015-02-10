@@ -33,10 +33,9 @@ RSpec.describe Artist, type: :model do
   end
 
   it "fails if a name-disambiguation pair already exists" do
-    disambiguation = 'yet another artist with this name'
-    @artist.disambiguation = disambiguation
+    @artist = FactoryGirl.create(:artist_with_disambiguation)
     clone = Artist.new(
-      name: @artist.name, disambiguation: disambiguation)
+      name: @artist.name, disambiguation: @artist.disambiguation)
     @artist.save!
     expect { clone.save! }.to raise_error
   end
