@@ -16,19 +16,16 @@ RSpec.describe Artist, type: :model do
 
   it "must have a unique name" do
     clone = Artist.new(name: @artist.name)
-    @artist.save!
     expect { clone.save! }.to raise_error
   end
 
   it "must have a case insensitive unique name" do
     clone = Artist.new(name: @artist.name.upcase)
-    @artist.save!
     expect { clone.save! }.to raise_error
   end
 
   it "is unique with a disambiguation" do
     clone = Artist.new(name: @artist.name, disambiguation: 'other one')
-    @artist.save!
     expect { clone.save! }.not_to raise_error 
   end
 
@@ -36,7 +33,6 @@ RSpec.describe Artist, type: :model do
     @artist = FactoryGirl.create(:artist_with_disambiguation)
     clone = Artist.new(
       name: @artist.name, disambiguation: @artist.disambiguation)
-    @artist.save!
     expect { clone.save! }.to raise_error
   end
 end
