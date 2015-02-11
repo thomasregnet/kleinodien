@@ -1,5 +1,8 @@
 FactoryGirl.define do
   factory :artist_credit do
     sequence(:name) { |n| "artist credit ##{n}" }
+    after(:build) do |ac|
+      ac.participants << FactoryGirl.build(:participant)
+    end
   end
 end

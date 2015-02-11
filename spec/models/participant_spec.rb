@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Participant, type: :model do
   before(:each) do
-    @participant = FactoryGirl.create(:participant)
+    # FactoryGirl.build and not create. Create violates foreign keys.
+    @participant = FactoryGirl.build(:participant)
   end
 
   it "is valid with valid attributes" do
