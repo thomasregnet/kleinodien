@@ -5,6 +5,8 @@ RSpec.describe ArtistCredit, type: :model do
     @artist_credit = FactoryGirl.build(:artist_credit)
   end
 
+  it { is_expected.to respond_to(:artists) }
+  
   it "is valid with valid attributes" do
     expect(@artist_credit).to be_valid
   end
@@ -23,4 +25,5 @@ RSpec.describe ArtistCredit, type: :model do
     @artist_credit.participants = []
     expect(@artist_credit).not_to be_valid
   end
+
 end
