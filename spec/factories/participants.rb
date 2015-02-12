@@ -8,7 +8,7 @@ FactoryGirl.define do
     
     factory :valid_participant do
       artist
-      artist_credit FactoryGirl.build_stubbed(:artist_credit)
+      artist_credit
     end
   end
 end
