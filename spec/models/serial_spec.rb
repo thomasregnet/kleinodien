@@ -13,4 +13,9 @@ RSpec.describe Serial, type: :model do
     @serial.title = nil
     expect(@serial).not_to be_valid
   end
+
+  it "must have a unique name" do
+    clone = Serial.new(title: @serial.title)
+    expect(clone).not_to be_valid
+  end
 end
