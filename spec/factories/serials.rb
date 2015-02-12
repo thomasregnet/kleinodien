@@ -1,7 +1,5 @@
 FactoryGirl.define do
   factory :serial do
-    title "MyString"
-disambiguation "MyString"
+    sequence(:title) { |n| "serial ##{n}" }
   end
-
 end
