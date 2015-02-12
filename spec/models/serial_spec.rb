@@ -23,4 +23,17 @@ RSpec.describe Serial, type: :model do
     clone = Serial.new(title: @serial.title.upcase)
     expect(clone).not_to be_valid
   end
+
+  it "is unique with a disambiguation" do
+    clone = Serial.new(title: @serial.title, disambiguation: 'another serial')
+    expect(clone).to be_valid
+  end
+
+  it "is not valid if a title disambiguation pair already exists" do
+    disambiguation = 'same thing'
+    @serial.disambiguation = disambiguation
+    @serial.save!
+    clone = Serial.new(title: @serial.title, disambiguation: disambiguation)
+    expect(clone).not_to be_valid
+  end
 end
