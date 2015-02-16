@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216211655) do
+ActiveRecord::Schema.define(version: 20150216213806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,4 +70,5 @@ ActiveRecord::Schema.define(version: 20150216211655) do
 
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
+  add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
