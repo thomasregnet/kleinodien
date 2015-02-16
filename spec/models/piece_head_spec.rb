@@ -29,4 +29,17 @@ RSpec.describe PieceHead, type: :model do
     expect(clone).not_to be_valid
   end
 
+  it "is valid and unique with disambiguation" do
+    clone = PieceHead.new(title: @ph.title.upcase, type: @ph.type)
+    clone.disambiguation = 'another one'
+    expect(clone).to be_valid
+  end
+
+  it "is not valid if a title disambuguation pair already exists" do
+    disambiguation = 'same thing'
+    @ph.disambiguation = disambiguation
+    @ph.save!
+    clone = PieceHead.new(title: @ph.title, disambiguation: disambiguation)
+    expect(clone).not_to be_valid
+  end
 end
