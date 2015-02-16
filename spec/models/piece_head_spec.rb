@@ -13,4 +13,9 @@ RSpec.describe PieceHead, type: :model do
     @ph.title = nil
     expect(@ph).not_to be_valid
   end
+
+  it "is not valid without a type" do
+    @ph.type = nil
+    expect(@ph).not_to be_valid
+  end
 end
