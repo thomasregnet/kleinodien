@@ -10,4 +10,10 @@ RSpec.describe Season, type: :model do
   it "is valid with valid attributes" do
     expect(@season).to be_valid
   end
+
+  it "is not valid without a no" do
+    @season.no = nil
+    expect(@season).not_to be_valid
+  end
+  
 end
