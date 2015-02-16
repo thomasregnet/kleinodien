@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216200436) do
+ActiveRecord::Schema.define(version: 20150216202333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20150216200436) do
   end
 
   add_index "participants", ["no", "artist_credit_id"], name: "participants_no_artist_credit_id_idx", unique: true, using: :btree
+
+  create_table "piece_heads", force: :cascade do |t|
+    t.integer  "artist_credit_id"
+    t.integer  "season_id"
+    t.string   "title",            null: false
+    t.string   "disambiguation"
+    t.integer  "no"
+    t.string   "type",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
