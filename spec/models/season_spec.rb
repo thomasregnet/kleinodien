@@ -15,5 +15,9 @@ RSpec.describe Season, type: :model do
     @season.no = nil
     expect(@season).not_to be_valid
   end
-  
+
+  it "is not valid without a serial" do
+    @season.serial = nil
+    expect(@season).not_to be_valid
+  end
 end
