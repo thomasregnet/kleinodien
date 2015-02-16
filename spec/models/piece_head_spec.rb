@@ -9,8 +9,8 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).to be_valid
   end
 
-  # it "is not valid without a title" do
-  #   @ph.title = nil
-  #   expect(@ph).not_to be_valid
-  # end
+  it "is not valid without a title" do
+    @ph.title = nil
+    expect(@ph).not_to be_valid
+  end
 end
