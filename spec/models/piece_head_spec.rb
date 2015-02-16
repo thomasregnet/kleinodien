@@ -18,4 +18,15 @@ RSpec.describe PieceHead, type: :model do
     @ph.type = nil
     expect(@ph).not_to be_valid
   end
+
+  it "must have a unique name" do
+    clone = PieceHead.new(title: @ph.title, type: @ph.type)
+    expect(clone).not_to be_valid
+  end
+
+  it "must have a case insensitive unique name" do
+    clone = PieceHead.new(title: @ph.title.upcase, type: @ph.type)
+    expect(clone).not_to be_valid
+  end
+
 end
