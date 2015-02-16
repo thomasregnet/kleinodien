@@ -14,12 +14,12 @@ RSpec.describe Serial, type: :model do
     expect(@serial).not_to be_valid
   end
 
-  it "must have a unique name" do
+  it "must have a unique title" do
     clone = Serial.new(title: @serial.title)
     expect(clone).not_to be_valid
   end
 
-  it "must have a case insensitive unique name" do
+  it "must have a case insensitive unique title" do
     clone = Serial.new(title: @serial.title.upcase)
     expect(clone).not_to be_valid
   end
