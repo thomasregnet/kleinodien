@@ -1,7 +1,7 @@
 class RenameSerialsLowerTitleIdx < ActiveRecord::Migration
   def change
     old = 'serials_lower_title_idx'
-    new = 'index_serials_lower_title'
+    new = 'index_serials_on_lower_title'
     reversible do |rename|
       rename.up do
         execute "ALTER INDEX #{old} RENAME TO #{new}"
