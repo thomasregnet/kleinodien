@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :station do
-    name "MyString"
-disambiguation "MyString"
-type ""
+    sequence(:name) { |n| "station ##{n}" }
+    type 'Station'
   end
 
 end
