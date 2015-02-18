@@ -11,24 +11,30 @@ RSpec.shared_examples "a model with disambiguations" do
   it "is not valid without a naming" do
     @model.send set_name, nil
     expect(@model).not_to be_valid
+    expect { @model.save! validate: false }.to raise_error
   end
 
   it "must have a unique naming" do
     clone = FactoryGirl.build(factory)
     clone.send set_name, @model.send(get_name)
-    expect { clone.save! }.to raise_error
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 
   it "must have a case insensitive unique naming" do
     clone = FactoryGirl.build(factory)
     clone.send(set_name, @model.send(get_name).upcase)
-    expect { clone.save! }.to raise_error
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 
   it "is unique with a disambiguation" do
     clone = FactoryGirl.build(factory)
     clone.send(set_name, @model.send(get_name))
     clone.disambiguation = disambiguation
+    expect(clone).to be_valid
     expect { clone.save! }.not_to raise_error 
   end
 
@@ -38,6 +44,7 @@ RSpec.shared_examples "a model with disambiguations" do
     clone = FactoryGirl.build(factory)
     clone.send(set_name, @model.send(get_name))
     clone.disambiguation = disambiguation
-    expect { clone.save! }.to raise_error
+    expect { clone.save! validate: false }.to raise_error(
+                                ActiveRecord::RecordNotUnique)
   end  
 end
