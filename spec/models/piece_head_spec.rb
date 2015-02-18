@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_disambiguations'
 
 RSpec.describe PieceHead, type: :model do
   before(:each) do
@@ -9,37 +10,13 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).to be_valid
   end
 
-  it "is not valid without a title" do
-    @ph.title = nil
-    expect(@ph).not_to be_valid
-  end
-
   it "is not valid without a type" do
     @ph.type = nil
     expect(@ph).not_to be_valid
   end
-
-  it "must have a unique name" do
-    clone = PieceHead.new(title: @ph.title, type: @ph.type)
-    expect(clone).not_to be_valid
-  end
-
-  it "must have a case insensitive unique name" do
-    clone = PieceHead.new(title: @ph.title.upcase, type: @ph.type)
-    expect(clone).not_to be_valid
-  end
-
-  it "is valid and unique with disambiguation" do
-    clone = PieceHead.new(title: @ph.title.upcase, type: @ph.type)
-    clone.disambiguation = 'another one'
-    expect(clone).to be_valid
-  end
-
-  it "is not valid if a title disambuguation pair already exists" do
-    disambiguation = 'same thing'
-    @ph.disambiguation = disambiguation
-    @ph.save!
-    clone = PieceHead.new(title: @ph.title, disambiguation: disambiguation)
-    expect(clone).not_to be_valid
+  
+  it_behaves_like "a model with disambiguations" do
+    let(:factory) { :piece_head }
+    let(:naming) { 'title' }
   end
 end
