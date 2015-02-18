@@ -8,7 +8,7 @@ RSpec.shared_examples "a model with disambiguations" do
   let(:set_name) { naming + '=' }
   let(:disambiguation) { 'another one' }
   
-  it "is not valid without a naming}" do
+  it "is not valid without a naming" do
     @model.send set_name, nil
     expect(@model).not_to be_valid
   end
