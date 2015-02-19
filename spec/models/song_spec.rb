@@ -11,6 +11,7 @@ RSpec.describe Song, type: :model do
   end
 
   it_behaves_like "a piece" do
-    let(:factory) { :song }
+    #let(:factory) { :song }
+    let(:piece) { @song }
   end
 end
