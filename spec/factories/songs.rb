@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :song do
+  factory :song_xxx do
     
   end
 
