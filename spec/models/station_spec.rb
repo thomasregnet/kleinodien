@@ -11,7 +11,8 @@ RSpec.describe Station, type: :model do
   end
 
   it_behaves_like "a model with disambiguations" do
-    let(:factory) { :artist }
+    let(:factory) { :station }
+    let(:object) { @station }
     let(:naming) { 'name' }
   end
 end

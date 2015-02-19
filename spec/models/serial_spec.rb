@@ -11,7 +11,8 @@ RSpec.describe Serial, type: :model do
   end
 
   it_behaves_like "a model with disambiguations" do
-    let(:factory) { :artist }
-    let(:naming) { 'name' }
+    let(:factory) { :serial }
+    let(:object) { @serial }
+    let(:naming) { 'title' }
   end  
 end

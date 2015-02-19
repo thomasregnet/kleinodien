@@ -17,6 +17,7 @@ RSpec.describe PieceHead, type: :model do
   
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :piece_head }
+    let(:object) { @ph }
     let(:naming) { 'title' }
   end
 end

@@ -17,6 +17,7 @@ RSpec.describe SongHead, type: :model do
 
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :song_head }
+    let(:object) { @song_head }
     let(:naming) { 'title' }
   end
 end

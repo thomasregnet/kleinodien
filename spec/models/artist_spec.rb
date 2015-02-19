@@ -12,6 +12,7 @@ RSpec.describe Artist, type: :model do
 
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :artist }
+    let(:object) { @artist }
     let(:naming) { 'name' }
   end
 end
