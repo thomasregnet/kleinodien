@@ -1,0 +1,2 @@
+class Song < Piece
+end
