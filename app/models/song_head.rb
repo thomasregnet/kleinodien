@@ -1,0 +1,2 @@
+class SongHead < PieceHead
+end
