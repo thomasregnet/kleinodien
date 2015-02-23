@@ -1,2 +1,0 @@
-class TvEpisode < PieceHead
-end
