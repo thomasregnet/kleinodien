@@ -11,5 +11,9 @@ FactoryGirl.define do
     factory :movie_head, class: MovieHead do
       type 'MovieHead'
     end
+
+    factory :tv_episode, class: TvEpisode do
+      type 'TvEpisode'
+    end
   end
 end
