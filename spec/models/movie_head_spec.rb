@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_disambiguations'
 
 RSpec.describe MovieHead, type: :model do
   before(:each) do
