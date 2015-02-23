@@ -1,0 +1,2 @@
+class TvSerial < Serial
+end
