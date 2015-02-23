@@ -4,8 +4,8 @@ FactoryGirl.define do
     no 1
     type 'Season'
 
-    factory :regular_season, class: RegularSeason do
-      type 'RegularSeason'
+    factory :tv_season, class: TvSeason do
+      type 'TvSeason'
     end
   end
 end
