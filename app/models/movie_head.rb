@@ -1,0 +1,2 @@
+class MovieHead < PieceHead
+end
