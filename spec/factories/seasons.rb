@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :season do
     serial
-    no 1
+    sequence(:no) { |n| n }
     type 'Season'
 
     factory :tv_season, class: TvSeason do

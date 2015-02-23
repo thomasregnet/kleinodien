@@ -18,4 +18,14 @@ RSpec.describe TvSerial, type: :model do
       let(:naming) { 'title' }
     end
   end
+
+  context "with seassons" do
+    before(:each) do
+      @tv_serial = FactoryGirl.create(:tv_serial_with_seasons)
+    end
+
+    it "fails" do
+      expect(@tv_serial).to be_valid
+    end
+  end
 end
