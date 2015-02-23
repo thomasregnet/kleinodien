@@ -7,5 +7,10 @@ FactoryGirl.define do
       type 'Song'
       association :head, factory: :song_head
     end
+
+    factory :movie, class: Movie do
+      type 'Movie'
+      association :head, factory: :movie_head
+    end
   end
 end
