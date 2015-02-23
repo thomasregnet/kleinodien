@@ -1,0 +1,2 @@
+class RegularSeason < Season
+end
