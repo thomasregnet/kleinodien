@@ -7,5 +7,9 @@ FactoryGirl.define do
       artist_credit
       type 'SongHead'
     end
+
+    factory :movie_head, class: MovieHead do
+      type 'MovieHead'
+    end
   end
 end

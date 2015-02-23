@@ -1,5 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe MovieHead, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @movie_head = FactoryGirl.create(:movie_head)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@movie_head).to be_valid
+  end
+
+  it_behaves_like "a model with disambiguations" do
+    let(:factory) { :movie_head }
+    let(:object) { @movie_head }
+    let(:naming) { 'title' }
+  end
 end
