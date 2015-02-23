@@ -21,11 +21,12 @@ RSpec.describe TvSerial, type: :model do
 
   context "with seassons" do
     before(:each) do
-      @tv_serial = FactoryGirl.create(:tv_serial_with_seasons)
+      @tv_serial = FactoryGirl.create(
+        :tv_serial_with_seasons, seasons_count: 3)
     end
 
-    it "fails" do
-      expect(@tv_serial).to be_valid
+    it "has seasons" do
+      expect(@tv_serial.seasons.count).to eq(3)
     end
   end
 end
