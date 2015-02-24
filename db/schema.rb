@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223194519) do
+ActiveRecord::Schema.define(version: 20150224204843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20150223194519) do
     t.datetime "updated_at",       null: false
   end
 
-  create_table "pieces", force: :cascade do |t|
+  create_table "piece_releases", force: :cascade do |t|
     t.integer  "piece_head_id", null: false
     t.integer  "station_id"
     t.string   "version"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20150223194519) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "pieces", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
-  add_index "pieces", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
+  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
+  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150223194519) do
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
-  add_foreign_key "pieces", "piece_heads", name: "pieces_fk_piece_heads"
-  add_foreign_key "pieces", "stations", name: "pieces_fk_stations"
+  add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
+  add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
