@@ -1,0 +1,2 @@
+class EpisodeHead < PieceHead
+end
