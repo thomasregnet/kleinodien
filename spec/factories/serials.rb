@@ -12,7 +12,7 @@ FactoryGirl.define do
         end
 
         after(:create) do |tv_serial, elevator|
-          create_list(:tv_season, elevator.seasons_count, serial: tv_serial)
+          create_list(:season, elevator.seasons_count, serial: tv_serial)
         end
       end
     end
