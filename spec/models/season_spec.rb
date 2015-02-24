@@ -21,7 +21,7 @@ RSpec.describe Season, type: :model do
     end
   end
 
-  context "with episodes" do
+  context "with episodes of a tv-serial" do
     before(:each) do
       @season = FactoryGirl.create(
         :season_with_tv_episode_heads, episodes_count: 7)
@@ -29,6 +29,6 @@ RSpec.describe Season, type: :model do
 
     it "has the expected count of episodes" do
       expect(@season.episodes.count).to eq(7)
-    end
+    end 
   end
 end
