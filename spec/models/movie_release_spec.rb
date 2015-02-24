@@ -1,17 +1,16 @@
 require 'rails_helper'
 require 'shared_examples_for_pieces'
 
-RSpec.describe Song, type: :model do
+RSpec.describe MovieRelease, type: :model do
   before(:each) do
-    @song = FactoryGirl.create(:song)
+    @movie_release = FactoryGirl.create(:movie_release)
   end
 
   it "is valid with valid attributes" do
-    expect(@song).to be_valid
+    expect(@movie_release).to be_valid
   end
 
   it_behaves_like "a piece" do
-    #let(:factory) { :song }
-    let(:piece) { @song }
+    let(:piece) { @movie_release }
   end
 end
