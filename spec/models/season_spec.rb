@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Season, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
-
-  context "without seasons" do
+  context "without episodes" do
     before(:each) do
       @season = FactoryGirl.create(:season)
     end
@@ -25,11 +23,12 @@ RSpec.describe Season, type: :model do
 
   context "with episodes" do
     before(:each) do
-      @season = FactoryGirl.create(:season_with_tv_episode_heads)
+      @season = FactoryGirl.create(
+        :season_with_tv_episode_heads, episodes_count: 7)
     end
 
-    it "is nice" do
-      expect(@season).to be_valid
+    it "has the expected count of episodes" do
+      expect(@season.episodes.count).to eq(7)
     end
   end
 end
