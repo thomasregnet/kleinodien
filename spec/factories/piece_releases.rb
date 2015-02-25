@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :piece_release do
-    piece_head
+    #piece_head
+    association :head, factory: :piece_head
     type 'Piece'
 
     factory :song_release, class: SongRelease do
