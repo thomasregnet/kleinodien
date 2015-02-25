@@ -1,0 +1,2 @@
+class TvEpisodeRelease < PieceRelease
+end
