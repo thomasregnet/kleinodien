@@ -1,4 +1,4 @@
 class SongRelease < PieceRelease
-  belongs_to :head, class_name: 'SongHead', foreign_key: :piece_head_id
+  belongs_to :head, class_name: SongHead, foreign_key: :piece_head_id
   validates :head, presence: true
 end
