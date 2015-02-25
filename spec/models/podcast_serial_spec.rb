@@ -10,5 +10,11 @@ RSpec.describe PodcastSerial, type: :model do
     it "is valid with valid attributes" do
       expect(@podcast_serial).to be_valid
     end
+
+    it_behaves_like "a model with disambiguations" do
+      let(:factory) { :podcast_serial }
+      let(:object) { @podcast_serial }
+      let(:naming) { 'title' }
+    end
   end
 end
