@@ -3,13 +3,17 @@ FactoryGirl.define do
     sequence(:title) { |n| "piece ##{n}" }
     type  'PieceHead'
 
+    factory :movie_head, class: MovieHead do
+      type 'MovieHead'
+    end
+
+    factory :podcast_episode_head, class: PodcastEpisodeHead do
+      type 'PodcastEpisodeHead'
+    end
+    
     factory :song_head, class: SongHead do
       artist_credit
       type 'SongHead'
-    end
-
-    factory :movie_head, class: MovieHead do
-      type 'MovieHead'
     end
 
     factory :tv_episode_head, class: TvEpisodeHead do
