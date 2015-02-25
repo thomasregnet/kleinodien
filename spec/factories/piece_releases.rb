@@ -14,6 +14,11 @@ FactoryGirl.define do
       association :head, factory: :movie_head
     end
 
+    factory :podcast_episode_release, class: PodcastEpisodeRelease do
+      type 'PodcastEpisodeRelease'
+      association :head, factory: :podcast_episode_head
+    end
+    
     factory :tv_episode_release, class: TvEpisodeRelease do
       type 'TvEpisodeRelease'
       association :head, factory: :tv_episode_head
