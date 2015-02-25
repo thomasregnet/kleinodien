@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe ZeroSeason, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @zero_season = FactoryGirl.create(:zero_season)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@zero_season).to be_valid
+  end
 end

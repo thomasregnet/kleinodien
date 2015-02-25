@@ -14,5 +14,11 @@ FactoryGirl.define do
         create_list(:tv_episode_head, elevator.episodes_count, season: season)
       end
     end
+
+    factory :zero_season, class: ZeroSeason do
+      association :serial, factory: :podcast_serial
+      no 0
+      type 'ZeroSeason'
+    end
   end
 end
