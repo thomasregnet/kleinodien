@@ -16,5 +16,9 @@ FactoryGirl.define do
         end
       end
     end
+
+    factory :podcast_serial, class: PodcastSerial do
+      type 'PodcastSerial'
+    end
   end
 end
