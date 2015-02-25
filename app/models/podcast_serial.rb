@@ -1,0 +1,2 @@
+class PodcastSerial < Serial
+end
