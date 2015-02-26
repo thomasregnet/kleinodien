@@ -20,4 +20,14 @@ RSpec.describe ZeroSeason, type: :model do
     @zero_season.no = nil
     expect(@zero_season).not_to be_valid
   end
+
+  it "has '0' as default for 'no'" do
+    zero_season = ZeroSeason.new
+    expect(zero_season.no).to eq(0)
+  end
+
+  it "does not force '0' for 'no'" do
+    zero_season = ZeroSeason.new(no: 123)
+    expect(zero_season.no).to eq(123)
+  end
 end
