@@ -17,10 +17,14 @@ RSpec.describe Format, type: :model do
   it "must have a unique name" do
     clone = Format.new(name: @format.name)
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 
   it "must have a case insensitive unique name" do
     clone = Format.new(name: @format.name.upcase)
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 end
