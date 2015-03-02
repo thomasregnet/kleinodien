@@ -1,8 +1,5 @@
 FactoryGirl.define do
   factory :format do
-    name "MyString"
-abbr "MyString"
-explanation "MyString"
+    sequence(:name) { |n| "format ##{n}" }
   end
-
 end
