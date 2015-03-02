@@ -9,4 +9,9 @@ RSpec.describe Track, type: :model do
   it "is valid with valid attributes" do
     expect(@track).to be_valid
   end
+
+  it "is not valid without a format" do
+    @track.format = nil
+    expect(@track).not_to be_valid
+  end
 end
