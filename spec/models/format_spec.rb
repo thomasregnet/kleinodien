@@ -13,4 +13,14 @@ RSpec.describe Format, type: :model do
     @format.name = nil
     expect(@format).not_to be_valid
   end
+
+  it "must have a unique name" do
+    clone = Format.new(name: @format.name)
+    expect(clone).not_to be_valid
+  end
+
+  it "must have a case insensitive unique name" do
+    clone = Format.new(name: @format.name.upcase)
+    expect(clone).not_to be_valid
+  end
 end
