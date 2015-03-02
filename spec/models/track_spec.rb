@@ -14,4 +14,9 @@ RSpec.describe Track, type: :model do
     @track.format = nil
     expect(@track).not_to be_valid
   end
+
+  it "is not valid without a piece_release" do
+    @track.piece_release = nil
+    expect(@track).not_to be_valid
+  end
 end
