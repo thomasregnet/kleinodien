@@ -9,6 +9,13 @@ RSpec.describe CompilationIdentifier, type: :model do
     expect(@ci).to be_valid
   end
 
-  it "is not valid without a release"
-  it "is not valid without a type"
+  it "is not valid without a release" do
+    @ci.release = nil
+    expect(@ci).not_to be_valid
+  end
+  
+  it "is not valid without a type"  do
+    @ci.type = nil
+    expect(@ci).not_to be_valid
+  end
 end
