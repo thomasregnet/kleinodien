@@ -1,7 +1,5 @@
 FactoryGirl.define do
   factory :identifier_type do
-    name "MyString"
-explanation "MyString"
+    sequence(:name) { |n| "identifier type ##{n}" }
   end
-
 end
