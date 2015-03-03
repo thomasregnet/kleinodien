@@ -39,6 +39,7 @@ RSpec.describe CompilationRelease, type: :model do
     other_release = CompilationRelease.new(
       head: @c_release.head, version: @c_release.version)
     expect(other_release).not_to be_valid
+    expect { other_release.save! validate: false }.to raise_error
   end
 
     it "is not valid with a duplicate head and duplicate upcase version" do
@@ -47,5 +48,6 @@ RSpec.describe CompilationRelease, type: :model do
     other_release = CompilationRelease.new(
       head: @c_release.head, version: @c_release.version.upcase)
     expect(other_release).not_to be_valid
+    expect { other_release.save! validate: false }.to raise_error
   end
 end
