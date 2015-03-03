@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302105527) do
+ActiveRecord::Schema.define(version: 20150303072944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20150302105527) do
     t.string   "disambiguation"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "compilation_heads", force: :cascade do |t|
+    t.integer  "artist_credit_id"
+    t.string   "title",            null: false
+    t.string   "disambiguation"
+    t.string   "type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "formats", force: :cascade do |t|
