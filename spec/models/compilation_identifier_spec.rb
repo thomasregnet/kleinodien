@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CompilationIdentifier, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @ci = FactoryGirl.create(:compilation_identifier)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@ci).to be_valid
+  end
 end
