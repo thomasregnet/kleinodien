@@ -14,4 +14,10 @@ RSpec.describe CompilationRelease, type: :model do
     expect(other_release).not_to be_valid
     # TODO: save! without validation
   end
+
+  it "is valid with a duplicate head and a version" do
+    other_release = CompilationRelease.new(head: @c_release.head)
+    other_release.version = 'other one'
+    expect(other_release).to be_valid
+  end
 end
