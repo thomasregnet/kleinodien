@@ -9,4 +9,10 @@ RSpec.describe CompilationHead, type: :model do
   it "is valid with valid attributes" do
     expect(@c_head).to be_valid
   end
+
+  it_behaves_like "a model with disambiguations" do
+    let(:factory) { :compilation_head }
+    let(:object) { @c_head }
+    let(:naming) { 'title' }
+  end
 end
