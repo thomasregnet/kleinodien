@@ -27,5 +27,14 @@ RSpec.describe CompilationIdentifier, type: :model do
   it "is not valid with a blank code" do
     @ci.code = ''
     expect(@ci).not_to be_valid
-  end    
+  end
+
+  it "must have a unique code" do
+    clone = FactoryGirl.build(:compilation_identifier) do |c|
+      c.release = @ci.release
+      c.type    = @ci.type
+      c.code    = @ci.code
+    end
+    expect(clone).not_to be_valid
+  end
 end
