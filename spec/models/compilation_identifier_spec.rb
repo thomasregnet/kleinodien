@@ -18,4 +18,14 @@ RSpec.describe CompilationIdentifier, type: :model do
     @ci.type = nil
     expect(@ci).not_to be_valid
   end
+
+  it "is not valid without a code" do
+    @ci.code = nil
+    expect(@ci).not_to be_valid
+  end
+
+  it "is not valid with a blank code" do
+    @ci.code = ''
+    expect(@ci).not_to be_valid
+  end    
 end

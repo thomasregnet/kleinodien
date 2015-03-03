@@ -9,4 +9,5 @@ class CompilationIdentifier < ActiveRecord::Base
     foreign_key: :identifier_type_id)
   validates :release, presence: true
   validates :type, presence: true
+  validates :code, presence: true, blank: false
 end
