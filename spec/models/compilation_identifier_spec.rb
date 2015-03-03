@@ -36,5 +36,32 @@ RSpec.describe CompilationIdentifier, type: :model do
       c.code    = @ci.code
     end
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
+
+  it "is valid with duplicate code and a disambiguation" do
+    clone = FactoryGirl.build(:compilation_identifier) do |c|
+      c.release        = @ci.release
+      c.type           = @ci.type
+      c.code           = @ci.code
+      c.disambiguation = 'other code'
+    end
+    expect(clone).to be_valid
+  end
+
+  it "is not valid with duplicate code and duplicate disambiguation" do
+    @ci.disambiguation = 'this code'
+    @ci.save!
+    clone = FactoryGirl.build(:compilation_identifier) do |c|
+      c.release        = @ci.release
+      c.type           = @ci.type
+      c.code           = @ci.code
+      c.disambiguation = @ci.disambiguation
+    end
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
+  end
+  
 end

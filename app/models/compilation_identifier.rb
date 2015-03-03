@@ -13,4 +13,8 @@ class CompilationIdentifier < ActiveRecord::Base
   validates_uniqueness_of(
     :code,
     scope: [:release, :type, :disambiguation])
+  validates_uniqueness_of(
+    :disambiguation,
+    scope: [:release, :type, :code],
+    case_sensitive: false )
 end
