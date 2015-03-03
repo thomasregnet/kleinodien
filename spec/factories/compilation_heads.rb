@@ -1,9 +1,7 @@
 FactoryGirl.define do
   factory :compilation_head do
-    artist_credit_id 1
-title "MyString"
-disambiguation "MyString"
-type ""
+    sequence(:title) { |n| "compilation head ##{n}" }
+    type 'CompilationHead'
   end
 
 end
