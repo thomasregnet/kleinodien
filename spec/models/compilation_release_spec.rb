@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CompilationRelease, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @c_release = FactoryGirl.create(:compilation_release)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@c_release).to be_valid
+  end
 end
