@@ -23,7 +23,7 @@ RSpec.describe CompilationRelease, type: :model do
     other_release = CompilationRelease.new(
       head: @c_release.head, type: @c_release.type)
     expect(other_release).not_to be_valid
-    # TODO: save! without validation
+    expect { other_release.save! validate: false }.to raise_error
   end
 
   it "is valid with a duplicate head and a version" do
