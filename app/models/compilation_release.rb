@@ -1,4 +1,6 @@
 class CompilationRelease < ActiveRecord::Base
+  validates :head, presence: true
+  validates :type, presence: true
   belongs_to(:head,
              class_name: CompilationHead,
              foreign_key: :compilation_head_id)
