@@ -20,34 +20,39 @@ RSpec.describe CompilationRelease, type: :model do
   end
   
   it "has a unique head" do
-    other_release = CompilationRelease.new(
+    clone = CompilationRelease.new(
       head: @c_release.head, type: @c_release.type)
-    expect(other_release).not_to be_valid
-    expect { other_release.save! validate: false }.to raise_error
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 
   it "is valid with a duplicate head and a version" do
-    other_release = CompilationRelease.new(
+    clone = CompilationRelease.new(
       head: @c_release.head, type: @c_release.type)
-    other_release.version = 'other one'
-    expect(other_release).to be_valid
+    clone.version = 'other one'
+    expect(clone).to be_valid
   end
 
   it "is not valid with a duplicate head and duplicate version" do
     @c_release.version = 'version 1'
     @c_release.save!
-    other_release = CompilationRelease.new(
-      head: @c_release.head, version: @c_release.version)
-    expect(other_release).not_to be_valid
-    expect { other_release.save! validate: false }.to raise_error
+    clone = FactoryGirl.build(:compilation_release,
+                              head: @c_release.head,
+                              version: @c_release.version)
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 
     it "is not valid with a duplicate head and duplicate upcase version" do
     @c_release.version = 'version 1'
     @c_release.save!
-    other_release = CompilationRelease.new(
-      head: @c_release.head, version: @c_release.version.upcase)
-    expect(other_release).not_to be_valid
-    expect { other_release.save! validate: false }.to raise_error
+    clone = FactoryGirl.build(:compilation_release,
+                              head: @c_release.head,
+                              version: @c_release.version.upcase)
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 end
