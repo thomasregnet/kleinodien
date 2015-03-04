@@ -8,4 +8,5 @@ class CompilationSection < ActiveRecord::Base
     foreign_key: :compilation_medium_id)
   validates :medium, presence: true
   validates :format, presence: true
+  validates :side, inclusion: { in: %w(A B) }, allow_nil: true
 end
