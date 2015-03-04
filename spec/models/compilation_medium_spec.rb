@@ -25,5 +25,7 @@ RSpec.describe CompilationMedium, type: :model do
       c.no      = @medium.no
     end
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error(
+                                                ActiveRecord::RecordNotUnique)
   end
 end
