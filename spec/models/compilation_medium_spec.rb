@@ -18,4 +18,12 @@ RSpec.describe CompilationMedium, type: :model do
     @medium.no = nil
     expect(@medium).not_to be_valid
   end
+
+  it "must have a unique combination of release and no" do
+    clone = FactoryGirl.build(:compilation_medium) do |c|
+      c.release = @medium.release
+      c.no      = @medium.no
+    end
+    expect(clone).not_to be_valid
+  end
 end

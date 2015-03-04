@@ -5,4 +5,5 @@ class CompilationMedium < ActiveRecord::Base
     foreign_key: :compilation_release_id)
   validates :release, presence: true
   validates :no, presence: true
+  validates_uniqueness_of :release, scope: :no
 end
