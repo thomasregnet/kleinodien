@@ -18,4 +18,13 @@ RSpec.describe CompilationSection, type: :model do
     @section.format = nil
     expect(@section).not_to be_valid
   end
+
+  it "is valid with a side named either A or B" do
+    @section.side = 'A'
+    expect(@section).to be_valid
+    @section.side = 'B'
+    expect(@section).to be_valid
+  end
+  
+  it "is not valid with a bad side name"
 end
