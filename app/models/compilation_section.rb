@@ -13,4 +13,8 @@ class CompilationSection < ActiveRecord::Base
     :medium,
     scope: :no,
     conditions: -> { where('side IS NULL') } )
+  validates_uniqueness_of(
+    :medium,
+    scope: [:no, :side],
+    conditions: -> { where('side IS NOT NULL') } )
 end

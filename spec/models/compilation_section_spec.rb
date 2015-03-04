@@ -47,5 +47,14 @@ RSpec.describe CompilationSection, type: :model do
     expect(clone).not_to be_valid
   end
   
-  it "must have a unique combination of medium, side and no if side is set"
+  it "must have a unique combination of medium, side and no if side is set" do
+    @section.side = 'A'
+    @section.save!
+    clone = FactoryGirl.build(:compilation_section) do |c|
+      c.medium = @section.medium
+      c.no     = @section.no
+      c.side   = @section.side
+    end
+    expect(clone).not_to be_valid
+  end
 end
