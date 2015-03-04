@@ -6,4 +6,6 @@ class CompilationSection < ActiveRecord::Base
   belongs_to(
     :medium, class_name: CompilationMedium,
     foreign_key: :compilation_medium_id)
+  validates :medium, presence: true
+  validates :format, presence: true
 end
