@@ -46,15 +46,28 @@ RSpec.describe CompilationSection, type: :model do
     end
     expect(clone).not_to be_valid
   end
-  
-  it "must have a unique combination of medium, side and no if side is set" do
-    @section.side = 'A'
-    @section.save!
-    clone = FactoryGirl.build(:compilation_section) do |c|
-      c.medium = @section.medium
-      c.no     = @section.no
-      c.side   = @section.side
+
+  context "with a side" do
+    before(:each) do
+      @section = FactoryGirl.create(:compilation_section_with_side)
     end
-    expect(clone).not_to be_valid
+    
+    it "is valid with a unique combination of medium side and no" do
+      clone = FactoryGirl.build(:compilation_section) do |c|
+        c.medium = @section.medium
+        c.no     = @section.no
+        c.side   = 'B'
+      end
+      expect(clone).to be_valid
+    end
+    
+    it "is not valid when a medium, side and no are not unique" do
+      clone = FactoryGirl.build(:compilation_section) do |c|
+        c.medium = @section.medium
+        c.no     = @section.no
+        c.side   = @section.side
+      end
+      expect(clone).not_to be_valid
+    end
   end
 end
