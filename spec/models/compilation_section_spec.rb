@@ -38,4 +38,7 @@ RSpec.describe CompilationSection, type: :model do
     @section.side = 'AB'
     expect(@section).not_to be_valid    
   end
+
+  it "must have a unique combination of medium and no"
+  it "must have a unique combination of medium, side and no if side is set"
 end
