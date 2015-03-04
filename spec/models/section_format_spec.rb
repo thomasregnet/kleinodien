@@ -12,10 +12,14 @@ RSpec.describe SectionFormat, type: :model do
   it "is not valid without a name" do
     @format.name = nil
     expect(@format).not_to be_valid
+    expect { @format.save! validate: false }.to raise_error(
+                                                  ActiveRecord::StatementInvalid)
   end
   
   it "is not valid withaut an abbr" do
     @format.abbr = nil
     expect(@format).not_to be_valid
+    expect { @format.save! validate: false }.to raise_error(
+                                                  ActiveRecord::StatementInvalid)
   end
 end
