@@ -9,4 +9,8 @@ class CompilationSection < ActiveRecord::Base
   validates :medium, presence: true
   validates :format, presence: true
   validates :side, inclusion: { in: %w(A B) }, allow_nil: true
+  validates_uniqueness_of(
+    :medium,
+    scope: :no,
+    conditions: -> { where('side IS NULL') } )
 end
