@@ -6,6 +6,9 @@ class CompilationSection < ActiveRecord::Base
   belongs_to(
     :medium, class_name: CompilationMedium,
     foreign_key: :compilation_medium_id)
+  has_many(
+    :tracks,
+    inverse_of: :section)
   validates :medium, presence: true
   validates :format, presence: true
   validates :side, inclusion: { in: %w(A B) }, allow_nil: true

@@ -63,4 +63,14 @@ RSpec.describe CompilationSection, type: :model do
       expect(clone).not_to be_valid
     end
   end
+
+  context "with tracks" do
+    before(:each) do
+      @section = FactoryGirl.create(:compilation_section_with_tracks)
+    end
+
+    it "holds the expected number of tracks" do
+      expect(@section.tracks.count).to eq(5)
+    end
+  end
 end
