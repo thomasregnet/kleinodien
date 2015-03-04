@@ -3,4 +3,6 @@ class CompilationMedium < ActiveRecord::Base
     :release,
     class_name: CompilationRelease,
     foreign_key: :compilation_release_id)
+  validates :release, presence: true
+  validates :no, presence: true
 end

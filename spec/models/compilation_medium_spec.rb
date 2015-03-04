@@ -8,4 +8,14 @@ RSpec.describe CompilationMedium, type: :model do
   it "is valid with valid attributes" do
     expect(@medium).to be_valid
   end
+
+  it "is not valid without a release" do
+    @medium.release = nil
+    expect(@medium).not_to be_valid
+  end
+  
+  it "is not valid without a no" do
+    @medium.no = nil
+    expect(@medium).not_to be_valid
+  end
 end
