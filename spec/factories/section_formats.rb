@@ -1,9 +1,6 @@
 FactoryGirl.define do
   factory :section_format do
-    name "MyString"
-abbr "MyString"
-explanation "MyString"
-rpm 1
+    sequence(:name) { |n| "section format ##{n}" }
+    sequence(:abbr) { |n| "sf ##{n}" }
   end
-
 end

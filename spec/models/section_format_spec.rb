@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe SectionFormat, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @format = FactoryGirl.create(:section_format)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@format).to be_valid
+  end
 end
