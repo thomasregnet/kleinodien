@@ -53,20 +53,13 @@ RSpec.describe CompilationSection, type: :model do
     end
     
     it "is valid with a unique combination of medium side and no" do
-      clone = FactoryGirl.build(:compilation_section) do |c|
-        c.medium = @section.medium
-        c.no     = @section.no
-        c.side   = 'B'
-      end
+      clone = @section.dup
+      clone.side = 'B'
       expect(clone).to be_valid
     end
     
     it "is not valid when a medium, side and no are not unique" do
-      clone = FactoryGirl.build(:compilation_section) do |c|
-        c.medium = @section.medium
-        c.no     = @section.no
-        c.side   = @section.side
-      end
+      clone = @section.dup
       expect(clone).not_to be_valid
     end
   end
