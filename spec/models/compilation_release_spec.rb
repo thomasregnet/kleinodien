@@ -1,64 +1,81 @@
 require 'rails_helper'
 
 RSpec.describe CompilationRelease, type: :model do
-  before(:each) do
-    @c_release = FactoryGirl.create(:compilation_release)
-  end
-
-  it "is valid with valid attributes" do
-    expect(@c_release).to be_valid
-  end
-
-  it "is not unique without a head" do
-    @c_release.head = nil
-    expect(@c_release).not_to be_valid
-  end
-  
-  it "is not unique without a type" do
-    @c_release.type = nil
-    expect(@c_release).not_to be_valid
-  end
-  
-  it "has a unique head" do
-    clone = FactoryGirl.build(:compilation_release) do |c|
-      c.head = @c_release.head
-      c.type = @c_release.type
+  context "minimal CompilationRelease" do
+    before(:each) do
+      @c_release = FactoryGirl.create(:compilation_release)
     end
-    expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error(
-                                                ActiveRecord::RecordNotUnique)
-  end
 
-  it "is valid with a duplicate head and a version" do
-    clone = FactoryGirl.build(:compilation_release) do |c|
-      c.head = @c_release.head
-      c.type = @c_release.type
+    it "is valid with valid attributes" do
+      expect(@c_release).to be_valid
     end
-    clone.version = 'other one'
-    expect(clone).to be_valid
-  end
 
-  it "is not valid with a duplicate head and duplicate version" do
-    @c_release.version = 'version 1'
-    @c_release.save!
-    clone = FactoryGirl.build(:compilation_release) do |c|
-      c.head = @c_release.head
-      c.version = @c_release.version
+    it "is not unique without a head" do
+      @c_release.head = nil
+      expect(@c_release).not_to be_valid
     end
-    expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error(
-                                                ActiveRecord::RecordNotUnique)
-  end
+    
+    it "is not unique without a type" do
+      @c_release.type = nil
+      expect(@c_release).not_to be_valid
+    end
+    
+    it "has a unique head" do
+      clone = FactoryGirl.build(:compilation_release) do |c|
+        c.head = @c_release.head
+        c.type = @c_release.type
+      end
+      expect(clone).not_to be_valid
+      expect { clone.save! validate: false }.to raise_error(
+                                                  ActiveRecord::RecordNotUnique)
+    end
+
+    it "is valid with a duplicate head and a version" do
+      clone = FactoryGirl.build(:compilation_release) do |c|
+        c.head = @c_release.head
+        c.type = @c_release.type
+      end
+      clone.version = 'other one'
+      expect(clone).to be_valid
+    end
+
+    it "is not valid with a duplicate head and duplicate version" do
+      @c_release.version = 'version 1'
+      @c_release.save!
+      clone = FactoryGirl.build(:compilation_release) do |c|
+        c.head = @c_release.head
+        c.version = @c_release.version
+      end
+      expect(clone).not_to be_valid
+      expect { clone.save! validate: false }.to raise_error(
+                                                  ActiveRecord::RecordNotUnique)
+    end
 
     it "is not valid with a duplicate head and duplicate upcase version" do
-    @c_release.version = 'version 1'
-    @c_release.save!
-    clone = FactoryGirl.build(:compilation_release) do |c|
-      c.head    = @c_release.head
-      c.version = @c_release.version.upcase
+      @c_release.version = 'version 1'
+      @c_release.save!
+      clone = FactoryGirl.build(:compilation_release) do |c|
+        c.head    = @c_release.head
+        c.version = @c_release.version.upcase
+      end
+      expect(clone).not_to be_valid
+      expect { clone.save! validate: false }.to raise_error(
+                                                  ActiveRecord::RecordNotUnique)
     end
-    expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error(
-                                                ActiveRecord::RecordNotUnique)
+  end
+
+  context "with identifiers" do
+    before(:each) do
+      @ci        = FactoryGirl.create(:compilation_identifier)
+      @c_release = @ci.release
+    end
+
+    it "is valid with valid attributes" do
+      expect(@c_release).to be_valid
+    end
+
+    it "has many identifiers" do
+      expect(@c_release.identifiers.count).to eq(1)
+    end
   end
 end
