@@ -1,0 +1,3 @@
+class DiscogsImporter
+  
+end
