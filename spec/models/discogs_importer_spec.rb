@@ -6,10 +6,10 @@ RSpec.describe DiscogsImporter, type: :model do
     context "import a CD release of one artist"
 
     json = DiscogsTestHelper.get_discogs_release_data('940468.json')
-    @release = DiscogsImporter.import_release(json)
+    release = DiscogsImporter.import_release(json)
 
     it "has imported the album" do
-      expect(@release).to be_instance_of(AlbumRelease)
+      expect(release).to be_instance_of(AlbumRelease)
     end
   end
 end
