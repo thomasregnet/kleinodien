@@ -3,6 +3,10 @@ class DiscogsImporter
     raw_release = JSON.parse(json, symbolize_names: true)
 
     artist_credit = import_artist_credit(raw_release[:artists])
+    album_head = artist_credit.compilations.create!(
+      title: raw_release[:title],
+      type: 'AlbumHead')
+    
     AlbumRelease.new
   end
 
