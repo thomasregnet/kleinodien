@@ -6,7 +6,8 @@ class DiscogsImporter
     album_head = artist_credit.compilations.create!(
       title: raw_release[:title],
       type: 'AlbumHead')
-    
+    album_release = album_head.releases.create!
+
     AlbumRelease.new
   end
 
