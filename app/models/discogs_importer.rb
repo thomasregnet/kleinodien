@@ -8,17 +8,19 @@ class DiscogsImporter
 
   def self.import_artist_credit(raw_artists)
     artist_credit = ArtistCredit.new
-
     raw_artists.each_with_index do |a, no|
-      artist = Artist.find_or_create_by!(name: a[:name])
-      participant = artist_credit.participants.build do |p|
-        p.joinparse = a[:join] unless a[:join].blank?
-        p.no        = no
-        p.artist    = artist
-      end
+      imort_participant(a, no, artist_credit)
     end
-
     artist_credit.save!
     artist_credit
+  end
+
+  def self.imort_participant(raw_artist, no, artist_credit)
+    artist = Artist.find_or_create_by!(name: raw_artist[:name])
+    participant = artist_credit.participants.build do |p|
+      p.joinparse = raw_artist[:join] unless raw_artist[:join].blank?
+      p.no        = no
+      p.artist    = artist
+    end
   end
 end
