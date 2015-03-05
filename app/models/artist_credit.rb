@@ -3,7 +3,7 @@ class ArtistCredit < ActiveRecord::Base
   has_many :participants, inverse_of: :artist_credit
   has_many :compilations, class_name: CompilationHead
   has_many :pieces, class_name: PieceHead
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, blank: false, uniqueness: { case_sensitive: false }
   validates :participants, presence: true
 
   before_save { self.name = name }
@@ -14,6 +14,7 @@ class ArtistCredit < ActiveRecord::Base
       names << p.artist.name
       names << p.joinparse unless p.joinparse.blank?
     end
+    #return if names.length < 1
     names.join(' ')
   end
 end
