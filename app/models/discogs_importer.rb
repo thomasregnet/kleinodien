@@ -8,7 +8,9 @@ class DiscogsImporter
       type: 'AlbumHead')
     album_release = album_head.releases.create!
     import_songs(raw_release[:tracklist], artist_credit)
-
+    # TODO: more than one medium
+    medium = album_release.media.create!(no: 1)
+    
     album_release
   end
 
