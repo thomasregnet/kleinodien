@@ -8,7 +8,7 @@ class DiscogsImporter
       type: 'AlbumHead')
     album_release = album_head.releases.create!
 
-    AlbumRelease.new
+    album_release
   end
 
   def self.import_artist_credit(raw_artists)
