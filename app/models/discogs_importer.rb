@@ -7,7 +7,7 @@ class DiscogsImporter
   end
 
   def self.import_artist_credit(raw_artists)
-    artist_credit = Artist.new
+    artist_credit = ArtistCredit.new
 
     raw_artists.each_with_index do |a, no|
       artist = Artist.find_or_create_by!(name: a[:name])
