@@ -1,0 +1,2 @@
+class AlbumHead < CompilationHead
+end
