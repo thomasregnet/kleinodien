@@ -7,6 +7,7 @@ class DiscogsImporter
       title: raw_release[:title],
       type: 'AlbumHead')
     album_release = album_head.releases.create!
+    import_songs(raw_release[:tracklist], artist_credit)
 
     album_release
   end
@@ -27,5 +28,18 @@ class DiscogsImporter
       p.no        = no
       p.artist    = artist
     end
+  end
+
+  def self.import_songs(raw_tracklist, fallback_artist_credit)
+    raw_songs = []
+    raw_tracklist.each do |t|
+      unless t[:type_] == 'heading'
+        artist_credit = t[:artists] ? import_artist_credit(t[:artist])
+                        : fallback_artist_credit
+        artist_credit.pieces.create!(
+          title: t[:title],
+          type: 'SongHead')
+      end
+    end 
   end
 end
