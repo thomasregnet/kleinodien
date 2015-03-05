@@ -1,15 +1,15 @@
 require 'rails_helper'
+require 'discogs_test_helper'
 
 RSpec.describe DiscogsImporter, type: :model do
-  before(:each) do
-    @importer = DiscogsImporter.new
-  end
-
   describe "import releases" do
     context "import a CD release of one artist"
 
-    it "is a object" do
-      expect(@importer).to be_instance_of(DiscogsImporter)
+    json = DiscogsTestHelper.get_discogs_release_data('940468.json')
+    @release = DiscogsImporter.import_release(json)
+
+    it "has imported the album" do
+      expect(@release).to be_instance_of(AlbumRelease)
     end
   end
 end

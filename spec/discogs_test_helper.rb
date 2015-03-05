@@ -1,0 +1,9 @@
+module DiscogsTestHelper
+  def self.get_discogs_release_data(name)
+    if ( name !~ /\.json$/ )
+      name = name.to_s + '.json'
+    end
+    file_path = File.join('fixtures', 'discogs', 'releases', name)
+    File.open(file_path).read
+  end
+end
