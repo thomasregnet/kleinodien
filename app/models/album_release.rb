@@ -1,0 +1,2 @@
+class AlbumRelease < CompilationRelease
+end
