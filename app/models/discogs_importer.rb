@@ -7,10 +7,15 @@ class DiscogsImporter
       title: raw_release[:title],
       type: 'AlbumHead')
     album_release = album_head.releases.create!
-    import_songs(raw_release[:tracklist], artist_credit)
+    #import_songs(raw_release[:tracklist], artist_credit)
     # TODO: more than one medium
     medium = album_release.media.create!(no: 1)
-    
+    # TODO: deal with real section_formats
+    format = SectionFormat.find_or_create_by(name: 'CD', abbr: 'CD')
+    # TODO: more than one section
+    section = medium.sections.create!(no: 1, format: format)
+
+    import_tracks(raw_release[:tracklist], section, artist_credit)
     album_release
   end
 
@@ -32,8 +37,21 @@ class DiscogsImporter
     end
   end
 
-  def self.import_songs(raw_tracklist, fallback_artist_credit)
-    raw_songs = []
+  # def self.import_songs(raw_tracklist, fallback_artist_credit)
+  #   raw_songs = []
+  #   raw_tracklist.each do |t|
+  #     unless t[:type_] == 'heading'
+  #       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
+  #                       : fallback_artist_credit
+  #       song_head = artist_credit.pieces.create!(
+  #         title: t[:title],
+  #         type: 'SongHead')
+  #       song_release = song_head.releases.create!
+  #     end
+  #   end 
+  # end
+
+  def self.import_tracks(raw_tracklist, section, fallback_artist_credit)
     raw_tracklist.each do |t|
       unless t[:type_] == 'heading'
         artist_credit = t[:artists] ? import_artist_credit(t[:artist])
@@ -41,8 +59,11 @@ class DiscogsImporter
         song_head = artist_credit.pieces.create!(
           title: t[:title],
           type: 'SongHead')
+        # TODO: deal with real formats
+        format = Format.find_or_create_by(name: 'mp3')
         song_release = song_head.releases.create!
+        track = song_release.tracks.create!(format: format, section: section)
       end
-    end 
+    end
   end
 end
