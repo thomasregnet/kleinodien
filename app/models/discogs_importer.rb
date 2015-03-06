@@ -59,9 +59,7 @@ class DiscogsImporter
     formats = []
     no    = 1
     raw_formats.each do |f|
-      if f[:name] == 'All Media'
-        next
-      end
+      next if f[:name] == 'All Media'
       format_name = f[:name]
       qty = f[:qty].to_i
       qty.times do
