@@ -18,6 +18,11 @@ RSpec.describe DiscogsImporter, type: :model do
         json = DiscogsTestHelper.get_discogs_release_data(4462260)
         @release = DiscogsImporter.import_release(json)
       end
+
+      it "has imported the album" do
+        expect(@release).to be_instance_of(AlbumRelease)
+        #expect(@require).not_to be_new_record
+      end
     end
   end
 end
