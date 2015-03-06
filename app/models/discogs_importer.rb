@@ -9,7 +9,7 @@ class DiscogsImporter
     album_release = album_head.releases.create!
     # TODO: more than one medium
     #medium = album_release.media.create!(no: 1)
-    prepare_media(raw_release[:formats], album_release)
+    formats = prepare_media(raw_release[:formats], album_release)
     medium = album_release.media.first
     # TODO: deal with real section_formats
     format = SectionFormat.find_or_create_by(name: 'CD', abbr: 'CD')
@@ -56,17 +56,21 @@ class DiscogsImporter
   end
 
   def self.prepare_media(raw_formats, album_release)
-    media = []
+    formats = []
     no    = 1
     raw_formats.each do |f|
       if f[:name] == 'All Media'
         next
       end
+      format_name = f[:name]
       qty = f[:qty].to_i
       qty.times do
         album_release.media.create!(no: no)
         no += 1
+        formats << SectionFormat.find_or_create_by!(
+        name: format_name, abbr: format_name)
       end
     end
+    formats
   end
 end
