@@ -7,17 +7,9 @@ class DiscogsImporter
       title: raw_release[:title],
       type: 'AlbumHead')
     album_release = album_head.releases.create!
-    # TODO: more than one medium
-    #medium = album_release.media.create!(no: 1)
+
     formats = prepare_media(raw_release[:formats], album_release)
-    #medium = album_release.media.first
-    # TODO: deal with real section_formats
-    #format = SectionFormat.find_or_create_by(name: 'CD', abbr: 'CD')
-    # TODO: more than one section
-    
-    #section = medium.sections.create!(no: 1, format: format)
-    
-    #import_tracks(raw_release[:tracklist], section, artist_credit)
+
     import_tracks(raw_release[:tracklist], album_release, formats, artist_credit)
     album_release
   end
@@ -40,26 +32,9 @@ class DiscogsImporter
     end
   end
 
-  # def self.import_tracks(raw_tracklist, section, fallback_artist_credit)
-  #   raw_tracklist.each do |t|
-  #     unless t[:type_] == 'heading'
-  #       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
-  #                       : fallback_artist_credit
-  #       song_head = artist_credit.pieces.find_or_create_by!(
-  #         title: t[:title],
-  #         type: 'SongHead')
-  #       # TODO: deal with real formats
-  #       format = Format.find_or_create_by(name: 'mp3')
-  #       # TODO: deal with song-versions
-  #       song_release = SongRelease.find_or_create_by!(head: song_head)
-  #       track = song_release.tracks.create!(format: format, section: section)
-  #     end
-  #   end
-  # end
   def self.import_tracks(
         raw_tracklist, album_release, formats, default_artist_credit)
     media = album_release.media
-    #byebug
     heading_no = 0
     medium = nil
     section = nil
@@ -68,6 +43,7 @@ class DiscogsImporter
       if t[:type_] == 'heading'
         format = formats[heading_no]
         medium = media[heading_no]
+        # TODO: more than one section    
         section = medium.sections.create!(no: section_no, format: format)
         heading_no += 1
         section_no += 1
