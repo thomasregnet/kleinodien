@@ -8,12 +8,14 @@ class DiscogsImporter
       type: 'AlbumHead')
     album_release = album_head.releases.create!
     # TODO: more than one medium
-    medium = album_release.media.create!(no: 1)
+    #medium = album_release.media.create!(no: 1)
+    prepare_media(raw_release[:formats], album_release)
+    medium = album_release.media.first
     # TODO: deal with real section_formats
     format = SectionFormat.find_or_create_by(name: 'CD', abbr: 'CD')
     # TODO: more than one section
     section = medium.sections.create!(no: 1, format: format)
-
+    
     import_tracks(raw_release[:tracklist], section, artist_credit)
     album_release
   end
@@ -49,6 +51,21 @@ class DiscogsImporter
         # TODO: deal with song-versions
         song_release = SongRelease.find_or_create_by!(head: song_head)
         track = song_release.tracks.create!(format: format, section: section)
+      end
+    end
+  end
+
+  def self.prepare_media(raw_formats, album_release)
+    media = []
+    no    = 1
+    raw_formats.each do |f|
+      if f[:name] == 'All Media'
+        next
+      end
+      qty = f[:qty].to_i
+      qty.times do
+        album_release.media.create!(no: no)
+        no += 1
       end
     end
   end
