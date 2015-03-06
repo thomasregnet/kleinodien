@@ -24,7 +24,6 @@ RSpec.describe DiscogsImporter, type: :model do
       it "has imported the album" do
         expect(@release).to be_instance_of(AlbumRelease)
         expect(@release).not_to be_new_record
-        byebug
       end
     end
   end
