@@ -65,6 +65,8 @@ class DiscogsImporter
       qty.times do
         album_release.media.create!(no: no)
         no += 1
+      end
+      qty.times do
         formats << SectionFormat.find_or_create_by!(
         name: format_name, abbr: format_name)
       end
