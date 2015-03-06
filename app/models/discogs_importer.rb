@@ -56,12 +56,14 @@ class DiscogsImporter
       unless t[:type_] == 'heading'
         artist_credit = t[:artists] ? import_artist_credit(t[:artist])
                         : fallback_artist_credit
-        song_head = artist_credit.pieces.create!(
+        song_head = artist_credit.pieces.find_or_create_by!(
           title: t[:title],
           type: 'SongHead')
         # TODO: deal with real formats
         format = Format.find_or_create_by(name: 'mp3')
-        song_release = song_head.releases.create!
+        #song_release = song_head.releases.create!
+        # TODO: deal with song-versions
+        song_release = SongRelease.find_or_create_by!(head: song_head)
         track = song_release.tracks.create!(format: format, section: section)
       end
     end
