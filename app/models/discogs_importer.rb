@@ -60,13 +60,17 @@ class DiscogsImporter
         raw_tracklist, album_release, formats, default_artist_credit)
     media = album_release.media
     #byebug
+    heading_no = 0
     medium = nil
     section = nil
+    section_no = 1
     raw_tracklist.each do |t|
-      if t[:type] == 'heading'
-        format = shift
-        medium = media.shift
+      if t[:type_] == 'heading'
+        format = formats[heading_no]
+        medium = media[heading_no]
         section = medium.sections.create!(no: section_no, format: format)
+        heading_no += 1
+        section_no += 1
       end
 
       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
