@@ -12,5 +12,12 @@ RSpec.describe DiscogsImporter, type: :model do
     it "has imported the album" do
       expect(@release).to be_instance_of(AlbumRelease)
     end
+
+    context "import 'Dead Human Collection'" do
+      before do
+        json = DiscogsTestHelper.get_discogs_release_data(4462260)
+        @release = DiscogsImporter.import_release(json)
+      end
+    end
   end
 end
