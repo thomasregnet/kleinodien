@@ -71,6 +71,7 @@ class DiscogsImporter
         section = medium.sections.create!(no: section_no, format: format)
         heading_no += 1
         section_no += 1
+        next
       end
 
       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
