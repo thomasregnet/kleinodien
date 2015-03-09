@@ -1,4 +1,5 @@
 class AlbumHead < CompilationHead
+  belongs_to :artsit_credit
   has_many(
     :releases,
     class_name: AlbumRelease,
