@@ -10,7 +10,7 @@ class DiscogsImporter
 
     formats = prepare_media(raw_release[:formats], album_release)
 
-    import_tracks(raw_release[:tracklist], album_release, formats, artist_credit)
+    import_tracks(raw_release[:tracklist], album_release, formats)
     album_release
   end
 
@@ -32,8 +32,7 @@ class DiscogsImporter
     end
   end
 
-  def self.import_tracks(
-        raw_tracklist, album_release, formats, default_artist_credit)
+  def self.import_tracks(raw_tracklist, album_release, formats)
 
     heading_idx = -1
     medium      = album_release.media[heading_idx]
@@ -61,7 +60,7 @@ class DiscogsImporter
       end
       
       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
-                      : default_artist_credit
+                      : album_release.head.artist_credit    
       song_head = artist_credit.pieces.find_or_create_by!(
         title: t[:title],
         type: 'SongHead')
