@@ -35,20 +35,20 @@ class DiscogsImporter
   def self.import_tracks(
         raw_tracklist, album_release, formats, default_artist_credit)
 
-    heading_no = 0
-    medium     = album_release.media[heading_no]
-    format     = formats[heading_no]    
-    section    = nil
-    side       = 'A'
+    heading_idx = -1
+    medium      = album_release.media[heading_idx]
+    section     = nil
+    side        = 'A'
     
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
-        format  = formats[heading_no]
-        medium  = album_release.media[heading_no]
+        heading_idx += 1
+        format  = formats[heading_idx]
+        medium  = album_release.media[heading_idx]
         side    = 'A'
-        section = medium.sections.create!(format: format, side: side)
+        section = medium.sections.create!(
+          format: formats[heading_idx], side: side)
         
-        heading_no += 1
         next
       end
 
@@ -56,7 +56,8 @@ class DiscogsImporter
       if m
         side = m[1]
         if side == 'B' && section.side == 'A'
-          section = medium.sections.create!(format: format, side: side)
+          section = medium.sections.create!(
+            format: formats[heading_idx], side: side)
         end
       end
       
