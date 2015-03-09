@@ -34,29 +34,24 @@ class DiscogsImporter
 
   def self.import_tracks(
         raw_tracklist, album_release, formats, default_artist_credit)
-    media = album_release.media
+
     heading_no = 0
-    medium  = nil
-    section = nil
-    format  = nil
-    side = 'A'
+    medium     = album_release.media[heading_no]
+    format     = formats[heading_no]    
+    section    = nil
+    side       = 'A'
+    
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
-        format = formats[heading_no]
-        medium = media[heading_no]
-        side = 'A'
-        section = medium.sections.create!(
-          format: format, side: side)
+        format  = formats[heading_no]
+        medium  = album_release.media[heading_no]
+        side    = 'A'
+        section = medium.sections.create!(format: format, side: side)
+        
         heading_no += 1
         next
       end
 
-      unless medium
-        format = formats[heading_no] unless format
-        medium = media[heading_no]
-        section = medium.sections.create!(format: format, side: side)
-      end
-      
       m = /^([AB])-(\d+)$/.match(t[:position])
       if m
         side = m[1]
