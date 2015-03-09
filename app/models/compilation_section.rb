@@ -14,10 +14,9 @@ class CompilationSection < ActiveRecord::Base
   validates :side, inclusion: { in: %w(A B) }, allow_nil: true
   validates_uniqueness_of(
     :medium,
-    scope: :no,
     conditions: -> { where('side IS NULL') } )
   validates_uniqueness_of(
     :medium,
-    scope: [:no, :side],
+    scope: [:side],
     conditions: -> { where('side IS NOT NULL') } )
 end

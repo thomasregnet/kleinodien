@@ -39,14 +39,6 @@ RSpec.describe CompilationSection, type: :model do
     expect(@section).not_to be_valid    
   end
 
-  it "must have a unique combination of medium and no" do
-    clone = FactoryGirl.build(:compilation_section) do |c|
-      c.medium = @section.medium
-      c.no     = @section.no
-    end
-    expect(clone).not_to be_valid
-  end
-
   context "with a side" do
     before(:each) do
       @section = FactoryGirl.create(:compilation_section_with_side)

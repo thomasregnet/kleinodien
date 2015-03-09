@@ -39,7 +39,7 @@ class DiscogsImporter
     medium  = nil
     section = nil
     format  = nil
-    section_no = 1
+    #section_no = 1
     side = 'A'
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
@@ -48,27 +48,24 @@ class DiscogsImporter
         # TODO: more than one section
         side = 'A'
         section = medium.sections.create!(
-          no: section_no, format: format, side: side)
+          format: format, side: side)
         heading_no += 1
-        section_no += 1
+        #section_no += 1
         next
       end
 
       unless medium
         format = formats[heading_no] unless format
         medium = media[heading_no]
-        section = medium.sections.create!(
-          no: section_no, format: format, side: side)
+        section = medium.sections.create!(format: format, side: side)
       end
       
       m = /^([AB])-(\d+)$/.match(t[:position])
       if m
         side = m[1]
-        if side == 'B'
+        if side == 'B' && section.side == 'A'
           # TODO: delete increment of section_no
-          section_no += 1
-          section = medium.sections.create!(
-            no: section_no, format: format, side: side)
+          section = medium.sections.create!(format: format, side: side)
         end
       end
       
