@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309101346) do
+ActiveRecord::Schema.define(version: 20150309104743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,11 +72,11 @@ ActiveRecord::Schema.define(version: 20150309101346) do
   add_index "compilation_releases", ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
 
   create_table "compilation_sections", force: :cascade do |t|
-    t.integer  "compilation_medium_id", null: false
-    t.integer  "section_format_id",     null: false
-    t.string   "side"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "compilation_medium_id",               null: false
+    t.integer  "section_format_id",                   null: false
+    t.string   "side",                  default: "A", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "formats", force: :cascade do |t|
