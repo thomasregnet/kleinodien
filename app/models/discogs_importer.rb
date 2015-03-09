@@ -36,30 +36,53 @@ class DiscogsImporter
         raw_tracklist, album_release, formats, default_artist_credit)
     media = album_release.media
     heading_no = 0
-    medium = nil
+    medium  = nil
     section = nil
+    format  = nil
     section_no = 1
+    side = 'A'
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
         format = formats[heading_no]
         medium = media[heading_no]
-        # TODO: more than one section    
-        section = medium.sections.create!(no: section_no, format: format)
+        # TODO: more than one section
+        side = 'A'
+        section = medium.sections.create!(
+          no: section_no, format: format, side: side)
         heading_no += 1
         section_no += 1
         next
       end
 
+      unless medium
+        format = formats[heading_no] unless format
+        medium = media[heading_no]
+        section = medium.sections.create!(
+          no: section_no, format: format, side: side)
+      end
+      
+      m = /^([AB])-(\d+)$/.match(t[:position])
+      if m
+        side = m[1]
+        if side == 'B'
+          # TODO: delete increment of section_no
+          section_no += 1
+          section = medium.sections.create!(
+            no: section_no, format: format, side: side)
+        end
+      end
+      
       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
                       : default_artist_credit
       song_head = artist_credit.pieces.find_or_create_by!(
         title: t[:title],
         type: 'SongHead')
       # TODO: deal with real formats
-      format = Format.find_or_create_by(name: 'mp3')
+      track_format = Format.find_or_create_by(name: 'mp3')
       # TODO: deal with song-versions
       song_release = SongRelease.find_or_create_by!(head: song_head)
-      track = song_release.tracks.create!(format: format, section: section)
+      track = song_release.tracks.create!(
+        format: track_format, section: section)
     end
   end
 
