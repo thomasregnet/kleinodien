@@ -34,33 +34,53 @@ class DiscogsImporter
 
   def self.import_tracks(raw_tracklist, album_release, formats)
 
-    heading_idx = -1
+    heading_idx = 0
     medium      = album_release.media[heading_idx]
     section     = nil
     side        = 'A'
+    last_side   = 'A'
     
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
-        heading_idx += 1
         medium       = album_release.media[heading_idx]
         side         = 'A'
         section      = medium.sections.create!(
           format: formats[heading_idx], side: side)
+        heading_idx += 1
         next
       end
 
       unless section
         section = medium.sections.create!(
           format: formats[heading_idx], side: side)
+        #byebug
       end
 
       
-      m = /^([AB])-(\d+)$/.match(t[:position])
+      # m = /^([AB])-(\d+)$/.match(t[:position])
+      # if m
+      #   side = m[1]
+      #   if side == 'B' && section.side == 'A'
+      #     section = medium.sections.create!(
+      #       format: formats[heading_idx], side: side)
+      #   end
+      # end
+      m = /^([A-Z])-?(\d+)$/.match(t[:position])
       if m
         side = m[1]
-        if side == 'B' && section.side == 'A'
-          section = medium.sections.create!(
-            format: formats[heading_idx], side: side)
+        if side != last_side #section.side
+          last_side = side
+          #byebug
+          if section.side == 'A'
+            section = medium.sections.create!(
+              format: formats[heading_idx], side: 'B')
+          else
+            #byebug
+            heading_idx += 1
+            medium = album_release.media[heading_idx]
+            section = medium.sections.create!(
+              format: formats[heading_idx], side: 'A')
+          end
         end
       end
       
