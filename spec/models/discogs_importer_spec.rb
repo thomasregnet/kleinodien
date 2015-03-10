@@ -36,6 +36,12 @@ RSpec.describe DiscogsImporter, type: :model do
       it "has imported the album" do
         expect(@release).not_to be_new_record
       end
+
+      # it "has the song 'Hit Et Nunc' at medium two side two" do
+      #   byebug
+      #   track = @release.media[1].sections[1]
+      #   expect(track.release.head.title).to eq('Hit Et Nunc')
+      # end
     end
   end
 end

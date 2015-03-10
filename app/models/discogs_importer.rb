@@ -49,6 +49,12 @@ class DiscogsImporter
         next
       end
 
+      unless section
+        section = medium.sections.create!(
+          format: formats[heading_idx], side: side)
+      end
+
+      
       m = /^([AB])-(\d+)$/.match(t[:position])
       if m
         side = m[1]
