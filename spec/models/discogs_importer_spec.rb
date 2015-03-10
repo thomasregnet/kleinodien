@@ -26,5 +26,16 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
     end
+
+    context "import a double album (Aphrodite's Child - 666)" do
+      before do
+        json = DiscogsTestHelper.get_discogs_release_data(4298844)
+        @release = DiscogsImporter.import_release(json)
+      end
+
+      it "has imported the album" do
+        expect(@release).not_to be_new_record
+      end
+    end
   end
 end
