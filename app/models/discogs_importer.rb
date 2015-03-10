@@ -34,8 +34,9 @@ class DiscogsImporter
 
   def self.import_tracks(raw_tracklist, album_release, formats)
 
-    heading_idx = 0
-    medium      = album_release.media[heading_idx]
+    #heading_idx = -1
+    heading_idx = raw_tracklist[0][:type_] == 'heading' ? -1 : 0
+    medium      = album_release.media.first #album_release.media[heading_idx]
     section     = nil
     side        = 'A'
     last_side   = 'A'
@@ -56,15 +57,6 @@ class DiscogsImporter
         #byebug
       end
 
-      
-      # m = /^([AB])-(\d+)$/.match(t[:position])
-      # if m
-      #   side = m[1]
-      #   if side == 'B' && section.side == 'A'
-      #     section = medium.sections.create!(
-      #       format: formats[heading_idx], side: side)
-      #   end
-      # end
       m = /^([A-Z])-?(\d+)$/.match(t[:position])
       if m
         side = m[1]
