@@ -42,6 +42,7 @@ class DiscogsImporter
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
         heading_idx += 1
+        # TODO: comment out next line
         format       = formats[heading_idx]
         medium       = album_release.media[heading_idx]
         side         = 'A'
@@ -64,8 +65,8 @@ class DiscogsImporter
       song_head = artist_credit.pieces.find_or_create_by!(
         title: t[:title],
         type: 'SongHead')
-      # TODO: deal with real formats
-      track_format = Format.find_or_create_by(name: 'mp3')
+
+      track_format = track_format_for(formats[heading_idx])
       # TODO: deal with song-versions
       song_release = SongRelease.find_or_create_by!(head: song_head)
       track = song_release.tracks.create!(
@@ -90,5 +91,15 @@ class DiscogsImporter
       end
     end
     formats
+  end
+
+  def self.track_format_for(medium_format)
+    format = nil
+    if medium_format.name == 'CD'
+      format = Format.find_or_create_by!(name: 'CD-DA')
+    elsif medium_format.name == 'Vinyl'
+      format = Format.find_or_create_by!(name: 'Analog Audio')
+    end
+    format
   end
 end
