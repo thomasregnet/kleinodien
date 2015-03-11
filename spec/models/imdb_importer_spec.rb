@@ -9,5 +9,9 @@ RSpec.describe ImdbImporter, type: :model do
     it "should have the right title" do
       expect(movie_head.title).to eq('Life of Brian')
     end
+
+    it "has the right class" do
+      expect(movie_head).to be_instance_of(MovieHead)
+    end
   end
 end
