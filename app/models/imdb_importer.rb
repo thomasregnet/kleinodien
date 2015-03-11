@@ -7,4 +7,7 @@ class ImdbImporter < ActiveRecord::Base
     title = CGI.unescapeHTML(title)
     MovieHead.create!(title: title)
   end
+
+  def self.import_serial_data(html)
+  end
 end
