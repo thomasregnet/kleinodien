@@ -4,9 +4,7 @@ require 'discogs_test_helper'
 RSpec.describe DiscogsImporter, type: :model do
   describe "import releases" do
     context "import a CD release of one artist (AC/DC Highway to Hell)" do
-      let(:json) { DiscogsTestHelper.get_discogs_release_data(940468) }
-      let(:release) { DiscogsImporter.import_release(json) }
-      
+      let(:release) { DiscogsTestHelper.import_release(940468) }
       it "has imported the album" do
         expect(release).to be_instance_of(AlbumRelease)
         expect(release).not_to be_new_record
@@ -14,8 +12,7 @@ RSpec.describe DiscogsImporter, type: :model do
     end
 
     context "import a Compilation (Cannibal Corpse - Dead Human Collection)" do
-      let(:json) { DiscogsTestHelper.get_discogs_release_data(4462260) }
-      let(:release) { DiscogsImporter.import_release(json) }
+      let(:release) { DiscogsTestHelper.import_release(4462260) }
 
       it "has imported the album" do
         expect(release).to be_instance_of(AlbumRelease)
@@ -24,8 +21,7 @@ RSpec.describe DiscogsImporter, type: :model do
     end
 
     context "import a double album (Aphrodite's Child - 666)" do
-      let(:json) { DiscogsTestHelper.get_discogs_release_data(4298844) }
-      let(:release) { DiscogsImporter.import_release(json) }
+      let(:release) { DiscogsTestHelper.import_release(4298844) }
 
       it "has imported the album" do
         expect(release).not_to be_new_record
