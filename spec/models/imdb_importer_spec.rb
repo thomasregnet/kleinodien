@@ -21,18 +21,18 @@ RSpec.describe ImdbImporter, type: :model do
     end
   end
 
-  context "importing a serial" do
+  context "importing a tv serial" do
     before(:all) do
-      html        = ImdbTestHelper.get_movie_data('tt0106179.html')
-      @serial_head = ImdbImporter.import_serial(html)
+      html    = ImdbTestHelper.get_movie_data('tt0106179.html')
+      @tv_serial = ImdbImporter.import_tv_serial(html)
     end
 
     it "has the right title" do
-      expect(@serial_head).to eq('The X Files')
+      expect(@tv_serial.title).to eq('"The X Files"')
     end
     
     after(:all) do
-      @serial_head.delete
+      @tv_serial.delete
     end
   end
 end
