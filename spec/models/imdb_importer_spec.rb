@@ -25,6 +25,9 @@ RSpec.describe ImdbImporter, type: :model do
     before(:all) do
       html    = ImdbTestHelper.get_movie_data('tt0106179.html')
       @tv_serial = ImdbImporter.import_tv_serial(html)
+
+      season_html = ImdbTestHelper.get_season_data('tt0106179-1.html')
+      ImdbImporter.import_tv_serial_season(@tv_serial, season_html)
     end
 
     it "has the right title" do

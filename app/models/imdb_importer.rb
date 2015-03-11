@@ -11,6 +11,9 @@ class ImdbImporter < ActiveRecord::Base
     TvSerial.create!(title: title(doc))
   end
 
+  def self.import_tv_serial_season(tv_serial, html)
+  end
+  
   def self.title(doc)
     title = doc.at('h1').inner_html.split('<span').first.strip
     title = CGI.unescapeHTML(title)
