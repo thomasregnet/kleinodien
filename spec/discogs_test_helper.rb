@@ -1,18 +1,11 @@
 module DiscogsTestHelper
-  def self.get_discogs_release_data(name)
-    if ( name !~ /\.json$/ )
-      name = name.to_s + '.json'
-    end
-    file_path = File.join('fixtures', 'discogs', 'releases', name)
-    File.open(file_path).read
+  def self.import_release(name)
+    DiscogsImporter.import_release(get_discogs_data('releases', name))
   end
 
-  def self.import_release(name)
-    if ( name !~ /\.json$/ )
-      name = name.to_s + '.json'
-    end
-    file_path = File.join('fixtures', 'discogs', 'releases', name)
-    json = File.open(file_path).read
-    DiscogsImporter.import_release(json)
+  def self.get_discogs_data(kind, name)
+    name = name.to_s + '.json' unless name =~ /\.json$/
+    kind = kind.pluralize
+    File.open(File.join('fixtures', 'discogs', kind, name)).read
   end
 end
