@@ -5,6 +5,6 @@ class ImdbImporter < ActiveRecord::Base
     doc = Nokogiri::HTML(html)
     title = doc.at('h1').inner_html.split('<span').first.strip
     title = CGI.unescapeHTML(title)
-    movie_head = MovieHead.create!(title: title)
+    MovieHead.create!(title: title)
   end
 end
