@@ -9,6 +9,10 @@ RSpec.describe PieceRelease, type: :model do
     it "is valid with valid attributes" do
       expect(@piece_release).to be_valid
     end
+
+    it "delegates title to its head" do
+      expect(@piece_release.title).to eq(@piece_release.head.title)
+    end
   end
 
   context "with tracks" do
