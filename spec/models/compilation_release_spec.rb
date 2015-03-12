@@ -10,6 +10,10 @@ RSpec.describe CompilationRelease, type: :model do
       expect(@c_release).to be_valid
     end
 
+    it "delegates title to its head" do
+      expect(@c_release.title).to eq(@c_release.head.title)
+    end
+
     it "is not unique without a head" do
       @c_release.head = nil
       expect(@c_release).not_to be_valid
