@@ -16,6 +16,8 @@ class ImdbImporter < ActiveRecord::Base
     doc.search("div.eplist div[@itemprop*='episode']").each do |div|
       link = div.search("a[@itemprop*='name']").first
       title = link.content.strip
+      no = div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i
+      #byebug
     end
   end
   
