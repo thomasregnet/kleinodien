@@ -42,11 +42,11 @@ class DiscogsImporter
     
     raw_tracklist.each do |t|
       if t[:type_] == 'heading'
+        heading_idx += 1
         medium       = album_release.media[heading_idx]
         side         = 'A'
         section      = medium.sections.create!(
           format: formats[heading_idx], side: side)
-        heading_idx += 1
         next
       end
 
