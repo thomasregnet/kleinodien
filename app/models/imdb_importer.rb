@@ -16,13 +16,9 @@ class ImdbImporter < ActiveRecord::Base
     doc = Nokogiri::HTML(html)
     doc.search("div.eplist div[@itemprop*='episode']").each do |div|
       link = div.search("a[@itemprop*='name']").first
-      title = link.content.strip
-      e_no = div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i
       epi = season.episodes.create!(
-        title: title,
-        no: e_no
-      )
-      puts epi
+        title: title = link.content.strip, #title,
+        no: div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i)
     end
     season
   end
