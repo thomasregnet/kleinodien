@@ -84,11 +84,29 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
 
-      it "has the song 'Hit Et Nunc' at medium two side two" do
-        track = @release.media[1].sections[1].tracks[0]
-        expect(track.release.head.title).to eq('All The Seats Were Occupied')
-      end
+      it "has imported the songs" do
+        section = @release.media[0].sections[0]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('The System')
+        expect(tracks.last.release.head.title).to  eq('The Seventh Seal')
 
+        section = @release.media[0].sections[1]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Aegian Sea')
+        expect(tracks.last.release.head.title).to  eq('Ofis')
+
+        section = @release.media[1].sections[0]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Seven Trumpets')
+        expect(tracks.last.release.head.title).to  eq('Hic Et Nunc')
+
+        section = @release.media[1].sections[1]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).
+          to eq('All The Seats Were Occupied')
+        expect(tracks.last.release.head.title).to  eq('Break')
+      end
+      
       after(:all) { DatabaseCleaner.clean }
     end
   end
