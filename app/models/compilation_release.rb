@@ -13,4 +13,5 @@ class CompilationRelease < ActiveRecord::Base
     class_name: CompilationMedium,
     foreign_key: :compilation_release_id)
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
+  delegate :title, to: :head
 end
