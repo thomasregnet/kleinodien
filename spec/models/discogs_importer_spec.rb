@@ -40,7 +40,35 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has imported the songs" do
         section = @release.media.first.sections.first
-        expect(section.tracks.first.release.head.title).to eq('Shredded Humans')
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Shredded Humans')
+        expect(tracks.last.release.head.title).to  eq('Pulverized')
+
+        section = @release.media[1].sections.first
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Devoured By Vermin')
+        expect(tracks.last.release.head.title).to  eq('Dormant Bodies Bursting')
+
+        section = @release.media[2].sections.first
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Decency Defied')
+        expect(tracks.last.release.head.title).to  eq('Encased In Concrete')
+
+        section = @release.media[3].sections.first
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('A Skull Full Of Maggots')
+        expect(tracks.last.release.head.title).to  eq('Scourge Of Iron')
+
+        # 12", Picture Disc
+        section = @release.media[4].sections[0]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('A Skull Full Of Maggots')
+        expect(tracks.last.release.head.title).to  eq('I Will Kill You')
+
+        section = @release.media[4].sections[1]
+        tracks = section.tracks
+        expect(tracks.first.release.head.title).to eq('Pounded Into Dust')
+        expect(tracks.last.release.head.title).to  eq('Scourge Of Iron')
       end
 
       after(:all) { DatabaseCleaner.clean }
