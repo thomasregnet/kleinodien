@@ -12,7 +12,8 @@ class ImdbImporter < ActiveRecord::Base
   end
 
   def self.import_tv_serial_season(tv_serial, s_no, html)
-    season = tv_serial.seasons.create!(no: s_no, type: 'Season')
+    #season = tv_serial.seasons.create!(no: s_no, type: 'Season')
+    season = tv_serial.seasons.create!(no: s_no)
     doc = Nokogiri::HTML(html)
     doc.search("div.eplist div[@itemprop*='episode']").each do |div|
       link = div.search("a[@itemprop*='name']").first
