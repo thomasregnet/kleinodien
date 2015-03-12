@@ -23,6 +23,7 @@ RSpec.describe ImdbImporter, type: :model do
 
   context "importing a tv serial" do
     before(:all) do
+      DatabaseCleaner.start
       html    = ImdbTestHelper.get_movie_data('tt0106179.html')
       @tv_serial = ImdbImporter.import_tv_serial(html)
 
@@ -55,9 +56,7 @@ RSpec.describe ImdbImporter, type: :model do
     end
     
     after(:all) do
-      @season.episodes.each { |e| e.destroy }
-      @season.destroy
-      @tv_serial.destroy
+      DatabaseCleaner.clean
     end
   end
 end
