@@ -11,15 +11,15 @@ RSpec.describe DiscogsImporter, type: :model do
       
       it "has imported the album" do
         expect(@release).to be_valid
-        expect(@release.head.title).to eq('Highway To Hell')
+        expect(@release.title).to eq('Highway To Hell')
         expect(@release).not_to be_new_record
       end
 
       it "has imorted the songs" do
         tracks = @release.media[0].sections[0].tracks
-        expect(tracks.first.release.head.title).to eq('Highway To Hell')
-        expect(tracks[4].release.head.title).to    eq('Beating Around The Bush')
-        expect(tracks.last.release.head.title).to  eq('Night Prowler')
+        expect(tracks.first.release.title).to eq('Highway To Hell')
+        expect(tracks[4].release.title).to    eq('Beating Around The Bush')
+        expect(tracks.last.release.title).to  eq('Night Prowler')
       end
 
       after(:all) { DatabaseCleaner.clean }
@@ -33,7 +33,7 @@ RSpec.describe DiscogsImporter, type: :model do
       
       it "has imported the album" do
         expect(@release).to be_valid
-        expect(@release.head.title).
+        expect(@release.title).
           to eq('Dead Human Collection: 25 Years Of Death Metal')
         expect(@release).not_to be_new_record
       end
@@ -41,34 +41,34 @@ RSpec.describe DiscogsImporter, type: :model do
       it "has imported the songs" do
         section = @release.media.first.sections.first
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Shredded Humans')
-        expect(tracks.last.release.head.title).to  eq('Pulverized')
+        expect(tracks.first.release.title).to eq('Shredded Humans')
+        expect(tracks.last.release.title).to  eq('Pulverized')
 
         section = @release.media[1].sections.first
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Devoured By Vermin')
-        expect(tracks.last.release.head.title).to  eq('Dormant Bodies Bursting')
+        expect(tracks.first.release.title).to eq('Devoured By Vermin')
+        expect(tracks.last.release.title).to  eq('Dormant Bodies Bursting')
 
         section = @release.media[2].sections.first
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Decency Defied')
-        expect(tracks.last.release.head.title).to  eq('Encased In Concrete')
+        expect(tracks.first.release.title).to eq('Decency Defied')
+        expect(tracks.last.release.title).to  eq('Encased In Concrete')
 
         section = @release.media[3].sections.first
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('A Skull Full Of Maggots')
-        expect(tracks.last.release.head.title).to  eq('Scourge Of Iron')
+        expect(tracks.first.release.title).to eq('A Skull Full Of Maggots')
+        expect(tracks.last.release.title).to  eq('Scourge Of Iron')
 
         # 12", Picture Disc
         section = @release.media[4].sections[0]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('A Skull Full Of Maggots')
-        expect(tracks.last.release.head.title).to  eq('I Will Kill You')
+        expect(tracks.first.release.title).to eq('A Skull Full Of Maggots')
+        expect(tracks.last.release.title).to  eq('I Will Kill You')
 
         section = @release.media[4].sections[1]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Pounded Into Dust')
-        expect(tracks.last.release.head.title).to  eq('Scourge Of Iron')
+        expect(tracks.first.release.title).to eq('Pounded Into Dust')
+        expect(tracks.last.release.title).to  eq('Scourge Of Iron')
       end
 
       after(:all) { DatabaseCleaner.clean }
@@ -87,24 +87,24 @@ RSpec.describe DiscogsImporter, type: :model do
       it "has imported the songs" do
         section = @release.media[0].sections[0]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('The System')
-        expect(tracks.last.release.head.title).to  eq('The Seventh Seal')
+        expect(tracks.first.release.title).to eq('The System')
+        expect(tracks.last.release.title).to  eq('The Seventh Seal')
 
         section = @release.media[0].sections[1]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Aegian Sea')
-        expect(tracks.last.release.head.title).to  eq('Ofis')
+        expect(tracks.first.release.title).to eq('Aegian Sea')
+        expect(tracks.last.release.title).to  eq('Ofis')
 
         section = @release.media[1].sections[0]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).to eq('Seven Trumpets')
-        expect(tracks.last.release.head.title).to  eq('Hic Et Nunc')
+        expect(tracks.first.release.title).to eq('Seven Trumpets')
+        expect(tracks.last.release.title).to  eq('Hic Et Nunc')
 
         section = @release.media[1].sections[1]
         tracks = section.tracks
-        expect(tracks.first.release.head.title).
+        expect(tracks.first.release.title).
           to eq('All The Seats Were Occupied')
-        expect(tracks.last.release.head.title).to  eq('Break')
+        expect(tracks.last.release.title).to  eq('Break')
       end
       
       after(:all) { DatabaseCleaner.clean }
