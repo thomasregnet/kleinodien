@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312083620) do
+ActiveRecord::Schema.define(version: 20150313074602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 20150312083620) do
     t.string   "type",          null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.date     "date"
+    t.integer  "date_mask"
   end
 
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree

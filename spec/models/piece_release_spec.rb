@@ -13,6 +13,24 @@ RSpec.describe PieceRelease, type: :model do
     it "delegates title to its head" do
       expect(@piece_release.title).to eq(@piece_release.head.title)
     end
+
+    it "rectifies the date and sets the right date-mask" do
+      @piece_release.date = 2015
+      expect(@piece_release.date.to_s).to eq('2015-01-01')
+      expect(@piece_release.date_mask).to eq(4)
+      
+      @piece_release.date = '2015'
+      expect(@piece_release.date.to_s).to eq('2015-01-01')
+      expect(@piece_release.date_mask).to eq(4)
+
+      @piece_release.date = '2015-03'
+      expect(@piece_release.date.to_s).to eq('2015-03-01')
+      expect(@piece_release.date_mask).to eq(6)
+
+      @piece_release.date = '2015-03-13'
+      expect(@piece_release.date.to_s).to eq('2015-03-13')
+      expect(@piece_release.date_mask).to eq(7)
+    end
   end
 
   context "with tracks" do
