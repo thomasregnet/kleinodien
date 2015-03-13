@@ -15,6 +15,10 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
 
+      it "has set the date" do
+        expect(@release.date.to_s).to eq('2000-11-20')
+        expect(@release.date_mask).to eq(7)
+      end
       it "has imorted the songs" do
         tracks = @release.media[0].sections[0].tracks
         expect(tracks.first.release.title).to eq('Highway To Hell')
@@ -38,6 +42,11 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
 
+      it "has set the date" do
+        expect(@release.date.to_s).to eq('2013-03-29')
+        expect(@release.date_mask).to eq(7)
+      end
+      
       it "has imported the songs" do
         section = @release.media.first.sections.first
         tracks = section.tracks
@@ -82,6 +91,11 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has imported the album" do
         expect(@release).not_to be_new_record
+      end
+
+      it "has set the date" do
+        expect(@release.date.to_s).to eq('1972-01-01')
+        expect(@release.date_mask).to eq(4)
       end
 
       it "has imported the songs" do

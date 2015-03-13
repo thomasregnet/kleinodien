@@ -7,7 +7,8 @@ class DiscogsImporter
       title: raw_release[:title],
       type: 'AlbumHead')
     album_release = album_head.releases.create!
-
+    album_release.date = raw_release[:released]
+    
     formats = prepare_media(raw_release[:formats], album_release)
 
     import_tracks(raw_release[:tracklist], album_release, formats)
