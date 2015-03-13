@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313074602) do
+ActiveRecord::Schema.define(version: 20150313093301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20150313074602) do
     t.string   "type",                null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.date     "date"
+    t.integer  "date_mask"
   end
 
   add_index "compilation_releases", ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id", unique: true, using: :btree
