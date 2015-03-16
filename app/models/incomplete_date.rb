@@ -1,2 +1,2 @@
-class IncompleteDate < ActiveRecord::Base
+class IncompleteDate
 end
