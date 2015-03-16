@@ -19,7 +19,11 @@ class IncompleteDate
     return 4 if /^\d\d\d\d$/.match(string)
     nil
   end
-    
+
+  def to_s
+    @date.to_s
+  end
+  
   private
 
   def init_date(date)
