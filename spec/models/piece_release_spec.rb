@@ -16,8 +16,9 @@ RSpec.describe PieceRelease, type: :model do
 
     it "rectifies the date and sets the right date-mask" do
       @piece_release.date = 2015
-      expect(@piece_release.date.to_s).to eq('2015-01-01')
-      expect(@piece_release.date_mask).to eq(4)
+      byebug
+      expect(@piece_release.date.date.to_s).to eq('2015-01-01')
+      expect(@piece_release.date.mask).to eq(4)
       
       @piece_release.date = '2015'
       expect(@piece_release.date.to_s).to eq('2015-01-01')
