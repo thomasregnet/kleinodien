@@ -17,6 +17,7 @@ RSpec.describe PieceRelease, type: :model do
 
     it_behaves_like "a model with an IncompleteDate" do
       let(:factory) { :piece_release }
+      let(:date_naming) { 'date' }
     end
     
   #   it "rectifies the date and sets the right date-mask" do
