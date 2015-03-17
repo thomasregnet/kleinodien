@@ -1,5 +1,7 @@
 class CompilationRelease < ActiveRecord::Base
-  composed_of :date, class_name: 'IncompleteDate', mapping: %w(date mask)
+  composed_of :date,
+              class_name: 'IncompleteDate',
+              mapping: [ %w(date date), %w(date_mask mask) ]
   validates :head, presence: true
   validates :type, presence: true
   belongs_to(
