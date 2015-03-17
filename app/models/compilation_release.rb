@@ -1,4 +1,5 @@
 class CompilationRelease < ActiveRecord::Base
+  composed_of :date, class_name: 'IncompleteDate', mapping: %w(date mask)
   validates :head, presence: true
   validates :type, presence: true
   belongs_to(
@@ -15,22 +16,22 @@ class CompilationRelease < ActiveRecord::Base
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
 
-  def date=(date)
-    if date.class == Fixnum
-      write_attribute(:date, date.to_s + '-01-01')
-      write_attribute(:date_mask, 4)
-    elsif date =~ /^\d\d\d\d$/
-      write_attribute(:date, date + '-01-01')
-      write_attribute(:date_mask, 4)
-    elsif date =~ /^\d\d\d\d-\d\d$/
-      write_attribute(:date, date + '-01')
-      write_attribute(:date_mask, 6)
-    elsif date =~ /^\d\d\d\d-\d\d-\d\d$/
-      write_attribute(:date, date)
-      write_attribute(:date_mask, 7)
-    else
-      write_attribute(:date, date)
-    end
-    date
-  end
+  # def date=(date)
+  #   if date.class == Fixnum
+  #     write_attribute(:date, date.to_s + '-01-01')
+  #     write_attribute(:date_mask, 4)
+  #   elsif date =~ /^\d\d\d\d$/
+  #     write_attribute(:date, date + '-01-01')
+  #     write_attribute(:date_mask, 4)
+  #   elsif date =~ /^\d\d\d\d-\d\d$/
+  #     write_attribute(:date, date + '-01')
+  #     write_attribute(:date_mask, 6)
+  #   elsif date =~ /^\d\d\d\d-\d\d-\d\d$/
+  #     write_attribute(:date, date)
+  #     write_attribute(:date_mask, 7)
+  #   else
+  #     write_attribute(:date, date)
+  #   end
+  #   date
+  # end
 end
