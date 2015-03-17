@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe CompilationRelease, type: :model do
   context "minimal CompilationRelease" do
@@ -24,23 +25,27 @@ RSpec.describe CompilationRelease, type: :model do
       expect(@c_release).not_to be_valid
     end
 
-    it "rectifies the date and sets the right date-mask" do
-      @c_release.date = IncompleteDate.new(2015)
-      expect(@c_release.date.to_s).to eq('2015-01-01')
-      expect(@c_release.date.mask).to eq(4)
-      
-      @c_release.date = IncompleteDate.new('2015')
-      expect(@c_release.date.to_s).to eq('2015-01-01')
-      expect(@c_release.date.mask).to eq(4)
-
-      @c_release.date = IncompleteDate.new('2015-03')
-      expect(@c_release.date.to_s).to eq('2015-03-01')
-      expect(@c_release.date.mask).to eq(6)
-
-      @c_release.date = IncompleteDate.new('2015-03-13')
-      expect(@c_release.date.to_s).to eq('2015-03-13')
-      expect(@c_release.date.mask).to eq(7)
+    it_behaves_like "a model with an IncompleteDate" do
+      let(:factory) { :compilation_release }
     end
+    
+    # it "rectifies the date and sets the right date-mask" do
+    #   @c_release.date = IncompleteDate.new(2015)
+    #   expect(@c_release.date.to_s).to eq('2015-01-01')
+    #   expect(@c_release.date.mask).to eq(4)
+      
+    #   @c_release.date = IncompleteDate.new('2015')
+    #   expect(@c_release.date.to_s).to eq('2015-01-01')
+    #   expect(@c_release.date.mask).to eq(4)
+
+    #   @c_release.date = IncompleteDate.new('2015-03')
+    #   expect(@c_release.date.to_s).to eq('2015-03-01')
+    #   expect(@c_release.date.mask).to eq(6)
+
+    #   @c_release.date = IncompleteDate.new('2015-03-13')
+    #   expect(@c_release.date.to_s).to eq('2015-03-13')
+    #   expect(@c_release.date.mask).to eq(7)
+    # end
         
     it "has a unique head" do
       clone = FactoryGirl.build(:compilation_release) do |c|
