@@ -24,8 +24,6 @@ RSpec.describe CompilationRelease, type: :model do
       @c_release.type = nil
       expect(@c_release).not_to be_valid
     end
-
-
     
     it "has a unique head" do
       clone = FactoryGirl.build(:compilation_release) do |c|
