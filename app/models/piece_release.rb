@@ -1,5 +1,7 @@
 class PieceRelease < ActiveRecord::Base
-  composed_of :date, class_name: 'IncompleteDate', mapping: %w(date mask)
+  composed_of :date,
+              class_name: 'IncompleteDate',
+              mapping: [ %w(date date), %w(date_mask mask) ]
   belongs_to :head, class_name: PieceHead, foreign_key: :piece_head_id
   has_many :tracks
   delegate :title, to: :head
