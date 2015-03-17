@@ -17,7 +17,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the date" do
         expect(@release.date.to_s).to eq('2000-11-20')
-        expect(@release.date_mask).to eq(7)
+        expect(@release.date.mask).to eq(7)
       end
       it "has imorted the songs" do
         tracks = @release.media[0].sections[0].tracks
@@ -44,7 +44,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the date" do
         expect(@release.date.to_s).to eq('2013-03-29')
-        expect(@release.date_mask).to eq(7)
+        expect(@release.date.mask).to eq(7)
       end
       
       it "has imported the songs" do
@@ -95,7 +95,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the date" do
         expect(@release.date.to_s).to eq('1972-01-01')
-        expect(@release.date_mask).to eq(4)
+        expect(@release.date.mask).to eq(4)
       end
 
       it "has imported the songs" do
