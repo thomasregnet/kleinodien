@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe PieceRelease, type: :model do
   context "without tracks" do
@@ -14,6 +15,10 @@ RSpec.describe PieceRelease, type: :model do
       expect(@piece_release.title).to eq(@piece_release.head.title)
     end
 
+    it_behaves_like "a model with an IncompleteDate" do
+      let(:factory) { :piece_release }
+    end
+    
     it "rectifies the date and sets the right date-mask" do
       idate = IncompleteDate.new(2015)
       @piece_release.date = idate
