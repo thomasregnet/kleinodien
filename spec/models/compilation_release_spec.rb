@@ -29,24 +29,6 @@ RSpec.describe CompilationRelease, type: :model do
       let(:factory) { :compilation_release }
     end
     
-    # it "rectifies the date and sets the right date-mask" do
-    #   @c_release.date = IncompleteDate.new(2015)
-    #   expect(@c_release.date.to_s).to eq('2015-01-01')
-    #   expect(@c_release.date.mask).to eq(4)
-      
-    #   @c_release.date = IncompleteDate.new('2015')
-    #   expect(@c_release.date.to_s).to eq('2015-01-01')
-    #   expect(@c_release.date.mask).to eq(4)
-
-    #   @c_release.date = IncompleteDate.new('2015-03')
-    #   expect(@c_release.date.to_s).to eq('2015-03-01')
-    #   expect(@c_release.date.mask).to eq(6)
-
-    #   @c_release.date = IncompleteDate.new('2015-03-13')
-    #   expect(@c_release.date.to_s).to eq('2015-03-13')
-    #   expect(@c_release.date.mask).to eq(7)
-    # end
-        
     it "has a unique head" do
       clone = FactoryGirl.build(:compilation_release) do |c|
         c.head = @c_release.head
