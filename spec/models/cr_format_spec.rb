@@ -9,10 +9,33 @@ RSpec.describe CrFormat, type: :model do
     expect(@cr_format).to be_valid
   end
 
-  it "is not valid without a release"
-  it "is not valid without a format_kind"
-  it "is not valid without a quantity"
-  it "is not valid without a no"
+  it "is not valid without a release" do
+    @cr_format.release = nil
+    expect(@cr_format).not_to be_valid
+    expect { @cr_format.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+  end
+  
+  it "is not valid without a format_kind" do
+    @cr_format.format_kind = nil
+    expect(@cr_format).not_to be_valid
+    expect { @cr_format.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+  end
+  
+  it "is not valid without a quantity" do
+    @cr_format.quantity = nil
+    expect(@cr_format).not_to be_valid
+    expect { @cr_format.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+  end
+  
+  it "is not valid without a no" do
+    @cr_format.no = nil
+    expect(@cr_format).not_to be_valid
+    expect { @cr_format.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+  end
 
   it "must have a unique combination of release and no"
 end
