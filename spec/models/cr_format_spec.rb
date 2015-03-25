@@ -37,5 +37,16 @@ RSpec.describe CrFormat, type: :model do
       .to raise_error(ActiveRecord::StatementInvalid)
   end
 
-  it "must have a unique combination of release and no"
+
+  it "must have a unique combination of release and no" do
+    clone = CrFormat.new do |c|
+      c.release     = @cr_format.release
+      c.no          = @cr_format.no
+      c.quantity    = @cr_format.quantity
+      c.format_kind = @cr_format.format_kind
+    end
+    expect(clone).not_to be_valid
+    #expect { clone.save! validate: false }.to raise_error
+  end
+
 end
