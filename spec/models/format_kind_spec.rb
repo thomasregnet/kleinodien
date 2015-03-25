@@ -8,4 +8,24 @@ RSpec.describe FormatKind, type: :model do
   it "is valid with valid attributes" do
     expect(@fki).to be_valid
   end
+
+  it "is not valid without a name" do
+    @fki.name = nil
+    expect(@fki).not_to be_valid
+    expect { @fki.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+    
+    @fki.name = ''
+    expect(@fki).not_to be_valid
+  end
+    
+  it "is not valid without a type" do
+    @fki.type = nil
+    expect(@fki).not_to be_valid
+    expect { @fki.save! validate: false }
+      .to raise_error(ActiveRecord::StatementInvalid)
+
+    @fki.type = ''
+    expect(@fki).not_to be_valid
+  end
 end
