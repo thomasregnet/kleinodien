@@ -32,5 +32,10 @@ RSpec.describe FormatKind, type: :model do
   it "must have a unique name" do
     clone = FormatKind.new(name: @fki.name, type: @fki.type)
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error
+    
+    clone = FormatKind.new(name: @fki.name.upcase, type: @fki.type)
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error
   end
 end
