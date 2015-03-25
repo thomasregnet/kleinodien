@@ -46,7 +46,7 @@ RSpec.describe CrFormat, type: :model do
       c.format_kind = @cr_format.format_kind
     end
     expect(clone).not_to be_valid
-    #expect { clone.save! validate: false }.to raise_error
+    expect { clone.save! validate: false }.to raise_error
   end
 
 end
