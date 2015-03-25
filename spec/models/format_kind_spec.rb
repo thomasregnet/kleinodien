@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe FormatKind, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @fki = FactoryGirl.create(:format_kind)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@fki).to be_valid
+  end
 end
