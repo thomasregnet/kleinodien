@@ -12,4 +12,5 @@ class CrFormat < ActiveRecord::Base
     :format_kind,
     class_name: FormatKind,
     foreign_key: :format_kind_id)
+  has_many(:clarifications, class_name: CrFormatClarification)
 end

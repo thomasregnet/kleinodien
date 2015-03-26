@@ -49,4 +49,7 @@ RSpec.describe CrFormat, type: :model do
     expect { clone.save! validate: false }.to raise_error
   end
 
+  it "has many clarifications" do
+    expect(@cr_format).to respond_to(:clarifications)
+  end
 end
