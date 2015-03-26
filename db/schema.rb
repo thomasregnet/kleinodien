@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325211225) do
+ActiveRecord::Schema.define(version: 20150326185844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20150325211225) do
     t.string   "side",                  default: "A", null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+  end
+
+  create_table "cr_format_clarifications", force: :cascade do |t|
+    t.integer  "cr_format_id"
+    t.integer  "format_kind_id"
+    t.integer  "no"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "cr_formats", force: :cascade do |t|
