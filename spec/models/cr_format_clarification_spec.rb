@@ -23,4 +23,15 @@ RSpec.describe CrFormatClarification, type: :model do
     @clarification.no = nil
     expect(@clarification).not_to be_valid
   end
+
+  it "must have a unique a combination of format and no" do
+    clone = CrFormatClarification.new do |c|
+      c.format = @clarification.format
+      c.format_kind = @clarification.format_kind
+      c.no     = @clarification.no
+    end
+    expect(clone).not_to be_valid
+    expect{ clone.save! validate: false }
+      .to raise_error(ActiveRecord::RecordNotUnique)
+  end
 end
