@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 20150326185844) do
   end
 
   create_table "cr_format_clarifications", force: :cascade do |t|
-    t.integer  "cr_format_id"
-    t.integer  "format_kind_id"
-    t.integer  "no"
+    t.integer  "cr_format_id",   null: false
+    t.integer  "format_kind_id", null: false
+    t.integer  "no",             null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

@@ -1,9 +1,9 @@
 class CreateCrFormatClarifications < ActiveRecord::Migration
   def change
     create_table :cr_format_clarifications do |t|
-      t.integer :cr_format_id
-      t.integer :format_kind_id
-      t.integer :no
+      t.integer :cr_format_id,   null: false
+      t.integer :format_kind_id, null: false
+      t.integer :no,             null: false
 
       t.timestamps null: false
     end
