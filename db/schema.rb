@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326185844) do
+ActiveRecord::Schema.define(version: 20150326192227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20150326185844) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "cr_format_clarifications", ["cr_format_id", "no"], name: "index_cr_format_clarifications_on_cr_format_id_and_no", unique: true, using: :btree
 
   create_table "cr_formats", force: :cascade do |t|
     t.integer  "compilation_release_id", null: false
