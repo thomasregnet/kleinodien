@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CrFormatClarification, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @clarification = FactoryGirl.create(:cr_format_clarification)
+  end
+
+  it "is valid with valid attributes" do
+    expect(@clarification).to be_valid
+  end
 end
