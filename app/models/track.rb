@@ -9,6 +9,10 @@ class Track < ActiveRecord::Base
   #   inverse_of: :tracks,
   #   class_name: CompilationSection,
   #   foreign_key: :compilation_section_id)
+  belongs_to(
+    :compilation,
+    class_name: CompilationRelease,
+    foreign_key: :compilation_release_id)
   validates :format, presence: true
   validates :release, presence: true
 end

@@ -34,6 +34,8 @@ RSpec.describe Track, type: :model do
       @track = FactoryGirl.create(:track_with_compilation_release)
     end
 
-    it "knows its CompilationRelease"
+    it "knows its CompilationRelease" do
+      expect(@track.compilation).to be_instance_of(CompilationRelease)
+    end
   end
 end
