@@ -15,6 +15,10 @@ class CompilationRelease < ActiveRecord::Base
   #   :media,
   #   class_name: CompilationMedium,
   #   foreign_key: :compilation_release_id)
+  has_many(
+    :formats,
+    class_name: CrFormat,
+    foreign_key: :compilation_release_id)
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
 
