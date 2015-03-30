@@ -11,10 +11,10 @@ class CompilationRelease < ActiveRecord::Base
   has_many(
     :identifiers,
     class_name: CompilationIdentifier)
-  has_many(
-    :media,
-    class_name: CompilationMedium,
-    foreign_key: :compilation_release_id)
+  # has_many(
+  #   :media,
+  #   class_name: CompilationMedium,
+  #   foreign_key: :compilation_release_id)
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
 
