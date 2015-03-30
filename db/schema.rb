@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330184009) do
+ActiveRecord::Schema.define(version: 20150330185706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,13 +182,12 @@ ActiveRecord::Schema.define(version: 20150330184009) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "piece_release_id",       null: false
-    t.integer  "format_id",              null: false
+    t.integer  "piece_release_id", null: false
+    t.integer  "format_id",        null: false
     t.integer  "no"
     t.string   "path"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "compilation_section_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
