@@ -19,13 +19,13 @@ RSpec.describe Track, type: :model do
     expect(@track).not_to be_valid
   end
 
-  context "with a section" do
-    before(:each) do
-      @track = FactoryGirl.create(:track_with_section)
-    end
+  # context "with a section" do
+  #   before(:each) do
+  #     @track = FactoryGirl.create(:track_with_section)
+  #   end
     
-    it "has access to its section" do
-      expect(@track.section).to be_instance_of(CompilationSection)
-    end
-  end
+  #   it "has access to its section" do
+  #     expect(@track.section).to be_instance_of(CompilationSection)
+  #   end
+  # end
 end
