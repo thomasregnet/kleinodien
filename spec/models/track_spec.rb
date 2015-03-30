@@ -28,4 +28,12 @@ RSpec.describe Track, type: :model do
   #     expect(@track.section).to be_instance_of(CompilationSection)
   #   end
   # end
+
+  context "belonging to a CompilationRelease" do
+    before(:each) do
+      @track = FactoryGirl.create(:track_with_compilation_release)
+    end
+
+    it "knows its CompilationRelease"
+  end
 end
