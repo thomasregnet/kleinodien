@@ -13,6 +13,6 @@ class Track < ActiveRecord::Base
     :compilation,
     class_name: CompilationRelease,
     foreign_key: :compilation_release_id)
-  validates :format, presence: true
+  #validates :format, presence: true
   validates :release, presence: true
 end
