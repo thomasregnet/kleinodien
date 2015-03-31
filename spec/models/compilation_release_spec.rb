@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe CompilationRelease, type: :model do
+  # TODO: test tracks
   context "minimal CompilationRelease" do
     before(:each) do
       @c_release = FactoryGirl.create(:compilation_release)

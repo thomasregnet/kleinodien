@@ -15,6 +15,8 @@ class CompilationRelease < ActiveRecord::Base
   #   :media,
   #   class_name: CompilationMedium,
   #   foreign_key: :compilation_release_id)
+  has_many(:tracks)
+    
   has_many(
     :formats,
     class_name: CrFormat,
