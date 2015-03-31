@@ -9,6 +9,10 @@ RSpec.describe TrackHeading, type: :model do
     expect(@heading).to be_valid
   end
 
+  it "has the alias method 'title' for heading" do
+    expect(@heading.heading).to eq(@heading.title)
+  end
+  
   it "is not valid without a heading" do
     @heading.heading = ''
     expect(@heading).not_to be_valid
