@@ -4,6 +4,7 @@ FactoryGirl.define do
 
     factory :track_heading, class: TrackHeading do
       association :compilation, factory: :compilation_release
+      heading 'some heading'
     end
     
     factory :track_with_compilation_release do
