@@ -9,11 +9,6 @@ RSpec.describe Track, type: :model do
     expect(@track).to be_valid
   end
 
-  it "is not valid without a format" do
-    @track.format = nil
-    expect(@track).not_to be_valid
-  end
-
   it "is not valid without a release" do
     @track.release = nil
     expect(@track).not_to be_valid
