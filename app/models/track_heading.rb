@@ -1,0 +1,2 @@
+class TrackHeading < Track
+end
