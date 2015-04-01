@@ -1,8 +1,8 @@
 class CrFormat < ActiveRecord::Base
-  validates :release,     presence: true
-  validates :format_kind, presence: true
-  validates :quantity,    presence: true
-  validates :no,          presence: true
+  validates :release,  presence: true
+  validates :format,   presence: true
+  validates :quantity, presence: true
+  validates :no,       presence: true
   validates_uniqueness_of :no, scope: :release
   belongs_to(
     :release,
