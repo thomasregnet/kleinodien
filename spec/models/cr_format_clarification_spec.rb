@@ -15,7 +15,7 @@ RSpec.describe CrFormatClarification, type: :model do
   end
   
   it "is not valid without a format_kind" do
-    @clarification.format_kind = nil
+    @clarification.kind = nil
     expect(@clarification).not_to be_valid
   end
   
@@ -27,7 +27,7 @@ RSpec.describe CrFormatClarification, type: :model do
   it "must have a unique a combination of format and no" do
     clone = CrFormatClarification.new do |c|
       c.format = @clarification.format
-      c.format_kind = @clarification.format_kind
+      c.kind   = @clarification.kind
       c.no     = @clarification.no
     end
     expect(clone).not_to be_valid
