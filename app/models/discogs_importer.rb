@@ -132,12 +132,12 @@ class DiscogsImporter
   def self.import_formats(raw_formats, album_release)
     formats = []
     raw_formats.each_with_index do |f, idx|
-      format_kind = FormatKind.find_or_create_by!(
-        type: 'FormatKind',
+      format = Format.find_or_create_by!(
+        type: 'Format',
         name: f[:name]
       )
       format = album_release.formats.create(
-        format_kind:     format_kind,
+        format:   format,
         quantity: f[:qty],
         no:       idx
       )
