@@ -137,7 +137,7 @@ class DiscogsImporter
         name: f[:name]
       )
       format = album_release.formats.create(
-        format:   format,
+        kind:     format,
         quantity: f[:qty],
         no:       idx
       )
