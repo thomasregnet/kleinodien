@@ -1,6 +1,6 @@
 class CrFormat < ActiveRecord::Base
   validates :release,  presence: true
-  validates :format,   presence: true
+  validates :kind,     presence: true
   validates :quantity, presence: true
   validates :no,       presence: true
   validates_uniqueness_of :no, scope: :release
@@ -8,6 +8,8 @@ class CrFormat < ActiveRecord::Base
     :release,
     class_name: CompilationRelease,
     foreign_key: :compilation_release_id)
-  belongs_to :format
+  #belongs_to :format
+  belongs_to :kind, class_name: Format, foreign_key: :format_id
+  
   has_many(:clarifications, class_name: CrFormatClarification)
 end
