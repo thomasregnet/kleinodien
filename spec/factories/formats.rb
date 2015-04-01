@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :format_kind do
+  factory :format do
     sequence(:name) { |n| "format kind ##{n}" }
-    type FormatKind
+    type Format
   end
 end
