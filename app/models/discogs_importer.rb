@@ -89,10 +89,14 @@ class DiscogsImporter
   # end
 
   def self.import_tracks(raw_tracklist, album_release, formats)
+    heading = nil
     raw_tracklist.each_with_index do |t, idx|
       # TODO: handle track headings
-      next if t[:type_] == 'heading'
-
+      #next if t[:type_] == 'heading'
+      if t[:type_] == 'heading'
+        heading = t[:title]
+        next
+      end
       artist_credit = t[:artists] ? import_artist_credit(t[:artist])
                       : album_release.head.artist_credit    
       song_head = artist_credit.pieces.find_or_create_by!(
@@ -105,7 +109,8 @@ class DiscogsImporter
       # track = song_release.tracks.create!(
       #   format: track_format, section: section)
       track = song_release.tracks.create!(
-        compilation: album_release
+        compilation: album_release,
+        heading:     heading,
       )
     end
   end
