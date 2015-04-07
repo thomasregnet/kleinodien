@@ -54,6 +54,11 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(tracks.last.release.title).to  eq('Scourge Of Iron')
       end
 
+      it "has imported the track headings" do
+        tracks = @release.tracks
+        expect(tracks[0].heading).to eq('Cd 1')
+      end
+      
       after(:all) { DatabaseCleaner.clean }
     end
 
