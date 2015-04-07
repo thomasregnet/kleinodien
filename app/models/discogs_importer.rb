@@ -91,8 +91,6 @@ class DiscogsImporter
   def self.import_tracks(raw_tracklist, album_release, formats)
     heading = nil
     raw_tracklist.each_with_index do |t, idx|
-      # TODO: handle track headings
-      #next if t[:type_] == 'heading'
       if t[:type_] == 'heading'
         heading = t[:title]
         next
