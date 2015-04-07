@@ -9,7 +9,6 @@ class DiscogsImporter
     album_release = album_head.releases.create!
     album_release.date = IncompleteDate.new(raw_release[:released])
     
-    #formats = prepare_media(raw_release[:formats], album_release)
     formats = import_formats(raw_release[:formats], album_release)
     
     import_tracks(raw_release[:tracklist], album_release, formats)
@@ -34,60 +33,6 @@ class DiscogsImporter
     end
   end
 
-  # def self.import_tracks(raw_tracklist, album_release, formats)
-
-  #   heading_idx = raw_tracklist[0][:type_] == 'heading' ? -1 : 0
-  #   medium      = album_release.media.first
-  #   section     = nil
-  #   side        = 'A'
-  #   last_side   = 'A'
-    
-  #   raw_tracklist.each do |t|
-  #     if t[:type_] == 'heading'
-  #       heading_idx += 1
-  #       medium       = album_release.media[heading_idx]
-  #       side         = 'A'
-  #       section      = medium.sections.create!(
-  #         format: formats[heading_idx], side: side)
-  #       next
-  #     end
-
-  #     unless section
-  #       section = medium.sections.create!(
-  #         format: formats[heading_idx], side: side)
-  #     end
-
-  #     m = /^([A-Z])-?(\d+)$/.match(t[:position])
-  #     if m
-  #       side = m[1]
-  #       if side != last_side
-  #         last_side = side
-  #         if section.side == 'A'
-  #           section = medium.sections.create!(
-  #             format: formats[heading_idx], side: 'B')
-  #         else
-  #           heading_idx += 1
-  #           medium = album_release.media[heading_idx]
-  #           section = medium.sections.create!(
-  #             format: formats[heading_idx], side: 'A')
-  #         end
-  #       end
-  #     end
-      
-  #     artist_credit = t[:artists] ? import_artist_credit(t[:artist])
-  #                     : album_release.head.artist_credit    
-  #     song_head = artist_credit.pieces.find_or_create_by!(
-  #       title: t[:title],
-  #       type: 'SongHead')
-
-  #     track_format = track_format_for(formats[heading_idx])
-  #     # TODO: deal with song-versions
-  #     song_release = SongRelease.find_or_create_by!(head: song_head)
-  #     track = song_release.tracks.create!(
-  #       format: track_format, section: section)
-  #   end
-  # end
-
   def self.import_tracks(raw_tracklist, album_release, formats)
     heading = nil
     raw_tracklist.each_with_index do |t, idx|
@@ -101,11 +46,9 @@ class DiscogsImporter
         title: t[:title],
         type: 'SongHead')
 
-      #track_format = track_format_for(formats[heading_idx])
       # TODO: deal with song-versions
       song_release = SongRelease.find_or_create_by!(head: song_head)
-      # track = song_release.tracks.create!(
-      #   format: track_format, section: section)
+
       track = song_release.tracks.create!(
         compilation: album_release,
         heading:     heading,
