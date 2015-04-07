@@ -19,12 +19,6 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.date.to_s).to eq('2000-11-20')
         expect(@release.date.mask).to eq(7)
       end
-      # it "has imorted the songs" do
-      #   tracks = @release.media[0].sections[0].tracks
-      #   expect(tracks.first.release.title).to eq('Highway To Hell')
-      #   expect(tracks[4].release.title).to    eq('Beating Around The Bush')
-      #   expect(tracks.last.release.title).to  eq('Night Prowler')
-      # end
 
       it "has imported the songs" do
         tracks = @release.tracks
