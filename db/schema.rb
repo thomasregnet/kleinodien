@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408194132) do
+ActiveRecord::Schema.define(version: 20150408195157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,14 @@ ActiveRecord::Schema.define(version: 20150408194132) do
     t.string   "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "trf_attributes", force: :cascade do |t|
+    t.integer  "track_id",              null: false
+    t.integer  "trf_attribute_kind_id", null: false
+    t.integer  "no",                    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
