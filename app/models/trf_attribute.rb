@@ -5,4 +5,7 @@ class TrfAttribute < ActiveRecord::Base
     class_name: TrfAttributeKind,
     foreign_key: :trf_attribute_kind_id
   )
+  validates :track, presence: true
+  validates :kind, presence: true
+  validates :no, presence: true
 end
