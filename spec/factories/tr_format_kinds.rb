@@ -1,8 +1,5 @@
 FactoryGirl.define do
   factory :tr_format_kind do
-    name "MyString"
-abbr "MyString"
-note "MyString"
+    sequence(:name) { |n| "format kind ##{n}" }
   end
-
 end
