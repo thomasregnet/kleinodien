@@ -1,0 +1,11 @@
+class CreateTrfAttributeKinds < ActiveRecord::Migration
+  def change
+    create_table :trf_attribute_kinds do |t|
+      t.string :name, null: false
+      t.string :abbr
+      t.string :note
+
+      t.timestamps null: false
+    end
+  end
+end
