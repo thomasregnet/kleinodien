@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408181753) do
+ActiveRecord::Schema.define(version: 20150408183457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20150408181753) do
     t.integer  "compilation_release_id"
     t.string   "position"
     t.string   "heading"
+    t.integer  "tr_format_kind_id"
   end
 
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
