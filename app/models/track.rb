@@ -14,5 +14,10 @@ class Track < ActiveRecord::Base
     class_name: TrFormatKind,
     foreign_key: :tr_format_kind_id
   )
+  has_many(
+    :format_attributes,
+    class_name: TrfAttribute,
+    foreign_key: :track_id
+  )
   validates :release, presence: true
 end
