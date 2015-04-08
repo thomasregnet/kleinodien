@@ -9,4 +9,12 @@ RSpec.describe TrFormatKind, type: :model do
   it "is valid with valid attributes" do
     expect(@trfk).to be_valid
   end
+
+  it "is not valid without a name" do
+    @trfk.name = ''
+    expect(@trfk).not_to be_valid
+    
+    @trfk.name = nil
+    expect(@trfk).not_to be_valid
+  end
 end
