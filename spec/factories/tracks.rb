@@ -10,5 +10,9 @@ FactoryGirl.define do
     factory :track_with_compilation_release do
       association :compilation, factory: :compilation_release
     end
+
+    factory :track_with_format do
+      association :format, factory: :tr_format_kind
+    end
   end
 end
