@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :trf_attribute do
-    track_id 1
-trf_attribute_kind_id 1
-no 1
+    association :track, factory: :track
+    association :kind, factory: :trf_attribute_kind
+    sequence(:no) { |n| n }
   end
-
 end
