@@ -23,4 +23,14 @@ RSpec.describe Track, type: :model do
       expect(@track.compilation).to be_instance_of(CompilationRelease)
     end
   end
+
+  context "with a format" do
+    before(:each) do
+      @track = FactoryGirl.create(:track_with_format)
+    end
+
+    it "belongs to its format" do
+      expect(@track.format).to be_instance_of(TrFormatKind)
+    end
+  end
 end
