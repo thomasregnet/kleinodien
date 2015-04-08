@@ -33,4 +33,14 @@ RSpec.describe Track, type: :model do
       expect(@track.format).to be_instance_of(TrFormatKind)
     end
   end
+
+  context "with format attributes" do
+    before(:each) do
+      @track = FactoryGirl.create(:track_with_format_attributes)
+    end
+
+    it "sees its attributes" do
+      expect(@track.format_attributes.count).to eq(3)
+    end
+  end
 end
