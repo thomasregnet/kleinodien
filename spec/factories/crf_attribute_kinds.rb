@@ -1,8 +1,5 @@
 FactoryGirl.define do
   factory :crf_attribute_kind do
-    name "MyString"
-abbr "MyString"
-note "MyString"
+    sequence(:name) { |n| "compilation release format attribute ##{n}" }
   end
-
 end
