@@ -28,7 +28,7 @@ RSpec.describe CrfAttribute, type: :model do
   end
 
   it "must have a unique pair of format_id and no" do
-    clone = TrfAttribute.new do |c|
+    clone = CrfAttribute.new do |c|
       c.format = @attr.format
       c.kind   = @attr.kind
       c.no     = @attr.no

@@ -12,4 +12,5 @@ class CrfAttribute < ActiveRecord::Base
   validates :format, presence: true
   validates :kind,   presence: true
   validates :no,     presence: true
+  validates_uniqueness_of :format, scope: :no
 end
