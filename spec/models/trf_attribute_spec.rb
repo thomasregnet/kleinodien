@@ -34,5 +34,6 @@ RSpec.describe TrfAttribute, type: :model do
       c.no    = @attr.no
     end
     expect(clone).not_to be_valid
+    expect { clone.save! validate: false }.to raise_error
   end
 end
