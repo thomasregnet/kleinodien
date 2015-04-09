@@ -8,4 +8,5 @@ class TrfAttribute < ActiveRecord::Base
   validates :track, presence: true
   validates :kind, presence: true
   validates :no, presence: true
+  validates_uniqueness_of :track_id, scope: :no
 end
