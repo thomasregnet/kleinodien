@@ -84,9 +84,21 @@ class DiscogsImporter
         quantity: f[:qty],
         no:       idx
       )
+      #byebug
+      import_format_attributes(raw_formats[idx][:descriptions], format)
       formats << format
     end
     formats
+  end
+
+  def self.import_format_attributes(raw_descriptions, format)
+    raw_descriptions.each_with_index do |d, idx|
+      attr_kind = CrfAttributeKind.find_or_create_by!(name: d)
+      format.format_attributes.create!(
+        no: idx,
+        kind: attr_kind
+      )
+    end
   end
   
   def self.track_format_for(medium_format)
