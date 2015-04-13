@@ -12,4 +12,5 @@ class CrFormat < ActiveRecord::Base
   belongs_to :kind, class_name: CrFormatKind, foreign_key: :cr_format_kind_id
   
   has_many(:clarifications, class_name: CrFormatClarification)
+  has_many(:format_attributes, class_name: CrfAttribute)
 end
