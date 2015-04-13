@@ -47,7 +47,35 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.date.to_s).to eq('2013-03-29')
         expect(@release.date.mask).to eq(7)
       end
-      
+
+      it "has imported the formats" do
+        formats = @release.formats
+        
+        expect(formats[0].kind.name).to eq('All Media')
+        expect(formats[0].quantity).to  eq(1)
+        expect(formats[0].format_attributes[0].kind.name)
+          .to eq('Limited Edition')
+
+        expect(formats[1].kind.name).to eq('CD')
+        expect(formats[1].quantity).to  eq(3)
+        expect(formats[1].format_attributes[0].kind.name)
+          .to eq('Compilation')
+
+        expect(formats[2].kind.name).to eq('CD')
+        expect(formats[2].quantity).to  eq(1)
+        expect(formats[2].format_attributes[0].kind.name)
+          .to eq('Album')
+
+        expect(formats[3].kind.name).to eq('Vinyl')
+        expect(formats[3].quantity).to  eq(1)
+        expect(formats[3].format_attributes[0].kind.name)
+          .to eq('12"')
+        expect(formats[3].format_attributes[1].kind.name)
+          .to eq('Picture Disc')
+        expect(formats[3].format_attributes[2].kind.name)
+          .to eq('Album')
+      end
+
       it "has imported the songs" do
         tracks = @release.tracks
         expect(tracks[0].release.title).to eq('Shredded Humans')
