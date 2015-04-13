@@ -49,17 +49,6 @@ RSpec.describe CrFormat, type: :model do
     expect { clone.save! validate: false }.to raise_error
   end
 
-  context "with clarificatons" do
-    before(:each) do
-      @cr_format = FactoryGirl.create(:cr_format_with_clarifications)
-    end
-    
-    it "should return the expected count of clarifications" do
-      expect(@cr_format).to respond_to(:clarifications)
-      expect(@cr_format.clarifications.count).to eq(3)
-    end
-  end
-
   context "with format attributes" do
     before(:each) do
       @cr_format = FactoryGirl.create(:cr_format_with_format_attributes)
