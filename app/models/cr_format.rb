@@ -8,9 +8,17 @@ class CrFormat < ActiveRecord::Base
     :release,
     class_name: CompilationRelease,
     foreign_key: :compilation_release_id)
-  #belongs_to :format
-  belongs_to :kind, class_name: CrFormatKind, foreign_key: :cr_format_kind_id
-  
-  has_many(:clarifications, class_name: CrFormatClarification)
-  has_many(:format_attributes, class_name: CrfAttribute)
+  belongs_to(
+    :kind,
+    class_name: CrFormatKind,
+    foreign_key: :cr_format_kind_id
+  )
+  has_many(
+    :clarifications,
+    class_name: CrFormatClarification
+  )
+  has_many(
+    :format_attributes,
+    class_name: CrfAttribute
+  )
 end
