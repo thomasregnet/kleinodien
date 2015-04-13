@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413172155) do
+ActiveRecord::Schema.define(version: 20150413183115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150413172155) do
     t.integer  "no",                     null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "note"
   end
 
   add_index "cr_formats", ["compilation_release_id", "no"], name: "index_cr_formats_on_compilation_release_id_and_no", unique: true, using: :btree
