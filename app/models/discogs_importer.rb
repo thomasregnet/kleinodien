@@ -81,10 +81,10 @@ class DiscogsImporter
       f_kind = CrFormatKind.find_or_create_by!(name: f[:name])
       format = album_release.formats.create(
         kind:     f_kind,
+        note:     f[:text],
         quantity: f[:qty],
         no:       idx
       )
-      #byebug
       import_format_attributes(raw_formats[idx][:descriptions], format)
       formats << format
     end
