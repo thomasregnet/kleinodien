@@ -9,6 +9,10 @@ RSpec.describe CrFormat, type: :model do
     expect(@cr_format).to be_valid
   end
 
+  it "has a note attribute" do
+    expect(@cr_format).to respond_to(:note)
+  end
+  
   it "is not valid without a release" do
     @cr_format.release = nil
     expect(@cr_format).not_to be_valid
