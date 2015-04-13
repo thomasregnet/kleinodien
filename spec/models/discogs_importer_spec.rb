@@ -53,6 +53,7 @@ RSpec.describe DiscogsImporter, type: :model do
         
         expect(formats[0].kind.name).to eq('All Media')
         expect(formats[0].quantity).to  eq(1)
+        expect(formats[0].note).to      eq('Hardcover-Artbook')
         expect(formats[0].format_attributes[0].kind.name)
           .to eq('Limited Edition')
 
