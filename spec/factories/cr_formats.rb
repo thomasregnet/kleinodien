@@ -18,5 +18,19 @@ FactoryGirl.define do
         )
       end
     end
+
+    factory :cr_format_with_format_attributes do
+      transient do
+        attributes_count 3
+      end
+
+      after(:create) do |cr_format, evaluator|
+        create_list(
+          :crf_attribute,
+          evaluator.attributes_count,
+          format: cr_format
+        )
+      end
+    end
   end
 end
