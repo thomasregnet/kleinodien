@@ -10,6 +10,23 @@ RSpec.describe CompilationHead, type: :model do
     expect(@c_head).to be_valid
   end
 
+  it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
+    @a_head = FactoryGirl.build(
+      :album_head,
+      title:          @c_head.title,
+      disambiguation: @c_head.disambiguation
+    )
+    expect(@a_head).to be_valid
+    expect { @a_head.save! }.not_to raise_error
+
+    disambiguation = 'disambiguate this!'
+    @a_head.disambiguation = disambiguation
+    @c_head.disambiguation = disambiguation
+    expect(@a_head).to be_valid
+    expect(@c_head).to be_valid
+    expect { @a_head.save! }.not_to raise_error
+    expect { @c_head.save! }.not_to raise_error
+  end
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :compilation_head }
     let(:object) { @c_head }
