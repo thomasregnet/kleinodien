@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414180044) do
+ActiveRecord::Schema.define(version: 20150414180958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(version: 20150414180044) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title", unique: true, where: "(disambiguation IS NULL)", using: :btree
+  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, using: :btree
 
   create_table "compilation_identifiers", force: :cascade do |t|
     t.integer  "compilation_release_id", null: false
