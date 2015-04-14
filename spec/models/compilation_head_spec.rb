@@ -27,6 +27,7 @@ RSpec.describe CompilationHead, type: :model do
     expect { @a_head.save! }.not_to raise_error
     expect { @c_head.save! }.not_to raise_error
   end
+  
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :compilation_head }
     let(:object) { @c_head }

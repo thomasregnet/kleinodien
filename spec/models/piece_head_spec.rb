@@ -10,6 +10,24 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).to be_valid
   end
 
+  it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
+    @s_head = FactoryGirl.build(
+      :song_head,
+      title:          @ph.title,
+      disambiguation: @ph.disambiguation
+    )
+    expect(@s_head).to be_valid
+    expect { @s_head.save! }.not_to raise_error
+
+    disambiguation = 'disambiguate this!'
+    @s_head.disambiguation = disambiguation
+    @ph.disambiguation = disambiguation
+    expect(@s_head).to be_valid
+    expect(@ph).to be_valid
+    expect { @s_head.save! }.not_to raise_error
+    expect { @ph.save! }.not_to raise_error
+  end
+  
   it "is not valid without a type" do
     @ph.type = nil
     expect(@ph).not_to be_valid
