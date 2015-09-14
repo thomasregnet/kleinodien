@@ -32,10 +32,16 @@ RSpec.describe Format, type: :model do
   it "must have a unique name" do
     clone = Format.new(name: @format.name, type: @format.type)
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error
+    expect { clone.save! validate: false }
+      .to raise_error(
+            /duplicate key.+"index_format_kinds_on_lower_name_and_type"/
+          )
     
     clone = Format.new(name: @format.name.upcase, type: @format.type)
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error
+    expect { clone.save! validate: false }
+      .to raise_error(
+            /duplicate key.+"index_format_kinds_on_lower_name_and_type"/
+          )
   end
 end
