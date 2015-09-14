@@ -28,7 +28,8 @@ RSpec.describe ArtistCredit, type: :model do
   end
 
   it "raises an error when it sets its participants to null" do
-    expect { @artist_credit.participants = [] }.to raise_error
+    expect { @artist_credit.participants = [] }
+      .to raise_error(/null value in column "artist_credit_id"/)
   end
 
 end
