@@ -23,6 +23,8 @@ RSpec.shared_examples "a format kind" do
     clone = FactoryGirl.create(factory)    
     clone.name = @format_kind.name.upcase
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error
+    expect { clone.save! validate: false }.to raise_error do |error|
+      expect(error).to be_a(ActiveRecord::RecordNotUnique)
+    end
   end
 end  
