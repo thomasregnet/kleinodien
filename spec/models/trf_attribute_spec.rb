@@ -12,19 +12,22 @@ RSpec.describe TrfAttribute, type: :model do
   it "is not valid without a track" do
     @attr.track = nil
     expect(@attr).not_to be_valid
-    expect { @attr.save! validate: false }.to raise_error
+    expect { @attr.save! validate: false }
+      .to raise_error(/ERROR:  null value in column "track_id"/)
   end
   
   it "is not valid without a kind" do
     @attr.kind = nil
     expect(@attr).not_to be_valid
-    expect { @attr.save! validate: false }.to raise_error
+    expect { @attr.save! validate: false }
+      .to raise_error(/ERROR:  null value in column "trf_attribute_kind_id"/)
   end
   
   it "is not valid without a no" do
     @attr.no = nil
     expect(@attr).not_to be_valid
-    expect { @attr.save! validate: false }.to raise_error
+    expect { @attr.save! validate: false }
+      .to raise_error(/ERROR:  null value in column "no"/)
   end
 
   it "must have a unique pair of track_id and no" do
@@ -33,7 +36,10 @@ RSpec.describe TrfAttribute, type: :model do
       c.kind  = @attr.kind
       c.no    = @attr.no
     end
+    
+
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error
+    expect { clone.save! validate: false }
+      .to raise_error(/ERROR:  duplicate key value violates unique constraint "index_trf_attributes_on_track_id_and_no"/)
   end
 end
