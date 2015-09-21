@@ -16,6 +16,7 @@ class DiscogsImporter
     formats = import_formats(dc_release.formats, album_release)
 
     import_tracks(raw_release[:tracklist], album_release, formats, dc_release)
+    album_release.save!
     album_release
   end
 
