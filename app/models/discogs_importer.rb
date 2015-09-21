@@ -8,8 +8,9 @@ class DiscogsImporter
     #artist_credit = import_artist_credit(raw_release[:artists])
     artist_credit = import_artist_credit(kodc_release.artists)
     album_head = artist_credit.compilations.create!(
-      title: raw_release[:title],
-      type: 'AlbumHead')
+      title: kodc_release.title,
+      type:  'AlbumHead'
+    )
     album_release = album_head.releases.create!
     album_release.date = IncompleteDate.new(raw_release[:released])
     
