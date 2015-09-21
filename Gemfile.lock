@@ -1,5 +1,7 @@
-PATH
-  remote: ../kleinodien_discogs
+GIT
+  remote: /home/ossi/oStuff/develop/kleinodien_discogs
+  revision: 50e310cf28d9eb0e11813813393e034f454b0e74
+  branch: master
   specs:
     kleinodien_discogs (0.0.4)
 
