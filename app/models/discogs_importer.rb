@@ -5,7 +5,6 @@ class DiscogsImporter
     raw_release = JSON.parse(json, symbolize_names: true)
     dc_release = KleinodienDiscogs.get_release(json)
     
-    #artist_credit = import_artist_credit(raw_release[:artists])
     artist_credit = import_artist_credit(dc_release.artists)
     album_head = artist_credit.compilations.create!(
       title: dc_release.title,
@@ -14,7 +13,7 @@ class DiscogsImporter
     album_release = album_head.releases.create!
     album_release.date = IncompleteDate.new(raw_release[:released])
     
-    formats = import_formats(raw_release[:formats], album_release)
+    formats = import_formats(dc_release.formats, album_release)
     
     import_tracks(raw_release[:tracklist], album_release, formats, dc_release)
     album_release
@@ -80,27 +79,27 @@ class DiscogsImporter
     formats
   end
 
-  def self.import_formats(raw_formats, album_release)
+  def self.import_formats(dc_formats, album_release)
     formats = []
-    raw_formats.each_with_index do |f, idx|
-      f_kind = CrFormatKind.find_or_create_by!(name: f[:name])
-      format = album_release.formats.create(
+    dc_formats.each_with_index do |f, no|
+      f_kind =    CrFormatKind.find_or_create_by!(name: f.name)
+      format =    album_release.formats.create!(
         kind:     f_kind,
-        note:     f[:text],
-        quantity: f[:qty],
-        no:       idx
+        note:     f.text,
+        quantity: f.qty,
+        no:       no
       )
-      import_format_attributes(raw_formats[idx][:descriptions], format)
+      import_format_attributes(dc_formats[no].descriptions, format)
       formats << format
     end
     formats
   end
 
-  def self.import_format_attributes(raw_descriptions, format)
-    raw_descriptions.each_with_index do |d, idx|
+  def self.import_format_attributes(dc_formats, format)
+    dc_formats.each_with_index do |d, no|
       attr_kind = CrfAttributeKind.find_or_create_by!(name: d)
       format.format_attributes.create!(
-        no: idx,
+        no:   no,
         kind: attr_kind
       )
     end
