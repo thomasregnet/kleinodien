@@ -34,10 +34,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise', '~> 3.4'
 
-#gem 'discogs_kleinodien',
 gem 'kleinodien_discogs',
     '0.0.4',
-    path:'/home/ossi/oStuff/develop/kleinodien_discogs'
+    git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
+    branch: 'master'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
