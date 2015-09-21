@@ -5,7 +5,8 @@ class DiscogsImporter
     raw_release = JSON.parse(json, symbolize_names: true)
     kodc_release = KleinodienDiscogs.get_release(json)
     
-    artist_credit = import_artist_credit(raw_release[:artists])
+    #artist_credit = import_artist_credit(raw_release[:artists])
+    artist_credit = import_artist_credit(kodc_release.artists)
     album_head = artist_credit.compilations.create!(
       title: raw_release[:title],
       type: 'AlbumHead')
@@ -18,24 +19,24 @@ class DiscogsImporter
     album_release
   end
 
-  def self.import_artist_credit(raw_artists)
+  def self.import_artist_credit(artists)
     artist_credit = ArtistCredit.new
-    raw_artists.each_with_index do |a, no|
-      import_participant(a, no, artist_credit)
+    artists.each_with_index do |artist, no|
+      import_participant(artist, no, artist_credit)
     end
     artist_credit.save!
     artist_credit
   end
 
-  def self.import_participant(raw_artist, no, artist_credit)
-    artist = Artist.find_or_create_by!(name: raw_artist[:name])
+  def self.import_participant(dc_artist, no, artist_credit)
+    artist = Artist.find_or_create_by(name: dc_artist.name)
     participant = artist_credit.participants.build do |p|
-      p.joinparse = raw_artist[:join] unless raw_artist[:join].blank?
+      p.joinparse = dc_artist.join unless dc_artist.join.blank?
       p.no        = no
       p.artist    = artist
     end
   end
-
+  
   def self.import_tracks(raw_tracklist, album_release, formats, kodc_release)
     heading = nil
     raw_tracklist.each do |track|
