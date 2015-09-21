@@ -11,10 +11,10 @@ class DiscogsImporter
       type:  'AlbumHead'
     )
     album_release = album_head.releases.create!
-    album_release.date = IncompleteDate.new(raw_release[:released])
+    album_release.date = IncompleteDate.new(dc_release.released)
     
     formats = import_formats(dc_release.formats, album_release)
-    
+
     import_tracks(raw_release[:tracklist], album_release, formats, dc_release)
     album_release
   end
