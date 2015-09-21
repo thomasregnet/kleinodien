@@ -1,7 +1,7 @@
 PATH
   remote: ../kleinodien_discogs
   specs:
-    discogs_kleinodien (0.0.3)
+    kleinodien_discogs (0.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -209,10 +209,10 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise (~> 3.4)
-  discogs_kleinodien (= 0.0.3)!
   factory_girl_rails (~> 4.5)
   jbuilder (~> 2.0)
   jquery-rails
+  kleinodien_discogs (= 0.0.4)!
   pg
   rails (= 4.2.4)
   rspec-rails (~> 3.0)
