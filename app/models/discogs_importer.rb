@@ -61,25 +61,6 @@ class DiscogsImporter
     end
   end
   
-  def self.prepare_media(raw_formats, album_release)
-    formats = []
-    no    = 1
-    raw_formats.each do |f|
-      next if f[:name] == 'All Media'
-      format_name = f[:name]
-      qty = f[:qty].to_i
-      qty.times do
-        album_release.media.create!(no: no)
-        no += 1
-      end
-      qty.times do
-        formats << SectionFormat.find_or_create_by!(
-        name: format_name, abbr: format_name)
-      end
-    end
-    formats
-  end
-
   def self.import_formats(dc_formats, album_release)
     formats = []
     dc_formats.each_with_index do |f, no|
