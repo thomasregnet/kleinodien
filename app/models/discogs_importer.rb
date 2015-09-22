@@ -2,7 +2,6 @@ require 'kleinodien_discogs'
 
 class DiscogsImporter
   def self.import_release(json)
-    raw_release = JSON.parse(json, symbolize_names: true)
     dc_release = KleinodienDiscogs.get_release(json)
     
     artist_credit = import_artist_credit(dc_release.artists)
