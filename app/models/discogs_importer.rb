@@ -38,6 +38,7 @@ class DiscogsImporter
   end
   
   def self.import_tracks(dc_media, album_release, formats)
+    no      = 0
     heading = nil
     dc_media.each do |dc_medium|
       dc_medium.tracklist.each do |dc_track|
@@ -45,14 +46,15 @@ class DiscogsImporter
           heading = dc_track.title
           next
         else
-          import_track(dc_track, album_release, heading)
+          import_track(dc_track, album_release, no, heading)
+          no += 1
         end
         heading = nil
       end
     end
   end
       
-  def self.import_track(dc_track, album_release, heading)
+  def self.import_track(dc_track, album_release, no, heading)
     artist_credit = dc_track.artists ?
                       import_artist_credit(dc_track.artists) :
                       album_release.head.artist_credit
@@ -66,6 +68,7 @@ class DiscogsImporter
 
     track = song_release.tracks.create!(
       compilation: album_release,
+      no:          no,
       position:    dc_track.position.to_s,
       heading:     heading
     )
