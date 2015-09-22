@@ -1,4 +1,4 @@
-require_relative '../../spec/discogs_test_helper'
+require 'discogs_test_helper'
 require_relative '../../spec/imdb_test_helper'
 
 namespace :db do
