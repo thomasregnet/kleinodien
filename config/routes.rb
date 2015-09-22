@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'album_releases/index'
+
   get 'pages/index'
 
   root to: 'pages#index'
