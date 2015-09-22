@@ -45,27 +45,30 @@ class DiscogsImporter
           heading = dc_track.title
           next
         else
-          artist_credit = dc_track.artists ?
-                            import_artist_credit(dc_track.artists) :
-                            album_release.head.artist_credit
-          song_head = artist_credit.pieces.find_or_create_by!(
-            title: dc_track.title,
-            type:  'SongHead'
-          )
-
-          # TODO: deal with song-versions
-          song_release = SongRelease.find_or_create_by!(head: song_head)
-
-          track = song_release.tracks.create!(
-            compilation: album_release,
-            heading:     heading
-          )
+          import_track(dc_track, album_release, heading)
         end
         heading = nil
       end
     end
   end
       
+  def self.import_track(dc_track, album_release, heading)
+    artist_credit = dc_track.artists ?
+                      import_artist_credit(dc_track.artists) :
+                      album_release.head.artist_credit
+    song_head = artist_credit.pieces.find_or_create_by!(
+      title: dc_track.title,
+      type:  'SongHead'
+    )
+
+    # TODO: deal with song-versions
+    song_release = SongRelease.find_or_create_by!(head: song_head)
+
+    track = song_release.tracks.create!(
+      compilation: album_release,
+      heading:     heading
+    )
+  end
   
   def self.import_formats(dc_formats, album_release)
     formats = []
