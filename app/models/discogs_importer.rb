@@ -15,7 +15,7 @@ class DiscogsImporter
     
     formats = import_formats(dc_release.formats, album_release)
 
-    import_tracks(raw_release[:tracklist], album_release, formats, dc_release)
+    import_tracks(dc_release.get_media, album_release, formats)
     album_release.save!
     album_release
   end
@@ -38,28 +38,35 @@ class DiscogsImporter
     end
   end
   
-  def self.import_tracks(raw_tracklist, album_release, formats, dc_release)
+  def self.import_tracks(dc_media, album_release, formats)
     heading = nil
-    raw_tracklist.each do |track|
-      if track[:type_] == 'heading'
-        heading = track[:title]
-        next
+    dc_media.each do |dc_medium|
+      dc_medium.tracklist.each do |dc_track|
+        if dc_track.class == KleinodienDiscogs::Heading
+          heading = dc_track.title
+          next
+        else
+          artist_credit = dc_track.artists ?
+                            import_artist_credit(dc_track.artists) :
+                            album_release.head.artist_credit
+          song_head = artist_credit.pieces.find_or_create_by!(
+            title: dc_track.title,
+            type:  'SongHead'
+          )
+
+          # TODO: deal with song-versions
+          song_release = SongRelease.find_or_create_by!(head: song_head)
+
+          track = song_release.tracks.create!(
+            compilation: album_release,
+            heading:     heading
+          )
+        end
+        heading = nil
       end
-      artist_credit = track[:artists] ? import_artist_credit(track[:artists])
-                      : album_release.head.artist_credit    
-      song_head = artist_credit.pieces.find_or_create_by!(
-        title: track[:title],
-        type: 'SongHead')
-
-      # TODO: deal with song-versions
-      song_release = SongRelease.find_or_create_by!(head: song_head)
-
-      track = song_release.tracks.create!(
-        compilation: album_release,
-        heading:     heading,
-      )
     end
   end
+      
   
   def self.import_formats(dc_formats, album_release)
     formats = []
