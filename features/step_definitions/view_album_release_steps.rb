@@ -10,5 +10,6 @@ When(/^I visit the album_releases page$/) do
 end
 
 When(/^I follow the link to that album$/) do
-  pending # express the regexp above with the code you wish you had
+  #pending # express the regexp above with the code you wish you had
+  click_link @release.title
 end
