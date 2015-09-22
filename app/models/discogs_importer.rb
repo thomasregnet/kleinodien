@@ -66,6 +66,7 @@ class DiscogsImporter
 
     track = song_release.tracks.create!(
       compilation: album_release,
+      position:    dc_track.position.to_s,
       heading:     heading
     )
   end
