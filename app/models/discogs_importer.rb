@@ -45,7 +45,7 @@ class DiscogsImporter
         heading = track[:title]
         next
       end
-      artist_credit = track[:artists] ? import_artist_credit(track[:artist])
+      artist_credit = track[:artists] ? import_artist_credit(track[:artists])
                       : album_release.head.artist_credit    
       song_head = artist_credit.pieces.find_or_create_by!(
         title: track[:title],
