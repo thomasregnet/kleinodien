@@ -1,4 +1,5 @@
 class Track < ActiveRecord::Base
+  default_scope { order('no ASC') }
   belongs_to(
     :release,
     class_name: PieceRelease,
