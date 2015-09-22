@@ -10,6 +10,10 @@ When(/^I visit the album_releases page$/) do
 end
 
 When(/^I follow the link to that album$/) do
-  #pending # express the regexp above with the code you wish you had
   click_link @release.title
+end
+
+Then(/^I will see the contents of the album release$/) do
+  #pending # express the regexp above with the code you wish you had
+  expect(page).to have_content @release.title
 end
