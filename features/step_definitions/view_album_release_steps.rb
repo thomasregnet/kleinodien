@@ -14,6 +14,8 @@ When(/^I follow the link to that album$/) do
 end
 
 Then(/^I will see the contents of the album release$/) do
-  #pending # express the regexp above with the code you wish you had
   expect(page).to have_content @release.title
+  @release.tracks.each do |t|
+    expect(page).to have_content(t.release.title)
+  end
 end
