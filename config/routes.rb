@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #get 'album_releases/index'
-  resources :album_releases, only: [:index]
+  resources :album_releases, only: [:index, :show]
   
   get 'pages/index'
 
