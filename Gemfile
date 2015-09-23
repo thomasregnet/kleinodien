@@ -35,7 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 3.4'
 
 gem 'kleinodien_discogs',
-    '0.0.6',
+    '0.0.7',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
