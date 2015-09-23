@@ -21,4 +21,15 @@ RSpec.describe CompanyRole, type: :model do
       expect(@company_role).not_to be_valid
     end
   end
+
+  context "with name set to a blank value" do
+    before(:each) do
+      @company_role = CompanyRole.new(name: "")
+    end
+
+    it "is not valid" do
+      expect(@company_role).not_to be_valid
+    end
+  end
+  
 end
