@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :company_role do
-    name "MyString"
+    sequence(:name) { |n| "company role ##{n}" }
   end
-
 end
