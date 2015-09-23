@@ -14,11 +14,24 @@ class DiscogsImporter
     
     formats = import_formats(dc_release.formats, album_release)
 
+    import_labels(dc_release.labels, album_release)
     import_tracks(dc_release.get_media, album_release, formats)
     album_release.save!
     album_release
   end
 
+  def self.import_labels(dc_labels, album_release)
+    role = CompanyRole.find_or_create_by!(name: 'Label')
+
+    dc_labels.each do |dc_label|
+      company = Company.find_or_create_by!(name: dc_label.name)
+      album_release.companies.create!(
+        company: company,
+        company_role: role,
+        catalog_no: dc_label.catno
+      )
+    end
+  end
   def self.import_artist_credit(artists)
     artist_credit = ArtistCredit.new
     artists.each_with_index do |artist, no|
