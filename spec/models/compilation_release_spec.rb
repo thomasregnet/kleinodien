@@ -88,10 +88,11 @@ RSpec.describe CompilationRelease, type: :model do
     before(:each) do
       @c_release = FactoryGirl.create(:compilation_release)
       @c_release.companies << FactoryGirl.create(:cr_company)
+      @c_release.companies << FactoryGirl.create(:cr_company)
     end
 
-    it "foobar" do
-      expect('foo').to eq('foo')
+    it "has the companies set" do
+      expect(@c_release.companies.length).to eq(2)
     end
   end
     
