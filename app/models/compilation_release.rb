@@ -8,6 +8,7 @@ class CompilationRelease < ActiveRecord::Base
     :head,
     class_name: CompilationHead,
     foreign_key: :compilation_head_id)
+  has_many :companies, class_name: CrCompany
   has_many(
     :identifiers,
     class_name: CompilationIdentifier)

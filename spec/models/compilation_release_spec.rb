@@ -84,8 +84,20 @@ RSpec.describe CompilationRelease, type: :model do
     end
   end
 
+  context "with companies" do
+    before(:each) do
+      @c_release = FactoryGirl.create(:compilation_release)
+      @c_release.companies << FactoryGirl.create(:cr_company)
+    end
+
+    it "foobar" do
+      expect('foo').to eq('foo')
+    end
+  end
+    
   it_behaves_like "a model with an IncompleteDate" do
     let(:factory) { :compilation_release }
     let(:date_naming) { 'date' }
   end
+
 end
