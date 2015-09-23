@@ -1,9 +1,9 @@
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: 2940064da11a2a41404cb6251ce3f4f8346a0437
+  revision: 309acdda512dbedb25d93a45976200f193c8323a
   branch: master
   specs:
-    kleinodien_discogs (0.0.6)
+    kleinodien_discogs (0.0.7)
 
 GEM
   remote: https://rubygems.org/
@@ -214,7 +214,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.5)
   jbuilder (~> 2.0)
   jquery-rails
-  kleinodien_discogs (= 0.0.6)!
+  kleinodien_discogs (= 0.0.7)!
   pg
   rails (= 4.2.4)
   rspec-rails (~> 3.0)
