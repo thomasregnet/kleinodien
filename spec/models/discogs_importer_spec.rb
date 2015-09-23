@@ -28,6 +28,8 @@ RSpec.describe DiscogsImporter, type: :model do
       end
 
       it "has imported the labels" do
+        expect(@release.companies[0].company.name).to eq('Atlantic')
+        expect(@release.companies[0].company_role.name).to eq('Label')
         expect(@release.companies[0].catalog_no).to eq('7567-92419-5')
       end
       
@@ -104,6 +106,13 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(tracks[72].heading).to eq('Torturing And Eviscerating Live')
         expect(tracks[72].release.title).to eq('A Skull Full Of Maggots') 
       end
+
+      it "has imorted the label" do
+        expect(@release.companies[0].company.name)
+          .to eq('Metal Blade Records GmbH')
+        expect(@release.companies[0].company_role.name).to eq('Label')
+        expect(@release.companies[0].catalog_no).to eq('3984-15180-0')
+      end
       
       after(:all) { DatabaseCleaner.clean }
     end
@@ -128,7 +137,13 @@ RSpec.describe DiscogsImporter, type: :model do
          expect(tracks.first.release.title).to eq('The System')
          expect(tracks.last.release.title).to  eq('Break')
       end
-      
+
+      it "has imorted the label" do
+        expect(@release.companies[0].company.name).to eq('Vertigo')
+        expect(@release.companies[0].company_role.name).to eq('Label')
+        expect(@release.companies[0].catalog_no).to eq('6673 001')
+      end
+
       after(:all) { DatabaseCleaner.clean }
     end
   end
