@@ -31,5 +31,18 @@ RSpec.describe CompanyRole, type: :model do
       expect(@company_role).not_to be_valid
     end
   end
+
+  context "two entities with the same name" do
+    before(:each) do
+      @company_role = FactoryGirl.create(:company_role)
+      @clone_role   = FactoryGirl.build(:company_role)
+      @clone_role.name = @company_role.name
+    end
+
+    it "is not valid when the name already exists" do
+      expect(@clone_role).not_to be_valid
+      expect{ @clone_role.save! validate: false }.to raise_error
+    end
+  end
   
 end
