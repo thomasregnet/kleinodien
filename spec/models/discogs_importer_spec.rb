@@ -28,7 +28,7 @@ RSpec.describe DiscogsImporter, type: :model do
       end
 
       it "has imported the labels" do
-        expect(@release.companies.catalog_no).to eq('7567-92419-5')
+        expect(@release.companies[0].catalog_no).to eq('7567-92419-5')
       end
       
       after(:all) { DatabaseCleaner.clean }
