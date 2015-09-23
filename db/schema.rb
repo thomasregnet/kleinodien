@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923092337) do
+ActiveRecord::Schema.define(version: 20150923095239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20150923092337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "company_roles", ["name"], name: "index_company_roles_on_name", unique: true, using: :btree
 
   create_table "compilation_heads", force: :cascade do |t|
     t.integer  "artist_credit_id"
