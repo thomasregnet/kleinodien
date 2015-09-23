@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CompanyRole, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
   before(:each) do
     @company_role = FactoryGirl.create(:company_role)
   end
@@ -41,7 +40,8 @@ RSpec.describe CompanyRole, type: :model do
 
     it "is not valid when the name already exists" do
       expect(@clone_role).not_to be_valid
-      expect{ @clone_role.save! validate: false }.to raise_error
+      expect{ @clone_role.save! validate: false }
+        .to raise_error(/duplicate.+ violates.+"index_company_roles_on_name"/)
     end
   end
   
