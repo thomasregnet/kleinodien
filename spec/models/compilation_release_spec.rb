@@ -86,9 +86,7 @@ RSpec.describe CompilationRelease, type: :model do
 
   context "with companies" do
     before(:each) do
-      @c_release = FactoryGirl.create(:compilation_release)
-      @c_release.companies << FactoryGirl.create(:cr_company)
-      @c_release.companies << FactoryGirl.create(:cr_company)
+      @c_release = FactoryGirl.create(:compilation_release_with_companies)
     end
 
     it "has the companies set" do
@@ -100,5 +98,5 @@ RSpec.describe CompilationRelease, type: :model do
     let(:factory) { :compilation_release }
     let(:date_naming) { 'date' }
   end
-
+  
 end
