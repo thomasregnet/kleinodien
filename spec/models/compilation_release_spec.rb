@@ -96,9 +96,10 @@ RSpec.describe CompilationRelease, type: :model do
 
   context "with countries" do
     before(:each) do
-      @c_release = FactoryGirl.create(:compilation_release)
-      @c_release.countries.create!(name: 'foo')
-      @c_release.countries.create!(name: 'bar')
+      # @c_release = FactoryGirl.create(:compilation_release)
+      # @c_release.countries.create!(name: 'foo')
+      # @c_release.countries.create!(name: 'bar')
+      @c_release = FactoryGirl.create(:compilation_release_with_countries)
     end
 
     it "has the countries set" do
