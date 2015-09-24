@@ -16,5 +16,17 @@ FactoryGirl.define do
         )
       end
     end
+
+    # http://stackoverflow.com/questions/14444878/has-many-through-with-factory-girl
+    factory :compilation_release_with_countries do
+      transient do
+        countries_count 2
+      end
+
+      after(:create) do |compilation_release|
+        compilation_release.countries << FactoryGirl.create(:country)
+        compilation_release.countries << FactoryGirl.create(:country)
+      end
+    end
   end
 end
