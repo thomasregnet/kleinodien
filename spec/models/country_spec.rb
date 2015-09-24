@@ -1,14 +1,8 @@
 require 'rails_helper'
+require 'shared_examples_for_unique_names'
 
 RSpec.describe Country, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
-  context "with valid values" do
-    before(:each) do
-      @country = FactoryGirl.create(:country)
-    end
-
-    it "is valid" do
-      expect(@country).to be_valid
-    end
+  it_behaves_like "an entity with an unique name" do
+    let(:factory) { :country }
   end
 end
