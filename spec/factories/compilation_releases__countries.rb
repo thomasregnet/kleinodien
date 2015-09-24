@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :compilation_releases__country do
-    no 1
-compilation_release_id "MyString"
-country_id 1
+  factory :compilation_releases_country do
+    sequence(:no) { |n| n }
+    compilation_release
+    country
   end
-
 end
