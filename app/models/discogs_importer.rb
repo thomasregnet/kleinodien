@@ -13,13 +13,18 @@ class DiscogsImporter
     album_release.date = IncompleteDate.new(dc_release.released)
     
     formats = import_formats(dc_release.formats, album_release)
-
+    import_country(dc_release.country, album_release)
     import_labels(dc_release.labels, album_release)
     import_tracks(dc_release.get_media, album_release, formats)
     album_release.save!
     album_release
   end
 
+  def self.import_country(country_name, album_release)
+    country = Country.find_or_create_by!(name: country_name)
+    album_release.countries << country
+  end
+    
   def self.import_labels(dc_labels, album_release)
     role = CompanyRole.find_or_create_by!(name: 'Label')
 

@@ -32,6 +32,11 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.companies[0].company_role.name).to eq('Label')
         expect(@release.companies[0].catalog_no).to eq('7567-92419-5')
       end
+
+      it "has imported the countries" do
+        expect(@release.countries[0].name).to eq('Germany')
+        expect(@release.countries.length).to eq(1)
+      end
       
       after(:all) { DatabaseCleaner.clean }
     end
@@ -49,6 +54,11 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
 
+      it "has imported the countries" do
+        expect(@release.countries[0].name).to eq('Europe')
+        expect(@release.countries.length).to eq(1)
+      end
+        
       it "has set the date" do
         expect(@release.date.to_s).to eq('2013-03-29')
         expect(@release.date.mask).to eq(7)
@@ -127,6 +137,11 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release).not_to be_new_record
       end
 
+      it "has imported the countries" do
+        expect(@release.countries[0].name).to eq('Germany')
+        expect(@release.countries.length).to eq(1)
+      end
+      
       it "has set the date" do
         expect(@release.date.to_s).to eq('1972-01-01')
         expect(@release.date.mask).to eq(4)
