@@ -40,7 +40,7 @@ RSpec.shared_examples "an entity with an unique name" do
       @clone.name = @entity.name
 
       @uc_clone = FactoryGirl.build(factory)
-      @uc_clone.name = @entity.name
+      @uc_clone.name = @entity.name.upcase
     end
 
     it "is not valid whith the a duplicate name" do
