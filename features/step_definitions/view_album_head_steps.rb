@@ -10,3 +10,7 @@ Then(/^I will see the releases of that album$/) do
   expect(page).to have_content(@release.head.artist_credit.name)
   expect(page).to have_content(@release.title)
 end
+
+Then(/^I will follow the link to the release$/) do
+  click_link("#{@release.countries[0].name} #{@release.date}")
+end
