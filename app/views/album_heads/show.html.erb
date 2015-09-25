@@ -1,2 +1,10 @@
-<h1>AlbumHeads#show</h1>
-<p>Find me in app/views/album_heads/show.html.erb</p>
+<h1><%= @album_head.artist_credit.name %> - <%= @album_head.title %></h1>
+
+<ul>
+  <% @album_head.releases.each do |release| %>
+    <li>
+      <%= link_to "#{release.countries[0].name} #{release.date}", release %>
+    </li>
+  <% end %>
+</ul>
+  

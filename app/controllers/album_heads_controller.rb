@@ -4,5 +4,6 @@ class AlbumHeadsController < ApplicationController
   end
 
   def show
+    @album_head = AlbumHead.find(params[:id])
   end
 end
