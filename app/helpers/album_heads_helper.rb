@@ -1,0 +1,2 @@
+module AlbumHeadsHelper
+end
