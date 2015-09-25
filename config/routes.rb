@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'album_heads/index'
+
+  get 'album_heads/show'
+
   #get 'album_releases/index'
   resources :album_releases, only: [:index, :show]
   
