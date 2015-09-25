@@ -3,6 +3,6 @@
 
 <ul>
   <% @album_heads.each do |head| %>
-    <li><%= link_to head.title, '#' %> by <%= head.artist_credit.name %></li>
+    <li><%= link_to head.title, head %> by <%= head.artist_credit.name %></li>
   <% end %>
 </ul>
