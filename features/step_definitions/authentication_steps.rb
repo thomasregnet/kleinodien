@@ -24,3 +24,7 @@ end
 Then(/^I should see the logout link$/) do
   expect(page).to have_link 'Sign out'
 end
+
+Given(/^User exists$/) do
+  @user = FactoryGirl.create(:user)
+end
