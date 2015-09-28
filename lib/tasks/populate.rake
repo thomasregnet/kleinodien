@@ -4,8 +4,23 @@ require_relative '../../spec/imdb_test_helper'
 namespace :db do
   desc 'fill the database with sample data'
   task :populate => :environment do
-    # TODO: users
 
+    password = 'topSecret'
+
+    User.create!(
+      email: 'user@example.com',
+      password: password,
+      password_confirmation: password
+    )
+
+    99.times do |n|
+      User.create!(
+        email: Faker::Internet.email,
+        password: password,
+        password_confirmation: password
+      )
+    end
+    
     discogs_releases = [4298844, 4462260, 940468]
     discogs_releases.each do |r|
       DiscogsTestHelper.import_release(r)
