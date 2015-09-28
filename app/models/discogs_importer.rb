@@ -14,12 +14,29 @@ class DiscogsImporter
     
     formats = import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
+    import_identifiers(dc_release.identifiers, album_release)
     import_labels(dc_release.labels, album_release)
     import_tracks(dc_release.get_media, album_release, formats)
     album_release.save!
     album_release
   end
 
+  def self.import_identifiers(dc_identifiers, album_release)
+    return unless dc_identifiers
+    dc_identifiers.each do |dc_id|
+      identifier_type = import_identifier_type(dc_id.type)
+      album_release.identifiers.create!(
+        code:           dc_id.value,
+        type:           identifier_type,
+        disambiguation: dc_id.description,
+      )
+    end 
+  end
+
+  def self.import_identifier_type(name)
+    IdentifierType.find_or_create_by!(name: name)
+  end
+                           
   def self.import_country(country_name, album_release)
     country = Country.find_or_create_by!(name: country_name)
     album_release.countries << country

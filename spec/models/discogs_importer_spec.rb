@@ -93,6 +93,23 @@ RSpec.describe DiscogsImporter, type: :model do
           .to eq('Album')
       end
 
+      it "has imported the identifiers" do
+        expect(@release.identifiers.length).to eq(17)
+        
+        expect(@release.identifiers[0].code).to eq('039841518009')
+        expect(@release.identifiers[0].disambiguation).to be_nil
+        expect(@release.identifiers[0].type.name).to eq('Barcode')
+
+        expect(@release.identifiers[1].code)
+          .to eq('Sony DADC A0102100183-0104 13 A00')
+        expect(@release.identifiers[1].disambiguation).to eq('CD 1')
+        expect(@release.identifiers[1].type.name).to eq('Matrix / Runout')
+
+        expect(@release.identifiers[16].code).to eq('GEMA')
+        expect(@release.identifiers[16].disambiguation).to be_nil
+        expect(@release.identifiers[16].type.name).to eq('Rights Society')
+      end
+                                             
       it "has imported the songs" do
         tracks = @release.tracks
         expect(tracks[0].release.title).to eq('Shredded Humans')
