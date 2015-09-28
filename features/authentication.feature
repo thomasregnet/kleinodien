@@ -12,3 +12,9 @@ Feature: Authentication
     Then I should see "signed up successfully"
     And I should see the logout link
     
+  Scenario: Sign in
+    Given User exists
+    When I visit the Sign in page
+    And I Fill in email and password
+    Then I should see success
+    
