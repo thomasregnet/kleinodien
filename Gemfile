@@ -41,6 +41,11 @@ gem 'kleinodien_discogs',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
+gem 'kleinodien_omdb',
+    '0.0.2',
+    git:    '/home/ossi/oStuff/develop/kleinodien_omdb',
+    branch: 'master'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
