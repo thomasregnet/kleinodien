@@ -5,6 +5,13 @@ GIT
   specs:
     kleinodien_discogs (0.0.9)
 
+GIT
+  remote: /home/ossi/oStuff/develop/kleinodien_omdb
+  revision: ec2a61b9a2ee4a2b802a99937756a4c3aeac29e2
+  branch: master
+  specs:
+    kleinodien_omdb (0.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -218,6 +225,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kleinodien_discogs (= 0.0.9)!
+  kleinodien_omdb (= 0.0.2)!
   pg
   rails (= 4.2.4)
   rspec-rails (~> 3.0)
