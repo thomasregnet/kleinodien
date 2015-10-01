@@ -1,4 +1,5 @@
 require 'discogs_test_helper'
+require 'omdb_test_helper'
 require_relative '../../spec/imdb_test_helper'
 
 namespace :db do
@@ -28,6 +29,13 @@ namespace :db do
 
     # movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
+
+    # omdb
+    Rake::FileList.new('fixtures/omdb/movie/*.xml') do |file|
+      m = /\/(\d+)\.xml$/.match(file.to_s)
+      id = m[1].to_i
+      OmdbImporter.import_movie(OmdbTestHelper.import_movie(id))
+    end
 
     #serial
     html = ImdbTestHelper.get_movie_data('tt0106179.html')
