@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movie tab_one="Information" tab_two="Crew/Cast" tab_three="Trailer">
+  <name>Braindead - Der Zombie-Rasenm&#228;hermann</name>
+  <original>Braindead</original>
+  <class>
+Movie  </class>
+  <date>1992</date>
+  <countries>
+    <country>NZ</country>
+  </countries>
+  <image>/image/embed/1222.jpeg</image>
+  <url>/movie/763-braindead</url>
+  <parent_id></parent_id>
+  <abstract>Wie bringe ich auf m&#246;glichst vielf&#228;ltige Weise m&#246;glichst viele Zombis in m&#246;glichst kurzer Zeit um, und wof&#252;r Rasenm&#228;her alles zu gebrauchen sind. Peter Jacksons Zombie-Horrorkom&#246;die liefert hierzu die passenden Antworten und darf sich zu Recht als Kultfilm von Genrefans feiern lassen. 
+
+</abstract>
+  <trailer>
+    <type>YouTube</type>
+  </trailer>
+  <vote>7.08</vote>
+  <genres title="Genre">
+    <genre>
+      <name>Zombiefilm</name>
+      <url>/encyclopedia/category/164</url>
+    </genre>
+    <genre>
+      <name>Splatterfilm / Gorefilm</name>
+      <url>/encyclopedia/category/157</url>
+    </genre>
+    <genre>
+      <name>Tierhorror</name>
+      <url>/encyclopedia/category/86</url>
+    </genre>
+  </genres>
+  <crew>
+    <department title="Director">
+      <person>
+        <name>Peter Jackson</name>
+        <url>/person/108-peter-jackson</url>
+      </person>
+    </department>
+    <department title="Author">
+      <person>
+        <name>Stephen Sinclair</name>
+        <url>/person/11325-stephen-sinclair</url>
+      </person>
+      <person>
+        <name>Fran Walsh</name>
+        <url>/person/126-fran-walsh</url>
+      </person>
+      <person>
+        <name>Peter Jackson</name>
+        <url>/person/108-peter-jackson</url>
+      </person>
+      <person>
+        <name>Stephen Sinclair</name>
+        <url>/person/11324-stephen-sinclair</url>
+      </person>
+    </department>
+    <department title="Producer">
+      <person>
+        <name>Jim Booth</name>
+        <url>/person/11326-jim-booth</url>
+      </person>
+    </department>
+    <department title="Director of photography">
+      <person>
+        <name>Murray Milne</name>
+        <url>/person/11328-murray-milne</url>
+      </person>
+    </department>
+    <department title="Editor">
+      <person>
+        <name>Jamie Selkirk</name>
+        <url>/person/1390-jamie-selkirk</url>
+      </person>
+    </department>
+    <department title="Composer">
+      <person>
+        <name>Peter Dasent</name>
+        <url>/person/11327-peter-dasent</url>
+      </person>
+    </department>
+    <department title="Akteur" with="mit">
+      <person>
+        <name>Timothy Balme</name>
+        <url>/person/11332-timothy-balme</url>
+        <role>Lionel Cosgrove</role>
+      </person>
+      <person>
+        <name>Diana Pe&#241;alver</name>
+        <url>/person/11333-diana-penalver</url>
+        <role>Paquita Maria Sanchez</role>
+      </person>
+      <person>
+        <name>Elizabeth Moody</name>
+        <url>/person/11334-elizabeth-moody</url>
+        <role>Mum</role>
+      </person>
+      <person>
+        <name>Ian Watkin</name>
+        <url>/person/11335-ian-watkin</url>
+        <role>Uncle Les</role>
+      </person>
+      <person>
+        <name>Brenda Kendall</name>
+        <url>/person/11336-brenda-kendall</url>
+        <role>Nurse McTavish</role>
+      </person>
+      <person>
+        <name>Stuart Devenie</name>
+        <url>/person/11337-stuart-devenie</url>
+        <role>Void</role>
+      </person>
+      <person>
+        <name>Stephen Papps</name>
+        <url>/person/11338-stephen-papps</url>
+        <role>Stephen Papps</role>
+      </person>
+      <person>
+        <name>Murray Keane</name>
+        <url>/person/11340-murray-keane</url>
+        <role>Scroat</role>
+      </person>
+      <person>
+        <name>Glenis Levestam</name>
+        <url>/person/11341-glenis-levestam</url>
+        <role>Nora Matheson</role>
+      </person>
+      <person>
+        <name>Lewis Rowe</name>
+        <url>/person/11342-lewis-rowe</url>
+        <role>Mr. Matheson</role>
+      </person>
+    </department>
+  </crew>
+</movie>
