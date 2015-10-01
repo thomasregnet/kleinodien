@@ -17,6 +17,8 @@ RSpec.describe CompilationReleasesCountry, type: :model do
         compilation_release: @release,
       )
       expect(other_release_country).not_to be_valid
+      expect { other_release_country.save! validate: false }
+        .to raise_error(/duplicate key value violates unique constraint/)
     end
   end
 end
