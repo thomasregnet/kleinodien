@@ -1,6 +1,5 @@
 module OmdbTestHelper
   def self.import_movie(omdb_id)
-    puts get_omdb_movie_data(omdb_id)
     OmdbImporter.import_movie(get_omdb_movie_data(omdb_id))
   end
 
