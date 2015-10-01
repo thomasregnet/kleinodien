@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  #get 'album_heads/index'
-
-  #get 'album_heads/show'
 
   resources :album_heads, only: [:index, :show]
-  #get 'album_releases/index'
+  
   resources :album_releases, only: [:index, :show]
   
+  resources :movie_heads, only: [:index, :show]
+
   get 'pages/index'
 
   root to: 'pages#index'
