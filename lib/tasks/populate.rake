@@ -22,19 +22,18 @@ namespace :db do
       )
     end
     
-    discogs_releases = [4298844, 4462260, 940468]
-    discogs_releases.each do |r|
-      DiscogsTestHelper.import_release(r)
+    Rake::FileList.new('fixtures/discogs/releases/*.json').each do |file|
+      m = /\/(\d+)\.json$/.match(file.to_s)
+      DiscogsTestHelper.import_release(m[1].to_i)
     end
-
-    # movie
+    
+    # imdb-movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
 
-    # omdb
-    Rake::FileList.new('fixtures/omdb/movie/*.xml') do |file|
+    # omdb-movies
+    Rake::FileList.new('fixtures/omdb/movie/*.xml').each do |file|
       m = /\/(\d+)\.xml$/.match(file.to_s)
-      id = m[1].to_i
-      OmdbImporter.import_movie(OmdbTestHelper.import_movie(id))
+      OmdbTestHelper.import_movie(m[1].to_i)
     end
 
     #serial
