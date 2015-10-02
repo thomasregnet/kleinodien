@@ -10,8 +10,9 @@ class CompilationRelease < ActiveRecord::Base
     foreign_key: :compilation_head_id)
   has_many :companies, class_name: CrCompany
 
-  has_many :compilation_releases_countries, inverse_of: :compilation_release
-  has_many :countries, through: :compilation_releases_countries
+  #has_many :compilation_releases_countries, inverse_of: :compilation_release
+  has_and_belongs_to_many :countries
+  #has_many :countries, through: :compilation_releases_countries
 
   #has_many :compilation_releases_countries, inverse_of: :countries
   has_many(
