@@ -16,6 +16,20 @@ FactoryGirl.define do
         )
       end
     end
+    
+    factory :compilation_release_with_credits do
+      transient do
+        credits_count 2
+      end
+
+      after(:create) do |compilation_release, elevator|
+        create_list(
+          :cr_credit,
+          elevator.credits_count,
+          compilation_release: compilation_release
+        )
+      end
+    end
 
     # http://stackoverflow.com/questions/14444878/has-many-through-with-factory-girl
     factory :compilation_release_with_countries do

@@ -106,6 +106,16 @@ RSpec.describe CompilationRelease, type: :model do
       expect(@c_release.countries.length).to eq(2)
     end
   end
+
+  context "with credits" do
+    before(:each) do
+      @c_release = FactoryGirl.create(:compilation_release_with_credits)
+    end
+
+    it "has the credits set" do
+      expect(@c_release.credits.length).to eq(2)
+    end
+  end
   
   it_behaves_like "a model with an IncompleteDate" do
     let(:factory) { :compilation_release }
