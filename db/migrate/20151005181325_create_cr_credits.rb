@@ -1,8 +1,8 @@
 class CreateCrCredits < ActiveRecord::Migration
   def change
     create_table :cr_credits do |t|
-      t.references :artist_credit, index: true, foreign_key: true
-      t.references :compilation_release, index: true, foreign_key: true
+      t.references :artist_credit, index: true, foreign_key: true, null: false
+      t.references :compilation_release, index: true, foreign_key: true, null: false
       t.references :job, index: true, foreign_key: true
       t.string :role
 

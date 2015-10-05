@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005175911) do
+ActiveRecord::Schema.define(version: 20151005181325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,19 @@ ActiveRecord::Schema.define(version: 20151005175911) do
     t.datetime "updated_at",             null: false
     t.integer  "compilation_release_id", null: false
   end
+
+  create_table "cr_credits", force: :cascade do |t|
+    t.integer  "artist_credit_id",       null: false
+    t.integer  "compilation_release_id", null: false
+    t.integer  "job_id"
+    t.string   "role"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "cr_credits", ["artist_credit_id"], name: "index_cr_credits_on_artist_credit_id", using: :btree
+  add_index "cr_credits", ["compilation_release_id"], name: "index_cr_credits_on_compilation_release_id", using: :btree
+  add_index "cr_credits", ["job_id"], name: "index_cr_credits_on_job_id", using: :btree
 
   create_table "cr_format_kinds", force: :cascade do |t|
     t.string   "name",       null: false
@@ -294,6 +307,9 @@ ActiveRecord::Schema.define(version: 20151005175911) do
 
   add_foreign_key "cr_companies", "companies"
   add_foreign_key "cr_companies", "company_roles"
+  add_foreign_key "cr_credits", "artist_credits"
+  add_foreign_key "cr_credits", "compilation_releases"
+  add_foreign_key "cr_credits", "jobs"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
