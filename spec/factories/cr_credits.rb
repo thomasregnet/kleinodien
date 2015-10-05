@@ -1,9 +1,7 @@
 FactoryGirl.define do
   factory :cr_credit do
-    artist_credit nil
-compilation_release nil
-job nil
-role "MyString"
+    artist_credit
+    compilation_release
   end
 
 end
