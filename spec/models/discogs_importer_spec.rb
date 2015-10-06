@@ -170,6 +170,10 @@ RSpec.describe DiscogsImporter, type: :model do
          expect(tracks.last.release.title).to  eq('Break')
       end
 
+      it "has imported the credits" do
+        expect(@release.credits[0].artist_credit.name).to eq('Demis Roussos')
+      end
+      
       it "has imorted the label" do
         expect(@release.companies[0].company.name).to eq('Vertigo')
         expect(@release.companies[0].company_role.name).to eq('Label')
