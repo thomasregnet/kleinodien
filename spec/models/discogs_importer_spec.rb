@@ -171,7 +171,13 @@ RSpec.describe DiscogsImporter, type: :model do
       end
 
       it "has imported the credits" do
+        expect(@release.credits.length).to eq(13)
+        
         expect(@release.credits[0].artist_credit.name).to eq('Demis Roussos')
+        expect(@release.credits[0].job.name).to eq('Bass, Backing Vocals')
+
+        expect(@release.credits[12].artist_credit.name).to eq('Michel Ripoche')
+        expect(@release.credits[12].job.name).to eq('Trombone')
       end
       
       it "has imorted the label" do
