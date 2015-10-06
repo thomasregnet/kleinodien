@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005181325) do
+ActiveRecord::Schema.define(version: 20151006191430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,19 @@ ActiveRecord::Schema.define(version: 20151005181325) do
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
 
+  create_table "pr_credits", force: :cascade do |t|
+    t.integer  "artist_credit_id", null: false
+    t.integer  "piece_release_id", null: false
+    t.integer  "job_id"
+    t.string   "role"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "pr_credits", ["artist_credit_id"], name: "index_pr_credits_on_artist_credit_id", using: :btree
+  add_index "pr_credits", ["job_id"], name: "index_pr_credits_on_job_id", using: :btree
+  add_index "pr_credits", ["piece_release_id"], name: "index_pr_credits_on_piece_release_id", using: :btree
+
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
     t.integer  "no",         null: false
@@ -316,5 +329,8 @@ ActiveRecord::Schema.define(version: 20151005181325) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
+  add_foreign_key "pr_credits", "artist_credits"
+  add_foreign_key "pr_credits", "jobs"
+  add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
