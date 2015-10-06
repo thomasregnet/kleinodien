@@ -14,6 +14,7 @@ class DiscogsImporter
     
     formats = import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
+    import_extraartists(dc_release.extraartists, album_release)
     import_identifiers(dc_release.identifiers, album_release)
     import_labels(dc_release.labels, album_release)
     import_tracks(dc_release.get_media, album_release, formats)
@@ -21,6 +22,18 @@ class DiscogsImporter
     album_release
   end
 
+  def self.import_extraartists(extraartists, album_release)
+    return unless extraartists
+    extraartists.each do |artist|
+      artist_credit = import_artist_credit([artist])
+      #job = Job.find_or_create_by!(name: artist.role) if artist.role
+      album_release.credits.build(
+        artist_credit: artist_credit,
+        job: Job.find_or_create_by!(name: artist.role),
+      )
+    end
+  end
+  
   def self.import_identifiers(dc_identifiers, album_release)
     return unless dc_identifiers
     dc_identifiers.each do |dc_id|
@@ -55,11 +68,15 @@ class DiscogsImporter
     end
   end
   def self.import_artist_credit(artists)
-    artist_credit = ArtistCredit.new
-    artists.each_with_index do |artist, no|
-      import_participant(artist, no, artist_credit)
+    ac_name = KleinodienDiscogs.join_artist_names(artists)
+    artist_credit = ArtistCredit.find_by(name: ac_name)
+    if !artist_credit
+      artist_credit = ArtistCredit.new
+      artists.each_with_index do |artist, no|
+        import_participant(artist, no, artist_credit)
+      end
+      artist_credit.save!
     end
-    artist_credit.save!
     artist_credit
   end
 
