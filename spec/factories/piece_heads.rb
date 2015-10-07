@@ -3,6 +3,20 @@ FactoryGirl.define do
     sequence(:title) { |n| "piece ##{n}" }
     type  'PieceHead'
 
+    factory :piece_head_with_credits do
+      transient do
+        credits_count 2
+      end
+
+      after(:create) do |piece_head, elevator|
+        create_list(
+          :ph_credit,
+          elevator.credits_count,
+          piece_head: piece_head
+        )
+      end
+    end
+
     factory :movie_head, class: MovieHead do
       type 'MovieHead'
     end

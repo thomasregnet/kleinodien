@@ -32,7 +32,17 @@ RSpec.describe PieceHead, type: :model do
     @ph.type = nil
     expect(@ph).not_to be_valid
   end
-  
+
+  context "with credits" do
+    before(:each) do
+      @ph = FactoryGirl.create(:piece_head_with_credits)
+    end
+
+    it "has the credits set" do
+      expect(@ph.credits.length).to eq(2)
+    end
+  end
+
   it_behaves_like "a model with disambiguations" do
     let(:factory) { :piece_head }
     let(:object) { @ph }
