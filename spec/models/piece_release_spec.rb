@@ -26,6 +26,16 @@ RSpec.describe PieceRelease, type: :model do
     end
   end
 
+  context "with credits" do
+    before(:each) do
+      @piece_release = FactoryGirl.create(:piece_release_with_credits)
+    end
+
+    it "has the credits set" do
+      expect(@piece_release.credits.lentgth).to eq(2)
+    end
+  end
+
   it_behaves_like "a model with an IncompleteDate" do
     let(:factory) { :piece_release }
     let(:date_naming) { 'date' }
