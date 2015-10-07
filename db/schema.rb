@@ -187,8 +187,8 @@ ActiveRecord::Schema.define(version: 20151007193423) do
   add_index "participants", ["no", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true, using: :btree
 
   create_table "ph_credits", force: :cascade do |t|
-    t.integer  "artist_credit_id"
-    t.integer  "piece_head_id"
+    t.integer  "artist_credit_id", null: false
+    t.integer  "piece_head_id",    null: false
     t.integer  "job_id"
     t.string   "role"
     t.datetime "created_at",       null: false

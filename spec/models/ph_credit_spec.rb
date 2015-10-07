@@ -8,6 +8,6 @@ RSpec.describe PhCredit, type: :model do
     let(:factory_with_job)  { :ph_credit_with_job }
     let(:factory_with_role) { :ph_credit_with_role }
     let(:owner_setter)      { 'piece_head=' }
-    end
+  end
     
 end
