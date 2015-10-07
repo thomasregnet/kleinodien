@@ -22,11 +22,11 @@ class DiscogsImporter
     album_release
   end
 
-  def self.import_extraartists(extraartists, album_release)
+  def self.import_extraartists(extraartists, release)
     return unless extraartists
     extraartists.each do |artist|
       artist_credit = import_artist_credit([artist])
-      album_release.credits.create!(
+      release.credits.create!(
         artist_credit: artist_credit,
         job: Job.find_or_create_by!(name: artist.role),
       )
