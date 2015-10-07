@@ -6,4 +6,5 @@ class PieceHead < ActiveRecord::Base
     scope: [:type, :disambiguation],
     case_sensitive: false
   )
+  has_many :credits, class_name: PhCredit
 end
