@@ -7,6 +7,7 @@ RSpec.describe PrCredit, type: :model do
     let(:factory)           { :pr_credit }
     let(:factory_with_job)  { :pr_credit_with_job }
     let(:factory_with_role) { :pr_credit_with_role }
+    let(:owner_setter)      { 'piece_release=' }
   end
 
 end
