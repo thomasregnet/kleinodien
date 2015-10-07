@@ -1,4 +1,4 @@
-RSpec.shared_examples "an entity with credits" do
+RSpec.shared_examples "a credit" do
 
   describe "with the mininum of attributes" do
     before(:each) do
