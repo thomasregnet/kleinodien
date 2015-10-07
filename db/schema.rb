@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006191430) do
+ActiveRecord::Schema.define(version: 20151007193423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,19 @@ ActiveRecord::Schema.define(version: 20151006191430) do
 
   add_index "participants", ["no", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true, using: :btree
 
+  create_table "ph_credits", force: :cascade do |t|
+    t.integer  "artist_credit_id"
+    t.integer  "piece_head_id"
+    t.integer  "job_id"
+    t.string   "role"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "ph_credits", ["artist_credit_id"], name: "index_ph_credits_on_artist_credit_id", using: :btree
+  add_index "ph_credits", ["job_id"], name: "index_ph_credits_on_job_id", using: :btree
+  add_index "ph_credits", ["piece_head_id"], name: "index_ph_credits_on_piece_head_id", using: :btree
+
   create_table "piece_heads", force: :cascade do |t|
     t.integer  "artist_credit_id"
     t.integer  "season_id"
@@ -325,6 +338,9 @@ ActiveRecord::Schema.define(version: 20151006191430) do
   add_foreign_key "cr_credits", "jobs"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
+  add_foreign_key "ph_credits", "artist_credits"
+  add_foreign_key "ph_credits", "jobs"
+  add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
