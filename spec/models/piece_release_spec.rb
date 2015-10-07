@@ -32,7 +32,7 @@ RSpec.describe PieceRelease, type: :model do
     end
 
     it "has the credits set" do
-      expect(@piece_release.credits.lentgth).to eq(2)
+      expect(@piece_release.credits.length).to eq(2)
     end
   end
 
