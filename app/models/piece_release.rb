@@ -3,6 +3,7 @@ class PieceRelease < ActiveRecord::Base
               class_name: 'IncompleteDate',
               mapping: [ %w(date date), %w(date_mask mask) ]
   belongs_to :head, class_name: PieceHead, foreign_key: :piece_head_id
+  has_many :credits, class_name: PrCredit
   has_many :tracks
   delegate :title, to: :head
 
