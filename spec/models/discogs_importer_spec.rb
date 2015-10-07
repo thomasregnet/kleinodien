@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 require 'discogs_test_helper'
 
@@ -167,6 +168,7 @@ RSpec.describe DiscogsImporter, type: :model do
       it "has imported the songs" do
          tracks = @release.tracks
          expect(tracks.first.release.title).to eq('The System')
+         expect(tracks[20].release.title).to  eq('∞')
          expect(tracks.last.release.title).to  eq('Break')
       end
 
@@ -179,7 +181,17 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.credits[12].artist_credit.name).to eq('Michel Ripoche')
         expect(@release.credits[12].job.name).to eq('Trombone')
       end
-      
+
+      it "has imported the extraartists" do
+        expect(@release.tracks[20].release.credits[0].artist_credit.name)
+          .to eq('Irene Papas')
+
+        expect(@release.tracks[21].release.credits[0].artist_credit.name)
+          .to eq('Demis Roussos')
+        expect(@release.tracks[21].release.credits[1].artist_credit.name)
+          .to eq('Michel Ripoche')        
+      end
+        
       it "has imorted the label" do
         expect(@release.companies[0].company.name).to eq('Vertigo')
         expect(@release.companies[0].company_role.name).to eq('Label')

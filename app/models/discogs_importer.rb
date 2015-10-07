@@ -26,8 +26,7 @@ class DiscogsImporter
     return unless extraartists
     extraartists.each do |artist|
       artist_credit = import_artist_credit([artist])
-      #job = Job.find_or_create_by!(name: artist.role) if artist.role
-      album_release.credits.build(
+      album_release.credits.create!(
         artist_credit: artist_credit,
         job: Job.find_or_create_by!(name: artist.role),
       )
@@ -67,6 +66,7 @@ class DiscogsImporter
       )
     end
   end
+  
   def self.import_artist_credit(artists)
     ac_name = KleinodienDiscogs.join_artist_names(artists)
     artist_credit = ArtistCredit.find_by(name: ac_name)
@@ -117,7 +117,7 @@ class DiscogsImporter
 
     # TODO: deal with song-versions
     song_release = SongRelease.find_or_create_by!(head: song_head)
-
+    import_extraartists(dc_track.extraartists, song_release)
     track = song_release.tracks.create!(
       compilation: album_release,
       no:          no,
