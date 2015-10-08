@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008192822) do
+ActiveRecord::Schema.define(version: 20151008193954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20151008192822) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "countries_piece_heads", ["country_id", "piece_head_id"], name: "index_countries_piece_heads_on_country_id_and_piece_head_id", unique: true, using: :btree
   add_index "countries_piece_heads", ["country_id"], name: "index_countries_piece_heads_on_country_id", using: :btree
   add_index "countries_piece_heads", ["piece_head_id"], name: "index_countries_piece_heads_on_piece_head_id", using: :btree
 
