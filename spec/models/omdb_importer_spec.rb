@@ -15,6 +15,14 @@ RSpec.describe OmdbImporter, type: :model do
           .to eq('Braindead - Der Zombie-Rasenmähermann')
 
         expect(@movie_head.credits.length).to eq(19)
+        
+        expect(@movie_head.credits[0].artist_credit.name).to eq('Peter Jackson')
+        expect(@movie_head.credits[0].role).to be_nil
+        expect(@movie_head.credits[0].job.name).to eq('Director')
+
+        expect(@movie_head.credits[18].artist_credit.name).to eq('Lewis Rowe')
+        expect(@movie_head.credits[18].role).to eq('Mr. Matheson')
+        expect(@movie_head.credits[18].job.name).to eq('Akteur')
       end
 
       after(:all) do
