@@ -7,4 +7,5 @@ class PieceHead < ActiveRecord::Base
     case_sensitive: false
   )
   has_many :credits, class_name: PhCredit
+  has_and_belongs_to_many :countries
 end
