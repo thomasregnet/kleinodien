@@ -13,6 +13,8 @@ RSpec.describe OmdbImporter, type: :model do
       specify "was imported" do
         expect(@movie_head.title)
           .to eq('Braindead - Der Zombie-Rasenmähermann')
+
+        expect(@movie_head.credits.length).to eq(19)
       end
 
       after(:all) do
