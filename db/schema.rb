@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008190239) do
+ActiveRecord::Schema.define(version: 20151008192822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,10 +91,15 @@ ActiveRecord::Schema.define(version: 20151008190239) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "countries_piece_heads", id: false, force: :cascade do |t|
-    t.integer "countries_id"
-    t.integer "piece_heads_id"
+  create_table "countries_piece_heads", force: :cascade do |t|
+    t.integer  "country_id",    null: false
+    t.integer  "piece_head_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "countries_piece_heads", ["country_id"], name: "index_countries_piece_heads_on_country_id", using: :btree
+  add_index "countries_piece_heads", ["piece_head_id"], name: "index_countries_piece_heads_on_piece_head_id", using: :btree
 
   create_table "cr_companies", force: :cascade do |t|
     t.integer  "company_id",             null: false
@@ -336,6 +341,8 @@ ActiveRecord::Schema.define(version: 20151008190239) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "countries_piece_heads", "countries"
+  add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "cr_companies", "companies"
   add_foreign_key "cr_companies", "company_roles"
   add_foreign_key "cr_credits", "artist_credits"

@@ -5,4 +5,5 @@ class Country < ActiveRecord::Base
   #has_many :compilation_releases, through: :compilation_releases_countries
   #has_many :compilation_releases_countries, inverse_of: :country
   has_and_belongs_to_many :compilation_releases
+  has_and_belongs_to_many :piece_heads
 end

@@ -3,6 +3,13 @@ FactoryGirl.define do
     sequence(:title) { |n| "piece ##{n}" }
     type  'PieceHead'
 
+    factory :piece_head_with_countries do
+      after(:create) do |piece_head|
+        piece_head.countries << FactoryGirl.create(:country)
+        piece_head.countries << FactoryGirl.create(:country)
+      end
+    end
+    
     factory :piece_head_with_credits do
       transient do
         credits_count 2
