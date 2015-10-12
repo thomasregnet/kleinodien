@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe PieceHead, type: :model do
@@ -33,16 +34,6 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).not_to be_valid
   end
 
-  context "with credits" do
-    before(:each) do
-      @ph = FactoryGirl.create(:piece_head_with_credits)
-    end
-
-    it "has the credits set" do
-      expect(@ph.credits.length).to eq(2)
-    end
-  end
-
   context "with countries" do
     before(:each) do
       @ph = FactoryGirl.create(:piece_head_with_countries)
@@ -51,6 +42,10 @@ RSpec.describe PieceHead, type: :model do
     it "has the countries set" do
       expect(@ph.countries.length).to eq(2)
     end
+  end
+
+  it_behaves_like "a model with credits" do
+    let(:factory) { :piece_head_with_credits }
   end
   
   it_behaves_like "a model with disambiguations" do
