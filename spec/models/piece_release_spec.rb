@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe PieceRelease, type: :model do
@@ -26,14 +27,8 @@ RSpec.describe PieceRelease, type: :model do
     end
   end
 
-  context "with credits" do
-    before(:each) do
-      @piece_release = FactoryGirl.create(:piece_release_with_credits)
-    end
-
-    it "has the credits set" do
-      expect(@piece_release.credits.length).to eq(2)
-    end
+  it_behaves_like "a model with credits" do
+    let(:factory) { :piece_release_with_credits }
   end
 
   it_behaves_like "a model with an IncompleteDate" do
