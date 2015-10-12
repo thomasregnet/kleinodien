@@ -29,3 +29,6 @@ doc/
 # Ignore rspec-config
 .rspec
 .rspec-local
+
+# Ignore coverage files
+/coverage
