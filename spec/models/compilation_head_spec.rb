@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_models_with_credits'
 
 RSpec.describe CompilationHead, type: :model do
   before(:each) do
@@ -26,6 +27,10 @@ RSpec.describe CompilationHead, type: :model do
     expect(@c_head).to be_valid
     expect { @a_head.save! }.not_to raise_error
     expect { @c_head.save! }.not_to raise_error
+  end
+
+  it_behaves_like "a model with credits" do
+    let(:factory) { :compilation_head_with_credits }
   end
   
   it_behaves_like "a model with disambiguations" do
