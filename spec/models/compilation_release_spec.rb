@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe CompilationRelease, type: :model do
@@ -107,14 +108,8 @@ RSpec.describe CompilationRelease, type: :model do
     end
   end
 
-  context "with credits" do
-    before(:each) do
-      @c_release = FactoryGirl.create(:compilation_release_with_credits)
-    end
-
-    it "has the credits set" do
-      expect(@c_release.credits.length).to eq(2)
-    end
+  it_behaves_like "a model with credits" do
+    let(:factory) { :compilation_head_with_credits }
   end
   
   it_behaves_like "a model with an IncompleteDate" do
