@@ -1,14 +1,16 @@
+# IncompleteDate represents a date which must not consist of all
+# obvious parameters year, month and day.
 class IncompleteDate
   attr_reader :date, :mask
 
-  def initialize(date, mask=nil)
+  def initialize(date, mask = nil)
     init_date(date)
     if mask
       @mask = mask
     else
       init_mask(date)
     end
-  end 
+  end
 
   def date_from_string(string)
     return Date.iso8601(string) if /^\d\d\d\d-\d\d-\d\d$/.match(string)
@@ -27,7 +29,7 @@ class IncompleteDate
   def to_s
     @date.to_s
   end
-  
+
   private
 
   def init_date(date)
