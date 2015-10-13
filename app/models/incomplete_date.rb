@@ -1,9 +1,13 @@
 class IncompleteDate
   attr_reader :date, :mask
 
-  def initialize(date, mask = nil)
+  def initialize(date, mask=nil)
     init_date(date)
-    init_mask(date)
+    if mask
+      @mask = mask
+    else
+      init_mask(date)
+    end
   end 
 
   def date_from_string(string)
