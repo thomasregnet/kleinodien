@@ -19,7 +19,7 @@ class DiscogsImporter
     import_extraartists(dc_release.extraartists, album_release)
     import_identifiers(dc_release.identifiers, album_release)
     import_labels(dc_release.labels, album_release)
-    import_tracks(dc_release.get_media, album_release, formats)
+    import_tracks(dc_release.get_media, album_release)
     album_release.save!
     album_release
   end
@@ -91,7 +91,7 @@ class DiscogsImporter
     end
   end
   
-  def self.import_tracks(dc_media, album_release, formats)
+  def self.import_tracks(dc_media, album_release)
     no      = 0
     heading = nil
     dc_media.each do |dc_medium|
