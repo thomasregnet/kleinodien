@@ -5,7 +5,7 @@ class DiscogsImporter
 
   def self.import_release(json)
     dc_release = KleinodienDiscogs.get_release(json)
-    
+
     artist_credit = import_artist_credit(dc_release.artists)
     album_head = artist_credit.compilations.create!(
       title: dc_release.title,
@@ -13,7 +13,7 @@ class DiscogsImporter
     )
     album_release = album_head.releases.create!
     album_release.date = IncompleteDate.new(dc_release.released)
-    
+
     formats = import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
     import_extraartists(dc_release.extraartists, album_release)
@@ -34,7 +34,7 @@ class DiscogsImporter
       )
     end
   end
-  
+
   def self.import_identifiers(dc_identifiers, album_release)
     return unless dc_identifiers
     dc_identifiers.each do |dc_id|
@@ -44,18 +44,18 @@ class DiscogsImporter
         type:           identifier_type,
         disambiguation: dc_id.description,
       )
-    end 
+    end
   end
 
   def self.import_identifier_type(name)
     IdentifierType.find_or_create_by!(name: name)
   end
-                           
+
   def self.import_country(country_name, album_release)
     country = Country.find_or_create_by!(name: country_name)
     album_release.countries << country
   end
-    
+
   def self.import_labels(dc_labels, album_release)
     role = CompanyRole.find_or_create_by!(name: 'Label')
 
@@ -68,7 +68,7 @@ class DiscogsImporter
       )
     end
   end
-  
+
   def self.import_artist_credit(artists)
     ac_name = KleinodienDiscogs.join_artist_names(artists)
     ArtistCredit.find_by(name: ac_name) || create_artist_credit(artists)
@@ -84,14 +84,15 @@ class DiscogsImporter
   end
 
   def self.import_participant(dc_artist, no, artist_credit)
-    artist = Artist.find_or_create_by(name: dc_artist.name)
-    participant = artist_credit.participants.build do |p|
-      p.joinparse = dc_artist.join unless dc_artist.join.blank?
-      p.no        = no
-      p.artist    = artist
-    end
+    artist = Artist.find_or_create_by!(name: dc_artist.name)
+    joinparse = dc_artist.join  unless dc_artist.join.blank?
+    artist_credit.participants.build(
+      artist:    artist,
+      joinparse: joinparse,
+      no:        no
+    )
   end
-  
+
   def self.import_tracks(dc_media, album_release)
     no      = 0
     heading = nil
@@ -108,7 +109,7 @@ class DiscogsImporter
       end
     end
   end
-      
+
   def self.import_track(dc_track, album_release, no, heading)
     artist_credit = dc_track.artists ?
                       import_artist_credit(dc_track.artists) :
@@ -128,7 +129,7 @@ class DiscogsImporter
       heading:     heading
     )
   end
-  
+
   def self.import_formats(dc_formats, album_release)
     dc_formats.each_with_index.map do |dc_format, no|
       format = album_release.formats.create!(
@@ -150,7 +151,7 @@ class DiscogsImporter
       )
     end
   end
-  
+
   def self.track_format_for(medium_format)
     case medium_format.name
     when 'CD'
