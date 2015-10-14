@@ -71,14 +71,15 @@ class DiscogsImporter
   
   def self.import_artist_credit(artists)
     ac_name = KleinodienDiscogs.join_artist_names(artists)
-    artist_credit = ArtistCredit.find_by(name: ac_name)
-    if !artist_credit
-      artist_credit = ArtistCredit.new
-      artists.each_with_index do |artist, no|
-        import_participant(artist, no, artist_credit)
-      end
-      artist_credit.save!
+    ArtistCredit.find_by(name: ac_name) || create_artist_credit(artists)
+  end
+
+  def self.create_artist_credit(artists)
+    artist_credit = ArtistCredit.new
+    artists.each_with_index do |artist, no|
+      import_participant(artist, no, artist_credit)
     end
+    artist_credit.save!
     artist_credit
   end
 
