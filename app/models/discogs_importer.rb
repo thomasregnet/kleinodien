@@ -155,12 +155,13 @@ class DiscogsImporter
   end
   
   def self.track_format_for(medium_format)
-    format = nil
-    if medium_format.name == 'CD'
-      format = Format.find_or_create_by!(name: 'CD-DA')
-    elsif medium_format.name == 'Vinyl'
-      format = Format.find_or_create_by!(name: 'Analog Audio')
+    case medium_format.name
+    when 'CD'
+      Format.find_or_create_by!(name: 'CD-DA')
+    when 'Vinyl'
+      Format.find_or_create_by!(name: 'Analog Audio')
+    else
+      nil
     end
-    format
   end
 end
