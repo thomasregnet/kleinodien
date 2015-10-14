@@ -130,19 +130,15 @@ class DiscogsImporter
   end
   
   def self.import_formats(dc_formats, album_release)
-    formats = []
-    dc_formats.each_with_index do |dc_format, no|
-      f_kind =    CrFormatKind.find_or_create_by!(name: dc_format.name)
-      format =    album_release.formats.create!(
-        kind:     f_kind,
+    dc_formats.each_with_index.map do |dc_format, no|
+      format = album_release.formats.create!(
+        kind:     CrFormatKind.find_or_create_by!(name: dc_format.name),
         note:     dc_format.text,
         quantity: dc_format.qty,
         no:       no
       )
       import_format_attributes(dc_formats[no].descriptions, format)
-      formats << format
     end
-    formats
   end
 
   def self.import_format_attributes(dc_formats, format)
