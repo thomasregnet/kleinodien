@@ -1,6 +1,8 @@
 require 'kleinodien_discogs'
 
+# Import data from Discogs
 class DiscogsImporter
+
   def self.import_release(json)
     dc_release = KleinodienDiscogs.get_release(json)
     
