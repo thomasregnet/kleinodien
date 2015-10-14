@@ -145,8 +145,8 @@ class DiscogsImporter
   end
 
   def self.import_format_attributes(dc_formats, format)
-    dc_formats.each_with_index do |d, no|
-      attr_kind = CrfAttributeKind.find_or_create_by!(name: d)
+    dc_formats.each_with_index do |dc_format_name, no|
+      attr_kind = CrfAttributeKind.find_or_create_by!(name: dc_format_name)
       format.format_attributes.create!(
         no:   no,
         kind: attr_kind
