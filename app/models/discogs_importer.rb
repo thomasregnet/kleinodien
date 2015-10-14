@@ -94,22 +94,27 @@ class DiscogsImporter
   end
 
   def self.import_tracks(dc_media, album_release)
-    no      = 0
-    heading = nil
+    params = { no: 0 }
     dc_media.each do |dc_medium|
-      dc_medium.tracklist.each do |dc_track|
-        if dc_track.class == KleinodienDiscogs::Heading
-          heading = dc_track.title
-          next
-        else
-          import_track(dc_track, album_release, no, heading)
-          no += 1
-        end
-        heading = nil
-      end
+      params = import_track_or_heading(
+        dc_medium.tracklist, album_release, params
+      )
     end
   end
 
+  def self.import_track_or_heading(dc_tracklist, album_release, params)
+    dc_tracklist.each do |dc_track|
+      if dc_track.class == KleinodienDiscogs::Heading
+        params[:heading] = dc_track.title
+        next
+      else
+        import_track(dc_track, album_release, params[:no], params[:heading])
+        params[:no] += 1
+      end
+    end
+    params
+  end
+  
   def self.import_track(dc_track, album_release, no, heading)
     artist_credit = dc_track.artists ?
                       import_artist_credit(dc_track.artists) :
