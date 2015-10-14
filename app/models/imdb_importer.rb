@@ -1,6 +1,6 @@
 require 'cgi'
 
-class ImdbImporter < ActiveRecord::Base
+class ImdbImporter
   def self.import_movie(html)
     doc = Nokogiri::HTML(html)
     MovieHead.create!(title: title(doc))

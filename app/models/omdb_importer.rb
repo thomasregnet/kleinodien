@@ -1,5 +1,5 @@
 # Import XML-data provided by OMDB
-class OmdbImporter < ActiveRecord::Base
+class OmdbImporter
   def self.import_movie(xml)
     omdb_movie = KleinodienOmdb.parse_movie(xml)
     movie_head = MovieHead.create!(title: omdb_movie.name)
