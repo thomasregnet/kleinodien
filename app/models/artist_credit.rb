@@ -10,12 +10,15 @@ class ArtistCredit < ActiveRecord::Base
   before_save { self.name = name }
   
   def name
-    names = []
-    participants.each do |participant|
-      names << participant.artist.name
-      joinparse = participant.joinparse
-      names << joinparse unless joinparse.blank?
+    names = participants.map do |participant|
+      name = participant.artist.name
+      name_with_joinparse(name, participant.joinparse)
     end
     names.join(' ')
+  end
+
+  def name_with_joinparse(name, joinparse)
+    return name if joinparse.blank?
+    "#{name} #{joinparse}"
   end
 end
