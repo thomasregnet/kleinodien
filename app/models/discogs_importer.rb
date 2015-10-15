@@ -36,7 +36,7 @@ class DiscogsImporter
       artist_credit = import_artist_credit([artist])
       release.credits.create!(
         artist_credit: artist_credit,
-        job: Job.find_or_create_by!(name: artist.role),
+        job: Job.find_or_create_by!(name: artist.role)
       )
     end
   end
@@ -48,7 +48,7 @@ class DiscogsImporter
       album_release.identifiers.create!(
         code:           dc_id.value,
         type:           identifier_type,
-        disambiguation: dc_id.description,
+        disambiguation: dc_id.description
       )
     end
   end
