@@ -33,11 +33,12 @@ class IncompleteDate
   private
 
   def init_date(date)
-    if date.class == Date
+    case date.class.to_s
+    when 'Date'
       @date = date
-    elsif date.class == Fixnum
+    when 'Fixnum'
       @date = Date.new(date, 1, 1)
-    elsif date.class == String
+    when 'String'
       @date = date_from_string(date)
     end
   end
