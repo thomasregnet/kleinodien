@@ -10,7 +10,7 @@ class DiscogsImporter
 
     album_release = create_album_release(dc_release, artist_credit)
 
-    formats = import_formats(dc_release.formats, album_release)
+    import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
     import_extraartists(dc_release.extraartists, album_release)
     import_identifiers(dc_release.identifiers, album_release)
