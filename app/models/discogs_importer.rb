@@ -2,7 +2,6 @@ require 'kleinodien_discogs'
 
 # Import data from Discogs
 class DiscogsImporter
-
   def self.import_release(json)
     dc_release = KleinodienDiscogs.get_release(json)
 
@@ -30,7 +29,7 @@ class DiscogsImporter
     )
     album_release
   end
-  
+
   def self.import_extraartists(extraartists, release)
     return unless extraartists
     extraartists.each do |artist|
@@ -120,7 +119,7 @@ class DiscogsImporter
     end
     params
   end
-  
+
   def self.import_track(dc_track, album_release, params)
     artist_credit = get_artist_credit_for_track(dc_track, album_release)
     song_head = artist_credit.pieces.find_or_create_by!(
@@ -146,7 +145,7 @@ class DiscogsImporter
       album_release.head.artist_credit
     end
   end
-  
+
   def self.import_formats(dc_formats, album_release)
     dc_formats.each_with_index.map do |dc_format, no|
       format = album_release.formats.create!(
@@ -175,8 +174,6 @@ class DiscogsImporter
       Format.find_or_create_by!(name: 'CD-DA')
     when 'Vinyl'
       Format.find_or_create_by!(name: 'Analog Audio')
-    else
-      nil
     end
   end
 end
