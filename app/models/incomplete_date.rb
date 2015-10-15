@@ -44,11 +44,12 @@ class IncompleteDate
   end
 
   def init_mask(date)
-    if date.class == Date
+    case date.class.to_s
+    when 'Date'
       @mask = 7
-    elsif date.class == Fixnum
+    when 'Fixnum'
       @mask = 4
-    elsif date.class == String
+    when 'String'
       @mask = mask_from_string(date)
     end
   end
