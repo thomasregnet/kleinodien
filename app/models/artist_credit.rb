@@ -10,11 +10,11 @@ class ArtistCredit < ActiveRecord::Base
   
   def name
     names = []
-    participants.each do |p|
-      names << p.artist.name
-      names << p.joinparse unless p.joinparse.blank?
+    participants.each do |participant|
+      names << participant.artist.name
+      joinparse = participant.joinparse
+      names << joinparse unless joinparse.blank?
     end
-    #return if names.length < 1
     names.join(' ')
   end
 end
