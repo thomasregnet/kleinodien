@@ -108,17 +108,14 @@ class DiscogsImporter
         params[:heading] = dc_track.title
         next
       else
-        import_track(dc_track, album_release, params[:no], params[:heading])
+        import_track(dc_track, album_release, params)
         params[:no] += 1
       end
     end
     params
   end
   
-  def self.import_track(dc_track, album_release, no, heading)
-    # artist_credit = dc_track.artists ?
-    #                   import_artist_credit(dc_track.artists) :
-    #                   album_release.head.artist_credit
+  def self.import_track(dc_track, album_release, params)
     artist_credit = get_artist_credit_for_track(dc_track, album_release)
     song_head = artist_credit.pieces.find_or_create_by!(
       title: dc_track.title,
@@ -130,9 +127,9 @@ class DiscogsImporter
     import_extraartists(dc_track.extraartists, song_release)
     track = song_release.tracks.create!(
       compilation: album_release,
-      no:          no,
+      no:          params[:no],
       position:    dc_track.position.to_s,
-      heading:     heading
+      heading:     params[:heading]
     )
   end
 
