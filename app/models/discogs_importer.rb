@@ -131,7 +131,7 @@ class DiscogsImporter
     # TODO: deal with song-versions
     song_release = SongRelease.find_or_create_by!(head: song_head)
     import_extraartists(dc_track.extraartists, song_release)
-    track = song_release.tracks.create!(
+    song_release.tracks.create!(
       compilation: album_release,
       no:          params[:no],
       position:    dc_track.position.to_s,
