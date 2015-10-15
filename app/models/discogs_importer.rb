@@ -106,7 +106,6 @@ class DiscogsImporter
     dc_tracklist.each do |dc_track|
       if dc_track.class == KleinodienDiscogs::Heading
         params[:heading] = dc_track.title
-        next
       else
         import_track(dc_track, album_release, params)
         params[:no] += 1
