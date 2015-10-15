@@ -3,19 +3,10 @@ require 'kleinodien_discogs'
 # Import data from Discogs
 class DiscogsImporter
   def self.import_release(json)
-    dc_release = KleinodienDiscogs.get_release(json)
-
+    dc_release    = KleinodienDiscogs.get_release(json)
     artist_credit = import_artist_credit(dc_release.artists)
-
     album_release = create_album_release(dc_release, artist_credit)
-
-    import_formats(dc_release.formats, album_release)
-    import_country(dc_release.country, album_release)
-    import_extraartists(dc_release.extraartists, album_release)
-    import_identifiers(dc_release.identifiers, album_release)
-    import_labels(dc_release.labels, album_release)
-    import_tracks(dc_release.get_media, album_release)
-    album_release.save!
+    round_out_release(dc_release, album_release)
     album_release
   end
 
@@ -28,6 +19,15 @@ class DiscogsImporter
       date: IncompleteDate.new(dc_release.released)
     )
     album_release
+  end
+
+  def self.round_out_release(dc_release, album_release)
+    import_formats(dc_release.formats, album_release)
+    import_country(dc_release.country, album_release)
+    import_extraartists(dc_release.extraartists, album_release)
+    import_identifiers(dc_release.identifiers, album_release)
+    import_labels(dc_release.labels, album_release)
+    import_tracks(dc_release.get_media, album_release)
   end
 
   def self.import_extraartists(extraartists, release)
