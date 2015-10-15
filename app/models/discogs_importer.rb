@@ -7,12 +7,8 @@ class DiscogsImporter
     dc_release = KleinodienDiscogs.get_release(json)
 
     artist_credit = import_artist_credit(dc_release.artists)
-    album_head = artist_credit.compilations.create!(
-      title: dc_release.title,
-      type:  'AlbumHead'
-    )
-    album_release = album_head.releases.create!
-    album_release.date = IncompleteDate.new(dc_release.released)
+
+    album_release = create_album_release(dc_release, artist_credit)
 
     formats = import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
@@ -24,6 +20,17 @@ class DiscogsImporter
     album_release
   end
 
+  def self.create_album_release(dc_release, artist_credit)
+    album_head = artist_credit.compilations.create!(
+      title: dc_release.title,
+      type:  'AlbumHead'
+    )
+    album_release = album_head.releases.create!(
+      date: IncompleteDate.new(dc_release.released)
+    )
+    album_release
+  end
+  
   def self.import_extraartists(extraartists, release)
     return unless extraartists
     extraartists.each do |artist|
