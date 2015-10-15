@@ -116,9 +116,10 @@ class DiscogsImporter
   end
   
   def self.import_track(dc_track, album_release, no, heading)
-    artist_credit = dc_track.artists ?
-                      import_artist_credit(dc_track.artists) :
-                      album_release.head.artist_credit
+    # artist_credit = dc_track.artists ?
+    #                   import_artist_credit(dc_track.artists) :
+    #                   album_release.head.artist_credit
+    artist_credit = get_artist_credit_for_track(dc_track, album_release)
     song_head = artist_credit.pieces.find_or_create_by!(
       title: dc_track.title,
       type:  'SongHead'
@@ -135,6 +136,14 @@ class DiscogsImporter
     )
   end
 
+  def self.get_artist_credit_for_track(dc_track, album_release)
+    if dc_track.artists
+      import_artist_credit(dc_track.artists)
+    else
+      album_release.head.artist_credit
+    end
+  end
+  
   def self.import_formats(dc_formats, album_release)
     dc_formats.each_with_index.map do |dc_format, no|
       format = album_release.formats.create!(
