@@ -6,6 +6,7 @@ class CompilationHead < ActiveRecord::Base
     scope: [:type, :disambiguation],
     case_sensitive: false
   )
+  has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit
   has_and_belongs_to_many :countries
 end
