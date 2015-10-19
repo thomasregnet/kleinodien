@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_incomplete_dates'
 
@@ -95,19 +96,23 @@ RSpec.describe CompilationRelease, type: :model do
     end
   end
 
-  context "with countries" do
-    before(:each) do
-      # @c_release = FactoryGirl.create(:compilation_release)
-      # @c_release.countries.create!(name: 'foo')
-      # @c_release.countries.create!(name: 'bar')
-      @c_release = FactoryGirl.create(:compilation_release_with_countries)
-    end
+  # context "with countries" do
+  #   before(:each) do
+  #     # @c_release = FactoryGirl.create(:compilation_release)
+  #     # @c_release.countries.create!(name: 'foo')
+  #     # @c_release.countries.create!(name: 'bar')
+  #     @c_release = FactoryGirl.create(:compilation_release_with_countries)
+  #   end
 
-    it "has the countries set" do
-      expect(@c_release.countries.length).to eq(2)
-    end
+  #   it "has the countries set" do
+  #     expect(@c_release.countries.length).to eq(2)
+  #   end
+  # end
+  it_behaves_like "a model with countries" do
+    let(:factory) { :compilation_release_with_countries }
   end
 
+  # TODO: compilation_head_with_credits -> compilation_release_with_credits }
   it_behaves_like "a model with credits" do
     let(:factory) { :compilation_head_with_credits }
   end
