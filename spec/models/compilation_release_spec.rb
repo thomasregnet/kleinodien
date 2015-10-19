@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_models_with_countries'
+require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_incomplete_dates'
 
@@ -86,14 +87,8 @@ RSpec.describe CompilationRelease, type: :model do
     end
   end
 
-  context "with companies" do
-    before(:each) do
-      @c_release = FactoryGirl.create(:compilation_release_with_companies)
-    end
-
-    it "has the companies set" do
-      expect(@c_release.companies.length).to eq(2)
-    end
+  it_behaves_like "a model with companies" do
+    let(:factory) { :compilation_release_with_companies }
   end
 
   it_behaves_like "a model with countries" do
