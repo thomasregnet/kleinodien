@@ -3,6 +3,20 @@ FactoryGirl.define do
     sequence(:title) { |n| "compilation head ##{n}"}
     type 'CompilationHead'
 
+    factory :compilation_head_with_companies do
+      transient do
+        companies_count 2
+      end
+
+      after(:create) do |compilation_head, elevator|
+        create_list(
+          :ch_company,
+          elevator.companies_count,
+          compilation_head: compilation_head
+        )
+      end
+    end
+
     factory :compilation_head_with_countries do
       after(:create) do |compilation_head|
         compilation_head.countries << FactoryGirl.create(:country)
