@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 
 RSpec.describe CompilationHead, type: :model do
@@ -29,6 +30,10 @@ RSpec.describe CompilationHead, type: :model do
     expect { @c_head.save! }.not_to raise_error
   end
 
+  it_behaves_like "a model with credits" do
+    let(:factory) { :compilation_head_with_countries }
+  end
+  
   it_behaves_like "a model with credits" do
     let(:factory) { :compilation_head_with_credits }
   end
