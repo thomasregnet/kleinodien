@@ -8,8 +8,8 @@ FactoryGirl.define do
         tracks_count 2
       end
       
-      after(:create) do |piece_release, elevator|
-        create_list(:track, elevator.tracks_count, release: piece_release)
+      after(:create) do |piece_release, evaluator|
+        create_list(:track, evaluator.tracks_count, release: piece_release)
       end
     end
     
@@ -26,10 +26,10 @@ FactoryGirl.define do
         credits_count 2
       end
 
-      after(:create) do |piece_release, elevator|
+      after(:create) do |piece_release, evaluator|
         create_list(
           :pr_credit,
-          elevator.credits_count,
+          evaluator.credits_count,
           piece_release: piece_release
         )
       end

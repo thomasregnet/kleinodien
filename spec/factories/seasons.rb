@@ -9,8 +9,8 @@ FactoryGirl.define do
         episodes_count 5
       end
 
-      after(:create) do |season, elevator|
-        create_list(:tv_episode_head, elevator.episodes_count, season: season)
+      after(:create) do |season, evaluator|
+        create_list(:tv_episode_head, evaluator.episodes_count, season: season)
       end
     end
   end
