@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019193519) do
+ActiveRecord::Schema.define(version: 20151019204433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,49 +241,18 @@ ActiveRecord::Schema.define(version: 20151019193519) do
 
   add_index "participants", ["no", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true, using: :btree
 
-  create_table "pga_diagrams", primary_key: "diagramname", force: :cascade do |t|
-    t.text "diagramtables"
-    t.text "diagramlinks"
+  create_table "ph_companies", force: :cascade do |t|
+    t.integer  "piece_head_id",   null: false
+    t.integer  "company_id",      null: false
+    t.integer  "company_role_id", null: false
+    t.string   "catalog_no"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  create_table "pga_forms", primary_key: "formname", force: :cascade do |t|
-    t.text "formsource"
-  end
-
-  create_table "pga_graphs", primary_key: "graphname", force: :cascade do |t|
-    t.text "graphsource"
-    t.text "graphcode"
-  end
-
-  create_table "pga_images", primary_key: "imagename", force: :cascade do |t|
-    t.text "imagesource"
-  end
-
-  create_table "pga_layout", primary_key: "tablename", force: :cascade do |t|
-    t.integer "nrcols",   limit: 2
-    t.text    "colnames"
-    t.text    "colwidth"
-  end
-
-  create_table "pga_queries", primary_key: "queryname", force: :cascade do |t|
-    t.string "querytype",     limit: 1
-    t.text   "querycommand"
-    t.text   "querytables"
-    t.text   "querylinks"
-    t.text   "queryresults"
-    t.text   "querycomments"
-  end
-
-  create_table "pga_reports", primary_key: "reportname", force: :cascade do |t|
-    t.text "reportsource"
-    t.text "reportbody"
-    t.text "reportprocs"
-    t.text "reportoptions"
-  end
-
-  create_table "pga_scripts", primary_key: "scriptname", force: :cascade do |t|
-    t.text "scriptsource"
-  end
+  add_index "ph_companies", ["company_id"], name: "index_ph_companies_on_company_id", using: :btree
+  add_index "ph_companies", ["company_role_id"], name: "index_ph_companies_on_company_role_id", using: :btree
+  add_index "ph_companies", ["piece_head_id"], name: "index_ph_companies_on_piece_head_id", using: :btree
 
   create_table "ph_credits", force: :cascade do |t|
     t.integer  "artist_credit_id", null: false
@@ -449,6 +418,9 @@ ActiveRecord::Schema.define(version: 20151019193519) do
   add_foreign_key "cr_credits", "jobs"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
+  add_foreign_key "ph_companies", "companies"
+  add_foreign_key "ph_companies", "company_roles"
+  add_foreign_key "ph_companies", "piece_heads"
   add_foreign_key "ph_credits", "artist_credits"
   add_foreign_key "ph_credits", "jobs"
   add_foreign_key "ph_credits", "piece_heads"
