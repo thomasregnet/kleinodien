@@ -15,8 +15,8 @@ FactoryGirl.define do
         attr_count 3
       end
 
-      after(:create) do |track, elevator|
-        create_list(:trf_attribute, elevator.attr_count, track: track)
+      after(:create) do |track, evaluator|
+        create_list(:trf_attribute, evaluator.attr_count, track: track)
       end
     end
   end

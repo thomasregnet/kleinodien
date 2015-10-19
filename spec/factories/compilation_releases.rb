@@ -8,10 +8,10 @@ FactoryGirl.define do
         companies_count 2
       end
 
-      after(:create) do |compilation_release, elevator|
+      after(:create) do |compilation_release, evaluator|
         create_list(
           :cr_company,
-          elevator.companies_count,
+          evaluator.companies_count,
           compilation_release: compilation_release
         )
       end
@@ -22,10 +22,10 @@ FactoryGirl.define do
         credits_count 2
       end
 
-      after(:create) do |compilation_release, elevator|
+      after(:create) do |compilation_release, evaluator|
         create_list(
           :cr_credit,
-          elevator.credits_count,
+          evaluator.credits_count,
           compilation_release: compilation_release
         )
       end
