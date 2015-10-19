@@ -3,6 +3,20 @@ FactoryGirl.define do
     sequence(:title) { |n| "piece ##{n}" }
     type  'PieceHead'
 
+    factory :piece_head_with_companies do
+      transient do
+        companies_count 2
+      end
+
+      after(:create) do |piece_head, elevator|
+        create_list(
+          :ph_company,
+          elevator.companies_count,
+          piece_head: piece_head
+        )
+      end
+    end
+    
     factory :piece_head_with_countries do
       after(:create) do |piece_head|
         piece_head.countries << FactoryGirl.create(:country)

@@ -1,6 +1,7 @@
 require 'rails_helper'
-require 'shared_examples_for_models_with_credits'
+require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
+require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe PieceHead, type: :model do
@@ -35,6 +36,10 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).not_to be_valid
   end
 
+  it_behaves_like "a model with companies" do
+    let(:factory) { :piece_head_with_companies }
+  end
+  
   it_behaves_like "a model with countries" do
     let(:factory) { :piece_head_with_countries }
   end
