@@ -12,7 +12,15 @@ FactoryGirl.define do
         create_list(:track, elevator.tracks_count, release: piece_release)
       end
     end
+    
+    factory :piece_release_with_countries do
+      after(:create) do |piece_release|
+        piece_release.countries << FactoryGirl.create(:country)
+        piece_release.countries << FactoryGirl.create(:country)
+      end
+    end
 
+    
     factory :piece_release_with_credits do
       transient do
         credits_count 2
