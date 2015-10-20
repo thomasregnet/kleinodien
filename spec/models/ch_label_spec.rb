@@ -1,5 +1,9 @@
 require 'rails_helper'
+require 'shared_examples_for_labels'
 
 RSpec.describe ChLabel, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_behaves_like "a label" do
+    let(:factory) { :ch_label }
+    let(:owner_setter) { 'compilation_head=' }
+  end
 end
