@@ -35,6 +35,20 @@ FactoryGirl.define do
       end
     end
 
+    factory :piece_release_with_companies do
+      transient do
+        companies_count 2
+      end
+
+      after(:create) do |piece_release, evaluator|
+        create_list(
+          :pr_company,
+          evaluator.companies_count,
+          piece_release: piece_release
+        )
+      end
+    end
+    
     factory :piece_release_with_labels do
       transient do
         labels_count 2

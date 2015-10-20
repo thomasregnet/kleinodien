@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_models_with_credits'
+require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
@@ -27,6 +28,10 @@ RSpec.describe PieceRelease, type: :model do
     it "has some tracks" do
       expect(@piece_release.tracks.count).to be > 0
     end
+  end
+
+  it_behaves_like "a model with companies" do
+    let(:factory) { :piece_release_with_companies }
   end
   
   it_behaves_like "a model with countries" do
