@@ -37,7 +37,20 @@ FactoryGirl.define do
         )
       end
     end
-        
+
+    factory :compilation_head_with_labels do
+      transient do
+        labels_count 2
+      end
+
+      after(:create) do |compilation_head, evaluator|
+        create_list(
+          :ch_label,
+          evaluator.labels_count,
+          compilation_head: compilation_head
+        )
+      end
+    end
     factory :album_head, class: AlbumHead do
       artist_credit
       type 'AlbumHead'
