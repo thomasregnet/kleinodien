@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020190111) do
+ActiveRecord::Schema.define(version: 20151020192043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,6 +354,17 @@ ActiveRecord::Schema.define(version: 20151020190111) do
   add_index "pr_credits", ["job_id"], name: "index_pr_credits_on_job_id", using: :btree
   add_index "pr_credits", ["piece_release_id"], name: "index_pr_credits_on_piece_release_id", using: :btree
 
+  create_table "pr_labels", force: :cascade do |t|
+    t.integer  "piece_release_id", null: false
+    t.integer  "company_id",       null: false
+    t.string   "catalog_no"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "pr_labels", ["company_id"], name: "index_pr_labels_on_company_id", using: :btree
+  add_index "pr_labels", ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
+
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
     t.integer  "no",         null: false
@@ -486,5 +497,7 @@ ActiveRecord::Schema.define(version: 20151020190111) do
   add_foreign_key "pr_credits", "artist_credits"
   add_foreign_key "pr_credits", "jobs"
   add_foreign_key "pr_credits", "piece_releases"
+  add_foreign_key "pr_labels", "companies"
+  add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
