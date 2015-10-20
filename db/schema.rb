@@ -290,8 +290,8 @@ ActiveRecord::Schema.define(version: 20151020190111) do
   add_index "ph_credits", ["piece_head_id"], name: "index_ph_credits_on_piece_head_id", using: :btree
 
   create_table "ph_labels", force: :cascade do |t|
-    t.integer  "piece_head_id"
-    t.integer  "company_id"
+    t.integer  "piece_head_id", null: false
+    t.integer  "company_id",    null: false
     t.string   "catalog_no"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
