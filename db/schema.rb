@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019204433) do
+ActiveRecord::Schema.define(version: 20151020174527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -295,6 +295,19 @@ ActiveRecord::Schema.define(version: 20151019204433) do
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
 
+  create_table "pr_companies", force: :cascade do |t|
+    t.integer  "piece_release_id", null: false
+    t.integer  "company_id",       null: false
+    t.integer  "company_role_id",  null: false
+    t.string   "catalog_no"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "pr_companies", ["company_id"], name: "index_pr_companies_on_company_id", using: :btree
+  add_index "pr_companies", ["company_role_id"], name: "index_pr_companies_on_company_role_id", using: :btree
+  add_index "pr_companies", ["piece_release_id"], name: "index_pr_companies_on_piece_release_id", using: :btree
+
   create_table "pr_credits", force: :cascade do |t|
     t.integer  "artist_credit_id", null: false
     t.integer  "piece_release_id", null: false
@@ -428,6 +441,9 @@ ActiveRecord::Schema.define(version: 20151019204433) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
+  add_foreign_key "pr_companies", "companies"
+  add_foreign_key "pr_companies", "company_roles"
+  add_foreign_key "pr_companies", "piece_releases"
   add_foreign_key "pr_credits", "artist_credits"
   add_foreign_key "pr_credits", "jobs"
   add_foreign_key "pr_credits", "piece_releases"
