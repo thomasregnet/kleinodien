@@ -35,10 +35,10 @@ RSpec.shared_examples "a company" do
     end
   end
 
-  describe "without a compilation_release" do
+  describe "without a owner" do
     before(:each) do
       @company = FactoryGirl.create(factory)
-      @company.compilation_release = nil
+      @company.send(owner_setter, nil) 
     end
 
     it "is not valid" do
