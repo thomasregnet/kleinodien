@@ -38,6 +38,19 @@ FactoryGirl.define do
       end
     end
 
+    factory :piece_head_with_labels do
+      transient do
+        labels_count 2
+      end
+
+      after(:create) do |piece_head, evaluator|
+        create_list(
+          :ph_label,
+          evaluator.labels_count,
+          piece_head: piece_head
+        )
+      end
+    end
     factory :movie_head, class: MovieHead do
       type 'MovieHead'
     end
