@@ -1,8 +1,10 @@
 FactoryGirl.define do
   factory :ch_label do
-    compilation_head nil
-company nil
-catalog_no "MyString"
-  end
+    compilation_head
+    company
 
+    factory :ch_label_with_catalog_no do
+      sequence(:catalog_no) { |n| "catalog-##{n}" }
+    end
+  end
 end
