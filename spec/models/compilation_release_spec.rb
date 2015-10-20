@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
+require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe CompilationRelease, type: :model do
@@ -97,6 +98,10 @@ RSpec.describe CompilationRelease, type: :model do
 
   it_behaves_like "a model with credits" do
     let(:factory) { :compilation_release_with_credits }
+  end
+
+  it_behaves_like "a model with labels" do
+    let(:factory) { :compilation_release_with_labels }
   end
   
   it_behaves_like "a model with an IncompleteDate" do

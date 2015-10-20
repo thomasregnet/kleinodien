@@ -38,5 +38,19 @@ FactoryGirl.define do
         compilation_release.countries << FactoryGirl.create(:country)
       end
     end
+
+    factory :compilation_release_with_labels do
+      transient do
+        labels_count 2
+      end
+
+      after(:create) do |compilation_release, evaluator|
+        create_list(
+          :cr_label,
+          evaluator.labels_count,
+          compilation_release: compilation_release
+        )
+      end
+    end
   end
 end

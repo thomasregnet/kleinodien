@@ -18,6 +18,7 @@ class CompilationRelease < ActiveRecord::Base
   has_many(
     :identifiers,
     class_name: CompilationIdentifier)
+  has_many :labels, class_name: CrLabel
   has_many(:tracks)
   has_many(
     :formats,
