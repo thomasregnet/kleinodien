@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020174527) do
+ActiveRecord::Schema.define(version: 20151020180558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20151020174527) do
   add_index "ch_credits", ["artist_credit_id"], name: "index_ch_credits_on_artist_credit_id", using: :btree
   add_index "ch_credits", ["compilation_head_id"], name: "index_ch_credits_on_compilation_head_id", using: :btree
   add_index "ch_credits", ["job_id"], name: "index_ch_credits_on_job_id", using: :btree
+
+  create_table "ch_labels", force: :cascade do |t|
+    t.integer  "compilation_head_id", null: false
+    t.integer  "company_id",          null: false
+    t.string   "catalog_no"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "ch_labels", ["company_id"], name: "index_ch_labels_on_company_id", using: :btree
+  add_index "ch_labels", ["compilation_head_id"], name: "index_ch_labels_on_compilation_head_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       null: false
@@ -418,6 +429,8 @@ ActiveRecord::Schema.define(version: 20151020174527) do
   add_foreign_key "ch_credits", "artist_credits"
   add_foreign_key "ch_credits", "compilation_heads"
   add_foreign_key "ch_credits", "jobs"
+  add_foreign_key "ch_labels", "companies"
+  add_foreign_key "ch_labels", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "countries_piece_heads", "countries"
