@@ -24,6 +24,7 @@ class DiscogsImporter
   def self.round_out_release(dc_release, album_release)
     import_formats(dc_release.formats, album_release)
     import_country(dc_release.country, album_release)
+    import_companies(dc_release.companies, album_release)
     import_extraartists(dc_release.extraartists, album_release)
     import_identifiers(dc_release.identifiers, album_release)
     import_labels(dc_release.labels, album_release)
@@ -68,6 +69,16 @@ class DiscogsImporter
     dc_labels.each do |dc_label|
       company = Company.find_or_create_by!(name: dc_label.name)
       album_release.labels.create!(
+        company: company,
+        catalog_no: dc_label.catno
+      )
+    end
+  end
+
+  def self.import_companies(dc_companies, album_release)
+    dc_labels.each do |dc_company|
+      company = Company.find_or_create_by!(name: dc_company.name)
+      album_release.companies.create!(
         company: company,
         catalog_no: dc_label.catno
       )
