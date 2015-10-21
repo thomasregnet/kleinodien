@@ -62,14 +62,27 @@ class DiscogsImporter
     album_release.countries << country
   end
 
+  # def self.import_labels(dc_labels, album_release)
+  #   role = CompanyRole.find_or_create_by!(name: 'Label')
+
+  #   dc_labels.each do |dc_label|
+  #     company = Company.find_or_create_by!(name: dc_label.name)
+  #     album_release.companies.create!(
+  #       company: company,
+  #       company_role: role,
+  #       catalog_no: dc_label.catno
+  #     )
+  #   end
+  # end
   def self.import_labels(dc_labels, album_release)
     role = CompanyRole.find_or_create_by!(name: 'Label')
 
     dc_labels.each do |dc_label|
       company = Company.find_or_create_by!(name: dc_label.name)
-      album_release.companies.create!(
+      #album_release.companies.create!(
+      album_release.labels.create!(
         company: company,
-        company_role: role,
+        #company_role: role,
         catalog_no: dc_label.catno
       )
     end
