@@ -28,7 +28,7 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(tracks[9].release.title).to eq('Night Prowler')
       end
 
-      it "has imported tshe labels" do
+      it "has imported the labels" do
         expect(@release.labels[0].company.name).to eq('Atlantic')
         expect(@release.labels[0].catalog_no).to eq('7567-92419-5')        
       end
