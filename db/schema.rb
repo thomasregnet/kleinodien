@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020192043) do
+ActiveRecord::Schema.define(version: 20151021193947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,12 @@ ActiveRecord::Schema.define(version: 20151020192043) do
   end
 
   add_index "crf_attributes", ["cr_format_id", "no"], name: "index_crf_attributes_on_cr_format_id_and_no", unique: true, using: :btree
+
+  create_table "data_sources", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "formats", force: :cascade do |t|
     t.string   "name",       null: false
