@@ -64,7 +64,7 @@ class DiscogsImporter
   end
 
   def self.import_labels(dc_labels, album_release)
-    role = CompanyRole.find_or_create_by!(name: 'Label')
+    #role = CompanyRole.find_or_create_by!(name: 'Label')
 
     dc_labels.each do |dc_label|
       company = Company.find_or_create_by!(name: dc_label.name)
@@ -76,11 +76,13 @@ class DiscogsImporter
   end
 
   def self.import_companies(dc_companies, album_release)
-    dc_labels.each do |dc_company|
+    dc_companies.each do |dc_company|
+      role = CompanyRole.find_or_create_by!(name: dc_company.entity_type_name)
       company = Company.find_or_create_by!(name: dc_company.name)
       album_release.companies.create!(
-        company: company,
-        catalog_no: dc_label.catno
+        catalog_no:   dc_company.catno,
+        company:      company,
+        company_role: role
       )
     end
   end
