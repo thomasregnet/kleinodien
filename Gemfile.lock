@@ -1,9 +1,9 @@
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: d9f26b7af262c1f58471a5b50ef979f5b6bf5305
+  revision: c1e869f737ffff12e8fb2758179d3b34113f5fb8
   branch: master
   specs:
-    kleinodien_discogs (0.0.10)
+    kleinodien_discogs (0.0.11)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_omdb
@@ -237,7 +237,7 @@ DEPENDENCIES
   faker (~> 1.5)
   jbuilder (~> 2.0)
   jquery-rails
-  kleinodien_discogs (= 0.0.10)!
+  kleinodien_discogs (= 0.0.11)!
   kleinodien_omdb (= 0.0.2)!
   pg
   rails (= 4.2.4)
