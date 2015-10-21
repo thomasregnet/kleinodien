@@ -37,7 +37,7 @@ gem 'faker',  '~> 1.5'
 gem 'devise', '~> 3.4'
 
 gem 'kleinodien_discogs',
-    '0.0.11',
+    '0.0.12',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
