@@ -1,5 +1,8 @@
 require 'rails_helper'
+require 'shared_examples_for_unique_names'
 
 RSpec.describe DataSource, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_behaves_like 'an entity with an unique name' do
+    let(:factory) { :data_source }
+  end
 end
