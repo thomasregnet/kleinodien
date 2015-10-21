@@ -55,7 +55,8 @@ RSpec.describe DiscogsImporter, type: :model do
       end
 
       it "has imported the companies" do
-        expect(@release.companies[0].name).to eq('Metal Blade Records GmbH')
+        expect(@release.companies[0].company.name)
+          .to eq('Metal Blade Records GmbH')
       end
       
       it "has imported the countries" do
