@@ -1,0 +1,2 @@
+class CrSourceIdentifier < SourceIdentifier
+end
