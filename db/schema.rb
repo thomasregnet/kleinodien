@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021195108) do
+ActiveRecord::Schema.define(version: 20151022174605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,6 +398,17 @@ ActiveRecord::Schema.define(version: 20151021195108) do
     t.string   "type",           null: false
   end
 
+  create_table "source_identifiers", force: :cascade do |t|
+    t.integer  "data_source_id", null: false
+    t.string   "identifier",     null: false
+    t.string   "type",           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "source_identifiers", ["data_source_id", "identifier", "type"], name: "index_src_id_on_data_src_ident_type", unique: true, using: :btree
+  add_index "source_identifiers", ["data_source_id"], name: "index_source_identifiers_on_data_source_id", using: :btree
+
   create_table "stations", force: :cascade do |t|
     t.string   "name",           null: false
     t.string   "disambiguation"
@@ -506,4 +517,5 @@ ActiveRecord::Schema.define(version: 20151021195108) do
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
+  add_foreign_key "source_identifiers", "data_sources"
 end
