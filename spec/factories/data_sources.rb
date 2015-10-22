@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :data_source do
-    name "MyString"
+    sequence(:name) { |n| "data source #{n}" }
   end
-
 end
