@@ -6,6 +6,7 @@ FactoryGirl.define do
 
     factory :cr_source_identifier, class: CrSourceIdentifier do
       type 'CrSourceIdentifier'
+      sequence(:identifier) { |n| "abc_#{n}_defg" }
     end
   end
 

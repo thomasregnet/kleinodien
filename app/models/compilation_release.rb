@@ -25,6 +25,7 @@ class CompilationRelease < ActiveRecord::Base
     :formats,
     class_name: CrFormat,
     foreign_key: :compilation_release_id)
+  validates_uniqueness_of :source_identifier, allow_nil: true
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
 end
