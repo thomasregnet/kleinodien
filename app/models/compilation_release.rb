@@ -8,6 +8,7 @@ class CompilationRelease < ActiveRecord::Base
     :head,
     class_name: CompilationHead,
     foreign_key: :compilation_head_id)
+  belongs_to :source_identifier, class_name: CrSourceIdentifier
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
   #has_many :compilation_releases_countries, inverse_of: :compilation_release

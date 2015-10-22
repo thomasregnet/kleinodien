@@ -52,5 +52,9 @@ FactoryGirl.define do
         )
       end
     end
+
+    factory :compilation_release_with_a_source_identifer do
+      association :source_identifier, factory: :cr_source_identifier
+    end
   end
 end
