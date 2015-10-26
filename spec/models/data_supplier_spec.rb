@@ -1,8 +1,8 @@
 require 'rails_helper'
 require 'shared_examples_for_unique_names'
 
-RSpec.describe DataSource, type: :model do
+RSpec.describe DataSupplier, type: :model do
   it_behaves_like 'an entity with an unique name' do
-    let(:factory) { :data_source }
+    let(:factory) { :data_supplier }
   end
 end
