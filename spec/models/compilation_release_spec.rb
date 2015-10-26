@@ -3,7 +3,7 @@ require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
-require 'shared_examples_for_models_with_a_source_identifier'
+require 'shared_examples_for_models_with_a_reference'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe CompilationRelease, type: :model do
@@ -110,8 +110,8 @@ RSpec.describe CompilationRelease, type: :model do
     let(:date_naming) { 'date' }
   end
 
-  it_behaves_like "a model with a SourceIdentifier" do
-    let(:factory) { :compilation_release_with_a_source_identifer }
+  it_behaves_like "a model with a Reference" do
+    let(:factory) { :compilation_release_with_a_reference }
   end
   
 end

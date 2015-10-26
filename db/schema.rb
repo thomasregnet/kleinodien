@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026190328) do
+ActiveRecord::Schema.define(version: 20151026193522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,19 +112,19 @@ ActiveRecord::Schema.define(version: 20151026190328) do
   add_index "compilation_identifiers", ["compilation_release_id", "identifier_type_id", "code"], name: "index_compilation_identifiers_on_code_disambiguation", unique: true, using: :btree
 
   create_table "compilation_releases", force: :cascade do |t|
-    t.integer  "compilation_head_id",  null: false
+    t.integer  "compilation_head_id", null: false
     t.string   "version"
-    t.string   "type",                 null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.string   "type",                null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.integer  "source_identifier_id"
+    t.integer  "reference_id"
   end
 
   add_index "compilation_releases", ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id", unique: true, using: :btree
   add_index "compilation_releases", ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
-  add_index "compilation_releases", ["source_identifier_id"], name: "index_compilation_releases_on_source_identifier_id", using: :btree
+  add_index "compilation_releases", ["reference_id"], name: "index_compilation_releases_on_reference_id", using: :btree
 
   create_table "compilation_releases_countries", id: false, force: :cascade do |t|
     t.integer "compilation_release_id", null: false
@@ -485,7 +485,7 @@ ActiveRecord::Schema.define(version: 20151026190328) do
   add_foreign_key "ch_labels", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
-  add_foreign_key "compilation_releases", "\"references\"", column: "source_identifier_id"
+  add_foreign_key "compilation_releases", "\"references\"", column: "reference_id"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_piece_releases", "countries"

@@ -1,16 +1,16 @@
-RSpec.shared_examples 'a model with a SourceIdentifier' do
+RSpec.shared_examples 'a model with a Reference' do
   before(:each) do
     @model = FactoryGirl.create(factory)
   end
 
   it 'responds to "source_identifier"' do
-    expect(@model).to respond_to('source_identifier')
+    expect(@model).to respond_to('reference')
   end
 
   describe 'source_identifier_id must be unique' do
     before(:each) do
       @other_model = FactoryGirl.create(factory)
-      @other_model.source_identifier = @model.source_identifier
+      @other_model.reference = @model.reference
     end
 
     it 'is not valid' do
