@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022191427) do
+ActiveRecord::Schema.define(version: 20151026183034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20151022191427) do
 
   add_index "crf_attributes", ["cr_format_id", "no"], name: "index_crf_attributes_on_cr_format_id_and_no", unique: true, using: :btree
 
-  create_table "data_sources", force: :cascade do |t|
+  create_table "data_suppliers", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -520,5 +520,5 @@ ActiveRecord::Schema.define(version: 20151022191427) do
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
-  add_foreign_key "source_identifiers", "data_sources"
+  add_foreign_key "source_identifiers", "data_suppliers", column: "data_source_id"
 end
