@@ -1,0 +1,2 @@
+class CrReference < Reference
+end
