@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe SourceIdentifier, type: :model do
+RSpec.describe Reference, type: :model do
   before(:each) do
-    @src_ident = FactoryGirl.create(:source_identifier)
+    @src_ident = FactoryGirl.create(:reference)
   end
 
   it 'is valid with valid attributes' do
