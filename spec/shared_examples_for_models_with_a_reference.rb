@@ -15,6 +15,8 @@ RSpec.shared_examples 'a model with a Reference' do
 
     it 'is not valid' do
       expect(@other_model).not_to be_valid
+      expect { @other_model.save! validate: false }
+        .to raise_error
     end
   end
 end
