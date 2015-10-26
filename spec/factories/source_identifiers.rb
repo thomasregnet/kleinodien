@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :source_identifier do
-    data_source
+    data_supplier
     sequence(:identifier) { |n| "abc_#{n}_defg" }
     type 'GenericSourceIdentifier'
 

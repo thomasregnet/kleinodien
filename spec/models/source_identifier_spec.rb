@@ -9,15 +9,15 @@ RSpec.describe SourceIdentifier, type: :model do
     expect(@src_ident).to be_valid
   end
 
-  describe 'without a DataSource' do
+  describe 'without a DataSupplier' do
     before(:each) do
-      @src_ident.data_source = nil
+      @src_ident.data_supplier = nil
     end
 
     it 'is not valid' do
       expect(@src_ident).not_to be_valid
       expect { @src_ident.save! validate: false }
-        .to raise_error(/PG::NotNullViolation:.+"data_source_id".+not-null/)
+        .to raise_error(/PG::NotNullViolation:.+"data_supplier_id".+not-null/)
     end
   end
 
