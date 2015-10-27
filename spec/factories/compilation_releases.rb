@@ -56,5 +56,13 @@ FactoryGirl.define do
     factory :compilation_release_with_a_reference do
       association :reference, factory: :cr_reference
     end
+
+    factory :compilation_release_with_many_references do
+      after(:create) do |compilation_release|
+        compilation_release.references << FactoryGirl.create(:cr_reference)
+        compilation_release.references << FactoryGirl.create(:cr_reference)
+      end
+    end
+    
   end
 end

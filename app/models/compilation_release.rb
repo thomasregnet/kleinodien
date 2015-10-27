@@ -8,7 +8,15 @@ class CompilationRelease < ActiveRecord::Base
     :head,
     class_name: CompilationHead,
     foreign_key: :compilation_head_id)
-  belongs_to :reference, class_name: CrReference
+
+  belongs_to              :reference,  class_name: CrReference  
+  has_and_belongs_to_many(
+    :references,
+    class_name: CrReference,
+    join_table: :compilation_releases_references,
+    association_foreign_key: :reference_id
+  )
+
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
   #has_many :compilation_releases_countries, inverse_of: :compilation_release
@@ -25,6 +33,7 @@ class CompilationRelease < ActiveRecord::Base
     :formats,
     class_name: CrFormat,
     foreign_key: :compilation_release_id)
+
   validates_uniqueness_of :reference, allow_nil: true
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
