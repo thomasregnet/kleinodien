@@ -36,7 +36,7 @@ class DiscogsImporter
     supplier = DataSupplier.find_or_create_by!(name: 'Discogs')
     ref = CrReference.create(
       identifier: dc_id,
-      data_supplier: supplier
+      supplier:   supplier
     )
     album_release.reference = ref
   end

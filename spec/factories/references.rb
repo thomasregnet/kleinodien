@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :reference do
-    data_supplier
+    association :supplier, factory: :data_supplier
     sequence(:identifier) { |n| "abc_#{n}_defg" }
     type 'GenericReference'
 
