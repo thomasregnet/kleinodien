@@ -23,7 +23,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the reference" do
         expect(@release.reference.identifier).to eq('940468')
-        expect(@release.reference.data_supplier.name).to eq('Discogs')
+        expect(@release.reference.supplier.name).to eq('Discogs')
       end
       
       it "has imported the songs" do
@@ -78,7 +78,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the reference" do
         expect(@release.reference.identifier).to eq('4462260')
-        expect(@release.reference.data_supplier.name).to eq('Discogs')
+        expect(@release.reference.supplier.name).to eq('Discogs')
       end
       
       it "has imported the formats" do
@@ -182,7 +182,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has set the reference" do
         expect(@release.reference.identifier).to eq('4298844')
-        expect(@release.reference.data_supplier.name).to eq('Discogs')
+        expect(@release.reference.supplier.name).to eq('Discogs')
       end
       
       it "has imported the songs" do
