@@ -28,9 +28,19 @@ class DiscogsImporter
     import_extraartists(dc_release.extraartists, album_release)
     import_identifiers(dc_release.identifiers, album_release)
     import_labels(dc_release.labels, album_release)
+    import_reference(dc_release.id, album_release)
     import_tracks(dc_release.get_media, album_release)
   end
 
+  def self.import_reference(dc_id, album_release)
+    supplier = DataSupplier.find_or_create_by!(name: 'Discogs')
+    ref = CrReference.create(
+      identifier: dc_id,
+      data_supplier: supplier
+    )
+    album_release.reference = ref
+  end
+      
   def self.import_extraartists(extraartists, release)
     return unless extraartists
     extraartists.each do |artist|
