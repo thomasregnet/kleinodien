@@ -51,6 +51,11 @@ FactoryGirl.define do
         )
       end
     end
+
+    factory :compilation_head_with_a_reference do
+      association :reference, factory: :ch_reference
+    end
+    
     factory :album_head, class: AlbumHead do
       artist_credit
       type 'AlbumHead'
