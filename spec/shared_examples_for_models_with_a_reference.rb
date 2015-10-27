@@ -3,11 +3,11 @@ RSpec.shared_examples 'a model with a Reference' do
     @model = FactoryGirl.create(factory)
   end
 
-  it 'responds to "source_identifier"' do
+  it 'responds to "reference"' do
     expect(@model).to respond_to('reference')
   end
 
-  describe 'source_identifier_id must be unique' do
+  describe 'reference_id must be unique' do
     before(:each) do
       @other_model = FactoryGirl.create(factory)
       @other_model.reference = @model.reference
