@@ -12,4 +12,10 @@ class CompilationHead < ActiveRecord::Base
   has_many :credits, class_name: ChCredit
   has_many :labels, class_name: ChLabel
   has_and_belongs_to_many :countries
+  has_and_belongs_to_many(
+    :references,
+    class_name: ChReference,
+    join_table: :compilation_heads_references,
+    association_foreign_key: :reference_id
+  )
 end
