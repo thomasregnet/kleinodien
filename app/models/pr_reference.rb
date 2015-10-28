@@ -1,0 +1,2 @@
+class PrReference < Reference
+end

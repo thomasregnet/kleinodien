@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028205705) do
+ActiveRecord::Schema.define(version: 20151028212133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -362,10 +362,13 @@ ActiveRecord::Schema.define(version: 20151028205705) do
     t.datetime "updated_at",    null: false
     t.date     "date"
     t.integer  "date_mask"
+    t.integer  "reference_id"
   end
 
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
+  add_index "piece_releases", ["reference_id"], name: "index_piece_releases_on_reference_id", using: :btree
+  add_index "piece_releases", ["reference_id"], name: "index_piece_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
 
   create_table "pr_companies", force: :cascade do |t|
     t.integer  "piece_release_id", null: false
@@ -548,6 +551,7 @@ ActiveRecord::Schema.define(version: 20151028205705) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_references", "\"references\"", column: "reference_id"
   add_foreign_key "piece_heads_references", "piece_heads"
+  add_foreign_key "piece_releases", "\"references\"", column: "reference_id"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "pr_companies", "companies"
