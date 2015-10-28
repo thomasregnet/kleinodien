@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027213921) do
+ActiveRecord::Schema.define(version: 20151028194758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,14 @@ ActiveRecord::Schema.define(version: 20151027213921) do
   add_index "compilation_heads_countries", ["compilation_head_id"], name: "index_compilation_heads_countries_on_compilation_head_id", using: :btree
   add_index "compilation_heads_countries", ["country_id", "compilation_head_id"], name: "index_phc_on_country_id_and_compilation_head_id", unique: true, using: :btree
   add_index "compilation_heads_countries", ["country_id"], name: "index_compilation_heads_countries_on_country_id", using: :btree
+
+  create_table "compilation_heads_references", id: false, force: :cascade do |t|
+    t.integer "compilation_head_id", null: false
+    t.integer "reference_id",        null: false
+  end
+
+  add_index "compilation_heads_references", ["compilation_head_id"], name: "index_compilation_heads_references_on_compilation_head_id", using: :btree
+  add_index "compilation_heads_references", ["reference_id"], name: "index_compilation_heads_references_on_reference_id", using: :btree
 
   create_table "compilation_identifiers", force: :cascade do |t|
     t.integer  "compilation_release_id", null: false
@@ -498,6 +506,8 @@ ActiveRecord::Schema.define(version: 20151027213921) do
   add_foreign_key "compilation_heads", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
+  add_foreign_key "compilation_heads_references", "\"references\"", column: "reference_id"
+  add_foreign_key "compilation_heads_references", "compilation_heads"
   add_foreign_key "compilation_releases", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_releases_references", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_releases_references", "compilation_releases"
