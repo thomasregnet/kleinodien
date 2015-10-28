@@ -12,4 +12,10 @@ class PieceHead < ActiveRecord::Base
   has_many :credits, class_name: PhCredit
   has_many :labels, class_name: PhLabel
   has_and_belongs_to_many :countries
+  has_and_belongs_to_many(
+    :references,
+    class_name: PhReference,
+    join_table: :piece_heads_references,
+    association_foreign_key: :reference_id
+  )
 end
