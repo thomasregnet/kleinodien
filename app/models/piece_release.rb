@@ -9,6 +9,12 @@ class PieceRelease < ActiveRecord::Base
   has_many :labels, class_name: PrLabel
   has_many :tracks
   has_and_belongs_to_many :countries
+  has_and_belongs_to_many(
+    :references,
+    class_name: PrReference,
+    join_table: :piece_releases_references,
+    association_foreign_key: :reference_id
+  )
   validates_uniqueness_of :reference, allow_nil: true
   delegate :title, to: :head
 end
