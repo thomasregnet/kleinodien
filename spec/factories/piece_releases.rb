@@ -64,7 +64,14 @@ FactoryGirl.define do
     end
 
     factory :piece_release_with_a_reference do
-      association :reference, factory: PrReference
+      association :reference, factory: :pr_reference
+    end
+
+    factory :piece_release_with_many_references do
+      after(:create) do |piece_release|
+        piece_release.references << FactoryGirl.create(:pr_reference)
+        piece_release.references << FactoryGirl.create(:pr_reference)
+      end
     end
 
     factory :song_release, class: SongRelease do

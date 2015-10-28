@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028212133) do
+ActiveRecord::Schema.define(version: 20151028213616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -370,6 +370,14 @@ ActiveRecord::Schema.define(version: 20151028212133) do
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_on_reference_id", using: :btree
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
 
+  create_table "piece_releases_references", id: false, force: :cascade do |t|
+    t.integer "piece_release_id"
+    t.integer "reference_id"
+  end
+
+  add_index "piece_releases_references", ["piece_release_id"], name: "index_piece_releases_references_on_piece_release_id", using: :btree
+  add_index "piece_releases_references", ["reference_id"], name: "index_piece_releases_references_on_reference_id", using: :btree
+
   create_table "pr_companies", force: :cascade do |t|
     t.integer  "piece_release_id", null: false
     t.integer  "company_id",       null: false
@@ -554,6 +562,8 @@ ActiveRecord::Schema.define(version: 20151028212133) do
   add_foreign_key "piece_releases", "\"references\"", column: "reference_id"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
+  add_foreign_key "piece_releases_references", "\"references\"", column: "reference_id"
+  add_foreign_key "piece_releases_references", "piece_releases"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
   add_foreign_key "pr_companies", "piece_releases"
