@@ -16,14 +16,14 @@ FactoryGirl.define do
         )
       end
     end
-    
+
     factory :piece_head_with_countries do
       after(:create) do |piece_head|
         piece_head.countries << FactoryGirl.create(:country)
         piece_head.countries << FactoryGirl.create(:country)
       end
     end
-    
+
     factory :piece_head_with_credits do
       transient do
         credits_count 2
@@ -51,6 +51,11 @@ FactoryGirl.define do
         )
       end
     end
+
+    factory :piece_head_with_a_reference do
+      association :reference, factory: :ph_reference
+    end
+
     factory :movie_head, class: MovieHead do
       type 'MovieHead'
     end
@@ -58,7 +63,7 @@ FactoryGirl.define do
     factory :podcast_episode_head, class: PodcastEpisodeHead do
       type 'PodcastEpisodeHead'
     end
-    
+
     factory :song_head, class: SongHead do
       artist_credit
       type 'SongHead'

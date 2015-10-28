@@ -1,0 +1,2 @@
+class PhReference < Reference
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028194758) do
+ActiveRecord::Schema.define(version: 20151028204109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,8 +337,11 @@ ActiveRecord::Schema.define(version: 20151028194758) do
     t.string   "type",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "reference_id"
   end
 
+  add_index "piece_heads", ["reference_id"], name: "index_piece_heads_on_reference_id", using: :btree
+  add_index "piece_heads", ["reference_id"], name: "index_piece_heads_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "piece_heads", ["type"], name: "index_piece_heads_on_lower_title", unique: true, where: "(disambiguation IS NULL)", using: :btree
   add_index "piece_heads", ["type"], name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
 
@@ -532,6 +535,7 @@ ActiveRecord::Schema.define(version: 20151028194758) do
   add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
+  add_foreign_key "piece_heads", "\"references\"", column: "reference_id"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"

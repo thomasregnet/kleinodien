@@ -13,6 +13,11 @@ FactoryGirl.define do
       type 'CrReference'
       sequence(:identifier) { |n| "abc_#{n}_defg" }
     end
+
+    factory :ph_reference, class: PhReference do
+      type 'PhReference'
+      sequence(:identifier) { |n| "abc_#{n}_defg" }
+    end
   end
 
-end
+ end
