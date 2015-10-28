@@ -9,7 +9,7 @@ RSpec.describe DiscogsImporter, type: :model do
         DatabaseCleaner.start
         @release = DiscogsTestHelper.import_release(940468)
       end
-      
+
       it "has imported the album" do
         expect(@release).to be_valid
         expect(@release.title).to eq('Highway To Hell')
@@ -25,7 +25,12 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.reference.identifier).to eq('940468')
         expect(@release.reference.supplier.name).to eq('Discogs')
       end
-      
+
+      it 'has set the reference of the master' do
+        expect(@release.head.reference.identifier).to eq('8522')
+        expect(@release.reference.supplier.name).to eq('Discogs')
+      end
+
       it "has imported the songs" do
         tracks = @release.tracks
         expect(tracks[0].release.title).to eq ('Highway To Hell')
@@ -35,14 +40,14 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has imported the labels" do
         expect(@release.labels[0].company.name).to eq('Atlantic')
-        expect(@release.labels[0].catalog_no).to eq('7567-92419-5')        
+        expect(@release.labels[0].catalog_no).to eq('7567-92419-5')
       end
 
       it "has imported the countries" do
         expect(@release.countries[0].name).to eq('Germany')
         expect(@release.countries.length).to eq(1)
       end
-      
+
       after(:all) { DatabaseCleaner.clean }
     end
 
@@ -51,7 +56,7 @@ RSpec.describe DiscogsImporter, type: :model do
         DatabaseCleaner.start
         @release = DiscogsTestHelper.import_release(4462260)
       end
-      
+
       it "has imported the album" do
         expect(@release).to be_valid
         expect(@release.title).
@@ -65,12 +70,12 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.companies[0].company_role.name)
           .to eq('Phonographic Copyright (p)')
       end
-      
+
       it "has imported the countries" do
         expect(@release.countries[0].name).to eq('Europe')
         expect(@release.countries.length).to eq(1)
       end
-        
+
       it "has set the date" do
         expect(@release.date.to_s).to eq('2013-03-29')
         expect(@release.date.mask).to eq(7)
@@ -80,10 +85,15 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.reference.identifier).to eq('4462260')
         expect(@release.reference.supplier.name).to eq('Discogs')
       end
-      
+
+      it 'has set the reference of the master' do
+        expect(@release.head.reference.identifier).to eq('543219')
+        expect(@release.reference.supplier.name).to eq('Discogs')
+      end
+
       it "has imported the formats" do
         formats = @release.formats
-        
+
         expect(formats[0].kind.name).to eq('All Media')
         expect(formats[0].quantity).to  eq(1)
         expect(formats[0].note).to      eq('Hardcover-Artbook')
@@ -112,7 +122,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has imported the identifiers" do
         expect(@release.identifiers.length).to eq(17)
-        
+
         expect(@release.identifiers[0].code).to eq('039841518009')
         expect(@release.identifiers[0].disambiguation).to be_nil
         expect(@release.identifiers[0].type.name).to eq('Barcode')
@@ -126,7 +136,7 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.identifiers[16].disambiguation).to be_nil
         expect(@release.identifiers[16].type.name).to eq('Rights Society')
       end
-                                             
+
       it "has imported the songs" do
         tracks = @release.tracks
         expect(tracks[0].release.title).to eq('Shredded Humans')
@@ -137,7 +147,7 @@ RSpec.describe DiscogsImporter, type: :model do
         tracks = @release.tracks
         expect(tracks[0].heading).to  eq('Cd 1')
         expect(tracks[0].release.title).to eq('Shredded Humans')
-        
+
         expect(tracks[20].heading).to eq('Cd 2')
         expect(tracks[20].release.title).to eq('Devoured By Vermin')
 
@@ -148,7 +158,7 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(tracks[60].release.title).to eq('A Skull Full Of Maggots')
 
         expect(tracks[72].heading).to eq('Torturing And Eviscerating Live')
-        expect(tracks[72].release.title).to eq('A Skull Full Of Maggots') 
+        expect(tracks[72].release.title).to eq('A Skull Full Of Maggots')
       end
 
       it "has imorted the label" do
@@ -156,7 +166,7 @@ RSpec.describe DiscogsImporter, type: :model do
           .to eq('Metal Blade Records GmbH')
         expect(@release.labels[0].catalog_no).to eq('3984-15180-0')
       end
-      
+
       after(:all) { DatabaseCleaner.clean }
     end
 
@@ -174,7 +184,7 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.countries[0].name).to eq('Germany')
         expect(@release.countries.length).to eq(1)
       end
-      
+
       it "has set the date" do
         expect(@release.date.to_s).to eq('1972-01-01')
         expect(@release.date.mask).to eq(4)
@@ -184,7 +194,12 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.reference.identifier).to eq('4298844')
         expect(@release.reference.supplier.name).to eq('Discogs')
       end
-      
+
+      it 'has set the reference of the master' do
+        expect(@release.head.reference.identifier).to eq('6200')
+        expect(@release.reference.supplier.name).to eq('Discogs')
+      end
+
       it "has imported the songs" do
          tracks = @release.tracks
          expect(tracks.first.release.title).to eq('The System')
@@ -194,7 +209,7 @@ RSpec.describe DiscogsImporter, type: :model do
 
       it "has imported the credits" do
         expect(@release.credits.length).to eq(13)
-        
+
         expect(@release.credits[0].artist_credit.name).to eq('Demis Roussos')
         expect(@release.credits[0].job.name).to eq('Bass, Backing Vocals')
 
@@ -209,9 +224,9 @@ RSpec.describe DiscogsImporter, type: :model do
         expect(@release.tracks[21].release.credits[0].artist_credit.name)
           .to eq('Demis Roussos')
         expect(@release.tracks[21].release.credits[1].artist_credit.name)
-          .to eq('Michel Ripoche')        
+          .to eq('Michel Ripoche')
       end
-        
+
       it "has imorted the label" do
         expect(@release.labels[0].company.name).to eq('Vertigo')
         expect(@release.labels[0].catalog_no).to eq('6673 001')
