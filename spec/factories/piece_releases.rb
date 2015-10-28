@@ -7,12 +7,12 @@ FactoryGirl.define do
       transient do
         tracks_count 2
       end
-      
+
       after(:create) do |piece_release, evaluator|
         create_list(:track, evaluator.tracks_count, release: piece_release)
       end
     end
-    
+
     factory :piece_release_with_countries do
       after(:create) do |piece_release|
         piece_release.countries << FactoryGirl.create(:country)
@@ -20,7 +20,7 @@ FactoryGirl.define do
       end
     end
 
-    
+
     factory :piece_release_with_credits do
       transient do
         credits_count 2
@@ -48,7 +48,7 @@ FactoryGirl.define do
         )
       end
     end
-    
+
     factory :piece_release_with_labels do
       transient do
         labels_count 2
@@ -61,6 +61,10 @@ FactoryGirl.define do
           piece_release: piece_release
         )
       end
+    end
+
+    factory :piece_release_with_a_reference do
+      association :reference, factory: PrReference
     end
 
     factory :song_release, class: SongRelease do
@@ -77,7 +81,7 @@ FactoryGirl.define do
       type 'PodcastEpisodeRelease'
       association :head, factory: :podcast_episode_head
     end
-    
+
     factory :tv_episode_release, class: TvEpisodeRelease do
       type 'TvEpisodeRelease'
       association :head, factory: :tv_episode_head
