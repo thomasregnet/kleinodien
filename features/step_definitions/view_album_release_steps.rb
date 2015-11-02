@@ -29,3 +29,7 @@ Then(/^I will see the Label "(.*?)" catalog "(.*?)"$/) do |label, catalog_no|
   expect(page).to have_content(label)
   expect(page).to have_content(catalog_no)
 end
+
+Then(/^I will see the format "(.*?)"$/) do |format|
+  expect(page).to have_content(format)
+end
