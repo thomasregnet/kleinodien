@@ -11,7 +11,7 @@
 <ul>
   <% @album_release.identifiers.each do |i| %>
     <% if i.disambiguation %>
-      <li><%= i.type.name %> <%= i.disambiguation %>: <%= i.code %></li>
+      <li><%= i.type.name %> (<%= i.disambiguation %>): <%= i.code %></li>
     <% else %>
       <li><%= i.type.name %>: <%= i.code %></li>
     <% end %>

@@ -20,6 +20,7 @@ Then(/^I will see the contents of the album release$/) do
   end
 end
 
-Then(/^I will see the barcode "(.*?)"$/) do |barcode|
+Then(/^I will see the identifier "(.*?)" "(.*?)"$/) do |type, barcode|
+  expect(page).to have_content(type)
   expect(page).to have_content(barcode)
 end
