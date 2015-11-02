@@ -1,5 +1,12 @@
 <h1><%= @album_release.title %></h1>
 
+<p>
+  <ul>
+    <% @album_release.labels.each do |l| %>
+      <li><%= l.company.name %> - <%= l.catalog_no %></li>
+    <% end  %>
+  </ul>
+</p>
 <h2>tracks</h2>
 <ul>
   <% @album_release.tracks.each do |t| %>
