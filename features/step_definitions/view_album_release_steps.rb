@@ -19,3 +19,7 @@ Then(/^I will see the contents of the album release$/) do
     expect(page).to have_content(t.release.title)
   end
 end
+
+Then(/^I will see the barcode "(.*?)"$/) do |barcode|
+  expect(page).to have_content(barcode)
+end
