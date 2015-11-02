@@ -6,6 +6,20 @@
       <li><%= l.company.name %> - <%= l.catalog_no %></li>
     <% end  %>
   </ul>
+  <h3>formats</h3>
+  <ul>
+    <% @album_release.formats.each do |f| %>
+      <li>
+	<%= "#{f.quantity} x " if f.quantity > 1%>	
+	<%= f.kind.name %>
+	<% if f.format_attributes %>
+	  <% attr_names = f.format_attributes.map { |a| a.kind.name } %>
+	  <%= attr_names.join(', ') %>
+        <% end %>
+	<%= f.note if f.note %>
+      </li>
+    <% end %>
+  </ul>
 </p>
 <h2>tracks</h2>
 <ul>
