@@ -9,3 +9,9 @@ Feature: View album release
     When I visit the album_releases page
     And I follow the link to that album
     Then I will see the contents of the album release
+
+  Scenario: View a complex album: Cannibal Corpse - Dead Human Collection
+    Given The album release with discogs id "4462260" exists
+    When I visit the album_releases page
+    And I follow the link to that album
+    Then I will see the contents of the album release    
