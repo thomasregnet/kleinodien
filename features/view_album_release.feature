@@ -14,6 +14,7 @@ Feature: View album release
     Given The album release with discogs id "4462260" exists
     When I visit the album_releases page
     And I follow the link to that album
+    Then I will see the Label "Metal Blade Records GmbH" catalog "3984-15180-0"
     Then I will see the identifier "Barcode" "39841518009"
     Then I will see the identifier "Mastering SID Code (CD 1)" "IFPI L553"
     Then I will see the identifier "Mould SID Code (CD 4)" "IFPI 94K7"

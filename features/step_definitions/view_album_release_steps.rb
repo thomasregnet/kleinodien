@@ -24,3 +24,8 @@ Then(/^I will see the identifier "(.*?)" "(.*?)"$/) do |type, barcode|
   expect(page).to have_content(type)
   expect(page).to have_content(barcode)
 end
+
+Then(/^I will see the Label "(.*?)" catalog "(.*?)"$/) do |label, catalog_no|
+  expect(page).to have_content(label)
+  expect(page).to have_content(catalog_no)
+end
