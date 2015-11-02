@@ -1,7 +1,19 @@
 <h1><%= @album_release.title %></h1>
 
+<h2>tracks</h2>
 <ul>
   <% @album_release.tracks.each do |t| %>
     <li><%= t.release.title %></li>
+  <% end %>
+</ul>
+
+<h2>identifiers</h2>
+<ul>
+  <% @album_release.identifiers.each do |i| %>
+    <% if i.disambiguation %>
+      <li><%= i.type.name %> <%= i.disambiguation %>: <%= i.code %></li>
+    <% else %>
+      <li><%= i.type.name %>: <%= i.code %></li>
+    <% end %>
   <% end %>
 </ul>

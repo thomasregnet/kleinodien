@@ -14,4 +14,5 @@ Feature: View album release
     Given The album release with discogs id "4462260" exists
     When I visit the album_releases page
     And I follow the link to that album
+    Then I will see the barcode "39841518009"
     Then I will see the contents of the album release    
