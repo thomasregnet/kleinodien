@@ -6,7 +6,7 @@ class CrfDetail < ActiveRecord::Base
   )
   belongs_to(
     :kind,
-    class_name: CrfAttributeKind,
+    class_name: CrfDetailKind,
     foreign_key: :crf_attribute_kind_id
   )
   validates :format, presence: true
