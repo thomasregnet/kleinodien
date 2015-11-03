@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103191658) do
+ActiveRecord::Schema.define(version: 20151103193403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 20151103191658) do
   add_index "cr_labels", ["company_id"], name: "index_cr_labels_on_company_id", using: :btree
   add_index "cr_labels", ["compilation_release_id"], name: "index_cr_labels_on_compilation_release_id", using: :btree
 
-  create_table "crf_attribute_kinds", force: :cascade do |t|
+  create_table "crf_detail_kinds", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "abbr"
     t.string   "note"
