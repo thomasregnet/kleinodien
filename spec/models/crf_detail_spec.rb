@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe CrfAttribute, type: :model do
+RSpec.describe CrfDetail, type: :model do
   before(:each) do
-    @attr = FactoryGirl.create(:crf_attribute)
+    @attr = FactoryGirl.create(:crf_detail)
   end
 
   it "is valid with valid attributes" do
@@ -31,7 +31,7 @@ RSpec.describe CrfAttribute, type: :model do
   end
 
   it "must have a unique pair of format_id and no" do
-    clone = CrfAttribute.new do |c|
+    clone = CrfDetail.new do |c|
       c.format = @attr.format
       c.kind   = @attr.kind
       c.no     = @attr.no
@@ -39,7 +39,7 @@ RSpec.describe CrfAttribute, type: :model do
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }
       .to raise_error(
-            /duplicate key.+"index_crf_attributes_on_cr_format_id_and_no"/
+            /duplicate key.+"index_crf_details_on_cr_format_id_and_no"/
           )
   end
 end
