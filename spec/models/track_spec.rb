@@ -34,13 +34,13 @@ RSpec.describe Track, type: :model do
     end
   end
 
-  context "with format attributes" do
+  context 'with details' do
     before(:each) do
-      @track = FactoryGirl.create(:track_with_format_attributes)
+      @track = FactoryGirl.create(:track_with_details)
     end
 
-    it "sees its attributes" do
-      expect(@track.format_attributes.count).to eq(3)
+    it 'sees its details' do
+      expect(@track.details.count).to eq(3)
     end
   end
 end
