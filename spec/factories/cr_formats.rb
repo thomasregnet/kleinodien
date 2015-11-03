@@ -12,7 +12,8 @@ FactoryGirl.define do
 
       after(:create) do |cr_format, evaluator|
         create_list(
-          :crf_attribute,
+          #:crf_attribute,
+          :crf_detail,
           evaluator.details_count,
           format: cr_format
         )

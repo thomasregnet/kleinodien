@@ -20,6 +20,7 @@ class CrFormat < ActiveRecord::Base
   has_many(
     #:format_attributes,
     :details,
-    class_name: CrfAttribute
+    #class_name: CrfAttribute
+    class_name: CrfDetail
   )
 end

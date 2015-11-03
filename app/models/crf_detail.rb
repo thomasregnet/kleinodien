@@ -1,4 +1,4 @@
-class CrfAttribute < ActiveRecord::Base
+class CrfDetail < ActiveRecord::Base
   belongs_to(
     :format,
     class_name: CrFormat,
