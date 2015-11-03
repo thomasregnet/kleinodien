@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe TrfAttribute, type: :model do
+RSpec.describe TrackDetail, type: :model do
   before(:each) do
-    @attr = FactoryGirl.create(:trf_attribute)
+    @attr = FactoryGirl.create(:track_detail)
   end
 
   it "is valid with valid attributes" do
@@ -31,15 +31,14 @@ RSpec.describe TrfAttribute, type: :model do
   end
 
   it "must have a unique pair of track_id and no" do
-    clone = TrfAttribute.new do |c|
+    clone = TrackDetail.new do |c|
       c.track = @attr.track
       c.kind  = @attr.kind
       c.no    = @attr.no
     end
-    
 
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }
-      .to raise_error(/ERROR:  duplicate key value violates unique constraint "index_trf_attributes_on_track_id_and_no"/)
+      .to raise_error(/ERROR:  duplicate key value violates unique constraint "index_track_details_on_track_id_and_no"/)
   end
 end

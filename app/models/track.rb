@@ -18,7 +18,7 @@ class Track < ActiveRecord::Base
   has_many(
     #:format_attributes,
     :details,
-    class_name: TrfAttribute,
+    class_name: TrackDetail,
     foreign_key: :track_id
   )
   validates :release, presence: true
