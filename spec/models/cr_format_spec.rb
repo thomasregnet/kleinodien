@@ -54,14 +54,14 @@ RSpec.describe CrFormat, type: :model do
       .to raise_error(/duplicate key value violates unique constraint "index_cr_formats_on_compilation_release_id_and_no"/)
   end
 
-  context "with format attributes" do
+  context 'with details' do
     before(:each) do
-      @cr_format = FactoryGirl.create(:cr_format_with_format_attributes)
+      @cr_format = FactoryGirl.create(:cr_format_with_details)
     end
 
-    it "should handle its format attributes" do
-      expect(@cr_format).to respond_to(:format_attributes)
-      expect(@cr_format.format_attributes.count).to eq(3)
+    it 'should handle its detalis' do
+      expect(@cr_format).to respond_to(:details)
+      expect(@cr_format.details.count).to eq(3)
     end
   end
 end

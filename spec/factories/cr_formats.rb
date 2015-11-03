@@ -5,15 +5,15 @@ FactoryGirl.define do
     quantity 1
     no 1
 
-    factory :cr_format_with_format_attributes do
+    factory :cr_format_with_details do
       transient do
-        attributes_count 3
+        details_count 3
       end
 
       after(:create) do |cr_format, evaluator|
         create_list(
           :crf_attribute,
-          evaluator.attributes_count,
+          evaluator.details_count,
           format: cr_format
         )
       end
