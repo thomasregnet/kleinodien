@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103200251) do
+ActiveRecord::Schema.define(version: 20151103202204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -469,6 +469,14 @@ ActiveRecord::Schema.define(version: 20151103200251) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "track_detail_kinds", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "abbr"
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "track_details", force: :cascade do |t|
     t.integer  "track_id",              null: false
     t.integer  "trf_attribute_kind_id", null: false
@@ -489,14 +497,6 @@ ActiveRecord::Schema.define(version: 20151103200251) do
     t.string   "position"
     t.string   "heading"
     t.integer  "tr_format_kind_id"
-  end
-
-  create_table "trf_attribute_kinds", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "abbr"
-    t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
