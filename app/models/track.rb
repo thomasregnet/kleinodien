@@ -16,7 +16,8 @@ class Track < ActiveRecord::Base
     foreign_key: :tr_format_kind_id
   )
   has_many(
-    :format_attributes,
+    #:format_attributes,
+    :details,
     class_name: TrfAttribute,
     foreign_key: :track_id
   )

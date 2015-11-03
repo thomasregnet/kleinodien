@@ -10,13 +10,13 @@ FactoryGirl.define do
       association :format, factory: :tr_format_kind
     end
 
-    factory :track_with_format_attributes do
+    factory :track_with_details do
       transient do
-        attr_count 3
+        details_count 3
       end
 
       after(:create) do |track, evaluator|
-        create_list(:trf_attribute, evaluator.attr_count, track: track)
+        create_list(:trf_attribute, evaluator.details_count, track: track)
       end
     end
   end
