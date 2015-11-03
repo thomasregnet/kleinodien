@@ -12,8 +12,8 @@
       <li>
 	<%= "#{f.quantity} x " if f.quantity > 1%>	
 	<%= f.kind.name %>
-	<% if f.format_attributes %>
-	  <% attr_names = f.format_attributes.map { |a| a.kind.name } %>
+	<% if f.details %>
+	  <% attr_names = f.details.map { |a| a.kind.name } %>
 	  <%= attr_names.join(', ') %>
         <% end %>
 	<%= f.note if f.note %>
