@@ -461,16 +461,6 @@ ActiveRecord::Schema.define(version: 20151103200251) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "tr_details", force: :cascade do |t|
-    t.integer  "track_id",              null: false
-    t.integer  "trf_attribute_kind_id", null: false
-    t.integer  "no",                    null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "tr_details", ["track_id", "no"], name: "index_tr_details_on_track_id_and_no", unique: true, using: :btree
-
   create_table "tr_format_kinds", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "abbr"
@@ -478,6 +468,16 @@ ActiveRecord::Schema.define(version: 20151103200251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "track_details", force: :cascade do |t|
+    t.integer  "track_id",              null: false
+    t.integer  "trf_attribute_kind_id", null: false
+    t.integer  "no",                    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "track_details", ["track_id", "no"], name: "index_track_details_on_track_id_and_no", unique: true, using: :btree
 
   create_table "tracks", force: :cascade do |t|
     t.integer  "piece_release_id",       null: false
