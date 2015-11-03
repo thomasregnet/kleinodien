@@ -1,4 +1,4 @@
-class TrfAttribute < ActiveRecord::Base
+class TrackDetail < ActiveRecord::Base
   belongs_to :track
   belongs_to(
     :kind,

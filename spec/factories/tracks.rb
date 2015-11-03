@@ -16,7 +16,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |track, evaluator|
-        create_list(:trf_attribute, evaluator.details_count, track: track)
+        create_list(:track_detail, evaluator.details_count, track: track)
       end
     end
   end
