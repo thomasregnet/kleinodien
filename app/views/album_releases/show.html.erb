@@ -10,8 +10,7 @@
   <ul>
     <% @album_release.formats.each do |f| %>
       <li>
-	<%= "#{f.quantity} x " if f.quantity > 1%>	
-	<%= f.kind.name %>
+	<%= format_quantity_multiplied_name_for(f)%>
 	<% if f.details %>
 	  <% attr_names = f.details.map { |a| a.kind.name } %>
 	  <%= attr_names.join(', ') %>
