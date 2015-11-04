@@ -2,19 +2,11 @@
 
 <p>
   <ul>
-    <%= render partial: "labels",
-               locals:  { labels: @album_release.labels } %>
-
+    <%= render partial: "labels", locals: { labels: @album_release.labels } %>
   </ul>
   <h3>formats</h3>
   <ul>
-    <% @album_release.formats.each do |f| %>
-      <li>
-	<%= format_quantity_multiplied_name_for(f) %>
-        <%= format_details_for(f) %>
-        <%= f.note if f.note %>
-      </li>
-    <% end %>
+    <%= render partial: "formats", locals: { formats: @album_release.formats } %>
   </ul>
 </p>
 <h2>tracks</h2>

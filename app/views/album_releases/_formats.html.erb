@@ -1,0 +1,7 @@
+<% formats.each do |f| %>
+  <li>
+    <%= format_quantity_multiplied_name_for(f) %>
+    <%= format_details_for(f) %>
+    <%= f.note if f.note %>
+  </li>
+<% end %>
