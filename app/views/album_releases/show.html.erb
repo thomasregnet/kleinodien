@@ -11,9 +11,7 @@
 </p>
 <h2>tracks</h2>
 <ul>
-  <% @album_release.tracks.each do |t| %>
-    <li><%= t.release.title %></li>
-  <% end %>
+  <%= render partial: "tracks", locals: { tracks: @album_release.tracks }%>
 </ul>
 
 <h2>identifiers</h2>
