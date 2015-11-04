@@ -10,12 +10,9 @@
   <ul>
     <% @album_release.formats.each do |f| %>
       <li>
-	<%= format_quantity_multiplied_name_for(f)%>
-	<% if f.details %>
-	  <% attr_names = f.details.map { |a| a.kind.name } %>
-	  <%= attr_names.join(', ') %>
-        <% end %>
-	<%= f.note if f.note %>
+	<%= format_quantity_multiplied_name_for(f) %>
+        <%= format_details_for(f) %>
+        <%= f.note if f.note %>
       </li>
     <% end %>
   </ul>

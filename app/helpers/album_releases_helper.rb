@@ -8,4 +8,9 @@ module AlbumReleasesHelper
     return format.kind.name unless format.quantity
     "#{format.quantity} x #{format.kind.name}"
   end
+
+  def format_details_for(format)
+    return unless format.details
+    format.details.map { |detail| detail.kind.name }.join(', ')
+  end
 end
