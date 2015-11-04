@@ -2,9 +2,9 @@
 
 <p>
   <ul>
-    <% @album_release.labels.each do |label| %>
-      <li><%= label_and_catalog_no_for(label) %></li>
-    <% end  %>
+    <%= render partial: "labels",
+               locals:  { labels: @album_release.labels } %>
+
   </ul>
   <h3>formats</h3>
   <ul>
