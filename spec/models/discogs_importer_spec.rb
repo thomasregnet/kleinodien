@@ -234,5 +234,24 @@ RSpec.describe DiscogsImporter, type: :model do
 
       after(:all) { DatabaseCleaner.clean }
     end
+
+    context "import a japanese album (Maximum The Hormone - 糞盤)" do
+      before(:all) do
+        DatabaseCleaner.start
+        @release = DiscogsTestHelper.import_release(4365415)
+      end
+
+      it 'has imported the album' do
+        expect(@release.title).to eq('糞盤')
+      end
+      
+      it "has imported the songs" do
+         tracks = @release.tracks
+         expect(tracks[0].release.title).to eq('恋のスウィート糞メリケン')
+         expect(tracks[7].release.title).to eq('祟り君〜たたりくん〜')
+      end
+
+      after(:all) { DatabaseCleaner.clean }
+    end
   end
 end
