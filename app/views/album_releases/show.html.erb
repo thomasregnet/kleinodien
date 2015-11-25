@@ -1,5 +1,5 @@
 <h1><%= @album_release.title %></h1>
-
+<p>by <b><%= @album_release.head.artist_credit.name %></b></p>
 <p>
   <ul>
     <%= render partial: "labels", locals: { labels: @album_release.labels } %>
