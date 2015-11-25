@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Insert::Discogs, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'responds to "release"' do
+    expect(Insert::Discogs).to respond_to('release')
+  end
 end
