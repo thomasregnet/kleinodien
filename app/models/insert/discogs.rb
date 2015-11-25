@@ -1,2 +1,2 @@
-class Insert::Discogs < ActiveRecord::Base
+module Insert::Discogs
 end
