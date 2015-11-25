@@ -1,2 +1,4 @@
-class Insert::Discogs::Release < ActiveRecord::Base
+class Insert::Discogs::Release
+  def run
+  end
 end
