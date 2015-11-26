@@ -14,7 +14,7 @@ RSpec.describe Insert::Discogs::Release, type: :model do
     end
 
     it 'returns an AlbumRelease' do
-      expect(@release.run).to be_instance_of(ArtistCredit)
+      expect(@release.run).to be_instance_of(AlbumRelease)
     end
   end
 end
