@@ -1,10 +1,10 @@
 class Insert::Discogs::Release
 
-  def initialize(json)
-    @discogs = KleinodienDiscogs.get_release(json)
+  def initialize(dc_release)
+    @dc_release = dc_release
   end
   
   def run
-    @discogs
+    @dc_release
   end
 end
