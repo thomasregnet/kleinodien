@@ -6,8 +6,20 @@ class Insert::Discogs::Release
   
   def run
     artist_credit = insert_artist_credit(@dc_release.artists)
+    album_release = insert_album_release(artist_credit)
   end
 
+  def insert_album_release(artist_credit)
+    album_head = artist_credit.compilations.create!(
+      title: @dc_release.title,
+      type:  AlbumHead.to_s
+    )
+
+    album_head.releases.create!(
+      date: IncompleteDate.new(@dc_release.released)
+    )
+  end
+  
   def insert_artist_credit(artists)
     ac_name =  KleinodienDiscogs.join_artist_names(artists)
     ArtistCredit.find_by(name: ac_name) || create_artist_credit(artists)
@@ -28,7 +40,7 @@ class Insert::Discogs::Release
      artist_credit.participants.build(
        artist:    artist,
        joinparse: joinparse,
-      no:        no
+       no:        no
      )
    end
    
