@@ -5,7 +5,8 @@ RSpec.describe Insert::Discogs::Release, type: :model do
   context 'Highway To Hell' do
     before(:all) do
       json = DiscogsTestHelper.get_discogs_data('releases', 940468)
-      @release = Insert::Discogs::Release.new(json)
+      dc_release = KleinodienDiscogs.get_release(json)
+      @release = Insert::Discogs::Release.new(dc_release)
     end
 
     it 'responds to "run"' do
