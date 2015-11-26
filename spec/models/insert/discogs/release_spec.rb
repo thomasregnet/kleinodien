@@ -13,8 +13,8 @@ RSpec.describe Insert::Discogs::Release, type: :model do
       expect(@release).to respond_to(:run)
     end
 
-    it 'returns a kleinodien_discogs-release' do
-      expect(@release.run).to be_instance_of(KleinodienDiscogs::Release)
+    it 'returns an AlbumRelease' do
+      expect(@release.run).to be_instance_of(ArtistCredit)
     end
   end
 end
