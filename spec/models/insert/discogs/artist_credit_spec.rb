@@ -12,6 +12,10 @@ RSpec.describe Insert::Discogs::ArtistCredit, type: :model do
     it 'returns an ArtistCredit' do
       expect(@artist_credit).to be_instance_of(ArtistCredit)
     end
+
+    it 'has set the right name' do
+      expect(@artist_credit.name).to eq('AC/DC')
+    end
   end
 
 end
