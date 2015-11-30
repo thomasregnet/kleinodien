@@ -1,5 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Discogs::InsertRelease, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'interface' do
+    before (:each) do
+      @insert_release = Discogs::InsertRelease.new
+    end
+
+    it 'responds to "perform"' do
+      expect(@insert_release).to respond_to(:perform)
+    end
+
+    specify 'class Discogs::InsertRelease responds to "perform"' do
+      expect(Discogs::InsertRelease).to respond_to(:perform)
+    end
+  end
+    
 end
