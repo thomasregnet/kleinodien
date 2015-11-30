@@ -1,2 +1,2 @@
-class Discogs::InsertArtists < ActiveRecord::Base
+class Discogs::InsertArtists
 end
