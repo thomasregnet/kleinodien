@@ -1,9 +1,10 @@
 require 'rails_helper'
+require 'discogs_test_helper'
 
 RSpec.describe Discogs::InsertRelease, type: :model do
   context 'interface' do
     before (:each) do
-      @insert_release = Discogs::InsertRelease.new
+      @insert_release = Discogs::InsertRelease.new('dummy data')
     end
 
     it 'responds to "perform"' do
@@ -14,5 +15,16 @@ RSpec.describe Discogs::InsertRelease, type: :model do
       expect(Discogs::InsertRelease).to respond_to(:perform)
     end
   end
-    
+
+  context 'AC/DC - Highway To Hell' do
+    before(:all) do
+      json = DiscogsTestHelper.get_discogs_data('releases', 940468)
+      dc_release = KleinodienDiscogs.get_release(json)
+      @release = Discogs::InsertRelease.perform(dc_release)
+    end
+
+    it 'returns an AlbumRelease' do
+      expect(@release).to be_instance_of(AlbumRelease)
+    end
+  end
 end
