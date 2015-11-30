@@ -33,7 +33,8 @@ class Discogs::InsertRelease
 
   def create_artist_credit
     artist_credit = ArtistCredit.new
-    @dc_artists.each_with_index do |artist, no|
+    #@dc_artists.each_with_index do |artist, no|
+    @dc_release.artists.each_with_index do |artist, no|
       insert_participant(artist, no, artist_credit)
     end
     artist_credit.save!

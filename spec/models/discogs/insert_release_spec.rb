@@ -18,6 +18,8 @@ RSpec.describe Discogs::InsertRelease, type: :model do
 
   context 'AC/DC - Highway To Hell' do
     before(:all) do
+      DatabaseCleaner.start
+      
       json = DiscogsTestHelper.get_discogs_data('releases', 940468)
       dc_release = KleinodienDiscogs.get_release(json)
       @release = Discogs::InsertRelease.perform(dc_release)
@@ -25,6 +27,10 @@ RSpec.describe Discogs::InsertRelease, type: :model do
 
     it 'returns an AlbumRelease' do
       expect(@release).to be_instance_of(AlbumRelease)
+    end
+
+    after(:all) do
+      DatabaseCleaner.clean
     end
   end
 end
