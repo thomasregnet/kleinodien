@@ -11,9 +11,11 @@ class Discogs::InsertRelease
   def perform
     artist_credit
     album_head
-    @release = @album_head.releases.create!(
+    @album_release = @album_head.releases.create!(
       date: IncompleteDate.new(@dc_release.released)
     )
+    formats
+    @album_release
   end
 
   private
@@ -27,5 +29,9 @@ class Discogs::InsertRelease
       title: @dc_release.title,
       type:  AlbumHead.to_s
     )
+  end
+
+  def formats
+    Discogs::InsertFormats.perform(@dc_release.formats, @album_release)
   end
 end
