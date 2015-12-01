@@ -29,6 +29,10 @@ RSpec.describe Discogs::InsertRelease, type: :model do
       expect(@release).to be_instance_of(AlbumRelease)
     end
 
+    it 'has the country set' do
+      expect(@release.countries[0].name).to eq('Germany')
+    end
+    
     after(:all) do
       DatabaseCleaner.clean
     end

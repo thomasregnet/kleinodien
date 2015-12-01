@@ -15,6 +15,7 @@ class Discogs::InsertRelease
       date: IncompleteDate.new(@dc_release.released)
     )
     formats
+    country
     @album_release
   end
 
@@ -31,6 +32,11 @@ class Discogs::InsertRelease
     )
   end
 
+  def country
+    country = Country.find_or_create_by!(name: @dc_release.country)
+    @album_release.countries << country
+  end
+  
   def formats
     Discogs::InsertFormats.perform(@dc_release.formats, @album_release)
   end
