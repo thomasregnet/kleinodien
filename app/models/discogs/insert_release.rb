@@ -14,6 +14,7 @@ class Discogs::InsertRelease
     @album_release = @album_head.releases.create!(
       date: IncompleteDate.new(@dc_release.released)
     )
+    extraartists
     formats
     country
     companies
@@ -43,6 +44,13 @@ class Discogs::InsertRelease
     @album_release.countries << country
   end
 
+  def extraartists
+    Discogs::InsertExtraartists.perform(
+      @dc_release.extraartists,
+      @album_release
+    )
+  end
+  
   def formats
     Discogs::InsertFormats.perform(@dc_release.formats, @album_release)
   end
