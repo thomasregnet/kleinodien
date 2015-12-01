@@ -16,6 +16,7 @@ class Discogs::InsertRelease
     )
     formats
     country
+    companies
     @album_release
   end
 
@@ -32,6 +33,10 @@ class Discogs::InsertRelease
     )
   end
 
+  def companies
+    Discogs::InsertCompanies.perform(@dc_release.companies, @album_release)
+  end
+  
   def country
     country = Country.find_or_create_by!(name: @dc_release.country)
     @album_release.countries << country
