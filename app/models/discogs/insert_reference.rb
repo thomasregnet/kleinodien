@@ -17,10 +17,14 @@ class Discogs::InsertReference
 
   def reference
     supplier = DataSupplier.find_or_create_by!(name: 'Discogs')
-    reference = @klass.create!(
+    reference = create_reference(supplier)
+    @owner.reference = reference
+  end
+
+  def create_reference(supplier)
+    @klass.create!(
       identifier: @identifier,
       supplier:   supplier
     )
-    @owner.reference = reference
   end
 end
