@@ -13,6 +13,7 @@ RSpec.describe Discogs::InsertIdentifiers, type: :model do
       @identifiers = @album_release.identifiers
     end
 
+    # TODO: spec for nil identifiers
     it 'has set the identifiers' do
       identifier = @identifiers[0]
       expect(identifier.type.name).to eq('Barcode')

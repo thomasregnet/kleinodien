@@ -26,8 +26,10 @@ RSpec.shared_examples 'an AlbumRelease imported from discogs' do
     expect(reference.identifier).to eq(discogs_id)
     expect(reference.supplier.name).to eq('Discogs')
 
-    head_reference = album_release.head.reference
-    expect(head_reference.identifier).to eq(discogs_master_id)
-    expect(head_reference.supplier.name).to eq('Discogs')
+    if discogs_master_id
+      head_reference = album_release.head.reference
+      expect(head_reference.identifier).to eq(discogs_master_id)
+      expect(head_reference.supplier.name).to eq('Discogs')
+    end
   end
 end
