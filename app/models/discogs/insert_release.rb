@@ -11,9 +11,7 @@ class Discogs::InsertRelease
   def perform
     artist_credit
     album_head
-    @album_release = @album_head.releases.create!(
-      date: IncompleteDate.new(@dc_release.released)
-    )
+    album_release
     extraartists
     formats
     country
@@ -21,11 +19,18 @@ class Discogs::InsertRelease
     labels
     reference
     head_reference
+
     @album_release
   end
 
   private
 
+  def album_release
+    @album_release = @album_head.releases.create!(
+      date: IncompleteDate.new(@dc_release.released)
+    )
+  end
+  
   def artist_credit
     @artist_credit = Discogs::InsertArtists.perform(@dc_release.artists)
   end
