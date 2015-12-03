@@ -18,6 +18,8 @@ RSpec.describe 'AC/DC - Highway To Hell, imported from Discogs' do
     let(:country)            { 'Germany' }
     let(:date)               { '2000-11-20' }
     let(:date_mask)          { 7 }
+    let(:discogs_id)         { '940468' }
+    let(:discogs_master_id)  { '8522' }
   end
   
   after(:all) { DatabaseCleaner.clean }
