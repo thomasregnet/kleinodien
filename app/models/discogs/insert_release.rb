@@ -19,6 +19,8 @@ class Discogs::InsertRelease
     country
     companies
     labels
+    reference
+    head_reference
     @album_release
   end
 
@@ -57,5 +59,21 @@ class Discogs::InsertRelease
 
   def labels
     Discogs::InsertLabels.perform(@dc_release.labels, @album_release)
+  end
+
+  def reference
+    Discogs::InsertReference.perform(
+      @dc_release.id,
+      @album_release,
+      CrReference
+    )
+  end
+
+  def head_reference
+    Discogs::InsertReference.perform(
+      @dc_release.master_id,
+      @album_release.head,
+      ChReference
+    )
   end
 end

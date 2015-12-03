@@ -20,4 +20,14 @@ RSpec.shared_examples 'an AlbumRelease imported from discogs' do
     expect(countries[0].name).to eq(country)
     expect(countries.length).to eq(1)
   end
+
+  it 'has set the references' do
+    reference = album_release.reference
+    expect(reference.identifier).to eq('940468')
+    expect(reference.supplier.name).to eq('Discogs')
+
+    head_reference = album_release.head.reference
+    expect(head_reference.identifier).to eq('8522')
+    expect(head_reference.supplier.name).to eq('Discogs')
+  end
 end
