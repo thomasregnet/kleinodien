@@ -10,6 +10,7 @@ class Discogs::InsertReference
   end
 
   def perform
+    return unless @identifier
     reference
   end
 
