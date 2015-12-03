@@ -23,31 +23,32 @@ RSpec.describe 'Discogs Release: Maximum The Hormone - 糞盤' do
     let(:discogs_master_id)  { nil }
   end
 
-  # it 'has imported the tracks' do
-  #   tracks = @album_release.tracks
-  #   expect(tracks.length).to eq(10)
+  it 'has imported the tracks' do
+    tracks = @album_release.tracks
+    expect(tracks.length).to eq(8)
 
-  #   track = tracks[0]
-  #   expect(track.release.title).to eq('Highway To Hell')
-  #   expect(track.position).to eq('1')
+    track = tracks[0]
+    expect(track.release.title).to eq('恋のスウィート糞メリケン')
+    expect(track.position).to eq('1')
 
-  #   track = tracks[4]
-  #   expect(track.release.title).to eq('Beating Around The Bush')
-  #   expect(track.position).to eq('5')
+    track = tracks[4]
+    expect(track.release.title).to eq('Mrブギータンブリンマン ') # note the space
+                                                              # at the end
+    expect(track.position).to eq('5')
 
-  #   track = tracks[9]
-  #   expect(track.release.title).to eq('Night Prowler')
-  #   expect(track.position).to eq('10')
-  # end
+    track = tracks[7]
+    expect(track.release.title).to eq('祟り君〜たたりくん〜')
+    expect(track.position).to eq('8')
+  end
 
-  # it 'has imported the labels' do
-  #   labels = @album_release.labels
-  #   expect(labels.length).to eq(1)
+  it 'has imported the labels' do
+    labels = @album_release.labels
+    expect(labels.length).to eq(1)
 
-  #   label = labels[0]
-  #   expect(label.company.name).to eq('Atlantic')
-  #   expect(label.catalog_no).to eq('7567-92419-5')
-  # end
+     label = labels[0]
+     expect(label.company.name).to eq('Vap Inc.')
+     expect(label.catalog_no).to eq('MCJL-00005')
+  end
   
   after(:all) { DatabaseCleaner.clean }
 end
