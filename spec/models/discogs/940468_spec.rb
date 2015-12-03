@@ -16,6 +16,8 @@ RSpec.describe 'AC/DC - Highway To Hell, imported from Discogs' do
     let(:title)              { 'Highway To Hell' }
     let(:artist_credit_name) { 'AC/DC' }
     let(:country)            { 'Germany' }
+    let(:date)               { '2000-11-20' }
+    let(:date_mask)          { 7 }
   end
   
   after(:all) { DatabaseCleaner.clean }
