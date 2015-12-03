@@ -19,7 +19,8 @@ class Discogs::InsertRelease
     labels
     reference
     head_reference
-
+    tracks
+    
     @album_release
   end
 
@@ -80,5 +81,9 @@ class Discogs::InsertRelease
       @album_release.head,
       ChReference
     )
+  end
+
+  def tracks
+    Discogs::InsertTracklist.perform(@dc_release.get_media, @album_release)
   end
 end
