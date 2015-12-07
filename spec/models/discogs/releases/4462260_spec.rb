@@ -22,6 +22,33 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     let(:discogs_master_id)  { '543219' }
   end
 
+  it "has imported the formats" do
+    formats = @album_release.formats
+
+    format = formats[0]
+    expect(format.kind.name).to eq('All Media')
+    expect(format.quantity).to eq(1)
+    expect(format.note).to eq('Hardcover-Artbook')
+    expect(format.details[0].kind.name).to eq('Limited Edition')
+
+    format = formats[1]
+    expect(format.kind.name).to eq('CD')
+    expect(format.quantity).to eq(3)
+    expect(format.details[0].kind.name).to eq('Compilation')
+
+    format = formats[2]
+    expect(format.kind.name).to eq('CD')
+    expect(format.quantity).to eq(1)
+    expect(format.details[0].kind.name).to eq('Album')
+
+    format = formats[3]
+    expect(format.kind.name).to eq('Vinyl')
+    expect(format.quantity).to eq(1)
+    expect(format.details[0].kind.name).to eq('12"')
+    expect(format.details[1].kind.name).to eq('Picture Disc')
+    expect(format.details[2].kind.name).to eq('Album')
+  end
+  
   it 'has imported the tracks' do
 
   end
