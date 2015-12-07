@@ -73,7 +73,9 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
   end
 
   it 'has imported the labels' do
-
+    label = @album_release.labels[0]
+    expect(label.company.name).to eq('Metal Blade Records GmbH')
+    expect(label.catalog_no).to eq('3984-15180-0')
   end
 
   after(:all) { DatabaseCleaner.clean }
