@@ -50,7 +50,26 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
   end
   
   it 'has imported the tracks' do
+    tracks = @album_release.tracks
 
+    track = tracks[0]
+    expect(track.heading).to eq('Cd 1')
+    expect(track.release.title).to eq('Shredded Humans')
+
+    track = tracks[20]
+    expect(track.heading).to eq('Cd 2')
+    expect(track.release.title).to eq('Devoured By Vermin')
+
+    track = tracks[42]
+    expect(track.heading).to eq('Cd 3')
+    expect(track.release.title).to eq('Decency Defied')
+
+    track = tracks[72]
+    expect(track.heading).to eq('Torturing And Eviscerating Live')
+    expect(track.release.title).to eq('A Skull Full Of Maggots')
+
+    expect(track.heading).to eq('Torturing And Eviscerating Live')
+    expect(track.release.title).to eq('A Skull Full Of Maggots')
   end
 
   it 'has imported the labels' do
