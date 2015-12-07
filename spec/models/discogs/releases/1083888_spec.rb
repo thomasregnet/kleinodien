@@ -22,6 +22,18 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
     let(:discogs_master_id)  { '32000' }
   end
 
+  it 'has the right participants' do
+    participants = @album_release.head.artist_credit.participants
+
+    participant = participants[0]
+    expect(participant.joinparse).to eq('With')
+    expect(participant.artist.name).to eq('Jello Biafra')
+
+    participant = participants[1]
+    expect(participant.joinparse).to be_nil
+    expect(participant.artist.name).to eq('Nomeansno')
+  end
+  
   it 'has imported the tracks' do
     tracks = @album_release.tracks
     expect(tracks.length).to eq(8)
