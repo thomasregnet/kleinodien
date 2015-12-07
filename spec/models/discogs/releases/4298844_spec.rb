@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 require 'discogs_test_helper'
 require 'shared_examples_for_album_releases_imported_from_discogs'
@@ -23,11 +24,25 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
   end
 
   it 'has imported the tracks' do
+    tracks = @album_release.tracks
 
+    track = tracks[0]
+    expect(track.position).to eq('A1')
+    expect(track.release.title).to eq('The System')
+
+    track = tracks[20]
+    expect(track.position).to eq('C5')
+    expect(track.release.title).to eq('∞')
+
+    track = tracks[23]
+    expect(track.position).to eq('D2')
+    expect(track.release.title).to eq('Break')
   end
 
   it 'has imported the labels' do
-
+    label = @album_release.labels[0]
+    expect(label.company.name).to eq('Vertigo')
+    expect(label.catalog_no).to eq('6673 001')
   end
   
   after(:all) { DatabaseCleaner.clean }
