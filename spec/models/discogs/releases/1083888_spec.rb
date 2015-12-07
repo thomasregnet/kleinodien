@@ -23,12 +23,33 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
   end
 
   it 'has imported the tracks' do
+    tracks = @album_release.tracks
+    expect(tracks.length).to eq(8)
 
+    track = tracks[0]
+    expect(track.release.title)
+      .to eq('The Sky Is Falling, And I Want My Mommy (Falling Space Junk)')
+    expect(track.position).to eq('1')
+
+    track = tracks[5]
+    expect(track.release.title).to eq('Chew')
+    expect(track.position).to eq('6')
+
+
+    track = tracks[7]
+    expect(track.release.title).to eq("The Myth Is Real - Let's Eat")
+    expect(track.position).to eq('8')
   end
 
   it 'has imported the labels' do
+    labels = @album_release.labels
+    expect(labels.length).to eq(1)
+
+    label = labels[0]
+    expect(label.company.name).to eq('Alternative Tentacles')
+    expect(label.catalog_no).to eq('VIRUS 85CD')
 
   end
-  
+
   after(:all) { DatabaseCleaner.clean }
 end
