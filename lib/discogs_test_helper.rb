@@ -1,9 +1,8 @@
 module DiscogsTestHelper
-  # def self.import_release(name)
-  #   DiscogsImporter.import_release(get_discogs_data('releases', name))
-  # end
   def self.import_release(name)
-    Discogs::InsertRelease.perform(get_discogs_data('releases', name))
+    dc_json = get_discogs_data('releases', name)
+    dc_release = KleinodienDiscogs.get_release(dc_json)
+    Discogs::InsertRelease.perform(dc_release)
   end
 
   def self.get_discogs_data(kind, name)
