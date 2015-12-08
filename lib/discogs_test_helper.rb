@@ -1,6 +1,9 @@
 module DiscogsTestHelper
+  # def self.import_release(name)
+  #   DiscogsImporter.import_release(get_discogs_data('releases', name))
+  # end
   def self.import_release(name)
-    DiscogsImporter.import_release(get_discogs_data('releases', name))
+    Discogs::InsertRelease.perform(get_discogs_data('releases', name))
   end
 
   def self.get_discogs_data(kind, name)
