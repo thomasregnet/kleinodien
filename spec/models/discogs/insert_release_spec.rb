@@ -19,7 +19,7 @@ RSpec.describe Discogs::InsertRelease, type: :model do
   context 'AC/DC - Highway To Hell' do
     before(:all) do
       DatabaseCleaner.start
-      
+
       json = DiscogsTestHelper.get_discogs_data('releases', 940468)
       dc_release = KleinodienDiscogs.get_release(json)
       @release = Discogs::InsertRelease.perform(dc_release)
@@ -32,7 +32,7 @@ RSpec.describe Discogs::InsertRelease, type: :model do
     it 'has the country set' do
       expect(@release.countries[0].name).to eq('Germany')
     end
-    
+
     after(:all) do
       DatabaseCleaner.clean
     end

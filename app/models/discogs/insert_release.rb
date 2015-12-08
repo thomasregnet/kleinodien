@@ -16,11 +16,12 @@ class Discogs::InsertRelease
     formats
     country
     companies
+    identifiers
     labels
     reference
     head_reference
     tracks
-    
+
     @album_release
   end
 
@@ -31,7 +32,7 @@ class Discogs::InsertRelease
       date: IncompleteDate.new(@dc_release.released)
     )
   end
-  
+
   def artist_credit
     @artist_credit = Discogs::InsertArtists.perform(@dc_release.artists)
   end
@@ -58,9 +59,13 @@ class Discogs::InsertRelease
       @album_release
     )
   end
-  
+
   def formats
     Discogs::InsertFormats.perform(@dc_release.formats, @album_release)
+  end
+
+  def identifiers
+    Discogs::InsertIdentifiers.perform(@dc_release.identifiers, @album_release)
   end
 
   def labels
