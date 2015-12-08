@@ -39,6 +39,20 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
     expect(track.release.title).to eq('Break')
   end
 
+  it 'has imported the identifiers' do
+    identifiers = @album_release.identifiers
+
+    identifier = identifiers[0]
+    expect(identifier.type.name).to eq('Other')
+    expect(identifier.disambiguation).to eq('Cat. nr. disc 1')
+    expect(identifier.code).to eq('6333 500')
+
+    identifier = identifiers[5]
+    expect(identifier.type.name).to eq('Matrix / Runout')
+    expect(identifier.disambiguation).to be_nil
+    expect(identifier.code).to eq('Side4 - 10 AA6333501 2Y 320')
+  end
+  
   it 'has imported the labels' do
     label = @album_release.labels[0]
     expect(label.company.name).to eq('Vertigo')
