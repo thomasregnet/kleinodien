@@ -3,6 +3,7 @@ require 'rails_helper'
 require 'discogs_test_helper'
 
 RSpec.describe DiscogsImporter, type: :model do
+  pending do
   describe "import releases" do
     context "import a CD release of one artist (AC/DC Highway To Hell)" do
       before(:all) do
@@ -253,5 +254,6 @@ RSpec.describe DiscogsImporter, type: :model do
 
       after(:all) { DatabaseCleaner.clean }
     end
+  end
   end
 end
