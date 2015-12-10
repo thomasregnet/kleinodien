@@ -33,3 +33,7 @@ end
 Then(/^I will see the format "(.*?)"$/) do |format|
   expect(page).to have_content(format)
 end
+
+Then(/^I will see the credit "(.*?)" \- "(.*?)"$/) do |artist_credit, job|
+  expect(page).to have_content("#{artist_credit} - #{job}")
+end

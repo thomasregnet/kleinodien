@@ -9,6 +9,8 @@ Feature: View album release
     When I visit the album_releases page
     And I follow the link to that album
     Then I will see the contents of the album release
+    And I will see the credit "Cliff Williams" - "Bass"
+    And I will see the credit "Kevin Dallimore" - "Engineer [Assistant]"
 
   Scenario: View a complex album: Cannibal Corpse - Dead Human Collection
     Given The album release with discogs id "4462260" exists
