@@ -7,9 +7,11 @@ class CompilationRelease < ActiveRecord::Base
   belongs_to(
     :head,
     class_name: CompilationHead,
-    foreign_key: :compilation_head_id)
+    foreign_key: :compilation_head_id
+  )
 
-  belongs_to              :reference,  class_name: CrReference  
+  belongs_to :reference,  class_name: CrReference
+
   has_and_belongs_to_many(
     :references,
     class_name: CrReference,
