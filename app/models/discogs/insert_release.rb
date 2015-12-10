@@ -22,6 +22,7 @@ class Discogs::InsertRelease
     head_reference
     tracks
 
+    @album_release.save! # important
     @album_release
   end
 
