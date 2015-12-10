@@ -1,0 +1,5 @@
+<% credits.each do |c| %>
+  <li>
+    <%= c.artist_credit.name %> - <%= c.job.name %> <%= " - #{c.role}" if c.role %>
+  </li>
+<% end %>	
