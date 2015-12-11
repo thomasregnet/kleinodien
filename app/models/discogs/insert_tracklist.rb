@@ -10,6 +10,7 @@ class Discogs::InsertTracklist
 
   def perform
     tracklist
+    @album_release.save!
   end
 
   private
@@ -48,6 +49,7 @@ class Discogs::InsertTracklist
       position:    dc_track.position.to_s,
       heading:     @heading
     )
+    Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
   end
 
   def artist_credit(artists)

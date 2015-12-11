@@ -1,14 +1,15 @@
 class Discogs::InsertExtraartists
-  def self.perform(dc_extraartists, album_release)
-    new(dc_extraartists, album_release).perform
+  def self.perform(dc_extraartists, owner)
+    new(dc_extraartists, owner).perform
   end
 
-  def initialize(dc_extraartists, album_release)
+  def initialize(dc_extraartists, owner)
     @dc_extraartists = dc_extraartists
-    @album_release   = album_release
+    @owner   = owner
   end
 
   def perform
+    return unless @dc_extraartists
     extraartists
   end
 
@@ -23,7 +24,7 @@ class Discogs::InsertExtraartists
   end
 
   def extraartist(artist_credit, job)
-    @album_release.credits.create!(
+    @owner.credits.create!(
       artist_credit: artist_credit,
       job:           job
     )
