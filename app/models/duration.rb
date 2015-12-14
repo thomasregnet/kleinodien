@@ -8,7 +8,7 @@ class Duration
   def self.milliseconds(milliseconds)
     new(milliseconds, 'millisecond')
   end
-  
+
   def self.seconds(seconds)
     new(seconds * SECOND_MS, 'second')
   end
@@ -40,7 +40,7 @@ class Duration
                    (ss.to_i * SECOND_MS)
     new(milliseconds, 'second')
   end
-  
+
   def initialize(milliseconds, accuracy = 'millisecond')
     @milliseconds = milliseconds
     @accuracy     = accuracy
@@ -49,7 +49,7 @@ class Duration
   def hours
     @milliseconds / HOUR_MS
   end
-  
+
   def minutes
     @milliseconds / MINUTE_MS
   end
@@ -61,16 +61,16 @@ class Duration
   def minutes_left
     @milliseconds % HOUR_MS / MINUTE_MS
   end
-  
-  def seconds_left
+
+  def seconds_left_rounded
     (@milliseconds % MINUTE_MS / SECOND_MS.to_f).round
   end
-  
+
   def mmss
-    [minutes.to_s, seconds_left.to_s].join(':')
+    [minutes.to_s, seconds_left_rounded.to_s].join(':')
   end
 
   def hhmmss
-    [hours.to_s, minutes_left.to_s, seconds_left.to_s].join(':')
+    [hours.to_s, minutes_left.to_s, seconds_left_rounded.to_s].join(':')
   end
 end
