@@ -45,4 +45,32 @@ class Duration
     @milliseconds = milliseconds
     @accuracy     = accuracy
   end
+
+  def hours
+    @milliseconds / HOUR_MS
+  end
+  
+  def minutes
+    @milliseconds / MINUTE_MS
+  end
+
+  def seconds
+    seconds = @milliseconds / SECOND_MS
+  end
+
+  def minutes_left
+    @milliseconds % HOUR_MS / MINUTE_MS
+  end
+  
+  def seconds_left
+    (@milliseconds % MINUTE_MS / SECOND_MS.to_f).round
+  end
+  
+  def mmss
+    [minutes.to_s, seconds_left.to_s].join(':')
+  end
+
+  def hhmmss
+    [hours.to_s, minutes_left.to_s, seconds_left.to_s].join(':')
+  end
 end
