@@ -5,6 +5,10 @@ class Duration
 
   attr_reader :milliseconds, :accuracy
 
+  def self.milliseconds(milliseconds)
+    new(milliseconds, 'millisecond')
+  end
+  
   def self.seconds(seconds)
     new(seconds * SECOND_MS, 'second')
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Duration, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
   describe 'constructor' do
     context 'without accuracy' do
       before(:all) do
@@ -26,6 +25,17 @@ RSpec.describe Duration, type: :model do
     end
   end
 
+  describe 'constructor "milliseconds"' do
+    before(:all) do
+      @duration = Duration.new(999_987_123)
+    end
+
+    it 'has the expected values set' do
+      expect(@duration.milliseconds).to eq(999_987_123)
+      expect(@duration.accuracy).to eq('millisecond')
+    end
+  end
+  
   describe 'construtor "seconds"' do
     before(:all) do
       @duration = Duration.minutes(10)
