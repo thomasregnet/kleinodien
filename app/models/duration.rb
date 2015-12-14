@@ -55,7 +55,7 @@ class Duration
   end
 
   def seconds
-    seconds = @milliseconds / SECOND_MS
+    @milliseconds / SECOND_MS
   end
 
   def minutes_left
