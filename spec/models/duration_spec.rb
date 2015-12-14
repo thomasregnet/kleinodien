@@ -35,7 +35,7 @@ RSpec.describe Duration, type: :model do
       expect(@duration.accuracy).to eq('millisecond')
     end
   end
-  
+
   describe 'construtor "seconds"' do
     before(:all) do
       @duration = Duration.minutes(10)
@@ -105,7 +105,7 @@ RSpec.describe Duration, type: :model do
         expect(@duration.seconds).to eq(6_330)
 
         expect(@duration.minutes_left).to eq(45)
-        expect(@duration.seconds_left).to eq(30)
+        expect(@duration.seconds_left_rounded).to eq(30)
 
         expect(@duration.mmss).to eq('105:30')
         expect(@duration.hhmmss).to eq('1:45:30')
@@ -119,7 +119,7 @@ RSpec.describe Duration, type: :model do
 
       it 'returns the correct conversions' do
         expect(@duration.seconds).to eq(6_330)
-        expect(@duration.seconds_left).to eq(31)
+        expect(@duration.seconds_left_rounded).to eq(31)
         expect(@duration.mmss).to eq('105:31')
         expect(@duration.hhmmss).to eq('1:45:31')
       end
@@ -132,10 +132,10 @@ RSpec.describe Duration, type: :model do
 
       it 'returns the correct conversions' do
         expect(@duration.seconds).to eq(6_329)
-        expect(@duration.seconds_left).to eq(29)
+        expect(@duration.seconds_left_rounded).to eq(29)
         expect(@duration.mmss).to eq('105:29')
         expect(@duration.hhmmss).to eq('1:45:29')
       end
-    end    
+    end
   end
 end
