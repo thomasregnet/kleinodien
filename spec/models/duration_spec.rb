@@ -90,4 +90,52 @@ RSpec.describe Duration, type: :model do
       expect(@duration.accuracy).to eq('second')
     end
   end
+
+  describe 'conversions' do
+    context 'even' do
+      before(:all) do
+        @duration = Duration.milliseconds(6_330_000) # 1:45:30
+      end
+
+      it 'returns the correct conversions' do
+        expect(@duration.accuracy).to eq('millisecond')
+
+        expect(@duration.hours).to eq(1)
+        expect(@duration.minutes).to eq(105)
+        expect(@duration.seconds).to eq(6_330)
+
+        expect(@duration.minutes_left).to eq(45)
+        expect(@duration.seconds_left).to eq(30)
+
+        expect(@duration.mmss).to eq('105:30')
+        expect(@duration.hhmmss).to eq('1:45:30')
+      end
+    end
+
+    context 'round up' do
+      before(:all) do
+        @duration = Duration.milliseconds(6_330_500) # 1:45:31
+      end
+
+      it 'returns the correct conversions' do
+        expect(@duration.seconds).to eq(6_330)
+        expect(@duration.seconds_left).to eq(31)
+        expect(@duration.mmss).to eq('105:31')
+        expect(@duration.hhmmss).to eq('1:45:31')
+      end
+    end
+
+    context 'round down' do
+      before(:all) do
+        @duration = Duration.milliseconds(6_329_400) # 1:45:29
+      end
+
+      it 'returns the correct conversions' do
+        expect(@duration.seconds).to eq(6_329)
+        expect(@duration.seconds_left).to eq(29)
+        expect(@duration.mmss).to eq('105:29')
+        expect(@duration.hhmmss).to eq('1:45:29')
+      end
+    end    
+  end
 end
