@@ -1,5 +1,17 @@
 require 'rails_helper'
 
+RSpec.shared_examples 'a duration constructor' do
+  let (:duration) { @duration = Duration.send(constructor, value) }
+
+  it 'has the milliseconds set' do
+    expect(duration.milliseconds).to eq(milliseconds)
+  end
+
+  it 'has the accuracy set' do
+    expect(duration.accuracy).to eq(accuracy)
+  end
+end
+
 RSpec.describe Duration, type: :model do
   describe '.new' do
     context 'without accuracy' do
@@ -24,86 +36,65 @@ RSpec.describe Duration, type: :model do
   end
 
   describe '.hours' do
-    duration = Duration.hours(7)
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(25200000)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('hour')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'hours' }
+      let(:value)        { 7 }
+      let(:milliseconds) { 25200000 }
+      let(:accuracy)     { 'hour' }
     end
   end
 
   describe '.minutes' do
-    duration = Duration.minutes(10)
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(600_000)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('minute')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'minutes' }
+      let(:value)        { 10 }
+      let(:milliseconds) { 600_000 }
+      let(:accuracy)     { 'minute'}
     end
   end
-    
+
   describe '.seconds' do
-    duration = Duration.seconds(322)
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(322000)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('second')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'seconds' }
+      let(:value)        { 322 }
+      let(:milliseconds) { 322000 }
+      let(:accuracy)     { 'second'}
     end
   end
 
   describe '.milliseconds' do
-    duration = Duration.new(999_987_123)
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(999_987_123)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('millisecond')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'milliseconds' }
+      let(:value)        { 999_987_123 }
+      let(:milliseconds) { 999_987_123 }
+      let(:accuracy)     { 'millisecond'}
     end
   end
 
   describe '.mmss' do
-    duration = Duration.mmss('3:11')
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(191_000)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('second')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'mmss' }
+      let(:value)        { '3:11' }
+      let(:milliseconds) { 191_000 }
+      let(:accuracy)     { 'second'}
     end
   end
 
-  describe '.mmss' do
-    duration = Duration.hhmm('4:56')
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(17760000)
-    end
-
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('minute')
+  describe '.hhmm' do
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'hhmm' }
+      let(:value)        { '4:56' }
+      let(:milliseconds) { 17_760_000 }
+      let(:accuracy)     { 'minute'}
     end
   end
 
   describe '.hhmmss' do
-    duration = Duration.hhmmss('19:44:13')
-
-    it 'has the milliseconds set' do
-      expect(duration.milliseconds).to eq(71053000)
-    end
-    
-    it 'has the accuracy set' do
-      expect(duration.accuracy).to eq('second')
+    it_behaves_like 'a duration constructor' do
+      let(:constructor)  { 'hhmmss' }
+      let(:value)        { '19:44:13' }
+      let(:milliseconds) { 71_053_000 }
+      let(:accuracy)     { 'second'}
     end
   end
 
