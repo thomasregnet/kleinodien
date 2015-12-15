@@ -63,8 +63,8 @@ class Duration
   end
 
   def minutes_left_rounded
-    minutes = self.minutes
-    ms_left = @milliseconds - (minutes * MINUTE_MS)
+    minutes = minutes_left
+    ms_left = @milliseconds - (minutes * MINUTE_MS) - (hours * HOUR_MS)
     minutes += 1 if ms_left >= 30_000
     minutes
   end
@@ -77,6 +77,10 @@ class Duration
     [minutes.to_s, seconds_left_rounded.to_s].join(':')
   end
 
+  def hhmm
+    [hours.to_s, minutes_left_rounded.to_s].join(':')
+  end
+  
   def hhmmss
     [hours.to_s, minutes_left.to_s, seconds_left_rounded.to_s].join(':')
   end
