@@ -62,6 +62,13 @@ class Duration
     @milliseconds % HOUR_MS / MINUTE_MS
   end
 
+  def minutes_left_rounded
+    minutes = self.minutes
+    ms_left = @milliseconds - (minutes * MINUTE_MS)
+    minutes += 1 if ms_left >= 30_000
+    minutes
+  end
+
   def seconds_left_rounded
     (@milliseconds % MINUTE_MS / SECOND_MS.to_f).round
   end
