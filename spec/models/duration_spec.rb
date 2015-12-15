@@ -130,6 +130,24 @@ RSpec.describe Duration, type: :model do
     end
   end
 
+  describe '#minutes_left_rounded' do\
+    context 'round up' do
+      duration = Duration.milliseconds(90_000)
+
+      it 'returns the rounded left minutes' do
+        expect(duration.minutes_left_rounded).to eq(2)
+      end
+    end
+
+    context 'round down' do
+      duration = Duration.milliseconds(89_999)
+
+      it 'returns the rounded left minutes' do
+        expect(duration.minutes_left_rounded).to eq(1)
+      end      
+    end
+  end
+ 
   describe '#seconds_left_rounded' do
     context 'round up' do
       duration = Duration.milliseconds(60_500)
@@ -146,9 +164,6 @@ RSpec.describe Duration, type: :model do
         expect(duration.seconds_left_rounded).to eq(0)
       end
     end
-  end
-
-  describe 'seconds_left_rounded' do
   end
 
   describe 'conversions' do
