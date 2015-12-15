@@ -31,6 +31,10 @@ RSpec.shared_examples 'a duration converting object' do
     expect(duration.mmss).to eq(mmss)
   end
 
+  specify '#hhmm returns hh:mm' do
+    expect(duration.hhmm).to eq(hhmm)
+  end
+  
   specify '#mmss returns hh:mm:ss' do
     expect(duration.hhmmss).to eq(hhmmss)
   end
@@ -174,6 +178,7 @@ RSpec.describe Duration, type: :model do
         let(:minutes)      { 105 }
         let(:seconds)      { 6_330 }
         let(:mmss)         { '105:30' }
+        let(:hhmm)         { '1:46' }
         let(:hhmmss)       { '1:45:30' }
       end
     end
@@ -185,6 +190,7 @@ RSpec.describe Duration, type: :model do
         let(:minutes)      { 105 }
         let(:seconds)      { 6_330 }
         let(:mmss)         { '105:31' }
+        let(:hhmm)         { '1:46' }
         let(:hhmmss)       { '1:45:31' }        
       end
     end
@@ -196,6 +202,7 @@ RSpec.describe Duration, type: :model do
         let(:minutes)      { 105 }
         let(:seconds)      { 6_329 }
         let(:mmss)         { '105:29' }
+        let(:hhmm)         { '1:45' }
         let(:hhmmss)       { '1:45:29' }        
       end
     end
