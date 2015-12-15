@@ -12,6 +12,30 @@ RSpec.shared_examples 'a duration constructor' do
   end
 end
 
+RSpec.shared_examples 'a duration converting object' do
+  let(:duration) { Duration.milliseconds(milliseconds) }
+
+  specify '#hours returns the hours' do
+    expect(duration.hours).to eq(hours)
+  end
+
+  specify '#minutes returns the minutes' do
+    expect(duration.minutes).to eq(minutes)
+  end
+
+  specify '#seconds returns the seconds' do
+    expect(duration.seconds).to eq(seconds)
+  end
+
+  specify '#mmss returns mm:ss' do
+    expect(duration.mmss).to eq(mmss)
+  end
+
+  specify '#mmss returns hh:mm:ss' do
+    expect(duration.hhmmss).to eq(hhmmss)
+  end
+end
+
 RSpec.describe Duration, type: :model do
   describe '.new' do
     context 'without accuracy' do
@@ -98,50 +122,66 @@ RSpec.describe Duration, type: :model do
     end
   end
 
-  describe 'conversions' do
-    context 'even' do
-      before(:all) do
-        @duration = Duration.milliseconds(6_330_000) # 1:45:30
-      end
+  describe '#minutes_left' do
+    duration = Duration.milliseconds(4_200_000)
 
-      it 'returns the correct conversions' do
-        expect(@duration.accuracy).to eq('millisecond')
-
-        expect(@duration.hours).to eq(1)
-        expect(@duration.minutes).to eq(105)
-        expect(@duration.seconds).to eq(6_330)
-
-        expect(@duration.minutes_left).to eq(45)
-        expect(@duration.seconds_left_rounded).to eq(30)
-
-        expect(@duration.mmss).to eq('105:30')
-        expect(@duration.hhmmss).to eq('1:45:30')
-      end
+    it 'returns the left minutes' do
+      expect(duration.minutes_left).to eq(10)
     end
+  end
 
+  describe '#seconds_left_rounded' do
     context 'round up' do
-      before(:all) do
-        @duration = Duration.milliseconds(6_330_500) # 1:45:31
-      end
+      duration = Duration.milliseconds(60_500)
 
-      it 'returns the correct conversions' do
-        expect(@duration.seconds).to eq(6_330)
-        expect(@duration.seconds_left_rounded).to eq(31)
-        expect(@duration.mmss).to eq('105:31')
-        expect(@duration.hhmmss).to eq('1:45:31')
+      it 'returns the rounded left seconds' do
+        expect(duration.seconds_left_rounded).to eq(1)
       end
     end
 
     context 'round down' do
-      before(:all) do
-        @duration = Duration.milliseconds(6_329_400) # 1:45:29
-      end
+      duration = Duration.milliseconds(60_499)
 
-      it 'returns the correct conversions' do
-        expect(@duration.seconds).to eq(6_329)
-        expect(@duration.seconds_left_rounded).to eq(29)
-        expect(@duration.mmss).to eq('105:29')
-        expect(@duration.hhmmss).to eq('1:45:29')
+      it 'returns the rounded left seconds' do
+        expect(duration.seconds_left_rounded).to eq(0)
+      end
+    end
+  end
+
+  describe 'seconds_left_rounded' do
+  end
+
+  describe 'conversions' do
+    context 'with even seconds' do
+      it_behaves_like 'a duration converting object' do
+        let(:milliseconds) { 6_330_000 }
+        let(:hours)        { 1 }
+        let(:minutes)      { 105 }
+        let(:seconds)      { 6_330 }
+        let(:mmss)         { '105:30' }
+        let(:hhmmss)       { '1:45:30' }
+      end
+    end
+
+    context 'with seconds to be rouned up' do
+      it_behaves_like 'a duration converting object' do
+        let(:milliseconds) { 6_330_500 }
+        let(:hours)        { 1 }
+        let(:minutes)      { 105 }
+        let(:seconds)      { 6_330 }
+        let(:mmss)         { '105:31' }
+        let(:hhmmss)       { '1:45:31' }        
+      end
+    end
+
+    context 'with seconds to be rouned down' do
+      it_behaves_like 'a duration converting object' do
+        let(:milliseconds) { 6_329_400 }
+        let(:hours)        { 1 }
+        let(:minutes)      { 105 }
+        let(:seconds)      { 6_329 }
+        let(:mmss)         { '105:29' }
+        let(:hhmmss)       { '1:45:29' }        
       end
     end
   end
