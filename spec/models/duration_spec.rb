@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.shared_examples 'a duration constructor' do
   let (:duration) { @duration = Duration.send(constructor, value) }
 
-  it 'has the milliseconds set' do
+  it 'sets the milliseconds' do
     expect(duration.milliseconds).to eq(milliseconds)
   end
 
-  it 'has the accuracy set' do
+  it 'sets the accuracy' do
     expect(duration.accuracy).to eq(accuracy)
   end
 end
