@@ -12,6 +12,13 @@ GIT
   specs:
     kleinodien_omdb (0.0.2)
 
+GIT
+  remote: /home/ossi/oStuff/develop/kleinodien_running_time
+  revision: db1785de33ce22009f4ab7b890e8404aa43bbdc0
+  branch: master
+  specs:
+    kleinodien_running_time (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -241,6 +248,7 @@ DEPENDENCIES
   jquery-rails
   kleinodien_discogs (= 0.0.14)!
   kleinodien_omdb (= 0.0.2)!
+  kleinodien_running_time (= 0.0.1)!
   pg
   rails (= 4.2.5)
   rails-erd
