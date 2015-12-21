@@ -50,7 +50,7 @@ RSpec.describe Track, type: :model do
       @track.duration = Duration.new(311000, 'second')
     end
 
-    it 'is valid with' do
+    it 'is valid' do
       expect(@track).to be_valid
     end
 
