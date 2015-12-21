@@ -6,6 +6,10 @@ FactoryGirl.define do
       association :compilation, factory: :compilation_release
     end
 
+    factory :track_with_duration do
+      association :duration, factory: :duration
+    end
+
     factory :track_with_format do
       association :format, factory: :tr_format_kind
     end
