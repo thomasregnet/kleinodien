@@ -1,8 +1,10 @@
 class Track < ActiveRecord::Base
   composed_of(
     :duration,
-    class_name: Duration.to_s,
-    mapping: [ %w(milliseconds accuracy), %w(milliseconds accuracy) ]
+    #class_name: 'KleinodienRunningTime::Duration',
+    class_name: 'Duration',
+    #mapping: [ %w(milliseconds accuracy), %w(milliseconds accuracy) ]
+    mapping: %w(milliseconds accuracy)
   )
   default_scope { order('no ASC') }
   belongs_to(
