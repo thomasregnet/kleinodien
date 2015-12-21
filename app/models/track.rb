@@ -1,4 +1,9 @@
 class Track < ActiveRecord::Base
+  composed_of(
+    :duration,
+    class_name: Duration.to_s,
+    mapping: [ %w(milliseconds accuracy), %w(milliseconds accuracy) ]
+  )
   default_scope { order('no ASC') }
   belongs_to(
     :release,

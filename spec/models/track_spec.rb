@@ -43,4 +43,23 @@ RSpec.describe Track, type: :model do
       expect(@track.details.count).to eq(3)
     end
   end
+
+  context 'with duration' do
+    before(:each) do
+      @track = FactoryGirl.create(:track)
+      @track.duration = Duration.new(311000, 'second')
+    end
+
+    it 'is valid with' do
+      expect(@track).to be_valid
+    end
+
+    it 'can be saved' do
+      expect { @track.save! }.not_to raise_error
+    end
+
+    it 'returns the duration in mm:ss format' do
+      expect(@track.duration.mmss).to eq('5:11')
+    end
+  end
 end
