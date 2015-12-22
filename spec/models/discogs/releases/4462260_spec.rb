@@ -56,6 +56,10 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     expect(track.heading).to eq('Cd 1')
     expect(track.release.title).to eq('Shredded Humans')
 
+    track = tracks[3]
+    expect(track.duration.mmss).to   eq    '2:04'
+    expect(track.duration.hhmmss).to eq '0:02:04'
+    
     track = tracks[20]
     expect(track.heading).to eq('Cd 2')
     expect(track.release.title).to eq('Devoured By Vermin')
