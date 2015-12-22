@@ -47,7 +47,7 @@ gem 'kleinodien_omdb',
     branch: 'master'
 
 gem 'kleinodien_running_time',
-    '0.0.1',
+    '0.0.2',
     git: '/home/ossi/oStuff/develop/kleinodien_running_time',
     branch: 'master'
 
