@@ -67,6 +67,7 @@ end
 
 group :development do
   gem 'rails-erd'
+  gem 'pry-rails'
 end
 
 group :test do
