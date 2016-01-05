@@ -57,6 +57,7 @@ class Discogs::InsertTracklist
   end
 
   def artist_credit(artists)
+    # TODO: the first part of this if else does not make sense
     if artists
       Discog::InsertArtistCredit(artists)
     else
