@@ -57,9 +57,8 @@ class Discogs::InsertTracklist
   end
 
   def artist_credit(artists)
-    # TODO: the first part of this if else does not make sense
-    if artists
-      Discog::InsertArtistCredit(artists)
+    if artists.length > 0
+      Discogs::InsertArtists.perform(artists)
     else
       @album_release.head.artist_credit
     end
