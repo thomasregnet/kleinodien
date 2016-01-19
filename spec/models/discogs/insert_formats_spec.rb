@@ -5,7 +5,7 @@ RSpec.describe Discogs::InsertFormats, type: :model do
   context 'Dead Human Collection' do
     before(:all) do
       DatabaseCleaner.start
-      
+
       json = DiscogsTestHelper.get_discogs_data('releases', 4462260)
       dc_release = KleinodienDiscogs.get_release(json)
       # TODO: mock @album_release
@@ -38,7 +38,7 @@ RSpec.describe Discogs::InsertFormats, type: :model do
       details = format.details
       expect(details[0].kind.name).to eq('12"')
       expect(details[1].kind.name).to eq('Picture Disc')
-      expect(details[2].kind.name).to eq('Album')      
+      expect(details[2].kind.name).to eq('Album')
     end
 
     after(:all) { DatabaseCleaner.clean }
