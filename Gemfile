@@ -36,8 +36,13 @@ gem 'faker',  '~> 1.5'
 
 gem 'devise', '~> 3.4'
 
+gem 'kleinodien_fill_media',
+    '0.0.4',
+    git:    '/home/ossi/oStuff/develop/kleinodien_fill_media',
+    branch: 'master'
+
 gem 'kleinodien_discogs',
-    '0.0.17',
+    '0.0.19',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
