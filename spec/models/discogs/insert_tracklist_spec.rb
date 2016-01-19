@@ -37,7 +37,8 @@ RSpec.describe Discogs::InsertTracklist, type: :model do
       json = DiscogsTestHelper.get_discogs_data('releases', 1083888)
       dc_release = KleinodienDiscogs.get_release(json)
       @album_release = FactoryGirl.create(:album_release)
-      Discogs::InsertTracklist.perform(dc_release.get_media, @album_release)
+      #Discogs::InsertTracklist.perform(dc_release.get_media, @album_release)
+      Discogs::InsertTracklist.perform(dc_release.tracklist, @album_release)
       @tracks = @album_release.tracks
     end
 
