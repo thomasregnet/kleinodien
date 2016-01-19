@@ -41,14 +41,12 @@ class Discogs::InsertTracklist
     # TODO: deal with song-versions
     song_release = SongRelease.find_or_create_by!(head: song_head)
     # TODO: insert_extraartists
-    duration = Duration.mmss(dc_track.duration)
-
     track = @album_release.tracks.create!(
       release:     song_release,
       no:          @no,
       position:    dc_track.position.to_s,
       heading:     @heading,
-      duration:    duration
+      duration:    dc_track.duration
     )
     Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
   end
