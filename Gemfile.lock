@@ -1,9 +1,9 @@
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: 9cbe7ba999b7645eb7a010e449fe0ca2a3f0c4fb
+  revision: d970cf2d71759df755697abe2c23b771b46320d2
   branch: master
   specs:
-    kleinodien_discogs (0.0.19)
+    kleinodien_discogs (0.0.20)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_fill_media
@@ -263,7 +263,7 @@ DEPENDENCIES
   faker (~> 1.5)
   jbuilder (~> 2.0)
   jquery-rails
-  kleinodien_discogs (= 0.0.19)!
+  kleinodien_discogs (= 0.0.20)!
   kleinodien_fill_media (= 0.0.4)!
   kleinodien_omdb (= 0.0.2)!
   kleinodien_running_time (= 0.0.2)!
