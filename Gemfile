@@ -73,6 +73,9 @@ end
 group :development do
   gem 'rails-erd'
   gem 'pry-rails'
+  gem 'reek'
+  gem 'rubocop'
+  gem 'rails_best_practices'
 end
 
 group :test do
