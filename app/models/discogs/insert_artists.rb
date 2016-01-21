@@ -12,7 +12,7 @@ class Discogs::InsertArtists
   end
 
   private
-  
+
   def artist_credit
     ac_name = KleinodienDiscogs.join_artist_names(@artists)
     ArtistCredit.find_by(name: ac_name) || new_artist_credit
@@ -26,9 +26,16 @@ class Discogs::InsertArtists
     artist_credit.save!
     artist_credit
   end
-  
+
   def participant(dc_artist, no, artist_credit)
-    artist = Artist.find_or_create_by!(name: dc_artist.name)
+    # TODO: move finding of unique case insensitive artists to the Artist model
+    #artist = Artist.find_or_create_by!(name: dc_artist.name)
+    # artist = Artist.find_by(name: dc_artist.name)
+    # artist = Artist.create!(name: dc_artist.name) unless artist
+
+    artist = Artist.where('lower(name) = ?', dc_artist.name.downcase).first
+    artist = Artist.create!(name: dc_artist.name) unless artist
+
     joinparse = dc_artist.join  unless dc_artist.join.blank?
     artist_credit.participants.build(
       artist:    artist,

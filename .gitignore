@@ -38,3 +38,6 @@ doc/
 
 # Somtime this appears
 .byebug_history
+
+# Ignore reek config file
+/.reek

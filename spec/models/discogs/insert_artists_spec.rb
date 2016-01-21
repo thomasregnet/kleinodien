@@ -42,7 +42,7 @@ RSpec.describe Discogs::InsertArtists, type: :model do
     it 'has the expected joinparse' do
       expect(@artist_credit.participants[0].joinparse).to eq('With')
     end
-    
+
     after(:all) do
       DatabaseCleaner.clean
     end

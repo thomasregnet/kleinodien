@@ -90,6 +90,6 @@ class Discogs::InsertRelease
   end
 
   def tracks
-    Discogs::InsertTracklist.perform(@dc_release.get_media, @album_release)
+    Discogs::InsertTracklist.perform(@dc_release.tracklist, @album_release)
   end
 end
