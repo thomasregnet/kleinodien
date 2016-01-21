@@ -3,8 +3,8 @@ class Discogs::InsertTracklist
     new(dc_media, album_release).perform
   end
 
-  def initialize(dc_media, album_release)
-    @dc_media  = dc_media
+  def initialize(dc_tracklist, album_release)
+    @dc_tracklist     = dc_tracklist
     @album_release = album_release
   end
 
@@ -17,21 +17,18 @@ class Discogs::InsertTracklist
 
   def tracklist
     @no = 0
-    @dc_media.each do |dc_medium|
-      track_or_heading(dc_medium.tracklist)
+    @dc_tracklist.each do |dc_track|
+      track_or_heading(dc_track)
     end
   end
 
-  def track_or_heading(dc_tracklist)
-    dc_tracklist.each do |dc_track|
-      if dc_track.class == KleinodienDiscogs::Heading
-        @heading = dc_track.title
-      else
-        track(dc_track)
-        @no += 1
-      end
+  def track_or_heading(dc_track)
+    if dc_track.heading?
+      @heading = dc_track.title
+    else
+      track(dc_track)
+      @no += 1
     end
-    #byebug
   end
 
   def track(dc_track)
@@ -44,21 +41,19 @@ class Discogs::InsertTracklist
     # TODO: deal with song-versions
     song_release = SongRelease.find_or_create_by!(head: song_head)
     # TODO: insert_extraartists
-    duration = Duration.mmss(dc_track.duration)
-
     track = @album_release.tracks.create!(
       release:     song_release,
       no:          @no,
       position:    dc_track.position.to_s,
       heading:     @heading,
-      duration:    duration
+      duration:    dc_track.duration
     )
     Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
   end
 
   def artist_credit(artists)
-    if artists
-      Discog::InsertArtistCredit(artists)
+    if artists.length > 0
+      Discogs::InsertArtists.perform(artists)
     else
       @album_release.head.artist_credit
     end
