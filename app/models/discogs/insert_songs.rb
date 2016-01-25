@@ -10,8 +10,6 @@ class Discogs::InsertSongs
   end
 
   def perform
-    
-    #@media.first.each do |medium|
       @media.each do |medium|
       side(medium.side_a)
       side(medium.side_b) if medium.twistable?
@@ -33,7 +31,7 @@ class Discogs::InsertSongs
       @no += 1
     end
   end
-  
+
   def track(dc_track)
     artist_credit = artist_credit(dc_track.artists)
     song_head = artist_credit.pieces.find_or_create_by!(
