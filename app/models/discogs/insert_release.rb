@@ -20,7 +20,8 @@ class Discogs::InsertRelease
     labels
     reference
     head_reference
-    tracks
+    #tracks
+    songs
 
     @album_release.save! # important
     @album_release
@@ -87,6 +88,10 @@ class Discogs::InsertRelease
       @album_release.head,
       ChReference
     )
+  end
+
+  def songs
+    Discogs::InsertSongs.perform(@dc_release.fill_media, @album_release)
   end
 
   def tracks
