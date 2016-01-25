@@ -36,14 +36,12 @@ module Discogs
 
     def track(dc_track)
       artist_credit = artist_credit(dc_track.artists)
-      song_head = artist_credit.pieces.find_or_create_by!(
-        title: dc_track.title,
-        type:  SongHead.to_s
+      # TODO: deal with song-versions
+      song_release = Discogs::InsertSongRelease.perform(
+        dc_track,
+        artist_credit
       )
 
-      # TODO: deal with song-versions
-      song_release = SongRelease.find_or_create_by!(head: song_head)
-      # TODO: insert_extraartists
       @album_release.tracks.create!(
         release:     song_release,
         no:          @no,
@@ -62,6 +60,13 @@ module Discogs
       else
         @album_release.head.artist_credit
       end
+    end
+
+    def song_head(artist_credit, dc_track)
+      artist_credit.pieces.find_or_create_by!(
+        title: dc_track.title,
+        type:  SongHead.to_s
+      )
     end
   end
 end
