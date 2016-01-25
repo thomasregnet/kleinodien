@@ -26,13 +26,11 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
   it 'has imported the tracks' do
     tracks = @album_release.tracks
 
-    #byebug
     track = tracks[0]
     expect(track.position).to eq('A1')
     expect(track.release.title).to eq('The System')
-    #byebug
     expect(track.duration.mmss).to eq('0:23')
-    
+
     track = tracks[20]
     expect(track.position).to eq('C5')
     expect(track.release.title).to eq('∞')
@@ -55,12 +53,12 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
     expect(identifier.disambiguation).to be_nil
     expect(identifier.code).to eq('Side4 - 10 AA6333501 2Y 320')
   end
-  
+
   it 'has imported the labels' do
     label = @album_release.labels[0]
     expect(label.company.name).to eq('Vertigo')
     expect(label.catalog_no).to eq('6673 001')
   end
-  
+
   after(:all) { DatabaseCleaner.clean }
 end
