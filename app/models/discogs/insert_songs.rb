@@ -41,7 +41,12 @@ module Discogs
         dc_track,
         artist_credit
       )
+      track_create(dc_track, song_release)
+      @heading = nil
+      Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
+    end
 
+    def track_create(dc_track, song_release)
       @album_release.tracks.create!(
         release:     song_release,
         no:          @no,
@@ -50,8 +55,6 @@ module Discogs
         duration:    dc_track.duration,
         side:        @side_name
       )
-      @heading = nil
-      Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
     end
 
     def artist_credit(artists)
