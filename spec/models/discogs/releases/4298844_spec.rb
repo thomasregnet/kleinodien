@@ -26,6 +26,7 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
   it 'has imported the tracks' do
     tracks = @album_release.tracks
 
+    #byebug
     track = tracks[0]
     expect(track.position).to eq('A1')
     expect(track.release.title).to eq('The System')
