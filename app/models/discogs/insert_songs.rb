@@ -61,12 +61,5 @@ module Discogs
         @album_release.head.artist_credit
       end
     end
-
-    def song_head(artist_credit, dc_track)
-      artist_credit.pieces.find_or_create_by!(
-        title: dc_track.title,
-        type:  SongHead.to_s
-      )
-    end
   end
 end
