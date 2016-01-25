@@ -50,6 +50,7 @@ class Discogs::InsertSongs
       duration:    dc_track.duration,
       side:        @side_name
     )
+    @heading = nil
     Discogs::InsertExtraartists.perform(dc_track.extraartists, song_release)
   end
 
