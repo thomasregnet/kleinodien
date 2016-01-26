@@ -13,8 +13,9 @@ module Discogs
 
     def perform
       @media.each do |medium|
-        side(medium.side_a)
-        side(medium.side_b) if medium.twistable?
+        medium.sides.each do |side|
+          side(side)
+        end
       end
     end
 
