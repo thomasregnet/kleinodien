@@ -13,13 +13,17 @@ module Discogs
 
     def perform
       @media.each do |medium|
-        medium.sides.each do |side|
-          side(side)
-        end
+        perform_medium(medium)
       end
     end
 
-    def side(side)
+    def perform_medium(medium)
+      medium.sides.each do |side|
+        perform_side(side)
+      end
+    end
+
+    def perform_side(side)
       @side_name = side.name
       side.tracks.each do |dc_track|
         track_or_heading(dc_track)
