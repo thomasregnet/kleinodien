@@ -47,6 +47,7 @@ group :development do
   gem 'reek'
   gem 'rubocop'
   gem 'rails_best_practices'
+  gem 'rubycritic', require: false
 end
 
 group :test do
