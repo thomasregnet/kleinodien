@@ -15,7 +15,7 @@ module Discogs
     end
 
     def perform_song_head
-     @artist_credit.pieces.find_or_create_by!(
+      @artist_credit.pieces.find_or_create_by!(
         title: @dc_track.title,
         type:  SongHead.to_s
       )
