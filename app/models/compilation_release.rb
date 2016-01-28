@@ -39,4 +39,11 @@ class CompilationRelease < ActiveRecord::Base
   validates_uniqueness_of :reference, allow_nil: true
   validates_uniqueness_of :version, scope: :head, case_sensitive: false
   delegate :title, to: :head
+
+  def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
+    CrReference.joins(:compilation_release, :supplier).where(
+      identifier: foreign_id,
+      data_suppliers: { name: data_supplier }
+    ).any?
+  end
 end
