@@ -9,6 +9,7 @@ class Discogs::InsertRelease
   end
 
   def perform
+    return if already_exists?
     artist_credit
     album_head
     album_release
@@ -29,6 +30,12 @@ class Discogs::InsertRelease
 
   private
 
+  def already_exists?
+    CrReference.joins(:compilation_release, :supplier).where(
+      identifier: @dc_release.id,
+      data_suppliers: { name: 'Discogs' }).any?
+  end
+  
   def album_release
     @album_release = @album_head.releases.create!(
       date: IncompleteDate.new(@dc_release.released)
