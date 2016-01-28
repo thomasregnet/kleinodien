@@ -31,9 +31,10 @@ class Discogs::InsertRelease
   private
 
   def already_exists?
-    CrReference.joins(:compilation_release, :supplier).where(
-      identifier: @dc_release.id,
-      data_suppliers: { name: 'Discogs' }).any?
+    AlbumRelease.with_discogs_id_exists? @dc_release.id
+    # CrReference.joins(:compilation_release, :supplier).where(
+    #   identifier: @dc_release.id,
+    #   data_suppliers: { name: 'Discogs' }).any?
   end
   
   def album_release
