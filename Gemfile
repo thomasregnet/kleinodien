@@ -19,7 +19,7 @@ gem 'kleinodien_fill_media',
     branch: 'master'
 
 gem 'kleinodien_discogs',
-    '0.0.23',
+    '0.0.24',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
@@ -31,6 +31,11 @@ gem 'kleinodien_omdb',
 gem 'kleinodien_running_time',
     '0.0.2',
     git: '/home/ossi/oStuff/develop/kleinodien_running_time',
+    branch: 'master'
+
+gem 'kleinodien_util',
+    '0.0.1',
+    git: '/home/ossi/oStuff/develop/kleinodien_util',
     branch: 'master'
 
 group :development, :test do
