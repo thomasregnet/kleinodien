@@ -14,7 +14,7 @@ class Discogs::InsertArtists
   private
 
   def artist_credit
-    ac_name = KleinodienDiscogs.join_artist_names(@artists)
+    ac_name = KleinodienDiscogs::JoinArtistNames.perform(@artists)
     ArtistCredit.find_by(name: ac_name) || new_artist_credit
   end
 
