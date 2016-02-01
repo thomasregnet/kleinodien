@@ -25,11 +25,11 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
   it 'has the right participants' do
     participants = @album_release.head.artist_credit.participants
     participant = participants[0]
-    expect(participant.joinparse).to eq('With')
+    expect(participant.join_phrase).to eq('With')
     expect(participant.artist.name).to eq('Jello Biafra')
 
     participant = participants[1]
-    expect(participant.joinparse).to be_nil
+    expect(participant.join_phrase).to be_nil
     expect(participant.artist.name).to eq('Nomeansno')
   end
   

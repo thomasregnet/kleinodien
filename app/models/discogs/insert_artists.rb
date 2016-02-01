@@ -35,11 +35,11 @@ module Discogs
       artist = Artist.where('lower(name) = ?', dc_artist.name.downcase).first
       artist = Artist.create!(name: dc_artist.name) unless artist
 
-      joinparse = dc_artist.join  unless dc_artist.join.blank?
+      join_phrase = dc_artist.join  unless dc_artist.join.blank?
       artist_credit.participants.build(
-        artist:    artist,
-        joinparse: joinparse,
-        no:        no
+        artist:      artist,
+        join_phrase: join_phrase,
+        no:          no
       )
     end
   end
