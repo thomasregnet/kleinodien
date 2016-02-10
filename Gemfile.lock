@@ -1,4 +1,11 @@
 GIT
+  remote: /home/ossi/oStuff/develop/kleinodien_brainz
+  revision: fe107fa205c69dcfc376b3639a02258545bab467
+  branch: master
+  specs:
+    kleinodien_brainz (0.0.2)
+
+GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
   revision: 23e8f0a3be0673fbf54bacae20866e065f37870c
   branch: master
@@ -343,6 +350,7 @@ DEPENDENCIES
   faker (~> 1.5)
   jbuilder (~> 2.0)
   jquery-rails
+  kleinodien_brainz (= 0.0.2)!
   kleinodien_discogs (= 0.0.24)!
   kleinodien_fill_media (= 0.0.6)!
   kleinodien_omdb (= 0.0.2)!
