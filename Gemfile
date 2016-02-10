@@ -13,6 +13,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'faker',  '~> 1.5'
 gem 'devise', '~> 3.4'
 
+gem 'kleinodien_brainz',
+    '0.0.2',
+    git:    '/home/ossi/oStuff/develop/kleinodien_brainz',
+    branch: 'master'
+
 gem 'kleinodien_fill_media',
     '0.0.6',
     git:    '/home/ossi/oStuff/develop/kleinodien_fill_media',
