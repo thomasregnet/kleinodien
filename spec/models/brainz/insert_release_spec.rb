@@ -10,7 +10,15 @@ RSpec.describe Brainz::InsertRelease, type: :model do
       @release = Brainz::InsertRelease.perform(@brz_release)
     end
 
-    it 'works'
+    specify '#artist_credit_name' do
+      #byebug
+      #expect(@release.artist_credit.name).to eq 'AC/DC'
+      #expect(@release.name).to eq 'AC/DC'
+    end
+
+    specify '#title' do
+      expect(@release.title).to eq 'Highway to Hell'
+    end
     
     after(:all) { DatabaseCleaner.clean }
   end
