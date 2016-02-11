@@ -11,13 +11,15 @@ RSpec.describe Brainz::InsertRelease, type: :model do
     end
 
     specify '#artist_credit_name' do
-      #byebug
-      #expect(@release.artist_credit.name).to eq 'AC/DC'
-      #expect(@release.name).to eq 'AC/DC'
+      expect(@release.head.artist_credit.name).to eq 'AC/DC'
     end
 
     specify '#title' do
       expect(@release.title).to eq 'Highway to Hell'
+    end
+
+    specify '#date' do
+      expect(@release.date.to_s).to eq '1979-07-27'
     end
     
     after(:all) { DatabaseCleaner.clean }
