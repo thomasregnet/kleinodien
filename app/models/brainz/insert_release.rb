@@ -31,9 +31,8 @@ module Brainz
     end
 
     def release
-      # TODO: Add IncompleteDate to release
-      # date = IncompleteDate.new(@brz_release.release_group.first_release_date)
-      @release = @head.releases.create!
+      date = IncompleteDate.new(@brz_release.release_group.first_release_date)
+      @release = @head.releases.create!(date: date)
     end
   end
 end
