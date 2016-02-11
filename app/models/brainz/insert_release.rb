@@ -9,10 +9,29 @@ class Brainz::InsertRelease
 
   def perform
     artist_credit
+    head
+    release
   end
+
+  private
 
   def artist_credit
     artist_credit = @brz_release.artist_credit
-    #Brainz::InsertArtistCredit.perform(@brz_release.artist_credit)
+    @artist_credit = Brainz::InsertArtistCredit.perform(
+      @brz_release.artist_credit
+    )
+  end
+
+  def head
+    @head = @artist_credit.compilations.create!(
+      title: @brz_release.title,
+      type:  AlbumHead.to_s
+    )
+  end
+
+  def release
+    # TODO: Add IncompleteDate to release
+    # date = IncompleteDate.new(@brz_release.release_group.first_release_date)
+    @release = @head.releases.create! #(date: date)
   end
 end
