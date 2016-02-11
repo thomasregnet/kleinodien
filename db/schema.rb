@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125112007) do
+ActiveRecord::Schema.define(version: 20160201160617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(version: 20160125112007) do
 
   create_table "participants", force: :cascade do |t|
     t.integer  "no",               null: false
-    t.string   "joinparse"
+    t.string   "join_phrase"
     t.integer  "artist_id",        null: false
     t.integer  "artist_credit_id", null: false
     t.datetime "created_at",       null: false
