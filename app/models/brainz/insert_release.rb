@@ -13,6 +13,9 @@ module Brainz
       artist_credit
       head
       release
+      media
+
+      @release
     end
 
     private
@@ -30,6 +33,39 @@ module Brainz
       )
     end
 
+    def media
+      @no = 1
+      @brz_release.fill_media.each do |medium|
+        medium.sides.each do |side|
+          insert_side(side)
+        end
+      end
+    end
+
+    def insert_side(side)
+      name = side.name
+      side.tracks.each do |brz_track|
+        #byebug
+        brz_recording = brz_track.recording
+        # TODO: real ArtistCredit for SongHead
+        song_head = SongHead.create!(
+          artist_credit: @artist_credit,
+          title:         brz_recording.title
+        )
+
+        song = song_head.releases.create!(
+        )
+
+
+        t = @release.tracks.create!(
+          release: song,
+          no:      @no,
+        )
+
+        #byebug
+      end
+    end
+    
     def release
       date = IncompleteDate.new(@brz_release.release_group.first_release_date)
       @release = @head.releases.create!(date: date)
