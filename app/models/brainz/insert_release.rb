@@ -34,12 +34,13 @@ module Brainz
     end
 
     def media
-      @no = 1
-      @brz_release.fill_media.each do |medium|
-        medium.sides.each do |side|
-          insert_side(side)
-        end
-      end
+      Brainz::InsertMediaTracks.perform(@brz_release.fill_media, @release)
+      # @no = 1
+      # @brz_release.fill_media.each do |medium|
+      #   medium.sides.each do |side|
+      #     insert_side(side)
+      #   end
+      # end
     end
 
     def insert_side(side)
