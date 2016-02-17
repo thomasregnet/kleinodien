@@ -26,28 +26,20 @@ class Brainz::InsertMediaTracks
   def perform_side(brz_side)
     @side_name = brz_side.name
     brz_side.tracks.each do |brz_track|
-      perform_track(brz_track)
+      perform_brainz_track(brz_track)
     end
   end
 
-  def perform_track(brz_track)
-    Brainz::InsertBrainzTrack.perform(brz_track, @release, @no, @side_name)
-    # brz_recording = brz_track.recording
-    # # TODO: real ArtistCredit for SongHead
-    # song_head = SongHead.create!(
-    #   artist_credit: @release.head.artist_credit,
-    #   title:         brz_recording.title
-    # )
+  def perform_brainz_track(brz_track)
+    piece_release = Brainz::InsertBrainzTrack.perform(
+      brz_track, @release.head.artist_credit
+    )
 
-    # song_release = song_head.releases.create!
-
-    # @release.tracks.create!(
-    #   release:  song_release,
-    #   no:       @no,
-    #   side:     @side_name,
-    #   position: brz_track.number
-    # )
-
+    @release.tracks.create!(
+      release: piece_release,
+      position: brz_track.number,
+      no:       @no
+    )
     @no += 1
   end
 end
