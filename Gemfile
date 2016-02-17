@@ -14,7 +14,7 @@ gem 'faker',  '~> 1.5'
 gem 'devise', '~> 3.4'
 
 gem 'kleinodien_brainz',
-    '0.0.4',
+    '0.0.5',
     git:    '/home/ossi/oStuff/develop/kleinodien_brainz',
     branch: 'master'
 
@@ -45,7 +45,6 @@ gem 'kleinodien_util',
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.5'
@@ -58,6 +57,7 @@ group :development do
   gem 'rubocop'
   gem 'rails_best_practices'
   gem 'rubycritic', require: false
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
