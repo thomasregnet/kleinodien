@@ -24,4 +24,17 @@ RSpec.describe Brainz::InsertRelease, type: :model do
     
     after(:all) { DatabaseCleaner.clean }
   end
+
+  describe 'Judgment Night' do
+    before(:all) do
+      DatabaseCleaner.start
+      @brz_release = BrainzTestHelper
+                     .get_release('f966b30a-a0bc-4234-bea6-7b93a1083276')
+      @release = Brainz::InsertRelease.perform(@brz_release)
+    end
+
+    it 'works'
+
+    after(:all) { DatabaseCleaner.clean }
+  end
 end
