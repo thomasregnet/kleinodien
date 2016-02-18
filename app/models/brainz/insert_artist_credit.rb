@@ -29,7 +29,7 @@ module Brainz
     def existing_artist_credit
       ArtistCredit.find_by(name: @brz_artist_credit.joined_artists)
     end
-   
+
     def participant(brz_name_credit, no)
       artist = create_artist(brz_name_credit.artist)
 

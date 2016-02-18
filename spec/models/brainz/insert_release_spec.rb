@@ -22,7 +22,7 @@ RSpec.describe Brainz::InsertRelease, type: :model do
     specify '#date' do
       expect(@release.date.to_s).to eq '1979-07-27'
     end
-    
+
     after(:all) { DatabaseCleaner.clean }
   end
 
@@ -46,7 +46,7 @@ RSpec.describe Brainz::InsertRelease, type: :model do
           .to eq 'Faith No More & Boo‐Yaa T.R.I.B.E.'
       end
     end
-    
+
     after(:all) { DatabaseCleaner.clean }
   end
 end
