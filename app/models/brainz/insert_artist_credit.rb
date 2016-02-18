@@ -17,18 +17,11 @@ module Brainz
     private
 
     def create_artist_credit
-      # @artist_credit = ArtistCredit.find_by(
-      #   name: @brz_artist_credit.joined_artists)
-      # return @artist_credit if @artist_credit
-
-      # byebug
       @artist_credit = ArtistCredit.new
       @brz_artist_credit.name_credits.each_with_index do |brz_name_credit, no|
         participant(brz_name_credit, no)
       end
 
-      existing_artist_credit = ArtistCredit.find_by(name: @artist_credit.name)
-      return existing_artist_credit if existing_artist_credit
       @artist_credit.save!
       @artist_credit
     end
@@ -40,7 +33,6 @@ module Brainz
     def participant(brz_name_credit, no)
       artist = create_artist(brz_name_credit.artist)
 
-      #join_phrase = brz_name_credit.joinphrase
       @artist_credit.participants.build(
         artist:      artist,
         join_phrase: brz_name_credit.stripped_joinphrase,
