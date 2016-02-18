@@ -4,4 +4,5 @@ class Participant < ActiveRecord::Base
   validates :artist, presence: true
   validates :artist_credit, presence: true
   validates :no, presence: true
+  delegate :name, to: :artist
 end
