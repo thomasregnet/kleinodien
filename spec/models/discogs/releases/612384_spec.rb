@@ -7,15 +7,15 @@ RSpec.describe 'Various ‎– Judgment Night - Music From The Motion Picture' d
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 612384)
+    json = DiscogsTestHelper.get_discogs_data('release', 612_384)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end
 
   it_behaves_like 'an AlbumRelease imported from discogs' do
+    let(:title) { 'Judgment Night - Music From The Motion Picture' }
     let(:album_release)      { @album_release }
-    let(:title)             { 'Judgment Night - Music From The Motion Picture' }
-    let(:artist_credit_name) { 'Various ,' } # aargh a comma!
+    let(:artist_credit_name) { 'Various' }
     let(:country)            { 'Europe' }
     let(:date)               { '1993-01-01' }
     let(:date_mask)          { 4 }

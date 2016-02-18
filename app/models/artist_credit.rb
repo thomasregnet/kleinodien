@@ -15,15 +15,10 @@ class ArtistCredit < ActiveRecord::Base
   before_save { self.name = name }
 
   def name
-    names = participants.map do |participant|
-      name = participant.artist.name
-      name_with_join_phrase(name, participant.join_phrase)
-    end
-    names.join(' ')
-  end
-
-  def name_with_join_phrase(name, join_phrase)
-    return name if join_phrase.blank?
-    "#{name} #{join_phrase}"
+    return unless participants
+    return if participants.empty?
+    KleinodienUtil::JoinNames.perform(
+      participants
+    )
   end
 end
