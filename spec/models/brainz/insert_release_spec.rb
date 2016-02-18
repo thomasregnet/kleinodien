@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 require 'brainz_test_helper'
 
@@ -33,8 +34,19 @@ RSpec.describe Brainz::InsertRelease, type: :model do
       @release = Brainz::InsertRelease.perform(@brz_release)
     end
 
-    it 'works'
+    context '#head.artist_credits' do
+      specify '#name' do
+        expect(@release.head.artist_credit.name).to eq 'Various Artists'
+      end
+    end
 
+    context '#tracks' do
+      specify 'artist_credit' do
+        expect(@release.tracks[5].release.head.artist_credit.name)
+          .to eq 'Faith No More & Boo‐Yaa T.R.I.B.E.'
+      end
+    end
+    
     after(:all) { DatabaseCleaner.clean }
   end
 end
