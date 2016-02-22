@@ -1,26 +1,16 @@
 class CrFormat < ActiveRecord::Base
-  validates :release,  presence: true
+  belongs_to :kind,
+             class_name: CrFormatKind,
+             foreign_key: :cr_format_kind_id
+  belongs_to :release,
+             class_name: CompilationRelease,
+             foreign_key: :compilation_release_id
+  has_many :details,
+           class_name: CrfDetail
+
   validates :kind,     presence: true
-  validates :quantity, presence: true
   validates :no,       presence: true
+  validates :quantity, presence: true
+  validates :release,  presence: true
   validates_uniqueness_of :no, scope: :release
-  belongs_to(
-    :release,
-    class_name: CompilationRelease,
-    foreign_key: :compilation_release_id)
-  belongs_to(
-    :kind,
-    class_name: CrFormatKind,
-    foreign_key: :cr_format_kind_id
-  )
-  # has_many(
-  #   :clarifications,
-  #   class_name: CrFormatClarification
-  # )
-  has_many(
-    #:format_attributes,
-    :details,
-    #class_name: CrfAttribute
-    class_name: CrfDetail
-  )
 end
