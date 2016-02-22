@@ -1,4 +1,5 @@
 module Discogs
+  # Inserts Discogs Artists to ArtistCredit
   class InsertParticipant
     def self.perform(dc_artist, no, artist_credit)
       new(dc_artist, no, artist_credit).perform
@@ -18,12 +19,16 @@ module Discogs
       artist = Artist.where('lower(name) = ?', dc_artist_name.downcase).first
       artist = Artist.create!(name: dc_artist_name) unless artist
 
-      join_phrase = @dc_artist.join  unless @dc_artist.join.blank?
       @artist_credit.participants.build(
         artist:      artist,
         join_phrase: join_phrase,
         no:          @no
       )
+    end
+
+    def join_phrase
+      join_phrase = @dc_artist.join
+      return join_phrase unless join_phrase.blank?
     end
   end
 end
