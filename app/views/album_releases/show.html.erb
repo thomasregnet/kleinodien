@@ -2,31 +2,28 @@
 <p>by <b><%= @album_release.head.artist_credit.name %></b></p>
 <p>
   <ul>
-    <%= render partial: "labels", locals: { labels: @album_release.labels } %>
+    <%= render 'labels', labels: @album_release.labels %>
   </ul>
 
   <h3>formats</h3>
   <ul>
-    <%= render partial: "formats",
-          locals:  { formats: @album_release.formats } %>
+    <%= render "formats", formats: @album_release.formats %>
   </ul>
 </p>
 
 <h2>tracks</h2>
 <ul>
-  <%= render partial: "tracks", locals: { tracks: @album_release.tracks }%>
+  <%= render "tracks", tracks: @album_release.tracks %>
 </ul>
 
 <h2>identifiers</h2>
 <ul>
-  <%= render partial: "identifiers",
-      locals:  { identifiers: @album_release.identifiers } %>
+  <%= render "identifiers", identifiers: @album_release.identifiers %>
 </ul>
 
 <h2>credits</h2>
 <ul>
-  <%= render(partial: "credits",
-	     locals:  { credits: @album_release.credits } ) %>
+  <%= render "credits", credits: @album_release.credits %>
 </ul>
 <h2>reference</h2>
   <%= @album_release.reference.supplier.name %>: <%= @album_release.reference.identifier %>
