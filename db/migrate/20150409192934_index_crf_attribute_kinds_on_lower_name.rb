@@ -13,6 +13,6 @@ class IndexCrfAttributeKindsOnLowerName < ActiveRecord::Migration
           name: :index_crf_attribute_kinds_on_lower_name
         )
       end
-    end   
+    end
   end
 end
