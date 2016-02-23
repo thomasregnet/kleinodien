@@ -63,7 +63,7 @@ module Discogs
     end
 
     def artist_credit(artists)
-      if artists.length > 0
+      if !artists.empty?
         Discogs::InsertArtists.perform(artists)
       else
         @album_release.head.artist_credit
