@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :album_heads, only: [:index, :show]
-  
+
   resources :album_releases, only: [:index, :show]
-  
+
   resources :movie_heads, only: [:index, :show]
 
   get 'pages/index'

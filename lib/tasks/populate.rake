@@ -21,12 +21,12 @@ namespace :db do
         password_confirmation: password
       )
     end
-    
+
     Rake::FileList.new('fixtures/discogs/releases/*.json').each do |file|
       m = /\/(\d+)\.json$/.match(file.to_s)
       DiscogsTestHelper.import_release(m[1].to_i)
     end
-    
+
     # imdb-movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
 

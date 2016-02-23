@@ -12,6 +12,6 @@ class IndexPieceHeadOnTypeAndLowerTitleAndDisambiguation < ActiveRecord::Migrati
           :piece_heads, name: :index_piece_heads_on_lower_title_disambiguation
         )
       end
-    end  
+    end
   end
 end

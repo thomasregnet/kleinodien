@@ -14,6 +14,6 @@ class AddIndexPieceHeadOnReferenceId < ActiveRecord::Migration
           name: :index_piece_heads_reference_id
         )
       end
-    end  
+    end
   end
 end

@@ -14,6 +14,6 @@ class AddIndexPieceReleaseOnReferenceId < ActiveRecord::Migration
           name: :index_piece_releases_reference_id
         )
       end
-    end  
+    end
   end
 end
