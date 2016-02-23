@@ -101,9 +101,5 @@ module Discogs
     def songs
       Discogs::InsertSongs.perform(@dc_release.fill_media, @album_release)
     end
-
-    def tracks
-      Discogs::InsertTracklist.perform(@dc_release.tracklist, @album_release)
-    end
   end
 end
