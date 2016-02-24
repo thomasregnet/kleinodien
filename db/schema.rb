@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201160617) do
+ActiveRecord::Schema.define(version: 20160224185409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160201160617) do
     t.integer  "reference_id"
   end
 
+  add_index "compilation_heads", ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id", using: :btree
   add_index "compilation_heads", ["reference_id"], name: "compilation_heads_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "compilation_heads", ["reference_id"], name: "index_compilation_heads_on_reference_id", using: :btree
   add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title", unique: true, where: "(disambiguation IS NULL)", using: :btree
