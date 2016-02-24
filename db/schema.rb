@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224191007) do
+ActiveRecord::Schema.define(version: 20160224191334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -511,6 +511,10 @@ ActiveRecord::Schema.define(version: 20160224191007) do
     t.string   "accuracy"
     t.string   "side"
   end
+
+  add_index "tracks", ["compilation_release_id"], name: "index_tracks_on_compilation_release_id", using: :btree
+  add_index "tracks", ["piece_release_id"], name: "index_tracks_on_piece_release_id", using: :btree
+  add_index "tracks", ["tr_format_kind_id"], name: "index_tracks_on_tr_format_kind_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
