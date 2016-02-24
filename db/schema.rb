@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224185409) do
+ActiveRecord::Schema.define(version: 20160224185703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,10 @@ ActiveRecord::Schema.define(version: 20160224185409) do
     t.datetime "updated_at",             null: false
     t.integer  "compilation_release_id", null: false
   end
+
+  add_index "cr_companies", ["company_id"], name: "index_cr_companies_on_company_id", using: :btree
+  add_index "cr_companies", ["company_role_id"], name: "index_cr_companies_on_company_role_id", using: :btree
+  add_index "cr_companies", ["compilation_release_id"], name: "index_cr_companies_on_compilation_release_id", using: :btree
 
   create_table "cr_credits", force: :cascade do |t|
     t.integer  "artist_credit_id",       null: false
