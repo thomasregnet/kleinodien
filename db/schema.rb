@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225191906) do
+ActiveRecord::Schema.define(version: 20160225192208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -598,6 +598,7 @@ ActiveRecord::Schema.define(version: 20160225191906) do
   add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
+  add_foreign_key "references", "data_suppliers"
   add_foreign_key "references", "data_suppliers"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "track_details", "tracks"
