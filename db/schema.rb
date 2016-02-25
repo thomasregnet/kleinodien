@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224191334) do
+ActiveRecord::Schema.define(version: 20160225183757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -543,6 +543,7 @@ ActiveRecord::Schema.define(version: 20160224191334) do
   add_foreign_key "ch_labels", "companies"
   add_foreign_key "ch_labels", "compilation_heads"
   add_foreign_key "compilation_heads", "\"references\"", column: "reference_id"
+  add_foreign_key "compilation_heads", "artist_credits"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_heads_references", "\"references\"", column: "reference_id"
