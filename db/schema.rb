@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225183757) do
+ActiveRecord::Schema.define(version: 20160225184819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -548,6 +548,8 @@ ActiveRecord::Schema.define(version: 20160225183757) do
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_heads_references", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_heads_references", "compilation_heads"
+  add_foreign_key "compilation_identifiers", "compilation_releases"
+  add_foreign_key "compilation_identifiers", "identifier_types"
   add_foreign_key "compilation_releases", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_releases_references", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_releases_references", "compilation_releases"
@@ -560,6 +562,8 @@ ActiveRecord::Schema.define(version: 20160225183757) do
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
+  add_foreign_key "cr_formats", "compilation_releases"
+  add_foreign_key "cr_formats", "cr_format_kinds"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
