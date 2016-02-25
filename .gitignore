@@ -41,3 +41,4 @@ doc/
 
 # Ignore reek config file
 /.reek
+/rails_best_practices_output.html
