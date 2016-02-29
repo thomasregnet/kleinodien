@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229080055) do
+ActiveRecord::Schema.define(version: 20160229110907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 20160229080055) do
   add_index "compilation_heads", ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id", using: :btree
   add_index "compilation_heads", ["reference_id"], name: "compilation_heads_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "compilation_heads", ["reference_id"], name: "index_compilation_heads_on_reference_id", using: :btree
-  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title", unique: true, where: "(disambiguation IS NULL)", using: :btree
-  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, using: :btree
+  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (reference_id IS NULL))", using: :btree
+  add_index "compilation_heads", ["type"], name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, where: "(reference_id IS NULL)", using: :btree
 
   create_table "compilation_heads_countries", id: false, force: :cascade do |t|
     t.integer "country_id",          null: false
