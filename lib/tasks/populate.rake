@@ -27,6 +27,12 @@ namespace :db do
       DiscogsTestHelper.import_release(m[1].to_i)
     end
 
+    # Rake::FileList.new('fixtures/music_brainz/release/*.xml').each do |file|
+    #   xml = File.open(file)
+    #   brz_release = KleinodienBrainz::Model::Release.xml(xml)
+    #   Brainz::InsertRelease.perform(brz_release)
+    # end
+
     # imdb-movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
 
