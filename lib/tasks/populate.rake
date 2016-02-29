@@ -14,24 +14,25 @@ namespace :db do
       password_confirmation: password
     )
 
-    99.times do |n|
-      User.create!(
-        email: Faker::Internet.email,
-        password: password,
-        password_confirmation: password
-      )
-    end
+    # 99.times do |n|
+    #   User.create!(
+    #     email: Faker::Internet.email,
+    #     password: password,
+    #     password_confirmation: password
+    #   )
+    # end
 
     Rake::FileList.new('fixtures/discogs/releases/*.json').each do |file|
       m = /\/(\d+)\.json$/.match(file.to_s)
       DiscogsTestHelper.import_release(m[1].to_i)
     end
 
-    # Rake::FileList.new('fixtures/music_brainz/release/*.xml').each do |file|
-    #   xml = File.open(file)
-    #   brz_release = KleinodienBrainz::Model::Release.xml(xml)
-    #   Brainz::InsertRelease.perform(brz_release)
-    # end
+    Rake::FileList.new('fixtures/music_brainz/release/*.xml').each do |file|
+      xml = File.open(file)
+      brz_release = KleinodienBrainz::Model::Release.xml(xml)
+      #byebug
+      Brainz::InsertRelease.perform(brz_release)
+    end
 
     # imdb-movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
@@ -50,4 +51,3 @@ namespace :db do
     ImdbImporter.import_tv_serial_season(serial, 1, html)
   end
 end
-

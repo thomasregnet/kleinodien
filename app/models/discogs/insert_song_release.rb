@@ -15,6 +15,16 @@ module Discogs
     end
 
     def perform_song_head
+      @song_head = SongHead.where(
+        'lower(title) = lower(?) AND artist_credit_id = ?',
+        @dc_track.title,
+        @artist_credit.id
+      ).first
+      
+      
+      return @song_head if @song_head
+      puts "OOOOOOOO Discogs #{@dc_track.title}"
+      #byebug
       @artist_credit.pieces.find_or_create_by!(
         title: @dc_track.title,
         type:  SongHead.to_s
