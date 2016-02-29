@@ -13,6 +13,13 @@ class PieceHead < ActiveRecord::Base
   validates :type,  presence: true
   validates_uniqueness_of :reference, allow_nil: true
   validates_uniqueness_of :title,
-                          scope: [:type, :disambiguation],
+                          scope: [:type, :disambiguation, :reference],
                           case_sensitive: false
+
+  def self.with_id_from_data_supplier(foreign_id, data_supplier)
+    PhReference.joins(:piece_head, :supplier).where(
+      identifier:     foreign_id,
+      data_suppliers: { name: data_supplier }
+    ).first
+  end
 end
