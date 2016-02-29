@@ -14,17 +14,12 @@ module Brainz
       brz_recording = @brz_track.recording
       brz_recording_id = brz_recording.id
 
-      # @song_head = SongHead.with_id_from_data_supplier(
-      #   brz_recording_id, 'MusicBrainz'
-      # )
-
       @song_head = SongHead.where(
-        'lower(title) = ? and artist_credit_id = ?',
+        'lower(title) = lower(?) and artist_credit_id = ?',
         brz_recording.title,
         artist_credit.id
       ).first
 
-      #byebug
       if !@song_head
         @song_head = SongHead.find_or_create_by!(
           artist_credit: artist_credit,
@@ -47,7 +42,6 @@ module Brainz
     end
 
     def perform_song_release
-      #byebug
       @song_release = @song_head.releases.create!
     end
   end
