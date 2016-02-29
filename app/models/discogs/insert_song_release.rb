@@ -23,8 +23,7 @@ module Discogs
       
       
       return @song_head if @song_head
-      puts "OOOOOOOO Discogs #{@dc_track.title}"
-      #byebug
+
       @artist_credit.pieces.find_or_create_by!(
         title: @dc_track.title,
         type:  SongHead.to_s
