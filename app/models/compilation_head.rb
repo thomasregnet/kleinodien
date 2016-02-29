@@ -11,8 +11,25 @@ class CompilationHead < ActiveRecord::Base
 
   validates :title, presence: true
   validates :type, presence: true
+  # validates_uniqueness_of :title,
+  #                         scope: [:type, :disambiguation],
+  #                         case_sensitive: false
   validates_uniqueness_of :title,
-                          scope: [:type, :disambiguation],
-                          case_sensitive: false
+                          scope: [:type, :disambiguation, :reference],
+                          case_sensitive: false  
   validates_uniqueness_of :reference, allow_nil: true
+
+  def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
+    ChReference.joins(:compilation_head, :supplier).where(
+      identifier:     foreign_id,
+      data_suppliers: { name: data_supplier }
+    ).any?
+  end
+
+  def self.with_id_from_data_supplier(foreign_id, data_supplier)
+    ChReference.joins(:compilation_head, :supplier).where(
+      identifier:     foreign_id,
+      data_suppliers: { name: data_supplier }
+    ).first
+  end  
 end

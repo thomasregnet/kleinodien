@@ -27,12 +27,26 @@ module Brainz
     end
 
     def head
+      brz_id = @brz_release.release_group.id
+      @head = AlbumHead.with_id_from_data_supplier(brz_id, 'MusicBrainz')
+      return if @head
+
       @head = @artist_credit.compilations.create!(
-        title: @brz_release.title,
-        type:  AlbumHead.to_s
+        title:     @brz_release.title,
+        type:      AlbumHead.to_s,
+        reference: create_head_reference
       )
     end
 
+    def create_head_reference
+      release_group_id = @brz_release.release_group.id
+      supplier = DataSupplier.find_or_create_by!(name: 'MusicBrainz')
+      ChReference.find_or_create_by!(
+        supplier: supplier,
+        identifier: release_group_id
+      )
+    end
+    
     def media
       Brainz::InsertMediaTracks.perform(@brz_release.fill_media, @release)
     end
