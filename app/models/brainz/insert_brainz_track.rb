@@ -32,7 +32,17 @@ module Brainz
 
     private
 
-    
+    def reference
+      supplier = DataSupplier.find_or_create_by!(name: 'MusicBrainz')
+      reference = create_reference(supplier)
+    end
+
+    def create_reference(supplier)
+      PrReference.create!(
+        identifier: @brz_track.recording.id,
+        supplier: supplier
+      )
+    end
     def artist_credit
       brz_artist_credit = @brz_track.recording.artist_credit
       # TODO: ArtistCredit of the Recording for SongHead
@@ -42,7 +52,7 @@ module Brainz
     end
 
     def perform_song_release
-      @song_release = @song_head.releases.create!
+      @song_release = @song_head.releases.create!(reference: reference)
     end
   end
 end

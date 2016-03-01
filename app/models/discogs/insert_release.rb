@@ -48,7 +48,9 @@ module Discogs
       @album_head = AlbumHead.with_id_from_data_supplier(
         @dc_release.id, 'Discogs'
       )
+
       return if @album_head
+
       @album_head = @artist_credit.compilations.create!(
         title: @dc_release.title,
         type:  AlbumHead.to_s
