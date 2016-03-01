@@ -58,7 +58,19 @@ module Brainz
     def release
       date = IncompleteDate.new(@brz_release.release_group.first_release_date)
       #byebug
-      @release = @head.releases.create!(date: date)
+      @release = @head.releases.create!(
+        date:      date,
+        reference: create_release_reference
+      )
+    end
+
+    def create_release_reference
+      release_id = @brz_release.id
+      supplier = DataSupplier.find_or_create_by!(name: 'MusicBrainz')
+      CrReference.find_or_create_by!(
+        supplier: supplier,
+        identifier: release_id
+      )
     end
   end
 end

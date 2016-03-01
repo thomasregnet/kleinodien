@@ -4,6 +4,8 @@
     <li>
       <% if release.countries[0] %>
         <%= link_to "#{release.countries[0].name} #{release.date}", release %>
+      <% else %>
+        <%= link_to " #{release.date}", release %>
       <% end %>
     </li>
   <% end %>
