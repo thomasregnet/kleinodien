@@ -21,7 +21,7 @@ module Discogs
         @artist_credit.id
       ).first
       
-      
+      #byebug
       return @song_head if @song_head
 
       @artist_credit.pieces.find_or_create_by!(

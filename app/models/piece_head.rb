@@ -13,7 +13,7 @@ class PieceHead < ActiveRecord::Base
   validates :type,  presence: true
   validates_uniqueness_of :reference, allow_nil: true
   validates_uniqueness_of :title,
-                          scope: [:type, :disambiguation, :reference],
+                          scope: [:type, :disambiguation, :artist_credit_id, :reference],
                           case_sensitive: false
 
   def self.with_id_from_data_supplier(foreign_id, data_supplier)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229110907) do
+ActiveRecord::Schema.define(version: 20160301072739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -336,12 +336,12 @@ ActiveRecord::Schema.define(version: 20160229110907) do
     t.integer  "reference_id"
   end
 
+  add_index "piece_heads", ["artist_credit_id", "type"], name: "index_piece_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (reference_id IS NULL))", using: :btree
+  add_index "piece_heads", ["artist_credit_id", "type"], name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
   add_index "piece_heads", ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
   add_index "piece_heads", ["reference_id"], name: "index_piece_heads_on_reference_id", using: :btree
   add_index "piece_heads", ["reference_id"], name: "index_piece_heads_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "piece_heads", ["season_id"], name: "index_piece_heads_on_season_id", using: :btree
-  add_index "piece_heads", ["type"], name: "index_piece_heads_on_lower_title", unique: true, where: "(disambiguation IS NULL)", using: :btree
-  add_index "piece_heads", ["type"], name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
 
   create_table "piece_heads_references", id: false, force: :cascade do |t|
     t.integer "piece_head_id"
@@ -364,7 +364,7 @@ ActiveRecord::Schema.define(version: 20160229110907) do
   end
 
   add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
-  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "(version IS NULL)", using: :btree
+  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "((version IS NULL) AND (reference_id IS NULL))", using: :btree
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_on_reference_id", using: :btree
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "piece_releases", ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
