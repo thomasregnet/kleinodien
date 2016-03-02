@@ -21,7 +21,7 @@ module Discogs
       identifiers
       labels
       reference
-      head_reference
+      # head_reference
       songs
 
       @album_release.save! # important
@@ -53,9 +53,14 @@ module Discogs
       )
       return if @album_head
 
+      # reference = ChReference.create_with_supplier_name!(
+      #    @dc_release.master_id, 'Discogs'
+      #  )
+
       @album_head = @artist_credit.compilations.create!(
         title: @dc_release.title,
-        type:  AlbumHead.to_s
+        type:  AlbumHead.to_s,
+        reference: head_reference
       )
     end
 
@@ -99,11 +104,8 @@ module Discogs
     end
 
     def head_reference
-      Discogs::InsertReference.perform(
-        @dc_release.master_id,
-        @album_release.head,
-        ChReference
-      )
+      master_id = @dc_release.master_id || return
+      ChReference.create_with_supplier_name!(master_id, 'Discogs')
     end
 
     def songs
