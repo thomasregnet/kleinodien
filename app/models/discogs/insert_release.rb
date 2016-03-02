@@ -45,10 +45,12 @@ module Discogs
     end
 
     def album_head
-      @album_head = AlbumHead.with_id_from_data_supplier(
-        @dc_release.id, 'Discogs'
+      # @album_head = AlbumHead.with_id_from_data_supplier(
+      #   @dc_release.id, 'Discogs'
+      # )
+      @album_head = AlbumHead.find_by_reference(
+        @dc_release.master_id, 'Discogs'
       )
-
       return if @album_head
 
       @album_head = @artist_credit.compilations.create!(
