@@ -31,5 +31,12 @@ class CompilationHead < ActiveRecord::Base
       identifier:     foreign_id,
       data_suppliers: { name: data_supplier }
     ).first
-  end  
+  end
+
+  def self.find_by_reference(foreign_id, data_supplier)
+    ChReference.joins(:compilation_head, :supplier).where(
+      identifier:     foreign_id,
+      data_suppliers: { name: data_supplier }
+    ).first
+  end
 end
