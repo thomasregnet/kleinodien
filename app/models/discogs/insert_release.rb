@@ -20,7 +20,6 @@ module Discogs
       companies
       identifiers
       labels
-      reference
       songs
 
       @album_release.save! # important
@@ -35,7 +34,8 @@ module Discogs
 
     def album_release
       @album_release = @album_head.releases.create!(
-        date: IncompleteDate.new(@dc_release.released)
+        date:      IncompleteDate.new(@dc_release.released),
+        reference: reference
       )
     end
 
@@ -88,11 +88,8 @@ module Discogs
     end
 
     def reference
-      Discogs::InsertReference.perform(
-        @dc_release.id,
-        @album_release,
-        CrReference
-      )
+      id = @dc_release.id || return
+      CrReference.create_with_supplier_name!(id, 'Discogs')      
     end
 
     def head_reference
