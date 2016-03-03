@@ -57,12 +57,9 @@ module Brainz
     end
 
     def create_release_reference
-      release_id = @brz_release.id
-      supplier = DataSupplier.find_or_create_by!(name: 'MusicBrainz')
-      CrReference.find_or_create_by!(
-        supplier: supplier,
-        identifier: release_id
-      )
+      CrReference.create_with_supplier_name!(
+        @brz_release.id, 'MusicBrainz'
+      )      
     end
   end
 end
