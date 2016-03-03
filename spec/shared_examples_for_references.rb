@@ -7,6 +7,7 @@ RSpec.shared_examples 'a reference' do
       @supplier_name
     )
   end
+
   specify '#identifier' do
     expect(@reference.identifier).to eq @foreign_id
   end
