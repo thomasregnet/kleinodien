@@ -39,11 +39,8 @@ module Brainz
     end
 
     def create_head_reference
-      release_group_id = @brz_release.release_group.id
-      supplier = DataSupplier.find_or_create_by!(name: 'MusicBrainz')
-      ChReference.find_or_create_by!(
-        supplier: supplier,
-        identifier: release_group_id
+      ChReference.create_with_supplier_name!(
+        @brz_release.release_group.id, 'MusicBrainz'
       )
     end
     
