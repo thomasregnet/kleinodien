@@ -89,7 +89,7 @@ module Discogs
 
     def reference
       id = @dc_release.id || return
-      CrReference.create_with_supplier_name!(id, 'Discogs')      
+      CrReference.create_with_supplier_name!(id, 'Discogs')
     end
 
     def head_reference

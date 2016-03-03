@@ -16,7 +16,7 @@ class CompilationHead < ActiveRecord::Base
   #                         case_sensitive: false
   validates_uniqueness_of :title,
                           scope: [:type, :disambiguation, :reference],
-                          case_sensitive: false  
+                          case_sensitive: false
   validates_uniqueness_of :reference, allow_nil: true
 
   def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)

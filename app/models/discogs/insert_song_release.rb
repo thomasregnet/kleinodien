@@ -20,7 +20,7 @@ module Discogs
         @dc_track.title,
         @artist_credit.id
       ).first
-      
+
       #byebug
       return @song_head if @song_head
 
