@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303093820) do
+ActiveRecord::Schema.define(version: 20160303100947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,8 +363,8 @@ ActiveRecord::Schema.define(version: 20160303093820) do
     t.integer  "reference_id"
   end
 
-  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_piece_head_id_and_lower_version", unique: true, using: :btree
-  add_index "piece_releases", ["piece_head_id"], name: "index_piece_on_unique_piece_head_id", unique: true, where: "((version IS NULL) AND (reference_id IS NULL))", using: :btree
+  add_index "piece_releases", ["piece_head_id"], name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
+  add_index "piece_releases", ["piece_head_id"], name: "index_piece_releases_on_unique_piece_head_id", unique: true, where: "((version IS NULL) AND (reference_id IS NULL))", using: :btree
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_on_reference_id", using: :btree
   add_index "piece_releases", ["reference_id"], name: "index_piece_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "piece_releases", ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
