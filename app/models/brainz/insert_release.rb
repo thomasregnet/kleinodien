@@ -43,7 +43,7 @@ module Brainz
         @brz_release.release_group.id, 'MusicBrainz'
       )
     end
-    
+
     def media
       Brainz::InsertMediaTracks.perform(@brz_release.fill_media, @release)
     end
@@ -59,7 +59,7 @@ module Brainz
     def create_release_reference
       CrReference.create_with_supplier_name!(
         @brz_release.id, 'MusicBrainz'
-      )      
+      )
     end
   end
 end
