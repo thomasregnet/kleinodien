@@ -20,7 +20,7 @@ RSpec.describe CrfDetail, type: :model do
     @attr.kind = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
-      .to raise_error(/null value in column "crf_attribute_kind_id"/)
+      .to raise_error(/null value in column "crf_detail_kind_id"/)
   end
   
   it "is not valid without a no" do
