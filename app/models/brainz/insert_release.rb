@@ -27,13 +27,9 @@ module Brainz
     end
 
     def head
-      brz_id = @brz_release.release_group.id
-      ref = AlbumHead.with_id_from_data_supplier(brz_id, 'MusicBrainz')
-      # byebug
-      if ref
-        @head = ref.compilation_head
-        return
-      end
+      @head = AlbumHead.find_by_reference(
+        @brz_release.release_group.id, 'MusicBrainz'
+      ) && return
 
       @head = @artist_credit.compilations.create!(
         title:     @brz_release.title,
@@ -57,7 +53,6 @@ module Brainz
 
     def release
       date = IncompleteDate.new(@brz_release.release_group.first_release_date)
-      #byebug
       @release = @head.releases.create!(
         date:      date,
         reference: create_release_reference
