@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304083600) do
+ActiveRecord::Schema.define(version: 20160304085500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20160304083600) do
 
   add_index "artists", ["reference_id"], name: "artists_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "artists", ["reference_id"], name: "index_artists_on_reference_id", using: :btree
+
+  create_table "artists_references", id: false, force: :cascade do |t|
+    t.integer "artist_id"
+    t.integer "reference_id"
+  end
+
+  add_index "artists_references", ["artist_id"], name: "index_artists_references_on_artist_id", using: :btree
+  add_index "artists_references", ["reference_id"], name: "index_artists_references_on_reference_id", using: :btree
 
   create_table "ch_companies", force: :cascade do |t|
     t.integer  "compilation_head_id", null: false
@@ -529,6 +537,8 @@ ActiveRecord::Schema.define(version: 20160304083600) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "artists", "\"references\"", column: "reference_id"
+  add_foreign_key "artists_references", "\"references\"", column: "reference_id"
+  add_foreign_key "artists_references", "artists"
   add_foreign_key "ch_companies", "companies"
   add_foreign_key "ch_companies", "company_roles"
   add_foreign_key "ch_companies", "compilation_heads"
