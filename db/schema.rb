@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303111207) do
+ActiveRecord::Schema.define(version: 20160304083600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160303111207) do
     t.integer  "reference_id"
   end
 
+  add_index "artists", ["reference_id"], name: "artists_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
   add_index "artists", ["reference_id"], name: "index_artists_on_reference_id", using: :btree
 
   create_table "ch_companies", force: :cascade do |t|

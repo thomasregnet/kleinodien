@@ -4,6 +4,11 @@ FactoryGirl.define do
     sequence(:identifier) { |n| "abc_#{n}_defg" }
     type 'GenericReference'
 
+    factory :artist_reference, class: ArtistReference do
+      type 'ArtistReference'
+      sequence(:identifier) { |n| "abc_#{n}_defg" }
+    end
+
     factory :ch_reference, class: ChReference do
       type 'ChReference'
       sequence(:identifier) { |n| "abc_#{n}_defg" }
