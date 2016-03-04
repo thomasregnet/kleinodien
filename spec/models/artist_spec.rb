@@ -22,7 +22,7 @@ RSpec.describe Artist, type: :model do
     let(:factory) { :artist_with_a_reference }
   end
 
-  # it_behaves_like 'a model with many References' do
-  #   let(:factory) { :artist_with_many_references }
-  # end
+  it_behaves_like 'a model with many References' do
+    let(:factory) { :artist_with_many_references }
+  end
 end
