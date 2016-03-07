@@ -11,16 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304085500) do
+ActiveRecord::Schema.define(version: 20160307192657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artist_credits", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "data_supplier_id"
   end
+
+  add_index "artist_credits", ["data_supplier_id"], name: "index_artist_credits_on_data_supplier_id", using: :btree
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",           null: false
@@ -536,6 +539,7 @@ ActiveRecord::Schema.define(version: 20160304085500) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "artist_credits", "data_suppliers"
   add_foreign_key "artists", "\"references\"", column: "reference_id"
   add_foreign_key "artists_references", "\"references\"", column: "reference_id"
   add_foreign_key "artists_references", "artists"
