@@ -51,7 +51,7 @@ RSpec.describe ArtistCredit, type: :model do
         data_supplier: FactoryGirl.create(:data_supplier),
         participants:  @artist_credit.participants
       )
-      expect(clone).to be_valid
+      expect { clone.save! }.not_to raise_error
     end
 
     after(:all) { DatabaseCleaner.clean }
