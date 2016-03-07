@@ -12,9 +12,8 @@ RSpec.describe ArtistCredit, type: :model do
       expect(@artist_credit).to be_valid
     end
 
-    # TODO: clone may not be valid because it has no paricipants
     it 'must have a unique name' do
-      clone = ArtistCredit.new(name: @artist_credit.name)
+      clone = ArtistCredit.new(participants: @artist_credit.participants)
       expect(clone).not_to be_valid
     end
 
@@ -50,7 +49,7 @@ RSpec.describe ArtistCredit, type: :model do
     it 'must not have an unique name when the DataSupplier differs' do
       clone = ArtistCredit.new(
         data_supplier: FactoryGirl.create(:data_supplier),
-        participants:  [@artist_credit.participants.first]
+        participants:  @artist_credit.participants
       )
       expect(clone).to be_valid
     end
