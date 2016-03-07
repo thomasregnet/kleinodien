@@ -9,7 +9,7 @@ class ArtistCredit < ActiveRecord::Base
   validates :name,
             presence: true,
             blank:    false,
-            uniqueness: { case_sensitive: false }
+            uniqueness: { case_sensitive: false, scope: :data_supplier_id }
 
   validates :participants, presence: true
 
