@@ -1,5 +1,6 @@
 # ArtistCredit joins Artists with join_phrases by using Participants
 class ArtistCredit < ActiveRecord::Base
+  belongs_to :data_supplier
   has_many :artists, through: :participants
   has_many :participants, inverse_of: :artist_credit
   has_many :compilations, class_name: CompilationHead
