@@ -6,7 +6,8 @@ module Discogs
     end
 
     def initialize(artists)
-      @artists = artists
+      @artists       = artists
+      @data_supplier = DataSupplier.find_or_create_by!(name: 'Discogs')
     end
 
     def perform
@@ -17,11 +18,14 @@ module Discogs
 
     def artist_credit
       ac_name = KleinodienDiscogs::JoinArtistNames.perform(@artists)
-      ArtistCredit.find_by(name: ac_name) || new_artist_credit
+      ArtistCredit.find_by(
+        name: ac_name,
+        data_supplier: @data_supplier
+      ) || new_artist_credit
     end
 
     def new_artist_credit
-      artist_credit = ArtistCredit.new
+      artist_credit = ArtistCredit.new(data_supplier: @data_supplier)
       @artists.each_with_index do |artist, no|
         Discogs::InsertParticipant.perform(artist, no, artist_credit)
       end
