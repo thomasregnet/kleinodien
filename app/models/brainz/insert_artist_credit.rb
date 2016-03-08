@@ -37,14 +37,17 @@ module Brainz
     end
 
     def create_artist(brz_artist)
-      name = brz_artist.name
-      # TODO: deal with disambiguation
-      artist = Artist.where('lower(name) = ?', name.downcase).first
+      mbid = brz_artist.mbid
+      artist = Artist.find_by_reference(mbid, 'MusicBrainz')
+
       return artist if artist
+
+      # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
       Artist.create!(
-        name:      name,
-        reference: create_artist_reference(brz_artist.id)
-      ) unless artist
+        name:           brz_artist.name,
+        #disambiguation: brz_artist.disambiguation,
+        reference:      create_artist_reference(brz_artist.id)
+      )
     end
 
     def create_artist_reference(brz_artist_id)

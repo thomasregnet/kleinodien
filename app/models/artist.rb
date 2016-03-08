@@ -9,4 +9,12 @@ class Artist < ActiveRecord::Base
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :disambiguation, case_sensitive: false
   validates_uniqueness_of :reference, allow_nil: true
+
+  def self.find_by_reference(identifier, data_supplier_name)
+    ref = ArtistReference.joins(:artist, :supplier).where(
+      identifier: identifier,
+      data_suppliers: { name: data_supplier_name }
+    ).first || return
+    Artist.find_by(reference_id: ref.id)
+  end
 end
