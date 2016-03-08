@@ -7,7 +7,9 @@ class Artist < ActiveRecord::Base
                           association_foreign_key: :reference_id
 
   validates :name, presence: true
-  validates_uniqueness_of :name, scope: :disambiguation, case_sensitive: false
+  validates_uniqueness_of :name,
+                          scope: [ :disambiguation, :reference],
+                          case_sensitive: false
   validates_uniqueness_of :reference, allow_nil: true
 
   def self.find_by_reference(identifier, data_supplier_name)
