@@ -41,7 +41,16 @@ module Brainz
       # TODO: deal with disambiguation
       artist = Artist.where('lower(name) = ?', name.downcase).first
       return artist if artist
-      Artist.create!(name: name) unless artist
+      Artist.create!(
+        name:      name,
+        reference: create_artist_reference(brz_artist.id)
+      ) unless artist
+    end
+
+    def create_artist_reference(brz_artist_id)
+      ArtistReference.create_with_supplier_name!(
+        brz_artist_id, 'MusicBrainz'
+      )
     end
   end
 end
