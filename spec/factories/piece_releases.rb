@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :piece_release do
     association :head, factory: :piece_head
-    type 'Piece'
+    type 'PieceRelease'
 
     factory :piece_release_with_tracks do
       transient do

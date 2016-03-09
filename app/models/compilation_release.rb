@@ -36,4 +36,16 @@ class CompilationRelease < ActiveRecord::Base
       data_suppliers: { name: data_supplier }
     ).any?
   end
+
+  def self.find_by_reference(identifier, data_supplier_name)
+    data_supplier = DataSupplier.find_by(name: data_supplier_name)
+    ref = CrReference.find_by(
+      identifier: identifier,
+      supplier:   data_supplier
+    )
+
+    return unless ref
+
+    CompilationRelease.find_by(reference_id: ref.id)
+  end
 end

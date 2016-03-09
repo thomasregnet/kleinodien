@@ -22,4 +22,16 @@ class PieceHead < ActiveRecord::Base
       data_suppliers: { name: data_supplier }
     ).first
   end
+
+  def self.find_by_reference(identifier, data_supplier_name)
+    data_supplier = DataSupplier.find_by(name: data_supplier_name)
+    ref = PhReference.find_by(
+      identifier: identifier,
+      supplier:   data_supplier
+    )
+
+    return unless ref
+
+    PieceHead.find_by(reference_id: ref.id)
+  end
 end
