@@ -14,7 +14,7 @@ gem 'faker',  '~> 1.5'
 gem 'devise', '~> 3.4'
 
 gem 'kleinodien_brainz',
-    '0.0.7',
+    '0.0.8',
     git:    '/home/ossi/oStuff/develop/kleinodien_brainz',
     branch: 'master'
 
