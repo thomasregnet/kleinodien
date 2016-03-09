@@ -26,7 +26,7 @@ class PieceRelease < ActiveRecord::Base
     )
 
     return unless ref
-    #byebug
+
     PieceRelease.find_by(reference_id: ref.id)
   end
 end
