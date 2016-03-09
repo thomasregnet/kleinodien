@@ -25,12 +25,12 @@ RSpec.describe CompilationRelease, type: :model do
       @c_release.head = nil
       expect(@c_release).not_to be_valid
     end
-    
+
     it "is not unique without a type" do
       @c_release.type = nil
       expect(@c_release).not_to be_valid
     end
-    
+
     it "has a unique head" do
       clone = FactoryGirl.build(:compilation_release) do |c|
         c.head = @c_release.head
@@ -105,7 +105,7 @@ RSpec.describe CompilationRelease, type: :model do
   it_behaves_like "a model with labels" do
     let(:factory) { :compilation_release_with_labels }
   end
-  
+
   it_behaves_like "a model with an IncompleteDate" do
     let(:factory) { :compilation_release }
     let(:date_naming) { 'date' }

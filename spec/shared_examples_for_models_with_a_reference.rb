@@ -8,13 +8,10 @@ RSpec.shared_examples 'a model with a Reference' do
   end
 
   specify '#find_by_reference' do
-    #byebug
-    #from_reference = @model.class.find_by_reference(
     from_reference = @model.class.find_by_reference(
       @model.reference.identifier,
       @model.reference.supplier.name
     )
-    #byebug
     expect(from_reference).to be_instance_of @model.class
   end
 

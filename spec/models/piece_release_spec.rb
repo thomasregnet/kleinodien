@@ -35,11 +35,11 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like "a model with companies" do
     let(:factory) { :piece_release_with_companies }
   end
-  
+
   it_behaves_like "a model with countries" do
     let(:factory) { :piece_release_with_countries }
   end
-  
+
   it_behaves_like "a model with credits" do
     let(:factory) { :piece_release_with_credits }
   end
@@ -54,7 +54,7 @@ RSpec.describe PieceRelease, type: :model do
 
   it_behaves_like "a model with many References" do
     let(:factory) { :piece_release_with_many_references }
-  end  
+  end
 
   it_behaves_like "a model with an IncompleteDate" do
     let(:factory) { :piece_release }

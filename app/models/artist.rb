@@ -13,20 +13,13 @@ class Artist < ActiveRecord::Base
   validates_uniqueness_of :reference, allow_nil: true
 
   def self.find_by_reference(identifier, data_supplier_name)
-    #byebug
-    # ref = ArtistReference.joins(:artist, :supplier).where(
-    #   identifier:     identifier,
-    #   data_suppliers: { name: data_supplier_name }
-    # ).first
-    #byebug
     data_supplier = DataSupplier.find_by(name: data_supplier_name)
     ref = ArtistReference.find_by(
       identifier: identifier,
       supplier:   data_supplier
     )
-    #byebug
     return unless ref
-    
+
     Artist.find_by(reference_id: ref.id)
   end
 end

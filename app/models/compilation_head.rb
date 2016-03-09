@@ -35,7 +35,7 @@ class CompilationHead < ActiveRecord::Base
       identifier:     foreign_id,
       data_suppliers: { name: data_supplier_name }
     ).first
-    #byebug
+
     return unless ref
 
     CompilationHead.find_by(reference_id: ref.id)
