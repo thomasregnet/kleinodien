@@ -17,4 +17,16 @@ class PieceRelease < ActiveRecord::Base
 
   validates_uniqueness_of :reference, allow_nil: true
   delegate :title, to: :head
+
+  def self.find_by_reference(identifier, data_supplier_name)
+    data_supplier = DataSupplier.find_by(name: data_supplier_name)
+    ref = PrReference.find_by(
+      identifier: identifier,
+      supplier:   data_supplier
+    )
+
+    return unless ref
+    #byebug
+    PieceRelease.find_by(reference_id: ref.id)
+  end
 end

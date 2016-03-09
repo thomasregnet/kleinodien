@@ -7,6 +7,17 @@ RSpec.shared_examples 'a model with a Reference' do
     expect(@model).to respond_to('reference')
   end
 
+  specify '#find_by_reference' do
+    #byebug
+    #from_reference = @model.class.find_by_reference(
+    from_reference = @model.class.find_by_reference(
+      @model.reference.identifier,
+      @model.reference.supplier.name
+    )
+    #byebug
+    expect(from_reference).to be_instance_of @model.class
+  end
+
   describe 'reference_id must be unique' do
     before(:each) do
       @other_model = FactoryGirl.create(factory)
