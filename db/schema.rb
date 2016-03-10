@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310185226) do
+ActiveRecord::Schema.define(version: 20160310195918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20160310185226) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "reference_id"
+    t.string   "source_name"
+    t.string   "source_ident"
   end
 
   add_index "artists", ["reference_id"], name: "artists_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
@@ -547,6 +549,7 @@ ActiveRecord::Schema.define(version: 20160310185226) do
 
   add_foreign_key "artist_credits", "data_suppliers"
   add_foreign_key "artists", "\"references\"", column: "reference_id"
+  add_foreign_key "artists", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "artists_references", "\"references\"", column: "reference_id"
   add_foreign_key "artists_references", "artists"
   add_foreign_key "ch_companies", "companies"
