@@ -21,3 +21,7 @@ Source.create!(
   description: 'omdb (open media database) is a free database for film media'
 )
 
+Source.create!(
+  name:        'User',
+  description: 'User contributed data'
+)
