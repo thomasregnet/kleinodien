@@ -5,3 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Source.create!(
+  name:        'MusicBrainz',
+  description: 'An open music encyclopedia that collects music metadata'
+)
+
+Source.create!(
+  name:        'Discogs',
+  description: 'Discover new music'
+)
+
+Source.create!(
+  name:        'Omdb',
+  description: 'omdb (open media database) is a free database for film media'
+)
+
