@@ -18,24 +18,24 @@ gem 'kleinodien_brainz',
     git:    '/home/ossi/oStuff/develop/kleinodien_brainz',
     branch: 'master'
 
+gem 'kleinodien_date_time',
+    '0.0.4',
+    git: '/home/ossi/oStuff/develop/kleinodien_date_time',
+    branch: 'master'
+
 gem 'kleinodien_fill_media',
     '0.0.7',
     git:    '/home/ossi/oStuff/develop/kleinodien_fill_media',
     branch: 'master'
 
 gem 'kleinodien_discogs',
-    '0.0.25',
+    '0.0.26',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
     branch: 'master'
 
 gem 'kleinodien_omdb',
     '0.0.2',
     git:    '/home/ossi/oStuff/develop/kleinodien_omdb',
-    branch: 'master'
-
-gem 'kleinodien_running_time',
-    '0.0.2',
-    git: '/home/ossi/oStuff/develop/kleinodien_running_time',
     branch: 'master'
 
 gem 'kleinodien_util',
