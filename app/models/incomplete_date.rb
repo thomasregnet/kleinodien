@@ -5,7 +5,7 @@ class IncompleteDate < KleinodienDateTime::IncompleteDate
   def initialize(parameter, mask = 7)
     if parameter.instance_of?(Date)
       @date = parameter
-      @mask = 7
+      @mask = mask
     else
       @string = parameter.to_s
       date = @string.split('-').map(&:to_i)
