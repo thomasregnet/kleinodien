@@ -1,2 +1,2 @@
-class Duration < KleinodienRunningTime::Duration
+class Duration < KleinodienDateTime::Duration
 end

@@ -6,11 +6,18 @@ GIT
     kleinodien_brainz (0.0.8)
 
 GIT
-  remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: 63f1acde0775cd35cda7617886d2ff1762012831
+  remote: /home/ossi/oStuff/develop/kleinodien_date_time
+  revision: c934a9d7a5a66ea4119a618e8b310e32fa36a816
   branch: master
   specs:
-    kleinodien_discogs (0.0.25)
+    kleinodien_date_time (0.0.4)
+
+GIT
+  remote: /home/ossi/oStuff/develop/kleinodien_discogs
+  revision: d18dc3d914256e9a29265f1caed7926ff4e0286c
+  branch: master
+  specs:
+    kleinodien_discogs (0.0.26)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_fill_media
@@ -25,13 +32,6 @@ GIT
   branch: master
   specs:
     kleinodien_omdb (0.0.2)
-
-GIT
-  remote: /home/ossi/oStuff/develop/kleinodien_running_time
-  revision: a85c28f5a0263172a69fb21235c364ac1563aee7
-  branch: master
-  specs:
-    kleinodien_running_time (0.0.2)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_util
@@ -353,10 +353,10 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kleinodien_brainz (= 0.0.8)!
-  kleinodien_discogs (= 0.0.25)!
+  kleinodien_date_time (= 0.0.4)!
+  kleinodien_discogs (= 0.0.26)!
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
-  kleinodien_running_time (= 0.0.2)!
   kleinodien_util (= 0.0.1)!
   pg
   pry-rails
