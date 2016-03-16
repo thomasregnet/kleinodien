@@ -34,7 +34,7 @@ module Discogs
 
     def album_release
       @album_release = @album_head.releases.create!(
-        date:      IncompleteDate.new(@dc_release.released),
+        date:      IncompleteDate.from_string(@dc_release.released),
         reference: reference
       )
     end

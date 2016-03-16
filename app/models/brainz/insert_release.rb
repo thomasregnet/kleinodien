@@ -49,7 +49,9 @@ module Brainz
     end
 
     def release
-      date = IncompleteDate.new(@brz_release.release_group.first_release_date)
+      date = IncompleteDate.from_string(
+        @brz_release.release_group.first_release_date
+      )
       @release = @head.releases.create!(
         date:      date,
         reference: create_release_reference
