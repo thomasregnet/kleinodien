@@ -7,17 +7,17 @@ GIT
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_date_time
-  revision: c934a9d7a5a66ea4119a618e8b310e32fa36a816
+  revision: 7360c715e70fde59aa49ec14a315d1cf14fd204f
   branch: master
   specs:
-    kleinodien_date_time (0.0.4)
+    kleinodien_date_time (0.0.5)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: d18dc3d914256e9a29265f1caed7926ff4e0286c
+  revision: 4c7a9165b15d70fb36ffb73f33aa62effc7c5247
   branch: master
   specs:
-    kleinodien_discogs (0.0.26)
+    kleinodien_discogs (0.0.27)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_fill_media
@@ -353,8 +353,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kleinodien_brainz (= 0.0.8)!
-  kleinodien_date_time (= 0.0.4)!
-  kleinodien_discogs (= 0.0.26)!
+  kleinodien_date_time (= 0.0.5)!
+  kleinodien_discogs (= 0.0.27)!
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
   kleinodien_util (= 0.0.1)!
