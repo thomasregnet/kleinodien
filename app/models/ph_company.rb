@@ -1,3 +1,4 @@
+# PieceHead Company
 class PhCompany < ActiveRecord::Base
   belongs_to :piece_head
   belongs_to :company
