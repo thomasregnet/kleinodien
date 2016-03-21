@@ -1,3 +1,4 @@
+# Detail for a track format
 class TrackDetail < ActiveRecord::Base
   belongs_to :kind,
              class_name: TrackDetailKind,
@@ -6,6 +7,7 @@ class TrackDetail < ActiveRecord::Base
 
   validates :kind,  presence: true
   validates :no,    presence: true
-  validates :track, presence: true
-  validates_uniqueness_of :track_id, scope: :no
+  validates :track,
+            presence: true,
+            uniqueness: { scope: :no }
 end
