@@ -16,7 +16,7 @@ class PieceRelease < ActiveRecord::Base
                           join_table: :piece_releases_references,
                           association_foreign_key: :reference_id
 
-  validates_uniqueness_of :reference, allow_nil: true
+  validates :reference, uniqueness: true, allow_nil: true
   delegate :title, to: :head
 
   def self.find_by_reference(identifier, data_supplier_name)
