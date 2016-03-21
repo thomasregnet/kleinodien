@@ -1,3 +1,4 @@
+# The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
   belongs_to :reference, class_name: ArtistReference
   has_many :participants, inverse_of: :artist
@@ -7,10 +8,12 @@ class Artist < ActiveRecord::Base
                           association_foreign_key: :reference_id
 
   validates :name, presence: true
-  validates_uniqueness_of :name,
-                          scope: [ :disambiguation, :reference],
-                          case_sensitive: false
-  validates_uniqueness_of :reference, allow_nil: true
+  validates :name,
+            uniqueness: {
+              scope:          [:disambiguation, :reference],
+              case_sensitive: false
+            }
+  validates :reference, uniqueness: true, allow_nil: true
 
   def self.find_by_reference(identifier, data_supplier_name)
     data_supplier = DataSupplier.find_by(name: data_supplier_name)
