@@ -16,15 +16,16 @@ class ImdbImporter
     doc = Nokogiri::HTML(html)
     doc.search("div.eplist div[@itemprop*='episode']").each do |div|
       link = div.search("a[@itemprop*='name']").first
-      epi = season.episodes.create!(
-        title: title = link.content.strip, #title,
-        no: div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i)
+      season.episodes.create!(
+        title: link.content.strip,
+        no:    div.search("meta[@itemprop*='episodeNumber']")
+          .first[:content].to_i)
     end
     season
   end
 
   def self.title(doc)
     title = doc.at('h1').inner_html.split('<span').first.strip
-    title = CGI.unescapeHTML(title)
+    CGI.unescapeHTML(title)
   end
 end
