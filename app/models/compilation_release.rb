@@ -1,3 +1,4 @@
+# A CompilationRelease may be an Album, a movie box ...
 class CompilationRelease < ActiveRecord::Base
   composed_of :date,
               class_name: 'IncompleteDate',
@@ -25,8 +26,8 @@ class CompilationRelease < ActiveRecord::Base
 
   validates :head, presence: true
   validates :type, presence: true
-  validates_uniqueness_of :reference, allow_nil: true
-  validates_uniqueness_of :version, scope: :head, case_sensitive: false
+  validates :reference, uniqueness: true, allow_nil: true
+  validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
   delegate :title, to: :head
 
