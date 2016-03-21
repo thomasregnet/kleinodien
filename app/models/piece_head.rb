@@ -1,3 +1,4 @@
+# A PieceHead my be a song, movie ...
 class PieceHead < ActiveRecord::Base
   belongs_to :reference, class_name: PhReference
   has_many :companies, class_name: PhCompany
@@ -11,11 +12,13 @@ class PieceHead < ActiveRecord::Base
 
   validates :title, presence: true
   validates :type,  presence: true
-  validates_uniqueness_of :reference, allow_nil: true
-  validates_uniqueness_of :title,
-                          scope: [:type, :disambiguation, :artist_credit_id, :reference],
-                          case_sensitive: false
-
+  validates :reference, uniqueness: true, allow_nil: true
+  validates :title,
+            uniqueness: {
+              scope: [:type, :disambiguation,
+                      :artist_credit_id, :reference],
+              case_sensitive: false
+            }
   def self.with_id_from_data_supplier(foreign_id, data_supplier)
     PhReference.joins(:piece_head, :supplier).where(
       identifier:     foreign_id,
