@@ -1,3 +1,4 @@
+# CompilationRelease Format Detail
 class CrfDetail < ActiveRecord::Base
   belongs_to :format,
              class_name: CrFormat,
@@ -9,5 +10,5 @@ class CrfDetail < ActiveRecord::Base
   validates :format, presence: true
   validates :kind,   presence: true
   validates :no,     presence: true
-  validates_uniqueness_of :format, scope: :no
+  validates :format, uniqueness: { scope: :no }
 end
