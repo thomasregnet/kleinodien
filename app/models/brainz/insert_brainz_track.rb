@@ -12,25 +12,24 @@ module Brainz
 
     def perform
       brz_recording = @brz_track.recording
-      brz_recording_id = brz_recording.id
 
       @song_head = SongHead.where(
         'lower(title) = lower(?) and artist_credit_id = ?',
         brz_recording.title,
         artist_credit.id
-      ).first
-
-      if !@song_head
-        @song_head = SongHead.find_or_create_by!(
-          artist_credit: artist_credit,
-          title:         brz_recording.title
-        )
-      end
+      ).first || find_or_create_song_head(brz_recording)
 
       perform_song_release
     end
 
     private
+
+    def find_or_create_song_head(brz_recording)
+      @song_head = SongHead.find_or_create_by!(
+        artist_credit: artist_credit,
+        title:         brz_recording.title
+      )
+    end
 
     def reference
       PrReference.create_with_supplier_name!(
