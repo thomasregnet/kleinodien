@@ -1,3 +1,4 @@
+# CompilationRelease Format
 class CrFormat < ActiveRecord::Base
   belongs_to :kind,
              class_name: CrFormatKind,
@@ -12,5 +13,5 @@ class CrFormat < ActiveRecord::Base
   validates :no,       presence: true
   validates :quantity, presence: true
   validates :release,  presence: true
-  validates_uniqueness_of :no, scope: :release
+  validates :no, uniqueness: { scope: :release }
 end
