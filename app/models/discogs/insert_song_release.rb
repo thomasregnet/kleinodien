@@ -1,4 +1,5 @@
 module Discogs
+  # Insert a Discogs-track
   class InsertSongRelease
     def self.perform(dc_track, artist_credit)
       new(dc_track, artist_credit).perform
@@ -21,7 +22,6 @@ module Discogs
         @artist_credit.id
       ).first
 
-      #byebug
       return @song_head if @song_head
 
       @artist_credit.pieces.find_or_create_by!(

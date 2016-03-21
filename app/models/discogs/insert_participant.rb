@@ -16,7 +16,6 @@ module Discogs
       #       artists to the Artist model
 
       dc_artist_name = @dc_artist.name
-      #artist = Artist.where('lower(name) = ?', dc_artist_name.downcase).first
       artist = Artist.find_by_reference(@dc_artist.id, 'Discogs')
       artist = Artist.create!(
         name:        dc_artist_name,
