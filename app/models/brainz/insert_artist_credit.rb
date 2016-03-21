@@ -20,7 +20,7 @@ module Brainz
       @artist_credit = ArtistCredit.new(
         data_supplier: DataSupplier.find_or_create_by!(name: 'MusicBrainz')
       )
-        
+
       @brz_artist_credit.name_credits.each_with_index do |brz_name_credit, no|
         participant(brz_name_credit, no)
       end
@@ -47,9 +47,8 @@ module Brainz
 
       # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
       Artist.create!(
-        name:           brz_artist.name,
-        #disambiguation: brz_artist.disambiguation,
-        reference:      create_artist_reference(brz_artist.id)
+        name:      brz_artist.name,
+        reference: create_artist_reference(brz_artist.id)
       )
     end
 
