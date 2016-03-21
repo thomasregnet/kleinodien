@@ -1,3 +1,4 @@
+# A release of a song, movie ...
 class PieceRelease < ActiveRecord::Base
   composed_of :date,
               class_name: 'IncompleteDate',
