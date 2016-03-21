@@ -1,3 +1,4 @@
+# The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
   belongs_to :reference, class_name: ChReference
   has_many :companies, class_name: ChCompany
@@ -11,10 +12,12 @@ class CompilationHead < ActiveRecord::Base
 
   validates :title, presence: true
   validates :type, presence: true
-  validates_uniqueness_of :title,
-                          scope: [:type, :disambiguation, :reference],
-                          case_sensitive: false
-  validates_uniqueness_of :reference, allow_nil: true
+  validates :title,
+            uniqueness: {
+              scope:          [:type, :disambiguation, :reference],
+              case_sensitive: false
+            }
+  validates :reference, uniqueness: true, allow_nil: true
 
   def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
     ChReference.joins(:compilation_head, :supplier).where(
