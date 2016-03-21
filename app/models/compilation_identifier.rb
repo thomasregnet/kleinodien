@@ -1,3 +1,4 @@
+# Identifiers for a release, for example a barcode
 class CompilationIdentifier < ActiveRecord::Base
   belongs_to :release,
              class_name: CompilationRelease,
@@ -9,9 +10,10 @@ class CompilationIdentifier < ActiveRecord::Base
   validates :release, presence: true
   validates :type, presence: true
   validates :code, presence: true, blank: false
-  validates_uniqueness_of :code,
-                          scope: [:release, :type, :disambiguation]
-  validates_uniqueness_of :disambiguation,
-                          scope: [:release, :type, :code],
-                          case_sensitive: false
+  validates :code, uniqueness: { scope: [:release, :type, :disambiguation] }
+  validates :disambiguation,
+            uniqueness: {
+              scope:          [:release, :type, :code],
+              case_sensitive: false
+            }
 end
