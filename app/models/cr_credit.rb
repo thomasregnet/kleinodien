@@ -1,3 +1,4 @@
+# What an Artist distributed to a CompilationRelease
 class CrCredit < ActiveRecord::Base
   belongs_to :artist_credit
   belongs_to :compilation_release
