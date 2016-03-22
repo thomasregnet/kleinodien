@@ -1,3 +1,4 @@
+# Reference to the data-source of an Artist
 class ArtistReference < Reference
   has_one :artist, foreign_key: 'reference_id'
 

@@ -1,3 +1,4 @@
+# Reference to the data-source of a PieceRelease
 class PrReference < Reference
   has_one :piece_release, foreign_key: 'reference_id'
 
