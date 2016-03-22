@@ -7,4 +7,3 @@ class AlbumReleasesController < ApplicationController
     @album_release = AlbumRelease.find(params[:id])
   end
 end
-
