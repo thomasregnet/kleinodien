@@ -1,3 +1,4 @@
+# Version of a song
 class SongRelease < PieceRelease
   belongs_to :head,
              class_name: SongHead,
