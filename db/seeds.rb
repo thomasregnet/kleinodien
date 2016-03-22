@@ -6,22 +6,29 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Source.create!(
+# The SourceSeed class is necessary because the really class, "Source",
+# ties to get domain data from the db which must be created here
+class SourceSeed < ActiveRecord::Base
+  self.table_name  = 'sources'
+  self.primary_key = 'name'
+end
+
+SourceSeed.create!(
   name:        'MusicBrainz',
   description: 'An open music encyclopedia that collects music metadata'
 )
 
-Source.create!(
+SourceSeed.create!(
   name:        'Discogs',
   description: 'Discover new music'
 )
 
-Source.create!(
+SourceSeed.create!(
   name:        'Omdb',
   description: 'omdb (open media database) is a free database for film media'
 )
 
-Source.create!(
+SourceSeed.create!(
   name:        'User',
   description: 'User contributed data'
 )
