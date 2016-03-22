@@ -1,5 +1,6 @@
 require 'cgi'
 
+# Insert Data received from IMDB
 class ImdbImporter
   def self.import_movie(html)
     doc = Nokogiri::HTML(html)

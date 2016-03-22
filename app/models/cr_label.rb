@@ -1,3 +1,4 @@
+# Label of a CompilationRelease
 class CrLabel < ActiveRecord::Base
   belongs_to :compilation_release
   belongs_to :company
