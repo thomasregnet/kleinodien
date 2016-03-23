@@ -7,7 +7,7 @@ RSpec.describe 'Discogs Release: Maximum The Hormone - 糞盤' do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 4365415)
+    json = DiscogsTestHelper.get_discogs_data('release', 4_365_415)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end
@@ -33,7 +33,7 @@ RSpec.describe 'Discogs Release: Maximum The Hormone - 糞盤' do
 
     track = tracks[4]
     expect(track.release.title).to eq('Mrブギータンブリンマン ') # note the space
-                                                              # at the end
+    # at the end
     expect(track.position).to eq('5')
 
     track = tracks[7]
@@ -45,10 +45,10 @@ RSpec.describe 'Discogs Release: Maximum The Hormone - 糞盤' do
     labels = @album_release.labels
     expect(labels.length).to eq(1)
 
-     label = labels[0]
-     expect(label.company.name).to eq('Vap Inc.')
-     expect(label.catalog_no).to eq('MCJL-00005')
+    label = labels[0]
+    expect(label.company.name).to eq('Vap Inc.')
+    expect(label.catalog_no).to eq('MCJL-00005')
   end
-  
+
   after(:all) { DatabaseCleaner.clean }
 end

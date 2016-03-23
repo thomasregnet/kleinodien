@@ -7,7 +7,7 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 4298844)
+    json = DiscogsTestHelper.get_discogs_data('release', 4_298_844)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end

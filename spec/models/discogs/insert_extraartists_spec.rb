@@ -5,8 +5,8 @@ RSpec.describe Discogs::InsertExtraartists, type: :model do
   context 'AC/DC - Highway To Hell' do
     before(:all) do
       DatabaseCleaner.start
-      
-      json = DiscogsTestHelper.get_discogs_data('releases', 940468)
+
+      json = DiscogsTestHelper.get_discogs_data('releases', 940_468)
       dc_release = KleinodienDiscogs.get_release(json)
       @release = Discogs::InsertRelease.perform(dc_release)
       @credits = @release.credits
@@ -16,7 +16,7 @@ RSpec.describe Discogs::InsertExtraartists, type: :model do
       credit = @credits[0]
       expect(credit.artist_credit.name).to eq('Cliff Williams')
       expect(credit.job.name).to eq('Bass')
-      
+
       credit = @credits[3]
       expect(credit.artist_credit.name).to eq('Angus Young')
       expect(credit.job.name).to eq('Guitar')

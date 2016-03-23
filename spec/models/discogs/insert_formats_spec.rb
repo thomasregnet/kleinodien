@@ -6,7 +6,7 @@ RSpec.describe Discogs::InsertFormats, type: :model do
     before(:all) do
       DatabaseCleaner.start
 
-      json = DiscogsTestHelper.get_discogs_data('releases', 4462260)
+      json = DiscogsTestHelper.get_discogs_data('releases', 4_462_260)
       dc_release = KleinodienDiscogs.get_release(json)
       # TODO: mock @album_release
       @album_release = Discogs::InsertRelease.perform(dc_release)
