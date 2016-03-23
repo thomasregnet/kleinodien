@@ -5,31 +5,31 @@ RSpec.describe CompilationIdentifier, type: :model do
     @ci = FactoryGirl.create(:compilation_identifier)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@ci).to be_valid
   end
 
-  it "is not valid without a release" do
+  it 'is not valid without a release' do
     @ci.release = nil
     expect(@ci).not_to be_valid
   end
-  
-  it "is not valid without a type"  do
+
+  it 'is not valid without a type' do
     @ci.type = nil
     expect(@ci).not_to be_valid
   end
 
-  it "is not valid without a code" do
+  it 'is not valid without a code' do
     @ci.code = nil
     expect(@ci).not_to be_valid
   end
 
-  it "is not valid with a blank code" do
+  it 'is not valid with a blank code' do
     @ci.code = ''
     expect(@ci).not_to be_valid
   end
 
-  it "must have a unique code" do
+  it 'must have a unique code' do
     clone = FactoryGirl.build(:compilation_identifier) do |c|
       c.release = @ci.release
       c.type    = @ci.type
@@ -37,10 +37,10 @@ RSpec.describe CompilationIdentifier, type: :model do
     end
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }.to raise_error(
-                                                ActiveRecord::RecordNotUnique)
+      ActiveRecord::RecordNotUnique)
   end
 
-  it "is valid with duplicate code and a disambiguation" do
+  it 'is valid with duplicate code and a disambiguation' do
     clone = FactoryGirl.build(:compilation_identifier) do |c|
       c.release        = @ci.release
       c.type           = @ci.type
@@ -50,7 +50,7 @@ RSpec.describe CompilationIdentifier, type: :model do
     expect(clone).to be_valid
   end
 
-  it "is not valid with duplicate code and duplicate disambiguation" do
+  it 'is not valid with duplicate code and duplicate disambiguation' do
     @ci.disambiguation = 'this code'
     @ci.save!
     clone = FactoryGirl.build(:compilation_identifier) do |c|
@@ -61,7 +61,6 @@ RSpec.describe CompilationIdentifier, type: :model do
     end
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }.to raise_error(
-                                                ActiveRecord::RecordNotUnique)
+      ActiveRecord::RecordNotUnique)
   end
-  
 end

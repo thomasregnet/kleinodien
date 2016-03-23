@@ -12,7 +12,7 @@ RSpec.describe CompilationHead, type: :model do
     @c_head = FactoryGirl.create(:compilation_head)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@c_head).to be_valid
   end
 
@@ -34,19 +34,19 @@ RSpec.describe CompilationHead, type: :model do
     expect { @c_head.save! }.not_to raise_error
   end
 
-  it_behaves_like "a model with companies" do
+  it_behaves_like 'a model with companies' do
     let(:factory) { :compilation_head_with_companies }
   end
 
-  it_behaves_like "a model with countries" do
+  it_behaves_like 'a model with countries' do
     let(:factory) { :compilation_head_with_countries }
   end
 
-  it_behaves_like "a model with credits" do
+  it_behaves_like 'a model with credits' do
     let(:factory) { :compilation_head_with_credits }
   end
 
-  it_behaves_like "a model with labels" do
+  it_behaves_like 'a model with labels' do
     let(:factory) { :compilation_head_with_labels }
   end
 
@@ -56,9 +56,9 @@ RSpec.describe CompilationHead, type: :model do
 
   it_behaves_like 'a model with many References' do
     let(:factory) { :compilation_head_with_many_references }
-  end  
+  end
 
-  it_behaves_like "a model with disambiguations" do
+  it_behaves_like 'a model with disambiguations' do
     let(:factory) { :compilation_head }
     let(:object) { @c_head }
     let(:naming) { 'title' }
