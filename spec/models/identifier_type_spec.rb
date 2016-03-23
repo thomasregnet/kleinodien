@@ -18,11 +18,11 @@ RSpec.describe IdentifierType, type: :model do
     other_id_type = IdentifierType.new(name: @id_type.name)
     expect(other_id_type).not_to be_valid
 
-    regexp = %r{
+    regexp = /
       duplicate\s key\s value\s violates\s unique\s constraint
       \s
       "index_identifier_types_on_lower_name"
-    }x
+    /x
     expect { other_id_type.save! validate: false }.to raise_error(regexp)
   end
 
@@ -30,11 +30,11 @@ RSpec.describe IdentifierType, type: :model do
     other_id_type = IdentifierType.new(name: @id_type.name.upcase)
     expect(other_id_type).not_to be_valid
 
-    regexp = %r{
+    regexp = /
       duplicate\s key\s value\s violates\s unique\s constraint
       \s
       "index_identifier_types_on_lower_name"
-    }x
+    /x
     expect { other_id_type.save! validate: false }.to raise_error(regexp)
   end
 end

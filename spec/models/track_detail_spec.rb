@@ -5,32 +5,32 @@ RSpec.describe TrackDetail, type: :model do
     @attr = FactoryGirl.create(:track_detail)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@attr).to be_valid
   end
 
-  it "is not valid without a track" do
+  it 'is not valid without a track' do
     @attr.track = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
       .to raise_error(/ERROR:  null value in column "track_id"/)
   end
-  
-  it "is not valid without a kind" do
+
+  it 'is not valid without a kind' do
     @attr.kind = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
       .to raise_error(/ERROR:  null value in column "trf_attribute_kind_id"/)
   end
-  
-  it "is not valid without a no" do
+
+  it 'is not valid without a no' do
     @attr.no = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
       .to raise_error(/ERROR:  null value in column "no"/)
   end
 
-  it "must have a unique pair of track_id and no" do
+  it 'must have a unique pair of track_id and no' do
     clone = TrackDetail.new do |c|
       c.track = @attr.track
       c.kind  = @attr.kind

@@ -6,11 +6,11 @@ RSpec.describe MovieRelease, type: :model do
     @movie_release = FactoryGirl.create(:movie_release)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@movie_release).to be_valid
   end
 
-  it_behaves_like "a piece" do
+  it_behaves_like 'a piece' do
     let(:piece) { @movie_release }
   end
 end

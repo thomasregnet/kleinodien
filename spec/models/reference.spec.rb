@@ -43,7 +43,7 @@ RSpec.describe Reference, type: :model do
     end
   end
 
-    describe 'without a type' do
+  describe 'without a type' do
     before(:each) do
       @src_ident.type = nil
     end

@@ -6,11 +6,11 @@ RSpec.describe PodcastEpisodeRelease, type: :model do
     @pe_release = FactoryGirl.create(:podcast_episode_release)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@pe_release).to be_valid
   end
 
-  it_behaves_like "a piece" do
+  it_behaves_like 'a piece' do
     let(:piece) { @pe_release }
   end
 end

@@ -6,11 +6,11 @@ RSpec.describe Station, type: :model do
     @station = FactoryGirl.create(:station)
   end
 
-  it "is valid with valid parameters" do
+  it 'is valid with valid parameters' do
     expect(@station).to be_valid
   end
 
-  it_behaves_like "a model with disambiguations" do
+  it_behaves_like 'a model with disambiguations' do
     let(:factory) { :station }
     let(:object) { @station }
     let(:naming) { 'name' }
