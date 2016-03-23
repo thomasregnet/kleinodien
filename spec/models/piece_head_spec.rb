@@ -12,7 +12,7 @@ RSpec.describe PieceHead, type: :model do
     @ph = FactoryGirl.create(:piece_head)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@ph).to be_valid
   end
 
@@ -34,36 +34,36 @@ RSpec.describe PieceHead, type: :model do
     expect { @ph.save! }.not_to raise_error
   end
 
-  it "is not valid without a type" do
+  it 'is not valid without a type' do
     @ph.type = nil
     expect(@ph).not_to be_valid
   end
 
-  it_behaves_like "a model with companies" do
+  it_behaves_like 'a model with companies' do
     let(:factory) { :piece_head_with_companies }
   end
 
-  it_behaves_like "a model with countries" do
+  it_behaves_like 'a model with countries' do
     let(:factory) { :piece_head_with_countries }
   end
 
-  it_behaves_like "a model with credits" do
+  it_behaves_like 'a model with credits' do
     let(:factory) { :piece_head_with_credits }
   end
 
-  it_behaves_like "a model with labels" do
+  it_behaves_like 'a model with labels' do
     let(:factory) { :piece_head_with_labels }
   end
 
-  it_behaves_like "a model with a Reference" do
+  it_behaves_like 'a model with a Reference' do
     let(:factory) { :piece_head_with_a_reference }
   end
 
-  it_behaves_like "a model with many References" do
+  it_behaves_like 'a model with many References' do
     let(:factory) { :piece_head_with_many_references }
-  end  
+  end
 
-  it_behaves_like "a model with disambiguations" do
+  it_behaves_like 'a model with disambiguations' do
     let(:factory) { :piece_head }
     let(:object) { @ph }
     let(:naming) { 'title' }

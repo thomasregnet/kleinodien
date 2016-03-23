@@ -6,11 +6,11 @@ RSpec.describe PodcastEpisodeHead, type: :model do
     @pe_head = FactoryGirl.create(:podcast_episode_head)
   end
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(@pe_head).to be_valid
   end
 
-  it_behaves_like "a model with disambiguations" do
+  it_behaves_like 'a model with disambiguations' do
     let(:factory) { :podcast_episode_head }
     let(:object) { @pe_head }
     let(:naming) { 'title' }

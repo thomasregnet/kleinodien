@@ -50,13 +50,13 @@ RSpec.describe CrFormat, type: :model do
     end
     expect(clone).not_to be_valid
 
-    regexp = %r{
+    regexp = /
       duplicate\s key
       .+
       violates\s unique\s constraint
       \s
       "index_cr_formats_on_compilation_release_id_and_no"
-    }x
+    /x
     expect { clone.save! validate: false }.to raise_error(regexp)
   end
 

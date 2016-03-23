@@ -47,7 +47,7 @@ RSpec.describe Track, type: :model do
   context 'with duration' do
     before(:each) do
       @track = FactoryGirl.create(:track)
-      @track.duration = Duration.new(311000, 'second')
+      @track.duration = Duration.new(311_000, 'second')
     end
 
     it 'is valid' do
