@@ -5,8 +5,8 @@ RSpec.describe Discogs::InsertIdentifiers, type: :model do
   context 'Dead Human Collection' do
     before(:all) do
       DatabaseCleaner.start
-      
-      json = DiscogsTestHelper.get_discogs_data('releases', 4462260)
+
+      json = DiscogsTestHelper.get_discogs_data('releases', 4_462_260)
       dc_release = KleinodienDiscogs.get_release(json)
       @album_release = FactoryGirl.create(:album_release)
       Discogs::InsertIdentifiers.perform(dc_release.identifiers, @album_release)

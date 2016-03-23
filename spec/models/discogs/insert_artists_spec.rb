@@ -6,7 +6,7 @@ RSpec.describe Discogs::InsertArtists, type: :model do
     before(:all) do
       DatabaseCleaner.start
 
-      json = DiscogsTestHelper.get_discogs_data('releases', 940468)
+      json = DiscogsTestHelper.get_discogs_data('releases', 940_468)
       dc_release = KleinodienDiscogs.get_release(json)
       @artist_credit = Discogs::InsertArtists.perform(dc_release.artists)
     end
@@ -20,11 +20,11 @@ RSpec.describe Discogs::InsertArtists, type: :model do
     end
   end
 
-    context 'Jello Biafra With Nomeansno' do
+  context 'Jello Biafra With Nomeansno' do
     before(:all) do
       DatabaseCleaner.start
 
-      json = DiscogsTestHelper.get_discogs_data('releases', 1083888)
+      json = DiscogsTestHelper.get_discogs_data('releases', 1_083_888)
       dc_release = KleinodienDiscogs.get_release(json)
       @artist_credit = Discogs::InsertArtists.perform(dc_release.artists)
     end

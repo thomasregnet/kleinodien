@@ -5,8 +5,8 @@ RSpec.describe Discogs::InsertCompanies, type: :model do
   context 'AC/DC - Highway To Hell' do
     before(:all) do
       DatabaseCleaner.start
-      
-      json = DiscogsTestHelper.get_discogs_data('releases', 940468)
+
+      json = DiscogsTestHelper.get_discogs_data('releases', 940_468)
       dc_release = KleinodienDiscogs.get_release(json)
       @release = Discogs::InsertRelease.perform(dc_release)
       @companies = @release.companies

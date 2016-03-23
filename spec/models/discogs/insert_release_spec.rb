@@ -20,7 +20,7 @@ RSpec.describe Discogs::InsertRelease, type: :model do
     before(:all) do
       DatabaseCleaner.start
 
-      json = DiscogsTestHelper.get_discogs_data('releases', 940468)
+      json = DiscogsTestHelper.get_discogs_data('releases', 940_468)
       @dc_release = KleinodienDiscogs.get_release(json)
       @release = Discogs::InsertRelease.perform(@dc_release)
     end
@@ -36,7 +36,7 @@ RSpec.describe Discogs::InsertRelease, type: :model do
     it 'can be inserted only once' do
       expect(Discogs::InsertRelease.perform(@dc_release)).not_to be true
     end
-    
+
     after(:all) do
       DatabaseCleaner.clean
     end

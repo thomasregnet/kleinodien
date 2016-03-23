@@ -6,7 +6,7 @@ RSpec.describe 'Iron Maiden - Killers' do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 4614763)
+    json = DiscogsTestHelper.get_discogs_data('release', 4_614_763)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end
@@ -21,5 +21,4 @@ RSpec.describe 'Iron Maiden - Killers' do
     let(:discogs_id)         { '4614763' }
     let(:discogs_master_id)  { '14360' }
   end
-
 end

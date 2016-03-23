@@ -6,7 +6,7 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 1083888)
+    json = DiscogsTestHelper.get_discogs_data('release', 1_083_888)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end
@@ -32,7 +32,7 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
     expect(participant.join_phrase).to be_nil
     expect(participant.artist.name).to eq('Nomeansno')
   end
-  
+
   it 'has imported the tracks' do
     tracks = @album_release.tracks
     expect(tracks.length).to eq(8)
@@ -46,7 +46,6 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
     expect(track.release.title).to eq('Chew')
     expect(track.position).to eq('6')
 
-
     track = tracks[7]
     expect(track.release.title).to eq("The Myth Is Real - Let's Eat")
     expect(track.position).to eq('8')
@@ -59,7 +58,6 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
     label = labels[0]
     expect(label.company.name).to eq('Alternative Tentacles')
     expect(label.catalog_no).to eq('VIRUS 85CD')
-
   end
 
   after(:all) { DatabaseCleaner.clean }

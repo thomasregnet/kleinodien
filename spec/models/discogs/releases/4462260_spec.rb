@@ -6,14 +6,14 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 4462260)
+    json = DiscogsTestHelper.get_discogs_data('release', 4_462_260)
     dc_release = KleinodienDiscogs.get_release(json)
     @album_release = Discogs::InsertRelease.perform(dc_release)
   end
 
   it_behaves_like 'an AlbumRelease imported from discogs' do
-    let(:album_release)      { @album_release }
-    let(:title)            { 'Dead Human Collection: 25 Years Of Death Metal' }
+    let(:album_release) { @album_release }
+    let(:title) { 'Dead Human Collection: 25 Years Of Death Metal' }
     let(:artist_credit_name) { 'Cannibal Corpse' }
     let(:country)            { 'Europe' }
     let(:date)               { '2013-03-29' }
@@ -22,7 +22,7 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     let(:discogs_master_id)  { '543219' }
   end
 
-  it "has imported the formats" do
+  it 'has imported the formats' do
     formats = @album_release.formats
 
     format = formats[0]
@@ -48,7 +48,7 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     expect(format.details[1].kind.name).to eq('Picture Disc')
     expect(format.details[2].kind.name).to eq('Album')
   end
-  
+
   it 'has imported the tracks' do
     tracks = @album_release.tracks
 
@@ -57,9 +57,9 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     expect(track.release.title).to eq('Shredded Humans')
 
     track = tracks[3]
-    expect(track.duration.mmss).to   eq    '2:04'
+    expect(track.duration.mmss).to   eq '2:04'
     expect(track.duration.hhmmss).to eq '0:02:04'
-    
+
     track = tracks[20]
     expect(track.heading).to eq('Cd 2')
     expect(track.release.title).to eq('Devoured By Vermin')
