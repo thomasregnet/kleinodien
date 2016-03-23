@@ -49,8 +49,15 @@ RSpec.describe CrFormat, type: :model do
       c.kind     = @cr_format.kind
     end
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }
-      .to raise_error(/duplicate key value violates unique constraint "index_cr_formats_on_compilation_release_id_and_no"/)
+
+    regexp = %r{
+      duplicate\s key
+      .+
+      violates\s unique\s constraint
+      \s
+      "index_cr_formats_on_compilation_release_id_and_no"
+    }x
+    expect { clone.save! validate: false }.to raise_error(regexp)
   end
 
   context 'with details' do
