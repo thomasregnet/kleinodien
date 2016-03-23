@@ -6,9 +6,8 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
   before(:all) do
     DatabaseCleaner.start
 
-    json = DiscogsTestHelper.get_discogs_data('release', 1_083_888)
-    dc_release = KleinodienDiscogs.get_release(json)
-    @album_release = Discogs::InsertRelease.perform(dc_release)
+    @album_release = DiscogsTestHelper.insert_release(1_083_888)
+    @participants  = @album_release.head.artist_credit.participants
   end
 
   it_behaves_like 'an AlbumRelease imported from discogs' do
@@ -22,15 +21,26 @@ RSpec.describe 'Jello Biafra With Nomeansno from Discogs' do
     let(:discogs_master_id)  { '32000' }
   end
 
-  it 'has the right participants' do
-    participants = @album_release.head.artist_credit.participants
-    participant = participants[0]
-    expect(participant.join_phrase).to eq('With')
-    expect(participant.artist.name).to eq('Jello Biafra')
+  describe '#participants' do
+    context 'first' do
+      specify '#join_phrase' do
+        expect(@participants.first.join_phrase).to eq('With')
+      end
 
-    participant = participants[1]
-    expect(participant.join_phrase).to be_nil
-    expect(participant.artist.name).to eq('Nomeansno')
+      specify '#name' do
+        expect(@participants.first.artist.name).to eq('Jello Biafra')
+      end
+    end
+
+    context 'last' do
+      specify '#join_phrase' do
+        expect(@participants.last.join_phrase).to be nil
+      end
+
+      specify '#name' do
+        expect(@participants.last.artist.name).to eq('Nomeansno')
+      end
+    end
   end
 
   it 'has imported the tracks' do
