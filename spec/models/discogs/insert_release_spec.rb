@@ -3,7 +3,7 @@ require 'discogs_test_helper'
 
 RSpec.describe Discogs::InsertRelease, type: :model do
   context 'interface' do
-    before (:each) do
+    before(:each) do
       @insert_release = Discogs::InsertRelease.new('dummy data')
     end
 
