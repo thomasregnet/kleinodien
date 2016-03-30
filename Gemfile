@@ -29,9 +29,8 @@ gem 'kleinodien_fill_media',
     branch: 'master'
 
 gem 'kleinodien_discogs',
-    '0.0.28',
     git:    '/home/ossi/oStuff/develop/kleinodien_discogs',
-    branch: 'master'
+    branch: 'develop'
 
 gem 'kleinodien_omdb',
     '0.0.2',

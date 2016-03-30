@@ -14,8 +14,8 @@ GIT
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: 4c7a9165b15d70fb36ffb73f33aa62effc7c5247
-  branch: master
+  revision: a948c23a243f85da414b5c1c3aa6271ad7e5b748
+  branch: develop
   specs:
     kleinodien_discogs (0.0.28)
 
@@ -352,7 +352,7 @@ DEPENDENCIES
   jquery-rails
   kleinodien_brainz (= 0.0.8)!
   kleinodien_date_time (= 0.0.5)!
-  kleinodien_discogs (= 0.0.28)!
+  kleinodien_discogs!
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
   kleinodien_util (= 0.0.1)!
