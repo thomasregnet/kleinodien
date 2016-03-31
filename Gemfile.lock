@@ -14,10 +14,10 @@ GIT
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: a948c23a243f85da414b5c1c3aa6271ad7e5b748
+  revision: daeb553d79fd42281ced789d1fb76ea0842baf2a
   branch: develop
   specs:
-    kleinodien_discogs (0.0.28)
+    kleinodien_discogs (0.0.29)
 
 GIT
   remote: /home/ossi/oStuff/develop/kleinodien_fill_media
