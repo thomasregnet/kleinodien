@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310195918) do
+ActiveRecord::Schema.define(version: 20160404185507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -471,7 +471,7 @@ ActiveRecord::Schema.define(version: 20160310195918) do
   end
 
   create_table "sources", primary_key: "name", force: :cascade do |t|
-    t.text     "description"
+    t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -549,7 +549,6 @@ ActiveRecord::Schema.define(version: 20160310195918) do
 
   add_foreign_key "artist_credits", "data_suppliers"
   add_foreign_key "artists", "\"references\"", column: "reference_id"
-  add_foreign_key "artists", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "artists_references", "\"references\"", column: "reference_id"
   add_foreign_key "artists_references", "artists"
   add_foreign_key "ch_companies", "companies"
