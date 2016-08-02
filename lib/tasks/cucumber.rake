@@ -17,7 +17,12 @@ begin
     Cucumber::Rake::Task.new({:ok => 'test:prepare'}, 'Run features that should pass') do |t|
       t.binary = vendored_cucumber_bin # If nil, the gem's binary is used.
       t.fork = true # You may get faster startup if you set this to false
-      t.profile = 'default'
+      ### after upgrade to rails 5.0.0
+      ### .../gems/railties-5.0.0/lib/rails/test_unit/minitest_plugin.rb:57:in
+      ### `plugin_rails_options': invalid option: --profile
+      ### (OptionParser::InvalidOption)
+      ### so this was commented out
+      ### t.profile = 'default'
     end
 
     Cucumber::Rake::Task.new({:wip => 'test:prepare'}, 'Run features that are being worked on') do |t|
