@@ -5,10 +5,7 @@ require 'shared_examples_for_album_releases_imported_from_discogs'
 RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
   before(:all) do
     DatabaseCleaner.start
-
-    json = DiscogsTestHelper.get_discogs_data('release', 4_462_260)
-    dc_release = KleinodienDiscogs.get_release(json)
-    @album_release = Discogs::InsertRelease.perform(dc_release)
+    @album_release = DiscogsTestHelper.insert_release(4_462_260)
   end
 
   it_behaves_like 'an AlbumRelease imported from discogs' do
