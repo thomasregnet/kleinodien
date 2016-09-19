@@ -6,10 +6,7 @@ require 'shared_examples_for_album_releases_imported_from_discogs'
 RSpec.describe 'Various ‎– Judgment Night - Music From The Motion Picture' do
   before(:all) do
     DatabaseCleaner.start
-
-    json = DiscogsTestHelper.get_discogs_data('release', 612_384)
-    dc_release = KleinodienDiscogs.get_release(json)
-    @album_release = Discogs::InsertRelease.perform(dc_release)
+    @album_release = DiscogsTestHelper.insert_release(612_384)
   end
 
   it_behaves_like 'an AlbumRelease imported from discogs' do
