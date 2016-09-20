@@ -16,11 +16,17 @@ module Discogs
       #       artists to the Artist model
 
       dc_artist_name = @dc_artist.name
-      artist = Artist.find_by_reference(@dc_artist.id, 'Discogs')
-      # TODO: create artist only if no one was found
+      #artist = Artist.find_by_reference(@dc_artist.id, 'Discogs')
+      artist = Artist.find_by(
+        source_name:  Source::Discogs.name,
+        source_ident: @dc_artist.id
+      )
+
       artist = Artist.create!(
         name:        dc_artist_name,
-        reference:   create_artist_reference(@dc_artist.id)
+        #reference:   create_artist_reference(@dc_artist.id)
+        source_name:  Source::Discogs.name,
+        source_ident: @dc_artist.id
       ) unless artist
 
       @artist_credit.participants.build(
