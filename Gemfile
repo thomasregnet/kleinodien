@@ -46,7 +46,7 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', '~> 4.5' #, require: false
+  gem 'factory_girl_rails', '~> 4.5', require: false
 end
 
 group :development do

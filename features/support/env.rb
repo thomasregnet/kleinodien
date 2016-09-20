@@ -5,6 +5,7 @@
 # files.
 
 require 'cucumber/rails'
+require 'factory_girl_rails'
 
 require 'simplecov'
 SimpleCov.start
