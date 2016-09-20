@@ -17,6 +17,7 @@ module Discogs
 
       dc_artist_name = @dc_artist.name
       artist = Artist.find_by_reference(@dc_artist.id, 'Discogs')
+      # TODO: create artist only if no one was found
       artist = Artist.create!(
         name:        dc_artist_name,
         reference:   create_artist_reference(@dc_artist.id)
