@@ -40,15 +40,22 @@ module Brainz
     end
 
     def create_artist(brz_artist)
-      mbid = brz_artist.mbid
-      artist = Artist.find_by_reference(mbid, 'MusicBrainz')
-
+      #mbid = brz_artist.mbid
+      #artist = Artist.find_by_reference(mbid, 'MusicBrainz')
+      artist = Artist.find_by(
+        #            Source::Discogs.name,
+       source_name: Source::MusicBrainz.name,
+       source_ident: brz_artist.mbid
+      )
+      
       return artist if artist
 
       # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
       Artist.create!(
-        name:      brz_artist.name,
-        reference: create_artist_reference(brz_artist.id)
+        name:         brz_artist.name,
+        source_name:  Source::MusicBrainz.name,
+        source_ident: brz_artist.mbid,       
+        reference:    create_artist_reference(brz_artist.id)
       )
     end
 
