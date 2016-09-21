@@ -52,16 +52,16 @@ FactoryGirl.define do
       end
     end
 
-    factory :compilation_head_with_a_reference do
-      association :reference, factory: :ch_reference
-    end
+    # factory :compilation_head_with_a_reference do
+    #   association :reference, factory: :ch_reference
+    # end
 
-    factory :compilation_head_with_many_references do
-      after(:create) do |compilation_head|
-        compilation_head.references << FactoryGirl.create(:ch_reference)
-        compilation_head.references << FactoryGirl.create(:ch_reference)
-      end
-    end
+    # factory :compilation_head_with_many_references do
+    #   after(:create) do |compilation_head|
+    #     compilation_head.references << FactoryGirl.create(:ch_reference)
+    #     compilation_head.references << FactoryGirl.create(:ch_reference)
+    #   end
+    # end
 
     factory :album_head, class: AlbumHead do
       artist_credit

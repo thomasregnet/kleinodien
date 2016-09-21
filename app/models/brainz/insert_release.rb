@@ -27,14 +27,22 @@ module Brainz
     end
 
     def head
-      @head = AlbumHead.find_by_reference(
-        @brz_release.release_group.id, 'MusicBrainz'
-      ) && return
+      @head = find_head || create_head
+    end
 
-      @head = @artist_credit.compilations.create!(
+    def find_head
+      AlbumHead.find_by(
+        source_name: Source::MusicBrainz.name,
+        source_ident: @brz_release.release_group.id
+      )
+    end
+
+    def create_head
+      @artist_credit.compilations.create!(
         title:     @brz_release.title,
         type:      AlbumHead.to_s,
-        reference: create_head_reference
+        source_name: Source::MusicBrainz.name,
+        source_ident: @brz_release.release_group.id
       )
     end
 
