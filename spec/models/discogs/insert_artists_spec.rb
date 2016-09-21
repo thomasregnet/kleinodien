@@ -15,14 +15,24 @@ RSpec.describe Discogs::InsertArtists, type: :model do
       expect(@artist_credit.name).to eq('Jello Biafra With Nomeansno')
     end
 
-    it 'has the expected participants' do
-      participants = @artist_credit.participants
-      expect(participants[0].artist.name).to eq('Jello Biafra')
-      expect(participants[1].artist.name).to eq('Nomeansno')
-    end
-
     it 'has the expected joinparse' do
       expect(@artist_credit.participants[0].join_phrase).to eq('With')
+    end
+
+    specify 'first artist' do
+      artist = @artist_credit.participants[0].artist
+      expect(artist.name).to         eq 'Jello Biafra'
+      expect(artist.source_name).to  eq 'Discogs'
+      expect(artist.source_ident).to eq '37752'
+      expect(artist.source.name).to eq 'Discogs'
+    end
+
+    specify 'first artist' do
+      artist = @artist_credit.participants[1].artist
+      expect(artist.name).to         eq 'Nomeansno'
+      expect(artist.source_name).to  eq 'Discogs'
+      expect(artist.source_ident).to eq '133641'
+      expect(artist.source.name).to eq 'Discogs'
     end
 
     after(:all) do

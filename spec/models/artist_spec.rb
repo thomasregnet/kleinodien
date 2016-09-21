@@ -27,14 +27,15 @@ RSpec.describe Artist, type: :model do
       let(:factory) { :artist_with_many_references }
     end
   end
-  
+
   context 'with source' do
     before(:each) do
       @artist = FactoryGirl.create(:artist_brainz)
     end
-    
+
     it 'has the source set' do
       expect(@artist.source_name).to eq('MusicBrainz')
+      expect(@artist.source.name).to eq('MusicBrainz')
       expect(@artist.source_ident).to match(/^looks-like-an-artist-uuid-/)
     end
   end

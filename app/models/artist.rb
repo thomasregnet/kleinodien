@@ -1,6 +1,7 @@
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
   belongs_to :reference, class_name: ArtistReference
+  belongs_to :source, foreign_key: :source_name
   has_many :participants, inverse_of: :artist
   has_and_belongs_to_many :references,
                           class_name: ArtistReference,
