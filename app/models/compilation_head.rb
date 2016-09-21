@@ -1,23 +1,18 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
-  belongs_to :reference, class_name: ChReference
+  belongs_to :source, foreign_key: :source_name
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit
   has_many :labels, class_name: ChLabel
   has_and_belongs_to_many :countries
-  has_and_belongs_to_many :references,
-                          class_name: ChReference,
-                          join_table: :compilation_heads_references,
-                          association_foreign_key: :reference_id
 
   validates :title, presence: true
   validates :type, presence: true
   validates :title,
             uniqueness: {
-              scope:          [:type, :disambiguation, :reference],
+              scope:          [:type, :disambiguation, :source],
               case_sensitive: false
             }
-  validates :reference, uniqueness: true, allow_nil: true
 
   def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
     ChReference.joins(:compilation_head, :supplier).where(
@@ -31,16 +26,5 @@ class CompilationHead < ActiveRecord::Base
       identifier:     foreign_id,
       data_suppliers: { name: data_supplier }
     ).first
-  end
-
-  def self.find_by_reference(foreign_id, data_supplier_name)
-    ref = ChReference.joins(:compilation_head, :supplier).where(
-      identifier:     foreign_id,
-      data_suppliers: { name: data_supplier_name }
-    ).first
-
-    return unless ref
-
-    CompilationHead.find_by(reference_id: ref.id)
   end
 end

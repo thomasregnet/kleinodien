@@ -44,18 +44,25 @@ module Discogs
     end
 
     def album_head
-      @album_head = AlbumHead.find_by_reference(
-        @dc_release.master_id, 'Discogs'
-      )
-      return if @album_head
+      @album_head = find_album_head || create_album_head
+    end
 
-      @album_head = @artist_credit.compilations.create!(
-        title: @dc_release.title,
-        type:  AlbumHead.to_s,
-        reference: head_reference
+    def find_album_head
+      AlbumHead.find_by(
+        source_name: Source::Discogs.name,
+        source_ident: @dc_release.master_id
       )
     end
 
+    def create_album_head
+      @artist_credit.compilations.create!(
+        title: @dc_release.title,
+        type:  AlbumHead.to_s,
+        source_name: Source::Discogs.name,
+        source_ident: @dc_release.master_id
+      )
+    end
+    
     def companies
       Discogs::InsertCompanies.perform(@dc_release.companies, @album_release)
     end
