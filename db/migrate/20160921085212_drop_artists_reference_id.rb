@@ -1,0 +1,5 @@
+class DropArtistsReferenceId < ActiveRecord::Migration[5.0]
+  def change
+    remove_column :artists, :reference_id
+  end
+end
