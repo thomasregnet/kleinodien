@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404185507) do
+ActiveRecord::Schema.define(version: 20160921091340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,20 +29,10 @@ ActiveRecord::Schema.define(version: 20160404185507) do
     t.string   "disambiguation"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "reference_id"
     t.string   "source_name"
     t.string   "source_ident"
-    t.index "lower((name)::text)", name: "index_artists_on_lower_name", unique: true, where: "((disambiguation IS NULL) AND (reference_id IS NULL))", using: :btree
-    t.index "lower((name)::text), lower((disambiguation)::text)", name: "index_artists_on_lower_disambiguation_and_name", unique: true, where: "(reference_id IS NULL)", using: :btree
-    t.index ["reference_id"], name: "artists_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
-    t.index ["reference_id"], name: "index_artists_on_reference_id", using: :btree
-  end
-
-  create_table "artists_references", id: false, force: :cascade do |t|
-    t.integer "artist_id"
-    t.integer "reference_id"
-    t.index ["artist_id"], name: "index_artists_references_on_artist_id", using: :btree
-    t.index ["reference_id"], name: "index_artists_references_on_reference_id", using: :btree
+    t.index "lower((name)::text)", name: "index_artists_on_lower_name", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
+    t.index "lower((name)::text), lower((disambiguation)::text)", name: "index_artists_on_lower_disambiguation_and_name", unique: true, where: "(source_ident IS NULL)", using: :btree
   end
 
   create_table "ch_companies", force: :cascade do |t|
@@ -529,9 +519,7 @@ ActiveRecord::Schema.define(version: 20160404185507) do
   end
 
   add_foreign_key "artist_credits", "data_suppliers"
-  add_foreign_key "artists", "\"references\"", column: "reference_id"
-  add_foreign_key "artists_references", "\"references\"", column: "reference_id"
-  add_foreign_key "artists_references", "artists"
+  add_foreign_key "artists", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "ch_companies", "companies"
   add_foreign_key "ch_companies", "company_roles"
   add_foreign_key "ch_companies", "compilation_heads"

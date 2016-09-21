@@ -40,10 +40,7 @@ module Brainz
     end
 
     def create_artist(brz_artist)
-      #mbid = brz_artist.mbid
-      #artist = Artist.find_by_reference(mbid, 'MusicBrainz')
       artist = Artist.find_by(
-        #            Source::Discogs.name,
        source_name: Source::MusicBrainz.name,
        source_ident: brz_artist.mbid
       )
@@ -55,13 +52,6 @@ module Brainz
         name:         brz_artist.name,
         source_name:  Source::MusicBrainz.name,
         source_ident: brz_artist.mbid,       
-        reference:    create_artist_reference(brz_artist.id)
-      )
-    end
-
-    def create_artist_reference(brz_artist_id)
-      ArtistReference.create_with_supplier_name!(
-        brz_artist_id, 'MusicBrainz'
       )
     end
   end
