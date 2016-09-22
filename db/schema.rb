@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922074414) do
+ActiveRecord::Schema.define(version: 20160922084803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,13 +135,6 @@ ActiveRecord::Schema.define(version: 20160922074414) do
     t.integer "compilation_release_id", null: false
     t.integer "country_id",             null: false
     t.index ["compilation_release_id", "country_id"], name: "index_compilation_releases_countries_no_and_ids", unique: true, using: :btree
-  end
-
-  create_table "compilation_releases_references", id: false, force: :cascade do |t|
-    t.integer "compilation_release_id"
-    t.integer "reference_id"
-    t.index ["compilation_release_id"], name: "index_compilation_releases_references_on_compilation_release_id", using: :btree
-    t.index ["reference_id"], name: "index_compilation_releases_references_on_reference_id", using: :btree
   end
 
   create_table "countries", force: :cascade do |t|
@@ -530,8 +523,6 @@ ActiveRecord::Schema.define(version: 20160922074414) do
   add_foreign_key "compilation_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
-  add_foreign_key "compilation_releases_references", "\"references\"", column: "reference_id"
-  add_foreign_key "compilation_releases_references", "compilation_releases"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_piece_releases", "countries"
