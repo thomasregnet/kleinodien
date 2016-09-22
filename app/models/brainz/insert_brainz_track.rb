@@ -31,12 +31,6 @@ module Brainz
       )
     end
 
-    def reference
-      PrReference.create_with_supplier_name!(
-        @brz_track.recording.id, 'MusicBrainz'
-      )
-    end
-
     def artist_credit
       brz_artist_credit = @brz_track.recording.artist_credit
       # TODO: ArtistCredit of the Recording for SongHead
@@ -46,7 +40,10 @@ module Brainz
     end
 
     def perform_song_release
-      @song_release = @song_head.releases.create!(reference: reference)
+      @song_release = @song_head.releases.create(
+        source_name: Source::MusicBrainz.name,
+        source_ident: @brz_track.mbid
+      )
     end
   end
 end
