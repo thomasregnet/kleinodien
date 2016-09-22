@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922095725) do
+ActiveRecord::Schema.define(version: 20160922101919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -370,16 +370,6 @@ ActiveRecord::Schema.define(version: 20160922095725) do
     t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
   end
 
-  create_table "references", force: :cascade do |t|
-    t.integer  "data_supplier_id", null: false
-    t.string   "identifier",       null: false
-    t.string   "type",             null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["data_supplier_id", "identifier", "type"], name: "index_src_id_on_data_src_ident_type", unique: true, using: :btree
-    t.index ["data_supplier_id"], name: "index_references_on_data_supplier_id", using: :btree
-  end
-
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
     t.integer  "no",         null: false
@@ -546,8 +536,6 @@ ActiveRecord::Schema.define(version: 20160922095725) do
   add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
-  add_foreign_key "references", "data_suppliers"
-  add_foreign_key "references", "data_suppliers"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "track_details", "tracks"
   add_foreign_key "tracks", "compilation_releases"
