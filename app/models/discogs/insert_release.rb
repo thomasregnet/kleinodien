@@ -29,13 +29,19 @@ module Discogs
     private
 
     def already_exists?
-      AlbumRelease.with_discogs_id_exists? @dc_release.id
+      #AlbumRelease.with_discogs_id_exists? @dc_release.id
+      AlbumRelease.find_by(
+        source_name: Source::Discogs.name,
+        source_ident: @dc_release.id
+      )
     end
 
     def album_release
       @album_release = @album_head.releases.create!(
         date:      IncompleteDate.from_string(@dc_release.released),
-        reference: reference
+        #reference: reference
+        source_name: Source::Discogs.name,
+        source_ident: @dc_release.id
       )
     end
 
@@ -62,7 +68,7 @@ module Discogs
         source_ident: @dc_release.master_id
       )
     end
-    
+
     def companies
       Discogs::InsertCompanies.perform(@dc_release.companies, @album_release)
     end
@@ -92,16 +98,6 @@ module Discogs
 
     def labels
       Discogs::InsertLabels.perform(@dc_release.labels, @album_release)
-    end
-
-    def reference
-      id = @dc_release.id || return
-      CrReference.create_with_supplier_name!(id, 'Discogs')
-    end
-
-    def head_reference
-      master_id = @dc_release.master_id || return
-      ChReference.create_with_supplier_name!(master_id, 'Discogs')
     end
 
     def songs

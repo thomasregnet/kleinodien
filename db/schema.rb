@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921102758) do
+ActiveRecord::Schema.define(version: 20160922074414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,11 +124,11 @@ ActiveRecord::Schema.define(version: 20160921102758) do
     t.datetime "updated_at",          null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.integer  "reference_id"
+    t.string   "source_name"
+    t.string   "source_ident"
     t.index "compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
+    t.index "type, compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_lower_version", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id", unique: true, using: :btree
-    t.index ["reference_id"], name: "compilation_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
-    t.index ["reference_id"], name: "index_compilation_releases_on_reference_id", using: :btree
   end
 
   create_table "compilation_releases_countries", id: false, force: :cascade do |t|
@@ -526,8 +526,8 @@ ActiveRecord::Schema.define(version: 20160921102758) do
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_identifiers", "compilation_releases"
   add_foreign_key "compilation_identifiers", "identifier_types"
-  add_foreign_key "compilation_releases", "\"references\"", column: "reference_id"
   add_foreign_key "compilation_releases", "compilation_heads"
+  add_foreign_key "compilation_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_releases_references", "\"references\"", column: "reference_id"
