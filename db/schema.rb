@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922084803) do
+ActiveRecord::Schema.define(version: 20160922092355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,20 +313,12 @@ ActiveRecord::Schema.define(version: 20160922084803) do
     t.string   "type",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "reference_id"
-    t.index "artist_credit_id, type, lower((title)::text)", name: "index_piece_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (reference_id IS NULL))", using: :btree
+    t.string   "source_name"
+    t.string   "source_ident"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
-    t.index ["reference_id"], name: "index_piece_heads_on_reference_id", using: :btree
-    t.index ["reference_id"], name: "index_piece_heads_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
     t.index ["season_id"], name: "index_piece_heads_on_season_id", using: :btree
-  end
-
-  create_table "piece_heads_references", id: false, force: :cascade do |t|
-    t.integer "piece_head_id"
-    t.integer "reference_id"
-    t.index ["piece_head_id"], name: "index_piece_heads_references_on_piece_head_id", using: :btree
-    t.index ["reference_id"], name: "index_piece_heads_references_on_reference_id", using: :btree
+    t.index ["source_name"], name: "index_piece_heads_source_name", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "piece_releases", force: :cascade do |t|
@@ -549,11 +541,9 @@ ActiveRecord::Schema.define(version: 20160922084803) do
   add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
-  add_foreign_key "piece_heads", "\"references\"", column: "reference_id"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
-  add_foreign_key "piece_heads_references", "\"references\"", column: "reference_id"
-  add_foreign_key "piece_heads_references", "piece_heads"
+  add_foreign_key "piece_heads", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "piece_releases", "\"references\"", column: "reference_id"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
