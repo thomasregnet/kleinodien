@@ -25,7 +25,7 @@
 <ul>
   <%= render "credits", credits: @album_release.credits %>
 </ul>
-<% if  @album_release.reference %>
-  <h2>reference</h2>
-  <%= @album_release.reference.supplier.name %>: <%= @album_release.reference.identifier %>
+<% if  @album_release.source %>
+  <h2>source</h2>
+  <%= @album_release.source.name %>: <%= @album_release.source_ident %>
 <% end %>

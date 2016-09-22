@@ -46,12 +46,6 @@ module Brainz
       )
     end
 
-    def create_head_reference
-      ChReference.create_with_supplier_name!(
-        @brz_release.release_group.id, 'MusicBrainz'
-      )
-    end
-
     def media
       Brainz::InsertMediaTracks.perform(@brz_release.fill_media, @release)
     end
@@ -62,13 +56,9 @@ module Brainz
       )
       @release = @head.releases.create!(
         date:      date,
-        reference: create_release_reference
-      )
-    end
-
-    def create_release_reference
-      CrReference.create_with_supplier_name!(
-        @brz_release.id, 'MusicBrainz'
+        #reference: create_release_reference
+        source_name: Source::MusicBrainz.name,
+        source_ident: @brz_release.mbid
       )
     end
   end
