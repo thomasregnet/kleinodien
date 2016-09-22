@@ -1,8 +1,0 @@
-# Reference to the data-source of a PieceHead
-class PhReference < Reference
-  has_one :piece_head, foreign_key: 'reference_id'
-
-  def self.create_with_supplier_name!(foreign_id, supplier_name)
-    Reference.create_with_supplier_name!(self, foreign_id, supplier_name)
-  end
-end
