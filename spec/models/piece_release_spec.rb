@@ -3,8 +3,8 @@ require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_labels'
-require 'shared_examples_for_models_with_a_reference'
-require 'shared_examples_for_models_with_many_references'
+#require 'shared_examples_for_models_with_a_reference'
+#require 'shared_examples_for_models_with_many_references'
 require 'shared_examples_for_incomplete_dates'
 
 RSpec.describe PieceRelease, type: :model do
@@ -48,13 +48,13 @@ RSpec.describe PieceRelease, type: :model do
     let(:factory) { :piece_release_with_labels }
   end
 
-  it_behaves_like 'a model with a Reference' do
-    let(:factory) { :piece_release_with_a_reference }
-  end
+  # it_behaves_like 'a model with a Reference' do
+  #   let(:factory) { :piece_release_with_a_reference }
+  # end
 
-  it_behaves_like 'a model with many References' do
-    let(:factory) { :piece_release_with_many_references }
-  end
+  # it_behaves_like 'a model with many References' do
+  #   let(:factory) { :piece_release_with_many_references }
+  # end
 
   it_behaves_like 'a model with an IncompleteDate' do
     let(:factory) { :piece_release }

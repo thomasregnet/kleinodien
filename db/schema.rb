@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922092355) do
+ActiveRecord::Schema.define(version: 20160922095725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,19 +330,10 @@ ActiveRecord::Schema.define(version: 20160922092355) do
     t.datetime "updated_at",    null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.integer  "reference_id"
+    t.string   "source_name"
+    t.string   "source_ident"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
-    t.index ["piece_head_id"], name: "index_piece_releases_on_unique_piece_head_id", unique: true, where: "((version IS NULL) AND (reference_id IS NULL))", using: :btree
-    t.index ["reference_id"], name: "index_piece_releases_on_reference_id", using: :btree
-    t.index ["reference_id"], name: "index_piece_releases_reference_id", unique: true, where: "(reference_id IS NOT NULL)", using: :btree
     t.index ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
-  end
-
-  create_table "piece_releases_references", id: false, force: :cascade do |t|
-    t.integer "piece_release_id"
-    t.integer "reference_id"
-    t.index ["piece_release_id"], name: "index_piece_releases_references_on_piece_release_id", using: :btree
-    t.index ["reference_id"], name: "index_piece_releases_references_on_reference_id", using: :btree
   end
 
   create_table "pr_companies", force: :cascade do |t|
@@ -544,11 +535,9 @@ ActiveRecord::Schema.define(version: 20160922092355) do
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads", "sources", column: "source_name", primary_key: "name"
-  add_foreign_key "piece_releases", "\"references\"", column: "reference_id"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
+  add_foreign_key "piece_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
-  add_foreign_key "piece_releases_references", "\"references\"", column: "reference_id"
-  add_foreign_key "piece_releases_references", "piece_releases"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
   add_foreign_key "pr_companies", "piece_releases"
