@@ -13,18 +13,4 @@ class CompilationHead < ActiveRecord::Base
               scope:          [:type, :disambiguation, :source],
               case_sensitive: false
             }
-
-  def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
-    ChReference.joins(:compilation_head, :supplier).where(
-      identifier:     foreign_id,
-      data_suppliers: { name: data_supplier }
-    ).any?
-  end
-
-  def self.with_id_from_data_supplier(foreign_id, data_supplier)
-    ChReference.joins(:compilation_head, :supplier).where(
-      identifier:     foreign_id,
-      data_suppliers: { name: data_supplier }
-    ).first
-  end
 end
