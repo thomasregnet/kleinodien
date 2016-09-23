@@ -1,7 +1,5 @@
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
-#require 'shared_examples_for_models_with_a_reference'
-#require 'shared_examples_for_models_with_many_references'
 
 RSpec.describe Artist, type: :model do
   context 'common artist' do
@@ -18,14 +16,6 @@ RSpec.describe Artist, type: :model do
       let(:object) { @artist }
       let(:naming) { 'name' }
     end
-
-    # it_behaves_like 'a model with a Reference' do
-    #   let(:factory) { :artist_with_a_reference }
-    # end
-
-    # it_behaves_like 'a model with many References' do
-    #   let(:factory) { :artist_with_many_references }
-    # end
   end
 
   context 'with source' do

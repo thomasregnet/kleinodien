@@ -3,8 +3,6 @@ require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
-#require 'shared_examples_for_models_with_a_reference'
-#require 'shared_examples_for_models_with_many_references'
 require 'shared_examples_for_models_with_labels'
 
 RSpec.describe CompilationHead, type: :model do
@@ -49,14 +47,6 @@ RSpec.describe CompilationHead, type: :model do
   it_behaves_like 'a model with labels' do
     let(:factory) { :compilation_head_with_labels }
   end
-
-  # it_behaves_like 'a model with a Reference' do
-  #   let(:factory) { :compilation_head_with_a_reference }
-  # end
-
-  # it_behaves_like 'a model with many References' do
-  #   let(:factory) { :compilation_head_with_many_references }
-  # end
 
   it_behaves_like 'a model with disambiguations' do
     let(:factory) { :compilation_head }
