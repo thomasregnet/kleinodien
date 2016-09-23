@@ -52,17 +52,6 @@ FactoryGirl.define do
       end
     end
 
-    factory :piece_head_with_a_reference do
-      association :reference, factory: :ph_reference
-    end
-
-    factory :piece_head_with_many_references do
-      after(:create) do |piece_head|
-        piece_head.references << FactoryGirl.create(:ph_reference)
-        piece_head.references << FactoryGirl.create(:ph_reference)
-      end
-    end
-
     factory :movie_head, class: MovieHead do
       type 'MovieHead'
     end
