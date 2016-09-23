@@ -56,7 +56,6 @@ module Brainz
       )
       @release = @head.releases.create!(
         date:      date,
-        #reference: create_release_reference
         source_name: Source::MusicBrainz.name,
         source_ident: @brz_release.mbid
       )

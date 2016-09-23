@@ -8,12 +8,6 @@ class CompilationRelease < ActiveRecord::Base
              class_name: CompilationHead,
              foreign_key: :compilation_head_id
   belongs_to :source, foreign_key: :source_name
-  # belongs_to :reference,  class_name: CrReference
-  # has_and_belongs_to_many :references,
-  #                         class_name: CrReference,
-  #                         join_table: :compilation_releases_references,
-  #                         association_foreign_key: :reference_id
-
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
   has_many :formats,
@@ -27,27 +21,7 @@ class CompilationRelease < ActiveRecord::Base
 
   validates :head, presence: true
   validates :type, presence: true
-  # validates :reference, uniqueness: true, allow_nil: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
   delegate :title, to: :head
-
-  # def self.with_id_from_data_supplier_exists?(foreign_id, data_supplier)
-  #   CrReference.joins(:compilation_release, :supplier).where(
-  #     identifier: foreign_id,
-  #     data_suppliers: { name: data_supplier }
-  #   ).any?
-  # end
-
-  # def self.find_by_reference(identifier, data_supplier_name)
-  #   data_supplier = DataSupplier.find_by(name: data_supplier_name)
-  #   ref = CrReference.find_by(
-  #     identifier: identifier,
-  #     supplier:   data_supplier
-  #   )
-
-  #   return unless ref
-
-  #   CompilationRelease.find_by(reference_id: ref.id)
-  # end
 end
