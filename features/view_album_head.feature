@@ -9,5 +9,3 @@ Feature: View album head
     Then I will see the releases of that album
     And I will follow the link to the release
     Then I will see the contents of the album release
-    
-    
