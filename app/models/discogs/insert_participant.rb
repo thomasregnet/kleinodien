@@ -41,9 +41,5 @@ module Discogs
       join_phrase = @dc_artist.join
       return join_phrase unless join_phrase.blank?
     end
-
-    def create_artist_reference(dc_artist_id)
-      ArtistReference.create_with_supplier_name!(dc_artist_id, 'Discogs')
-    end
   end
 end
