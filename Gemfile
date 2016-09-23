@@ -56,7 +56,7 @@ group :development do
   gem 'rubocop'
   gem 'rails_best_practices'
   gem 'rubycritic', require: false
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 end
 
 group :test do
