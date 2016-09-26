@@ -4,6 +4,7 @@ require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
+require 'shared_examples_for_sources'
 
 RSpec.describe CompilationHead, type: :model do
   before(:each) do
@@ -52,5 +53,9 @@ RSpec.describe CompilationHead, type: :model do
     let(:factory) { :compilation_head }
     let(:object) { @c_head }
     let(:naming) { 'title' }
+  end
+
+  it_behaves_like 'an object with a source' do
+    let(:factory) { :compilation_head }
   end
 end

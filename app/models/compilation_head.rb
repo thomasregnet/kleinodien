@@ -8,6 +8,7 @@ class CompilationHead < ActiveRecord::Base
 
   validates :title, presence: true
   validates :type, presence: true
+  validates :source_name, uniqueness: { scope: :source_ident }
   validates :title,
             uniqueness: {
               scope:          [:type, :disambiguation, :source],
