@@ -4,6 +4,7 @@ require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
+require 'shared_examples_for_sources'
 
 RSpec.describe CompilationRelease, type: :model do
   context 'minimal CompilationRelease' do
@@ -107,5 +108,9 @@ RSpec.describe CompilationRelease, type: :model do
   it_behaves_like 'a model with an IncompleteDate' do
     let(:factory) { :compilation_release }
     let(:date_naming) { 'date' }
+  end
+
+  it_behaves_like 'an object with a source' do
+    let(:factory) { :compilation_release }
   end
 end
