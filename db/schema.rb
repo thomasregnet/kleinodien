@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927075441) do
+ActiveRecord::Schema.define(version: 20160927082950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20160927075441) do
     t.index "type, lower((title)::text)", name: "index_compilation_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
     t.index "type, lower((title)::text), lower((disambiguation)::text)", name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id", using: :btree
-    t.index ["source_name", "source_ident"], name: "index_compilation_heads_sorce_name_sorce_ident", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
+    t.index ["source_name", "source_ident", "type"], name: "index_compilation_heads_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "compilation_heads_countries", id: false, force: :cascade do |t|
