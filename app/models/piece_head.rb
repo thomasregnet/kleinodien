@@ -13,4 +13,8 @@ class PieceHead < ActiveRecord::Base
               scope: [:type, :disambiguation, :artist_credit_id, :source_name],
               case_sensitive: false
             }
+  # validates :source_name,
+  #           uniqueness: { scope: [:source_ident, :type] }
+  validates :source_ident,
+            uniqueness: { allow_blank: true, scope: [:source_name, :type] }
 end

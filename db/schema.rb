@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926084934) do
+ActiveRecord::Schema.define(version: 20160927075441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(version: 20160926084934) do
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
     t.index ["season_id"], name: "index_piece_heads_on_season_id", using: :btree
-    t.index ["source_name"], name: "index_piece_heads_source_name", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
+    t.index ["source_name", "source_ident", "type"], name: "index_piece_heads_source_name_source_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "piece_releases", force: :cascade do |t|

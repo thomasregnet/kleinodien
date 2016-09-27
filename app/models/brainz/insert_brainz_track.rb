@@ -27,7 +27,9 @@ module Brainz
     def find_or_create_song_head(brz_recording)
       @song_head = SongHead.find_or_create_by!(
         artist_credit: artist_credit,
-        title:         brz_recording.title
+        title:         brz_recording.title,
+        source_name:   Source::MusicBrainz.name,
+        source_ident:  brz_recording.mbid
       )
     end
 

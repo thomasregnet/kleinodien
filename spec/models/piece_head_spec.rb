@@ -4,6 +4,7 @@ require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_sources'
 
 RSpec.describe PieceHead, type: :model do
   before(:each) do
@@ -18,7 +19,8 @@ RSpec.describe PieceHead, type: :model do
     @s_head = FactoryGirl.build(
       :song_head,
       title:          @ph.title,
-      disambiguation: @ph.disambiguation
+      disambiguation: @ph.disambiguation,
+      source_ident:   nil
     )
     expect(@s_head).to be_valid
     expect { @s_head.save! }.not_to raise_error
@@ -57,5 +59,9 @@ RSpec.describe PieceHead, type: :model do
     let(:factory) { :piece_head }
     let(:object) { @ph }
     let(:naming) { 'title' }
+  end
+
+  it_behaves_like 'an object with a source' do
+    let(:factory) { :piece_head }
   end
 end
