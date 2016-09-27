@@ -13,4 +13,7 @@ class PieceRelease < ActiveRecord::Base
   has_and_belongs_to_many :countries
 
   delegate :title, to: :head
+
+  validates :source_ident,
+            uniqueness: { allow_blank: true, scope: [:source_name, :type] }
 end
