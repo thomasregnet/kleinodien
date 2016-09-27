@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927092128) do
+ActiveRecord::Schema.define(version: 20160927095538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(version: 20160927092128) do
     t.string   "source_name"
     t.string   "source_ident"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
+    t.index ["source_name", "source_ident", "type"], name: "index_piece_releases_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
     t.index ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
   end
 

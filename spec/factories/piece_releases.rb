@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :piece_release do
     association :head, factory: :piece_head
     type 'PieceRelease'
+    source_name Source::MusicBrainz.name
+    sequence(:source_ident) { |n| "looks-like-brainz-id-#{n}" }
 
     factory :piece_release_with_tracks do
       transient do
