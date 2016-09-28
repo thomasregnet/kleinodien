@@ -29,7 +29,6 @@ module Discogs
     private
 
     def already_exists?
-      #AlbumRelease.with_discogs_id_exists? @dc_release.id
       AlbumRelease.find_by(
         source_name: Source::Discogs.name,
         source_ident: @dc_release.id
