@@ -4,7 +4,10 @@ require 'cgi'
 class ImdbImporter
   def self.import_movie(html)
     doc = Nokogiri::HTML(html)
-    MovieHead.create!(title: title(doc))
+    MovieHead.create!(
+      title: title(doc),
+      source_name: Source::User.name
+    )
   end
 
   def self.import_tv_serial(html)
@@ -20,7 +23,10 @@ class ImdbImporter
       season.episodes.create!(
         title: link.content.strip,
         no:    div.search("meta[@itemprop*='episodeNumber']")
-          .first[:content].to_i)
+          .first[:content].to_i,
+        source_name: Source::User.name
+      )
+      
     end
     season
   end
