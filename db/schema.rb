@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927095538) do
+ActiveRecord::Schema.define(version: 20160928073711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20160927095538) do
     t.string   "type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "source_name"
+    t.string   "source_name",      null: false
     t.string   "source_ident"
     t.index "type, lower((title)::text)", name: "index_compilation_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
     t.index "type, lower((title)::text), lower((disambiguation)::text)", name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, where: "(source_ident IS NULL)", using: :btree
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160927095538) do
     t.datetime "updated_at",          null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.string   "source_name"
+    t.string   "source_name",         null: false
     t.string   "source_ident"
     t.index "compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
     t.index "type, compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_lower_version", unique: true, where: "(source_ident IS NULL)", using: :btree
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 20160927095538) do
     t.string   "type",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "source_name"
+    t.string   "source_name",      null: false
     t.string   "source_ident"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
@@ -332,7 +332,7 @@ ActiveRecord::Schema.define(version: 20160927095538) do
     t.datetime "updated_at",    null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.string   "source_name"
+    t.string   "source_name",   null: false
     t.string   "source_ident"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
     t.index ["source_name", "source_ident", "type"], name: "index_piece_releases_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
