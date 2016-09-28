@@ -19,16 +19,19 @@ class ImdbImporter
     season = tv_serial.seasons.create!(no: s_no)
     doc = Nokogiri::HTML(html)
     doc.search("div.eplist div[@itemprop*='episode']").each do |div|
-      link = div.search("a[@itemprop*='name']").first
-      season.episodes.create!(
-        title: link.content.strip,
-        no:    div.search("meta[@itemprop*='episodeNumber']")
-          .first[:content].to_i,
-        source_name: Source::User.name
-      )
-      
+      create_episode(season, div)
     end
     season
+  end
+
+  def self.create_episode(season, div)
+    title = div.search("a[@itemprop*='name']").first.content.strip
+    no    = div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i
+    season.episodes.create!(
+      title:       title,
+      no:          no,
+      source_name: Source::User.name
+    )
   end
 
   def self.title(doc)
