@@ -5,7 +5,7 @@ class PieceRelease < ActiveRecord::Base
               mapping: [%w(date date), %w(date_mask mask)]
 
   belongs_to :head, class_name: PieceHead, foreign_key: :piece_head_id
-  belongs_to :source, primary_key: :source_name
+  belongs_to :source, primary_key: :name, foreign_key: :source_name
   has_many :companies, class_name: PrCompany
   has_many :credits, class_name: PrCredit
   has_many :labels, class_name: PrLabel

@@ -32,16 +32,16 @@ module Brainz
 
     def find_head
       AlbumHead.find_by(
-        source_name: Source::MusicBrainz.name,
+        source:       Source::MusicBrainz,
         source_ident: @brz_release.release_group.id
       )
     end
 
     def create_head
       @artist_credit.compilations.create!(
-        title:     @brz_release.title,
-        type:      AlbumHead.to_s,
-        source_name: Source::MusicBrainz.name,
+        title:        @brz_release.title,
+        type:         AlbumHead.to_s,
+        source:       Source::MusicBrainz,
         source_ident: @brz_release.release_group.id
       )
     end
@@ -55,8 +55,8 @@ module Brainz
         @brz_release.release_group.first_release_date
       )
       @release = @head.releases.create!(
-        date:      date,
-        source_name: Source::MusicBrainz.name,
+        date:         date,
+        source:       Source::MusicBrainz,
         source_ident: @brz_release.mbid
       )
     end
