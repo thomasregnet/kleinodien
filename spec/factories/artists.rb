@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "artist ##{n}" }
 
     factory :artist_brainz do
-      source_name Source::MusicBrainz.name
+      source Source::MusicBrainz
       sequence(:source_ident) { |n| "looks-like-an-artist-uuid-#{n}" }
     end
 

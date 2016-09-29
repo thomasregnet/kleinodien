@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :compilation_head do
     sequence(:title) { |n| "compilation head ##{n}"}
     type 'CompilationHead'
-    source_name Source::MusicBrainz.name
+    source Source::MusicBrainz
     sequence(:source_ident) { |n| "looks-like-an-brainz-uuid-#{n}" }
     
     factory :compilation_head_with_companies do
