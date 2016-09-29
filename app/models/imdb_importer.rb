@@ -6,7 +6,8 @@ class ImdbImporter
     doc = Nokogiri::HTML(html)
     MovieHead.create!(
       title: title(doc),
-      source_name: Source::User.name
+      #source_name: Source::User.name
+      source: Source::User
     )
   end
 
@@ -30,7 +31,8 @@ class ImdbImporter
     season.episodes.create!(
       title:       title,
       no:          no,
-      source_name: Source::User.name
+      #source_name: Source::User.name
+      source: Source::User
     )
   end
 

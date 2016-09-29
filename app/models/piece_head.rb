@@ -1,6 +1,6 @@
 # A PieceHead my be a song, movie ...
 class PieceHead < ActiveRecord::Base
-  belongs_to :source, primary_key: :source_name
+  belongs_to :source, primary_key: :name, foreign_key: :source_name
   has_many :companies, class_name: PhCompany
   has_many :credits, class_name: PhCredit
   has_many :labels, class_name: PhLabel
@@ -13,8 +13,6 @@ class PieceHead < ActiveRecord::Base
               scope: [:type, :disambiguation, :artist_credit_id, :source_name],
               case_sensitive: false
             }
-  # validates :source_name,
-  #           uniqueness: { scope: [:source_ident, :type] }
   validates :source_ident,
             uniqueness: { allow_blank: true, scope: [:source_name, :type] }
 end
