@@ -41,7 +41,7 @@ module Brainz
 
     def create_artist(brz_artist)
       artist = Artist.find_by(
-        source_name: Source::MusicBrainz.name,
+        source:       Source::MusicBrainz,
         source_ident: brz_artist.mbid
       )
 
@@ -50,7 +50,7 @@ module Brainz
       # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
       Artist.create!(
         name:         brz_artist.name,
-        source_name:  Source::MusicBrainz.name,
+        source:       Source::MusicBrainz,
         source_ident: brz_artist.mbid
       )
     end
