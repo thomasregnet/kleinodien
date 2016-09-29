@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :compilation_release do
     association :head, factory: :compilation_head
     type "CompilationRelease"
-    source_name Source::MusicBrainz.name
+    source Source::MusicBrainz
     sequence(:source_ident) { |n| "looks-like-brinz-id-#{n}" }
  
     factory :compilation_release_with_companies do
