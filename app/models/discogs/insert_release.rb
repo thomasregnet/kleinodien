@@ -30,15 +30,15 @@ module Discogs
 
     def already_exists?
       AlbumRelease.find_by(
-        source_name: Source::Discogs.name,
+        source:       Source::Discogs,
         source_ident: @dc_release.id
       )
     end
 
     def album_release
       @album_release = @album_head.releases.create!(
-        date:      IncompleteDate.from_string(@dc_release.released),
-        source_name: Source::Discogs.name,
+        date:         IncompleteDate.from_string(@dc_release.released),
+        source:       Source::Discogs,
         source_ident: @dc_release.id
       )
     end
@@ -53,16 +53,16 @@ module Discogs
 
     def find_album_head
       AlbumHead.find_by(
-        source_name: Source::Discogs.name,
+        source:       Source::Discogs,
         source_ident: @dc_release.master_id
       )
     end
 
     def create_album_head
       @artist_credit.compilations.create!(
-        title: @dc_release.title,
-        type:  AlbumHead.to_s,
-        source_name: Source::Discogs.name,
+        title:        @dc_release.title,
+        type:         AlbumHead.to_s,
+        source:       Source::Discogs,
         source_ident: @dc_release.master_id
       )
     end

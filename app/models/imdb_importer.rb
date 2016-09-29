@@ -5,8 +5,7 @@ class ImdbImporter
   def self.import_movie(html)
     doc = Nokogiri::HTML(html)
     MovieHead.create!(
-      title: title(doc),
-      #source_name: Source::User.name
+      title:  title(doc),
       source: Source::User
     )
   end
@@ -29,9 +28,8 @@ class ImdbImporter
     title = div.search("a[@itemprop*='name']").first.content.strip
     no    = div.search("meta[@itemprop*='episodeNumber']").first[:content].to_i
     season.episodes.create!(
-      title:       title,
-      no:          no,
-      #source_name: Source::User.name
+      title:  title,
+      no:     no,
       source: Source::User
     )
   end

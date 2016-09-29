@@ -24,7 +24,7 @@ module Discogs
 
     def find_artist
       Artist.find_by(
-        source_name:  Source::Discogs.name,
+        source:       Source::Discogs,
         source_ident: @dc_artist.id
       )
     end
@@ -32,7 +32,7 @@ module Discogs
     def create_artist
       Artist.create!(
         name:         @dc_artist.name,
-        source_name:  Source::Discogs.name,
+        source:       Source::Discogs,
         source_ident: @dc_artist.id
       )
     end
