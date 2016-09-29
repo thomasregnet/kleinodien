@@ -28,7 +28,7 @@ module Brainz
       @song_head = SongHead.find_or_create_by!(
         artist_credit: artist_credit,
         title:         brz_recording.title,
-        source_name:   Source::MusicBrainz.name,
+        source:        Source::MusicBrainz,
         source_ident:  brz_recording.mbid
       )
     end
@@ -43,7 +43,7 @@ module Brainz
 
     def perform_song_release
       @song_release = @song_head.releases.create(
-        source_name: Source::MusicBrainz.name,
+        source:       Source::MusicBrainz,
         source_ident: @brz_track.mbid
       )
     end
