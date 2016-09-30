@@ -16,7 +16,7 @@ class CompilationTrack < ActiveRecord::Base
              class_name:  TrFormatKind,
              foreign_key: :tr_format_kind_id
   has_many :details,
-           class_name:  TrackDetail,
+           class_name:  CompilationTrackDetail,
            foreign_key: :track_id
 
   validates :release, presence: true

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe TrackDetail, type: :model do
+RSpec.describe CompilationTrackDetail, type: :model do
   before(:each) do
-    @attr = FactoryGirl.create(:track_detail)
+    @attr = FactoryGirl.create(:compilation_track_detail)
   end
 
   it 'is valid with valid attributes' do
@@ -31,7 +31,7 @@ RSpec.describe TrackDetail, type: :model do
   end
 
   it 'must have a unique pair of track_id and no' do
-    clone = TrackDetail.new do |c|
+    clone = CompilationTrackDetail.new do |c|
       c.track = @attr.track
       c.kind  = @attr.kind
       c.no    = @attr.no
@@ -39,6 +39,6 @@ RSpec.describe TrackDetail, type: :model do
 
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }
-      .to raise_error(/ERROR:  duplicate key value violates unique constraint "index_track_details_on_track_id_and_no"/)
+      .to raise_error(/ERROR:  duplicate key value violates unique constraint/)
   end
 end

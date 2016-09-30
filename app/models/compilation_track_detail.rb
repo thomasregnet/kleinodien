@@ -1,5 +1,6 @@
+
 # Detail for a track format
-class TrackDetail < ActiveRecord::Base
+class CompilationTrackDetail < ActiveRecord::Base
   belongs_to :kind,
              class_name: TrackDetailKind,
              foreign_key: :trf_attribute_kind_id
