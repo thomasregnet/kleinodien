@@ -11,7 +11,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |piece_release, evaluator|
-        create_list(:track, evaluator.tracks_count, release: piece_release)
+        create_list(:compilation_track, evaluator.tracks_count, release: piece_release)
       end
     end
 

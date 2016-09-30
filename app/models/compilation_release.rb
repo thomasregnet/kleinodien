@@ -16,7 +16,7 @@ class CompilationRelease < ActiveRecord::Base
   has_many :identifiers,
            class_name: CompilationIdentifier
   has_many :labels, class_name: CrLabel
-  has_many :tracks
+  has_many :tracks, class_name: CompilationTrack
   has_and_belongs_to_many :countries
 
   validates :head, presence: true

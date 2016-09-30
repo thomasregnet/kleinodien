@@ -9,7 +9,8 @@ class PieceRelease < ActiveRecord::Base
   has_many :companies, class_name: PrCompany
   has_many :credits, class_name: PrCredit
   has_many :labels, class_name: PrLabel
-  has_many :tracks
+  # TODO: must be PieceTrack when table piece_tracks exists
+  has_many :tracks, class_name: CompilationTrack
   has_and_belongs_to_many :countries
 
   delegate :title, to: :head
