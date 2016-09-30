@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930074015) do
+ActiveRecord::Schema.define(version: 20160930082725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 20160930074015) do
     t.integer "compilation_release_id", null: false
     t.integer "country_id",             null: false
     t.index ["compilation_release_id", "country_id"], name: "index_compilation_releases_countries_no_and_ids", unique: true, using: :btree
+  end
+
+  create_table "compilation_track_details", force: :cascade do |t|
+    t.integer  "track_id",              null: false
+    t.integer  "trf_attribute_kind_id", null: false
+    t.integer  "no",                    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["track_id", "no"], name: "index_compilation_track_details_on_track_id_and_no", unique: true, using: :btree
   end
 
   create_table "compilation_tracks", force: :cascade do |t|
@@ -453,15 +462,6 @@ ActiveRecord::Schema.define(version: 20160930074015) do
     t.index "lower((name)::text)", name: "index_trf_attribute_kinds_on_lower_name", unique: true, using: :btree
   end
 
-  create_table "track_details", force: :cascade do |t|
-    t.integer  "track_id",              null: false
-    t.integer  "trf_attribute_kind_id", null: false
-    t.integer  "no",                    null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["track_id", "no"], name: "index_track_details_on_track_id_and_no", unique: true, using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -499,6 +499,7 @@ ActiveRecord::Schema.define(version: 20160930074015) do
   add_foreign_key "compilation_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
+  add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
   add_foreign_key "compilation_tracks", "compilation_releases"
   add_foreign_key "compilation_tracks", "piece_releases"
   add_foreign_key "compilation_tracks", "tr_format_kinds"
@@ -543,5 +544,4 @@ ActiveRecord::Schema.define(version: 20160930074015) do
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
-  add_foreign_key "track_details", "compilation_tracks", column: "track_id"
 end
