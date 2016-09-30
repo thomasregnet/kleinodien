@@ -1,5 +1,5 @@
 # A PieceRelease that maybe exists on a CompilationRelease
-class Track < ActiveRecord::Base
+class CompilationTrack < ActiveRecord::Base
   default_scope { order('no ASC') }
 
   composed_of :duration,

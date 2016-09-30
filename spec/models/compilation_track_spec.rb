@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Track, type: :model do
+RSpec.describe CompilationTrack, type: :model do
   before(:each) do
-    @track = FactoryGirl.create(:track)
+    @track = FactoryGirl.create(:compilation_track)
   end
 
   it 'is valid with valid attributes' do
@@ -16,7 +16,7 @@ RSpec.describe Track, type: :model do
 
   context 'belonging to a CompilationRelease' do
     before(:each) do
-      @track = FactoryGirl.create(:track_with_compilation_release)
+      @track = FactoryGirl.create(:compilation_track_with_compilation_release)
     end
 
     it 'knows its CompilationRelease' do
@@ -26,7 +26,7 @@ RSpec.describe Track, type: :model do
 
   context 'with a format' do
     before(:each) do
-      @track = FactoryGirl.create(:track_with_format)
+      @track = FactoryGirl.create(:compilation_track_with_format)
     end
 
     it 'belongs to its format' do
@@ -36,7 +36,7 @@ RSpec.describe Track, type: :model do
 
   context 'with details' do
     before(:each) do
-      @track = FactoryGirl.create(:track_with_details)
+      @track = FactoryGirl.create(:compilation_track_with_details)
     end
 
     it 'sees its details' do
@@ -46,7 +46,7 @@ RSpec.describe Track, type: :model do
 
   context 'with duration' do
     before(:each) do
-      @track = FactoryGirl.create(:track)
+      @track = FactoryGirl.create(:compilation_track)
       @track.duration = Duration.new(311_000, 'second')
     end
 

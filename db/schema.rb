@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928073711) do
+ActiveRecord::Schema.define(version: 20160930074015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,24 @@ ActiveRecord::Schema.define(version: 20160928073711) do
     t.integer "compilation_release_id", null: false
     t.integer "country_id",             null: false
     t.index ["compilation_release_id", "country_id"], name: "index_compilation_releases_countries_no_and_ids", unique: true, using: :btree
+  end
+
+  create_table "compilation_tracks", force: :cascade do |t|
+    t.integer  "piece_release_id",       null: false
+    t.integer  "no"
+    t.string   "path"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "compilation_release_id"
+    t.string   "position"
+    t.string   "heading"
+    t.integer  "tr_format_kind_id"
+    t.integer  "milliseconds"
+    t.string   "accuracy"
+    t.string   "side"
+    t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id", using: :btree
+    t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id", using: :btree
+    t.index ["tr_format_kind_id"], name: "index_compilation_tracks_on_tr_format_kind_id", using: :btree
   end
 
   create_table "countries", force: :cascade do |t|
@@ -444,24 +462,6 @@ ActiveRecord::Schema.define(version: 20160928073711) do
     t.index ["track_id", "no"], name: "index_track_details_on_track_id_and_no", unique: true, using: :btree
   end
 
-  create_table "tracks", force: :cascade do |t|
-    t.integer  "piece_release_id",       null: false
-    t.integer  "no"
-    t.string   "path"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "compilation_release_id"
-    t.string   "position"
-    t.string   "heading"
-    t.integer  "tr_format_kind_id"
-    t.integer  "milliseconds"
-    t.string   "accuracy"
-    t.string   "side"
-    t.index ["compilation_release_id"], name: "index_tracks_on_compilation_release_id", using: :btree
-    t.index ["piece_release_id"], name: "index_tracks_on_piece_release_id", using: :btree
-    t.index ["tr_format_kind_id"], name: "index_tracks_on_tr_format_kind_id", using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -499,6 +499,9 @@ ActiveRecord::Schema.define(version: 20160928073711) do
   add_foreign_key "compilation_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
+  add_foreign_key "compilation_tracks", "compilation_releases"
+  add_foreign_key "compilation_tracks", "piece_releases"
+  add_foreign_key "compilation_tracks", "tr_format_kinds"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_piece_releases", "countries"
@@ -540,8 +543,5 @@ ActiveRecord::Schema.define(version: 20160928073711) do
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
-  add_foreign_key "track_details", "tracks"
-  add_foreign_key "tracks", "compilation_releases"
-  add_foreign_key "tracks", "piece_releases"
-  add_foreign_key "tracks", "tr_format_kinds"
+  add_foreign_key "track_details", "compilation_tracks", column: "track_id"
 end
