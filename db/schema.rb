@@ -367,14 +367,14 @@ ActiveRecord::Schema.define(version: 20161004074841) do
   end
 
   create_table "piece_tracks", force: :cascade do |t|
-    t.integer  "piece_releases_id",  null: false
-    t.integer  "tr_format_kinds_id"
+    t.integer  "piece_release_id",  null: false
+    t.integer  "tr_format_kind_id"
     t.integer  "milliseconds"
     t.text     "accuracy"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["piece_releases_id"], name: "index_piece_tracks_on_piece_releases_id", using: :btree
-    t.index ["tr_format_kinds_id"], name: "index_piece_tracks_on_tr_format_kinds_id", using: :btree
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["piece_release_id"], name: "index_piece_tracks_on_piece_release_id", using: :btree
+    t.index ["tr_format_kind_id"], name: "index_piece_tracks_on_tr_format_kind_id", using: :btree
   end
 
   create_table "pr_companies", force: :cascade do |t|
@@ -546,8 +546,8 @@ ActiveRecord::Schema.define(version: 20161004074841) do
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
-  add_foreign_key "piece_tracks", "piece_releases", column: "piece_releases_id"
-  add_foreign_key "piece_tracks", "tr_format_kinds", column: "tr_format_kinds_id"
+  add_foreign_key "piece_tracks", "piece_releases"
+  add_foreign_key "piece_tracks", "tr_format_kinds"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
   add_foreign_key "pr_companies", "piece_releases"
