@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930082725) do
+ActiveRecord::Schema.define(version: 20161004074841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,6 +366,17 @@ ActiveRecord::Schema.define(version: 20160930082725) do
     t.index ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
   end
 
+  create_table "piece_tracks", force: :cascade do |t|
+    t.integer  "piece_releases_id",  null: false
+    t.integer  "tr_format_kinds_id"
+    t.integer  "milliseconds"
+    t.text     "accuracy"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["piece_releases_id"], name: "index_piece_tracks_on_piece_releases_id", using: :btree
+    t.index ["tr_format_kinds_id"], name: "index_piece_tracks_on_tr_format_kinds_id", using: :btree
+  end
+
   create_table "pr_companies", force: :cascade do |t|
     t.integer  "piece_release_id", null: false
     t.integer  "company_id",       null: false
@@ -535,6 +546,8 @@ ActiveRecord::Schema.define(version: 20160930082725) do
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
+  add_foreign_key "piece_tracks", "piece_releases", column: "piece_releases_id"
+  add_foreign_key "piece_tracks", "tr_format_kinds", column: "tr_format_kinds_id"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
   add_foreign_key "pr_companies", "piece_releases"
