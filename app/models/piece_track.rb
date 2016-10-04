@@ -5,4 +5,6 @@ class PieceTrack < ApplicationRecord
   composed_of :duration,
               class_name: 'Duration',
               mapping: [%w(milliseconds milliseconds), %w(accuracy accuracy)]
+
+  validates :release, presence: true
 end

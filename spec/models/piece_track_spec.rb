@@ -9,6 +9,11 @@ RSpec.describe PieceTrack, type: :model do
     expect(@track).to be_valid
   end
 
+  it 'is not valid without a PieceRelease' do
+    @track.release = nil
+    expect(@track).not_to be_valid
+  end
+
   # TODO: shared_exampes_for_duration
   # this spec was cut and pasted from compilation_tracks
   context 'with duration' do
