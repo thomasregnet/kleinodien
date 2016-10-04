@@ -113,6 +113,8 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     colorize (0.8.1)
+    composite_primary_keys (9.0.4)
+      activerecord (~> 5.0.0)
     concurrent-ruby (1.0.2)
     cucumber (2.4.0)
       builder (>= 2.1.2)
@@ -352,6 +354,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.2.1)
+  composite_primary_keys (~> 9.0)
   cucumber-rails
   database_cleaner
   devise (~> 4.0)
