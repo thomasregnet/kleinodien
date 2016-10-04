@@ -6,5 +6,6 @@ class PieceTrack < ApplicationRecord
               class_name: 'Duration',
               mapping: [%w(milliseconds milliseconds), %w(accuracy accuracy)]
 
+  # TODO: relation to formats and format details
   validates :release, presence: true
 end
