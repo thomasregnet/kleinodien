@@ -1,4 +1,4 @@
 class PieceTrack < ApplicationRecord
-  belongs_to :piece_releases
+  belongs_to :release, class_name: PieceRelease, foreign_key: :piece_release_id
   belongs_to :tr_format_kinds
 end
