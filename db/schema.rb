@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004074841) do
+ActiveRecord::Schema.define(version: 20161004083007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 20161004074841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_company_roles_on_lower_name", unique: true, using: :btree
+  end
+
+  create_table "compilation_copies", force: :cascade do |t|
+    t.integer  "compilation_release_id", null: false
+    t.integer  "user_id",                null: false
+    t.text     "explanation"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["compilation_release_id"], name: "index_compilation_copies_on_compilation_release_id", using: :btree
+    t.index ["user_id"], name: "index_compilation_copies_on_user_id", using: :btree
   end
 
   create_table "compilation_heads", force: :cascade do |t|
@@ -500,6 +510,8 @@ ActiveRecord::Schema.define(version: 20161004074841) do
   add_foreign_key "ch_credits", "jobs"
   add_foreign_key "ch_labels", "companies"
   add_foreign_key "ch_labels", "compilation_heads"
+  add_foreign_key "compilation_copies", "compilation_releases"
+  add_foreign_key "compilation_copies", "users"
   add_foreign_key "compilation_heads", "artist_credits"
   add_foreign_key "compilation_heads", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
