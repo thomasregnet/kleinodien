@@ -1,0 +1,2 @@
+class RepositoryPosition < ApplicationRecord
+end
