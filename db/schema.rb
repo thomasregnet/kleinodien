@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004083007) do
+ActiveRecord::Schema.define(version: 20161006091904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20161004083007) do
     t.string   "accuracy"
     t.string   "side"
     t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id", using: :btree
+    t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true, using: :btree
     t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id", using: :btree
     t.index ["tr_format_kind_id"], name: "index_compilation_tracks_on_tr_format_kind_id", using: :btree
   end
