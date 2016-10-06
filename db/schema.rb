@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006091904) do
+ActiveRecord::Schema.define(version: 20161006093359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -422,6 +422,14 @@ ActiveRecord::Schema.define(version: 20161006091904) do
     t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
   end
 
+  create_table "repository_positions", force: :cascade do |t|
+    t.integer  "compilation_track_id"
+    t.integer  "compilation_release_id"
+    t.integer  "piece_release_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
     t.integer  "no",         null: false
@@ -569,5 +577,7 @@ ActiveRecord::Schema.define(version: 20161006091904) do
   add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
+  add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
+  add_foreign_key "repository_positions", "piece_releases", name: "repository_positions_piece_release_id_fkey"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
