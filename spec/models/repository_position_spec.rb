@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe RepositoryPosition, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  #pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @position = FactoryGirl.create(:repository_position_with_compilation_track)
+
+  end
+
+  it 'is valid' do
+    expect(@position).to be_valid
+    byebug
+  end
 end
