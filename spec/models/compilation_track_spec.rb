@@ -44,6 +44,23 @@ RSpec.describe CompilationTrack, type: :model do
     end
   end
 
+  context 'with repository_positions' do
+    before(:each) do
+      @track = FactoryGirl.create(:compilation_track_with_repository_positions)
+    end
+
+    it 'foo' do
+    end
+    it 'can use repository positions' do
+      expect(@track.repository_positions.count).to eq(3)
+    end
+
+    specify 'the repository_positions have set their foreign key' do
+      repo_pos = @track.repository_positions[0]
+      expect(repo_pos.compilation_release_id).not_to be_nil
+    end
+  end
+
   context 'with duration' do
     before(:each) do
       @track = FactoryGirl.create(:compilation_track)

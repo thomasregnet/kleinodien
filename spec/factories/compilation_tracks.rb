@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :compilation_track do
     association :release, factory: :piece_release
+    association :compilation, factory: :compilation_release
 
     factory :compilation_track_with_compilation_release do
       association :compilation, factory: :compilation_release
@@ -25,6 +26,18 @@ FactoryGirl.define do
           evaluator.details_count,
           track: track
         )
+      end
+    end
+
+    factory :compilation_track_with_repository_positions do
+      transient do
+        positions_count 3
+      end
+
+      after(:create) do |track, evaluator|
+        track.repository_positions << RepositoryPosition.new
+        track.repository_positions << RepositoryPosition.new
+        track.repository_positions << RepositoryPosition.new
       end
     end
   end
