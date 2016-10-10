@@ -3,8 +3,10 @@ class RepositoryPosition < ApplicationRecord
              primary_key: [:id, :compilation_release_id],
              foreign_key: [:compilation_track_id, :compilation_release_id]
 
+  belongs_to :repository
   belongs_to :user
 
+  validates :repository, presence: true
   validates :user, presence: true
 
   def compilation_track=(ct)

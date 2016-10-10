@@ -13,4 +13,9 @@ RSpec.describe RepositoryPosition, type: :model do
     @position.user = nil
     expect(@position).not_to be_valid
   end
+
+  it 'is not valid without a reository' do
+    @position.repository = nil
+    expect(@position).not_to be_valid
+  end
 end
