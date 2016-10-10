@@ -34,10 +34,18 @@ FactoryGirl.define do
         positions_count 3
       end
 
+      # TODO: refactor factory :compilation_track_with_repository_positions
       after(:create) do |track, evaluator|
-        track.repository_positions << RepositoryPosition.new
-        track.repository_positions << RepositoryPosition.new
-        track.repository_positions << RepositoryPosition.new
+        3.times do
+          user = FactoryGirl.create(:user)
+          repository = FactoryGirl.create(:repository, user: user)
+          track.repository_positions << FactoryGirl.create(
+            :repository_position,
+            compilation_track: track,
+            repository: repository,
+            user: user
+          )
+        end
       end
     end
   end
