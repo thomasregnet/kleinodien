@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010181156) do
+ActiveRecord::Schema.define(version: 20161011180836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20161010181156) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["compilation_release_id"], name: "index_compilation_copies_on_compilation_release_id", using: :btree
+    t.index ["id", "compilation_release_id", "user_id"], name: "index_compilation_copies", unique: true, using: :btree
     t.index ["user_id"], name: "index_compilation_copies_on_user_id", using: :btree
   end
 
@@ -439,6 +440,7 @@ ActiveRecord::Schema.define(version: 20161010181156) do
     t.datetime "updated_at",             null: false
     t.integer  "repository_id"
     t.integer  "user_id"
+    t.integer  "compilation_copy_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -589,6 +591,7 @@ ActiveRecord::Schema.define(version: 20161010181156) do
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_releases", name: "repository_positions_piece_release_id_fkey"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
