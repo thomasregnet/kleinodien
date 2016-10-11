@@ -10,7 +10,7 @@ RSpec.describe CompilationTrack, type: :model do
   end
 
   it 'is not valid without a release' do
-    @track.release = nil
+    @track.piece = nil
     expect(@track).not_to be_valid
   end
 
