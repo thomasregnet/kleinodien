@@ -18,4 +18,9 @@ RSpec.describe RepositoryPosition, type: :model do
     @position.repository = nil
     expect(@position).not_to be_valid
   end
+
+  it 'is not valid without a compilation_copy' do
+    @position.compilation_copy = nil
+    expect(@position).not_to be_valid
+  end
 end
