@@ -9,6 +9,11 @@ FactoryGirl.define do
       after(:build) do |r_pos|
         user = FactoryGirl.create(:user)
         r_pos.repository = FactoryGirl.create(:repository, user: r_pos.user)
+        r_pos.compilation_copy = FactoryGirl.create(
+          :compilation_copy,
+          user: r_pos.user,
+          compilation_release_id: r_pos.compilation_track.compilation_release_id
+        )
       end
     end
   end
