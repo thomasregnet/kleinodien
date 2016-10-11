@@ -41,6 +41,11 @@ FactoryGirl.define do
           repository = FactoryGirl.create(:repository, user: user)
           track.repository_positions << FactoryGirl.create(
             :repository_position,
+            compilation_copy: FactoryGirl.create(
+              :compilation_copy,
+              user: user,
+              release: track.compilation
+            ),
             compilation_track: track,
             repository: repository,
             user: user
