@@ -16,7 +16,7 @@ end
 Then(/^I will see the contents of the album release$/) do
   expect(page).to have_content @release.title
   @release.tracks.each do |t|
-    expect(page).to have_content(t.release.title)
+    expect(page).to have_content(t.piece.title)
   end
 end
 
