@@ -6,7 +6,8 @@ class CompilationTrack < ActiveRecord::Base
               class_name: 'Duration',
               mapping: [%w(milliseconds milliseconds), %w(accuracy accuracy)]
 
-  belongs_to :release,
+  # belongs_to :release,
+  belongs_to :piece,
              class_name:  PieceRelease,
              foreign_key: :piece_release_id
   belongs_to :compilation,
@@ -23,5 +24,6 @@ class CompilationTrack < ActiveRecord::Base
            foreign_key: :track_id
 
   validates :compilation, presence: true
-  validates :release,     presence: true
+  # validates :release,     presence: true
+  validates :piece,     presence: true
 end

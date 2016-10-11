@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :compilation_track do
-    association :release, factory: :piece_release
+    # association :release, factory: :piece_release
+    association :piece, factory: :piece_release
     association :compilation, factory: :compilation_release
 
     factory :compilation_track_with_compilation_release do
