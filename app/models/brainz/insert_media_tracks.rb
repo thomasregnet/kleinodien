@@ -38,7 +38,8 @@ module Brainz
       )
 
       @release.tracks.create!(
-        release: piece_release,
+        # release: piece_release,
+        piece: piece_release,
         position: brz_track.number,
         no:       @no
       )

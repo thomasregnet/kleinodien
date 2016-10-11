@@ -53,7 +53,8 @@ module Discogs
 
     def track_create(dc_track, song_release)
       @album_release.tracks.create!(
-        release:     song_release,
+        # release:     song_release,
+        piece:       song_release,
         no:          @no,
         position:    dc_track.position.to_s,
         heading:     @heading,
