@@ -7,4 +7,7 @@ class CompilationCopy < ApplicationRecord
 
   validates :release, presence: true
   validates :user, presence: true
+
+  # def release(release)
+  #   self.
 end

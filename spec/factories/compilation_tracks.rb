@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :compilation_track do
     # association :release, factory: :piece_release
-    association :piece, factory: :piece_release
-    association :compilation, factory: :compilation_release
+    association :piece_release, factory: :piece_release
+    association :compilation_release, factory: :compilation_release
 
     factory :compilation_track_with_compilation_release do
-      association :compilation, factory: :compilation_release
+      association :compilation_release, factory: :compilation_release
     end
 
     factory :compilation_track_with_duration do
@@ -45,7 +45,7 @@ FactoryGirl.define do
             compilation_copy: FactoryGirl.create(
               :compilation_copy,
               user: user,
-              release: track.compilation
+              release: track.compilation_release
             ),
             compilation_track: track,
             repository: repository,

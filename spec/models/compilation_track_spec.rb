@@ -10,7 +10,7 @@ RSpec.describe CompilationTrack, type: :model do
   end
 
   it 'is not valid without a release' do
-    @track.piece = nil
+    @track.piece_release = nil
     expect(@track).not_to be_valid
   end
 
@@ -20,7 +20,7 @@ RSpec.describe CompilationTrack, type: :model do
     end
 
     it 'knows its CompilationRelease' do
-      expect(@track.compilation).to be_instance_of(CompilationRelease)
+      expect(@track.compilation_release).to be_instance_of(CompilationRelease)
     end
   end
 
@@ -49,8 +49,6 @@ RSpec.describe CompilationTrack, type: :model do
       @track = FactoryGirl.create(:compilation_track_with_repository_positions)
     end
 
-    it 'foo' do
-    end
     it 'can use repository positions' do
       expect(@track.repository_positions.count).to eq(3)
     end
