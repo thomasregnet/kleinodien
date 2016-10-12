@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011200834) do
+ActiveRecord::Schema.define(version: 20161012175931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -441,6 +441,7 @@ ActiveRecord::Schema.define(version: 20161011200834) do
     t.integer  "repository_id",          null: false
     t.integer  "user_id",                null: false
     t.integer  "compilation_copy_id"
+    t.integer  "piece_track_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -594,6 +595,7 @@ ActiveRecord::Schema.define(version: 20161011200834) do
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_releases", name: "repository_positions_piece_release_id_fkey"
+  add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
