@@ -6,6 +6,7 @@ class RepositoryPosition < ApplicationRecord
   belongs_to :compilation_track,
              primary_key: [:id, :compilation_release_id],
              foreign_key: [:compilation_track_id, :compilation_release_id]
+  belongs_to :piece_track
   belongs_to :repository
   belongs_to :user
 
