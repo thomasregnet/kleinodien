@@ -14,7 +14,7 @@ FactoryGirl.define do
         create_list(
           :compilation_track,
           evaluator.tracks_count,
-          piece: piece_release
+          piece_release: piece_release
         )
       end
     end

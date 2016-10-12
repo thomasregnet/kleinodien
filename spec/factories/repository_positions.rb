@@ -11,8 +11,9 @@ FactoryGirl.define do
         r_pos.repository = create(:repository, user: r_pos.user)
         r_pos.compilation_copy = create(
           :compilation_copy,
-          user: r_pos.user,
-          compilation_release_id: r_pos.compilation_track.compilation_release_id
+          user:    r_pos.user,
+          # release: r_pos.compilation_track.compilation
+          release: r_pos.compilation_track.compilation_release
         )
       end
     end

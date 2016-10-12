@@ -42,7 +42,7 @@ RSpec.describe Brainz::InsertRelease, type: :model do
 
     context '#tracks' do
       specify 'artist_credit' do
-        expect(@release.tracks[5].piece.head.artist_credit.name)
+        expect(@release.tracks[5].piece_release.head.artist_credit.name)
           .to eq 'Faith No More & Boo‐Yaa T.R.I.B.E.'
       end
     end

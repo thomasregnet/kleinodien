@@ -1,4 +1,3 @@
-
 # Detail for a track format
 class CompilationTrackDetail < ActiveRecord::Base
   belongs_to :kind,
