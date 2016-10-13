@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'repositories/create'
+  # get 'repositories/create'
 
-  get 'repositories/show'
+  # get 'repositories/show'
 
-  get 'repositories/index'
+  # get 'repositories/index'
 
   devise_for :users
 
@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :album_releases, only: [:index, :show]
 
   resources :movie_heads, only: [:index, :show]
+
+  resources :repositories, only: [:create, :index, :show]
 
   get 'pages/index'
 
