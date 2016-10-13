@@ -9,3 +9,4 @@ Feature: Repository
     When I visit the Sign in page
     And I Fill in email and password
     And I visit the repositories page
+    And I click the link to create a new repository
