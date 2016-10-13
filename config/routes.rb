@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :movie_heads, only: [:index, :show]
 
-  resources :repositories, only: [:create, :index, :show]
+  resources :repositories, only: [:create, :index, :new, :show]
 
   get 'pages/index'
 
