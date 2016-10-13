@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'repositories/create'
+
+  get 'repositories/show'
+
+  get 'repositories/index'
+
   devise_for :users
 
   resources :album_heads, only: [:index, :show]
