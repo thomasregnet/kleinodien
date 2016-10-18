@@ -8,6 +8,8 @@
 
 # The SourceSeed class is necessary because the really class, "Source",
 # ties to get domain data from the db which must be created here
+require 'multi_json'
+
 class SourceSeed < ActiveRecord::Base
   self.table_name  = 'sources'
   self.primary_key = 'name'
@@ -32,3 +34,15 @@ SourceSeed.create!(
   name:        'User',
   description: 'User contributed data'
 )
+
+@formats = MultiJson.load(
+  File.read('db/seeds/formats.json'),
+  symbolize_keys: true
+)
+
+@formats.each do |format|
+  Format.create!(
+    name: format[:name],
+    abbr: format[:abbreviation],
+  )
+end
