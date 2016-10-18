@@ -1,0 +1,462 @@
+[
+  {
+    "name": "4-Track Cartridge",
+    "abbreviation": "4-Trk",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "8-Track Cartridge",
+    "abbreviation": "8-Trk",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Acetate",
+    "abbreviation": "Acetate",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "All Media",
+    "abbreviation": "All Media",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Betacam",
+    "abbreviation": "Betacam",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Betacam SP",
+    "abbreviation": "Betacam SP",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Betamax",
+    "abbreviation": "Beta",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Blu-ray",
+    "abbreviation": "Blu-ray",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Blu-ray-R",
+    "abbreviation": "Blu-ray-R",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Box Set",
+    "abbreviation": "Box",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "CD",
+    "abbreviation": "CD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "CDV",
+    "abbreviation": "CDV",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "CDr",
+    "abbreviation": "CDr",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Cassette",
+    "abbreviation": "Cass",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Cylinder",
+    "abbreviation": "Cyl",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "DAT",
+    "abbreviation": "DAT",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "DCC",
+    "abbreviation": "DCC",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "DVD",
+    "abbreviation": "DVD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "DVDr",
+    "abbreviation": "DVDr",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Edison Disc",
+    "abbreviation": "Edison Disc",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "File",
+    "abbreviation": "File",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Flexi-disc",
+    "abbreviation": "Flexi",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Floppy Disk",
+    "abbreviation": "Floppy",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "HD DVD",
+    "abbreviation": "HD DVD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "HD DVD-R",
+    "abbreviation": "HD DVD-R",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Hybrid",
+    "abbreviation": "Hybrid",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Laserdisc",
+    "abbreviation": "Laserdisc",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Lathe Cut",
+    "abbreviation": "Lathe",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "MVD",
+    "abbreviation": "MVD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Memory Stick",
+    "abbreviation": "M/Stick",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Microcassette",
+    "abbreviation": "M/cass",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "MiniDV",
+    "abbreviation": "MiniDV",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Minidisc",
+    "abbreviation": "MD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Pathé Disc",
+    "abbreviation": "Pathé Disc",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "PlayTape",
+    "abbreviation": "PlayTape",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Reel-To-Reel",
+    "abbreviation": "Reel",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "SACD",
+    "abbreviation": "SACD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "SelectaVision",
+    "abbreviation": "S/Vision",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Shellac",
+    "abbreviation": "Shellac",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "U-matic",
+    "abbreviation": "Umatic",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "UMD",
+    "abbreviation": "UMD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "VHD",
+    "abbreviation": "VHD",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "VHS",
+    "abbreviation": "VHS",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Video 2000",
+    "abbreviation": "V2000",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Video8",
+    "abbreviation": "Video8",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  },
+  {
+    "name": "Vinyl",
+    "abbreviation": "Vinyl",
+    "use_for": {
+      "compilation_releases": true,
+      "piece_tracks": true,
+      "compilation_tracks": true,
+      "repository_positions": true
+    }
+  }
+]
