@@ -46,3 +46,9 @@ SourceSeed.create!(
     abbr: format[:abbreviation],
   )
 end
+
+@formats.each do |format|
+  next unless format[:use_for][:compilation_tracks]
+  CtFormat.create!(name: format[:name])
+end
+                   
