@@ -1,0 +1,2 @@
+class CtFormat < ApplicationRecord
+end

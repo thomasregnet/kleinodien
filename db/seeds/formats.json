@@ -30,13 +30,13 @@
     }
   },
   {
-    "name": "All Media",
+    "name":         "All Media",
     "abbreviation": "All Media",
     "use_for": {
       "compilation_releases": true,
-      "piece_tracks": true,
-      "compilation_tracks": true,
-      "repository_positions": true
+      "piece_tracks":         false,
+      "compilation_tracks":   false,
+      "repository_positions": false
     }
   },
   {
@@ -90,13 +90,13 @@
     }
   },
   {
-    "name": "Box Set",
+    "name":         "Box Set",
     "abbreviation": "Box",
     "use_for": {
       "compilation_releases": true,
-      "piece_tracks": true,
-      "compilation_tracks": true,
-      "repository_positions": true
+      "piece_tracks":         false,
+      "compilation_tracks":   false,
+      "repository_positions": false
     }
   },
   {
