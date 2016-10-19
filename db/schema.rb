@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018194210) do
+ActiveRecord::Schema.define(version: 20161019181024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,9 @@ ActiveRecord::Schema.define(version: 20161018194210) do
     t.index ["crf_detail_kind_id"], name: "index_crf_details_on_crf_detail_kind_id", using: :btree
   end
 
+  create_table "ct_formats", primary_key: "name", id: :text, force: :cascade do |t|
+  end
+
   create_table "data_suppliers", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -429,6 +432,9 @@ ActiveRecord::Schema.define(version: 20161018194210) do
     t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
   end
 
+  create_table "pt_formats", primary_key: "name", id: :text, force: :cascade do |t|
+  end
+
   create_table "repositories", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.string   "name",       null: false
@@ -448,6 +454,12 @@ ActiveRecord::Schema.define(version: 20161018194210) do
     t.integer  "user_id",                null: false
     t.integer  "compilation_copy_id"
     t.integer  "piece_track_id"
+  end
+
+  create_table "repositoy_formats", primary_key: "name", id: :text, force: :cascade do |t|
+  end
+
+  create_table "rp_formats", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -571,6 +583,7 @@ ActiveRecord::Schema.define(version: 20161018194210) do
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "crf_details", "cr_formats"
   add_foreign_key "crf_details", "crf_detail_kinds"
+  add_foreign_key "ct_formats", "formats", column: "name", primary_key: "name", name: "ct_formats_name_fkey"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "ph_companies", "companies"
@@ -597,6 +610,7 @@ ActiveRecord::Schema.define(version: 20161018194210) do
   add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
+  add_foreign_key "pt_formats", "formats", column: "name", primary_key: "name", name: "pt_formats_name_fkey"
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
@@ -604,5 +618,7 @@ ActiveRecord::Schema.define(version: 20161018194210) do
   add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
+  add_foreign_key "repositoy_formats", "formats", column: "name", primary_key: "name", name: "repositoy_formats_name_fkey"
+  add_foreign_key "rp_formats", "formats", column: "name", primary_key: "name", name: "rp_formats_name_fkey"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
