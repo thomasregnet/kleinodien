@@ -5,7 +5,7 @@ RSpec.describe CtFormat, type: :model do
     @format = CtFormat.find('FLAC')
   end
 
-  it 'has the right name set' do
-    expect(@format.name).to eq 'FLAC'
+  it 'has the right abbr set' do\
+    expect(@format.abbr).to eq 'FLAC'
   end
 end
