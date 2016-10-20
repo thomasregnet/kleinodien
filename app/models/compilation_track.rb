@@ -23,6 +23,11 @@ class CompilationTrack < ActiveRecord::Base
            class_name:  CompilationTrackDetail,
            foreign_key: :track_id
 
+  belongs_to :new_format,
+             class_name: CtFormat,
+             foreign_key: :format_name,
+             primary_key: :name
+  
   validates :compilation_release, presence: true
   # validates :release,     presence: true
   validates :piece_release,     presence: true

@@ -1,17 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe CompilationTrack, type: :model do
-  before(:each) do
-    @track = FactoryGirl.create(:compilation_track)
-  end
+  context 'simple track' do
+    before(:all) do
+      DatabaseCleaner.start
+      @track = FactoryGirl.create(:compilation_track)
+    end
 
-  it 'is valid with valid attributes' do
-    expect(@track).to be_valid
-  end
+    it 'is valid with valid attributes' do
+      expect(@track).to be_valid
+    end
 
-  it 'is not valid without a release' do
-    @track.piece_release = nil
-    expect(@track).not_to be_valid
+    it 'is not valid without a release' do
+      @track.piece_release = nil
+      expect(@track).not_to be_valid
+    end
+
+    after(:all) do
+      DatabaseCleaner.clean
+    end
   end
 
   context 'belonging to a CompilationRelease' do
@@ -61,6 +68,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'with duration' do
     before(:each) do
+      DatabaseCleaner.start
       @track = FactoryGirl.create(:compilation_track)
       @track.duration = Duration.new(311_000, 'second')
     end
@@ -75,6 +83,28 @@ RSpec.describe CompilationTrack, type: :model do
 
     it 'returns the duration in mm:ss format' do
       expect(@track.duration.mmss).to eq('5:11')
+    end
+
+    after(:each) do
+      DatabaseCleaner.clean
+    end
+  end
+
+  context 'with a format' do
+    before(:all) do
+      DatabaseCleaner.start
+      @track = FactoryGirl.create(
+        :compilation_track,
+        new_format: CtFormat.find('FLAC')
+      )
+    end
+
+    it 'is valid' do
+      # byebug
+    end
+
+    after(:all) do
+      DatabaseCleaner.clean
     end
   end
 end
