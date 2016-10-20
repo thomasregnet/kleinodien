@@ -47,8 +47,9 @@ SourceSeed.create!(
   )
 end
 
-@formats.select { |format| format[:ct_formats] }.each do |format|
-  #CtFormat.create!(name: format[:name], abbr: format[:abbr] )
+@formats.each do |format|
+  next unless format[:ct_formats]
+  CtFormat.create!(name: format[:name] )
 end
 # @formats.each do |format|
 #   next unless format[:use_for][:compilation_tracks]
