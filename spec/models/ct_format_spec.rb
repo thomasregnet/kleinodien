@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CtFormat, type: :model do
   before(:all) do
-    @format = CtFormat.find_by(name: 'FLAC')
+    @format = CtFormat.find('FLAC')
   end
 
   it 'has the right name set' do
