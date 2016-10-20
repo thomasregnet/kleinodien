@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019181024) do
+ActiveRecord::Schema.define(version: 20161020190400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,7 +172,9 @@ ActiveRecord::Schema.define(version: 20161019181024) do
     t.integer  "milliseconds"
     t.string   "accuracy"
     t.string   "side"
+    t.text     "format_name"
     t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id", using: :btree
+    t.index ["format_name"], name: "index_compilation_tracks_format_name", using: :btree
     t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true, using: :btree
     t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id", using: :btree
     t.index ["tr_format_kind_id"], name: "index_compilation_tracks_on_tr_format_kind_id", using: :btree
@@ -565,6 +567,7 @@ ActiveRecord::Schema.define(version: 20161019181024) do
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
   add_foreign_key "compilation_tracks", "compilation_releases"
+  add_foreign_key "compilation_tracks", "ct_formats", column: "format_name", primary_key: "name", name: "compilation_tracks_format_name_fkey"
   add_foreign_key "compilation_tracks", "piece_releases"
   add_foreign_key "compilation_tracks", "tr_format_kinds"
   add_foreign_key "countries_piece_heads", "countries"
