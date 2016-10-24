@@ -1,11 +1,7 @@
 <h1>Create a new repository</h1>
 
-<%= form_tag do %>
-  <p>
-    <%= label_tag(:name, 'name:') %>
-    <%= text_field_tag(:name) %>
-  </p>
-  <p>
-    <%= submit_tag('create') %>
-  </p>
+<%= form_for @repository, url: {action: 'create'} do |f| %>
+  <%= f.label 'name:'%>
+  <%= f.text_field :name  %>
+  <%= f.submit "create" %>
 <% end %>
