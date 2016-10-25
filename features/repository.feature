@@ -10,3 +10,8 @@ Feature: Repository
     And I Fill in email and password
     And I visit the repositories page
     And I click the link to create a new repository
+    And I fill in a repository name
+    And I press the create button
+    Then I will see the my new repository
+    When I visit the repositories page
+    Then I will see the my new repository
