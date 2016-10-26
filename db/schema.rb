@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026184402) do
+ActiveRecord::Schema.define(version: 20161026191209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -440,6 +440,9 @@ ActiveRecord::Schema.define(version: 20161026184402) do
   create_table "re_formats", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
+  create_table "ref_attributes", primary_key: "name", id: :text, force: :cascade do |t|
+  end
+
   create_table "repositories", force: :cascade do |t|
     t.integer  "user_id",        null: false
     t.string   "name",           null: false
@@ -620,6 +623,7 @@ ActiveRecord::Schema.define(version: 20161026184402) do
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "pt_formats", "formats", column: "name", primary_key: "name", name: "pt_formats_name_fkey"
   add_foreign_key "re_formats", "formats", column: "name", primary_key: "name", name: "re_formats_name_fkey"
+  add_foreign_key "ref_attributes", "formats", column: "name", primary_key: "name", name: "ref_attributes_name_fkey"
   add_foreign_key "repositories", "re_formats", column: "re_format_name", primary_key: "name", name: "repositories_re_format_name_fkey"
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"

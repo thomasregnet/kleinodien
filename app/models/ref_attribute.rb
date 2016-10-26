@@ -1,0 +1,2 @@
+class RefAttribute < ApplicationRecord
+end
