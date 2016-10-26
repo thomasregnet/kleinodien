@@ -51,6 +51,12 @@ end
   next unless format[:ct_formats]
   CtFormat.create!(name: format[:name] )
 end
+
+# TODO: more subtle selection of re_formats
+@formats.each do |format|
+  ReFormat.create!(name: format[:name])
+end
+
 # @formats.each do |format|
 #   next unless format[:use_for][:compilation_tracks]
 #   CtFormat.create!(name: format[:name])
