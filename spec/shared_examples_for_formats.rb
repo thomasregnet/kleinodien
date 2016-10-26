@@ -1,10 +1,10 @@
 RSpec.shared_examples "a format" do
   it 'has the name set' do
-    format = ReFormat.find(name)
+    expect(format.name).to eq name
   end
 
   it 'has the abbr set' do
-    format = ReFormat.find(abbr)
+    expect(format.abbr).to eq abbr
   end
 
   it 'has the format set' do
