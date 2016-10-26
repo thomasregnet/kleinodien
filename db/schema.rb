@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026191209) do
+ActiveRecord::Schema.define(version: 20161026200140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -454,6 +454,12 @@ ActiveRecord::Schema.define(version: 20161026191209) do
     t.index ["user_id"], name: "index_repositories_on_user_id", using: :btree
   end
 
+  create_table "repository_position_rpf_attributes", primary_key: ["ref_attribute_name", "repository_id", "no"], force: :cascade do |t|
+    t.text    "ref_attribute_name", null: false
+    t.integer "repository_id",      null: false
+    t.integer "no",                 null: false
+  end
+
   create_table "repository_positions", force: :cascade do |t|
     t.integer  "compilation_track_id"
     t.integer  "compilation_release_id"
@@ -626,6 +632,8 @@ ActiveRecord::Schema.define(version: 20161026191209) do
   add_foreign_key "ref_attributes", "formats", column: "name", primary_key: "name", name: "ref_attributes_name_fkey"
   add_foreign_key "repositories", "re_formats", column: "re_format_name", primary_key: "name", name: "repositories_re_format_name_fkey"
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_position_rpf_attributes", "ref_attributes", column: "ref_attribute_name", primary_key: "name", name: "repository_position_rpf_attributes_ref_attribute_name_fkey"
+  add_foreign_key "repository_position_rpf_attributes", "repositories", name: "repository_position_rpf_attributes_repository_id_fkey"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_releases", name: "repository_positions_piece_release_id_fkey"
