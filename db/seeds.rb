@@ -57,6 +57,11 @@ end
   ReFormat.create!(name: format[:name])
 end
 
+# TODO: more subtle selection of ref_attributes
+@formats.each do |format|
+  RefAttribute.create!(name: format[:name])
+end
+
 # @formats.each do |format|
 #   next unless format[:use_for][:compilation_tracks]
 #   CtFormat.create!(name: format[:name])
