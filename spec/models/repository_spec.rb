@@ -41,4 +41,25 @@ RSpec.describe Repository, type: :model do
       DatabaseCleaner.clean
     end
   end
+
+  context 'with format details' do
+    before(:all) do
+      DatabaseCleaner.start
+      @repository = FactoryGirl.build(:repository)
+      @repository.format = ReFormat.find('CDr')
+      @repos_format_detail = RepositoryRefDetail.new(
+        name: 'WAV',
+        no:   0
+      )
+      @repository.format_details << @repos_format_detail
+    end
+
+    it 'works' do
+      expect(@repository.save).to be true
+    end
+
+    after(:all) do
+      DatabaseCleaner.clean
+    end
+  end
 end

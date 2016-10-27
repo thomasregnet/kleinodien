@@ -1,5 +1,5 @@
 class RepositoryRefDetail < ApplicationRecord
-  self.primary_key = [:ref_attribute_name, :repository_id, :no]
+  self.primary_key = [:name, :repository_id, :no]
 
   belongs_to :attrib,
              class_name: RefDetail,
