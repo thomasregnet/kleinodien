@@ -1,4 +1,4 @@
-class RefAttribute < ApplicationRecord
+class RefDetail < ApplicationRecord
   self.primary_key = :name
 
   belongs_to :format, primary_key: :name, foreign_key: :name

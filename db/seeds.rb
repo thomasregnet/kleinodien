@@ -57,9 +57,9 @@ end
   ReFormat.create!(name: format[:name])
 end
 
-# TODO: more subtle selection of ref_attributes
+# TODO: more subtle selection of ref_details
 @formats.each do |format|
-  RefAttribute.create!(name: format[:name])
+  RefDetail.create!(name: format[:name])
 end
 
 # @formats.each do |format|

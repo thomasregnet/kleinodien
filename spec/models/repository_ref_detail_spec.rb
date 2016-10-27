@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe RepositoryPositionRpfAttribute, type: :model do
+RSpec.describe RepositoryRefDetail, type: :model do
   #pending "add some examples to (or delete) #{__FILE__}"
   before(:all) do
     DatabaseCleaner.start
-    @attr = RepositoryPositionRpfAttribute.new(
+    @attr = RepositoryRefDetail.new(
       repository: FactoryGirl.build(:repository),
-      attrib:     RefAttribute.find('FLAC'),
+      attrib:     RefDetail.find('FLAC'),
       no:         0
     )
   end

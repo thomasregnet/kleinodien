@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026200140) do
+ActiveRecord::Schema.define(version: 20161027174106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -440,7 +440,7 @@ ActiveRecord::Schema.define(version: 20161026200140) do
   create_table "re_formats", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
-  create_table "ref_attributes", primary_key: "name", id: :text, force: :cascade do |t|
+  create_table "ref_details", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
   create_table "repositories", force: :cascade do |t|
@@ -454,12 +454,6 @@ ActiveRecord::Schema.define(version: 20161026200140) do
     t.index ["user_id"], name: "index_repositories_on_user_id", using: :btree
   end
 
-  create_table "repository_position_rpf_attributes", primary_key: ["ref_attribute_name", "repository_id", "no"], force: :cascade do |t|
-    t.text    "ref_attribute_name", null: false
-    t.integer "repository_id",      null: false
-    t.integer "no",                 null: false
-  end
-
   create_table "repository_positions", force: :cascade do |t|
     t.integer  "compilation_track_id"
     t.integer  "compilation_release_id"
@@ -470,6 +464,12 @@ ActiveRecord::Schema.define(version: 20161026200140) do
     t.integer  "user_id",                null: false
     t.integer  "compilation_copy_id"
     t.integer  "piece_track_id"
+  end
+
+  create_table "repository_ref_details", primary_key: ["name", "repository_id", "no"], force: :cascade do |t|
+    t.text    "name",          null: false
+    t.integer "repository_id", null: false
+    t.integer "no",            null: false
   end
 
   create_table "repositoy_formats", primary_key: "name", id: :text, force: :cascade do |t|
@@ -629,17 +629,17 @@ ActiveRecord::Schema.define(version: 20161026200140) do
   add_foreign_key "pr_labels", "piece_releases"
   add_foreign_key "pt_formats", "formats", column: "name", primary_key: "name", name: "pt_formats_name_fkey"
   add_foreign_key "re_formats", "formats", column: "name", primary_key: "name", name: "re_formats_name_fkey"
-  add_foreign_key "ref_attributes", "formats", column: "name", primary_key: "name", name: "ref_attributes_name_fkey"
+  add_foreign_key "ref_details", "formats", column: "name", primary_key: "name", name: "ref_attributes_name_fkey"
   add_foreign_key "repositories", "re_formats", column: "re_format_name", primary_key: "name", name: "repositories_re_format_name_fkey"
   add_foreign_key "repositories", "users"
-  add_foreign_key "repository_position_rpf_attributes", "ref_attributes", column: "ref_attribute_name", primary_key: "name", name: "repository_position_rpf_attributes_ref_attribute_name_fkey"
-  add_foreign_key "repository_position_rpf_attributes", "repositories", name: "repository_position_rpf_attributes_repository_id_fkey"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_releases", name: "repository_positions_piece_release_id_fkey"
   add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
+  add_foreign_key "repository_ref_details", "ref_details", column: "name", primary_key: "name", name: "repository_position_rpf_attributes_ref_attribute_name_fkey"
+  add_foreign_key "repository_ref_details", "repositories", name: "repository_position_rpf_attributes_repository_id_fkey"
   add_foreign_key "repositoy_formats", "formats", column: "name", primary_key: "name", name: "repositoy_formats_name_fkey"
   add_foreign_key "rp_formats", "formats", column: "name", primary_key: "name", name: "rp_formats_name_fkey"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
