@@ -20,6 +20,7 @@ When(/^I choose "([^"]*)" as format$/) do |f_name|
 end
 
 Then(/^I will see the my new repository$/) do
-  expect(page).to have_content @my_repository_name
+  expect(page).to have_content 'my new repository'
+  expect(page).to have_content 'CDr'
 end
 

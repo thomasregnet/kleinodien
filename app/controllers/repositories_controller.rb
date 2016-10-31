@@ -1,5 +1,6 @@
 class RepositoriesController < ApplicationController
   def new
+    # TODO: new needs valid user
     @repository = Repository.new
     @formats = ReFormat.all
   end
@@ -25,6 +26,6 @@ class RepositoriesController < ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:name, :id)
+    params.require(:repository).permit(:name, :id, :re_format_name)
   end
 end
