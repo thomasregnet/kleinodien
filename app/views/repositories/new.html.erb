@@ -1,7 +1,17 @@
 <h1>Create a new repository</h1>
 
 <%= form_for @repository, url: {action: 'create'} do |f| %>
-  <%= f.label 'name:'%>
-  <%= f.text_field :name  %>
-  <%= f.submit "create" %>
+  <p>
+    <%= f.label 'name:'%>
+    <%= f.text_field :name  %>
+  </p>
+  <p>
+    <%= f.label 'format:'%>
+    <%= f.select(:re_format_name) do %>
+      <%= options_for_select(@formats.map { |f| [f.name, f.name] }) %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.submit "create" %>
+  </p>
 <% end %>
