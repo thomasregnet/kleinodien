@@ -1,12 +1,13 @@
 class RepositoriesController < ApplicationController
   def new
     @repository = Repository.new
+    @formats = ReFormat.all
   end
 
   def create
     @repository = Repository.new(repository_params)
     @repository.user = current_user
-    if @repository.save
+    if @repository.save!
       redirect_to @repository
     else
       render 'new'

@@ -11,6 +11,7 @@ Feature: Repository
     And I visit the repositories page
     And I click the link to create a new repository
     And I fill in a repository name
+    And I choose "CDr" as format
     And I press the create button
     Then I will see the my new repository
     When I visit the repositories page
