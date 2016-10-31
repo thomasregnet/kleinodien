@@ -1,18 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe RepositoryRefDetail, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
   before(:all) do
     DatabaseCleaner.start
-    @attr = RepositoryRefDetail.new(
+    @detail = RepositoryRefDetail.new(
       repository: FactoryGirl.build(:repository),
-      attrib:     RefDetail.find('FLAC'),
+      detail:     RefDetail.find('FLAC'),
       no:         0
     )
   end
 
-  it 'works' do
-    expect(@attr).to be_valid
+  it 'is valid' do
+    expect(@detail).to be_valid
+  end
+
+  it 'returns the abbr' do
+    expect(@detail.abbr).to eq 'FLAC'
   end
 
   after(:all) do
