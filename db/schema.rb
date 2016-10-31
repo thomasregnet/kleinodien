@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027174106) do
+ActiveRecord::Schema.define(version: 20161031201724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -444,13 +444,13 @@ ActiveRecord::Schema.define(version: 20161027174106) do
   end
 
   create_table "repositories", force: :cascade do |t|
-    t.integer  "user_id",        null: false
-    t.string   "name",           null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.text     "re_format_name"
+    t.integer  "user_id",     null: false
+    t.string   "name",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "format_name"
+    t.index ["format_name"], name: "index_repositories_re_format_name", using: :btree
     t.index ["id", "user_id"], name: "index_repositories_id_and_user_id", unique: true, using: :btree
-    t.index ["re_format_name"], name: "index_repositories_re_format_name", using: :btree
     t.index ["user_id"], name: "index_repositories_on_user_id", using: :btree
   end
 
@@ -630,7 +630,7 @@ ActiveRecord::Schema.define(version: 20161027174106) do
   add_foreign_key "pt_formats", "formats", column: "name", primary_key: "name", name: "pt_formats_name_fkey"
   add_foreign_key "re_formats", "formats", column: "name", primary_key: "name", name: "re_formats_name_fkey"
   add_foreign_key "ref_details", "formats", column: "name", primary_key: "name", name: "ref_attributes_name_fkey"
-  add_foreign_key "repositories", "re_formats", column: "re_format_name", primary_key: "name", name: "repositories_re_format_name_fkey"
+  add_foreign_key "repositories", "re_formats", column: "format_name", primary_key: "name", name: "repositories_re_format_name_fkey"
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"

@@ -7,7 +7,7 @@
   </p>
   <p>
     <%= f.label 'format:'%>
-    <%= f.select(:re_format_name) do %>
+    <%= f.select(:format_name) do %>
       <%= options_for_select(@formats.map { |f| [f.name, f.name] }) %>
     <% end %>
   </p>
