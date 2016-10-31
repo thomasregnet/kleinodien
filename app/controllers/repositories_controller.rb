@@ -26,6 +26,6 @@ class RepositoriesController < ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:name, :id, :re_format_name)
+    params.require(:repository).permit(:name, :id, :format_name)
   end
 end
