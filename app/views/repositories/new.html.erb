@@ -12,6 +12,14 @@
     <% end %>
   </p>
   <p>
+    <%= f.collection_check_boxes(
+                                 :format_details,
+                                 @format_details,
+                                 :name,
+                                 :name
+    )
+    %>
+  <p>
     <%= f.submit "create" %>
   </p>
 <% end %>
