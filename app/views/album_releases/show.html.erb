@@ -29,7 +29,7 @@
   <h2>source</h2>
   <%= @album_release.source.name %>: <%= @album_release.source_ident %>
 <% end %>
-
+  
 <p><%= link_to('add to collection',
                new_compilation_copy_path(
                    compilation_release_id: @album_release.id)) -%>

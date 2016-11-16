@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :compilation_copies, only: [:edit, :index, :new, :show]
+  resources :compilation_copies, only: [:create, :edit, :index, :new, :show]
 
   resources :album_heads, only: [:index, :show]
 

@@ -1,7 +1,11 @@
 class CompilationCopiesController < ApplicationController
+
+  def create
+  end
   def new
     @copy = CompilationCopy.new
     @compilation_release_id = compilation_copie_parms
+    @repositories = Repository.where(user: current_user)
   end
 
   def index
