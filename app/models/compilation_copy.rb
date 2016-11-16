@@ -8,6 +8,7 @@ class CompilationCopy < ApplicationRecord
   validates :release, presence: true
   validates :user, presence: true
 
+  has_many :repositories, through: :user
   # def release(release)
   #   self.
 end
