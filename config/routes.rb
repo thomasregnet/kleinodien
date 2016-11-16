@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'compilation_copies/new'
+  # get 'compilation_copies/new'
 
-  get 'compilation_copies/index'
+  # get 'compilation_copies/index'
 
-  get 'compilation_copies/show'
+  # get 'compilation_copies/show'
 
-  get 'compilation_copies/edit'
+  # get 'compilation_copies/edit'
 
   # get 'repositories/create'
 
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # get 'repositories/index'
 
   devise_for :users
+
+  resources :compilation_copies, only: [:edit, :index, :new, :show]
 
   resources :album_heads, only: [:index, :show]
 
