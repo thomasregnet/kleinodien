@@ -1,0 +1,2 @@
+module CompilationCopiesHelper
+end

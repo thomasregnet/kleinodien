@@ -1,5 +1,6 @@
 When(/^I visit the album_heads page$/) do
-  visit 'album_heads'
+  #visit 'album_heads'
+  visit album_heads_path
 end
 
 When(/^I follow the link to that album head$/) do

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'compilation_copies/new'
+
+  get 'compilation_copies/index'
+
+  get 'compilation_copies/show'
+
+  get 'compilation_copies/edit'
+
   # get 'repositories/create'
 
   # get 'repositories/show'
