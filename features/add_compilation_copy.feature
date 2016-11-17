@@ -2,7 +2,7 @@ Feature: Add a CompilationCopy
 
   In order to manage my collection
   As a user
-  I want to add albums
+  I want to add compilation_copies
 
   Scenario: Add an album to a repository
     Given The album release with discogs id "940468" exists
