@@ -20,3 +20,7 @@ Feature: Add a CompilationCopy
     And I will follow the link to the release
     Then I will see the contents of the album release
     And I follow the link 'add to collection'
+    And I fill in a explanation
+    And I press the create button
+    Then I will see the CompilationCopy
+
