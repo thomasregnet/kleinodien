@@ -1,11 +1,10 @@
-Feature: Add album
+Feature: Add a CompilationCopy
 
   In order to manage my collection
   As a user
   I want to add albums
 
-  # TODO: User must have signed in
-  Scenario: Add album to repository
+  Scenario: Add an album to a repository
     Given The album release with discogs id "940468" exists
     Given User exists
     When I visit the Sign in page
