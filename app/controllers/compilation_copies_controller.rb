@@ -23,6 +23,7 @@ class CompilationCopiesController < ApplicationController
   end
 
   def show
+    @compilation_copy = CompilationCopy.find(params[:id])
   end
 
   def edit
