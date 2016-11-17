@@ -1,27 +1,14 @@
 <h1>CompilationCopies#new</h1>
 <p>Find me in app/views/compilation_copies/new.html.erb</p>
 
-<p>ComplationRelease#id: <%= @compilation_release_id %></p>
-
-<%= form_for @copy, url: { action: 'create' } do |form| %>
+<%= form_for @compilation_copy, url: {action: "create"} do |form| %>
   <p>
     <%= form.label 'explanation' %>
     <%= form.text_field :explanation %>
   </p>
-  <p>
-    <%= form.collection_check_boxes(
-        :repositories,
-        @repositories,
-        :name,
-        :name
-    ) %>
-  </p>
+  <%= form.hidden_field(
+      :compilation_release_id,
+      value: @compilation_release_id.to_s
+  ) %>
   <%= form.submit 'create' %>
 <% end %>
-<p>
-  <ul>
-    <p><% @repositories.each do |repo| %></p>
-      <li><%= repo.name %></li>
-    <% end %>
-  </ul>
-</p>
