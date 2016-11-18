@@ -10,6 +10,11 @@ class RepositoryPosition < ApplicationRecord
   belongs_to :repository
   belongs_to :user
 
+  belongs_to :release,
+             class_name: CompilationRelease,
+             primary_key: :id,
+             foreign_key: :compilation_release_id
+  
   validates :compilation_copy,
             presence: true,
             unless: 'compilation_track.nil?'
