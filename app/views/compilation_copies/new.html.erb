@@ -6,6 +6,12 @@
     <%= form.label 'explanation' %>
     <%= form.text_field :explanation %>
   </p>
+  <p>
+    <%= form.label 'repositories:' %>
+    <%= form.select :repositories, {multiple: true, size: 10 } do %>
+      <%= options_for_select(@repositories.map { |r| [r.name, r.id] }) %>
+    <% end %>
+  </p>
   <%= form.hidden_field(
       :compilation_release_id,
       value: @compilation_release_id.to_s

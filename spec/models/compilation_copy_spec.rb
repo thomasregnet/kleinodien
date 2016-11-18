@@ -29,5 +29,5 @@ RSpec.describe CompilationCopy, type: :model do
     @copy.user = nil
     expect { @copy.save! validate: false }
       .to raise_error /PG::NotNullViolation: ERROR/
-  end  
+  end
 end

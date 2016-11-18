@@ -1,8 +1,6 @@
+# Controller for CompilationCopies
 class CompilationCopiesController < ApplicationController
-
   def create
-    #params = create_compilation_release_params
-    #byebug
     @compilation_copy = CompilationCopy.new(create_compilation_release_params)
     @compilation_copy.user = current_user
 
