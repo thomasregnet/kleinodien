@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe Artist, type: :model do
-  context 'common artist' do
+  context 'usual artist' do
     before(:each) do
-      @artist = FactoryGirl.create(:artist)
+      @artist = FactoryGirl.build(:artist)
     end
 
     it 'is valid with with valid attributes' do
@@ -20,7 +20,7 @@ RSpec.describe Artist, type: :model do
 
   context 'with source' do
     before(:each) do
-      @artist = FactoryGirl.create(:artist_brainz)
+      @artist = FactoryGirl.build(:artist_brainz)
     end
 
     it 'has the source set' do
