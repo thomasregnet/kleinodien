@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031201724) do
+ActiveRecord::Schema.define(version: 20161129214240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -580,6 +580,7 @@ ActiveRecord::Schema.define(version: 20161031201724) do
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
+  add_foreign_key "compilation_track_details", "track_detail_kinds", column: "trf_attribute_kind_id", name: "fk_compilation_track_details_track_detail_kind"
   add_foreign_key "compilation_tracks", "compilation_releases"
   add_foreign_key "compilation_tracks", "ct_formats", column: "format_name", primary_key: "name", name: "compilation_tracks_format_name_fkey"
   add_foreign_key "compilation_tracks", "piece_releases"

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CompilationTrackDetail, type: :model do
   before(:each) do
-    @attr = FactoryGirl.create(:compilation_track_detail)
+    @attr = FactoryGirl.build(:compilation_track_detail)
   end
 
   it 'is valid with valid attributes' do
@@ -31,6 +31,7 @@ RSpec.describe CompilationTrackDetail, type: :model do
   end
 
   it 'must have a unique pair of track_id and no' do
+    @attr.save!
     clone = CompilationTrackDetail.new do |c|
       c.track = @attr.track
       c.kind  = @attr.kind
