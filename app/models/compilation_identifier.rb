@@ -7,13 +7,16 @@ class CompilationIdentifier < ActiveRecord::Base
              class_name: IdentifierType,
              foreign_key: :identifier_type_id
 
-  validates :release, presence: true
-  validates :type, presence: true
-  validates :code, presence: true, blank: false
-  validates :code, uniqueness: { scope: [:release, :type, :disambiguation] }
+  validates :code,
+            presence: true,
+            blank: false,
+            uniqueness: { scope: [:release, :type, :disambiguation] }
+
   validates :disambiguation,
             uniqueness: {
-              scope:          [:release, :type, :code],
+              scope: [:release, :type, :code],
               case_sensitive: false
             }
+  validates :release, presence: true
+  validates :type, presence: true
 end

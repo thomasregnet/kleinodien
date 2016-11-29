@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CompilationIdentifier, type: :model do
   before(:each) do
-    @ci = FactoryGirl.create(:compilation_identifier)
+    @ci = FactoryGirl.build(:compilation_identifier)
   end
 
   it 'is valid with valid attributes' do
@@ -29,15 +29,16 @@ RSpec.describe CompilationIdentifier, type: :model do
     expect(@ci).not_to be_valid
   end
 
-  it 'must have a unique code' do
+  it 'must have an unique code' do
+    @ci.save!
     clone = FactoryGirl.build(:compilation_identifier) do |c|
       c.release = @ci.release
       c.type    = @ci.type
       c.code    = @ci.code
     end
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error(
-      ActiveRecord::RecordNotUnique)
+    expect { clone.save! validate: false }
+      .to raise_error ActiveRecord::RecordNotUnique
   end
 
   it 'is valid with duplicate code and a disambiguation' do
@@ -60,7 +61,7 @@ RSpec.describe CompilationIdentifier, type: :model do
       c.disambiguation = @ci.disambiguation
     end
     expect(clone).not_to be_valid
-    expect { clone.save! validate: false }.to raise_error(
-      ActiveRecord::RecordNotUnique)
+    expect { clone.save! validate: false }
+      .to raise_error ActiveRecord::RecordNotUnique
   end
 end
