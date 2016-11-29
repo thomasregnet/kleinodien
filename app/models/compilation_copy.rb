@@ -1,5 +1,5 @@
+# CompilationCopy holds user copies
 class CompilationCopy < ApplicationRecord
-  #belongs_to :compilation_release
   belongs_to :release,
              class_name:  CompilationRelease,
              foreign_key: :compilation_release_id
@@ -11,12 +11,4 @@ class CompilationCopy < ApplicationRecord
   has_many :repositories, through: :user
 
   accepts_nested_attributes_for :repositories
-  # def release(release)
-  #   self.
-
-  # def repository_ids
-  # end
-
-  # def repository_ids=
-  # end
 end

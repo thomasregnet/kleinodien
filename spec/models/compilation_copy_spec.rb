@@ -19,7 +19,7 @@ RSpec.describe CompilationCopy, type: :model do
     it 'raises without a release' do
       @copy.release = nil
       expect { @copy.save! validate: false }
-        .to raise_error /PG::NotNullViolation: ERROR/
+        .to raise_error(/PG::NotNullViolation: ERROR/)
     end
 
     it 'is not valid without an user' do
@@ -30,7 +30,7 @@ RSpec.describe CompilationCopy, type: :model do
     it 'raises without a user' do
       @copy.user = nil
       expect { @copy.save! validate: false }
-        .to raise_error /PG::NotNullViolation: ERROR/
+        .to raise_error(/PG::NotNullViolation: ERROR/)
     end
   end
 
@@ -53,9 +53,7 @@ RSpec.describe CompilationCopy, type: :model do
     # TODO: ...realy suck!
     it 'works' do
       @release.tracks.each do |track|
-        puts track.piece_release.title
-        puts track.compilation_release.id
-        rp = RepositoryPosition.new(
+        RepositoryPosition.new(
           release:           @release,
           repository:        @repository,
           compilation_track: track,
