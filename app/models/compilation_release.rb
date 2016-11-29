@@ -8,6 +8,7 @@ class CompilationRelease < ActiveRecord::Base
              class_name: CompilationHead,
              foreign_key: :compilation_head_id
   belongs_to :source, foreign_key: :source_name
+
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
   has_many :formats,
@@ -17,6 +18,7 @@ class CompilationRelease < ActiveRecord::Base
            class_name: CompilationIdentifier
   has_many :labels, class_name: CrLabel
   has_many :tracks, class_name: CompilationTrack
+
   has_and_belongs_to_many :countries
 
   validates :head, presence: true

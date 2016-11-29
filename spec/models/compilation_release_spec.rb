@@ -36,8 +36,8 @@ RSpec.describe CompilationRelease, type: :model do
         c.type = @c_release.type
       end
       expect(clone).not_to be_valid
-      expect { clone.save! validate: false }.to raise_error(
-        ActiveRecord::RecordNotUnique)
+      expect { clone.save! validate: false }
+        .to raise_error ActiveRecord::RecordNotUnique
     end
 
     it 'is valid with a duplicate head and a version' do
@@ -57,8 +57,8 @@ RSpec.describe CompilationRelease, type: :model do
         c.version = @c_release.version
       end
       expect(clone).not_to be_valid
-      expect { clone.save! validate: false }.to raise_error(
-        ActiveRecord::RecordNotUnique)
+      expect { clone.save! validate: false }
+        .to raise_error ActiveRecord::RecordNotUnique
     end
 
     it 'is not valid with a duplicate head and duplicate upcase version' do
@@ -69,8 +69,8 @@ RSpec.describe CompilationRelease, type: :model do
         c.version = @c_release.version.upcase
       end
       expect(clone).not_to be_valid
-      expect { clone.save! validate: false }.to raise_error(
-        ActiveRecord::RecordNotUnique)
+      expect { clone.save! validate: false }
+        .to raise_error ActiveRecord::RecordNotUnique
     end
   end
 
