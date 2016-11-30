@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PieceTrack, type: :model do
   before(:each) do
-    @track = FactoryGirl.create(:piece_track)
+    @track = FactoryGirl.build(:piece_track)
   end
 
   it 'is valid with valid attributes' do
@@ -18,7 +18,7 @@ RSpec.describe PieceTrack, type: :model do
   # this spec was cut and pasted from compilation_tracks
   context 'with duration' do
     before(:each) do
-      @track = FactoryGirl.create(:piece_track)
+      @track = FactoryGirl.build(:piece_track)
       @track.duration = Duration.new(311_000, 'second')
     end
 
