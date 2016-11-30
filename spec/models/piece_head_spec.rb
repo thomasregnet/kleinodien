@@ -8,7 +8,7 @@ require 'shared_examples_for_sources'
 
 RSpec.describe PieceHead, type: :model do
   before(:each) do
-    @ph = FactoryGirl.create(:piece_head)
+    @ph = FactoryGirl.build(:piece_head)
   end
 
   it 'is valid with valid attributes' do
