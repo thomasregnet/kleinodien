@@ -9,7 +9,7 @@ require 'shared_examples_for_sources'
 RSpec.describe PieceRelease, type: :model do
   context 'without tracks' do
     before(:each) do
-      @piece_release = FactoryGirl.create(:piece_release)
+      @piece_release = FactoryGirl.build(:piece_release)
     end
 
     it 'is valid with valid attributes' do
