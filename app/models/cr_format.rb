@@ -10,8 +10,7 @@ class CrFormat < ActiveRecord::Base
            class_name: CrfDetail
 
   validates :kind,     presence: true
-  validates :no,       presence: true
+  validates :no,       presence: true, uniqueness: { scope: :release }
   validates :quantity, presence: true
   validates :release,  presence: true
-  validates :no, uniqueness: { scope: :release }
 end
