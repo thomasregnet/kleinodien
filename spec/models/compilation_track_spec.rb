@@ -4,7 +4,7 @@ RSpec.describe CompilationTrack, type: :model do
   context 'simple track' do
     before(:all) do
       DatabaseCleaner.start
-      @track = FactoryGirl.create(:compilation_track)
+      @track = FactoryGirl.build(:compilation_track)
     end
 
     it 'is valid with valid attributes' do
@@ -23,7 +23,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'belonging to a CompilationRelease' do
     before(:each) do
-      @track = FactoryGirl.create(:compilation_track_with_compilation_release)
+      @track = FactoryGirl.build(:compilation_track_with_compilation_release)
     end
 
     it 'knows its CompilationRelease' do
@@ -33,7 +33,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'with a format' do
     before(:each) do
-      @track = FactoryGirl.create(:compilation_track_with_format)
+      @track = FactoryGirl.build(:compilation_track_with_format)
     end
 
     it 'belongs to its format' do
@@ -69,7 +69,7 @@ RSpec.describe CompilationTrack, type: :model do
   context 'with duration' do
     before(:each) do
       DatabaseCleaner.start
-      @track = FactoryGirl.create(:compilation_track)
+      @track = FactoryGirl.build(:compilation_track)
       @track.duration = Duration.new(311_000, 'second')
     end
 
@@ -93,14 +93,14 @@ RSpec.describe CompilationTrack, type: :model do
   context 'with a format' do
     before(:all) do
       DatabaseCleaner.start
-      @track = FactoryGirl.create(
+      @track = FactoryGirl.build(
         :compilation_track,
         new_format: CtFormat.find('FLAC')
       )
     end
 
     it 'is valid' do
-      # byebug
+      expect(@track).to be_valid
     end
 
     after(:all) do
