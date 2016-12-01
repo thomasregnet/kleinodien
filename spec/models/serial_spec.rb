@@ -4,7 +4,7 @@ require 'shared_examples_for_disambiguations'
 RSpec.describe Serial, type: :model do
   context 'without seasons' do
     before(:each) do
-      @serial = FactoryGirl.create(:serial)
+      @serial = FactoryGirl.build(:serial)
     end
 
     it 'is valid with valid attributes' do
