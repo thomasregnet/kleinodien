@@ -1,3 +1,4 @@
+# Repository Repository Format Detail
 class RepositoryRefDetail < ApplicationRecord
   self.primary_key = [:name, :repository_id, :no]
 
