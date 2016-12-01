@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129214240) do
+ActiveRecord::Schema.define(version: 20161201190320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -472,9 +472,6 @@ ActiveRecord::Schema.define(version: 20161129214240) do
     t.integer "no",            null: false
   end
 
-  create_table "repositoy_formats", primary_key: "name", id: :text, force: :cascade do |t|
-  end
-
   create_table "rp_formats", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
@@ -641,7 +638,6 @@ ActiveRecord::Schema.define(version: 20161129214240) do
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
   add_foreign_key "repository_ref_details", "ref_details", column: "name", primary_key: "name", name: "repository_position_rpf_attributes_ref_attribute_name_fkey"
   add_foreign_key "repository_ref_details", "repositories", name: "repository_position_rpf_attributes_repository_id_fkey"
-  add_foreign_key "repositoy_formats", "formats", column: "name", primary_key: "name", name: "repositoy_formats_name_fkey"
   add_foreign_key "rp_formats", "formats", column: "name", primary_key: "name", name: "rp_formats_name_fkey"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
