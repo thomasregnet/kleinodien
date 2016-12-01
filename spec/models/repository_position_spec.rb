@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.shared_examples 'repository_positions' do |position|
+RSpec.shared_examples 'repository_positions' do
   it 'is valid' do
     expect(@position).to be_valid
   end
@@ -19,7 +19,7 @@ end
 RSpec.describe RepositoryPosition, type: :model do
   context 'with a CompilationTrack' do
     before(:each) do
-      @position = FactoryGirl.create(
+      @position = FactoryGirl.build(
         :repository_position_with_compilation_track
       )
     end
@@ -34,7 +34,7 @@ RSpec.describe RepositoryPosition, type: :model do
 
   context 'with a PieceTrack' do
     before(:each) do
-      @position = FactoryGirl.create(:repository_position_with_piece_track)
+      @position = FactoryGirl.build(:repository_position_with_piece_track)
     end
 
     include_examples 'repository_positions', @position
