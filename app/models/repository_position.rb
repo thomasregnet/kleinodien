@@ -1,3 +1,4 @@
+# A position of a content in an users repository
 class RepositoryPosition < ApplicationRecord
   belongs_to :compilation_copy,
              primary_key: [:id, :compilation_release_id, :user_id],
@@ -14,7 +15,7 @@ class RepositoryPosition < ApplicationRecord
              class_name: CompilationRelease,
              primary_key: :id,
              foreign_key: :compilation_release_id
-  
+
   validates :compilation_copy,
             presence: true,
             unless: 'compilation_track.nil?'
