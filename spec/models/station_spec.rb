@@ -3,7 +3,7 @@ require 'shared_examples_for_disambiguations'
 
 RSpec.describe Station, type: :model do
   before(:each) do
-    @station = FactoryGirl.create(:station)
+    @station = FactoryGirl.build(:station)
   end
 
   it 'is valid with valid parameters' do
