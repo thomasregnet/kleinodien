@@ -26,8 +26,8 @@ module Discogs
 
     def new_artist_credit
       artist_credit = ArtistCredit.new(data_supplier: @data_supplier)
-      @artists.each_with_index do |artist, no|
-        Discogs::InsertParticipant.perform(artist, no, artist_credit)
+      @artists.each_with_index do |artist, position|
+        Discogs::InsertParticipant.perform(artist, position, artist_credit)
       end
       artist_credit.save!
       artist_credit

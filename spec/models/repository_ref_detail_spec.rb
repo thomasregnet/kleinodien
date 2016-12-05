@@ -6,7 +6,7 @@ RSpec.describe RepositoryRefDetail, type: :model do
     @detail = RepositoryRefDetail.new(
       repository: FactoryGirl.build(:repository),
       detail:     RefDetail.find('FLAC'),
-      no:         0
+      position:  0
     )
   end
 

@@ -48,8 +48,8 @@ RSpec.describe Repository, type: :model do
       @repository = FactoryGirl.build(:repository)
       @repository.format = ReFormat.find('CDr')
       @repos_format_detail = RepositoryRefDetail.new(
-        name: 'WAV',
-        no:   0
+        name:     'WAV',
+        position: 0
       )
       @repository.format_details << @repos_format_detail
     end

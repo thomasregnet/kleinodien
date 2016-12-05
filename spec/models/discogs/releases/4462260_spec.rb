@@ -23,6 +23,7 @@ RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
     formats = @album_release.formats
 
     format = formats[0]
+
     expect(format.kind.name).to eq('All Media')
     expect(format.quantity).to eq(1)
     expect(format.note).to eq('Hardcover-Artbook')

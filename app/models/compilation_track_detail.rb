@@ -5,9 +5,9 @@ class CompilationTrackDetail < ActiveRecord::Base
              foreign_key: :trf_attribute_kind_id
   belongs_to :track, class_name: CompilationTrack
 
-  validates :kind,  presence: true
-  validates :no,    presence: true
+  validates :kind, presence: true
+  validates :position, presence: true
   validates :track,
             presence: true,
-            uniqueness: { scope: :no }
+            uniqueness: { scope: :position }
 end

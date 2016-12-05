@@ -3,7 +3,7 @@ FactoryGirl.define do
     association :release, factory: :compilation_release
     association :kind, factory: :cr_format_kind
     quantity 1
-    no 1
+    position 1
 
     factory :cr_format_with_details do
       transient do
@@ -12,7 +12,6 @@ FactoryGirl.define do
 
       after(:create) do |cr_format, evaluator|
         create_list(
-          #:crf_attribute,
           :crf_detail,
           evaluator.details_count,
           format: cr_format

@@ -8,7 +8,7 @@ module Brainz
     def initialize(brz_media, release)
       @brz_media = brz_media
       @release   = release
-      @no        = 1
+      @position  = 1
     end
 
     def perform
@@ -41,9 +41,9 @@ module Brainz
         # release: piece_release,
         piece_release: piece_release,
         position:      brz_track.number,
-        no:            @no
+        position:            @position
       )
-      @no += 1
+      @position += 1
     end
   end
 end

@@ -19,8 +19,8 @@ RSpec.describe Participant, type: :model do
     expect(@participant).not_to be_valid
   end
 
-  it 'is not valid without a no' do
-    @participant.no = nil
+  it 'is not valid without a position' do
+    @participant.position = nil
     expect(@participant).not_to be_valid
   end
 end

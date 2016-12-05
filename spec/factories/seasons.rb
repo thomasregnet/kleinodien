@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :season do
     serial
-    sequence(:no) { |n| n }
+    sequence(:position) { |n| n }
 
     factory :season_with_tv_episode_heads do
       association :serial, factory: :tv_serial

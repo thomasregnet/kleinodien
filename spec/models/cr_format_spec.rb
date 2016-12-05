@@ -35,7 +35,7 @@ RSpec.describe CrFormat, type: :model do
   end
 
   it 'is not valid without a no' do
-    @cr_format.no = nil
+    @cr_format.position = nil
     expect(@cr_format).not_to be_valid
     expect { @cr_format.save! validate: false }
       .to raise_error(ActiveRecord::StatementInvalid)
@@ -44,20 +44,14 @@ RSpec.describe CrFormat, type: :model do
   it 'must have a unique combination of release and no' do
     clone = CrFormat.new do |c|
       c.release  = @cr_format.release
-      c.no       = @cr_format.no
+      c.position = @cr_format.position
       c.quantity = @cr_format.quantity
       c.kind     = @cr_format.kind
     end
-    expect(clone).not_to be_valid
 
-    regexp = /
-      duplicate\s key
-      .+
-      violates\s unique\s constraint
-      \s
-      "index_cr_formats_on_compilation_release_id_and_no"
-    /x
-    expect { clone.save! validate: false }.to raise_error(regexp)
+    expect(clone).not_to be_valid
+    expect { clone.save! validate: false }
+      .to raise_error(/PG::UniqueViolation/)
   end
 
   context 'with details' do
