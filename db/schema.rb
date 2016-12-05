@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205195640) do
+ActiveRecord::Schema.define(version: 20161205203712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,20 +153,20 @@ ActiveRecord::Schema.define(version: 20161205195640) do
   create_table "compilation_track_details", force: :cascade do |t|
     t.integer  "track_id",              null: false
     t.integer  "trf_attribute_kind_id", null: false
-    t.integer  "no",                    null: false
+    t.integer  "position",              null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.index ["track_id", "no"], name: "index_compilation_track_details_on_track_id_and_no", unique: true, using: :btree
+    t.index ["track_id", "position"], name: "index_compilation_track_details_on_track_id_and_position", unique: true, using: :btree
   end
 
   create_table "compilation_tracks", force: :cascade do |t|
     t.integer  "piece_release_id",       null: false
-    t.integer  "no"
+    t.integer  "position"
     t.string   "path"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "compilation_release_id"
-    t.string   "position"
+    t.string   "location"
     t.string   "heading"
     t.integer  "tr_format_kind_id"
     t.integer  "milliseconds"
@@ -242,11 +242,11 @@ ActiveRecord::Schema.define(version: 20161205195640) do
     t.integer  "compilation_release_id", null: false
     t.integer  "cr_format_kind_id",      null: false
     t.integer  "quantity",               null: false
-    t.integer  "no",                     null: false
+    t.integer  "position",               null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "note"
-    t.index ["compilation_release_id", "no"], name: "index_cr_formats_on_compilation_release_id_and_no", unique: true, using: :btree
+    t.index ["compilation_release_id", "position"], name: "index_cr_formats_on_compilation_release_id_and_position", unique: true, using: :btree
     t.index ["cr_format_kind_id"], name: "index_cr_formats_on_cr_format_kind_id", using: :btree
   end
 
@@ -272,10 +272,10 @@ ActiveRecord::Schema.define(version: 20161205195640) do
   create_table "crf_details", force: :cascade do |t|
     t.integer  "cr_format_id",       null: false
     t.integer  "crf_detail_kind_id", null: false
-    t.integer  "no",                 null: false
+    t.integer  "position",           null: false
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["cr_format_id", "no"], name: "index_crf_details_on_cr_format_id_and_no", unique: true, using: :btree
+    t.index ["cr_format_id", "position"], name: "index_crf_details_on_cr_format_id_and_position", unique: true, using: :btree
     t.index ["crf_detail_kind_id"], name: "index_crf_details_on_crf_detail_kind_id", using: :btree
   end
 
@@ -312,14 +312,14 @@ ActiveRecord::Schema.define(version: 20161205195640) do
   end
 
   create_table "participants", force: :cascade do |t|
-    t.integer  "no",               null: false
+    t.integer  "position",         null: false
     t.string   "join_phrase"
     t.integer  "artist_id",        null: false
     t.integer  "artist_credit_id", null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["artist_id"], name: "index_participants_on_artist_id", using: :btree
-    t.index ["no", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true, using: :btree
+    t.index ["position", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true, using: :btree
   end
 
   create_table "ph_companies", force: :cascade do |t|
@@ -361,7 +361,7 @@ ActiveRecord::Schema.define(version: 20161205195640) do
     t.integer  "season_id"
     t.string   "title",            null: false
     t.string   "disambiguation"
-    t.integer  "no"
+    t.integer  "position"
     t.string   "type",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -466,19 +466,19 @@ ActiveRecord::Schema.define(version: 20161205195640) do
     t.integer  "piece_track_id"
   end
 
-  create_table "repository_ref_details", primary_key: ["name", "repository_id", "no"], force: :cascade do |t|
+  create_table "repository_ref_details", primary_key: ["name", "repository_id", "position"], force: :cascade do |t|
     t.text    "name",          null: false
     t.integer "repository_id", null: false
-    t.integer "no",            null: false
+    t.integer "position",      null: false
   end
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "serial_id",  null: false
-    t.integer  "no",         null: false
+    t.integer  "position",   null: false
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["no", "serial_id"], name: "index_seasons_on_no_and_serial_id", unique: true, using: :btree
+    t.index ["position", "serial_id"], name: "index_seasons_on_position_and_serial_id", unique: true, using: :btree
   end
 
   create_table "serials", force: :cascade do |t|
