@@ -50,7 +50,11 @@ RSpec.describe RepositoryPosition, type: :model do
 
     it 'is not valid' do
       expect(@position).not_to be_valid
-      #byebug
+    end
+
+    it 'raises an exception if it is saved without validation' do
+      expect { @position.save validate: false }
+        .to raise_error(/PG::CheckViolation/)
     end
   end
 end
