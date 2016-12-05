@@ -16,6 +16,8 @@ class RepositoryPosition < ApplicationRecord
              primary_key: :id,
              foreign_key: :compilation_release_id
 
+  validate :only_on_track_type
+
   validates :compilation_copy,
             presence: true,
             unless: 'compilation_track.nil?'
@@ -43,5 +45,18 @@ class RepositoryPosition < ApplicationRecord
     self.compilation_copy_id    = nil
     self.compilation_release_id = nil
     self.user_id                = nil
+  end
+
+  def only_on_track_type
+    return unless compilation_track
+    return unless piece_track
+    errors.add(
+      :compilation_track,
+      "compilation_track can't be used with a piece_track"
+    )
+    errors.add(
+      :piece_track,
+      "piece_track can't be used with a compilation_track"
+    )
   end
 end

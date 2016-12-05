@@ -39,4 +39,18 @@ RSpec.describe RepositoryPosition, type: :model do
 
     include_examples 'repository_positions', @position
   end
+
+  context 'with CompilationTrack and PieceTrack' do
+    before(:each) do
+      @position = FactoryGirl.build(
+        :repository_position_with_compilation_track
+      )
+      @position.piece_track = FactoryGirl.build(:piece_track)
+    end
+
+    it 'is not valid' do
+      expect(@position).not_to be_valid
+      #byebug
+    end
+  end
 end
