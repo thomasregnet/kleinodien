@@ -24,22 +24,20 @@ RSpec.describe CrfDetail, type: :model do
   end
 
   it 'is not valid without a no' do
-    @attr.no = nil
+    @attr.position = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
-      .to raise_error(/null value in column "no"/)
+      .to raise_error(/null value in column "position"/)
   end
 
   it 'must have a unique pair of format_id and no' do
     clone = CrfDetail.new do |c|
-      c.format = @attr.format
-      c.kind   = @attr.kind
-      c.no     = @attr.no
+      c.format   = @attr.format
+      c.kind     = @attr.kind
+      c.position = @attr.position
     end
     expect(clone).not_to be_valid
     expect { clone.save! validate: false }
-      .to raise_error(
-        /duplicate key.+"index_crf_details_on_cr_format_id_and_no"/
-      )
+      .to raise_error(/PG::UniqueViolation/)
   end
 end

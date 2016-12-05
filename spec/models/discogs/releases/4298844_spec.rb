@@ -24,16 +24,16 @@ RSpec.describe "Aphrodite's Child - 666 from Discogs" do
     tracks = @album_release.tracks
 
     track = tracks[0]
-    expect(track.position).to eq('A1')
+    expect(track.location).to eq('A1')
     expect(track.piece_release.title).to eq('The System')
     expect(track.duration.mmss).to eq('0:23')
 
     track = tracks[20]
-    expect(track.position).to eq('C5')
+    expect(track.location).to eq('C5')
     expect(track.piece_release.title).to eq('∞')
 
     track = tracks[23]
-    expect(track.position).to eq('D2')
+    expect(track.location).to eq('D2')
     expect(track.piece_release.title).to eq('Break')
   end
 

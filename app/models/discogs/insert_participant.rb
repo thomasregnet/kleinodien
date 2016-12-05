@@ -1,13 +1,13 @@
 module Discogs
   # Inserts Discogs Artists to ArtistCredit
   class InsertParticipant
-    def self.perform(dc_artist, no, artist_credit)
-      new(dc_artist, no, artist_credit).perform
+    def self.perform(dc_artist, position, artist_credit)
+      new(dc_artist, position, artist_credit).perform
     end
 
-    def initialize(dc_artist, no, artist_credit)
+    def initialize(dc_artist, position, artist_credit)
       @dc_artist     = dc_artist
-      @no            = no
+      @position      = position
       @artist_credit = artist_credit
     end
 
@@ -18,7 +18,7 @@ module Discogs
       @artist_credit.participants.build(
         artist:      artist,
         join_phrase: join_phrase,
-        no:          @no
+        position:    @position
       )
     end
 

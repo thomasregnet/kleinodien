@@ -21,21 +21,21 @@ module Brainz
         data_supplier: DataSupplier.find_or_create_by!(name: 'MusicBrainz')
       )
 
-      @brz_artist_credit.name_credits.each_with_index do |brz_name_credit, no|
-        participant(brz_name_credit, no)
+      @brz_artist_credit.name_credits.each_with_index do |brz_name_credit, pos|
+        participant(brz_name_credit, pos)
       end
 
       @artist_credit.save!
       @artist_credit
     end
 
-    def participant(brz_name_credit, no)
+    def participant(brz_name_credit, position)
       artist = create_artist(brz_name_credit.artist)
 
       @artist_credit.participants.build(
         artist:      artist,
         join_phrase: brz_name_credit.stripped_joinphrase,
-        no:          no
+        position:          position
       )
     end
 

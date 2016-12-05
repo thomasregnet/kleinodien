@@ -45,14 +45,14 @@ RSpec.describe ImdbImporter, type: :model do
 
     it 'has imported the episodes' do
       expect(@tv_serial.seasons.first.episodes[0].title).to eq('Pilot')
-      expect(@tv_serial.seasons.first.episodes[0].no).to eq(0)
+      expect(@tv_serial.seasons.first.episodes[0].position).to eq(0)
 
       expect(@tv_serial.seasons.first.episodes[9].title).to eq('Fallen Angel')
-      expect(@tv_serial.seasons.first.episodes[9].no).to eq(9)
+      expect(@tv_serial.seasons.first.episodes[9].position).to eq(9)
 
       expect(@tv_serial.seasons.first.episodes.last.title)
         .to eq('The Erlenmeyer Flask')
-      expect(@tv_serial.seasons.first.episodes.last.no).to eq(23)
+      expect(@tv_serial.seasons.first.episodes.last.position).to eq(23)
     end
 
     after(:all) do

@@ -11,8 +11,8 @@ module Discogs
     end
 
     def perform
-      @dc_formats.each_with_index.map do |dc_format, no|
-        Discogs::InsertFormat.perform(dc_format, @album_release, no)
+      @dc_formats.each_with_index.map do |dc_format, position|
+        Discogs::InsertFormat.perform(dc_format, @album_release, position)
       end
     end
   end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :participant do
-    sequence(:no) { |n| n }
+    sequence(:position) { |n| n }
 
     factory :participant_without_artist_credit do
       artist

@@ -7,7 +7,7 @@ class CrfDetail < ActiveRecord::Base
              class_name: CrfDetailKind,
              foreign_key: :crf_detail_kind_id
 
-  validates :format, presence: true, uniqueness: { scope: :no }
-  validates :kind,   presence: true
-  validates :no,     presence: true
+  validates :format,   presence: true, uniqueness: { scope: :position }
+  validates :kind,     presence: true
+  validates :position, presence: true
 end

@@ -23,19 +23,19 @@ RSpec.describe CompilationTrackDetail, type: :model do
       .to raise_error(/ERROR:  null value in column "trf_attribute_kind_id"/)
   end
 
-  it 'is not valid without a no' do
-    @attr.no = nil
+  it 'is not valid without a position' do
+    @attr.position = nil
     expect(@attr).not_to be_valid
     expect { @attr.save! validate: false }
-      .to raise_error(/ERROR:  null value in column "no"/)
+      .to raise_error(/ERROR:  null value in column "position"/)
   end
 
-  it 'must have a unique pair of track_id and no' do
+  it 'must have a unique pair of track_id and position' do
     @attr.save!
     clone = CompilationTrackDetail.new do |c|
-      c.track = @attr.track
-      c.kind  = @attr.kind
-      c.no    = @attr.no
+      c.track    = @attr.track
+      c.kind     = @attr.kind
+      c.position = @attr.position
     end
 
     expect(clone).not_to be_valid

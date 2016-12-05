@@ -41,8 +41,8 @@ class OmdbImporter
       artist_credit = ArtistCredit.new
       artist = Artist.find_or_create_by(name: person.name)
       artist_credit.participants.build(
-        no:     0,
-        artist: artist
+        position: 0,
+        artist:   artist
       )
     end
     artist_credit

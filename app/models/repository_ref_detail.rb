@@ -1,6 +1,6 @@
 # Repository Repository Format Detail
 class RepositoryRefDetail < ApplicationRecord
-  self.primary_key = [:name, :repository_id, :no]
+  self.primary_key = [:name, :repository_id, :position]
 
   belongs_to :detail,
              class_name: RefDetail,

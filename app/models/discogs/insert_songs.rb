@@ -8,7 +8,7 @@ module Discogs
     def initialize(media, album_release)
       @media         = media
       @album_release = album_release
-      @no            = 0
+      @position      = 0
     end
 
     def perform
@@ -35,7 +35,7 @@ module Discogs
         @heading = dc_track.title
       else
         track(dc_track)
-        @no += 1
+        @position += 1
       end
     end
 
@@ -55,8 +55,8 @@ module Discogs
       @album_release.tracks.create!(
         # release:     song_release,
         piece_release: song_release,
-        no:            @no,
-        position:      dc_track.position.to_s,
+        position:      @position,
+        location:      dc_track.position.to_s,
         heading:       @heading,
         duration:      dc_track.duration,
         side:          @side_name

@@ -10,8 +10,8 @@ RSpec.describe Season, type: :model do
       expect(@season).to be_valid
     end
 
-    it 'is not valid without a no' do
-      @season.no = nil
+    it 'is not valid without a position' do
+      @season.position = nil
       expect(@season).not_to be_valid
     end
 
