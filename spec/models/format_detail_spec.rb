@@ -1,5 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe FormatDetail, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @format_detail = FactoryGirl.build(:format_detail)
+  end
+
+  it 'is valid with valid parameters' do
+    expect(@format_detail).to be_valid
+  end
+
+  it 'is not valid without a abbr' do
+    @format_detail.abbr = nil
+    expect(@format_detail).not_to be_valid
+  end
+
+  it 'is not valid without a name' do
+    @format_detail.name = nil
+    expect(@format_detail).not_to be_valid
+  end    
 end
