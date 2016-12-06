@@ -35,7 +35,7 @@ class CompilationCopiesController < ApplicationController
 
   def create_compilation_release_params
     params.require(:compilation_copy).permit(
-      :compilation_release_id, :explanation, repositories: []
+      :compilation_release_id, :note, repositories: []
     )
   end
 end
