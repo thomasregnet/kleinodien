@@ -1,18 +1,15 @@
 RSpec.shared_examples "a format" do
-  it 'has the name set' do
-    expect(format.name).to eq name
+  it 'is valid with valid parameters' do
+    expect(format).to be_valid
   end
 
-  it 'has the abbr set' do
-    expect(format.abbr).to eq abbr
-  end
-
-  it 'has the format set' do
-      expect(format.format.name).to eq name
+  it 'is not valid without a abbr' do
+    format.abbr = nil
+    expect(format).not_to be_valid
   end
 
   it 'is not valid without a name' do
-    format = klass.new
+    format.name = nil
     expect(format).not_to be_valid
   end
 end

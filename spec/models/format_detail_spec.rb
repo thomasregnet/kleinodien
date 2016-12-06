@@ -1,21 +1,13 @@
 require 'rails_helper'
+require 'shared_examples_for_formats'
 
 RSpec.describe FormatDetail, type: :model do
   before(:each) do
     @format_detail = FactoryGirl.build(:format_detail)
   end
 
-  it 'is valid with valid parameters' do
-    expect(@format_detail).to be_valid
+  it_behaves_like 'a format' do
+    #byebug
+    let(:format) { @format_detail }
   end
-
-  it 'is not valid without a abbr' do
-    @format_detail.abbr = nil
-    expect(@format_detail).not_to be_valid
-  end
-
-  it 'is not valid without a name' do
-    @format_detail.name = nil
-    expect(@format_detail).not_to be_valid
-  end    
 end
