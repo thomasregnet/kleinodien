@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206185829) do
+ActiveRecord::Schema.define(version: 20161206193034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,6 +288,10 @@ ActiveRecord::Schema.define(version: 20161206185829) do
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_data_sources_on_lower_name", unique: true, using: :btree
     t.index "lower((name)::text)", name: "index_data_suppliers_on_lower_name", unique: true, using: :btree
+  end
+
+  create_table "format_details", primary_key: "abbr", id: :text, force: :cascade do |t|
+    t.text "name", null: false
   end
 
   create_table "formats", primary_key: "name", id: :text, force: :cascade do |t|
