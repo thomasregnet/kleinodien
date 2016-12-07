@@ -20,8 +20,8 @@ RSpec.describe CrFormat, type: :model do
       .to raise_error(ActiveRecord::StatementInvalid)
   end
 
-  it 'is not valid without a kind' do
-    @cr_format.kind = nil
+  it 'is not valid without an format' do
+    @cr_format.format = nil
     expect(@cr_format).not_to be_valid
     expect { @cr_format.save! validate: false }
       .to raise_error(ActiveRecord::StatementInvalid)
@@ -41,12 +41,12 @@ RSpec.describe CrFormat, type: :model do
       .to raise_error(ActiveRecord::StatementInvalid)
   end
 
-  it 'must have a unique combination of release and no' do
+  it 'must have a unique combination of release and postition' do
     clone = CrFormat.new do |c|
       c.release  = @cr_format.release
       c.position = @cr_format.position
       c.quantity = @cr_format.quantity
-      c.kind     = @cr_format.kind
+      c.format   = @cr_format.format
     end
 
     expect(clone).not_to be_valid
