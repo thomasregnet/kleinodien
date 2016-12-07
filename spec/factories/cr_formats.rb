@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :cr_format do
     association :release, factory: :compilation_release
-    association :kind, factory: :cr_format_kind
+    #association :kind, factory: :cr_format_kind
+    association :format, factory: :format
     quantity 1
     position 1
 

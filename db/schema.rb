@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206202120) do
+ActiveRecord::Schema.define(version: 20161207190648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,15 +239,12 @@ ActiveRecord::Schema.define(version: 20161206202120) do
   end
 
   create_table "cr_formats", force: :cascade do |t|
-    t.integer  "compilation_release_id", null: false
-    t.integer  "cr_format_kind_id",      null: false
-    t.integer  "quantity",               null: false
-    t.integer  "position",               null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "note"
-    t.index ["compilation_release_id", "position"], name: "index_cr_formats_on_compilation_release_id_and_position", unique: true, using: :btree
-    t.index ["cr_format_kind_id"], name: "index_cr_formats_on_cr_format_kind_id", using: :btree
+    t.integer "compilation_release_id", null: false
+    t.text    "abbr",                   null: false
+    t.integer "position",               null: false
+    t.integer "quantity",               null: false
+    t.text    "note"
+    t.index ["compilation_release_id", "position"], name: "cr_formats_compilation_release_id_position_idx", unique: true, using: :btree
   end
 
   create_table "cr_labels", force: :cascade do |t|
@@ -582,11 +579,10 @@ ActiveRecord::Schema.define(version: 20161206202120) do
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
-  add_foreign_key "cr_formats", "compilation_releases"
-  add_foreign_key "cr_formats", "cr_format_kinds"
+  add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
+  add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
-  add_foreign_key "crf_details", "cr_formats"
   add_foreign_key "crf_details", "crf_detail_kinds"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
