@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207190648) do
+ActiveRecord::Schema.define(version: 20161207194423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,14 @@ ActiveRecord::Schema.define(version: 20161207190648) do
     t.index ["artist_credit_id"], name: "index_cr_credits_on_artist_credit_id", using: :btree
     t.index ["compilation_release_id"], name: "index_cr_credits_on_compilation_release_id", using: :btree
     t.index ["job_id"], name: "index_cr_credits_on_job_id", using: :btree
+  end
+
+  create_table "cr_format_details", force: :cascade do |t|
+    t.integer "cr_format_id", null: false
+    t.text    "abbr",         null: false
+    t.integer "position",     null: false
+    t.index ["cr_format_id", "abbr"], name: "cr_format_details_cr_format_id_abbr_idx", unique: true, using: :btree
+    t.index ["cr_format_id", "position"], name: "cr_format_details_cr_format_id_position_idx", unique: true, using: :btree
   end
 
   create_table "cr_format_kinds", force: :cascade do |t|
@@ -579,6 +587,8 @@ ActiveRecord::Schema.define(version: 20161207190648) do
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
+  add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
+  add_foreign_key "cr_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "cr_format_details_abbr_fkey"
   add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
   add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
   add_foreign_key "cr_labels", "companies"
