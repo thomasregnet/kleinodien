@@ -1,0 +1,498 @@
+[
+  {
+    "name": "LP",
+    "abbr": "LP"
+  },
+  {
+    "name": "16\"",
+    "abbr": "16\""
+  },
+  {
+    "name": "12\"",
+    "abbr": "12\""
+  },
+  {
+    "name": "11\"",
+    "abbr": "11\""
+  },
+  {
+    "name": "10\"",
+    "abbr": "10\""
+  },
+  {
+    "name": "9\"",
+    "abbr": "9\""
+  },
+  {
+    "name": "8\"",
+    "abbr": "8\""
+  },
+  {
+    "name": "7\"",
+    "abbr": "7\""
+  },
+  {
+    "name": "6½\"",
+    "abbr": "6½\""
+  },
+  {
+    "name": "6\"",
+    "abbr": "6\""
+  },
+  {
+    "name": "5½\"",
+    "abbr": "5½\""
+  },
+  {
+    "name": "5\"",
+    "abbr": "5\""
+  },
+  {
+    "name": "4\"",
+    "abbr": "4\""
+  },
+  {
+    "name": "3½\"",
+    "abbr": "3½\""
+  },
+  {
+    "name": "3\"",
+    "abbr": "3\""
+  },
+  {
+    "name": "2\"",
+    "abbr": "2\""
+  },
+  {
+    "name": "8 ⅓ RPM",
+    "abbr": "8 ⅓ RPM"
+  },
+  {
+    "name": "21cm",
+    "abbr": "21cm"
+  },
+  {
+    "name": "25cm",
+    "abbr": "25cm"
+  },
+  {
+    "name": "27cm",
+    "abbr": "27cm"
+  },
+  {
+    "name": "29cm",
+    "abbr": "29cm"
+  },
+  {
+    "name": "35cm",
+    "abbr": "35cm"
+  },
+  {
+    "name": "50cm",
+    "abbr": "50cm"
+  },
+  {
+    "name": "80 RPM",
+    "abbr": "80 RPM"
+  },
+  {
+    "name": "90 RPM",
+    "abbr": "90 RPM"
+  },
+  {
+    "name": "2-Track Mono",
+    "abbr": "2tr Mono"
+  },
+  {
+    "name": "2-Track Stereo",
+    "abbr": "2tr Stereo"
+  },
+  {
+    "name": "4-Track Mono",
+    "abbr": "4tr Mono"
+  },
+  {
+    "name": "4-Track Stereo",
+    "abbr": "4tr Stereo"
+  },
+  {
+    "name": "10.5\" NAB Reel",
+    "abbr": "10.5\" Reel"
+  },
+  {
+    "name": "3\" Cine Reel",
+    "abbr": "3\" Reel"
+  },
+  {
+    "name": "5\" Cine Reel",
+    "abbr": "5\" Reel"
+  },
+  {
+    "name": "7\" Cine Reel",
+    "abbr": "7\" Reel"
+  },
+  {
+    "name": "2 Minute",
+    "abbr": "2min"
+  },
+  {
+    "name": "3 Minute",
+    "abbr": "3min"
+  },
+  {
+    "name": "4 Minute",
+    "abbr": "4min"
+  },
+  {
+    "name": "Concert",
+    "abbr": "Concert"
+  },
+  {
+    "name": "Salon",
+    "abbr": "Salon"
+  },
+  {
+    "name": "Mini",
+    "abbr": "Mini"
+  },
+  {
+    "name": "Business Card",
+    "abbr": "B/card"
+  },
+  {
+    "name": "Shape",
+    "abbr": "Shape"
+  },
+  {
+    "name": "Minimax",
+    "abbr": "Minimax"
+  },
+  {
+    "name": "CD-ROM",
+    "abbr": "CD-ROM"
+  },
+  {
+    "name": "CDi",
+    "abbr": "CDi"
+  },
+  {
+    "name": "CD+G",
+    "abbr": "CD+G"
+  },
+  {
+    "name": "HDCD",
+    "abbr": "HDCD"
+  },
+  {
+    "name": "VCD",
+    "abbr": "VCD"
+  },
+  {
+    "name": "AVCD",
+    "abbr": "AVCD"
+  },
+  {
+    "name": "SVCD",
+    "abbr": "SVCD"
+  },
+  {
+    "name": "Blu-ray Audio",
+    "abbr": "Blu-ray-A"
+  },
+  {
+    "name": "DVD-Audio",
+    "abbr": "DVD-A"
+  },
+  {
+    "name": "DVD-Data",
+    "abbr": "DVD-D"
+  },
+  {
+    "name": "DVD-Video",
+    "abbr": "DVD-V"
+  },
+  {
+    "name": "Hybrid",
+    "abbr": "Hybrid"
+  },
+  {
+    "name": "Multichannel",
+    "abbr": "Multichannel"
+  },
+  {
+    "name": "AAC",
+    "abbr": "AAC"
+  },
+  {
+    "name": "AIFC",
+    "abbr": "AIFC"
+  },
+  {
+    "name": "AIFF",
+    "abbr": "AIFF"
+  },
+  {
+    "name": "ALAC",
+    "abbr": "ALAC"
+  },
+  {
+    "name": "AMR",
+    "abbr": "AMR"
+  },
+  {
+    "name": "APE",
+    "abbr": "APE"
+  },
+  {
+    "name": "AVI",
+    "abbr": "AVI"
+  },
+  {
+    "name": "DFF",
+    "abbr": "DFF"
+  },
+  {
+    "name": "DSF",
+    "abbr": "DSF"
+  },
+  {
+    "name": "FLAC",
+    "abbr": "FLAC"
+  },
+  {
+    "name": "FLV",
+    "abbr": "FLV"
+  },
+  {
+    "name": "MOV",
+    "abbr": "MOV"
+  },
+  {
+    "name": "MP3",
+    "abbr": "MP3"
+  },
+  {
+    "name": "MPEG Video",
+    "abbr": "MPEG Video"
+  },
+  {
+    "name": "MPEG-4 Video",
+    "abbr": "MPEG-4 Video"
+  },
+  {
+    "name": "ogg-vorbis",
+    "abbr": "ogg"
+  },
+  {
+    "name": "Opus",
+    "abbr": "Opus"
+  },
+  {
+    "name": "SHN",
+    "abbr": "SHN"
+  },
+  {
+    "name": "SWF",
+    "abbr": "SWF"
+  },
+  {
+    "name": "WAV",
+    "abbr": "WAV"
+  },
+  {
+    "name": "WavPack",
+    "abbr": "WavPack"
+  },
+  {
+    "name": "WMA",
+    "abbr": "WMA"
+  },
+  {
+    "name": "WMV",
+    "abbr": "WMV"
+  },
+  {
+    "name": "MP3 Surround",
+    "abbr": "MP3Sur"
+  },
+  {
+    "name": "3.5\"",
+    "abbr": "3,5\""
+  },
+  {
+    "name": "5.25\"",
+    "abbr": "5.25\""
+  },
+  {
+    "name": "DualDisc",
+    "abbr": "DualDisc"
+  },
+  {
+    "name": "DVDplus",
+    "abbr": "DVDplus"
+  },
+  {
+    "name": "VinylDisc",
+    "abbr": "VinylDisc"
+  },
+  {
+    "name": "Double Sided",
+    "abbr": "D/Sided"
+  },
+  {
+    "name": "Single Sided",
+    "abbr": "S/Sided"
+  },
+  {
+    "name": "Album",
+    "abbr": "Album"
+  },
+  {
+    "name": "Mini-Album",
+    "abbr": "MiniAlbum"
+  },
+  {
+    "name": "EP",
+    "abbr": "EP"
+  },
+  {
+    "name": "Maxi-Single",
+    "abbr": "Maxi"
+  },
+  {
+    "name": "Single",
+    "abbr": "Single"
+  },
+  {
+    "name": "Compilation",
+    "abbr": "Comp"
+  },
+  {
+    "name": "Mono",
+    "abbr": "Mono"
+  },
+  {
+    "name": "Quadraphonic",
+    "abbr": "Quad"
+  },
+  {
+    "name": "Ambisonic",
+    "abbr": "Amb"
+  },
+  {
+    "name": "Card Backed",
+    "abbr": "Card"
+  },
+  {
+    "name": "Club Edition",
+    "abbr": "Club"
+  },
+  {
+    "name": "Copy Protected",
+    "abbr": "Copy Prot."
+  },
+  {
+    "name": "Deluxe Edition",
+    "abbr": "Dlx"
+  },
+  {
+    "name": "Enhanced",
+    "abbr": "Enh"
+  },
+  {
+    "name": "Etched",
+    "abbr": "Etch"
+  },
+  {
+    "name": "Jukebox",
+    "abbr": "Jukebox"
+  },
+  {
+    "name": "Limited Edition",
+    "abbr": "Ltd"
+  },
+  {
+    "name": "Mispress",
+    "abbr": "MP"
+  },
+  {
+    "name": "Misprint",
+    "abbr": "M/Print"
+  },
+  {
+    "name": "Mixed",
+    "abbr": "Mixed"
+  },
+  {
+    "name": "Mixtape",
+    "abbr": "Mixtape"
+  },
+  {
+    "name": "Numbered",
+    "abbr": "Num"
+  },
+  {
+    "name": "Partially Mixed",
+    "abbr": "P/Mixed"
+  },
+  {
+    "name": "Partially Unofficial",
+    "abbr": "P/Unofficial"
+  },
+  {
+    "name": "Picture Disc",
+    "abbr": "Pic"
+  },
+  {
+    "name": "Promo",
+    "abbr": "Promo"
+  },
+  {
+    "name": "Reissue",
+    "abbr": "RE"
+  },
+  {
+    "name": "Remastered",
+    "abbr": "RM"
+  },
+  {
+    "name": "Repress",
+    "abbr": "RP"
+  },
+  {
+    "name": "Sampler",
+    "abbr": "Smplr"
+  },
+  {
+    "name": "Special Edition",
+    "abbr": "S/Edition"
+  },
+  {
+    "name": "Test Pressing",
+    "abbr": "TP"
+  },
+  {
+    "name": "Transcription",
+    "abbr": "Transcription"
+  },
+  {
+    "name": "Unofficial Release",
+    "abbr": "Unofficial"
+  },
+  {
+    "name": "White Label",
+    "abbr": "W/Lbl"
+  },
+  {
+    "name": "NTSC",
+    "abbr": "NTSC"
+  },
+  {
+    "name": "PAL",
+    "abbr": "PAL"
+  },
+  {
+    "name": "SECAM",
+    "abbr": "SECAM"
+  }
+]

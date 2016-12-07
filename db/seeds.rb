@@ -40,6 +40,11 @@ SourceSeed.create!(
   symbolize_keys: true
 )
 
+@format_details = MultiJson.load(
+  File.read('db/seeds/format_details.json'),
+  symbolize_keys: true
+)
+
 @formats.each do |format|
   Format.create!(
     name: format[:name],
@@ -47,20 +52,27 @@ SourceSeed.create!(
   )
 end
 
-@formats.each do |format|
-  next unless format[:ct_formats]
-  CtFormat.create!(name: format[:name] )
+@format_details.each do |detail|
+  FormatDetail.create!(
+    name: detail[:name],
+    abbr: detail[:abbr],
+  )
 end
+# TODO: cleanup db/seeds.rb
+# @formats.each do |format|
+#   next unless format[:ct_formats]
+#   CtFormat.create!(name: format[:name] )
+# end
 
-# TODO: more subtle selection of re_formats
-@formats.each do |format|
-  ReFormat.create!(name: format[:name])
-end
+# # TODO: more subtle selection of re_formats
+# @formats.each do |format|
+#   ReFormat.create!(name: format[:name])
+# end
 
-# TODO: more subtle selection of ref_details
-@formats.each do |format|
-  RefDetail.create!(name: format[:name])
-end
+# # TODO: more subtle selection of ref_details
+# @formats.each do |format|
+#   RefDetail.create!(name: format[:name])
+# end
 
 # @formats.each do |format|
 #   next unless format[:use_for][:compilation_tracks]
