@@ -15,5 +15,7 @@ class CrFormat < ActiveRecord::Base
   validates :quantity, presence: true
   validates :release,  presence: true
 
+  alias_attribute :format_details, :details
+
   delegate :name, to: :format
 end

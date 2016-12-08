@@ -55,10 +55,6 @@ RSpec.describe Repository, type: :model do
       @repository.format_details << @repos_format_detail
     end
 
-    it 'works' do
-      expect(@repository.save).to be true
-    end
-
     it_behaves_like 'an entity with format_details' do
       let(:entity) { @repository }
     end
