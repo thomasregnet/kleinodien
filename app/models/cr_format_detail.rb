@@ -10,4 +10,6 @@ class CrFormatDetail < ApplicationRecord
   validates :detail,   presence: true
   validates :format,   presence: true
   validates :position, presence: true
+
+  delegate :name, to: :format
 end
