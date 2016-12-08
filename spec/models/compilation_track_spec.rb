@@ -37,17 +37,18 @@ RSpec.describe CompilationTrack, type: :model do
     end
 
     it 'belongs to its format' do
-      expect(@track.format).to be_instance_of(TrFormatKind)
+      #expect(@track.format).to be_instance_of(TrFormatKind)
+      expect(@track.format).to be_instance_of(Format)
     end
   end
 
-  context 'with details' do
+  context 'with format_details' do
     before(:each) do
       @track = FactoryGirl.create(:compilation_track_with_details)
     end
 
     it 'sees its details' do
-      expect(@track.details.count).to eq(3)
+      expect(@track.format_details.count).to eq(3)
     end
   end
 
@@ -90,21 +91,22 @@ RSpec.describe CompilationTrack, type: :model do
     end
   end
 
-  context 'with a format' do
-    before(:all) do
-      DatabaseCleaner.start
-      @track = FactoryGirl.build(
-        :compilation_track,
-        new_format: CtFormat.find('FLAC')
-      )
-    end
+  # TODO: the following seems to be obsolet an may be deleted (2016-12-08)
+  # context 'with a format' do
+  #   before(:all) do
+  #     DatabaseCleaner.start
+  #     @track = FactoryGirl.build(
+  #       :compilation_track,
+  #       new_format: CtFormat.find('FLAC')
+  #     )
+  #   end
 
-    it 'is valid' do
-      expect(@track).to be_valid
-    end
+  #   it 'is valid' do
+  #     expect(@track).to be_valid
+  #   end
 
-    after(:all) do
-      DatabaseCleaner.clean
-    end
-  end
+  #   after(:all) do
+  #     DatabaseCleaner.clean
+  #   end
+  # end
 end
