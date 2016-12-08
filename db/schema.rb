@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208095731) do
+ActiveRecord::Schema.define(version: 20161208101430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,24 +234,6 @@ ActiveRecord::Schema.define(version: 20161208095731) do
     t.index ["cr_format_id", "position"], name: "cr_format_details_cr_format_id_position_idx", unique: true, using: :btree
   end
 
-  create_table "cr_format_kinds", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "abbr"
-    t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_cr_format_kinds_on_lower_name", unique: true, using: :btree
-  end
-
-  create_table "cr_formats", force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
-    t.text    "abbr",                   null: false
-    t.integer "position",               null: false
-    t.integer "quantity",               null: false
-    t.text    "note"
-    t.index ["compilation_release_id", "position"], name: "cr_formats_compilation_release_id_position_idx", unique: true, using: :btree
-  end
-
   create_table "cr_labels", force: :cascade do |t|
     t.integer  "compilation_release_id", null: false
     t.integer  "company_id",             null: false
@@ -287,9 +269,6 @@ ActiveRecord::Schema.define(version: 20161208095731) do
     t.integer "position",             null: false
     t.index ["compilation_track_id", "abbr"], name: "ct_format_details_compilation_track_id_abbr_idx", unique: true, using: :btree
     t.index ["compilation_track_id", "position"], name: "ct_format_details_compilation_track_id_position_idx", unique: true, using: :btree
-  end
-
-  create_table "ct_formats", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
   create_table "data_suppliers", force: :cascade do |t|
@@ -446,12 +425,6 @@ ActiveRecord::Schema.define(version: 20161208095731) do
     t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
   end
 
-  create_table "pt_formats", primary_key: "name", id: :text, force: :cascade do |t|
-  end
-
-  create_table "re_formats", primary_key: "name", id: :text, force: :cascade do |t|
-  end
-
   create_table "ref_details", primary_key: "name", id: :text, force: :cascade do |t|
   end
 
@@ -526,15 +499,6 @@ ActiveRecord::Schema.define(version: 20161208095731) do
     t.index "lower((name)::text)", name: "index_stations_on_lower_name", unique: true, where: "(disambiguation IS NULL)", using: :btree
   end
 
-  create_table "tr_format_kinds", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "abbr"
-    t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_tr_format_kinds_on_lower_name", unique: true, using: :btree
-  end
-
   create_table "track_detail_kinds", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "abbr"
@@ -598,10 +562,7 @@ ActiveRecord::Schema.define(version: 20161208095731) do
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
-  add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
   add_foreign_key "cr_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "cr_format_details_abbr_fkey"
-  add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
-  add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "crf_details", "crf_detail_kinds"
@@ -624,7 +585,6 @@ ActiveRecord::Schema.define(version: 20161208095731) do
   add_foreign_key "piece_releases", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "piece_tracks", "piece_releases"
-  add_foreign_key "piece_tracks", "tr_format_kinds"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
   add_foreign_key "pr_companies", "piece_releases"
