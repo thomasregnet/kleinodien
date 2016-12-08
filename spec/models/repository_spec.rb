@@ -30,7 +30,7 @@ RSpec.describe Repository, type: :model do
     before(:all) do
       DatabaseCleaner.start
       @repository = FactoryGirl.build(:repository)
-      @repository.format = ReFormat.find('CDr')
+      @repository.format = Format.find('CDr')
     end
 
     it 'has that format set' do
@@ -46,9 +46,9 @@ RSpec.describe Repository, type: :model do
     before(:all) do
       DatabaseCleaner.start
       @repository = FactoryGirl.build(:repository)
-      @repository.format = ReFormat.find('CDr')
-      @repos_format_detail = RepositoryRefDetail.new(
-        name:     'WAV',
+      @repository.format = Format.find('CDr')
+      @repos_format_detail = RepositoryFormatDetail.new(
+        abbr:     'WAV',
         position: 0
       )
       @repository.format_details << @repos_format_detail
