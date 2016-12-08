@@ -3,6 +3,10 @@ RSpec.shared_examples 'an entity with format_details' do
     expect(entity).to be_valid
   end
 
+  it 'has set the format' do
+    expect(entity.format).not_to be nil
+  end
+
   it 'has set at least one FormatDetail' do
     expect(entity.format_details.length).to be >= 1
   end

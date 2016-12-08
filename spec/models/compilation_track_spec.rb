@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_entities_with_format_details'
 
 RSpec.describe CompilationTrack, type: :model do
   context 'simple track' do
@@ -37,7 +38,6 @@ RSpec.describe CompilationTrack, type: :model do
     end
 
     it 'belongs to its format' do
-      #expect(@track.format).to be_instance_of(TrFormatKind)
       expect(@track.format).to be_instance_of(Format)
     end
   end
@@ -47,8 +47,8 @@ RSpec.describe CompilationTrack, type: :model do
       @track = FactoryGirl.create(:compilation_track_with_details)
     end
 
-    it 'sees its details' do
-      expect(@track.format_details.count).to eq(3)
+    it_behaves_like 'an entity with format_details' do
+      let(:entity) { @track }
     end
   end
 
