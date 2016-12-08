@@ -4,6 +4,4 @@ class CtFormatDetail < ApplicationRecord
              class_name: FormatDetail,
              primary_key: :abbr,
              foreign_key: :abbr
-
-  #alias_attribute :track, :compilation_track
 end
