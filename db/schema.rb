@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207194423) do
+ActiveRecord::Schema.define(version: 20161208091207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,16 +168,13 @@ ActiveRecord::Schema.define(version: 20161207194423) do
     t.integer  "compilation_release_id"
     t.string   "location"
     t.string   "heading"
-    t.integer  "tr_format_kind_id"
     t.integer  "milliseconds"
     t.string   "accuracy"
     t.string   "side"
-    t.text     "format_name"
+    t.text     "format_abbr"
     t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id", using: :btree
-    t.index ["format_name"], name: "index_compilation_tracks_format_name", using: :btree
     t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true, using: :btree
     t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id", using: :btree
-    t.index ["tr_format_kind_id"], name: "index_compilation_tracks_on_tr_format_kind_id", using: :btree
   end
 
   create_table "countries", force: :cascade do |t|
@@ -282,6 +279,14 @@ ActiveRecord::Schema.define(version: 20161207194423) do
     t.datetime "updated_at",         null: false
     t.index ["cr_format_id", "position"], name: "index_crf_details_on_cr_format_id_and_position", unique: true, using: :btree
     t.index ["crf_detail_kind_id"], name: "index_crf_details_on_crf_detail_kind_id", using: :btree
+  end
+
+  create_table "ct_format_details", force: :cascade do |t|
+    t.integer "compilation_track_id", null: false
+    t.text    "abbr",                 null: false
+    t.integer "position",             null: false
+    t.index ["compilation_track_id", "abbr"], name: "ct_format_details_compilation_track_id_abbr_idx", unique: true, using: :btree
+    t.index ["compilation_track_id", "position"], name: "ct_format_details_compilation_track_id_position_idx", unique: true, using: :btree
   end
 
   create_table "ct_formats", primary_key: "name", id: :text, force: :cascade do |t|
@@ -574,9 +579,8 @@ ActiveRecord::Schema.define(version: 20161207194423) do
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
   add_foreign_key "compilation_track_details", "track_detail_kinds", column: "trf_attribute_kind_id", name: "fk_compilation_track_details_track_detail_kind"
   add_foreign_key "compilation_tracks", "compilation_releases"
-  add_foreign_key "compilation_tracks", "ct_formats", column: "format_name", primary_key: "name", name: "compilation_tracks_format_name_fkey"
+  add_foreign_key "compilation_tracks", "formats", column: "format_abbr", primary_key: "abbr", name: "fk_compilation_tracks_format_abbr"
   add_foreign_key "compilation_tracks", "piece_releases"
-  add_foreign_key "compilation_tracks", "tr_format_kinds"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_piece_releases", "countries"
@@ -594,6 +598,8 @@ ActiveRecord::Schema.define(version: 20161207194423) do
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "crf_details", "crf_detail_kinds"
+  add_foreign_key "ct_format_details", "compilation_tracks", name: "ct_format_details_compilation_track_id_fkey"
+  add_foreign_key "ct_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "ct_format_details_abbr_fkey"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "ph_companies", "companies"

@@ -13,7 +13,8 @@ FactoryGirl.define do
     end
 
     factory :compilation_track_with_format do
-      association :format, factory: :tr_format_kind
+      #association :format, factory: :tr_format_kind
+      association :format, factory: :format
     end
 
     factory :compilation_track_with_details do
@@ -23,9 +24,10 @@ FactoryGirl.define do
 
       after(:create) do |track, evaluator|
         create_list(
-          :compilation_track_detail,
+          #:compilation_track_detail,
+          :ct_format_detail,
           evaluator.details_count,
-          track: track
+          compilation_track: track
         )
       end
     end

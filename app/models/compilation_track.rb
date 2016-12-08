@@ -10,21 +10,16 @@ class CompilationTrack < ActiveRecord::Base
              class_name:  CompilationRelease,
              foreign_key: :compilation_release_id
   belongs_to :format,
-             class_name:  TrFormatKind,
-             foreign_key: :tr_format_kind_id
+             class_name:  Format,
+             primary_key: :abbr,
+             foreign_key: :format_abbr
   belongs_to :piece_release,
              class_name:  PieceRelease,
              foreign_key: :piece_release_id
 
-  # TODO: new_format must be deleted
-  belongs_to :new_format,
-             class_name: CtFormat,
-             foreign_key: :format_name,
-             primary_key: :name
-
-  has_many :details,
-           class_name:  CompilationTrackDetail,
-           foreign_key: :track_id
+  has_many :format_details,
+           class_name: CtFormatDetail,
+           foreign_key: :compilation_track_id
   has_many :repository_positions,
            inverse_of: :compilation_track,
            primary_key: [:id, :compilation_release_id],
