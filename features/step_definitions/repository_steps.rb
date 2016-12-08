@@ -16,7 +16,8 @@ When(/^I press the create button$/) do
 end
 
 When(/^I choose "([^"]*)" as format$/) do |f_name|
-  select 'CDr', from: 'repository_format_name'
+  #select 'CDr', from: 'repository_format_name'
+  select 'CDr', from: 'repository_format_abbr'
 end
 
 Then(/^I will see the my new repository$/) do
