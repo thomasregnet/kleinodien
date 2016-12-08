@@ -7,7 +7,7 @@ class Repository < ApplicationRecord
   belongs_to :user
 
   has_many :format_details,
-           class_name: RepositoryFormatDetail #RepositoryRefDetail
+           class_name: RepositoryFormatDetail
 
   # TODO: check if accepts_nested_attributes_for :format_details is needed
   accepts_nested_attributes_for :format_details
