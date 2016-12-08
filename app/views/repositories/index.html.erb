@@ -3,7 +3,7 @@
 
 <ul>
   <% @repositories.each do |r| %>
-    <li><%= link_to r.name, r %> <%= r.format_name %></li>
+    <li><%= link_to r.name, r %> <%= r.format_abbr %></li>
   <% end %>
 </ul>
 
