@@ -234,6 +234,15 @@ ActiveRecord::Schema.define(version: 20161208101430) do
     t.index ["cr_format_id", "position"], name: "cr_format_details_cr_format_id_position_idx", unique: true, using: :btree
   end
 
+  create_table "cr_formats", force: :cascade do |t|
+    t.integer "compilation_release_id", null: false
+    t.text    "abbr",                   null: false
+    t.integer "position",               null: false
+    t.integer "quantity",               null: false
+    t.text    "note"
+    t.index ["compilation_release_id", "position"], name: "cr_formats_compilation_release_id_position_idx", unique: true, using: :btree
+  end
+
   create_table "cr_labels", force: :cascade do |t|
     t.integer  "compilation_release_id", null: false
     t.integer  "company_id",             null: false
@@ -562,7 +571,10 @@ ActiveRecord::Schema.define(version: 20161208101430) do
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
+  add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
   add_foreign_key "cr_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "cr_format_details_abbr_fkey"
+  add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
+  add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "crf_details", "crf_detail_kinds"
