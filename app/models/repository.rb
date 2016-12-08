@@ -1,13 +1,13 @@
 # A Repository is used to store parts of an users collection
 class Repository < ApplicationRecord
   belongs_to :format,
-             class_name: ReFormat,
-             primary_key: :name,
-             foreign_key: :format_name
+             class_name: Format,
+             primary_key: :abbr,
+             foreign_key: :format_abbr
   belongs_to :user
 
   has_many :format_details,
-           class_name: RepositoryRefDetail
+           class_name: RepositoryFormatDetail #RepositoryRefDetail
 
   # TODO: check if accepts_nested_attributes_for :format_details is needed
   accepts_nested_attributes_for :format_details
