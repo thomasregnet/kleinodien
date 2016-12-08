@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_entities_with_format_details'
 
 RSpec.describe Repository, type: :model do
   context 'when live is simple' do
@@ -56,6 +57,10 @@ RSpec.describe Repository, type: :model do
 
     it 'works' do
       expect(@repository.save).to be true
+    end
+
+    it_behaves_like 'an entity with format_details' do
+      let(:entity) { @repository }
     end
 
     after(:all) do
