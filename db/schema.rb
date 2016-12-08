@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208101430) do
+ActiveRecord::Schema.define(version: 20161208104739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,25 +253,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
     t.index ["compilation_release_id"], name: "index_cr_labels_on_compilation_release_id", using: :btree
   end
 
-  create_table "crf_detail_kinds", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "abbr"
-    t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_crf_attribute_kinds_on_lower_name", unique: true, using: :btree
-  end
-
-  create_table "crf_details", force: :cascade do |t|
-    t.integer  "cr_format_id",       null: false
-    t.integer  "crf_detail_kind_id", null: false
-    t.integer  "position",           null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["cr_format_id", "position"], name: "index_crf_details_on_cr_format_id_and_position", unique: true, using: :btree
-    t.index ["crf_detail_kind_id"], name: "index_crf_details_on_crf_detail_kind_id", using: :btree
-  end
-
   create_table "ct_format_details", force: :cascade do |t|
     t.integer "compilation_track_id", null: false
     t.text    "abbr",                 null: false
@@ -434,9 +415,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
     t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id", using: :btree
   end
 
-  create_table "ref_details", primary_key: "name", id: :text, force: :cascade do |t|
-  end
-
   create_table "repositories", force: :cascade do |t|
     t.integer  "user_id",     null: false
     t.string   "name",        null: false
@@ -465,12 +443,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
     t.integer  "user_id",                null: false
     t.integer  "compilation_copy_id"
     t.integer  "piece_track_id"
-  end
-
-  create_table "repository_ref_details", primary_key: ["name", "repository_id", "position"], force: :cascade do |t|
-    t.text    "name",          null: false
-    t.integer "repository_id", null: false
-    t.integer "position",      null: false
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -506,15 +478,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
     t.datetime "updated_at",     null: false
     t.index "lower((disambiguation)::text), lower((name)::text)", name: "index_stations_on_lower_disambiguation_and_name", unique: true, using: :btree
     t.index "lower((name)::text)", name: "index_stations_on_lower_name", unique: true, where: "(disambiguation IS NULL)", using: :btree
-  end
-
-  create_table "track_detail_kinds", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "abbr"
-    t.string   "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_trf_attribute_kinds_on_lower_name", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -557,7 +520,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
-  add_foreign_key "compilation_track_details", "track_detail_kinds", column: "trf_attribute_kind_id", name: "fk_compilation_track_details_track_detail_kind"
   add_foreign_key "compilation_tracks", "compilation_releases"
   add_foreign_key "compilation_tracks", "formats", column: "format_abbr", primary_key: "abbr", name: "fk_compilation_tracks_format_abbr"
   add_foreign_key "compilation_tracks", "piece_releases"
@@ -577,7 +539,6 @@ ActiveRecord::Schema.define(version: 20161208101430) do
   add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
-  add_foreign_key "crf_details", "crf_detail_kinds"
   add_foreign_key "ct_format_details", "compilation_tracks", name: "ct_format_details_compilation_track_id_fkey"
   add_foreign_key "ct_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "ct_format_details_abbr_fkey"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
@@ -615,7 +576,5 @@ ActiveRecord::Schema.define(version: 20161208101430) do
   add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
-  add_foreign_key "repository_ref_details", "ref_details", column: "name", primary_key: "name", name: "repository_position_rpf_attributes_ref_attribute_name_fkey"
-  add_foreign_key "repository_ref_details", "repositories", name: "repository_position_rpf_attributes_repository_id_fkey"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
 end
