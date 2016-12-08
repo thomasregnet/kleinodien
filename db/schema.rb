@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208104739) do
+ActiveRecord::Schema.define(version: 20161208130637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,10 +271,12 @@ ActiveRecord::Schema.define(version: 20161208104739) do
 
   create_table "format_details", primary_key: "abbr", id: :text, force: :cascade do |t|
     t.text "name", null: false
+    t.index "lower(name)", name: "format_details_lower_idx", unique: true, using: :btree
   end
 
   create_table "formats", primary_key: "abbr", id: :text, force: :cascade do |t|
     t.text "name", null: false
+    t.index "lower(name)", name: "formats_lower_idx", unique: true, using: :btree
   end
 
   create_table "identifier_types", force: :cascade do |t|
