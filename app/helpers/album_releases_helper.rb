@@ -6,12 +6,12 @@ module AlbumReleasesHelper
 
   def format_quantity_multiplied_name_for(format)
     return format.kind.name unless format.quantity
-    "#{format.quantity} x #{format.kind.name}"
+    "#{format.quantity} x #{format.name}"
   end
 
   def format_details_for(format)
     return unless format.details
-    format.details.map { |detail| detail.kind.name }.join(', ')
+    format.details.map { |detail| detail.name }.join(', ')
   end
 
   def identifier_disambiguation_for(identifier)

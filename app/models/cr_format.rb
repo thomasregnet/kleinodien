@@ -14,4 +14,6 @@ class CrFormat < ActiveRecord::Base
   validates :position, presence: true, uniqueness: { scope: :release }
   validates :quantity, presence: true
   validates :release,  presence: true
+
+  delegate :name, to: :format
 end
