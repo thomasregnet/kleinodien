@@ -30,6 +30,11 @@ Rails.application.routes.draw do
 
   root to: 'pages#index'
 
+  namespace :api do
+    namespace :v01 do
+      jsonapi_resources :artists
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
