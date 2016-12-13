@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v01 do
       jsonapi_resources :artists
+      jsonapi_resources :sources
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
