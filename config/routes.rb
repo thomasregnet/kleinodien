@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v01 do
+      jsonapi_resources :artist_credits
       jsonapi_resources :artists
       jsonapi_resources :sources
     end
