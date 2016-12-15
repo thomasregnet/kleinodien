@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208130637) do
+ActiveRecord::Schema.define(version: 20161215191105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artist_credits", force: :cascade do |t|
-    t.string   "name",             null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "data_supplier_id"
-    t.index "lower((name)::text)", name: "index_artist_credits_on_lower_name", unique: true, where: "(data_supplier_id IS NULL)", using: :btree
-    t.index ["data_supplier_id"], name: "index_artist_credits_on_data_supplier_id", using: :btree
+    t.string   "name",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "source_name"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -261,14 +259,6 @@ ActiveRecord::Schema.define(version: 20161208130637) do
     t.index ["compilation_track_id", "position"], name: "ct_format_details_compilation_track_id_position_idx", unique: true, using: :btree
   end
 
-  create_table "data_suppliers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_data_sources_on_lower_name", unique: true, using: :btree
-    t.index "lower((name)::text)", name: "index_data_suppliers_on_lower_name", unique: true, using: :btree
-  end
-
   create_table "format_details", primary_key: "abbr", id: :text, force: :cascade do |t|
     t.text "name", null: false
     t.index "lower(name)", name: "format_details_lower_idx", unique: true, using: :btree
@@ -499,7 +489,7 @@ ActiveRecord::Schema.define(version: 20161208130637) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "artist_credits", "data_suppliers"
+  add_foreign_key "artist_credits", "sources", column: "source_name", primary_key: "name", name: "fk_artist_credits_sources_name"
   add_foreign_key "artists", "sources", column: "source_name", primary_key: "name"
   add_foreign_key "ch_companies", "companies"
   add_foreign_key "ch_companies", "company_roles"
