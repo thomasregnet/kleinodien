@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ArtistCredit, type: :model do
-  context 'without DataSupplier' do
+  context 'without a Source' do
     context 'not saved to the database' do
       before(:each) do
         @artist_credit = FactoryGirl.build(:artist_credit)
@@ -35,10 +35,10 @@ RSpec.describe ArtistCredit, type: :model do
     end
   end
 
-  context 'with DataSupplier' do
+  context 'with Source' do
     before(:all) do
       DatabaseCleaner.start
-      @artist_credit = FactoryGirl.create(:artist_credit_with_data_supplier)
+      @artist_credit = FactoryGirl.create(:artist_credit_with_source)
     end
 
     it 'is valid' do
@@ -50,10 +50,10 @@ RSpec.describe ArtistCredit, type: :model do
       expect(clone).not_to be_valid
     end
 
-    it 'must not have an unique name when the DataSupplier differs' do
+    it 'must not have an unique name when the Source differs' do
       clone = ArtistCredit.new(
-        data_supplier: FactoryGirl.create(:data_supplier),
-        participants:  @artist_credit.participants
+        participants:  @artist_credit.participants,
+        source:        FactoryGirl.create(:source)
       )
       expect { clone.save! }.not_to raise_error
     end

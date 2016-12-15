@@ -5,9 +5,12 @@ FactoryGirl.define do
       ac.participants << FactoryGirl.build(:participant_without_artist_credit)
     end
 
-    factory :artist_credit_with_data_supplier do
+    #factory :artist_credit_with_data_supplier do
       #association :data_supplier, factory: :data_supplier
-      data_supplier
+      #data_supplier
+    #end
+    factory :artist_credit_with_source do
+      source Source::MusicBrainz
     end
   end
 end
