@@ -3,7 +3,6 @@ require 'api_helper'
 
 include ApiHelper
 
-#RSpec.describe 'Artists API' do
 RSpec.describe Api::V01::ArtistsController, :type => :controller do
   it 'sends a list of artists' do
     FactoryGirl.create_list(:artist, 2)
