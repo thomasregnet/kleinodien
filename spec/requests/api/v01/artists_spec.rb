@@ -16,8 +16,7 @@ RSpec.describe Api::V01::ArtistsController, :type => :controller do
   end
 
   it 'accepts an artist' do
-    headers = { 'Content-Type' => 'application/vnd.api+json' }
-    request.headers.merge! headers
+    set_request_content_type_to_vnd_api_json
     post :create, params: {
            data: {
              type: 'artists',
