@@ -3,11 +3,11 @@ require 'api_helper'
 
 include ApiHelper
 
-RSpec.describe Api::V01::ArtistsController, :type => :controller do
+RSpec.describe Api::V01::ArtistsController, type: :request do
   it 'sends a list of artists' do
     FactoryGirl.create_list(:artist, 2)
 
-    get :index
+    api_get '/api/v01/artists'
 
     expect(response).to be_success
 
@@ -15,16 +15,17 @@ RSpec.describe Api::V01::ArtistsController, :type => :controller do
   end
 
   it 'accepts an artist' do
-    set_request_content_type_to_vnd_api_json
-    post :create, params: {
-           data: {
-             type: 'artists',
-             attributes: {
-               name: 'AC/DC'
-             }
-           },
-         }
+    api_post '/api/v01/artists',
+             Hash[
+               data: {
+                 type: 'artists',
+                 attributes: {
+                   name: 'ACDC'
+                 }
+               }
+             ]
 
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
   end
 end
