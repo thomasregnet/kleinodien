@@ -3,6 +3,14 @@ module ApiHelper
     get url, headers: { 'Accept' => 'application/vnd.api+json' }
   end
 
+  def api_post(url, params)
+    headers = {
+      'Accept'       => 'application/vnd.api+json',
+      'Content-Type' => 'application/vnd.api+json'
+    }
+    post url, params: params.to_json, headers: headers
+  end
+
   def json
     JSON.parse(response.body)
   end
