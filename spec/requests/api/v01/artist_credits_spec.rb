@@ -26,8 +26,10 @@ RSpec.describe Api::V01::ArtistCreditsController, :type => :request do
       get "/api/v01/artist-credits/#{id}?include=participants",
           headers: { 'Accept' => 'application/vnd.api+json' }
 
-      #byebug
+
       expect(response).to be_success
+
+      expect(json['included'].first['type']).to eq 'participants'
     end
   end
 
