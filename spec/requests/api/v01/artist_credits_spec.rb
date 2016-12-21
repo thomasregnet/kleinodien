@@ -3,7 +3,7 @@ require 'api_helper'
 
 include ApiHelper
 
-RSpec.describe Api::V01::ArtistCreditsController, :type => :request do
+RSpec.describe Api::V01::ArtistCreditsController, type: :request do
   context '#get' do
     before(:all) do
       DatabaseCleaner.start
@@ -11,25 +11,20 @@ RSpec.describe Api::V01::ArtistCreditsController, :type => :request do
     end
 
     it 'sends a list of artist_credits' do
-      headers = {
-        'Accept'       => 'application/vnd.api+json'
-      }
-      get '/api/v01/artist-credits', headers: headers
+      api_get '/api/v01/artist-credits'
 
       expect(response).to be_success
 
-      expect(json['data'].length).to eq 2
+      expect(json_data.length).to eq 2
     end
 
     it 'sends a list of artist_credits with participants' do
       id = @credits.first.id
-      get "/api/v01/artist-credits/#{id}?include=participants",
-          headers: { 'Accept' => 'application/vnd.api+json' }
-
+      api_get "/api/v01/artist-credits/#{id}?include=participants"
 
       expect(response).to be_success
 
-      expect(json['included'].first['type']).to eq 'participants'
+      expect(json_included[0]['type']).to eq 'participants'
     end
   end
 
