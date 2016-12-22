@@ -1,3 +1,4 @@
+# CopilationRelease format detail
 class CrFormatDetail < ApplicationRecord
   belongs_to :detail,
              class_name: FormatDetail,

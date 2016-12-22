@@ -1,3 +1,4 @@
+# CompilationTrack format detail
 class CtFormatDetail < ApplicationRecord
   belongs_to :compilation_track, inverse_of: :format_details
   belongs_to :detail,
