@@ -1,3 +1,4 @@
+# Formats may be for files or Media
 class Format < ApplicationRecord
   self.primary_key = :abbr
   validates :abbr, presence: true
