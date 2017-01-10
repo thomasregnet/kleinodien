@@ -1,6 +1,7 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
-  belongs_to :source, foreign_key: :source_name
+  #belongs_to :source, foreign_key: :source_name
+  belongs_to :source
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit
   has_many :labels, class_name: ChLabel
@@ -8,7 +9,7 @@ class CompilationHead < ActiveRecord::Base
 
   validates :type, presence: true
   validates :source_ident,
-            uniqueness: { allow_blank: true, scope: [:source_name, :type] }
+            uniqueness: { allow_blank: true, scope: [:source_id, :type] }
   validates :title,
             presence: true,
             uniqueness: {
