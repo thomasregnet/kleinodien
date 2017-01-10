@@ -12,6 +12,7 @@ class SurrogateKeyForSources < ActiveRecord::Migration[5.0]
     execute <<-DDL
       ALTER TABLE sources DROP COLUMN name CASCADE;
       ALTER TABLE sources ADD COLUMN id SERIAL PRIMARY KEY;
+      ALTER TABLE sources ADD COLUMN name TEXT NOT NULL;
     DDL
 
     tables.each do |table|
