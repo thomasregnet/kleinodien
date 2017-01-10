@@ -1,9 +1,9 @@
 # Data Source for db entries
 class Source < ActiveRecord::Base
-  self.primary_key = 'name'
+  #self.primary_key = 'name'
 
-  Discogs     = find('Discogs')
-  MusicBrainz = find('MusicBrainz')
-  Omdb        = find('Omdb')
-  User        = find('User')
+  Discogs     = find_by(name: 'Discogs')
+  MusicBrainz = find_by(name: 'MusicBrainz')
+  Omdb        = find_by(name: 'Omdb')
+  User        = find_by(name: 'User')
 end
