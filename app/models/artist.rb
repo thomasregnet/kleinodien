@@ -1,6 +1,5 @@
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
-  #belongs_to :source, foreign_key: :source_name
   belongs_to :source
   has_many :participants, inverse_of: :artist
   validates :name, presence: true
