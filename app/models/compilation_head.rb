@@ -1,6 +1,5 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
-  #belongs_to :source, foreign_key: :source_name
   belongs_to :source
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit

@@ -7,7 +7,6 @@ class CompilationRelease < ActiveRecord::Base
   belongs_to :head,
              class_name: CompilationHead,
              foreign_key: :compilation_head_id
-  #belongs_to :source, foreign_key: :source_name
   belongs_to :source
 
   has_many :companies, class_name: CrCompany
