@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110190706) do
+ActiveRecord::Schema.define(version: 20170110200910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artist_credits", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "source_name"
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "source_id"
   end
 
@@ -28,7 +27,6 @@ ActiveRecord::Schema.define(version: 20170110190706) do
     t.string   "disambiguation"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "source_name"
     t.string   "source_ident"
     t.integer  "source_id"
     t.index "lower((name)::text)", name: "index_artists_on_lower_name", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
@@ -101,13 +99,11 @@ ActiveRecord::Schema.define(version: 20170110190706) do
     t.string   "type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "source_name",      null: false
     t.string   "source_ident"
     t.integer  "source_id"
     t.index "type, lower((title)::text)", name: "index_compilation_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
     t.index "type, lower((title)::text), lower((disambiguation)::text)", name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id", using: :btree
-    t.index ["source_name", "source_ident", "type"], name: "index_compilation_heads_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "compilation_heads_countries", id: false, force: :cascade do |t|
@@ -137,13 +133,11 @@ ActiveRecord::Schema.define(version: 20170110190706) do
     t.datetime "updated_at",          null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.string   "source_name",         null: false
     t.string   "source_ident"
     t.integer  "source_id"
     t.index "compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
     t.index "type, compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_lower_version", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id", unique: true, using: :btree
-    t.index ["source_name", "source_ident", "type"], name: "index_compilation_releases_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "compilation_releases_countries", id: false, force: :cascade do |t|
@@ -342,13 +336,11 @@ ActiveRecord::Schema.define(version: 20170110190706) do
     t.string   "type",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "source_name",      null: false
     t.string   "source_ident"
     t.integer  "source_id"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
     t.index ["season_id"], name: "index_piece_heads_on_season_id", using: :btree
-    t.index ["source_name", "source_ident", "type"], name: "index_piece_heads_source_name_source_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
   end
 
   create_table "piece_releases", force: :cascade do |t|
@@ -360,11 +352,9 @@ ActiveRecord::Schema.define(version: 20170110190706) do
     t.datetime "updated_at",    null: false
     t.date     "date"
     t.integer  "date_mask"
-    t.string   "source_name",   null: false
     t.string   "source_ident"
     t.integer  "source_id"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
-    t.index ["source_name", "source_ident", "type"], name: "index_piece_releases_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
     t.index ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
   end
 

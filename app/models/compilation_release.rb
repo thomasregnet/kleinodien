@@ -7,7 +7,8 @@ class CompilationRelease < ActiveRecord::Base
   belongs_to :head,
              class_name: CompilationHead,
              foreign_key: :compilation_head_id
-  belongs_to :source, foreign_key: :source_name
+  #belongs_to :source, foreign_key: :source_name
+  belongs_to :source
 
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
@@ -23,7 +24,7 @@ class CompilationRelease < ActiveRecord::Base
 
   validates :head, presence: true
   validates :source_ident,
-            uniqueness: { allow_blank: true, scope: [:source_name, :type] }
+            uniqueness: { allow_blank: true, scope: [:source_id, :type] }
   validates :type, presence: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
