@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215191105) do
+ActiveRecord::Schema.define(version: 20170110190706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "source_name"
+    t.integer  "source_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.datetime "updated_at",     null: false
     t.string   "source_name"
     t.string   "source_ident"
+    t.integer  "source_id"
     t.index "lower((name)::text)", name: "index_artists_on_lower_name", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
     t.index "lower((name)::text), lower((disambiguation)::text)", name: "index_artists_on_lower_disambiguation_and_name", unique: true, where: "(source_ident IS NULL)", using: :btree
   end
@@ -101,6 +103,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.datetime "updated_at",       null: false
     t.string   "source_name",      null: false
     t.string   "source_ident"
+    t.integer  "source_id"
     t.index "type, lower((title)::text)", name: "index_compilation_heads_on_lower_title", unique: true, where: "((disambiguation IS NULL) AND (source_ident IS NULL))", using: :btree
     t.index "type, lower((title)::text), lower((disambiguation)::text)", name: "index_compilation_heads_on_lower_title_disambiguation", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id", using: :btree
@@ -136,6 +139,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.integer  "date_mask"
     t.string   "source_name",         null: false
     t.string   "source_ident"
+    t.integer  "source_id"
     t.index "compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_compilation_head_id_lower_version", unique: true, using: :btree
     t.index "type, compilation_head_id, lower((version)::text)", name: "index_compilation_releases_on_lower_version", unique: true, where: "(source_ident IS NULL)", using: :btree
     t.index ["compilation_head_id"], name: "index_compilation_releases_on_compilation_head_id", unique: true, using: :btree
@@ -340,6 +344,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.datetime "updated_at",       null: false
     t.string   "source_name",      null: false
     t.string   "source_ident"
+    t.integer  "source_id"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true, using: :btree
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id", using: :btree
     t.index ["season_id"], name: "index_piece_heads_on_season_id", using: :btree
@@ -357,6 +362,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.integer  "date_mask"
     t.string   "source_name",   null: false
     t.string   "source_ident"
+    t.integer  "source_id"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true, using: :btree
     t.index ["source_name", "source_ident", "type"], name: "index_piece_releases_sorce_name_sorce_ident_type", unique: true, where: "(source_ident IS NOT NULL)", using: :btree
     t.index ["station_id"], name: "index_piece_releases_on_station_id", using: :btree
@@ -456,7 +462,7 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.index "lower((title)::text), lower((disambiguation)::text)", name: "index_serials_on_lower_disambiguation_and_title", unique: true, using: :btree
   end
 
-  create_table "sources", primary_key: "name", id: :string, force: :cascade do |t|
+  create_table "sources", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -489,8 +495,8 @@ ActiveRecord::Schema.define(version: 20161215191105) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "artist_credits", "sources", column: "source_name", primary_key: "name", name: "fk_artist_credits_sources_name"
-  add_foreign_key "artists", "sources", column: "source_name", primary_key: "name"
+  add_foreign_key "artist_credits", "sources", name: "fk_artist_credits_source_id"
+  add_foreign_key "artists", "sources", name: "fk_artists_source_id"
   add_foreign_key "ch_companies", "companies"
   add_foreign_key "ch_companies", "company_roles"
   add_foreign_key "ch_companies", "compilation_heads"
@@ -502,13 +508,13 @@ ActiveRecord::Schema.define(version: 20161215191105) do
   add_foreign_key "compilation_copies", "compilation_releases"
   add_foreign_key "compilation_copies", "users"
   add_foreign_key "compilation_heads", "artist_credits"
-  add_foreign_key "compilation_heads", "sources", column: "source_name", primary_key: "name"
+  add_foreign_key "compilation_heads", "sources", name: "fk_compilation_heads_source_id"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_identifiers", "compilation_releases"
   add_foreign_key "compilation_identifiers", "identifier_types"
   add_foreign_key "compilation_releases", "compilation_heads"
-  add_foreign_key "compilation_releases", "sources", column: "source_name", primary_key: "name"
+  add_foreign_key "compilation_releases", "sources", name: "fk_compilation_releases_source_id"
   add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
@@ -545,9 +551,9 @@ ActiveRecord::Schema.define(version: 20161215191105) do
   add_foreign_key "ph_labels", "piece_heads"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
-  add_foreign_key "piece_heads", "sources", column: "source_name", primary_key: "name"
+  add_foreign_key "piece_heads", "sources", name: "fk_piece_heads_source_id"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
-  add_foreign_key "piece_releases", "sources", column: "source_name", primary_key: "name"
+  add_foreign_key "piece_releases", "sources", name: "fk_piece_releases_source_id"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "piece_tracks", "piece_releases"
   add_foreign_key "pr_companies", "companies"
