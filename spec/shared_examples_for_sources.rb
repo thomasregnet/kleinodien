@@ -7,6 +7,7 @@ RSpec.shared_examples 'an object with a source' do
     expect(@object).to be_valid
   end
 
+  # TODO: check 'source_name, source_ident and type must be unique'
   # describe 'source_name, source_ident and type must be unique' do
   #   before(:each) do
   #     @bad_object = FactoryGirl.build(factory)

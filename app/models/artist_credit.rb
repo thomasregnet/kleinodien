@@ -1,6 +1,5 @@
 # ArtistCredit joins Artists with join_phrases by using Participants
 class ArtistCredit < ActiveRecord::Base
-  #belongs_to :source, primary_key: :name, foreign_key: :source_name
   belongs_to :source
 
   has_many :artists, through: :participants
