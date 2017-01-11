@@ -1,9 +1,10 @@
 # A Repository is used to store parts of an users collection
 class Repository < ApplicationRecord
-  belongs_to :format,
-             class_name: Format,
-             primary_key: :abbr,
-             foreign_key: :format_abbr
+  # belongs_to :format,
+  #            class_name: Format,
+  #            primary_key: :abbr,
+  #            foreign_key: :format_abbr
+  belongs_to :format
   belongs_to :user
 
   has_many :format_details,
