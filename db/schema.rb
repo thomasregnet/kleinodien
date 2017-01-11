@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110200910) do
+ActiveRecord::Schema.define(version: 20170111190945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20170110200910) do
     t.integer  "milliseconds"
     t.string   "accuracy"
     t.string   "side"
-    t.text     "format_abbr"
+    t.integer  "format_id"
     t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id", using: :btree
     t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true, using: :btree
     t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id", using: :btree
@@ -223,19 +223,18 @@ ActiveRecord::Schema.define(version: 20170110200910) do
   end
 
   create_table "cr_format_details", force: :cascade do |t|
-    t.integer "cr_format_id", null: false
-    t.text    "abbr",         null: false
-    t.integer "position",     null: false
-    t.index ["cr_format_id", "abbr"], name: "cr_format_details_cr_format_id_abbr_idx", unique: true, using: :btree
+    t.integer "cr_format_id",     null: false
+    t.integer "position",         null: false
+    t.integer "format_detail_id"
     t.index ["cr_format_id", "position"], name: "cr_format_details_cr_format_id_position_idx", unique: true, using: :btree
   end
 
   create_table "cr_formats", force: :cascade do |t|
     t.integer "compilation_release_id", null: false
-    t.text    "abbr",                   null: false
     t.integer "position",               null: false
     t.integer "quantity",               null: false
     t.text    "note"
+    t.integer "format_id"
     t.index ["compilation_release_id", "position"], name: "cr_formats_compilation_release_id_position_idx", unique: true, using: :btree
   end
 
@@ -251,20 +250,23 @@ ActiveRecord::Schema.define(version: 20170110200910) do
 
   create_table "ct_format_details", force: :cascade do |t|
     t.integer "compilation_track_id", null: false
-    t.text    "abbr",                 null: false
     t.integer "position",             null: false
-    t.index ["compilation_track_id", "abbr"], name: "ct_format_details_compilation_track_id_abbr_idx", unique: true, using: :btree
+    t.integer "format_detail_id"
     t.index ["compilation_track_id", "position"], name: "ct_format_details_compilation_track_id_position_idx", unique: true, using: :btree
   end
 
-  create_table "format_details", primary_key: "abbr", id: :text, force: :cascade do |t|
+  create_table "format_details", force: :cascade do |t|
     t.text "name", null: false
+    t.text "abbr"
     t.index "lower(name)", name: "format_details_lower_idx", unique: true, using: :btree
+    t.index ["abbr"], name: "format_details_abbr_key", unique: true, using: :btree
   end
 
-  create_table "formats", primary_key: "abbr", id: :text, force: :cascade do |t|
+  create_table "formats", force: :cascade do |t|
     t.text "name", null: false
+    t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true, using: :btree
+    t.index ["abbr"], name: "formats_abbr_key", unique: true, using: :btree
   end
 
   create_table "identifier_types", force: :cascade do |t|
@@ -404,20 +406,19 @@ ActiveRecord::Schema.define(version: 20170110200910) do
   end
 
   create_table "repositories", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.string   "name",        null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "format_abbr"
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "format_id"
     t.index ["id", "user_id"], name: "index_repositories_id_and_user_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_repositories_on_user_id", using: :btree
   end
 
   create_table "repository_format_details", force: :cascade do |t|
-    t.integer "repository_id", null: false
-    t.text    "abbr",          null: false
-    t.integer "position",      null: false
-    t.index ["repository_id", "abbr"], name: "repository_format_details_repository_id_abbr_idx", unique: true, using: :btree
+    t.integer "repository_id",    null: false
+    t.integer "position",         null: false
+    t.integer "format_detail_id"
     t.index ["repository_id", "position"], name: "repository_format_details_repository_id_position_idx", unique: true, using: :btree
   end
 
@@ -510,7 +511,7 @@ ActiveRecord::Schema.define(version: 20170110200910) do
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
   add_foreign_key "compilation_tracks", "compilation_releases"
-  add_foreign_key "compilation_tracks", "formats", column: "format_abbr", primary_key: "abbr", name: "fk_compilation_tracks_format_abbr"
+  add_foreign_key "compilation_tracks", "formats", name: "fk_compilation_tracks_format_id"
   add_foreign_key "compilation_tracks", "piece_releases"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
@@ -523,13 +524,13 @@ ActiveRecord::Schema.define(version: 20170110200910) do
   add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
   add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
-  add_foreign_key "cr_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "cr_format_details_abbr_fkey"
+  add_foreign_key "cr_format_details", "format_details", name: "fk_cr_format_details_format_detail_id"
   add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
-  add_foreign_key "cr_formats", "formats", column: "abbr", primary_key: "abbr", name: "cr_formats_abbr_fkey"
+  add_foreign_key "cr_formats", "formats", name: "fk_cr_formats_format_id"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "ct_format_details", "compilation_tracks", name: "ct_format_details_compilation_track_id_fkey"
-  add_foreign_key "ct_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "ct_format_details_abbr_fkey"
+  add_foreign_key "ct_format_details", "format_details", name: "fk_ct_format_details_format_detail_id"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "ph_companies", "companies"
@@ -555,9 +556,9 @@ ActiveRecord::Schema.define(version: 20170110200910) do
   add_foreign_key "pr_credits", "piece_releases"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "piece_releases"
-  add_foreign_key "repositories", "formats", column: "format_abbr", primary_key: "abbr", name: "fk_repositories_format_abbr"
+  add_foreign_key "repositories", "formats", name: "fk_repositories_format_id"
   add_foreign_key "repositories", "users"
-  add_foreign_key "repository_format_details", "format_details", column: "abbr", primary_key: "abbr", name: "repository_format_details_abbr_fkey"
+  add_foreign_key "repository_format_details", "format_details", name: "fk_repository_format_details_format_detail_id"
   add_foreign_key "repository_format_details", "repositories", name: "repository_format_details_repository_id_fkey"
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
