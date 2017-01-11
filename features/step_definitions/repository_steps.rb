@@ -17,7 +17,8 @@ end
 
 When(/^I choose "([^"]*)" as format$/) do |f_name|
   #select 'CDr', from: 'repository_format_name'
-  select 'CDr', from: 'repository_format_abbr'
+  #select 'CDr', from: 'repository_format_abbr'
+  select 'CDr', from: 'repository_format'
 end
 
 Then(/^I will see the my new repository$/) do
