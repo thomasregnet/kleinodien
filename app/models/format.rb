@@ -1,6 +1,6 @@
 # Formats may be for files or Media
 class Format < ApplicationRecord
-  self.primary_key = :abbr
+  #self.primary_key = :abbr
   validates :abbr, presence: true
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 end
