@@ -7,8 +7,8 @@
   </p>
   <p>
     <%= f.label 'format:'%>
-    <%= f.select(:format_abbr) do %>
-      <%= options_for_select(@formats.map { |f| [f.abbr, f.abbr] }) %>
+    <%= f.select(:format) do %>
+      <%= options_for_select(@formats.map { |f| [f.abbr, f.id] }) %>
     <% end %>
   </p>
   <p>
