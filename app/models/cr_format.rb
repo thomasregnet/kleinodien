@@ -1,8 +1,9 @@
 # One of possibly many formats of a ComplationRelease
 class CrFormat < ActiveRecord::Base
-  belongs_to :format,
-             foreign_key: :abbr,
-             primary_key: :abbr
+  # belongs_to :format,
+  #            foreign_key: :abbr,
+  #            primary_key: :abbr
+  belongs_to :format
   belongs_to :release,
              class_name: CompilationRelease,
              foreign_key: :compilation_release_id
