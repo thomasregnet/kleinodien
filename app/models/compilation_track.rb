@@ -9,10 +9,6 @@ class CompilationTrack < ActiveRecord::Base
   belongs_to :compilation_release,
              class_name:  CompilationRelease,
              foreign_key: :compilation_release_id
-  # belongs_to :format,
-  #            class_name:  Format,
-  #            primary_key: :abbr,
-  #            foreign_key: :format_abbr
   belongs_to :format
   belongs_to :piece_release,
              class_name:  PieceRelease,
@@ -21,11 +17,6 @@ class CompilationTrack < ActiveRecord::Base
   has_many :format_details,
            class_name: CtFormatDetail,
            foreign_key: :compilation_track_id
-  # has_many :repository_positions,
-  #          inverse_of: :compilation_track,
-  #          primary_key: [:id, :compilation_release_id],
-  #          foreign_key: [:compilation_track_id, :compilation_release_id]
-
   has_many :repository_positions
 
   validates :compilation_release, presence: true
