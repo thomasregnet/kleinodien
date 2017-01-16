@@ -21,10 +21,12 @@ class CompilationTrack < ActiveRecord::Base
   has_many :format_details,
            class_name: CtFormatDetail,
            foreign_key: :compilation_track_id
-  has_many :repository_positions,
-           inverse_of: :compilation_track,
-           primary_key: [:id, :compilation_release_id],
-           foreign_key: [:compilation_track_id, :compilation_release_id]
+  # has_many :repository_positions,
+  #          inverse_of: :compilation_track,
+  #          primary_key: [:id, :compilation_release_id],
+  #          foreign_key: [:compilation_track_id, :compilation_release_id]
+
+  has_many :repository_positions
 
   validates :compilation_release, presence: true
   validates :piece_release,       presence: true
