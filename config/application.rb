@@ -26,5 +26,8 @@ module Kleinodien
     # ActiveRecord::Base.raise_in_transactional_callbacks= is deprecated,
     # has no effect and will be removed without replacement.
     ###config.active_record.raise_in_transactional_callbacks = true
+
+    # db/structure.sql instead of db/schema.rb
+    config.active_record.schema_format = :sql
   end
 end
