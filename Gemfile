@@ -12,7 +12,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'faker',  '~> 1.5'
 gem 'devise', '~> 4.0'
-gem 'composite_primary_keys', '~> 9.0'
 gem 'jsonapi-resources'
 
 gem 'kleinodien_brainz',
