@@ -35,5 +35,9 @@
                    compilation_release_id: @album_release.id)) -%>
 </p>
 <p>
-  <%= link_to('add as original', '#') %>
+  <%= link_to('add as original',
+              new_original_exemplar_path(
+                  compilation_release_id: @album_release.id
+              )
+  ) %>
 </p>
