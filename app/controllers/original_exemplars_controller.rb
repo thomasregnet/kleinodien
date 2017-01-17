@@ -28,6 +28,7 @@ class OriginalExemplarsController < ApplicationController
   end
 
   def show
+    @original_exemplar = OriginalExemplar.find(params[:id])
   end
 
   private

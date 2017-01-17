@@ -5,6 +5,8 @@ Feature: Original Exemplar
 
   Scenario: Add an original exemplar
     Given User exists
+    When I visit the Sign in page
+    And I Fill in email and password
     Given The album release with discogs id "940468" exists
     When I visit the album release page
     And I click the link to add it as original to my collection

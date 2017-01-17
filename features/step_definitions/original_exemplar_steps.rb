@@ -11,5 +11,5 @@ When(/^I fill in a disambiguation$/) do
 end
 
 Then(/^I will see my new original exemplar$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content 'my nice exemplar'
 end
