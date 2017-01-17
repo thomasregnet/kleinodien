@@ -896,6 +896,39 @@ ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
 
 
 --
+-- Name: original_exemplars; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE original_exemplars (
+    id integer NOT NULL,
+    compilation_release_id integer NOT NULL,
+    user_id integer NOT NULL,
+    disambiguation text NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: original_exemplars_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE original_exemplars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: original_exemplars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE original_exemplars_id_seq OWNED BY original_exemplars.id;
+
+
+--
 -- Name: participants; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1702,6 +1735,13 @@ ALTER TABLE ONLY jobs ALTER COLUMN id SET DEFAULT nextval('jobs_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY original_exemplars ALTER COLUMN id SET DEFAULT nextval('original_exemplars_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY participants ALTER COLUMN id SET DEFAULT nextval('participants_id_seq'::regclass);
 
 
@@ -2046,6 +2086,14 @@ ALTER TABLE ONLY identifier_types
 
 ALTER TABLE ONLY jobs
     ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: original_exemplars_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY original_exemplars
+    ADD CONSTRAINT original_exemplars_pkey PRIMARY KEY (id);
 
 
 --
@@ -2565,6 +2613,20 @@ CREATE UNIQUE INDEX index_jobs_on_lower_name ON jobs USING btree (lower((name)::
 
 
 --
+-- Name: index_original_exemplars_on_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_original_exemplars_on_compilation_release_id ON original_exemplars USING btree (compilation_release_id);
+
+
+--
+-- Name: index_original_exemplars_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_original_exemplars_on_user_id ON original_exemplars USING btree (user_id);
+
+
+--
 -- Name: index_participants_on_artist_credit_id_and_no; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2961,6 +3023,14 @@ ALTER TABLE ONLY compilation_copies
 
 
 --
+-- Name: fk_rails_12d1a6dd66; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY original_exemplars
+    ADD CONSTRAINT fk_rails_12d1a6dd66 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
 -- Name: fk_rails_2536f5da69; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3318,6 +3388,14 @@ ALTER TABLE ONLY ph_credits
 
 ALTER TABLE ONLY pr_labels
     ADD CONSTRAINT fk_rails_ed786e6e71 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_fc315208ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY original_exemplars
+    ADD CONSTRAINT fk_rails_fc315208ac FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -3718,6 +3796,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20161215191105'),
 ('20170110190706'),
 ('20170110200910'),
-('20170111190945');
+('20170111190945'),
+('20170117193418');
 
 
