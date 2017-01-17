@@ -1,0 +1,13 @@
+<h1>OriginalExemplar#new</h1>
+<p>Find me in app/views/original_exemplar/new.html.erb</p>
+
+<%= form_for @original_exemplar do |form| %>
+  <%= form.hidden_field :compilation_release_id, value: @compilation_release_id %>
+  <p>
+    <%= form.label :disambiguation %>
+    <%= form.text_field :disambiguation %>
+  </p>
+  <p>
+    <%= form.submit "create" %>
+  </p>
+<% end %>

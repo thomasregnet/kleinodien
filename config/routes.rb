@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  # get 'original_exemplar/new'
+
+  # get 'original_exemplar/create'
+
+  # get 'original_exemplar/update'
+
+  # get 'original_exemplar/edit'
+
+  # get 'original_exemplar/destroy'
+
+  # get 'original_exemplar/index'
+
+  # get 'original_exemplar/show'
+
   # get 'compilation_copies/new'
 
   # get 'compilation_copies/index'
@@ -23,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :movie_heads, only: [:index, :show]
 
+  resources :original_exemplars
   #resources :repositories, only: [:create, :index, :new, :show]
   resources :repositories
 
