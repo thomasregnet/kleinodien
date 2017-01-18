@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
@@ -30,6 +31,17 @@ RSpec.describe CompilationHead, type: :model do
     expect(@c_head).to be_valid
     expect { @a_head.save! }.not_to raise_error
     expect { @c_head.save! }.not_to raise_error
+  end
+
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @commentable = FactoryGirl.create(:compilation_head)
+    end
+
+    let(:commentable) { @commentable }
+
+    after(:all) { DatabaseCleaner.clean }
   end
 
   it_behaves_like 'a model with companies' do
