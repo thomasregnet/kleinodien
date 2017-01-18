@@ -1,7 +1,19 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe Artist, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist = FactoryGirl.create(:artist)
+    end
+
+    let(:commentable) { @artist }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'usual artist' do
     before(:each) do
       @artist = FactoryGirl.build(:artist)
