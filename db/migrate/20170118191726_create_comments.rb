@@ -4,16 +4,16 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.text :text, null: false
       t.references :user, foreign_key: true, null: false
 
-      t.references :artist_credit,        foreign_key: true
-      t.references :artist,               foreign_key: true
-      t.references :compilation_heads,    foreign_key: true
-      t.references :compilation_releases, foreign_key: true
-      t.references :piece_heads,          foreign_key: true
-      t.references :piece_releases,       foreign_key: true
-      t.references :repositories,         foreign_key: true
-      t.references :seasons,              foreign_key: true
-      t.references :serials,              foreign_key: true
-      t.references :stations,             foreign_key: true
+      t.references :artist_credit,       foreign_key: true
+      t.references :artist,              foreign_key: true
+      t.references :compilation_head,    foreign_key: true
+      t.references :compilation_release, foreign_key: true
+      t.references :piece_head,          foreign_key: true
+      t.references :piece_release,       foreign_key: true
+      t.references :repository,          foreign_key: true
+      t.references :season,              foreign_key: true
+      t.references :serial,              foreign_key: true
+      t.references :station,             foreign_key: true
 
       t.timestamps
     end
