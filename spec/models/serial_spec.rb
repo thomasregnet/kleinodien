@@ -1,7 +1,19 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe Serial, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @commentable = FactoryGirl.create(:serial)
+    end
+
+    let(:commentable) { @commentable }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'without seasons' do
     before(:each) do
       @serial = FactoryGirl.build(:serial)
