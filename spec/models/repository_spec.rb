@@ -1,7 +1,19 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_entities_with_format_details'
 
 RSpec.describe Repository, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @compilation_release = FactoryGirl.create(:repository)
+    end
+
+    let(:commentable) { @compilation_release }
+
+    after(:all) { DatabaseCleaner.clean }
+  end  
+
   context 'when live is simple' do
     before(:each) do
       DatabaseCleaner.start

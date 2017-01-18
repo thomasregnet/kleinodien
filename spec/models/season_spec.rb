@@ -1,6 +1,18 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 
 RSpec.describe Season, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @commentable = FactoryGirl.create(:season)
+    end
+
+    let(:commentable) { @commentable }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'without episodes' do
     before(:each) do
       @season = FactoryGirl.build(:season)
