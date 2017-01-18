@@ -209,6 +209,48 @@ ALTER SEQUENCE ch_labels_id_seq OWNED BY ch_labels.id;
 
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    comment text NOT NULL,
+    user_id integer NOT NULL,
+    artist_credit_id integer,
+    artist_id integer,
+    compilation_heads_id integer,
+    compilation_releases_id integer,
+    piece_heads_id integer,
+    piece_releases_id integer,
+    repositories_id integer,
+    seasons_id integer,
+    serials_id integer,
+    stations_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
 -- Name: companies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1595,6 +1637,13 @@ ALTER TABLE ONLY ch_labels ALTER COLUMN id SET DEFAULT nextval('ch_labels_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq'::regclass);
 
 
@@ -1910,6 +1959,14 @@ ALTER TABLE ONLY ch_credits
 
 ALTER TABLE ONLY ch_labels
     ADD CONSTRAINT ch_labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -2358,6 +2415,83 @@ CREATE INDEX index_ch_labels_on_company_id ON ch_labels USING btree (company_id)
 --
 
 CREATE INDEX index_ch_labels_on_compilation_head_id ON ch_labels USING btree (compilation_head_id);
+
+
+--
+-- Name: index_comments_on_artist_credit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_artist_credit_id ON comments USING btree (artist_credit_id);
+
+
+--
+-- Name: index_comments_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_artist_id ON comments USING btree (artist_id);
+
+
+--
+-- Name: index_comments_on_compilation_heads_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_compilation_heads_id ON comments USING btree (compilation_heads_id);
+
+
+--
+-- Name: index_comments_on_compilation_releases_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_compilation_releases_id ON comments USING btree (compilation_releases_id);
+
+
+--
+-- Name: index_comments_on_piece_heads_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_piece_heads_id ON comments USING btree (piece_heads_id);
+
+
+--
+-- Name: index_comments_on_piece_releases_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_piece_releases_id ON comments USING btree (piece_releases_id);
+
+
+--
+-- Name: index_comments_on_repositories_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_repositories_id ON comments USING btree (repositories_id);
+
+
+--
+-- Name: index_comments_on_seasons_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_seasons_id ON comments USING btree (seasons_id);
+
+
+--
+-- Name: index_comments_on_serials_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_serials_id ON comments USING btree (serials_id);
+
+
+--
+-- Name: index_comments_on_stations_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_stations_id ON comments USING btree (stations_id);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
@@ -2983,6 +3117,14 @@ ALTER TABLE ONLY piece_releases
 
 
 --
+-- Name: fk_rails_016dc7a508; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_016dc7a508 FOREIGN KEY (piece_releases_id) REFERENCES piece_releases(id);
+
+
+--
 -- Name: fk_rails_01ebf7126a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2991,11 +3133,27 @@ ALTER TABLE ONLY compilation_heads_countries
 
 
 --
+-- Name: fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_03de2dc08c FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: fk_rails_04307d4c11; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compilation_tracks
     ADD CONSTRAINT fk_rails_04307d4c11 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_04a2108543; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_04a2108543 FOREIGN KEY (serials_id) REFERENCES serials(id);
 
 
 --
@@ -3023,11 +3181,27 @@ ALTER TABLE ONLY compilation_copies
 
 
 --
+-- Name: fk_rails_1185695be6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_1185695be6 FOREIGN KEY (artist_credit_id) REFERENCES artist_credits(id);
+
+
+--
 -- Name: fk_rails_12d1a6dd66; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY original_exemplars
     ADD CONSTRAINT fk_rails_12d1a6dd66 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_1f08edfd17; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_1f08edfd17 FOREIGN KEY (repositories_id) REFERENCES repositories(id);
 
 
 --
@@ -3135,6 +3309,22 @@ ALTER TABLE ONLY pr_companies
 
 
 --
+-- Name: fk_rails_3d225c231b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_3d225c231b FOREIGN KEY (stations_id) REFERENCES stations(id);
+
+
+--
+-- Name: fk_rails_462f153acd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_462f153acd FOREIGN KEY (seasons_id) REFERENCES seasons(id);
+
+
+--
 -- Name: fk_rails_49b539283c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3223,6 +3413,14 @@ ALTER TABLE ONLY countries_piece_releases
 
 
 --
+-- Name: fk_rails_8dc25981ef; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_8dc25981ef FOREIGN KEY (artist_id) REFERENCES artists(id);
+
+
+--
 -- Name: fk_rails_8e7336dad9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3252,6 +3450,14 @@ ALTER TABLE ONLY pr_credits
 
 ALTER TABLE ONLY ch_companies
     ADD CONSTRAINT fk_rails_9951108430 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_998a4f4e8d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_998a4f4e8d FOREIGN KEY (piece_heads_id) REFERENCES piece_heads(id);
 
 
 --
@@ -3300,6 +3506,14 @@ ALTER TABLE ONLY ch_labels
 
 ALTER TABLE ONLY ph_companies
     ADD CONSTRAINT fk_rails_b93a075402 FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
+
+
+--
+-- Name: fk_rails_b95cd38e07; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_b95cd38e07 FOREIGN KEY (compilation_releases_id) REFERENCES compilation_releases(id);
 
 
 --
@@ -3364,6 +3578,14 @@ ALTER TABLE ONLY ch_companies
 
 ALTER TABLE ONLY compilation_identifiers
     ADD CONSTRAINT fk_rails_d9764bf4b0 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_dc215f750d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_dc215f750d FOREIGN KEY (compilation_heads_id) REFERENCES compilation_heads(id);
 
 
 --
@@ -3797,6 +4019,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170110190706'),
 ('20170110200910'),
 ('20170111190945'),
-('20170117193418');
+('20170117193418'),
+('20170118191726');
 
 
