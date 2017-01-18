@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
@@ -7,6 +8,17 @@ require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_sources'
 
 RSpec.describe PieceRelease, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @commentable = FactoryGirl.create(:piece_release)
+    end
+
+    let(:commentable) { @commentable }
+
+    after(:all) { DatabaseCleaner.clean }
+  end  
+
   context 'without tracks' do
     before(:each) do
       @piece_release = FactoryGirl.build(:piece_release)

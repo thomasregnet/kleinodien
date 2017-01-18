@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
@@ -7,6 +8,17 @@ require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_sources'
 
 RSpec.describe CompilationRelease, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @compilation_release = FactoryGirl.create(:compilation_release)
+    end
+
+    let(:commentable) { @compilation_release }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'minimal CompilationRelease' do
     before(:each) do
       @c_release = FactoryGirl.create(:compilation_release)
