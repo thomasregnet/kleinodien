@@ -1,6 +1,18 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 
 RSpec.describe ArtistCredit, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist_credit = FactoryGirl.create(:artist_credit)
+    end
+
+    let(:commentable) { @artist_credit }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'without a Source' do
     context 'not saved to the database' do
       before(:each) do

@@ -3,6 +3,7 @@ class ArtistCredit < ActiveRecord::Base
   belongs_to :source
 
   has_many :artists, through: :participants
+  has_many :comments
   has_many :participants, inverse_of: :artist_credit
   has_many :compilations, class_name: CompilationHead
   has_many :pieces, class_name: PieceHead
