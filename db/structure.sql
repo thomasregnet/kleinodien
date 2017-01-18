@@ -214,7 +214,7 @@ ALTER SEQUENCE ch_labels_id_seq OWNED BY ch_labels.id;
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    comment text NOT NULL,
+    text text NOT NULL,
     user_id integer NOT NULL,
     artist_credit_id integer,
     artist_id integer,
