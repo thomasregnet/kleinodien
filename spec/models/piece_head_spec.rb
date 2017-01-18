@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_commentable'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
@@ -7,6 +8,17 @@ require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_sources'
 
 RSpec.describe PieceHead, type: :model do
+  it_behaves_like 'a commentable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @piece_head = FactoryGirl.create(:piece_head)
+    end
+
+    let(:commentable) { @piece_head }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   before(:each) do
     @ph = FactoryGirl.build(:piece_head)
   end
