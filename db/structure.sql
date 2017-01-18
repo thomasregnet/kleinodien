@@ -218,14 +218,14 @@ CREATE TABLE comments (
     user_id integer NOT NULL,
     artist_credit_id integer,
     artist_id integer,
-    compilation_heads_id integer,
-    compilation_releases_id integer,
-    piece_heads_id integer,
-    piece_releases_id integer,
-    repositories_id integer,
-    seasons_id integer,
-    serials_id integer,
-    stations_id integer,
+    compilation_head_id integer,
+    compilation_release_id integer,
+    piece_head_id integer,
+    piece_release_id integer,
+    repository_id integer,
+    season_id integer,
+    serial_id integer,
+    station_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2432,59 +2432,59 @@ CREATE INDEX index_comments_on_artist_id ON comments USING btree (artist_id);
 
 
 --
--- Name: index_comments_on_compilation_heads_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_compilation_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_compilation_heads_id ON comments USING btree (compilation_heads_id);
-
-
---
--- Name: index_comments_on_compilation_releases_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_compilation_releases_id ON comments USING btree (compilation_releases_id);
+CREATE INDEX index_comments_on_compilation_head_id ON comments USING btree (compilation_head_id);
 
 
 --
--- Name: index_comments_on_piece_heads_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_piece_heads_id ON comments USING btree (piece_heads_id);
-
-
---
--- Name: index_comments_on_piece_releases_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_piece_releases_id ON comments USING btree (piece_releases_id);
+CREATE INDEX index_comments_on_compilation_release_id ON comments USING btree (compilation_release_id);
 
 
 --
--- Name: index_comments_on_repositories_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_piece_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_repositories_id ON comments USING btree (repositories_id);
-
-
---
--- Name: index_comments_on_seasons_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_seasons_id ON comments USING btree (seasons_id);
+CREATE INDEX index_comments_on_piece_head_id ON comments USING btree (piece_head_id);
 
 
 --
--- Name: index_comments_on_serials_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_piece_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_serials_id ON comments USING btree (serials_id);
+CREATE INDEX index_comments_on_piece_release_id ON comments USING btree (piece_release_id);
 
 
 --
--- Name: index_comments_on_stations_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_repository_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_comments_on_stations_id ON comments USING btree (stations_id);
+CREATE INDEX index_comments_on_repository_id ON comments USING btree (repository_id);
+
+
+--
+-- Name: index_comments_on_season_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_season_id ON comments USING btree (season_id);
+
+
+--
+-- Name: index_comments_on_serial_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_serial_id ON comments USING btree (serial_id);
+
+
+--
+-- Name: index_comments_on_station_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_station_id ON comments USING btree (station_id);
 
 
 --
@@ -3117,14 +3117,6 @@ ALTER TABLE ONLY piece_releases
 
 
 --
--- Name: fk_rails_016dc7a508; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_016dc7a508 FOREIGN KEY (piece_releases_id) REFERENCES piece_releases(id);
-
-
---
 -- Name: fk_rails_01ebf7126a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3146,14 +3138,6 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY compilation_tracks
     ADD CONSTRAINT fk_rails_04307d4c11 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
-
-
---
--- Name: fk_rails_04a2108543; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_04a2108543 FOREIGN KEY (serials_id) REFERENCES serials(id);
 
 
 --
@@ -3197,19 +3181,19 @@ ALTER TABLE ONLY original_exemplars
 
 
 --
--- Name: fk_rails_1f08edfd17; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_1f08edfd17 FOREIGN KEY (repositories_id) REFERENCES repositories(id);
-
-
---
 -- Name: fk_rails_2536f5da69; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY countries_piece_releases
     ADD CONSTRAINT fk_rails_2536f5da69 FOREIGN KEY (country_id) REFERENCES countries(id);
+
+
+--
+-- Name: fk_rails_25a57070fa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_25a57070fa FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
 
 
 --
@@ -3309,19 +3293,11 @@ ALTER TABLE ONLY pr_companies
 
 
 --
--- Name: fk_rails_3d225c231b; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_39dbeba97b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_3d225c231b FOREIGN KEY (stations_id) REFERENCES stations(id);
-
-
---
--- Name: fk_rails_462f153acd; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_462f153acd FOREIGN KEY (seasons_id) REFERENCES seasons(id);
+    ADD CONSTRAINT fk_rails_39dbeba97b FOREIGN KEY (compilation_head_id) REFERENCES compilation_heads(id);
 
 
 --
@@ -3373,11 +3349,27 @@ ALTER TABLE ONLY ch_credits
 
 
 --
+-- Name: fk_rails_6ff07629cd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_6ff07629cd FOREIGN KEY (piece_release_id) REFERENCES piece_releases(id);
+
+
+--
 -- Name: fk_rails_7204f5c5ca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cr_labels
     ADD CONSTRAINT fk_rails_7204f5c5ca FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_73a874ce99; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_73a874ce99 FOREIGN KEY (season_id) REFERENCES seasons(id);
 
 
 --
@@ -3453,19 +3445,19 @@ ALTER TABLE ONLY ch_companies
 
 
 --
--- Name: fk_rails_998a4f4e8d; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_998a4f4e8d FOREIGN KEY (piece_heads_id) REFERENCES piece_heads(id);
-
-
---
 -- Name: fk_rails_9a3108629b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY compilation_track_details
     ADD CONSTRAINT fk_rails_9a3108629b FOREIGN KEY (track_id) REFERENCES compilation_tracks(id);
+
+
+--
+-- Name: fk_rails_a55ea41678; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_a55ea41678 FOREIGN KEY (serial_id) REFERENCES serials(id);
 
 
 --
@@ -3509,11 +3501,11 @@ ALTER TABLE ONLY ph_companies
 
 
 --
--- Name: fk_rails_b95cd38e07; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_be93d8ae79; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_b95cd38e07 FOREIGN KEY (compilation_releases_id) REFERENCES compilation_releases(id);
+    ADD CONSTRAINT fk_rails_be93d8ae79 FOREIGN KEY (station_id) REFERENCES stations(id);
 
 
 --
@@ -3522,6 +3514,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY compilation_releases_countries
     ADD CONSTRAINT fk_rails_c0c37ae7ab FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_c723c589bc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_c723c589bc FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
 
 
 --
@@ -3581,14 +3581,6 @@ ALTER TABLE ONLY compilation_identifiers
 
 
 --
--- Name: fk_rails_dc215f750d; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT fk_rails_dc215f750d FOREIGN KEY (compilation_heads_id) REFERENCES compilation_heads(id);
-
-
---
 -- Name: fk_rails_e562cf7d82; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3610,6 +3602,14 @@ ALTER TABLE ONLY ph_credits
 
 ALTER TABLE ONLY pr_labels
     ADD CONSTRAINT fk_rails_ed786e6e71 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_f7dd8d775b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT fk_rails_f7dd8d775b FOREIGN KEY (repository_id) REFERENCES repositories(id);
 
 
 --
