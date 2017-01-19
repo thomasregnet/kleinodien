@@ -1,3 +1,4 @@
+# User comments on contents
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :artist
@@ -14,4 +15,19 @@ class Comment < ApplicationRecord
 
   validates :text, presence: true
   validates :user, presence: true
+
+  validate :only_one_content
+
+  private
+
+  def only_one_content
+    contents = [
+      :artist_credit, :artist, :compilation_head, :compilation_release,
+      :piece_head, :piece_release, :repository, :season, :serial, :station
+    ]
+
+    content_count = 0
+    contents.each { |content| content_count += 1 if send content }
+    content_count != 1 && errors.add(:comment, 'can contain only one content')
+  end
 end
