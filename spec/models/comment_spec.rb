@@ -15,7 +15,22 @@ RSpec.describe Comment, type: :model do
     expect(@comment).not_to be_valid
   end
 
-  context 'only valid with exact one content' do
+  context 'without a content' do
+    before(:each) do
+      @comment = FactoryGirl.build(:comment)
+    end
+
+    it 'is not valid' do
+      expect(@comment).not_to be_valid
+    end
+
+    it 'raises an error when it is saved without validations' do
+      expect { @comment.save! validate: false }
+        .to raise_error /exact_one_content/
+    end
+  end
+
+  context 'valid with exact one content' do
     before(:each) do
       @comment = FactoryGirl.create(:comment_on_artist_credit)
     end
@@ -30,6 +45,8 @@ RSpec.describe Comment, type: :model do
         setter = factory.to_s + '='
         @comment.send setter, FactoryGirl.create(factory)
         expect(@comment).not_to be_valid
+        expect { @comment.save! validate: false }
+          .to raise_error /exact_one_content/
       end
     end
   end
