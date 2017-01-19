@@ -227,7 +227,8 @@ CREATE TABLE comments (
     serial_id integer,
     station_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    CONSTRAINT exact_one_content CHECK (((((((((((((artist_credit_id IS NOT NULL))::integer + ((artist_id IS NOT NULL))::integer) + ((compilation_head_id IS NOT NULL))::integer) + ((compilation_release_id IS NOT NULL))::integer) + ((piece_head_id IS NOT NULL))::integer) + ((piece_release_id IS NOT NULL))::integer) + ((repository_id IS NOT NULL))::integer) + ((season_id IS NOT NULL))::integer) + ((serial_id IS NOT NULL))::integer) + ((station_id IS NOT NULL))::integer) = 1))
 );
 
 
@@ -4020,6 +4021,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170110200910'),
 ('20170111190945'),
 ('20170117193418'),
-('20170118191726');
+('20170118191726'),
+('20170119194017');
 
 
