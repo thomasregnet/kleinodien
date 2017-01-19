@@ -4,8 +4,7 @@ RSpec.shared_examples "a commentable model" do
   end
 
   it 'accepts a comment' do
-    comment = FactoryGirl.create(:comment)
-    commentable.comments << comment
+    commentable.comments << FactoryGirl.build(:comment)
     expect(commentable.comments.length).to eq 1
   end
 end
