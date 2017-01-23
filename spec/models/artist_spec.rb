@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 
@@ -10,6 +11,17 @@ RSpec.describe Artist, type: :model do
     end
 
     let(:commentable) { @artist }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist = FactoryGirl.create(:artist_credit)
+    end
+
+    let(:rateable) { @artist }
 
     after(:all) { DatabaseCleaner.clean }
   end

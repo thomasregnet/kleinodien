@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_commentable'
+require 'shared_examples_for_rateable_models'
 
 RSpec.describe Season, type: :model do
   it_behaves_like 'a commentable model' do
@@ -13,6 +14,16 @@ RSpec.describe Season, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @season = FactoryGirl.create(:season)
+    end
+
+    let(:rateable) { @season }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
   context 'without episodes' do
     before(:each) do
       @season = FactoryGirl.build(:season)

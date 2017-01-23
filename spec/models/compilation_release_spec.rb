@@ -5,6 +5,7 @@ require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
+require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
 
 RSpec.describe CompilationRelease, type: :model do
@@ -15,6 +16,17 @@ RSpec.describe CompilationRelease, type: :model do
     end
 
     let(:commentable) { @compilation_release }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @compilation_release = FactoryGirl.create(:compilation_release)
+    end
+
+    let(:rateable) { @compilation_release }
 
     after(:all) { DatabaseCleaner.clean }
   end

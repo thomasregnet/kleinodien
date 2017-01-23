@@ -5,6 +5,7 @@ class CompilationHead < ActiveRecord::Base
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit
   has_many :labels, class_name: ChLabel
+  has_many :ratings
   has_and_belongs_to_many :countries
 
   validates :type, presence: true
