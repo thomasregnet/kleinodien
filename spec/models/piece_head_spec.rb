@@ -5,6 +5,7 @@ require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
 
 RSpec.describe PieceHead, type: :model do
@@ -27,7 +28,18 @@ RSpec.describe PieceHead, type: :model do
     expect(@ph).to be_valid
   end
 
-  it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @piece_head = FactoryGirl.create(:piece_head)
+    end
+
+    let(:rateable) { @piece_head }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+    it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
     @s_head = FactoryGirl.build(
       :song_head,
       title:          @ph.title,

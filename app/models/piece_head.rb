@@ -5,6 +5,7 @@ class PieceHead < ActiveRecord::Base
   has_many :companies, class_name: PhCompany
   has_many :credits, class_name: PhCredit
   has_many :labels, class_name: PhLabel
+  has_many :ratings
 
   has_and_belongs_to_many :countries
 

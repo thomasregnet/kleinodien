@@ -5,6 +5,7 @@ require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
+require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
 
 RSpec.describe PieceRelease, type: :model do
@@ -19,6 +20,17 @@ RSpec.describe PieceRelease, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end  
 
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @piece_release = FactoryGirl.create(:piece_release)
+    end
+
+    let(:rateable) { @piece_release }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+  
   context 'without tracks' do
     before(:each) do
       @piece_release = FactoryGirl.build(:piece_release)

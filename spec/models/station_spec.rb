@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_rateable_models'
 
 RSpec.describe Station, type: :model do
   it_behaves_like 'a commentable model' do
@@ -13,6 +14,18 @@ RSpec.describe Station, type: :model do
 
     after(:all) { DatabaseCleaner.clean }
   end
+
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @station = FactoryGirl.create(:station)
+    end
+
+    let(:rateable) { @station }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   before(:each) do
     @station = FactoryGirl.build(:station)
   end
