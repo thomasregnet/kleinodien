@@ -1,6 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Rating, type: :model do
+  describe '#value' do
+    it 'is not valid with a value smaller than 0' do
+      @rating = FactoryGirl.build(:artist_credit_rating, value: -1)
+      expect(@rating).not_to be_valid
+    end
+
+    it 'is not valid with a value greater than 10' do
+      @rating = FactoryGirl.build(:artist_credit_rating, value: 11)
+      expect(@rating).not_to be_valid
+    end
+
+    context 'valid values' do
+      (0..10).to_a.each do |value|
+        it "is valid with #{value} as value" do
+          @rating = FactoryGirl.build(:artist_credit_rating, value: value)
+          expect(@rating).to be_valid
+        end
+      end
+    end
+  end
+
   context 'with or without a content' do
     before(:each) do
       @rating = FactoryGirl.build(:artist_credit_rating)
