@@ -57,6 +57,8 @@ RSpec.describe Rating, type: :model do
       it "is not valid when artist_credit and #{factory} are set" do
         @rating.send setter, FactoryGirl.create(factory)
         expect(@rating).not_to be_valid
+        expect { @rating.save! validate: false }
+          .to raise_error /exact_one_content_on_ratings/
       end
     end
   end
