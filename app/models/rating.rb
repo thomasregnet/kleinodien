@@ -18,7 +18,8 @@ class Rating < ApplicationRecord
   validate :exact_one_content
 
   validates :user, presence: true
-  
+  validates :value, inclusion: 0..10
+
   private
 
   def exact_one_content
