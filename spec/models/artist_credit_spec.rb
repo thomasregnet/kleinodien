@@ -36,7 +36,7 @@ RSpec.describe ArtistCredit, type: :model do
 
     after(:all) { DatabaseCleaner.clean }
   end
-  
+
   context 'without a Source' do
     context 'not saved to the database' do
       before(:each) do

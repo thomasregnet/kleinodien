@@ -7,6 +7,7 @@ require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
+require 'shared_examples_for_tagable_models'
 
 RSpec.describe CompilationHead, type: :model do
   before(:each) do
@@ -52,6 +53,17 @@ RSpec.describe CompilationHead, type: :model do
     end
 
     let(:rateable) { @compilation_head }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a tagable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @tagable = FactoryGirl.create(:compilation_head)
+    end
+
+    let(:tagable) { @tagable }
 
     after(:all) { DatabaseCleaner.clean }
   end

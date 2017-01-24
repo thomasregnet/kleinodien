@@ -1,6 +1,7 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
   belongs_to :source
+  has_and_belongs_to_many :tags
   has_many :comments
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit

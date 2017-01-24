@@ -6,7 +6,7 @@ class PieceRelease < ActiveRecord::Base
 
   belongs_to :head, class_name: PieceHead, foreign_key: :piece_head_id
   belongs_to :source
-
+  has_and_belongs_to_many :tags
   has_many :comments
   has_many :companies, class_name: PrCompany
   has_many :credits, class_name: PrCredit

@@ -7,6 +7,7 @@ require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
+require 'shared_examples_for_tagable_models'
 
 RSpec.describe CompilationRelease, type: :model do
   it_behaves_like 'a commentable model' do
@@ -27,6 +28,17 @@ RSpec.describe CompilationRelease, type: :model do
     end
 
     let(:rateable) { @compilation_release }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a tagable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @tagable = FactoryGirl.create(:compilation_release)
+    end
+
+    let(:tagable) { @tagable }
 
     after(:all) { DatabaseCleaner.clean }
   end
