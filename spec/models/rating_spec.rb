@@ -1,23 +1,44 @@
 require 'rails_helper'
 
+RSpec.shared_examples 'a rating with a wrong value' do
+  it 'is not valid' do
+    expect(rating).not_to be_valid
+  end
+
+  it 'raises an error if it is saved without being validated' do
+    expect { rating.save! validate: false }
+      .to raise_error /ratings_value_between_0_and_10/
+  end
+end
+
 RSpec.describe Rating, type: :model do
   describe '#value' do
-    it 'is not valid with a value smaller than 0' do
-      @rating = FactoryGirl.build(:artist_credit_rating, value: -1)
-      expect(@rating).not_to be_valid
+    before(:all) do
+      DatabaseCleaner.start
+      @bigger_rating = FactoryGirl.build(:artist_credit_rating, value: -1)
+      @lower_rating  = FactoryGirl.build(:artist_credit_rating, value: 11)
     end
 
-    it 'is not valid with a value greater than 10' do
-      @rating = FactoryGirl.build(:artist_credit_rating, value: 11)
-      expect(@rating).not_to be_valid
+    context 'with a value bigger than 10' do
+      it_behaves_like 'a rating with a wrong value' do
+        let(:rating) { @bigger_rating }
+      end
     end
 
-    context 'valid values' do
-      (0..10).to_a.each do |value|
-        it "is valid with #{value} as value" do
-          @rating = FactoryGirl.build(:artist_credit_rating, value: value)
-          expect(@rating).to be_valid
-        end
+    context 'with a value lower than 0' do
+      it_behaves_like 'a rating with a wrong value' do
+        let(:rating) { @lower_rating }
+      end
+    end
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  context 'valid values' do
+    (0..10).to_a.each do |value|
+      it "is valid with #{value} as value" do
+        @rating = FactoryGirl.build(:artist_credit_rating, value: value)
+        expect(@rating).to be_valid
       end
     end
   end
