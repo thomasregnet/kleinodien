@@ -1,7 +1,7 @@
 class CommentExactOneContent < ActiveRecord::Migration[5.0]
   def change
     execute <<-DDL
-      ALTER TABLE comments ADD CONSTRAINT exact_one_content check (
+      ALTER TABLE comments ADD CONSTRAINT exact_one_content_on_comments CHECK (
         (artist_credit_id       IS NOT NULL)::integer +
         (artist_id              IS NOT NULL)::integer +
         (compilation_head_id    IS NOT NULL)::integer +
