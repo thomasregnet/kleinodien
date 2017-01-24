@@ -118,6 +118,16 @@ ALTER SEQUENCE artists_id_seq OWNED BY artists.id;
 
 
 --
+-- Name: artists_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE artists_tags (
+    artist_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+--
 -- Name: ch_companies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -403,6 +413,16 @@ ALTER SEQUENCE compilation_heads_id_seq OWNED BY compilation_heads.id;
 
 
 --
+-- Name: compilation_heads_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE compilation_heads_tags (
+    compilation_head_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+--
 -- Name: compilation_identifiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -481,6 +501,16 @@ CREATE SEQUENCE compilation_releases_id_seq
 --
 
 ALTER SEQUENCE compilation_releases_id_seq OWNED BY compilation_releases.id;
+
+
+--
+-- Name: compilation_releases_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE compilation_releases_tags (
+    compilation_release_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
 
 
 --
@@ -1155,6 +1185,16 @@ ALTER SEQUENCE piece_heads_id_seq OWNED BY piece_heads.id;
 
 
 --
+-- Name: piece_heads_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE piece_heads_tags (
+    piece_head_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+--
 -- Name: piece_releases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1190,6 +1230,16 @@ CREATE SEQUENCE piece_releases_id_seq
 --
 
 ALTER SEQUENCE piece_releases_id_seq OWNED BY piece_releases.id;
+
+
+--
+-- Name: piece_releases_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE piece_releases_tags (
+    piece_release_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
 
 
 --
@@ -1515,6 +1565,16 @@ ALTER SEQUENCE seasons_id_seq OWNED BY seasons.id;
 
 
 --
+-- Name: seasons_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE seasons_tags (
+    season_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+--
 -- Name: serials; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1545,6 +1605,16 @@ CREATE SEQUENCE serials_id_seq
 --
 
 ALTER SEQUENCE serials_id_seq OWNED BY serials.id;
+
+
+--
+-- Name: serials_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE serials_tags (
+    serial_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
 
 
 --
@@ -1610,6 +1680,16 @@ CREATE SEQUENCE stations_id_seq
 --
 
 ALTER SEQUENCE stations_id_seq OWNED BY stations.id;
+
+
+--
+-- Name: stations_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE stations_tags (
+    station_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
 
 
 --
@@ -2492,6 +2572,20 @@ CREATE UNIQUE INDEX index_artists_on_lower_name ON artists USING btree (lower((n
 
 
 --
+-- Name: index_artists_tags_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artists_tags_on_artist_id ON artists_tags USING btree (artist_id);
+
+
+--
+-- Name: index_artists_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artists_tags_on_tag_id ON artists_tags USING btree (tag_id);
+
+
+--
 -- Name: index_ch_companies_on_company_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2695,6 +2789,20 @@ CREATE UNIQUE INDEX index_compilation_heads_on_lower_title_disambiguation ON com
 
 
 --
+-- Name: index_compilation_heads_tags_on_compilation_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_compilation_heads_tags_on_compilation_head_id ON compilation_heads_tags USING btree (compilation_head_id);
+
+
+--
+-- Name: index_compilation_heads_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_compilation_heads_tags_on_tag_id ON compilation_heads_tags USING btree (tag_id);
+
+
+--
 -- Name: index_compilation_identifiers_on_code; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2734,6 +2842,20 @@ CREATE UNIQUE INDEX index_compilation_releases_on_compilation_head_id_lower_vers
 --
 
 CREATE UNIQUE INDEX index_compilation_releases_on_lower_version ON compilation_releases USING btree (type, compilation_head_id, lower((version)::text)) WHERE (source_ident IS NULL);
+
+
+--
+-- Name: index_compilation_releases_tags_on_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_compilation_releases_tags_on_compilation_release_id ON compilation_releases_tags USING btree (compilation_release_id);
+
+
+--
+-- Name: index_compilation_releases_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_compilation_releases_tags_on_tag_id ON compilation_releases_tags USING btree (tag_id);
 
 
 --
@@ -2989,6 +3111,20 @@ CREATE INDEX index_piece_heads_on_season_id ON piece_heads USING btree (season_i
 
 
 --
+-- Name: index_piece_heads_tags_on_piece_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_piece_heads_tags_on_piece_head_id ON piece_heads_tags USING btree (piece_head_id);
+
+
+--
+-- Name: index_piece_heads_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_piece_heads_tags_on_tag_id ON piece_heads_tags USING btree (tag_id);
+
+
+--
 -- Name: index_piece_releases_on_piece_head_id_and_lower_version; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3000,6 +3136,20 @@ CREATE UNIQUE INDEX index_piece_releases_on_piece_head_id_and_lower_version ON p
 --
 
 CREATE INDEX index_piece_releases_on_station_id ON piece_releases USING btree (station_id);
+
+
+--
+-- Name: index_piece_releases_tags_on_piece_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_piece_releases_tags_on_piece_release_id ON piece_releases_tags USING btree (piece_release_id);
+
+
+--
+-- Name: index_piece_releases_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_piece_releases_tags_on_tag_id ON piece_releases_tags USING btree (tag_id);
 
 
 --
@@ -3164,6 +3314,20 @@ CREATE UNIQUE INDEX index_seasons_on_position_and_serial_id ON seasons USING btr
 
 
 --
+-- Name: index_seasons_tags_on_season_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_seasons_tags_on_season_id ON seasons_tags USING btree (season_id);
+
+
+--
+-- Name: index_seasons_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_seasons_tags_on_tag_id ON seasons_tags USING btree (tag_id);
+
+
+--
 -- Name: index_serials_on_lower_disambiguation_and_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3178,6 +3342,20 @@ CREATE UNIQUE INDEX index_serials_on_lower_title ON serials USING btree (lower((
 
 
 --
+-- Name: index_serials_tags_on_serial_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_serials_tags_on_serial_id ON serials_tags USING btree (serial_id);
+
+
+--
+-- Name: index_serials_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_serials_tags_on_tag_id ON serials_tags USING btree (tag_id);
+
+
+--
 -- Name: index_stations_on_lower_disambiguation_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3189,6 +3367,20 @@ CREATE UNIQUE INDEX index_stations_on_lower_disambiguation_and_name ON stations 
 --
 
 CREATE UNIQUE INDEX index_stations_on_lower_name ON stations USING btree (lower((name)::text)) WHERE (disambiguation IS NULL);
+
+
+--
+-- Name: index_stations_tags_on_station_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_stations_tags_on_station_id ON stations_tags USING btree (station_id);
+
+
+--
+-- Name: index_stations_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_stations_tags_on_tag_id ON stations_tags USING btree (tag_id);
 
 
 --
@@ -3364,6 +3556,14 @@ ALTER TABLE ONLY ph_labels
 
 
 --
+-- Name: fk_rails_0e5c05a1d3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY serials_tags
+    ADD CONSTRAINT fk_rails_0e5c05a1d3 FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
 -- Name: fk_rails_0ebfa9dfb8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3385,6 +3585,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY original_exemplars
     ADD CONSTRAINT fk_rails_12d1a6dd66 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_14cd9888d9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stations_tags
+    ADD CONSTRAINT fk_rails_14cd9888d9 FOREIGN KEY (tag_id) REFERENCES tags(id);
 
 
 --
@@ -3524,6 +3732,22 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: fk_rails_41d01a9df9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY piece_releases_tags
+    ADD CONSTRAINT fk_rails_41d01a9df9 FOREIGN KEY (piece_release_id) REFERENCES piece_releases(id);
+
+
+--
+-- Name: fk_rails_47535a2160; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY serials_tags
+    ADD CONSTRAINT fk_rails_47535a2160 FOREIGN KEY (serial_id) REFERENCES serials(id);
+
+
+--
 -- Name: fk_rails_49b539283c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3537,6 +3761,22 @@ ALTER TABLE ONLY ch_labels
 
 ALTER TABLE ONLY ratings
     ADD CONSTRAINT fk_rails_4b101ee403 FOREIGN KEY (compilation_head_id) REFERENCES compilation_heads(id);
+
+
+--
+-- Name: fk_rails_4b9a174361; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY compilation_heads_tags
+    ADD CONSTRAINT fk_rails_4b9a174361 FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
+-- Name: fk_rails_4d417c1eb4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY piece_releases_tags
+    ADD CONSTRAINT fk_rails_4d417c1eb4 FOREIGN KEY (tag_id) REFERENCES tags(id);
 
 
 --
@@ -3596,6 +3836,30 @@ ALTER TABLE ONLY ratings
 
 
 --
+-- Name: fk_rails_6c850f5f4a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artists_tags
+    ADD CONSTRAINT fk_rails_6c850f5f4a FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
+-- Name: fk_rails_6daae60d18; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY compilation_releases_tags
+    ADD CONSTRAINT fk_rails_6daae60d18 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_6e325ae0d7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY stations_tags
+    ADD CONSTRAINT fk_rails_6e325ae0d7 FOREIGN KEY (station_id) REFERENCES stations(id);
+
+
+--
 -- Name: fk_rails_6ff07629cd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3644,6 +3908,14 @@ ALTER TABLE ONLY pr_companies
 
 
 --
+-- Name: fk_rails_74772a69c1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY seasons_tags
+    ADD CONSTRAINT fk_rails_74772a69c1 FOREIGN KEY (season_id) REFERENCES seasons(id);
+
+
+--
 -- Name: fk_rails_7b69ed2838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3660,11 +3932,35 @@ ALTER TABLE ONLY compilation_copies
 
 
 --
+-- Name: fk_rails_7d0e08dd6b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY seasons_tags
+    ADD CONSTRAINT fk_rails_7d0e08dd6b FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
 -- Name: fk_rails_8015f9d7ae; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ratings
     ADD CONSTRAINT fk_rails_8015f9d7ae FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_815a91ee09; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY compilation_heads_tags
+    ADD CONSTRAINT fk_rails_815a91ee09 FOREIGN KEY (compilation_head_id) REFERENCES compilation_heads(id);
+
+
+--
+-- Name: fk_rails_81dd9f559b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY compilation_releases_tags
+    ADD CONSTRAINT fk_rails_81dd9f559b FOREIGN KEY (tag_id) REFERENCES tags(id);
 
 
 --
@@ -3812,6 +4108,14 @@ ALTER TABLE ONLY compilation_releases_countries
 
 
 --
+-- Name: fk_rails_c24b3a4fff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY piece_heads_tags
+    ADD CONSTRAINT fk_rails_c24b3a4fff FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
+
+
+--
 -- Name: fk_rails_c723c589bc; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3873,6 +4177,22 @@ ALTER TABLE ONLY ch_companies
 
 ALTER TABLE ONLY compilation_identifiers
     ADD CONSTRAINT fk_rails_d9764bf4b0 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_da212ea42e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY piece_heads_tags
+    ADD CONSTRAINT fk_rails_da212ea42e FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
+-- Name: fk_rails_e0359ee6bb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artists_tags
+    ADD CONSTRAINT fk_rails_e0359ee6bb FOREIGN KEY (artist_id) REFERENCES artists(id);
 
 
 --
@@ -4329,6 +4649,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170123213126'),
 ('20170124190758'),
 ('20170124200135'),
-('20170124202508');
+('20170124202508'),
+('20170124210548');
 
 
