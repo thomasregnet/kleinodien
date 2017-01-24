@@ -7,6 +7,7 @@ require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
+require 'shared_examples_for_tagable_models'
 
 RSpec.describe PieceHead, type: :model do
   it_behaves_like 'a commentable model' do
@@ -39,7 +40,18 @@ RSpec.describe PieceHead, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
-    it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
+  it_behaves_like 'a tagable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @tagable = FactoryGirl.create(:piece_head)
+    end
+
+    let(:tagable) { @tagable }
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
+  it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
     @s_head = FactoryGirl.build(
       :song_head,
       title:          @ph.title,

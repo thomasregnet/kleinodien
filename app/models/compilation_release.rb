@@ -9,6 +9,8 @@ class CompilationRelease < ActiveRecord::Base
              foreign_key: :compilation_head_id
   belongs_to :source
 
+  has_and_belongs_to_many :tags
+
   has_many :comments
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit

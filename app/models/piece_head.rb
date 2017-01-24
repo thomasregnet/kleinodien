@@ -1,13 +1,13 @@
 # A PieceHead my be a song, movie ...
 class PieceHead < ActiveRecord::Base
   belongs_to :source
+  has_and_belongs_to_many :countries
+  has_and_belongs_to_many :tags
   has_many :comments
   has_many :companies, class_name: PhCompany
   has_many :credits, class_name: PhCredit
   has_many :labels, class_name: PhLabel
   has_many :ratings
-
-  has_and_belongs_to_many :countries
 
   validates :title,
             presence: true,
