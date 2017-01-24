@@ -1603,6 +1603,38 @@ ALTER SEQUENCE stations_id_seq OWNED BY stations.id;
 
 
 --
+-- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tags (
+    id integer NOT NULL,
+    name text NOT NULL,
+    note text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1955,6 +1987,13 @@ ALTER TABLE ONLY sources ALTER COLUMN id SET DEFAULT nextval('sources_id_seq'::r
 --
 
 ALTER TABLE ONLY stations ALTER COLUMN id SET DEFAULT nextval('stations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
 --
@@ -2354,6 +2393,14 @@ ALTER TABLE ONLY sources
 
 ALTER TABLE ONLY stations
     ADD CONSTRAINT stations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -3118,6 +3165,13 @@ CREATE UNIQUE INDEX index_stations_on_lower_disambiguation_and_name ON stations 
 --
 
 CREATE UNIQUE INDEX index_stations_on_lower_name ON stations USING btree (lower((name)::text)) WHERE (disambiguation IS NULL);
+
+
+--
+-- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 
 
 --
@@ -4233,6 +4287,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170119194017'),
 ('20170123185156'),
 ('20170123213126'),
-('20170124190758');
+('20170124190758'),
+('20170124200135');
 
 
