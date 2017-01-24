@@ -74,6 +74,16 @@ ALTER SEQUENCE artist_credits_id_seq OWNED BY artist_credits.id;
 
 
 --
+-- Name: artist_credits_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE artist_credits_tags (
+    artist_credit_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+--
 -- Name: artists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2454,6 +2464,20 @@ CREATE UNIQUE INDEX formats_lower_idx ON formats USING btree (lower(name));
 
 
 --
+-- Name: index_artist_credits_tags_on_artist_credit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artist_credits_tags_on_artist_credit_id ON artist_credits_tags USING btree (artist_credit_id);
+
+
+--
+-- Name: index_artist_credits_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artist_credits_tags_on_tag_id ON artist_credits_tags USING btree (tag_id);
+
+
+--
 -- Name: index_artists_on_lower_disambiguation_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3372,6 +3396,14 @@ ALTER TABLE ONLY ratings
 
 
 --
+-- Name: fk_rails_2493022b8a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_credits_tags
+    ADD CONSTRAINT fk_rails_2493022b8a FOREIGN KEY (artist_credit_id) REFERENCES artist_credits(id);
+
+
+--
 -- Name: fk_rails_2536f5da69; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3577,6 +3609,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY ratings
     ADD CONSTRAINT fk_rails_70f67fa677 FOREIGN KEY (season_id) REFERENCES seasons(id);
+
+
+--
+-- Name: fk_rails_716a08d546; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_credits_tags
+    ADD CONSTRAINT fk_rails_716a08d546 FOREIGN KEY (tag_id) REFERENCES tags(id);
 
 
 --
@@ -4288,6 +4328,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170123185156'),
 ('20170123213126'),
 ('20170124190758'),
-('20170124200135');
+('20170124200135'),
+('20170124202508');
 
 
