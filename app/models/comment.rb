@@ -26,8 +26,8 @@ class Comment < ApplicationRecord
       :piece_head, :piece_release, :repository, :season, :serial, :station
     ]
 
-    content_count = 0
-    contents.each { |content| content_count += 1 if send content }
-    content_count != 1 && errors.add(:comment, 'can contain only one content')
+    count = 0
+    contents.each { |content| count += 1 if send content }
+    count != 1 && errors.add(:comment, 'must contain exact one content')
   end
 end
