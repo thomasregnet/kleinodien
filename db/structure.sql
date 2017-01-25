@@ -856,6 +856,49 @@ ALTER SEQUENCE ct_format_details_id_seq OWNED BY ct_format_details.id;
 
 
 --
+-- Name: descriptions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE descriptions (
+    id integer NOT NULL,
+    text text NOT NULL,
+    user_id integer,
+    source_id integer,
+    artist_credit_id integer,
+    artist_id integer,
+    compilation_head_id integer,
+    compilation_release_id integer,
+    country_id integer,
+    piece_head_id integer,
+    piece_release_id integer,
+    season_id integer,
+    serial_id integer,
+    station_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: descriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE descriptions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: descriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE descriptions_id_seq OWNED BY descriptions.id;
+
+
+--
 -- Name: format_details; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1922,6 +1965,13 @@ ALTER TABLE ONLY ct_format_details ALTER COLUMN id SET DEFAULT nextval('ct_forma
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY descriptions ALTER COLUMN id SET DEFAULT nextval('descriptions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY format_details ALTER COLUMN id SET DEFAULT nextval('format_details_id_seq'::regclass);
 
 
@@ -2275,6 +2325,14 @@ ALTER TABLE ONLY cr_labels
 
 ALTER TABLE ONLY ct_format_details
     ADD CONSTRAINT ct_format_details_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: descriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT descriptions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2982,6 +3040,90 @@ CREATE INDEX index_cr_labels_on_company_id ON cr_labels USING btree (company_id)
 --
 
 CREATE INDEX index_cr_labels_on_compilation_release_id ON cr_labels USING btree (compilation_release_id);
+
+
+--
+-- Name: index_descriptions_on_artist_credit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_artist_credit_id ON descriptions USING btree (artist_credit_id);
+
+
+--
+-- Name: index_descriptions_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_artist_id ON descriptions USING btree (artist_id);
+
+
+--
+-- Name: index_descriptions_on_compilation_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_compilation_head_id ON descriptions USING btree (compilation_head_id);
+
+
+--
+-- Name: index_descriptions_on_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_compilation_release_id ON descriptions USING btree (compilation_release_id);
+
+
+--
+-- Name: index_descriptions_on_country_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_country_id ON descriptions USING btree (country_id);
+
+
+--
+-- Name: index_descriptions_on_piece_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_piece_head_id ON descriptions USING btree (piece_head_id);
+
+
+--
+-- Name: index_descriptions_on_piece_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_piece_release_id ON descriptions USING btree (piece_release_id);
+
+
+--
+-- Name: index_descriptions_on_season_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_season_id ON descriptions USING btree (season_id);
+
+
+--
+-- Name: index_descriptions_on_serial_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_serial_id ON descriptions USING btree (serial_id);
+
+
+--
+-- Name: index_descriptions_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_source_id ON descriptions USING btree (source_id);
+
+
+--
+-- Name: index_descriptions_on_station_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_station_id ON descriptions USING btree (station_id);
+
+
+--
+-- Name: index_descriptions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_descriptions_on_user_id ON descriptions USING btree (user_id);
 
 
 --
@@ -3796,6 +3938,14 @@ ALTER TABLE ONLY cr_companies
 
 
 --
+-- Name: fk_rails_58ab0d4634; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_58ab0d4634 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: fk_rails_5b62c0dff0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3849,6 +3999,14 @@ ALTER TABLE ONLY artists_tags
 
 ALTER TABLE ONLY compilation_releases_tags
     ADD CONSTRAINT fk_rails_6daae60d18 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_6df434c598; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_6df434c598 FOREIGN KEY (serial_id) REFERENCES serials(id);
 
 
 --
@@ -4004,6 +4162,14 @@ ALTER TABLE ONLY pr_credits
 
 
 --
+-- Name: fk_rails_97a4d11676; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_97a4d11676 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
 -- Name: fk_rails_9951108430; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4017,6 +4183,14 @@ ALTER TABLE ONLY ch_companies
 
 ALTER TABLE ONLY compilation_track_details
     ADD CONSTRAINT fk_rails_9a3108629b FOREIGN KEY (track_id) REFERENCES compilation_tracks(id);
+
+
+--
+-- Name: fk_rails_9d0928ab85; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_9d0928ab85 FOREIGN KEY (season_id) REFERENCES seasons(id);
 
 
 --
@@ -4052,6 +4226,14 @@ ALTER TABLE ONLY cr_companies
 
 
 --
+-- Name: fk_rails_ace92ec2ab; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_ace92ec2ab FOREIGN KEY (piece_release_id) REFERENCES piece_releases(id);
+
+
+--
 -- Name: fk_rails_b25e5ea472; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4068,11 +4250,27 @@ ALTER TABLE ONLY cr_credits
 
 
 --
+-- Name: fk_rails_b59f9b25b6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_b59f9b25b6 FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
 -- Name: fk_rails_b751628f21; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ch_labels
     ADD CONSTRAINT fk_rails_b751628f21 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_b91aa70e14; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_b91aa70e14 FOREIGN KEY (artist_id) REFERENCES artists(id);
 
 
 --
@@ -4140,6 +4338,14 @@ ALTER TABLE ONLY countries_piece_heads
 
 
 --
+-- Name: fk_rails_d02a5a1df1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_d02a5a1df1 FOREIGN KEY (artist_credit_id) REFERENCES artist_credits(id);
+
+
+--
 -- Name: fk_rails_d4da78d1c9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4196,11 +4402,27 @@ ALTER TABLE ONLY artists_tags
 
 
 --
+-- Name: fk_rails_e147a88bdb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_e147a88bdb FOREIGN KEY (station_id) REFERENCES stations(id);
+
+
+--
 -- Name: fk_rails_e562cf7d82; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cr_credits
     ADD CONSTRAINT fk_rails_e562cf7d82 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: fk_rails_e726ca8458; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_e726ca8458 FOREIGN KEY (country_id) REFERENCES countries(id);
 
 
 --
@@ -4217,6 +4439,22 @@ ALTER TABLE ONLY ph_credits
 
 ALTER TABLE ONLY pr_labels
     ADD CONSTRAINT fk_rails_ed786e6e71 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: fk_rails_f1597c62ab; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_f1597c62ab FOREIGN KEY (compilation_head_id) REFERENCES compilation_heads(id);
+
+
+--
+-- Name: fk_rails_f63bb9a79b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY descriptions
+    ADD CONSTRAINT fk_rails_f63bb9a79b FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
 
 
 --
@@ -4650,6 +4888,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170124190758'),
 ('20170124200135'),
 ('20170124202508'),
-('20170124210548');
+('20170124210548'),
+('20170125191914');
 
 
