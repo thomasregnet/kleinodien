@@ -10,6 +10,10 @@ require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe PieceRelease, type: :model do
+  specify '#descriptions' do
+    expect(subject).to respond_to(:descriptions)
+  end
+
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start

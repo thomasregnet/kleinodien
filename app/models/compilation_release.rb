@@ -14,6 +14,7 @@ class CompilationRelease < ActiveRecord::Base
   has_many :comments
   has_many :companies, class_name: CrCompany
   has_many :credits, class_name: CrCredit
+  has_many :descriptions
   has_many :formats,
            class_name: CrFormat,
            foreign_key: :compilation_release_id
