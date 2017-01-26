@@ -3,6 +3,7 @@ class CompilationHead < ActiveRecord::Base
   belongs_to :source
   has_and_belongs_to_many :tags
   has_many :comments
+  has_many :descriptions
   has_many :companies, class_name: ChCompany
   has_many :credits, class_name: ChCredit
   has_many :labels, class_name: ChLabel

@@ -10,6 +10,10 @@ require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe CompilationRelease, type: :model do
+  specify '#comments' do
+    expect(subject).to respond_to(:comments)
+  end
+
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
