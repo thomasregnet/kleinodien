@@ -10,5 +10,9 @@ FactoryGirl.define do
     factory :artist_with_disambiguation do
       sequence(:disambiguation) { |n| "artist disambiguation ##{n}" }
     end
+
+    factory :artist_with_identifier do
+      association :identifier, factory: :artist_identifier
+    end
   end
 end

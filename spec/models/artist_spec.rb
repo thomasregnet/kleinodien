@@ -58,7 +58,17 @@ RSpec.describe Artist, type: :model do
     end
   end
 
-  context 'with source' do
+  context 'with an identifier' do
+    before(:each) do
+      @artist = FactoryGirl.build(:artist_with_identifier)
+    end
+
+    it 'gets the identifier' do
+      expect(@artist.identifier).to be_instance_of ArtistIdentifier
+    end
+  end
+
+  context 'with a source' do
     before(:each) do
       @artist = FactoryGirl.build(:artist_brainz)
     end
