@@ -84,6 +84,38 @@ CREATE TABLE artist_credits_tags (
 
 
 --
+-- Name: artist_identifiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE artist_identifiers (
+    id integer NOT NULL,
+    source_id integer NOT NULL,
+    value text NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: artist_identifiers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE artist_identifiers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: artist_identifiers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE artist_identifiers_id_seq OWNED BY artist_identifiers.id;
+
+
+--
 -- Name: artists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1819,6 +1851,13 @@ ALTER TABLE ONLY artist_credits ALTER COLUMN id SET DEFAULT nextval('artist_cred
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY artist_identifiers ALTER COLUMN id SET DEFAULT nextval('artist_identifiers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY artists ALTER COLUMN id SET DEFAULT nextval('artists_id_seq'::regclass);
 
 
@@ -2158,6 +2197,14 @@ ALTER TABLE ONLY ar_internal_metadata
 
 ALTER TABLE ONLY artist_credits
     ADD CONSTRAINT artist_credits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: artist_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY artist_identifiers
+    ADD CONSTRAINT artist_identifiers_pkey PRIMARY KEY (id);
 
 
 --
@@ -2614,6 +2661,13 @@ CREATE INDEX index_artist_credits_tags_on_artist_credit_id ON artist_credits_tag
 --
 
 CREATE INDEX index_artist_credits_tags_on_tag_id ON artist_credits_tags USING btree (tag_id);
+
+
+--
+-- Name: index_artist_identifiers_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artist_identifiers_on_source_id ON artist_identifiers USING btree (source_id);
 
 
 --
@@ -4075,6 +4129,14 @@ ALTER TABLE ONLY seasons_tags
 
 
 --
+-- Name: fk_rails_75c715b1c3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_identifiers
+    ADD CONSTRAINT fk_rails_75c715b1c3 FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
 -- Name: fk_rails_7b69ed2838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4891,6 +4953,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170124202508'),
 ('20170124210548'),
 ('20170125191914'),
-('20170125203906');
+('20170125203906'),
+('20170201191359');
 
 
