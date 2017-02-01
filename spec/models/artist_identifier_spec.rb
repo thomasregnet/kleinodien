@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ArtistIdentifier, type: :model do
+  context 'simple' do
   before(:each) do
     @identifier = FactoryGirl.build(:artist_identifier)
   end
@@ -23,9 +24,19 @@ RSpec.describe ArtistIdentifier, type: :model do
     @identifier.value = ''
     expect(@identifier).not_to be_valid
   end
+  end
 
-  it 'can have one artist' do
-    @identifier.artist = FactoryGirl.create(:artist)
-    expect(@identifier).to be_valid
+  context 'with an artist' do
+    before(:all) do
+      @identifier = FactoryGirl.create(:artist)
+    end
+  
+    it 'has one artist' do
+      expect(@identifier).to be_valid
+    end
+
+    specify '#identified' do
+      expect(@identifier).to be_instance_of Artist
+    end
   end
 end
