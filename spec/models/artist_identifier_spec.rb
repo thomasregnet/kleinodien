@@ -22,5 +22,10 @@ RSpec.describe ArtistIdentifier, type: :model do
   it 'is not valid with a blank value' do
     @identifier.value = ''
     expect(@identifier).not_to be_valid
-  end  
+  end
+
+  it 'can have one artist' do
+    @identifier.artist = FactoryGirl.create(:artist)
+    expect(@identifier).to be_valid
+  end
 end
