@@ -126,7 +126,8 @@ CREATE TABLE artists (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     source_ident character varying,
-    source_id integer
+    source_id integer,
+    artist_identifier_id integer
 );
 
 
@@ -2671,6 +2672,13 @@ CREATE INDEX index_artist_identifiers_on_source_id ON artist_identifiers USING b
 
 
 --
+-- Name: index_artists_on_artist_identifier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_artists_on_artist_identifier_id ON artists USING btree (artist_identifier_id);
+
+
+--
 -- Name: index_artists_on_lower_disambiguation_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4249,6 +4257,14 @@ ALTER TABLE ONLY compilation_track_details
 
 
 --
+-- Name: fk_rails_9c0a03d24c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artists
+    ADD CONSTRAINT fk_rails_9c0a03d24c FOREIGN KEY (artist_identifier_id) REFERENCES artist_identifiers(id);
+
+
+--
 -- Name: fk_rails_9d0928ab85; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4954,6 +4970,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170124210548'),
 ('20170125191914'),
 ('20170125203906'),
-('20170201191359');
+('20170201191359'),
+('20170201195746');
 
 
