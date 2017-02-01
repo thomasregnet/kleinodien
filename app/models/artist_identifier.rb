@@ -3,4 +3,5 @@ class ArtistIdentifier < ApplicationRecord
   has_one :artist
   validates :source, presence: true
   validates :value, presence: true, blank: false
+  alias_attribute :identified, :artist
 end
