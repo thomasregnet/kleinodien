@@ -11,6 +11,7 @@ RSpec.describe Api::V01::ArtistsController, type: :request do
 
     expect(response).to be_success
 
+    #byebug
     expect(json['data'].length).to eq 2
   end
 
