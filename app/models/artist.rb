@@ -4,6 +4,9 @@ class Artist < ActiveRecord::Base
              class_name: ArtistIdentifier,
              foreign_key: :artist_identifier_id
   belongs_to :source
+  # note that the class_name has to be quoted
+  has_and_belongs_to_many :alt_identifiers,
+                          class_name: 'ArtistIdentifier'
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions
