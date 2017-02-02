@@ -43,4 +43,18 @@ RSpec.describe ArtistIdentifier, type: :model do
 
     after(:each) { DatabaseCleaner.clean }
   end
+
+  context 'with an alternative identified' do
+    before(:all) do
+      DatabaseCleaner.start
+      @identifier = FactoryGirl.create(:artist_identifier)
+    end
+
+    specify '#alt_identified' do
+      @identifier.alt_identified << FactoryGirl.create(:artist)
+      expect(@identifier.alt_identified.length).to eq 1
+    end
+
+    after(:all) { DatabaseCleaner.clean }
+  end
 end
