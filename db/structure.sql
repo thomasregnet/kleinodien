@@ -97,6 +97,16 @@ CREATE TABLE artist_identifiers (
 
 
 --
+-- Name: artist_identifiers_artists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE artist_identifiers_artists (
+    artist_identifier_id integer NOT NULL,
+    artist_id integer NOT NULL
+);
+
+
+--
 -- Name: artist_identifiers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2665,6 +2675,20 @@ CREATE INDEX index_artist_credits_tags_on_tag_id ON artist_credits_tags USING bt
 
 
 --
+-- Name: index_artist_identifiers_artists_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artist_identifiers_artists_on_artist_id ON artist_identifiers_artists USING btree (artist_id);
+
+
+--
+-- Name: index_artist_identifiers_artists_on_artist_identifier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artist_identifiers_artists_on_artist_identifier_id ON artist_identifiers_artists USING btree (artist_identifier_id);
+
+
+--
 -- Name: index_artist_identifiers_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3937,6 +3961,14 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: fk_rails_3fa8efa307; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_identifiers_artists
+    ADD CONSTRAINT fk_rails_3fa8efa307 FOREIGN KEY (artist_identifier_id) REFERENCES artist_identifiers(id);
+
+
+--
 -- Name: fk_rails_41d01a9df9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4358,6 +4390,14 @@ ALTER TABLE ONLY descriptions
 
 ALTER TABLE ONLY ph_companies
     ADD CONSTRAINT fk_rails_b93a075402 FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
+
+
+--
+-- Name: fk_rails_bbd6cbbc5f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_identifiers_artists
+    ADD CONSTRAINT fk_rails_bbd6cbbc5f FOREIGN KEY (artist_id) REFERENCES artists(id);
 
 
 --
@@ -4971,6 +5011,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170125191914'),
 ('20170125203906'),
 ('20170201191359'),
-('20170201195746');
+('20170201195746'),
+('20170202201511');
 
 
