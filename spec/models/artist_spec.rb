@@ -68,6 +68,20 @@ RSpec.describe Artist, type: :model do
     end
   end
 
+  context '#alt_identifiers' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist = FactoryGirl.create(:artist)
+    end
+
+    it 'takes an alternative identifier' do
+      @artist.alt_identifiers << FactoryGirl.create(:artist_identifier)
+      expect(@artist.alt_identifiers.length).to eq 1
+    end
+
+    after(:all) { DatabaseCleaner.clean }
+  end
+
   context 'with a source' do
     before(:each) do
       @artist = FactoryGirl.build(:artist_brainz)
