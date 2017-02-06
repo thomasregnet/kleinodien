@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: citext; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -5012,6 +5026,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170125203906'),
 ('20170201191359'),
 ('20170201195746'),
-('20170202201511');
+('20170202201511'),
+('20170206191751');
 
 
