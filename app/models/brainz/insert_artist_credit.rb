@@ -40,20 +40,44 @@ module Brainz
       )
     end
 
+    # def create_artist(brz_artist)
+    #   artist = Artist.find_by(
+    #     source:       Source::MusicBrainz,
+    #     source_ident: brz_artist.mbid
+    #   )
+
+    #   return artist if artist
+
+    #   # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
+    #   Artist.create!(
+    #     name:         brz_artist.name,
+    #     source:       Source::MusicBrainz,
+    #     source_ident: brz_artist.mbid
+    #   )
+    # end
     def create_artist(brz_artist)
-      artist = Artist.find_by(
-        source:       Source::MusicBrainz,
-        source_ident: brz_artist.mbid
+      identifier = ArtistIdentifier.find_by(
+        source: Source::Brainz,
+        value:  brz_artist.mbid
       )
 
-      return artist if artist
+      if identifier
+        artist = identifier.artist
+        return artist if artist
+      end
 
-      # TODO: add disambiguation. Maybe needs change in KleinodienBrainz
-      Artist.create!(
-        name:         brz_artist.name,
-        source:       Source::MusicBrainz,
-        source_ident: brz_artist.mbid
+      identifier = ArtistIdentifier.create!(
+        source: Source::MusicBrainz,
+        value:  brz_artist.mbid
       )
+
+      artist = identifier.create_artist!(
+        name: brz_artist.name
+      )
+      #byebug
+
+      artist
     end
+
   end
 end
