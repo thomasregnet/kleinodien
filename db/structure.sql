@@ -145,13 +145,13 @@ ALTER SEQUENCE artist_identifiers_id_seq OWNED BY artist_identifiers.id;
 
 CREATE TABLE artists (
     id integer NOT NULL,
-    name character varying NOT NULL,
-    disambiguation character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     source_ident character varying,
     source_id integer,
-    artist_identifier_id integer
+    artist_identifier_id integer,
+    name citext NOT NULL,
+    disambiguation citext
 );
 
 
@@ -2717,20 +2717,6 @@ CREATE UNIQUE INDEX index_artists_on_artist_identifier_id ON artists USING btree
 
 
 --
--- Name: index_artists_on_lower_disambiguation_and_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_artists_on_lower_disambiguation_and_name ON artists USING btree (lower((name)::text), lower((disambiguation)::text)) WHERE (source_ident IS NULL);
-
-
---
--- Name: index_artists_on_lower_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_artists_on_lower_name ON artists USING btree (lower((name)::text)) WHERE ((disambiguation IS NULL) AND (source_ident IS NULL));
-
-
---
 -- Name: index_artists_tags_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5027,6 +5013,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170201191359'),
 ('20170201195746'),
 ('20170202201511'),
-('20170206191751');
+('20170206191751'),
+('20170206193520');
 
 
