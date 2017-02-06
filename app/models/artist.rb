@@ -13,9 +13,15 @@ class Artist < ActiveRecord::Base
   has_many :participants, inverse_of: :artist
   has_many :ratings
   validates :name, presence: true
+  # validates :name,
+  #           uniqueness: {
+  #             scope:          [:disambiguation, :source],
+  #             case_sensitive: false
+  #           }
+
   validates :name,
             uniqueness: {
-              scope:          [:disambiguation, :source],
+              scope:          [:disambiguation, :identifier],
               case_sensitive: false
             }
 

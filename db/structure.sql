@@ -2633,6 +2633,20 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: artists_name_disambiguation_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX artists_name_disambiguation_idx ON artists USING btree (name, disambiguation) WHERE (artist_identifier_id IS NULL);
+
+
+--
+-- Name: artists_name_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX artists_name_idx ON artists USING btree (name) WHERE ((disambiguation IS NULL) AND (artist_identifier_id IS NULL));
+
+
+--
 -- Name: compilation_tracks_id_and_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5014,6 +5028,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170201195746'),
 ('20170202201511'),
 ('20170206191751'),
-('20170206193520');
+('20170206193520'),
+('20170206195311');
 
 
