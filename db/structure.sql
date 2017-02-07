@@ -153,7 +153,8 @@ CREATE TABLE artists (
     begin_date date,
     begin_date_mask smallint,
     end_date date,
-    end_date_mask smallint
+    end_date_mask smallint,
+    sort_name citext
 );
 
 
@@ -5025,6 +5026,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170206193520'),
 ('20170206195311'),
 ('20170207184138'),
-('20170207192224');
+('20170207192224'),
+('20170207200705');
 
 

@@ -10,6 +10,10 @@ RSpec.describe Artist, type: :model do
     expect(subject).to respond_to(:descriptions)
   end
 
+  specify '#sort_name' do
+    expect(subject).to respond_to :sort_name
+  end
+
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
@@ -45,7 +49,7 @@ RSpec.describe Artist, type: :model do
       let(:date_naming) { 'end_date' }
     end
   end
-  
+
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
