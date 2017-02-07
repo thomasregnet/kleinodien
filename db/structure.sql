@@ -149,7 +149,11 @@ CREATE TABLE artists (
     updated_at timestamp without time zone NOT NULL,
     artist_identifier_id integer,
     name citext NOT NULL,
-    disambiguation citext
+    disambiguation citext,
+    begin_date date,
+    begin_date_mask smallint,
+    end_date date,
+    end_date_mask smallint
 );
 
 
@@ -5020,6 +5024,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170206191751'),
 ('20170206193520'),
 ('20170206195311'),
-('20170207184138');
+('20170207184138'),
+('20170207192224');
 
 

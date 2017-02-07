@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe Artist, type: :model do
@@ -31,6 +32,20 @@ RSpec.describe Artist, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
+  context 'with a begin date' do
+    it_behaves_like 'a model with an IncompleteDate' do
+      let(:factory)     { :artist }
+      let(:date_naming) { 'begin_date' }
+    end
+  end
+
+  context 'with an end date' do
+    it_behaves_like 'a model with an IncompleteDate' do
+      let(:factory)     { :artist }
+      let(:date_naming) { 'end_date' }
+    end
+  end
+  
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
