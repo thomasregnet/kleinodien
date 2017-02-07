@@ -528,9 +528,9 @@ CREATE TABLE compilation_releases (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     date date,
-    date_mask integer,
     source_ident character varying,
-    source_id integer
+    source_id integer,
+    date_mask smallint
 );
 
 
@@ -1311,9 +1311,9 @@ CREATE TABLE piece_releases (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     date date,
-    date_mask integer,
     source_ident character varying,
-    source_id integer
+    source_id integer,
+    date_mask smallint
 );
 
 
@@ -5027,6 +5027,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170206195311'),
 ('20170207184138'),
 ('20170207192224'),
-('20170207200705');
+('20170207200705'),
+('20170207203824');
 
 
