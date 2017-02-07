@@ -5,13 +5,12 @@ include ApiHelper
 
 RSpec.describe Api::V01::ArtistsController, type: :request do
   it 'sends a list of artists' do
-    FactoryGirl.create_list(:artist, 2)
+    a = FactoryGirl.create_list(:artist, 2)
 
     api_get '/api/v01/artists'
 
     expect(response).to be_success
 
-    #byebug
     expect(json['data'].length).to eq 2
   end
 

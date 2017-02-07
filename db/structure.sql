@@ -147,8 +147,6 @@ CREATE TABLE artists (
     id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    source_ident character varying,
-    source_id integer,
     artist_identifier_id integer,
     name citext NOT NULL,
     disambiguation citext
@@ -3687,14 +3685,6 @@ ALTER TABLE ONLY artist_credits
 
 
 --
--- Name: fk_artists_source_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY artists
-    ADD CONSTRAINT fk_artists_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
-
-
---
 -- Name: fk_compilation_heads_source_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5029,6 +5019,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170202201511'),
 ('20170206191751'),
 ('20170206193520'),
-('20170206195311');
+('20170206195311'),
+('20170207184138');
 
 
