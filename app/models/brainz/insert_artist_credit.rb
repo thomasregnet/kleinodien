@@ -17,10 +17,7 @@ module Brainz
     private
 
     def create_artist_credit
-      @artist_credit = ArtistCredit.new(
-        #data_supplier: DataSupplier.find_or_create_by!(name: 'MusicBrainz')
-        source: Source::MusicBrainz
-      )
+      @artist_credit = ArtistCredit.new(source: Source::MusicBrainz)
 
       @brz_artist_credit.name_credits.each_with_index do |brz_name_credit, pos|
         participant(brz_name_credit, pos)
@@ -43,7 +40,6 @@ module Brainz
     def create_artist(brz_artist)
       source = Source.find_by(name: 'MusicBrainz')
       identifier = ArtistIdentifier.find_by(
-        #source: Source::Brainz,
         source: source,
         value:  brz_artist.mbid
       )
