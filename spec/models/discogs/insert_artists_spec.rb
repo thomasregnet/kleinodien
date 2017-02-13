@@ -22,15 +22,15 @@ RSpec.describe Discogs::InsertArtists, type: :model do
     specify 'first artist' do
       artist = @artist_credit.participants[0].artist
       expect(artist.name).to         eq 'Jello Biafra'
-      expect(artist.identifier.source.name).to  eq 'Discogs'
-      expect(artist.identifier.value).to eq '37752'
+      expect(artist.identifiers.first.source.name).to  eq 'Discogs'
+      expect(artist.identifiers.first.value).to eq '37752'
     end
 
     specify 'first artist' do
       artist = @artist_credit.participants[1].artist
       expect(artist.name).to         eq 'Nomeansno'
-      expect(artist.identifier.source.name).to  eq 'Discogs'
-      expect(artist.identifier.value).to eq '133641'
+      expect(artist.identifiers.first.source.name).to  eq 'Discogs'
+      expect(artist.identifiers.first.value).to eq '133641'
     end
 
     after(:all) do
