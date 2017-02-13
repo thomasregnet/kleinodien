@@ -1,8 +1,6 @@
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
-  belongs_to :identifier,
-             class_name: ArtistIdentifier,
-             foreign_key: :artist_identifier_id
+  has_many :identifiers, class_name: ArtistIdentifier
   belongs_to :source
 
   composed_of :begin_date,
@@ -22,11 +20,7 @@ class Artist < ActiveRecord::Base
   has_many :ratings
 
   validates :name, presence: true
-  validates :name,
-            uniqueness: {
-              scope:          [:disambiguation, :identifier],
-              case_sensitive: false
-            }
+  validates :name, uniqueness: { scope: :disambiguation, case_sensitive: false }
 
   delegate :name, to: :source, prefix: :source
 end
