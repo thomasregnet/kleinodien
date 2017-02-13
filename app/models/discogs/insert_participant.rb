@@ -64,7 +64,7 @@ module Discogs
 
       return identifier.artist if identifier
 
-      artist = Artist.create(
+      artist = Artist.create!(
         name: @dc_artist.name
       )
 
