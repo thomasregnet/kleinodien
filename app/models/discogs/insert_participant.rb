@@ -30,24 +30,46 @@ module Discogs
     # end
 
     def find_artist
+      source = Source.find_by(name: 'Discogs')
       ident = ArtistIdentifier.find_by(
-        source: Source::Discogs,
+        #source: Source::Discogs,
+        source: source,
         value:  @dc_artist.id
       ) || return
-      Artist.find_by(identifier: ident.id)
+      #Artist.find_by(identifier: ident.id)
+      ident.artist
     end
 
+    # def create_artist
+    #   source = Source.find_by(name: 'Discogs')
+    #   identifier = ArtistIdentifier.create!(
+    #     #source: Source::Discogs,
+    #     source: source,
+    #     value:  @dc_artist.id
+    #   )
+      
+    #   identifier.create_artist(name: @dc_artist.name)
+    #   # Artist.create!(
+    #   #   name:         @dc_artist.name,
+    #   #   source:       Source::Discogs,
+    #   #   source_ident: @dc_artist.id
+    #   # )
+    # end
     def create_artist
-      identifier = ArtistIdentifier.create!(
-        source: Source::Discogs,
+      source = Source.find_by(name: 'Discogs')
+      identifier = ArtistIdentifier.find_by(
+        source: source,
         value:  @dc_artist.id
       )
-      identifier.create_artist(name: @dc_artist.name)
-      # Artist.create!(
-      #   name:         @dc_artist.name,
-      #   source:       Source::Discogs,
-      #   source_ident: @dc_artist.id
-      # )
+
+      return identifier.artist if identifier
+
+      artist = Artist.create(
+        name: @dc_artist.name
+      )
+
+      artist.identifiers.create!(source: source, value: @dc_artist.id)
+      artist
     end
 
     def join_phrase
