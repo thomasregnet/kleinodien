@@ -102,21 +102,12 @@ CREATE TABLE artist_credits_tags (
 --
 
 CREATE TABLE artist_identifiers (
-    id integer NOT NULL,
-    source_id integer NOT NULL,
+    id bigint NOT NULL,
     value text NOT NULL,
+    artist_id integer NOT NULL,
+    source_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: artist_identifiers_artists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE artist_identifiers_artists (
-    artist_identifier_id integer NOT NULL,
-    artist_id integer NOT NULL
 );
 
 
@@ -147,7 +138,6 @@ CREATE TABLE artists (
     id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    artist_identifier_id integer,
     name citext NOT NULL,
     disambiguation citext,
     begin_date date,
@@ -2636,20 +2626,6 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: artists_name_disambiguation_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX artists_name_disambiguation_idx ON artists USING btree (name, disambiguation) WHERE (artist_identifier_id IS NULL);
-
-
---
--- Name: artists_name_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX artists_name_idx ON artists USING btree (name) WHERE ((disambiguation IS NULL) AND (artist_identifier_id IS NULL));
-
-
---
 -- Name: compilation_tracks_id_and_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2703,34 +2679,6 @@ CREATE INDEX index_artist_credits_tags_on_artist_credit_id ON artist_credits_tag
 --
 
 CREATE INDEX index_artist_credits_tags_on_tag_id ON artist_credits_tags USING btree (tag_id);
-
-
---
--- Name: index_artist_identifiers_artists_on_artist_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_artist_identifiers_artists_on_artist_id ON artist_identifiers_artists USING btree (artist_id);
-
-
---
--- Name: index_artist_identifiers_artists_on_artist_identifier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_artist_identifiers_artists_on_artist_identifier_id ON artist_identifiers_artists USING btree (artist_identifier_id);
-
-
---
--- Name: index_artist_identifiers_on_source_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_artist_identifiers_on_source_id ON artist_identifiers USING btree (source_id);
-
-
---
--- Name: index_artists_on_artist_identifier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_artists_on_artist_identifier_id ON artists USING btree (artist_identifier_id);
 
 
 --
@@ -3658,6 +3606,22 @@ CREATE UNIQUE INDEX repository_format_details_repository_id_position_idx ON repo
 
 
 --
+-- Name: artist_identifiers_artist_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_identifiers
+    ADD CONSTRAINT artist_identifiers_artist_id_fkey FOREIGN KEY (artist_id) REFERENCES artists(id);
+
+
+--
+-- Name: artist_identifiers_source_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY artist_identifiers
+    ADD CONSTRAINT artist_identifiers_source_id_fkey FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
 -- Name: cr_format_details_cr_format_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3970,14 +3934,6 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: fk_rails_3fa8efa307; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY artist_identifiers_artists
-    ADD CONSTRAINT fk_rails_3fa8efa307 FOREIGN KEY (artist_identifier_id) REFERENCES artist_identifiers(id);
-
-
---
 -- Name: fk_rails_41d01a9df9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4178,14 +4134,6 @@ ALTER TABLE ONLY seasons_tags
 
 
 --
--- Name: fk_rails_75c715b1c3; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY artist_identifiers
-    ADD CONSTRAINT fk_rails_75c715b1c3 FOREIGN KEY (source_id) REFERENCES sources(id);
-
-
---
 -- Name: fk_rails_7b69ed2838; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4298,14 +4246,6 @@ ALTER TABLE ONLY compilation_track_details
 
 
 --
--- Name: fk_rails_9c0a03d24c; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY artists
-    ADD CONSTRAINT fk_rails_9c0a03d24c FOREIGN KEY (artist_identifier_id) REFERENCES artist_identifiers(id);
-
-
---
 -- Name: fk_rails_9d0928ab85; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4399,14 +4339,6 @@ ALTER TABLE ONLY descriptions
 
 ALTER TABLE ONLY ph_companies
     ADD CONSTRAINT fk_rails_b93a075402 FOREIGN KEY (piece_head_id) REFERENCES piece_heads(id);
-
-
---
--- Name: fk_rails_bbd6cbbc5f; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY artist_identifiers_artists
-    ADD CONSTRAINT fk_rails_bbd6cbbc5f FOREIGN KEY (artist_id) REFERENCES artists(id);
 
 
 --
@@ -5028,6 +4960,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170207184138'),
 ('20170207192224'),
 ('20170207200705'),
-('20170207203824');
+('20170207203824'),
+('20170213190118');
 
 
