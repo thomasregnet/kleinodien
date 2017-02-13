@@ -9,8 +9,6 @@ class Artist < ActiveRecord::Base
   composed_of :end_date,
               class_name: 'IncompleteDate',
               mapping: [%w(end_date date), %w(end_date_mask mask)]
-  
-  # note that the class_name has to be quoted
   has_and_belongs_to_many :alt_identifiers,
                           class_name: 'ArtistIdentifier'
   has_and_belongs_to_many :tags
