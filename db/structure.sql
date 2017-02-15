@@ -2626,6 +2626,20 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: artist_identifiers_artist_id_source_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX artist_identifiers_artist_id_source_id_idx ON artist_identifiers USING btree (artist_id, source_id);
+
+
+--
+-- Name: artist_identifiers_source_id_value_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX artist_identifiers_source_id_value_idx ON artist_identifiers USING btree (source_id, value);
+
+
+--
 -- Name: compilation_tracks_id_and_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4961,6 +4975,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170207192224'),
 ('20170207200705'),
 ('20170207203824'),
-('20170213190118');
+('20170213190118'),
+('20170215193102');
 
 
