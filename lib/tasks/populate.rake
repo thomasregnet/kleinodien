@@ -30,8 +30,15 @@ namespace :db do
     end
 
     Rake::FileList.new('fixtures/discogs/releases/*.json').each do |file|
+
       m = /\/(\d+)\.json$/.match(file.to_s)
-      DiscogsTestHelper.import_release(m[1].to_i)
+      discogs_id = m[1].to_i
+      # Some releases must be omited because they collide with the imports
+      # from MusicBrainz
+      # TODO: stop omitting discogs releases
+      next if discogs_id == 612384 # Judgment Night
+      next if discogs_id == 940468 # Highway To Hell
+      DiscogsTestHelper.import_release(discogs_id)
     end
     # imdb-movie
     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
