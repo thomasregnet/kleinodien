@@ -1720,7 +1720,7 @@ CREATE TABLE sources (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     id integer NOT NULL,
-    name text NOT NULL
+    name citext NOT NULL
 );
 
 
@@ -3620,6 +3620,13 @@ CREATE UNIQUE INDEX repository_format_details_repository_id_position_idx ON repo
 
 
 --
+-- Name: sources_name_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX sources_name_idx ON sources USING btree (name);
+
+
+--
 -- Name: artist_identifiers_artist_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4976,6 +4983,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170207200705'),
 ('20170207203824'),
 ('20170213190118'),
-('20170215193102');
+('20170215193102'),
+('20170306103000');
 
 
