@@ -12,18 +12,15 @@ require 'multi_json'
 
 class SourceSeed < ActiveRecord::Base
   self.table_name  = 'sources'
-  self.primary_key = 'name'
+  # self.primary_key = 'name'
 end
-
-SourceSeed.create!(
-  name:        'MusicBrainz',
-  description: 'An open music encyclopedia that collects music metadata'
-)
 
 SourceSeed.create!(
   name:        'Discogs',
   description: 'Discover new music'
 )
+
+SourceSeed.create!(name: 'IMDb')
 
 SourceSeed.create!(
   name:        'Omdb',
@@ -31,8 +28,18 @@ SourceSeed.create!(
 )
 
 SourceSeed.create!(
+  name:        'MusicBrainz',
+  description: 'An open music encyclopedia that collects music metadata'
+)
+
+SourceSeed.create!(
   name:        'User',
   description: 'User contributed data'
+)
+
+SourceSeed.create!(
+  name:        'Wikidata',
+  description: 'Free and open knowledge base'
 )
 
 @formats = MultiJson.load(
