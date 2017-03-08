@@ -1,5 +1,6 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
+  has_many :identifiers, class_name: ChIdentifier
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions
