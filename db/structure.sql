@@ -246,6 +246,39 @@ ALTER SEQUENCE ch_credits_id_seq OWNED BY ch_credits.id;
 
 
 --
+-- Name: ch_identifiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ch_identifiers (
+    id bigint NOT NULL,
+    value text NOT NULL,
+    compilation_head_id integer NOT NULL,
+    source_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: ch_identifiers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ch_identifiers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ch_identifiers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ch_identifiers_id_seq OWNED BY ch_identifiers.id;
+
+
+--
 -- Name: ch_labels; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -427,9 +460,7 @@ CREATE TABLE compilation_heads (
     disambiguation character varying,
     type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    source_ident character varying,
-    source_id integer
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1897,6 +1928,13 @@ ALTER TABLE ONLY ch_credits ALTER COLUMN id SET DEFAULT nextval('ch_credits_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY ch_identifiers ALTER COLUMN id SET DEFAULT nextval('ch_identifiers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY ch_labels ALTER COLUMN id SET DEFAULT nextval('ch_labels_id_seq'::regclass);
 
 
@@ -2247,6 +2285,14 @@ ALTER TABLE ONLY ch_companies
 
 ALTER TABLE ONLY ch_credits
     ADD CONSTRAINT ch_credits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ch_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ch_identifiers
+    ADD CONSTRAINT ch_identifiers_pkey PRIMARY KEY (id);
 
 
 --
@@ -2896,20 +2942,6 @@ CREATE INDEX index_compilation_heads_countries_on_country_id ON compilation_head
 --
 
 CREATE INDEX index_compilation_heads_on_artist_credit_id ON compilation_heads USING btree (artist_credit_id);
-
-
---
--- Name: index_compilation_heads_on_lower_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_heads_on_lower_title ON compilation_heads USING btree (type, lower((title)::text)) WHERE ((disambiguation IS NULL) AND (source_ident IS NULL));
-
-
---
--- Name: index_compilation_heads_on_lower_title_disambiguation; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_heads_on_lower_title_disambiguation ON compilation_heads USING btree (type, lower((title)::text), lower((disambiguation)::text)) WHERE (source_ident IS NULL);
 
 
 --
@@ -3643,6 +3675,22 @@ ALTER TABLE ONLY artist_identifiers
 
 
 --
+-- Name: ch_identifiers_compilation_head_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ch_identifiers
+    ADD CONSTRAINT ch_identifiers_compilation_head_id_fkey FOREIGN KEY (compilation_head_id) REFERENCES compilation_heads(id);
+
+
+--
+-- Name: ch_identifiers_source_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ch_identifiers
+    ADD CONSTRAINT ch_identifiers_source_id_fkey FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
 -- Name: cr_format_details_cr_format_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3672,14 +3720,6 @@ ALTER TABLE ONLY ct_format_details
 
 ALTER TABLE ONLY artist_credits
     ADD CONSTRAINT fk_artist_credits_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
-
-
---
--- Name: fk_compilation_heads_source_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY compilation_heads
-    ADD CONSTRAINT fk_compilation_heads_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
 
 
 --
@@ -4984,6 +5024,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170207203824'),
 ('20170213190118'),
 ('20170215193102'),
-('20170306103000');
+('20170306103000'),
+('20170308191455');
 
 
