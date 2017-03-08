@@ -1,6 +1,5 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
-  belongs_to :source
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions
@@ -11,12 +10,10 @@ class CompilationHead < ActiveRecord::Base
   has_and_belongs_to_many :countries
 
   validates :type, presence: true
-  validates :source_ident,
-            uniqueness: { allow_blank: true, scope: [:source_id, :type] }
   validates :title,
             presence: true,
             uniqueness: {
-              scope:          [:type, :disambiguation, :source],
+              scope:          [:type, :disambiguation],
               case_sensitive: false
             }
 end
