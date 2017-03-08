@@ -1,0 +1,2 @@
+class ChIdentifier < ApplicationRecord
+end
