@@ -52,18 +52,18 @@ module Discogs
     end
 
     def find_album_head
-      AlbumHead.find_by(
-        source:       Source::Discogs,
-        source_ident: @dc_release.master_id
-      )
+      # AlbumHead.find_by(
+      #   source:       Source::Discogs,
+      #   source_ident: @dc_release.master_id
+      # )
     end
 
     def create_album_head
       @artist_credit.compilations.create!(
         title:        @dc_release.title,
         type:         AlbumHead.to_s,
-        source:       Source::Discogs,
-        source_ident: @dc_release.master_id
+        #source:       Source::Discogs,
+        #source_ident: @dc_release.master_id
       )
     end
 
