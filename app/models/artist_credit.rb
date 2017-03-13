@@ -17,10 +17,7 @@ class ArtistCredit < ActiveRecord::Base
             blank:    false,
             uniqueness: { case_sensitive: false, scope: :source }
 
-  #validates :participants, presence: true
-
-  #before_save { write_attribute(:name, forced_name) }
-  before_save { name = forced_name }
+  before_save { self.name = forced_name }
   before_validation { self.name = forced_name }
 
   def forced_name
@@ -35,19 +32,4 @@ class ArtistCredit < ActiveRecord::Base
       participants
     )
   end
-  # def name
-  #   if !participants || participants.empty?
-  #     byebug
-  #     return self.name
-  #   end
-  #   name_by_participants
-  # end
-
-  # def name_by_participants
-  #   return unless participants
-  #   return if participants.empty?
-  #   KleinodienUtil::JoinNames.perform(
-  #     participants
-  #   )
-  # end
 end
