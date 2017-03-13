@@ -55,6 +55,7 @@ RSpec.describe ArtistCredit, type: :model do
 
       it 'is not valid without a participant' do
         @artist_credit.participants = []
+        @artist_credit.name = nil
         expect(@artist_credit).not_to be_valid
       end
     end
@@ -69,7 +70,7 @@ RSpec.describe ArtistCredit, type: :model do
       end
 
       it 'must have a unique name' do
-        clone = ArtistCredit.new(participants: @artist_credit.participants)
+        clone = ArtistCredit.new(name: @artist_credit.name)
         expect(clone).not_to be_valid
       end
     end
@@ -86,7 +87,10 @@ RSpec.describe ArtistCredit, type: :model do
     end
 
     it 'must have an unique name' do
-      clone = ArtistCredit.new(name: @artist_credit.name)
+      clone = ArtistCredit.new(
+        name:   @artist_credit.name,
+        source: @artist_credit.source
+      )
       expect(clone).not_to be_valid
     end
 
