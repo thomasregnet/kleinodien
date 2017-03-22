@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       jsonapi_resources :artist_credits
       jsonapi_resources :artist_identifiers      
       jsonapi_resources :artists
+      jsonapi_resources :ch_identifiers
       jsonapi_resources :compilation_heads
       jsonapi_resources :episode_heads
       jsonapi_resources :movie_heads
