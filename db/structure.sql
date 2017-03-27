@@ -178,6 +178,40 @@ CREATE TABLE artists_tags (
 
 
 --
+-- Name: brainz_releases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE brainz_releases (
+    id bigint NOT NULL,
+    mbid uuid NOT NULL,
+    url text NOT NULL,
+    data xml NOT NULL,
+    compilation_release_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: brainz_releases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE brainz_releases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: brainz_releases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE brainz_releases_id_seq OWNED BY brainz_releases.id;
+
+
+--
 -- Name: ch_companies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1914,6 +1948,13 @@ ALTER TABLE ONLY artists ALTER COLUMN id SET DEFAULT nextval('artists_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY brainz_releases ALTER COLUMN id SET DEFAULT nextval('brainz_releases_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY ch_companies ALTER COLUMN id SET DEFAULT nextval('ch_companies_id_seq'::regclass);
 
 
@@ -2269,6 +2310,22 @@ ALTER TABLE ONLY artist_identifiers
 
 ALTER TABLE ONLY artists
     ADD CONSTRAINT artists_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: brainz_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY brainz_releases
+    ADD CONSTRAINT brainz_releases_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: brainz_releases_url_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY brainz_releases
+    ADD CONSTRAINT brainz_releases_url_key UNIQUE (url);
 
 
 --
@@ -3675,6 +3732,14 @@ ALTER TABLE ONLY artist_identifiers
 
 
 --
+-- Name: brainz_releases_compilation_release_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY brainz_releases
+    ADD CONSTRAINT brainz_releases_compilation_release_id_fkey FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
 -- Name: ch_identifiers_compilation_head_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5025,6 +5090,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170213190118'),
 ('20170215193102'),
 ('20170306103000'),
-('20170308191455');
+('20170308191455'),
+('20170327180351');
 
 
