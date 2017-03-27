@@ -1,2 +1,7 @@
-class Api::V01::MovieHeadResource < Api::V01::PieceHeadResource
+module Api
+  module V01
+    class MovieHeadResource < PieceHeadResource
+      model_name 'MovieHead'
+    end
+  end
 end
