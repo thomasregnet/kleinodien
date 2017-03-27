@@ -1,0 +1,2 @@
+class BrainzRelease < ApplicationRecord
+end
