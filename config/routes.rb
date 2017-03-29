@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :import do
+      get 'brainz_releases/create'
+    end
+  end
+
   # get 'original_exemplar/new'
 
   # get 'original_exemplar/create'
