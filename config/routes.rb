@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :import do
-      get 'brainz_releases/create'
-    end
-  end
-
   # get 'original_exemplar/new'
 
   # get 'original_exemplar/create'
@@ -52,6 +46,9 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   namespace :api do
+    namespace :import do
+      resources :brainz_releases, only: [:create]
+    end
     namespace :v01 do
       jsonapi_resources :album_heads
       jsonapi_resources :artist_credits
