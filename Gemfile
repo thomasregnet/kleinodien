@@ -12,7 +12,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'faker',  '~> 1.5'
 gem 'devise', '~> 4.0'
+gem 'hashie', '~> 3.5'
 gem 'jsonapi-resources'
+gem 'multi_xml', '~> 0.6'
 
 gem 'kleinodien_brainz',
     '0.0.8',
