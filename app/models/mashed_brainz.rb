@@ -1,0 +1,2 @@
+module MashedBrainz
+end
