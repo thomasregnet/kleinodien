@@ -11,7 +11,7 @@ module Import
     end
 
     def perform
-
+      data
     end
   end
 end
