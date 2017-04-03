@@ -7,7 +7,7 @@ module Import
     end
 
     def initialize(data)
-      @data = data
+      @data = MashedBrainz::Release.new(MultiXml.parse(data))
     end
 
     def perform

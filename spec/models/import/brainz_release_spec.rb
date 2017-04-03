@@ -9,8 +9,8 @@ RSpec.describe Import::BrainzRelease, type: :model do
     )
   end
 
-  it 'returns xml' do
+  it 'returns a hash' do
     expect(Import::BrainzRelease.perform(@xml))
-      .to match(/^<\?xml/)
+      .to be_instance_of MashedBrainz::Release
   end
 end
