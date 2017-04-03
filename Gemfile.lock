@@ -165,6 +165,7 @@ GEM
     gherkin (4.1.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    hashie (3.5.5)
     i18n (0.8.1)
     ice_nine (0.11.2)
     jbuilder (2.6.3)
@@ -193,6 +194,7 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multi_test (0.1.2)
+    multi_xml (0.6.0)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -360,6 +362,7 @@ DEPENDENCIES
   devise (~> 4.0)
   factory_girl_rails (~> 4.5)
   faker (~> 1.5)
+  hashie (~> 3.5)
   jbuilder (~> 2.0)
   jquery-rails
   jsonapi-resources
@@ -369,6 +372,7 @@ DEPENDENCIES
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
   kleinodien_util (= 0.0.1)!
+  multi_xml (~> 0.6)
   pg
   pry-rails
   rails (= 5.0.2)
