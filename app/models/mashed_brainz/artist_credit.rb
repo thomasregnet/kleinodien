@@ -1,8 +1,10 @@
 module MashedBrainz
   class ArtistCredit < Base
-    #include Hashie::Extensions::Coercion
-    #include Hashie::Extensions::MergeInitializer
-    #coerce_key :name_credit, MashedBrainz::NameCredit
+    def name
+      KleinodienUtil::JoinNames.perform(
+        name_credit,
+        join_phrase: 'stripped_joinphrase')
+    end
   end
 end
     
