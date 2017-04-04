@@ -10,4 +10,11 @@ module BrainzTestHelper
     file_name += '.xml'
     File.open(file_name).read
   end
+
+  def self.get_mashed_brainz(type, mbid)
+    xml = get_xml(type, mbid)
+    multi_xml = MultiXml.parse(xml)
+    klass = "MashedBrainz::#{type.to_s.camelize}".constantize
+    klass.new(multi_xml['metadata']['release'])
+  end
 end

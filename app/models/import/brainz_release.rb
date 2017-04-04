@@ -25,8 +25,9 @@ module Import
     end
 
     def artist_credit_name
+      # FIXME: evil hack here
       # TODO: join compound ArtistCredit names
-      data.artist_credit.name_credit.artist.name
+      data.artist_credit.name_credit[0].artist.name
     end
 
     def artist
