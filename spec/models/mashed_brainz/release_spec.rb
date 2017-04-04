@@ -12,6 +12,7 @@ RSpec.describe MashedBrainz::Release, type: :model do
    end
 
    specify '#artist_credit' do
+     #byebug
      expect(@release.artist_credit)
        .to be_instance_of MashedBrainz::ArtistCredit
    end
