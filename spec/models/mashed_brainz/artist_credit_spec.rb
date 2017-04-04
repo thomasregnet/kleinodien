@@ -11,9 +11,13 @@ RSpec.describe MashedBrainz::ArtistCredit, type: :model do
       @artist_credit = @release.artist_credit
     end
 
-    specify '#artist_credit' do
+    specify '#name_credit' do
       expect(@artist_credit.name_credit)
         .to be_instance_of Hashie::Array
+    end
+
+    specify '#name' do
+      expect(@artist_credit.name).to eq 'Cannibal Corpse'
     end
   end
 
@@ -26,9 +30,13 @@ RSpec.describe MashedBrainz::ArtistCredit, type: :model do
       @artist_credit = @release.artist_credit
     end
 
-    specify '#artist_credit' do
+    specify '#name_credit' do
       expect(@artist_credit.name_credit)
         .to be_kind_of Hashie::Array
+    end
+
+    specify '#name' do
+      expect(@artist_credit.name).to eq 'Jello Biafra With NoMeansNo'
     end
   end
 end
