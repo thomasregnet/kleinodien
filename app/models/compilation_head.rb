@@ -1,5 +1,7 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
+  include BrainzConstructors
+
   has_many :identifiers, class_name: ChIdentifier
   has_and_belongs_to_many :tags
   has_many :comments
@@ -17,4 +19,13 @@ class CompilationHead < ActiveRecord::Base
               scope:          [:type, :disambiguation],
               case_sensitive: false
             }
+
+  def self.brainz_parameters(args)
+    brainz = args[:brainz]
+    Hash[
+      artist_credit:  args[:artist_credit],
+      title:          brainz.title,
+      disambiguation: brainz.disambiguation
+    ]
+  end
 end

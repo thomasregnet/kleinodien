@@ -10,9 +10,12 @@ RSpec.describe Import::BrainzRelease, type: :model do
     )
   end
 
-  it 'returns an ArtistCredit' do
-    artist_credit = Import::BrainzRelease.perform(@xml)
-    expect(artist_credit).to be_instance_of ArtistCredit
+  it 'returns an AlbumHead' do
+    album_head = Import::BrainzRelease.perform(@xml)
+    expect(album_head).to be_instance_of AlbumHead
+    expect(album_head.type).to eq 'AlbumHead'
+    expect(album_head).not_to be_new_record
+    expect(album_head.title).to eq 'Butchered at Birth'
   end
 
   after(:each) do

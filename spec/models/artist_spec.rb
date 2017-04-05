@@ -64,7 +64,6 @@ RSpec.describe Artist, type: :model do
   end
 
   it_behaves_like 'a model with BrainzConstructors' do
-    #artist = FactoryGirl.build(:artist)
     let(:klass) { Artist }
   end
 

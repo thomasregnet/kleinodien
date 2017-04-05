@@ -23,7 +23,7 @@ class Artist < ActiveRecord::Base
 
   delegate :name, to: :source, prefix: :source
 
-  def self.brainz_paramters(brainz_artist)
+  def self.brainz_parameters(brainz_artist)
     Hash[
       name:           brainz_artist.name,
       sort_name:      brainz_artist.sort_name,

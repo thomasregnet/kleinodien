@@ -14,6 +14,15 @@ module Import
 
     def perform
       artist_credit
+      album_head(artist_credit)
+    end
+
+    def album_head(artist_credit)
+      # TODO: check if AlbumHead already exists
+      AlbumHead.brainz_create!(
+        artist_credit:  artist_credit,
+        brainz:         data.release_group
+      )
     end
 
     def artist_credit
@@ -35,8 +44,7 @@ module Import
     end
 
     def import_artist(brainz_artist)
-      artist = Artist.brainz_create!(brainz_artist) #.save!
-
+      artist = Artist.brainz_create!(brainz_artist)
       import_artist_identifier(artist, brainz_artist.id)
       artist
     end

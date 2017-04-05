@@ -8,6 +8,7 @@ require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
+require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe PieceHead, type: :model do
   specify '#descriptions' do
@@ -23,6 +24,10 @@ RSpec.describe PieceHead, type: :model do
     let(:commentable) { @piece_head }
 
     after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a model with BrainzConstructors' do
+    let(:klass) { AlbumHead }
   end
 
   before(:each) do

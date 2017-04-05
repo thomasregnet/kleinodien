@@ -7,15 +7,15 @@ module BrainzConstructors
   # Class methods to be mixed in
   module ClassMethods
     def brainz(brainz_artist)
-      new(brainz_paramters(brainz_artist))
+      new(brainz_parameters(brainz_artist))
     end
 
     def brainz_create(brainz_artist)
-      create(brainz_paramters(brainz_artist))
+      create(brainz_parameters(brainz_artist))
     end
 
     def brainz_create!(brainz_artist)
-      create!(brainz_paramters(brainz_artist))
+      create!(brainz_parameters(brainz_artist))
     end
   end
 end
