@@ -35,12 +35,7 @@ module Import
     end
 
     def import_artist(brainz_artist)
-      # TODO: check if the artist already exists
-      artist = Artist.create!(
-        name:           brainz_artist.name,
-        sort_name:      brainz_artist.sort_name,
-        disambiguation: brainz_artist.disambiguation
-      )
+      artist = Artist.brainz_create!(brainz_artist) #.save!
 
       import_artist_identifier(artist, brainz_artist.id)
       artist
