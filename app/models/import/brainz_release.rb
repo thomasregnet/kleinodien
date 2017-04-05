@@ -17,7 +17,6 @@ module Import
     end
 
     def artist_credit
-      # TODO: import the artists for ArtistCredit
       ac_name = artist_credit_name
       ac = ArtistCredit.find_by(name: ac_name)
       return ac if ac
@@ -35,12 +34,23 @@ module Import
       name_credits.map { |credit| import_artist(credit.artist) }
     end
 
-    def import_artist(artist)
+    def import_artist(brainz_artist)
       # TODO: check if the artist already exists
-      Artist.create!(
-        name:           artist.name,
-        sort_name:      artist.sort_name,
-        disambiguation: artist.disambiguation
+      artist = Artist.create!(
+        name:           brainz_artist.name,
+        sort_name:      brainz_artist.sort_name,
+        disambiguation: brainz_artist.disambiguation
+      )
+
+      import_artist_identifier(artist, brainz_artist.id)
+      artist
+    end
+
+    def import_artist_identifier(artist, value)
+      ArtistIdentifier.create!(
+        artist: artist,
+        source: Source::MusicBrainz,
+        value:  value
       )
     end
 
