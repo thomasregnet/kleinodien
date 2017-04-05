@@ -1,6 +1,6 @@
 RSpec.shared_examples 'a model with BrainzConstructors' do
   specify '#brainz_parameters' do
-    expect(klass).to respond_to(:brainz_paramters)
+    expect(klass).to respond_to(:brainz_parameters)
   end
 
   specify '#brainz' do
