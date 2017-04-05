@@ -1,5 +1,7 @@
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
+  include BrainzConstructors
+
   has_many :identifiers, class_name: ArtistIdentifier
   belongs_to :source
 
@@ -20,18 +22,6 @@ class Artist < ActiveRecord::Base
   validates :name, uniqueness: { scope: :disambiguation, case_sensitive: false }
 
   delegate :name, to: :source, prefix: :source
-
-  def self.brainz(brainz_artist)
-    new(brainz_paramters(brainz_artist))
-  end
-
-  def self.brainz_create(brainz_artist)
-    create(brainz_paramters(brainz_artist))
-  end
-
-  def self.brainz_create!(brainz_artist)
-    create!(brainz_paramters(brainz_artist))
-  end
 
   def self.brainz_paramters(brainz_artist)
     Hash[
