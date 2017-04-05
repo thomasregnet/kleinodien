@@ -4,6 +4,7 @@ require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_tagable_models'
+require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe Artist, type: :model do
   # TODO: spec Artist has_many: identifiers
@@ -60,6 +61,11 @@ RSpec.describe Artist, type: :model do
     let(:tagable) { @tagable }
 
     after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a model with BrainzConstructors' do
+    #artist = FactoryGirl.build(:artist)
+    let(:klass) { Artist }
   end
 
   context 'usual artist' do
