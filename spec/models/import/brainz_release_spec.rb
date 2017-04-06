@@ -16,6 +16,8 @@ RSpec.describe Import::BrainzRelease, type: :model do
     expect(album_head.type).to eq 'AlbumHead'
     expect(album_head).not_to be_new_record
     expect(album_head.title).to eq 'Butchered at Birth'
+    expect(album_head.identifiers.first.value)
+      .to eq '846e5976-9b9b-3e4f-a96b-f15c2585b725'
   end
 
   after(:each) do

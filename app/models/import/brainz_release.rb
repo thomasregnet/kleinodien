@@ -13,15 +13,26 @@ module Import
     end
 
     def perform
-      artist_credit
-      album_head(artist_credit)
+      ac = artist_credit
+      ah = album_head(ac)
+      album_head_identifiers(ah)
+      ah
     end
 
-    def album_head(artist_credit)
+    def album_head(ac)
       # TODO: check if AlbumHead already exists
-      AlbumHead.brainz_create!(
-        artist_credit:  artist_credit,
+      ah = AlbumHead.brainz_create!(
+        artist_credit:  ac,
         brainz:         data.release_group
+      )
+      ah
+    end
+
+    def album_head_identifiers(album_head)
+      ChIdentifier.create!(
+        compilation_head: album_head,
+        source:           Source::MusicBrainz,
+        value:            data.release_group.id
       )
     end
 
