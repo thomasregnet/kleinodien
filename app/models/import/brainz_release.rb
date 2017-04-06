@@ -13,22 +13,21 @@ module Import
     end
 
     def perform
-      ac = artist_credit
-      ah = album_head(ac)
-      album_head_identifiers(ah)
-      ah
+      artist_credit = import_artist_credit
+      album_head = import_album_head(artist_credit)
+      import_album_head_identifiers(album_head)
+      album_head
     end
 
-    def album_head(ac)
+    def import_album_head(ac)
       # TODO: check if AlbumHead already exists
-      ah = AlbumHead.brainz_create!(
+      AlbumHead.brainz_create!(
         artist_credit:  ac,
         brainz:         data.release_group
       )
-      ah
     end
 
-    def album_head_identifiers(album_head)
+    def import_album_head_identifiers(album_head)
       ChIdentifier.create!(
         compilation_head: album_head,
         source:           Source::MusicBrainz,
@@ -36,18 +35,17 @@ module Import
       )
     end
 
-    def artist_credit
-      ac_name = artist_credit_name
-      ac = ArtistCredit.find_by(name: ac_name)
-      return ac if ac
-      ac = ArtistCredit.create!(name: ac_name)
+    def import_artist_credit
+      artist_credit = ArtistCredit.find_or_create_by!(
+        name: data.artist_credit.name
+      )
       artists = import_artists(data.artist_credit.name_credits)
-      participants(ac, artists, data.artist_credit.name_credits)
-      ac
-    end
-
-    def artist_credit_name
-      data.artist_credit.name
+      import_participants(
+        artist_credit,
+        artists,
+        data.artist_credit.name_credits
+      )
+      artist_credit
     end
 
     def import_artists(name_credits)
@@ -68,7 +66,7 @@ module Import
       )
     end
 
-    def participants(artist_credit, artists, name_credits)
+    def import_participants(artist_credit, artists, name_credits)
       artists.each_with_index do |artist, no|
         join_phrase = name_credits[no].stripped_joinphrase
         Participant.create!(
