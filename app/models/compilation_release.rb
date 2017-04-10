@@ -7,7 +7,6 @@ class CompilationRelease < ActiveRecord::Base
   belongs_to :head,
              class_name: CompilationHead,
              foreign_key: :compilation_head_id
-  belongs_to :source
 
   has_and_belongs_to_many :tags
 
@@ -27,8 +26,6 @@ class CompilationRelease < ActiveRecord::Base
   has_and_belongs_to_many :countries
 
   validates :head, presence: true
-  validates :source_ident,
-            uniqueness: { allow_blank: true, scope: [:source_id, :type] }
   validates :type, presence: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
