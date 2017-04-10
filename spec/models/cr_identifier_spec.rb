@@ -1,0 +1,14 @@
+require 'rails_helper'
+require 'shared_examples_for_identifiers'
+
+RSpec.describe CrIdentifier, type: :model do
+  it_behaves_like 'an identifier' do
+    let(:identifier) { FactoryGirl.build(:cr_identifier) }
+  end
+
+  it 'is not valid without a CompilationHead' do
+    identifier = FactoryGirl.build(:cr_identifier)
+    identifier.compilation_release = nil
+    expect(identifier).not_to be_valid
+  end
+end
