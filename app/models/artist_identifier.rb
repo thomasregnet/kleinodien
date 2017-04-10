@@ -5,5 +5,4 @@ class ArtistIdentifier < ApplicationRecord
   validates :source, presence: true
   validates :value, presence: true, blank: false
   alias_attribute :identified, :artist
-  alias_attribute :alt_identified, :artists
 end
