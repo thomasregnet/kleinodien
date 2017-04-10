@@ -38,7 +38,3 @@ Then(/^I will see the credit "(.*?)" \- "(.*?)"$/) do |artist_credit, job|
   expect(page).to have_content("#{artist_credit} - #{job}")
 end
 
-Then(/^I will see the source "(.*?)" identifier "(.*?)"$/) do |supplier, id|
-  expect(page).to have_content(supplier)
-  expect(page).to have_content(id)
-end
