@@ -583,8 +583,6 @@ CREATE TABLE compilation_releases (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     date date,
-    source_ident character varying,
-    source_id integer,
     date_mask smallint
 );
 
@@ -904,6 +902,39 @@ CREATE SEQUENCE cr_formats_id_seq
 --
 
 ALTER SEQUENCE cr_formats_id_seq OWNED BY cr_formats.id;
+
+
+--
+-- Name: cr_identifiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cr_identifiers (
+    id bigint NOT NULL,
+    value text NOT NULL,
+    compilation_release_id integer NOT NULL,
+    source_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cr_identifiers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cr_identifiers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cr_identifiers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cr_identifiers_id_seq OWNED BY cr_identifiers.id;
 
 
 --
@@ -2088,6 +2119,13 @@ ALTER TABLE ONLY cr_formats ALTER COLUMN id SET DEFAULT nextval('cr_formats_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cr_identifiers ALTER COLUMN id SET DEFAULT nextval('cr_identifiers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cr_labels ALTER COLUMN id SET DEFAULT nextval('cr_labels_id_seq'::regclass);
 
 
@@ -2478,6 +2516,14 @@ ALTER TABLE ONLY cr_format_details
 
 ALTER TABLE ONLY cr_formats
     ADD CONSTRAINT cr_formats_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cr_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cr_identifiers
+    ADD CONSTRAINT cr_identifiers_pkey PRIMARY KEY (id);
 
 
 --
@@ -3048,13 +3094,6 @@ CREATE UNIQUE INDEX index_compilation_releases_on_compilation_head_id ON compila
 --
 
 CREATE UNIQUE INDEX index_compilation_releases_on_compilation_head_id_lower_version ON compilation_releases USING btree (compilation_head_id, lower((version)::text));
-
-
---
--- Name: index_compilation_releases_on_lower_version; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_releases_on_lower_version ON compilation_releases USING btree (type, compilation_head_id, lower((version)::text)) WHERE (source_ident IS NULL);
 
 
 --
@@ -3772,6 +3811,22 @@ ALTER TABLE ONLY cr_formats
 
 
 --
+-- Name: cr_identifiers_compilation_release_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cr_identifiers
+    ADD CONSTRAINT cr_identifiers_compilation_release_id_fkey FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: cr_identifiers_source_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cr_identifiers
+    ADD CONSTRAINT cr_identifiers_source_id_fkey FOREIGN KEY (source_id) REFERENCES sources(id);
+
+
+--
 -- Name: ct_format_details_compilation_track_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3785,14 +3840,6 @@ ALTER TABLE ONLY ct_format_details
 
 ALTER TABLE ONLY artist_credits
     ADD CONSTRAINT fk_artist_credits_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
-
-
---
--- Name: fk_compilation_releases_source_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY compilation_releases
-    ADD CONSTRAINT fk_compilation_releases_source_id FOREIGN KEY (source_id) REFERENCES sources(id);
 
 
 --
@@ -4809,7 +4856,7 @@ ALTER TABLE ONLY seasons
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES
+INSERT INTO "schema_migrations" (version) VALUES
 ('20150209182752'),
 ('20150210191122'),
 ('20150210194156'),
@@ -5091,6 +5138,7 @@ INSERT INTO schema_migrations (version) VALUES
 ('20170215193102'),
 ('20170306103000'),
 ('20170308191455'),
-('20170327180351');
+('20170327180351'),
+('20170410182110');
 
 
