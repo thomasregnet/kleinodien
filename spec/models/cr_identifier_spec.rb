@@ -6,7 +6,7 @@ RSpec.describe CrIdentifier, type: :model do
     let(:identifier) { FactoryGirl.build(:cr_identifier) }
   end
 
-  it 'is not valid without a CompilationHead' do
+  it 'is not valid without a CompilationRelease' do
     identifier = FactoryGirl.build(:cr_identifier)
     identifier.compilation_release = nil
     expect(identifier).not_to be_valid
