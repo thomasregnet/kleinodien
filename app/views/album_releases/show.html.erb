@@ -25,11 +25,14 @@
 <ul>
   <%= render "credits", credits: @album_release.credits %>
 </ul>
-<% if  @album_release.source %>
-  <h2>source</h2>
-  <%= @album_release.source.name %>: <%= @album_release.source_ident %>
+
+<% if false %>
+  <% if  @album_release.source %>
+    <h2>source</h2>
+    <%= @album_release.source.name %>: <%= @album_release.source_ident %>
+  <% end %>
 <% end %>
-  
+
 <p><%= link_to('add to collection',
                new_compilation_copy_path(
                    compilation_release_id: @album_release.id)) -%>

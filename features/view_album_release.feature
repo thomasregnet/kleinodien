@@ -11,7 +11,6 @@ Feature: View album release
     Then I will see the contents of the album release
     And I will see the credit "Cliff Williams" - "Bass"
     And I will see the credit "Kevin Dallimore" - "Engineer [Assistant]"
-    And I will see the source "Discogs" identifier "940468"
 
   Scenario: View a complex album: Cannibal Corpse - Dead Human Collection
     Given The album release with discogs id "4462260" exists

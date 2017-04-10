@@ -29,17 +29,17 @@ module Discogs
     private
 
     def already_exists?
-      AlbumRelease.find_by(
-        source:       Source::Discogs,
-        source_ident: @dc_release.id
-      )
+      #AlbumRelease.find_by(
+        #source:       Source::Discogs,
+        #source_ident: @dc_release.id
+      #)
     end
 
     def album_release
       @album_release = @album_head.releases.create!(
         date:         IncompleteDate.from_string(@dc_release.released),
-        source:       Source::Discogs,
-        source_ident: @dc_release.id
+        # source:       Source::Discogs,
+        # source_ident: @dc_release.id
       )
     end
 
