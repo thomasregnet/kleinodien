@@ -538,40 +538,6 @@ CREATE TABLE compilation_heads_tags (
 
 
 --
--- Name: compilation_identifiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE compilation_identifiers (
-    id integer NOT NULL,
-    compilation_release_id integer NOT NULL,
-    identifier_type_id integer NOT NULL,
-    code character varying NOT NULL,
-    disambiguation character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: compilation_identifiers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE compilation_identifiers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: compilation_identifiers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE compilation_identifiers_id_seq OWNED BY compilation_identifiers.id;
-
-
---
 -- Name: compilation_releases; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1106,38 +1072,6 @@ ALTER SEQUENCE formats_id_seq OWNED BY formats.id;
 
 
 --
--- Name: identifier_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE identifier_types (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    note character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: identifier_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE identifier_types_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: identifier_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE identifier_types_id_seq OWNED BY identifier_types.id;
-
-
---
 -- Name: jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1565,6 +1499,71 @@ CREATE SEQUENCE pr_labels_id_seq
 --
 
 ALTER SEQUENCE pr_labels_id_seq OWNED BY pr_labels.id;
+
+
+--
+-- Name: product_number_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE product_number_types (
+    id bigint NOT NULL,
+    name citext NOT NULL,
+    note text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: product_number_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE product_number_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: product_number_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE product_number_types_id_seq OWNED BY product_number_types.id;
+
+
+--
+-- Name: product_numbers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE product_numbers (
+    id bigint NOT NULL,
+    code text NOT NULL,
+    compilation_release_id integer NOT NULL,
+    product_number_type_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: product_numbers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE product_numbers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: product_numbers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE product_numbers_id_seq OWNED BY product_numbers.id;
 
 
 --
@@ -2049,13 +2048,6 @@ ALTER TABLE ONLY compilation_heads ALTER COLUMN id SET DEFAULT nextval('compilat
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY compilation_identifiers ALTER COLUMN id SET DEFAULT nextval('compilation_identifiers_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY compilation_releases ALTER COLUMN id SET DEFAULT nextval('compilation_releases_id_seq'::regclass);
 
 
@@ -2161,13 +2153,6 @@ ALTER TABLE ONLY formats ALTER COLUMN id SET DEFAULT nextval('formats_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY identifier_types ALTER COLUMN id SET DEFAULT nextval('identifier_types_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY jobs ALTER COLUMN id SET DEFAULT nextval('jobs_id_seq'::regclass);
 
 
@@ -2246,6 +2231,20 @@ ALTER TABLE ONLY pr_credits ALTER COLUMN id SET DEFAULT nextval('pr_credits_id_s
 --
 
 ALTER TABLE ONLY pr_labels ALTER COLUMN id SET DEFAULT nextval('pr_labels_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_number_types ALTER COLUMN id SET DEFAULT nextval('product_number_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_numbers ALTER COLUMN id SET DEFAULT nextval('product_numbers_id_seq'::regclass);
 
 
 --
@@ -2439,14 +2438,6 @@ ALTER TABLE ONLY compilation_heads
 
 
 --
--- Name: compilation_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY compilation_identifiers
-    ADD CONSTRAINT compilation_identifiers_pkey PRIMARY KEY (id);
-
-
---
 -- Name: compilation_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2583,14 +2574,6 @@ ALTER TABLE ONLY formats
 
 
 --
--- Name: identifier_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY identifier_types
-    ADD CONSTRAINT identifier_types_pkey PRIMARY KEY (id);
-
-
---
 -- Name: jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2684,6 +2667,30 @@ ALTER TABLE ONLY pr_credits
 
 ALTER TABLE ONLY pr_labels
     ADD CONSTRAINT pr_labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_number_types_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY product_number_types
+    ADD CONSTRAINT product_number_types_name_key UNIQUE (name);
+
+
+--
+-- Name: product_number_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY product_number_types
+    ADD CONSTRAINT product_number_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_numbers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY product_numbers
+    ADD CONSTRAINT product_numbers_pkey PRIMARY KEY (id);
 
 
 --
@@ -3062,20 +3069,6 @@ CREATE INDEX index_compilation_heads_tags_on_tag_id ON compilation_heads_tags US
 
 
 --
--- Name: index_compilation_identifiers_on_code; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_identifiers_on_code ON compilation_identifiers USING btree (compilation_release_id, identifier_type_id, code) WHERE (disambiguation IS NULL);
-
-
---
--- Name: index_compilation_identifiers_on_code_disambiguation; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_identifiers_on_code_disambiguation ON compilation_identifiers USING btree (compilation_release_id, identifier_type_id, code, lower((disambiguation)::text));
-
-
---
 -- Name: index_compilation_releases_countries_no_and_ids; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3318,13 +3311,6 @@ CREATE INDEX index_descriptions_on_station_id ON descriptions USING btree (stati
 --
 
 CREATE INDEX index_descriptions_on_user_id ON descriptions USING btree (user_id);
-
-
---
--- Name: index_identifier_types_on_lower_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_identifier_types_on_lower_name ON identifier_types USING btree (lower((name)::text));
 
 
 --
@@ -3741,6 +3727,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: product_numbers_code_compilation_release_id_product_number__idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX product_numbers_code_compilation_release_id_product_number__idx ON product_numbers USING btree (code, compilation_release_id, product_number_type_id);
+
+
+--
 -- Name: repository_format_details_repository_id_position_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4056,14 +4049,6 @@ ALTER TABLE ONLY pr_credits
 
 ALTER TABLE ONLY ph_companies
     ADD CONSTRAINT fk_rails_2ff06832e6 FOREIGN KEY (company_role_id) REFERENCES company_roles(id);
-
-
---
--- Name: fk_rails_2ff57459b2; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY compilation_identifiers
-    ADD CONSTRAINT fk_rails_2ff57459b2 FOREIGN KEY (identifier_type_id) REFERENCES identifier_types(id);
 
 
 --
@@ -4611,14 +4596,6 @@ ALTER TABLE ONLY ch_companies
 
 
 --
--- Name: fk_rails_d9764bf4b0; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY compilation_identifiers
-    ADD CONSTRAINT fk_rails_d9764bf4b0 FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
-
-
---
 -- Name: fk_rails_da212ea42e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4816,6 +4793,22 @@ ALTER TABLE ONLY piece_releases
 
 ALTER TABLE ONLY piece_releases
     ADD CONSTRAINT pieces_fk_stations FOREIGN KEY (station_id) REFERENCES stations(id);
+
+
+--
+-- Name: product_numbers_compilation_release_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_numbers
+    ADD CONSTRAINT product_numbers_compilation_release_id_fkey FOREIGN KEY (compilation_release_id) REFERENCES compilation_releases(id);
+
+
+--
+-- Name: product_numbers_product_number_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY product_numbers
+    ADD CONSTRAINT product_numbers_product_number_type_id_fkey FOREIGN KEY (product_number_type_id) REFERENCES product_numbers(id);
 
 
 --
@@ -5139,6 +5132,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170306103000'),
 ('20170308191455'),
 ('20170327180351'),
-('20170410182110');
+('20170410182110'),
+('20170411180427');
 
 
