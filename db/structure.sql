@@ -1540,6 +1540,7 @@ ALTER SEQUENCE product_number_types_id_seq OWNED BY product_number_types.id;
 CREATE TABLE product_numbers (
     id bigint NOT NULL,
     code text NOT NULL,
+    disambiguation text,
     compilation_release_id integer NOT NULL,
     product_number_type_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -3730,7 +3731,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 -- Name: product_numbers_code_compilation_release_id_product_number__idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX product_numbers_code_compilation_release_id_product_number__idx ON product_numbers USING btree (code, compilation_release_id, product_number_type_id);
+CREATE UNIQUE INDEX product_numbers_code_compilation_release_id_product_number__idx ON product_numbers USING btree (code, compilation_release_id, product_number_type_id) WHERE (disambiguation IS NULL);
+
+
+--
+-- Name: product_numbers_code_disambiguation_compilation_release_id__idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX product_numbers_code_disambiguation_compilation_release_id__idx ON product_numbers USING btree (code, disambiguation, compilation_release_id, product_number_type_id) WHERE (disambiguation IS NOT NULL);
 
 
 --

@@ -1,4 +1,4 @@
-class PorductNumbers < ActiveRecord::Migration[5.0]
+class ProductNumbers < ActiveRecord::Migration[5.0]
   def change
     execute <<-DDL
       DROP TABLE compilation_identifiers CASCADE;
@@ -16,6 +16,7 @@ class PorductNumbers < ActiveRecord::Migration[5.0]
       CREATE TABLE product_numbers (
         id                     bigserial PRIMARY KEY,
         code                   text      NOT NULL,
+        disambiguation         text,
         compilation_release_id integer   NOT NULL,
         product_number_type_id bigint    NOT NULL,
 
@@ -30,7 +31,12 @@ class PorductNumbers < ActiveRecord::Migration[5.0]
       );
 
       CREATE UNIQUE INDEX ON product_numbers
-        (code, compilation_release_id, product_number_type_id);
+        (code, compilation_release_id, product_number_type_id)
+        WHERE disambiguation IS NULL;
+
+      CREATE UNIQUE INDEX ON product_numbers
+        (code, disambiguation, compilation_release_id, product_number_type_id)
+        WHERE disambiguation IS NOT NULL;
     DDL
   end
 end
