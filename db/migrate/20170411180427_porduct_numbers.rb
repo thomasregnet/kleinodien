@@ -26,7 +26,7 @@ class PorductNumbers < ActiveRecord::Migration[5.0]
           REFERENCES compilation_releases(id),
 
         FOREIGN KEY (product_number_type_id)
-          REFERENCES product_numbers(id)
+          REFERENCES product_number_types(id)
       );
 
       CREATE UNIQUE INDEX ON product_numbers

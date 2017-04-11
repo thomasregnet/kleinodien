@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :compilation_identifier do
+  factory :product_number do
     association :release, factory: :compilation_release
-    association :type, factory: :identifier_type
+    association :type, factory: :product_number_type
     sequence(:code) { |n| "code ##{n}" }
   end
 end

@@ -4808,7 +4808,7 @@ ALTER TABLE ONLY product_numbers
 --
 
 ALTER TABLE ONLY product_numbers
-    ADD CONSTRAINT product_numbers_product_number_type_id_fkey FOREIGN KEY (product_number_type_id) REFERENCES product_numbers(id);
+    ADD CONSTRAINT product_numbers_product_number_type_id_fkey FOREIGN KEY (product_number_type_id) REFERENCES product_number_types(id);
 
 
 --

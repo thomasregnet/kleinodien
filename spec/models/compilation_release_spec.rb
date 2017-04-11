@@ -114,18 +114,18 @@ RSpec.describe CompilationRelease, type: :model do
     end
   end
 
-  context 'with identifiers' do
+  context 'with product_numbers' do
     before(:each) do
-      @ci        = FactoryGirl.create(:compilation_identifier)
-      @c_release = @ci.release
+      @product_number = FactoryGirl.create(:product_number)
+      @c_release      = @product_number.release
     end
 
     it 'is valid with valid attributes' do
       expect(@c_release).to be_valid
     end
 
-    it 'has many identifiers' do
-      expect(@c_release.identifiers.count).to eq(1)
+    it 'has many product_numbers' do
+      expect(@c_release.product_numbers.count).to eq(1)
     end
   end
 
