@@ -14,11 +14,12 @@ module Discogs
       return unless @dc_identifiers
 
       @dc_identifiers.each do |dc_identifier|
-        type = IdentifierType.find_or_create_by!(name: dc_identifier.type)
-        @album_release.identifiers.create!(
+        # type = IdentifierType.find_or_create_by!(name: dc_identifier.type)
+        type = ProductNumberType.find_or_create_by!(name: dc_identifier.type)
+        @album_release.product_numbers.find_or_create_by!(
           code:           dc_identifier.value,
           type:           type,
-          disambiguation: dc_identifier.description
+          # disambiguation: dc_identifier.description
         )
       end
     end

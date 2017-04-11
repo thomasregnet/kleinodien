@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'discogs_test_helper'
 require 'shared_examples_for_album_releases_imported_from_discogs'
 
-RSpec.describe 'Cannibal Corpse - Dead Human Collectio from Discogs' do
+RSpec.describe 'Cannibal Corpse - Dead Human Collection from Discogs' do
   before(:all) do
     DatabaseCleaner.start
     @album_release = DiscogsTestHelper.insert_release(4_462_260)

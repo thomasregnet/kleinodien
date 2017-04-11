@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe IdentifierType, type: :model do
+RSpec.describe ProductNumberType, type: :model do
   before(:each) do
-    @id_type = FactoryGirl.build(:identifier_type)
+    @id_type = FactoryGirl.build(:product_number_type)
   end
 
   it 'is valid with valid attributes' do
@@ -16,7 +16,7 @@ RSpec.describe IdentifierType, type: :model do
 
   it 'must have a unique name' do
     @id_type.save!
-    other_id_type = IdentifierType.new(name: @id_type.name)
+    other_id_type = ProductNumberType.new(name: @id_type.name)
     expect(other_id_type).not_to be_valid
     expect { other_id_type.save! validate: false }
       .to raise_error(/duplicate\skey/)
@@ -24,7 +24,7 @@ RSpec.describe IdentifierType, type: :model do
 
   it 'must have a case insensitive unique name' do
     @id_type.save!
-    other_id_type = IdentifierType.new(name: @id_type.name.upcase)
+    other_id_type = ProductNumberType.new(name: @id_type.name.upcase)
     expect(other_id_type).not_to be_valid
     expect { other_id_type.save! validate: false }
       .to raise_error(/duplicate\skey/)
