@@ -1,4 +1,4 @@
-class RailsReleases < ActiveRecord::Migration[5.0]
+class BrainzReleases < ActiveRecord::Migration[5.0]
   def change
     reversible do |brainz|
       brainz.up do
