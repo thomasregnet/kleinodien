@@ -25,7 +25,6 @@ namespace :db do
     Rake::FileList.new('fixtures/music_brainz/release/*.xml').each do |file|
       xml = File.open(file)
       brz_release = KleinodienBrainz::Model::Release.xml(xml)
-      #byebug
       Brainz::InsertRelease.perform(brz_release)
     end
 
@@ -36,8 +35,10 @@ namespace :db do
       # Some releases must be omited because they collide with the imports
       # from MusicBrainz
       # TODO: stop omitting discogs releases
-      next if discogs_id == 612384 # Judgment Night
-      next if discogs_id == 940468 # Highway To Hell
+      next if discogs_id == 612384  # Judgment Night
+      next if discogs_id == 940468  # Highway To Hell
+      next if discogs_id == 1083888 # The Sky Is Falling and I Want My Mommy
+      next if discogs_id == 4462260 # Dead Human Collection
       DiscogsTestHelper.import_release(discogs_id)
     end
     # imdb-movie
