@@ -19,7 +19,7 @@ module Discogs
         @album_release.product_numbers.find_or_create_by!(
           code:           dc_identifier.value,
           type:           type,
-          # disambiguation: dc_identifier.description
+          disambiguation: dc_identifier.description
         )
       end
     end
