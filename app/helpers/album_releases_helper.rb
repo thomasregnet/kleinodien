@@ -14,19 +14,20 @@ module AlbumReleasesHelper
     format.details.map { |detail| detail.name }.join(', ')
   end
 
-  def identifier_disambiguation_for(identifier)
-    if identifier.disambiguation
-      identifier_with_disambiguation(identifier)
-    else
-      identifier_without_disambiguation(identifier)
-    end
-  end
+  # TODO: delete the following later
+  # def identifier_disambiguation_for(identifier)
+  #   if identifier.disambiguation
+  #     identifier_with_disambiguation(identifier)
+  #   else
+  #     identifier_without_disambiguation(identifier)
+  #   end
+  # end
 
-  def identifier_with_disambiguation(identifier)
-    "#{identifier.type.name} (#{identifier.disambiguation}) #{identifier.code}"
-  end
+  # def identifier_with_disambiguation(identifier)
+  #   "#{identifier.type.name} (#{identifier.disambiguation}) #{identifier.code}"
+  # end
 
-  def identifier_without_disambiguation(identifier)
-    "#{identifier.type.name} #{identifier.code}"
-  end
+  # def identifier_without_disambiguation(identifier)
+  #   "#{identifier.type.name} #{identifier.code}"
+  # end
 end
