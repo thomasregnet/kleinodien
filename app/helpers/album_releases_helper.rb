@@ -1,3 +1,4 @@
+# Helpers for AlbumRelease views
 module AlbumReleasesHelper
   def label_and_catalog_no_for(label)
     return label.company.name unless label.catalog_no
@@ -11,7 +12,7 @@ module AlbumReleasesHelper
 
   def format_details_for(format)
     return unless format.details
-    format.details.map { |detail| detail.name }.join(', ')
+    format.details.map(&:name).join(', ')
   end
 
   def product_number_disambiguation_for(product_number)
@@ -22,8 +23,8 @@ module AlbumReleasesHelper
     end
   end
 
-  def product_number_with_disambiguation(product_number)
-    "#{product_number.type.name} (#{product_number.disambiguation}) #{product_number.code}"
+  def product_number_with_disambiguation(p_num)
+    "#{p_num.type.name} (#{p_num.disambiguation}) #{p_num.code}"
   end
 
   def product_number_without_disambiguation(product_number)

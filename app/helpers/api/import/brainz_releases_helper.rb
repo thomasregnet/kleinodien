@@ -1,2 +1,6 @@
-module Api::Import::BrainzReleasesHelper
+module Api
+  module Import
+    module BrainzReleasesHelper
+    end
+  end
 end
