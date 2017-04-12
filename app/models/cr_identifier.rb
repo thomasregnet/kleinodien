@@ -1,3 +1,4 @@
+# Foreign identifiers of CompilationRelease
 class CrIdentifier < ApplicationRecord
   belongs_to :compilation_release
   belongs_to :source

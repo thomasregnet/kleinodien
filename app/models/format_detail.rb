@@ -1,5 +1,5 @@
+# More precise information for formats
 class FormatDetail < ApplicationRecord
-  #self.primary_key = :abbr
   validates :abbr, presence: true
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 end

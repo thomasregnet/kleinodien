@@ -10,7 +10,7 @@ class ProductNumber < ActiveRecord::Base
   validates :code,
             presence: true,
             blank: false,
-            uniqueness: { scope: [:release, :type, :disambiguation] }
+            uniqueness: { scope: %i(release type disambiguation) }
 
   validates :release, presence: true
   validates :type, presence: true

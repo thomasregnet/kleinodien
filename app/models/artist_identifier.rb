@@ -1,3 +1,4 @@
+# Foreign identifier of Artist
 class ArtistIdentifier < ApplicationRecord
   belongs_to :source
   belongs_to :artist

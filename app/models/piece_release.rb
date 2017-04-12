@@ -21,5 +21,5 @@ class PieceRelease < ActiveRecord::Base
   delegate :title, to: :head
 
   validates :source_ident,
-            uniqueness: { allow_blank: true, scope: [:source_id, :type] }
+            uniqueness: { allow_blank: true, scope: %i(source_id type) }
 end
