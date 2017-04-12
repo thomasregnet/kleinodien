@@ -1,29 +1,27 @@
 module MashedBrainz
+  # Base class for representations of MusicBrainz entities
   class Base < Hashie::Mash
     disable_warnings
 
     include Hashie::Extensions::Coercion
     include Hashie::Extensions::MergeInitializer
 
-    #coerce_key :artist_credit, MashedBrainz::ArtistCredit
-    coerce_key :artist, ->(value) do
+    coerce_key :artist, lambda { |value|
       MashedBrainz::Artist.new(value)
-    end
+    }
 
-    coerce_key :artist_credit, ->(value) do
-      #byebug
+    coerce_key :artist_credit, lambda { |value|
       MashedBrainz::ArtistCredit.new(value)
-    end
+    }
 
-    #coerce_key :name_credit, MashedBrainz::NameCredit
-    coerce_key :name_credit, ->(value) do
-      if value.kind_of? Array
+    coerce_key :name_credit, lambda { |value|
+      if value.is_a? Array
         value.map do |nc|
           MashedBrainz::NameCredit.new(nc)
         end
       else
         [MashedBrainz::NameCredit.new(value)]
       end
-    end
+    }
   end
 end
