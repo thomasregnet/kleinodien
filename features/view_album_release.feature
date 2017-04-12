@@ -20,7 +20,6 @@ Feature: View album release
     Then I will see the identifier "Barcode" "39841518009"
     Then I will see the format "All Media"
     Then I will see the format "3 x CD"
-    # TODO: let the following two lines work again
-    # Then I will see the identifier "Mastering SID Code (CD 1)" "IFPI L553"
-    # Then I will see the identifier "Mould SID Code (CD 4)" "IFPI 94K7"
+    Then I will see the identifier "Mastering SID Code (CD 1)" "IFPI L553"
+    Then I will see the identifier "Mould SID Code (CD 4)" "IFPI 94K7"
     Then I will see the contents of the album release
