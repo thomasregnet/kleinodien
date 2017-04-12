@@ -16,7 +16,7 @@ class CompilationHead < ActiveRecord::Base
   validates :title,
             presence: true,
             uniqueness: {
-              scope:          [:type, :disambiguation],
+              scope:          %i(type disambiguation),
               case_sensitive: false
             }
 

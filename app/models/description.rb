@@ -1,8 +1,9 @@
+# Describe things
 class Description < ApplicationRecord
-  POSSIBLE_CONTENTS = [
-       :artist_credit, :artist, :compilation_head, :compilation_release,
-       :country, :piece_head, :piece_release, :season, :serial, :station
-  ]
+  POSSIBLE_CONTENTS = %i(
+    artist_credit artist compilation_head compilation_release
+    country piece_head piece_release season serial station
+  ).freeze
 
   belongs_to :user
   belongs_to :source
@@ -27,8 +28,11 @@ class Description < ApplicationRecord
   def only_one_content
     count = 0
     POSSIBLE_CONTENTS.each { |content| count += 1 if send content }
-    if count != 1
-      errors.add :description, 'must contain exact one content model'
-    end
+    must_contain_exact_one_content_model(count)
+  end
+
+  def must_contain_exact_one_content_model(count)
+    return if count == 1
+    errors.add(:description, 'must contain exact one content model')
   end
 end
