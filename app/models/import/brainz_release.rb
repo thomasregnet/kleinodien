@@ -16,7 +16,9 @@ module Import
       artist_credit = import_artist_credit
       album_head = import_album_head(artist_credit)
       import_album_head_identifiers(album_head)
-      album_head
+      album_release = import_album_release(album_head)
+      # TODO: import_album_release_identifiers(album_release)
+      album_release
     end
 
     def import_album_head(ac)
@@ -32,6 +34,12 @@ module Import
         compilation_head: album_head,
         source:           Source::MusicBrainz,
         value:            data.release_group.id
+      )
+    end
+
+    def import_album_release(album_head)
+      AlbumRelease.create!(
+        head: album_head
       )
     end
 
