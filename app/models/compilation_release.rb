@@ -31,5 +31,13 @@ class CompilationRelease < ActiveRecord::Base
   validates :type, presence: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
-  delegate :title, to: :head
+  # TODO: remove automatic generation of title
+  before_save { self[:title] = title }
+
+  def title
+    return self[:title] if self[:title]
+    return head.title if head
+  end
+
+  # delegate :title, to: :head
 end
