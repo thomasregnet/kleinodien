@@ -44,7 +44,7 @@ module Import
     end
 
     def import_album_release_identifiers(album_release)
-      CrIdentifier.create!(
+      AlbumReleaseIdentifier.create!(
         compilation_release: album_release,
         source:              Source::MusicBrainz,
         value:               data.id

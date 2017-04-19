@@ -1,0 +1,2 @@
+class AlbumReleaseIdentifier < CrIdentifier
+end
