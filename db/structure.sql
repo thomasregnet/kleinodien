@@ -881,7 +881,8 @@ CREATE TABLE cr_identifiers (
     compilation_release_id integer NOT NULL,
     source_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    type text NOT NULL
 );
 
 
@@ -5143,6 +5144,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170327180351'),
 ('20170410182110'),
 ('20170411180427'),
-('20170419181553');
+('20170419181553'),
+('20170419184221');
 
 
