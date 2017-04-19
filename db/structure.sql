@@ -545,12 +545,12 @@ CREATE TABLE compilation_heads_tags (
 CREATE TABLE compilation_releases (
     id integer NOT NULL,
     compilation_head_id integer NOT NULL,
-    version character varying,
     type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     date date,
-    date_mask smallint
+    date_mask smallint,
+    version citext
 );
 
 
@@ -2799,6 +2799,13 @@ CREATE UNIQUE INDEX artist_identifiers_source_id_value_idx ON artist_identifiers
 
 
 --
+-- Name: compilation_releases_compilation_head_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX compilation_releases_compilation_head_id_idx ON compilation_releases USING btree (compilation_head_id);
+
+
+--
 -- Name: compilation_tracks_id_and_compilation_release_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3076,20 +3083,6 @@ CREATE INDEX index_compilation_heads_tags_on_tag_id ON compilation_heads_tags US
 --
 
 CREATE UNIQUE INDEX index_compilation_releases_countries_no_and_ids ON compilation_releases_countries USING btree (compilation_release_id, country_id);
-
-
---
--- Name: index_compilation_releases_on_compilation_head_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_releases_on_compilation_head_id ON compilation_releases USING btree (compilation_head_id);
-
-
---
--- Name: index_compilation_releases_on_compilation_head_id_lower_version; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_compilation_releases_on_compilation_head_id_lower_version ON compilation_releases USING btree (compilation_head_id, lower((version)::text));
 
 
 --
@@ -5145,6 +5138,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170410182110'),
 ('20170411180427'),
 ('20170419181553'),
-('20170419184221');
+('20170419184221'),
+('20170419192405');
 
 
