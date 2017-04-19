@@ -30,7 +30,7 @@ module Import
     end
 
     def import_album_head_identifiers(album_head)
-      ChIdentifier.create!(
+      AlbumHeadIdentifier.create!(
         compilation_head: album_head,
         source:           Source::MusicBrainz,
         value:            data.release_group.id

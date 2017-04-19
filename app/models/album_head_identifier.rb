@@ -1,0 +1,2 @@
+class AlbumHeadIdentifier < ChIdentifier
+end
