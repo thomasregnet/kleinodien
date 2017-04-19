@@ -550,7 +550,8 @@ CREATE TABLE compilation_releases (
     updated_at timestamp without time zone NOT NULL,
     date date,
     date_mask smallint,
-    version citext
+    version citext,
+    title citext NOT NULL
 );
 
 
@@ -5139,6 +5140,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170411180427'),
 ('20170419181553'),
 ('20170419184221'),
-('20170419192405');
+('20170419192405'),
+('20170419201449');
 
 
