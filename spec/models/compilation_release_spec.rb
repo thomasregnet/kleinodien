@@ -86,7 +86,7 @@ RSpec.describe CompilationRelease, type: :model do
   end
 
   it_behaves_like 'a model with labels' do
-    let(:factory) { :compilation_release_with_labels }
+    let(:candidate) { FactoryGirl.create(:compilation_release_with_labels) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do

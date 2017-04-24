@@ -81,7 +81,7 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'a model with labels' do
-    let(:factory) { :compilation_head_with_labels }
+    let(:candidate) { FactoryGirl.create(:compilation_head_with_labels) }
   end
 
   it_behaves_like 'a model with disambiguations' do
