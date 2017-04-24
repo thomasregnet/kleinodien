@@ -85,7 +85,7 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:factory) { :piece_head_with_companies }
+    let(:candidate) { FactoryGirl.create(:piece_head_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
