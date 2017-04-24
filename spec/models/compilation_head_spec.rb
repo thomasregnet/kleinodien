@@ -77,7 +77,7 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'a model with credits' do
-    let(:factory) { :compilation_head_with_credits }
+    let(:candidate) { FactoryGirl.create(:compilation_head_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do

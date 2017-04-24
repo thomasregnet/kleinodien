@@ -93,7 +93,7 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'a model with credits' do
-    let(:factory) { :piece_head_with_credits }
+    let(:candidate) { FactoryGirl.create(:piece_head_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do
