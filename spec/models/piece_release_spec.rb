@@ -76,7 +76,7 @@ RSpec.describe PieceRelease, type: :model do
   end
 
   it_behaves_like 'a model with countries' do
-    let(:factory) { :piece_release_with_countries }
+    let(:candidate) { FactoryGirl.create(:piece_release_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
