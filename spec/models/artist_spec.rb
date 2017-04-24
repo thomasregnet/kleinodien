@@ -40,14 +40,14 @@ RSpec.describe Artist, type: :model do
 
   context 'with a begin date' do
     it_behaves_like 'a model with an IncompleteDate' do
-      let(:factory)     { :artist }
+      let(:candidate)     { FactoryGirl.build(:artist) }
       let(:date_naming) { 'begin_date' }
     end
   end
 
   context 'with an end date' do
     it_behaves_like 'a model with an IncompleteDate' do
-      let(:factory)     { :artist }
+      let(:candidate)     { FactoryGirl.build(:artist) }
       let(:date_naming) { 'end_date' }
     end
   end
