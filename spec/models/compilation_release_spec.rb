@@ -74,7 +74,7 @@ RSpec.describe CompilationRelease, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:factory) { :compilation_release_with_companies }
+    let(:candidate) { FactoryGirl.create(:compilation_release_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
