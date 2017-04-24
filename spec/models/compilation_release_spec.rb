@@ -95,6 +95,6 @@ RSpec.describe CompilationRelease, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:factory) { :compilation_release }
+    let(:candidate) { FactoryGirl.create(:compilation_release) }
   end
 end

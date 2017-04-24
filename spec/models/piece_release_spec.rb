@@ -93,6 +93,6 @@ RSpec.describe PieceRelease, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:factory) { :piece_release }
+    let(:candidate) { FactoryGirl.create(:piece_release) }
   end
 end
