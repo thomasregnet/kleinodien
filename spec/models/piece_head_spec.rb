@@ -107,6 +107,6 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:factory) { :piece_head }
+    let(:candidate) { FactoryGirl.create(:piece_head) }
   end
 end

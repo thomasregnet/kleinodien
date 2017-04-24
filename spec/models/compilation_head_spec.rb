@@ -91,6 +91,6 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:factory) { :compilation_head }
+    let(:candidate) { FactoryGirl.create(:compilation_head) }
   end
 end

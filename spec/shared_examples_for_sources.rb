@@ -1,10 +1,6 @@
 RSpec.shared_examples 'an object with a source' do
-  before(:each) do
-    @object = FactoryGirl.create(factory)
-  end
-
   it 'is valid' do
-    expect(@object).to be_valid
+    expect(candidate).to be_valid
   end
 
   # TODO: check 'source_name, source_ident and type must be unique'
