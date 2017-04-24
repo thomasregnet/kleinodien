@@ -73,7 +73,7 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'a model with countries' do
-    let(:factory) { :compilation_head_with_countries }
+    let(:candidate) { FactoryGirl.create(:compilation_head_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
