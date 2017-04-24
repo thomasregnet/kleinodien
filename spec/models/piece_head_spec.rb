@@ -97,7 +97,7 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'a model with labels' do
-    let(:factory) { :piece_head_with_labels }
+    let(:candidate) { FactoryGirl.create(:piece_head_with_labels) }
   end
 
   it_behaves_like 'a model with disambiguations' do

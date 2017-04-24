@@ -84,7 +84,7 @@ RSpec.describe PieceRelease, type: :model do
   end
 
   it_behaves_like 'a model with labels' do
-    let(:factory) { :piece_release_with_labels }
+    let(:candidate) { FactoryGirl.create(:piece_release_with_labels) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do
