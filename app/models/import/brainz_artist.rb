@@ -28,9 +28,7 @@ module Import
     end
 
     def import_non_brainz_identifiers
-      data.relation_list.relation.each do |relation|
-        next unless WANTED_RELATION_TYPES.include? relation.type
-
+      wanted_relations.each do |relation|
         artist.identifiers.create!(
           source: Source.find_by(name: relation.type),
           value:  extract_value_from_url(relation.target.__content__)
@@ -41,6 +39,14 @@ module Import
     def extract_value_from_url(url)
       m = url.match(%r{discogs.+\/(\d+)$})
       return m[1] if m
+    end
+
+    private
+
+    def wanted_relations
+      data.relation_list.relation.select do |relation|
+        WANTED_RELATION_TYPES.include? relation.type
+      end
     end
   end
 end
