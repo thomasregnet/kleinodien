@@ -1,6 +1,8 @@
 module Import
   class BrainzArtist
-    attr_reader :data
+    attr_reader :artist, :data
+
+    WANTED_RELATION_TYPES = %w(discogs).freeze
 
     def self.perform(data)
       new(data).perform
@@ -12,9 +14,33 @@ module Import
     end
 
     def perform
-      # FIXME: return an existing Artist
-      #Artist.new
-      Artist.brainz_create!(data)
+      @artist = Artist.brainz_create!(data)
+      import_brainz_identifer
+      import_non_brainz_identifiers
+      artist
+    end
+
+    def import_brainz_identifer
+      artist.identifiers.create!(
+        source: Source::MusicBrainz,
+        value: data.id
+      )
+    end
+
+    def import_non_brainz_identifiers
+      data.relation_list.relation.each do |relation|
+        next unless WANTED_RELATION_TYPES.include? relation.type
+
+        artist.identifiers.create!(
+          source: Source.find_by(name: relation.type),
+          value:  extract_value_from_url(relation.target.__content__)
+        )
+      end
+    end
+
+    def extract_value_from_url(url)
+      m = url.match(%r{discogs.+\/(\d+)$})
+      return m[1] if m
     end
   end
 end
