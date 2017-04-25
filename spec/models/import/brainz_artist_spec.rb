@@ -11,14 +11,13 @@ RSpec.describe Import::BrainzRelease, type: :model do
   end
 
   it 'gets the xml data' do
-    #byebug
     expect(@xml).not_to be nil
   end
 
   it 'returns an Artist' do
     artist = Import::BrainzArtist.perform(@xml)
     expect(artist).to be_instance_of Artist
-    # expect(artist.name).to eq 'Cannibal Corpse'
+    expect(artist.name).to eq 'Cannibal Corpse'
   end
 
   after(:each) do

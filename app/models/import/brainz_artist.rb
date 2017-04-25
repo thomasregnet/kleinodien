@@ -13,7 +13,8 @@ module Import
 
     def perform
       # FIXME: return an existing Artist
-      Artist.new
+      #Artist.new
+      Artist.brainz_create!(data)
     end
   end
 end
