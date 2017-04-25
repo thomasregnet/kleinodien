@@ -23,5 +23,15 @@ module MashedBrainz
         [MashedBrainz::NameCredit.new(value)]
       end
     }
+
+    coerce_key :relation, lambda { |value|
+      if value.is_a? Array
+        value.map do |nc|
+          MashedBrainz::Relation.new(nc)
+        end
+      else
+        [MashedBrainz::Relation.new(value)]
+      end
+    }
   end
 end
