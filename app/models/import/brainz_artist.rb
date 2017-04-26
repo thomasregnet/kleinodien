@@ -44,7 +44,7 @@ module Import
     private
 
     def wanted_relations
-      data.relation_list.relation.select do |relation|
+      data.relations_for_target(:url).select do |relation|
         WANTED_RELATION_TYPES.include? relation.type
       end
     end
