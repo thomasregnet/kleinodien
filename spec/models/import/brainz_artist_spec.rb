@@ -15,4 +15,12 @@ RSpec.describe Import::BrainzRelease, type: :model do
     expect(identifier_values).to include @brainz_id
     expect(identifier_values).to include '124774' # Discogs id
   end
+
+  it 'returns an existing artist if it exists' do
+    @artist.name = 'Vegan Alive'
+    @artist.save!
+
+    artist = Import::BrainzArtist.perform(@xml)
+    expect(artist.name).to eq 'Vegan Alive'
+  end
 end
