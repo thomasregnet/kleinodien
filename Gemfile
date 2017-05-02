@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.2'
+gem 'rails', '5.1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -11,7 +11,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'faker',  '~> 1.5'
-gem 'devise', '~> 4.0'
+#gem 'devise', '~> 4.0'
+gem 'devise', github: 'plataformatec/devise'
 gem 'hashie', '~> 3.5'
 gem 'jsonapi-resources'
 gem 'multi_xml', '~> 0.6'
