@@ -30,7 +30,7 @@ RSpec.describe Artist, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @artist = FactoryGirl.create(:artist_credit)
+      @artist = FactoryGirl.create(:artist)
     end
 
     let(:rateable) { @artist }

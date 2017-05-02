@@ -1,17 +1,17 @@
 # User comments on contents
 class Comment < ApplicationRecord
-  belongs_to :user
-  belongs_to :artist
-  belongs_to :artist_credit
-  belongs_to :artist
-  belongs_to :compilation_head
-  belongs_to :compilation_release
-  belongs_to :piece_head
-  belongs_to :piece_release
-  belongs_to :repository
-  belongs_to :season
-  belongs_to :serial
-  belongs_to :station
+  belongs_to :user, required: false
+  belongs_to :artist, required: false
+  belongs_to :artist_credit, required: false
+  belongs_to :artist, required: false
+  belongs_to :compilation_head, required: false
+  belongs_to :compilation_release, required: false
+  belongs_to :piece_head, required: false
+  belongs_to :piece_release, required: false
+  belongs_to :repository, required: false
+  belongs_to :season, required: false
+  belongs_to :serial, required: false
+  belongs_to :station, required: false
 
   validates :text, presence: true
   validates :user, presence: true
