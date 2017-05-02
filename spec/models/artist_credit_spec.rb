@@ -11,7 +11,6 @@ RSpec.describe ArtistCredit, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      #byebug
       @artist_credit = FactoryGirl.create(:artist_credit)
     end
 
@@ -20,27 +19,27 @@ RSpec.describe ArtistCredit, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
-  # it_behaves_like 'a rateable model' do
-  #   before(:all) do
-  #     DatabaseCleaner.start
-  #     @artist_credit = FactoryGirl.create(:artist_credit)
-  #   end
+  it_behaves_like 'a rateable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist_credit = FactoryGirl.create(:artist_credit)
+    end
 
-  #   let(:rateable) { @artist_credit }
+    let(:rateable) { @artist_credit }
 
-  #   after(:all) { DatabaseCleaner.clean }
-  # end
+    after(:all) { DatabaseCleaner.clean }
+  end
 
-  # it_behaves_like 'a tagable model' do
-  #   before(:all) do
-  #     DatabaseCleaner.start
-  #     @tagable = FactoryGirl.create(:artist_credit)
-  #   end
+  it_behaves_like 'a tagable model' do
+    before(:all) do
+      DatabaseCleaner.start
+      @tagable = FactoryGirl.create(:artist_credit)
+    end
 
-  #   let(:tagable) { @tagable }
+    let(:tagable) { @tagable }
 
-  #   after(:all) { DatabaseCleaner.clean }
-  # end
+    after(:all) { DatabaseCleaner.clean }
+  end
 
   context 'without a Source' do
     context 'not saved to the database' do
@@ -61,50 +60,52 @@ RSpec.describe ArtistCredit, type: :model do
       end
     end
 
-  #   context 'saved to the database' do
-  #     before(:each) do
-  #       @artist_credit = FactoryGirl.create(:artist_credit)
-  #     end
-  #     it 'raises an error when it sets its participants to null' do
-  #       expect { @artist_credit.participants = [] }
-  #         .to raise_error(/null value in column "artist_credit_id"/)
-  #     end
+    context 'saved to the database' do
+      before(:each) do
+        @artist_credit = FactoryGirl.create(:artist_credit)
+      end
 
-  #     it 'must have a unique name' do
-  #       clone = ArtistCredit.new(name: @artist_credit.name)
-  #       expect(clone).not_to be_valid
-  #     end
-  #   end
+      # TODO: let this test pass again
+      # it 'raises an error when it sets its participants to null' do
+      #   expect { @artist_credit.participants = [] }
+      #     .to raise_error(/null value in column "artist_credit_id"/)
+      # end
+
+      it 'must have a unique name' do
+        clone = ArtistCredit.new(name: @artist_credit.name)
+        expect(clone).not_to be_valid
+      end
+    end
   end
 
-  # context 'with Source' do
-  #   before(:all) do
-  #     DatabaseCleaner.start
-  #     @artist_credit = FactoryGirl.create(:artist_credit_with_source)
-  #   end
+  context 'with Source' do
+    before(:all) do
+      DatabaseCleaner.start
+      @artist_credit = FactoryGirl.create(:artist_credit_with_source)
+    end
 
-  #   it 'is valid' do
-  #     expect(@artist_credit).to be_valid
-  #   end
+    it 'is valid' do
+      expect(@artist_credit).to be_valid
+    end
 
-  #   it 'must have an unique name' do
-  #     clone = ArtistCredit.new(
-  #       name:   @artist_credit.name,
-  #       source: @artist_credit.source
-  #     )
-  #     expect(clone).not_to be_valid
-  #   end
+    it 'must have an unique name' do
+      clone = ArtistCredit.new(
+        name:   @artist_credit.name,
+        source: @artist_credit.source
+      )
+      expect(clone).not_to be_valid
+    end
 
-  #   it 'must not have an unique name when the Source differs' do
-  #     clone = ArtistCredit.new(
-  #       participants:  @artist_credit.participants,
-  #       source:        FactoryGirl.create(:source)
-  #     )
-  #     expect { clone.save! }.not_to raise_error
-  #   end
+    it 'must not have an unique name when the Source differs' do
+      clone = ArtistCredit.new(
+        participants:  @artist_credit.participants,
+        source:        FactoryGirl.create(:source)
+      )
+      expect { clone.save! }.not_to raise_error
+    end
 
-  #   after(:all) do
-  #     DatabaseCleaner.clean
-  #   end
-  # end
+    after(:all) do
+      DatabaseCleaner.clean
+    end
+  end
 end
