@@ -8,7 +8,7 @@ FactoryGirl.define do
     
     factory :valid_participant do
       association :artist, factory: :artist
-      association :artist_credit, factory: :artist_credit
+      #association :artist_credit, factory: :artist_credit
     end
   end
 end

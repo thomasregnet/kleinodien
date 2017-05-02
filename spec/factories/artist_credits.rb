@@ -1,10 +1,11 @@
 FactoryGirl.define do
   factory :artist_credit do
     sequence(:name) { |n| "artist credit ##{n}" }
-    after(:build) do |ac|
+    after(:create) do |ac|
     #after(:create) do |ac|
       #ac.participants << FactoryGirl.build(:participant_without_artist_credit)
-      ac.participants << FactoryGirl.create(:participant)
+      #ac.participants << FactoryGirl.create(:participant)
+      ac.participants.build(artist: FactoryGirl.create(:artist), position: 0)
       #ac.participants << FactoryGirl.create(:participant_without_artist_credit)
     end
 
