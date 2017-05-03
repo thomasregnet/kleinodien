@@ -69,7 +69,8 @@ RSpec.describe Serial, type: :model do
     end
 
     it 'has episodes' do
-      expect(@serial.episodes.count).to eq(5)
+      season = @serial.seasons[0]
+      expect(season.episodes.count).to eq(5)
     end
   end
 end
