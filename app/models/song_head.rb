@@ -4,6 +4,6 @@ class SongHead < PieceHead
 
   validates :artist_credit, presence: true
   has_many :releases,
-           class_name: SongRelease,
+           class_name: 'SongRelease',
            foreign_key: :piece_head_id
 end

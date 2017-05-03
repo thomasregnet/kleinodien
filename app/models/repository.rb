@@ -5,7 +5,7 @@ class Repository < ApplicationRecord
 
   has_many :comments
   has_many :format_details,
-           class_name: RepositoryFormatDetail
+           class_name: 'RepositoryFormatDetail'
 
   # TODO: check if accepts_nested_attributes_for :format_details is needed
   accepts_nested_attributes_for :format_details

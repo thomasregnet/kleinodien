@@ -2,7 +2,7 @@
 class Artist < ActiveRecord::Base
   include BrainzConstructors
 
-  has_many :identifiers, class_name: ArtistIdentifier
+  has_many :identifiers, class_name: 'ArtistIdentifier'
   # belongs_to :source
 
   composed_of :begin_date,

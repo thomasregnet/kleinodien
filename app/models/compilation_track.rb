@@ -7,15 +7,15 @@ class CompilationTrack < ActiveRecord::Base
               mapping: [%w(milliseconds milliseconds), %w(accuracy accuracy)]
 
   belongs_to :compilation_release,
-             class_name:  CompilationRelease,
+             class_name:  'CompilationRelease',
              foreign_key: :compilation_release_id
   belongs_to :format, required: false
   belongs_to :piece_release,
-             class_name:  PieceRelease,
+             class_name:  'PieceRelease',
              foreign_key: :piece_release_id
 
   has_many :format_details,
-           class_name: CtFormatDetail,
+           class_name: 'CtFormatDetail',
            foreign_key: :compilation_track_id
   has_many :repository_positions
 

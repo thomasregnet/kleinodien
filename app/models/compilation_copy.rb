@@ -1,7 +1,7 @@
 # CompilationCopy holds user copies
 class CompilationCopy < ApplicationRecord
   belongs_to :release,
-             class_name:  CompilationRelease,
+             class_name:  'CompilationRelease',
              foreign_key: :compilation_release_id
   belongs_to :user, inverse_of: :compilation_copies
 
