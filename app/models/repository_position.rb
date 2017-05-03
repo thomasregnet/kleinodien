@@ -1,15 +1,16 @@
 # A position of a content in an users repository
 class RepositoryPosition < ApplicationRecord
-  belongs_to :compilation_copy
-  belongs_to :compilation_track
-  belongs_to :piece_track
+  belongs_to :compilation_copy, required: false
+  belongs_to :compilation_track, required: false
+  belongs_to :piece_track, required: false
   belongs_to :repository
   belongs_to :user
 
   belongs_to :release,
              class_name: CompilationRelease,
              primary_key: :id,
-             foreign_key: :compilation_release_id
+             foreign_key: :compilation_release_id,
+             required: false
 
   validate :only_on_track_type
 
