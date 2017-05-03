@@ -7,7 +7,7 @@ class RepositoryPosition < ApplicationRecord
   belongs_to :user
 
   belongs_to :release,
-             class_name: CompilationRelease,
+             class_name: 'CompilationRelease',
              primary_key: :id,
              foreign_key: :compilation_release_id,
              required: false
