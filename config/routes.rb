@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
+    namespace :import do
+      resources :brainz_releases, only: [:create]
+    end
     namespace :v01 do
       jsonapi_resources :album_heads
       jsonapi_resources :artist_credits
