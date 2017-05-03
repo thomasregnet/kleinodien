@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  # TODO: maybe delete this factory
   factory :participant do
     sequence(:position) { |n| n }
 
@@ -6,9 +7,9 @@ FactoryGirl.define do
     #   artist
     # end
     
-    factory :valid_participant do
-      association :artist, factory: :artist
-      #association :artist_credit, factory: :artist_credit
-    end
+    # factory :valid_participant do
+    #   association :artist, factory: :artist
+    #   #association :artist_credit, factory: :artist_credit
+    # end
   end
 end

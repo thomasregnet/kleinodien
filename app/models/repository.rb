@@ -1,6 +1,6 @@
 # A Repository is used to store parts of an users collection
 class Repository < ApplicationRecord
-  belongs_to :format
+  belongs_to :format, required: false
   belongs_to :user
 
   has_many :comments

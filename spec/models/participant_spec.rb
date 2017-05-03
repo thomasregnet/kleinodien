@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Participant, type: :model do
   before(:each) do
-    @participant = FactoryGirl.create(:valid_participant)
+    @participant = Participant.new(
+      artist:        FactoryGirl.create(:artist),
+      artist_credit: FactoryGirl.create(:artist_credit),
+      position:      0
+    )
   end
 
   it 'is valid with valid attributes' do
