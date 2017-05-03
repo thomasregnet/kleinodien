@@ -16,7 +16,7 @@ class RepositoryPosition < ApplicationRecord
 
   validates :compilation_copy,
             presence: true,
-            unless: 'compilation_track.nil?'
+            unless: Proc.new { |rp| rp.compilation_track.nil? }
   validates :repository, presence: true
   validates :user, presence: true
 
