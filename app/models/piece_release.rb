@@ -14,7 +14,7 @@ class PieceRelease < ActiveRecord::Base
   has_many :labels, class_name: PrLabel
   has_many :ratings
   # TODO: must be PieceTrack when table piece_tracks exists
-  has_many :tracks, class_name: CompilationTrack
+  has_many :tracks, class_name: 'CompilationTrack'
 
   has_and_belongs_to_many :countries
 

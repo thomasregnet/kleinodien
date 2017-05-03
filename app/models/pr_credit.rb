@@ -1,7 +1,7 @@
 # PieceRelease Credit
 class PrCredit < ActiveRecord::Base
   belongs_to :artist_credit
-  belongs_to :job
+  belongs_to :job, required: false
   belongs_to :piece_release
 
   validates :artist_credit, presence: true
