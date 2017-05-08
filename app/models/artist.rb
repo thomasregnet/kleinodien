@@ -1,6 +1,7 @@
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
   include BrainzConstructors
+  include Identifyable
 
   has_many :identifiers, class_name: 'ArtistIdentifier'
   # belongs_to :source

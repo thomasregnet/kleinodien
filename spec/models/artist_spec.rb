@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
+require 'shared_examples_for_identifyable'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_tagable_models'
 require 'shared_examples_for_models_with_brainz_constructors'
@@ -25,6 +26,14 @@ RSpec.describe Artist, type: :model do
     let(:commentable) { @artist }
 
     after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'an identifyable model' do
+    before(:each) do
+      @artist = FactoryGirl.build(:artist)
+    end
+
+    let(:identifyable) { @artist }
   end
 
   it_behaves_like 'a rateable model' do
