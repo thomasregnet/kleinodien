@@ -30,7 +30,7 @@ RSpec.describe Artist, type: :model do
 
   it_behaves_like 'an identifyable model' do
     before(:each) do
-      @artist = FactoryGirl.build(:artist)
+      @artist = FactoryGirl.create(:artist_with_identifiers)
     end
 
     let(:identifyable) { @artist }
