@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   before(:each) do
-    #@comment = FactoryGirl.create(:comment_on_artist_credit)
     @comment = FactoryGirl.create(:comment_on_artist)
   end
 
@@ -33,7 +32,6 @@ RSpec.describe Comment, type: :model do
 
   context 'valid with exact one content' do
     before(:each) do
-      #@comment = FactoryGirl.create(:comment_on_artist_credit)
       @comment = FactoryGirl.create(:comment_on_artist)
     end
 
@@ -47,7 +45,6 @@ RSpec.describe Comment, type: :model do
         setter = factory.to_s + '='
         @comment.send setter, FactoryGirl.create(factory)
         puts factory.to_s
-        #byebug if factory == :piece_release
         expect(@comment).not_to be_valid
         expect { @comment.save! validate: false }
           .to raise_error /exact_one_content_on_comments/

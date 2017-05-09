@@ -49,7 +49,7 @@ RSpec.describe CompilationRelease, type: :model do
 
   context 'with identifiers' do
     before(:each) do
-      @identifier = FactoryGirl.create(:cr_identifier)
+      @identifier = FactoryGirl.create(:compilation_release_identifier)
       @c_release = @identifier.identified
     end
 
