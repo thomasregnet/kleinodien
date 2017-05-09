@@ -3,7 +3,13 @@ module Identifyable
 
   included do
     identifier_class_name = "#{self}Identifier"
-    has_many :identifiers, class_name: identifier_class_name
+    if respond_to? :identified_foreign_key
+      has_many :identifiers,
+               class_name: identifier_class_name,
+               foreign_key: identified_foreign_key
+    else
+      has_many :identifiers, class_name: identifier_class_name
+    end
   end
 
   module ClassMethods

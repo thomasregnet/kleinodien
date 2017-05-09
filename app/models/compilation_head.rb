@@ -27,4 +27,9 @@ class CompilationHead < ActiveRecord::Base
       disambiguation: brainz.disambiguation
     ]
   end
+
+  # this method is needed for inheriting classes that include "Identifyable"
+  def self.identified_foreign_key
+    :compilation_head_id
+  end
 end
