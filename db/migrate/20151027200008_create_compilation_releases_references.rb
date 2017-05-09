@@ -1,4 +1,4 @@
-class CreateCompilationReleasesReferences < ActiveRecord::Migration
+class CreateCompilationReleasesReferences < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_releases_references, id: false do |t|
       t.references :compilation_release, index: true, foreign_key: true

@@ -1,4 +1,4 @@
-class IndexCompilationSectionMediumNoSide < ActiveRecord::Migration
+class IndexCompilationSectionMediumNoSide < ActiveRecord::Migration[4.2]
   def change
     add_index(:compilation_sections,
               [:compilation_medium_id, :no, :side],

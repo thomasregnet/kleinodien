@@ -1,4 +1,4 @@
-class CreateTrfAttributeKinds < ActiveRecord::Migration
+class CreateTrfAttributeKinds < ActiveRecord::Migration[4.2]
   def change
     create_table :trf_attribute_kinds do |t|
       t.string :name, null: false

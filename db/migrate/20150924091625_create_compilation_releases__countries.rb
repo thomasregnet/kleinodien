@@ -1,4 +1,4 @@
-class CreateCompilationReleasesCountries < ActiveRecord::Migration
+class CreateCompilationReleasesCountries < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_releases_countries do |t|
       t.integer :no, null: false

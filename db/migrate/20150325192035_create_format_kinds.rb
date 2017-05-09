@@ -1,4 +1,4 @@
-class CreateFormatKinds < ActiveRecord::Migration
+class CreateFormatKinds < ActiveRecord::Migration[4.2]
   def change
     create_table :format_kinds do |t|
       t.string :name, null: false

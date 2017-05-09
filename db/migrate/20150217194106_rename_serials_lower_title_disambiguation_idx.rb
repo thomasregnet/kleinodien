@@ -1,4 +1,4 @@
-class RenameSerialsLowerTitleDisambiguationIdx < ActiveRecord::Migration
+class RenameSerialsLowerTitleDisambiguationIdx < ActiveRecord::Migration[4.2]
   def change
     old = 'serials_lower_title_disambiguation_idx'
     new = 'index_serials_on_lower_disambiguation_and_title'

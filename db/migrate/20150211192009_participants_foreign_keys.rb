@@ -1,4 +1,4 @@
-class ParticipantsForeignKeys < ActiveRecord::Migration
+class ParticipantsForeignKeys < ActiveRecord::Migration[4.2]
   def change
     add_foreign_key :participants, :artists, name: :participants_fk_artists
     add_foreign_key :participants, :artist_credits,

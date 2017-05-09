@@ -1,4 +1,4 @@
-class DropCrFormatClarifications < ActiveRecord::Migration
+class DropCrFormatClarifications < ActiveRecord::Migration[4.2]
   def change
     remove_index(
       :cr_format_clarifications,

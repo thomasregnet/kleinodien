@@ -1,4 +1,4 @@
-class CreateCrfAttributes < ActiveRecord::Migration
+class CreateCrfAttributes < ActiveRecord::Migration[4.2]
   def change
     create_table :crf_attributes do |t|
       t.integer :cr_format_id

@@ -1,4 +1,4 @@
-class CreateCountriesPieceHeads < ActiveRecord::Migration
+class CreateCountriesPieceHeads < ActiveRecord::Migration[4.2]
   def change
     create_table :countries_piece_heads do |t|
       t.references :country, index: true, foreign_key: true, null: false

@@ -1,4 +1,4 @@
-class RemoveDisambiguationIndicesOnPieceHead < ActiveRecord::Migration
+class RemoveDisambiguationIndicesOnPieceHead < ActiveRecord::Migration[4.2]
   def change
     remove_index(
       :piece_heads,

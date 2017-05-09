@@ -1,4 +1,4 @@
-class SerialsLowerTitleDisambiguationIdx < ActiveRecord::Migration
+class SerialsLowerTitleDisambiguationIdx < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

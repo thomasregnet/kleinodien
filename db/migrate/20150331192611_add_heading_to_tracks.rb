@@ -1,4 +1,4 @@
-class AddHeadingToTracks < ActiveRecord::Migration
+class AddHeadingToTracks < ActiveRecord::Migration[4.2]
   def change
     add_column :tracks, :heading, :string
   end

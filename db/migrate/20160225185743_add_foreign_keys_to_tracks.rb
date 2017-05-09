@@ -1,4 +1,4 @@
-class AddForeignKeysToTracks < ActiveRecord::Migration
+class AddForeignKeysToTracks < ActiveRecord::Migration[4.2]
   def change
     add_foreign_key :tracks, :piece_releases
     add_foreign_key :tracks, :compilation_releases

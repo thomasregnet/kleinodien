@@ -1,4 +1,4 @@
-class MinimizeCompilationReleasesCountries < ActiveRecord::Migration
+class MinimizeCompilationReleasesCountries < ActiveRecord::Migration[4.2]
   def change
     remove_column :compilation_releases_countries, :id, :integer
     remove_column :compilation_releases_countries, :created_at, :datetime

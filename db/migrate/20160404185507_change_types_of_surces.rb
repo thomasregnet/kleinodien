@@ -1,4 +1,4 @@
-class ChangeTypesOfSurces < ActiveRecord::Migration
+class ChangeTypesOfSurces < ActiveRecord::Migration[4.2]
   def change
     reversible do |source|
       source.up do

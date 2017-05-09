@@ -1,4 +1,4 @@
-class CreatePieceReleasesReferences < ActiveRecord::Migration
+class CreatePieceReleasesReferences < ActiveRecord::Migration[4.2]
   def change
     create_table :piece_releases_references, id: false do |t|
       t.references :piece_release, index: true, foreign_key: true

@@ -1,4 +1,4 @@
-class RenameSerialsLowerTitleIdx < ActiveRecord::Migration
+class RenameSerialsLowerTitleIdx < ActiveRecord::Migration[4.2]
   def change
     old = 'serials_lower_title_idx'
     new = 'index_serials_on_lower_title'

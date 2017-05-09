@@ -1,4 +1,4 @@
-class IndexCrFormatsOnCompilationReleaseIdAndNo < ActiveRecord::Migration
+class IndexCrFormatsOnCompilationReleaseIdAndNo < ActiveRecord::Migration[4.2]
   def change
     add_index(
       :cr_formats,

@@ -1,4 +1,4 @@
-class CreateCompilationHeadsReferences < ActiveRecord::Migration
+class CreateCompilationHeadsReferences < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_heads_references, id: false do |t|
       t.references :compilation_head, index: true, foreign_key: true, null: false
