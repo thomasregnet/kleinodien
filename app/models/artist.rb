@@ -13,6 +13,7 @@ class Artist < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions
+  # has_many :identifiers, class_name: 'ArtistIdentifier'
   has_many :participants, inverse_of: :artist
   has_many :ratings
 

@@ -55,6 +55,20 @@ FactoryGirl.define do
     factory :album_head, class: AlbumHead do
       artist_credit
       type 'AlbumHead'
+
+      factory :album_head_with_identifiers do
+        transient do
+          identifiers_count 2
+        end
+
+        after(:create) do |album_head, evaluator|
+          create_list(
+            :album_head_identifier,
+            evaluator.identifiers_count,
+            identified: album_head
+          )
+        end
+      end
     end
   end
 end

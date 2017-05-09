@@ -1,5 +1,7 @@
 # Name giving group of AlbumReleases
 class AlbumHead < CompilationHead
+  include Identifyable
+
   belongs_to :artist_credit
   has_many :releases,
            class_name:  'AlbumRelease',
