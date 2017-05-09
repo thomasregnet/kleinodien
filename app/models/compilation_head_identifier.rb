@@ -1,5 +1,5 @@
 # Foreign identifiers of CompilationHead
-class ChIdentifier < ApplicationRecord
+class CompilationHeadIdentifier < ApplicationRecord
   belongs_to :compilation_head
   belongs_to :source
 
