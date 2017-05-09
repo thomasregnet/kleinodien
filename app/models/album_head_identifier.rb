@@ -1,2 +1,2 @@
-class AlbumHeadIdentifier < ChIdentifier
+class AlbumHeadIdentifier < CompilationHeadIdentifier
 end
