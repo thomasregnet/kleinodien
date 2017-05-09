@@ -1,4 +1,4 @@
-class DropCompilationSections < ActiveRecord::Migration
+class DropCompilationSections < ActiveRecord::Migration[4.2]
   def change
     drop_table :compilation_sections
   end

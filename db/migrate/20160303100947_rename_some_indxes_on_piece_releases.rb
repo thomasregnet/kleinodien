@@ -1,4 +1,4 @@
-class RenameSomeIndxesOnPieceReleases < ActiveRecord::Migration
+class RenameSomeIndxesOnPieceReleases < ActiveRecord::Migration[4.2]
   def change
     rename_index :piece_releases,
                  :index_piece_on_piece_head_id_and_lower_version,

@@ -1,4 +1,4 @@
-class CreateSectionFormats < ActiveRecord::Migration
+class CreateSectionFormats < ActiveRecord::Migration[4.2]
   def change
     create_table :section_formats do |t|
       t.string :name, null: false

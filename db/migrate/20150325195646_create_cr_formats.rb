@@ -1,4 +1,4 @@
-class CreateCrFormats < ActiveRecord::Migration
+class CreateCrFormats < ActiveRecord::Migration[4.2]
   def change
     create_table :cr_formats do |t|
       t.integer :compilation_release_id, null: false

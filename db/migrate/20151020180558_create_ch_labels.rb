@@ -1,4 +1,4 @@
-class CreateChLabels < ActiveRecord::Migration
+class CreateChLabels < ActiveRecord::Migration[4.2]
   def change
     create_table :ch_labels do |t|
       t.references :compilation_head, index: true, foreign_key: true, null: false

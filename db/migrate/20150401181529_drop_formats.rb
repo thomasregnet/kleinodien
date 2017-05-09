@@ -1,4 +1,4 @@
-class DropFormats < ActiveRecord::Migration
+class DropFormats < ActiveRecord::Migration[4.2]
   def change
     drop_table :formats
   end

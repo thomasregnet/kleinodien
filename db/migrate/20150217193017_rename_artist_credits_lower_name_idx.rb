@@ -1,4 +1,4 @@
-class RenameArtistCreditsLowerNameIdx < ActiveRecord::Migration
+class RenameArtistCreditsLowerNameIdx < ActiveRecord::Migration[4.2]
   def change
     old = 'artist_credits_lower_name_idx'
     new = 'index_artist_credits_on_lower_name'

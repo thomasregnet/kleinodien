@@ -1,4 +1,4 @@
-class CreateCompilationIdentifiers < ActiveRecord::Migration
+class CreateCompilationIdentifiers < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_identifiers do |t|
       t.integer :compilation_release_id, null: false

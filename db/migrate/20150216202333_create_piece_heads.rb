@@ -1,4 +1,4 @@
-class CreatePieceHeads < ActiveRecord::Migration
+class CreatePieceHeads < ActiveRecord::Migration[4.2]
   def change
     create_table :piece_heads do |t|
       t.integer :artist_credit_id

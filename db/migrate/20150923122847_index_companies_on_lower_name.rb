@@ -1,4 +1,4 @@
-class IndexCompaniesOnLowerName < ActiveRecord::Migration
+class IndexCompaniesOnLowerName < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

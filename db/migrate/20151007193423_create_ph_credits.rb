@@ -1,4 +1,4 @@
-class CreatePhCredits < ActiveRecord::Migration
+class CreatePhCredits < ActiveRecord::Migration[4.2]
   def change
     create_table :ph_credits do |t|
       t.references :artist_credit, index: true, foreign_key: true, null: false

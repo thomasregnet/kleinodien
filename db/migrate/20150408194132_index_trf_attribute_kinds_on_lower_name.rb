@@ -1,4 +1,4 @@
-class IndexTrfAttributeKindsOnLowerName < ActiveRecord::Migration
+class IndexTrfAttributeKindsOnLowerName < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

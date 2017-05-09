@@ -1,4 +1,4 @@
-class RenameParticipantsNoArtistCreditIdIdx < ActiveRecord::Migration
+class RenameParticipantsNoArtistCreditIdIdx < ActiveRecord::Migration[4.2]
   def change
     old = 'participants_no_artist_credit_id_idx'
     new = 'index_participants_on_artist_credit_id_and_no'

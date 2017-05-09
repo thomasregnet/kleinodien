@@ -1,4 +1,4 @@
-class DropIndexCrFormatsOnCompilationReleaseIdAndFormatKind < ActiveRecord::Migration
+class DropIndexCrFormatsOnCompilationReleaseIdAndFormatKind < ActiveRecord::Migration[4.2]
   def change
     remove_index(
       :cr_formats,

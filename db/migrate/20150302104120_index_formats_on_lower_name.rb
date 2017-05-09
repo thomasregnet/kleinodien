@@ -1,4 +1,4 @@
-class IndexFormatsOnLowerName < ActiveRecord::Migration
+class IndexFormatsOnLowerName < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

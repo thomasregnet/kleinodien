@@ -1,4 +1,4 @@
-class CreateCompilationSections < ActiveRecord::Migration
+class CreateCompilationSections < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_sections do |t|
       t.integer :compilation_medium_id, null: false

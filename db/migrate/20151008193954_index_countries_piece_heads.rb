@@ -1,4 +1,4 @@
-class IndexCountriesPieceHeads < ActiveRecord::Migration
+class IndexCountriesPieceHeads < ActiveRecord::Migration[4.2]
   def change
     add_index(
       :countries_piece_heads,

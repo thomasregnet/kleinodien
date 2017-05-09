@@ -1,4 +1,4 @@
-class CreateCountriesCompilationHeads < ActiveRecord::Migration
+class CreateCountriesCompilationHeads < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_heads_countries, id: false do |t|
       t.references :country, index: true, foreign_key: true, null: false

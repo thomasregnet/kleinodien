@@ -1,4 +1,4 @@
-class IndexStationsOnLowerDisambiguationAndName < ActiveRecord::Migration
+class IndexStationsOnLowerDisambiguationAndName < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

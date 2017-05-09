@@ -1,4 +1,4 @@
-class CreateCountriesPieceReleases < ActiveRecord::Migration
+class CreateCountriesPieceReleases < ActiveRecord::Migration[4.2]
   def change
     create_table :countries_piece_releases, id: false do |t|
       t.references :country, index: true, foreign_key: true, null: false

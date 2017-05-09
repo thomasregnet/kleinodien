@@ -1,4 +1,4 @@
-class CreateSources < ActiveRecord::Migration
+class CreateSources < ActiveRecord::Migration[4.2]
   def change
     reversible do |source|
       source.up do

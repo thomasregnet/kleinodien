@@ -1,4 +1,4 @@
-class AddIndexCompilationHeadOnReferenceId < ActiveRecord::Migration
+class AddIndexCompilationHeadOnReferenceId < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do

@@ -1,4 +1,4 @@
-class RemoveDisambiguationIndicesOnCompilationHeads < ActiveRecord::Migration
+class RemoveDisambiguationIndicesOnCompilationHeads < ActiveRecord::Migration[4.2]
   def change
     remove_index(
       :compilation_heads,

@@ -1,4 +1,4 @@
-class CreateChCompanies < ActiveRecord::Migration
+class CreateChCompanies < ActiveRecord::Migration[4.2]
   def change
     create_table :ch_companies do |t|
       t.references :compilation_head, index: true, foreign_key: true, null: false

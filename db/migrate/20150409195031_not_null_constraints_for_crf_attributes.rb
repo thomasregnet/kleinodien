@@ -1,4 +1,4 @@
-class NotNullConstraintsForCrfAttributes < ActiveRecord::Migration
+class NotNullConstraintsForCrfAttributes < ActiveRecord::Migration[4.2]
   def change
     change_column(
       :crf_attributes,

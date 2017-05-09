@@ -1,4 +1,4 @@
-class CreateCrCompanies < ActiveRecord::Migration
+class CreateCrCompanies < ActiveRecord::Migration[4.2]
   def change
     create_table :cr_companies do |t|
       t.integer :company_id, null: false

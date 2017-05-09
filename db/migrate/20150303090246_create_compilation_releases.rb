@@ -1,4 +1,4 @@
-class CreateCompilationReleases < ActiveRecord::Migration
+class CreateCompilationReleases < ActiveRecord::Migration[4.2]
   def change
     create_table :compilation_releases do |t|
       t.integer :compilation_head_id, null: false

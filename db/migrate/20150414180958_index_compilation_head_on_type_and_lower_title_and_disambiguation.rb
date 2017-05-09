@@ -1,4 +1,4 @@
-class IndexCompilationHeadOnTypeAndLowerTitleAndDisambiguation < ActiveRecord::Migration
+class IndexCompilationHeadOnTypeAndLowerTitleAndDisambiguation < ActiveRecord::Migration[4.2]
   def change
       reversible do |idx|
       idx.up do

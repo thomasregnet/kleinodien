@@ -1,4 +1,4 @@
-class IndexCountryRolesOnLowerName < ActiveRecord::Migration
+class IndexCountryRolesOnLowerName < ActiveRecord::Migration[4.2]
   def change
     reversible do |idx|
       idx.up do
