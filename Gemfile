@@ -55,6 +55,7 @@ end
 
 group :development do
   gem 'rails-erd'
+  gem 'listen'
   gem 'pry-rails'
   gem 'reek'
   gem 'rubocop'
