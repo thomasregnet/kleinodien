@@ -1,2 +1,2 @@
-class AlbumReleaseIdentifier < CrIdentifier
+class AlbumReleaseIdentifier < CompilationReleaseIdentifier
 end
