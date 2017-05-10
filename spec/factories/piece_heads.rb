@@ -62,10 +62,10 @@ FactoryGirl.define do
       type 'PodcastEpisodeHead'
     end
 
-    factory :song_head, class: SongHead do
-      artist_credit
-      type 'SongHead'
-    end
+    # factory :song_head, class: SongHead do
+    #   artist_credit
+    #   type 'SongHead'
+    # end
 
     factory :tv_episode_head, class: TvEpisodeHead do
       type 'TvEpisodeHead'
