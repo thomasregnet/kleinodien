@@ -3,13 +3,9 @@ module Identifyable
 
   included do
     identifier_class_name = "#{self}Identifier"
-    if respond_to? :identified_foreign_key
-      has_many :identifiers,
-               class_name: identifier_class_name,
-               foreign_key: identified_foreign_key
-    else
-      has_many :identifiers, class_name: identifier_class_name
-    end
+    has_many :identifiers,
+             class_name: identifier_class_name,
+             foreign_key: ForeignKeyFinder.perform(self)
   end
 
   module ClassMethods
@@ -22,6 +18,18 @@ module Identifyable
       identifier = identifier_class.find_by(source: source, value: value)
       return unless identifier
       identifier.identified
+    end
+  end
+
+  # http://stackoverflow.com/questions/318850/private-module-methods-in-ruby
+  class ForeignKeyFinder
+    def self.perform(klass)
+      klass.ancestors.each do |ancestor|
+        next unless ancestor.respond_to? :superclass
+        if ancestor.superclass == ActiveRecord::Base
+          return ancestor.to_s.foreign_key.to_sym
+        end
+      end
     end
   end
 end
