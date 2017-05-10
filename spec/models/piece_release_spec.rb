@@ -17,6 +17,8 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
+      attr = FactoryGirl.attributes_for(:piece_release)
+      #byebug
       @commentable = FactoryGirl.create(:piece_release)
     end
 

@@ -28,8 +28,8 @@ module Brainz
       @song_head = SongHead.find_or_create_by!(
         artist_credit: artist_credit,
         title:         brz_recording.title,
-        source:        Source::MusicBrainz,
-        source_ident:  brz_recording.mbid
+        #source:        Source::MusicBrainz,
+        #source_ident:  brz_recording.mbid
       )
     end
 

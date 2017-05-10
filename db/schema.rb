@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509180647) do
+ActiveRecord::Schema.define(version: 20170510190845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -439,6 +439,14 @@ ActiveRecord::Schema.define(version: 20170509180647) do
     t.index ["piece_head_id"], name: "index_ph_labels_on_piece_head_id"
   end
 
+  create_table "piece_head_identifiers", force: :cascade do |t|
+    t.text "value", null: false
+    t.integer "piece_head_id", null: false
+    t.integer "source_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "piece_heads", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id"
     t.integer "season_id"
@@ -448,8 +456,6 @@ ActiveRecord::Schema.define(version: 20170509180647) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "source_ident"
-    t.integer "source_id"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id"
     t.index ["season_id"], name: "index_piece_heads_on_season_id"
@@ -775,9 +781,10 @@ ActiveRecord::Schema.define(version: 20170509180647) do
   add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
+  add_foreign_key "piece_head_identifiers", "piece_heads", name: "piece_head_identifiers_piece_head_id_fkey"
+  add_foreign_key "piece_head_identifiers", "sources", name: "piece_head_identifiers_source_id_fkey"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
-  add_foreign_key "piece_heads", "sources", name: "fk_piece_heads_source_id"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
