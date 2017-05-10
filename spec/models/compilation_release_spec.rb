@@ -47,17 +47,6 @@ RSpec.describe CompilationRelease, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
-  context 'with identifiers' do
-    before(:each) do
-      @identifier = FactoryGirl.create(:compilation_release_identifier)
-      @c_release = @identifier.identified
-    end
-
-    specify '#identifiers' do
-      expect(@c_release.identifiers.count).to eq 1
-    end
-  end
-
   context 'with product_numbers' do
     before(:each) do
       @product_number = FactoryGirl.create(:product_number)
