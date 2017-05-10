@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'shared_examples_for_identifyable'
 
 RSpec.describe EpisodeHead, type: :model do
   before(:each) do
@@ -15,5 +16,13 @@ RSpec.describe EpisodeHead, type: :model do
 
   it 'knows its serial' do
     expect(@episode_head.serial).to be_instance_of(Serial)
+  end
+
+  it_behaves_like 'an identifyable model' do
+    before(:each) do
+      @episode_head = FactoryGirl.create(:episode_head_with_identifiers)
+    end
+
+    let(:identifyable) { @episode_head }
   end
 end
