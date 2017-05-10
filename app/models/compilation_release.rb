@@ -17,9 +17,6 @@ class CompilationRelease < ActiveRecord::Base
   has_many :formats,
            class_name: 'CrFormat',
            foreign_key: :compilation_release_id
-  has_many :identifiers,
-           class_name: 'CompilationReleaseIdentifier',
-           foreign_key: :compilation_release_id
   has_many :labels, class_name: 'CrLabel'
   has_many :product_numbers
   has_many :ratings
