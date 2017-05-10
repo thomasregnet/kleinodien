@@ -1,0 +1,2 @@
+class SongHeadIdentifier < PieceHeadIdentifier
+end
