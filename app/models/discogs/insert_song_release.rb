@@ -30,7 +30,7 @@ module Discogs
       @artist_credit.pieces.find_or_create_by!(
         title:  @dc_track.title,
         type:   SongHead.to_s,
-        source: Source::Discogs
+        #source: Source::Discogs
       )
     end
   end
