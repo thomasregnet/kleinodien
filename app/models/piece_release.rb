@@ -7,7 +7,6 @@ class PieceRelease < ActiveRecord::Base
   belongs_to :head,
              class_name: 'PieceHead',
              foreign_key: :piece_head_id
-  belongs_to :source
 
   has_and_belongs_to_many :tags
 
@@ -23,7 +22,4 @@ class PieceRelease < ActiveRecord::Base
   has_and_belongs_to_many :countries
 
   delegate :title, to: :head
-
-  validates :source_ident,
-            uniqueness: { allow_blank: true, scope: %i(source_id type) }
 end
