@@ -67,10 +67,10 @@ FactoryGirl.define do
       end
     end
 
-    factory :song_release, class: SongRelease do
-      type 'Song'
-      association :head, factory: :song_head
-    end
+    # factory :song_release, class: SongRelease do
+    #   type 'Song'
+    #   association :head, factory: :song_head
+    # end
 
     # factory :movie_release, class: MovieRelease do
     #   type 'Movie'

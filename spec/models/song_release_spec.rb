@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_pieces'
+require 'shared_examples_for_identifyable'
 
 RSpec.describe SongRelease, type: :model do
   before(:each) do
@@ -17,5 +18,13 @@ RSpec.describe SongRelease, type: :model do
 
   it_behaves_like 'a piece' do
     let(:piece) { @song_release }
+  end
+
+  it_behaves_like 'an identifyable model' do
+    before(:each) do
+      @song_release = FactoryGirl.create(:song_release_with_identifiers)
+    end
+
+    let(:identifyable) { @song_release }
   end
 end
