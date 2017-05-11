@@ -1,0 +1,2 @@
+class PieceReleaseIdentifier < ApplicationRecord
+end
