@@ -1,0 +1,2 @@
+class MovieReleaseIdentifier < PieceReleaseIdentifier
+end
