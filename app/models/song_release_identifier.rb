@@ -1,0 +1,2 @@
+class SongReleaseIdentifier < PieceReleaseIdentifier
+end
