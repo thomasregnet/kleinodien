@@ -43,8 +43,8 @@ module Brainz
 
     def perform_song_release
       @song_release = @song_head.releases.create(
-        source:       Source::MusicBrainz,
-        source_ident: @brz_track.mbid
+        # source:       Source::MusicBrainz,
+        # source_ident: @brz_track.mbid
       )
     end
   end
