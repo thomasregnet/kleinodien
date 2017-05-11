@@ -54,9 +54,9 @@ FactoryGirl.define do
       end
     end
 
-    factory :movie_head, class: MovieHead do
-      type 'MovieHead'
-    end
+    # factory :movie_head, class: MovieHead do
+    #   type 'MovieHead'
+    # end
 
     factory :podcast_episode_head, class: PodcastEpisodeHead do
       type 'PodcastEpisodeHead'
