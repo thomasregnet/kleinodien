@@ -14,7 +14,7 @@ module Discogs
       song_head = perform_song_head
       SongRelease.find_or_create_by!(
         head:   song_head,
-        source: Source::Discogs
+        # source: Source::Discogs
       )
     end
 
