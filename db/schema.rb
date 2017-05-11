@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510190845) do
+ActiveRecord::Schema.define(version: 20170511183828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -468,6 +468,14 @@ ActiveRecord::Schema.define(version: 20170510190845) do
     t.index ["tag_id"], name: "index_piece_heads_tags_on_tag_id"
   end
 
+  create_table "piece_release_identifiers", force: :cascade do |t|
+    t.text "value", null: false
+    t.integer "piece_release_id", null: false
+    t.integer "source_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "piece_releases", id: :serial, force: :cascade do |t|
     t.integer "piece_head_id", null: false
     t.integer "station_id"
@@ -476,8 +484,6 @@ ActiveRecord::Schema.define(version: 20170510190845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
-    t.string "source_ident"
-    t.integer "source_id"
     t.integer "date_mask", limit: 2
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true
     t.index ["station_id"], name: "index_piece_releases_on_station_id"
@@ -787,8 +793,9 @@ ActiveRecord::Schema.define(version: 20170510190845) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
+  add_foreign_key "piece_release_identifiers", "piece_releases", name: "piece_release_identifiers_piece_release_id_fkey"
+  add_foreign_key "piece_release_identifiers", "sources", name: "piece_release_identifiers_source_id_fkey"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
-  add_foreign_key "piece_releases", "sources", name: "fk_piece_releases_source_id"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "piece_releases_tags", "piece_releases"
   add_foreign_key "piece_releases_tags", "tags"
