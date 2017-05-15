@@ -1,5 +1,8 @@
 require 'rails_helper'
+require 'shared_examples_for_identifiers'
 
 RSpec.describe MovieReleaseIdentifier, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_behaves_like 'an identifier' do
+    let(:identifier) { FactoryGirl.build(:movie_release_identifier) }
+  end
 end
