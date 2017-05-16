@@ -1,8 +1,8 @@
 # A position of a content in an users repository
 class RepositoryPosition < ApplicationRecord
-  belongs_to :compilation_copy, required: false
+  belongs_to :compilation_copy,  required: false
   belongs_to :compilation_track, required: false
-  belongs_to :piece_track, required: false
+  belongs_to :piece_track,       required: false
   belongs_to :repository
   belongs_to :user
 
@@ -17,8 +17,6 @@ class RepositoryPosition < ApplicationRecord
   validates :compilation_copy,
             presence: true,
             unless: Proc.new { |rp| rp.compilation_track.nil? }
-  validates :repository, presence: true
-  validates :user, presence: true
 
   def compilation_copy=(cc)
     if cc

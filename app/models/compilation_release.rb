@@ -24,7 +24,6 @@ class CompilationRelease < ActiveRecord::Base
 
   has_and_belongs_to_many :countries
 
-  validates :head, presence: true
   validates :type, presence: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 

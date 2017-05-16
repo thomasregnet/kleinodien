@@ -3,7 +3,6 @@ class Serial < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions
-  #has_many :episodes, through: :seasons
   has_many :seasons, inverse_of: :serial
   has_many :ratings
 

@@ -18,7 +18,4 @@ class CompilationTrack < ActiveRecord::Base
            class_name: 'CtFormatDetail',
            foreign_key: :compilation_track_id
   has_many :repository_positions
-
-  validates :compilation_release, presence: true
-  validates :piece_release,       presence: true
 end
