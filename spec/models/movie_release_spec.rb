@@ -16,10 +16,6 @@ RSpec.describe MovieRelease, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    before(:each) do
-      @movie_release = FactoryGirl.create(:movie_release_with_identifiers)
-    end
-
-    let(:identifyable) { @movie_release }
+    let(:identifyable) { FactoryGirl.create(:movie_release_with_identifiers) }
   end
 end

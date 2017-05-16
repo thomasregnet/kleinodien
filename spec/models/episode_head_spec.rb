@@ -19,10 +19,6 @@ RSpec.describe EpisodeHead, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    before(:each) do
-      @episode_head = FactoryGirl.create(:episode_head_with_identifiers)
-    end
-
-    let(:identifyable) { @episode_head }
+    let(:identifyable) { FactoryGirl.create(:episode_head_with_identifiers) }
   end
 end

@@ -18,10 +18,6 @@ RSpec.describe MovieHead, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    before(:each) do
-      @movie_head = FactoryGirl.create(:movie_head_with_identifiers)
-    end
-
-    let(:identifyable) { @movie_head }
+    let(:identifyable) { FactoryGirl.create(:movie_head_with_identifiers) }
   end
 end

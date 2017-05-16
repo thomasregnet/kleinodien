@@ -29,11 +29,7 @@ RSpec.describe Artist, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    before(:each) do
-      @artist = FactoryGirl.create(:artist_with_identifiers)
-    end
-
-    let(:identifyable) { @artist }
+    let(:identifyable) { FactoryGirl.create(:artist_with_identifiers) }
   end
 
   it_behaves_like 'a rateable model' do
