@@ -21,10 +21,6 @@ RSpec.describe SongRelease, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    before(:each) do
-      @song_release = FactoryGirl.create(:song_release_with_identifiers)
-    end
-
-    let(:identifyable) { @song_release }
+    let(:identifyable) { FactoryGirl.create(:song_release_with_identifiers) }
   end
 end
