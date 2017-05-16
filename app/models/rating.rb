@@ -5,20 +5,20 @@ class Rating < ApplicationRecord
     piece_head piece_release season serial station
   ).freeze
 
-  belongs_to :user, required: false
-  belongs_to :artist_credit, required: false
-  belongs_to :artist, required: false
-  belongs_to :compilation_head, required: false
+  belongs_to :user
+
+  belongs_to :artist_credit,       required: false
+  belongs_to :artist,              required: false
+  belongs_to :compilation_head,    required: false
   belongs_to :compilation_release, required: false
-  belongs_to :piece_head, required: false
-  belongs_to :piece_release, required: false
-  belongs_to :season, required: false
-  belongs_to :serial, required: false
-  belongs_to :station, required: false
+  belongs_to :piece_head,          required: false
+  belongs_to :piece_release,       required: false
+  belongs_to :season,              required: false
+  belongs_to :serial,              required: false
+  belongs_to :station,             required: false
 
   validate :exact_one_content
 
-  validates :user, presence: true
   validates :value, inclusion: 0..10
 
   private

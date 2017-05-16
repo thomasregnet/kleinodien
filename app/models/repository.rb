@@ -11,5 +11,4 @@ class Repository < ApplicationRecord
   accepts_nested_attributes_for :format_details
 
   validates :name, presence: true
-  validates :user, presence: true
 end

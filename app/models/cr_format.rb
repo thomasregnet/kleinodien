@@ -8,10 +8,8 @@ class CrFormat < ActiveRecord::Base
   has_many :details,
            class_name: 'CrFormatDetail'
 
-  validates :format,   presence: true
   validates :position, presence: true, uniqueness: { scope: :release }
   validates :quantity, presence: true
-  validates :release,  presence: true
 
   alias_attribute :format_details, :details
 
