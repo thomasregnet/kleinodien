@@ -2,7 +2,7 @@ module Import
   class BrainzArtist
     attr_reader :artist, :data
 
-    WANTED_RELATION_TYPES = %w(discogs).freeze
+    WANTED_RELATION_TYPES = %w[discogs].freeze
 
     def self.perform(data)
       new(data).perform

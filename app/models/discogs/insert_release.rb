@@ -29,10 +29,10 @@ module Discogs
     private
 
     def already_exists?
-      #AlbumRelease.find_by(
-        #source:       Source::Discogs,
-        #source_ident: @dc_release.id
-      #)
+      # AlbumRelease.find_by(
+      # source:       Source::Discogs,
+      # source_ident: @dc_release.id
+      # )
     end
 
     def album_release
@@ -62,8 +62,8 @@ module Discogs
       @artist_credit.compilations.create!(
         title:        @dc_release.title,
         type:         AlbumHead.to_s,
-        #source:       Source::Discogs,
-        #source_ident: @dc_release.master_id
+        # source:       Source::Discogs,
+        # source_ident: @dc_release.master_id
       )
     end
 

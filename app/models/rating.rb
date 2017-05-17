@@ -1,9 +1,9 @@
 # User ratings for artists, albums, movies ...
 class Rating < ApplicationRecord
-  POSSIBLE_CONTENTS = %i(
+  POSSIBLE_CONTENTS = %i[
     artist_credit artist compilation_head compilation_release
     piece_head piece_release season serial station
-  ).freeze
+  ].freeze
 
   belongs_to :user
 

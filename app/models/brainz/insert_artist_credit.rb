@@ -44,8 +44,6 @@ module Brainz
         value:  brz_artist.mbid
       )
 
-
-
       if identifier
         artist = identifier.artist
         return artist if artist

@@ -2,7 +2,7 @@
 class CompilationRelease < ActiveRecord::Base
   composed_of :date,
               class_name: 'IncompleteDate',
-              mapping: [%w(date date), %w(date_mask mask)]
+              mapping: [%w[date date], %w[date_mask mask]]
 
   belongs_to :head,
              class_name: 'CompilationHead',

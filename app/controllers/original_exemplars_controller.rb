@@ -15,17 +15,13 @@ class OriginalExemplarsController < ApplicationController
     end
   end
 
-  def update
-  end
+  def update; end
 
-  def edit
-  end
+  def edit; end
 
-  def destroy
-  end
+  def destroy; end
 
-  def index
-  end
+  def index; end
 
   def show
     @original_exemplar = OriginalExemplar.find(params[:id])
@@ -35,6 +31,6 @@ class OriginalExemplarsController < ApplicationController
 
   def original_exemplar_params
     params.require(:original_exemplar)
-      .permit(:compilation_release_id, :disambiguation)
+          .permit(:compilation_release_id, :disambiguation)
   end
 end

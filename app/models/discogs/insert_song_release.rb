@@ -13,7 +13,7 @@ module Discogs
     def perform
       song_head = perform_song_head
       SongRelease.find_or_create_by!(
-        head:   song_head,
+        head: song_head,
         # source: Source::Discogs
       )
     end
@@ -30,7 +30,7 @@ module Discogs
       @artist_credit.pieces.find_or_create_by!(
         title:  @dc_track.title,
         type:   SongHead.to_s,
-        #source: Source::Discogs
+        # source: Source::Discogs
       )
     end
   end

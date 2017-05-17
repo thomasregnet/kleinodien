@@ -4,7 +4,7 @@ class CompilationTrack < ActiveRecord::Base
 
   composed_of :duration,
               class_name: 'Duration',
-              mapping: [%w(milliseconds milliseconds), %w(accuracy accuracy)]
+              mapping: [%w[milliseconds milliseconds], %w[accuracy accuracy]]
 
   belongs_to :compilation_release,
              class_name:  'CompilationRelease',

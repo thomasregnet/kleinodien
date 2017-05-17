@@ -17,15 +17,13 @@ class CompilationCopiesController < ApplicationController
     @repositories = Repository.where(user: current_user)
   end
 
-  def index
-  end
+  def index; end
 
   def show
     @compilation_copy = CompilationCopy.find(params[:id])
   end
 
-  def edit
-  end
+  def edit; end
 
   private
 
