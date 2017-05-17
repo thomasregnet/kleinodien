@@ -1,3 +1,4 @@
+# Controller for /album_releases
 class AlbumReleasesController < ApplicationController
   def index
     @album_releases = AlbumRelease.all

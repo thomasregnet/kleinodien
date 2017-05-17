@@ -1,2 +1,6 @@
-class Api::V01::ParticipantsController < JSONAPI::ResourceController
+module Api
+  module V01
+    class ParticipantsController < JSONAPI::ResourceController
+    end
+  end
 end

@@ -1,3 +1,4 @@
+# Controller for /repositories
 class RepositoriesController < ApplicationController
   def new
     # TODO: new needs valid user

@@ -1,3 +1,4 @@
+# Controller for /original_exemplars
 class OriginalExemplarsController < ApplicationController
   def new
     @original_exemplar      = OriginalExemplar.new

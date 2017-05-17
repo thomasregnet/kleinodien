@@ -1,3 +1,4 @@
+# Controller for /movie_heads
 class MovieHeadsController < ApplicationController
   def index
     @movie_heads = MovieHead.all

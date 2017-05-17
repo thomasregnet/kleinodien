@@ -1,2 +1,6 @@
-class Api::V01::MovieHeadsController < JSONAPI::ResourceController
+module Api
+  module V01
+    class MovieHeadsController < JSONAPI::ResourceController
+    end
+  end
 end
