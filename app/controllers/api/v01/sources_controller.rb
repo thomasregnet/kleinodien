@@ -1,2 +1,6 @@
-class Api::V01::SourcesController < JSONAPI::ResourceController
+module Api
+  module V01
+    class SourcesController < JSONAPI::ResourceController
+    end
+  end
 end

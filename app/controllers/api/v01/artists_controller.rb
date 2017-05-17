@@ -1,2 +1,6 @@
-class Api::V01::ArtistsController < JSONAPI::ResourceController
+module Api
+  module V01
+    class ArtistsController < JSONAPI::ResourceController
+    end
+  end
 end

@@ -1,3 +1,4 @@
+# Controller for /album_heds
 class AlbumHeadsController < ApplicationController
   def index
     @album_heads = AlbumHead.all

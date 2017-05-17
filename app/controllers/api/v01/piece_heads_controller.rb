@@ -1,2 +1,6 @@
-class Api::V01::PieceHeadsController < JSONAPI::ResourceController
+module Api
+  module V01
+    class PieceHeadsController < JSONAPI::ResourceController
+    end
+  end
 end
