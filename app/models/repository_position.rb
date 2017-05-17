@@ -16,7 +16,7 @@ class RepositoryPosition < ApplicationRecord
 
   validates :compilation_copy,
             presence: true,
-            unless: Proc.new { |rp| rp.compilation_track.nil? }
+            unless: proc { |rp| rp.compilation_track.nil? }
 
   def compilation_copy=(cc)
     if cc

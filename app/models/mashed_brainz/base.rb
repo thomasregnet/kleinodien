@@ -6,7 +6,6 @@ module MashedBrainz
     include Hashie::Extensions::Coercion
     include Hashie::Extensions::MergeInitializer
 
-
     coerce_key :artist, lambda { |value|
       MashedBrainz::Artist.new(value)
     }

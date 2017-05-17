@@ -12,7 +12,7 @@ class PieceHead < ActiveRecord::Base
   validates :title,
             presence: true,
             uniqueness: {
-              scope: %i(type disambiguation artist_credit_id),
+              scope: %i[type disambiguation artist_credit_id],
               case_sensitive: false
             }
   validates :type, presence: true

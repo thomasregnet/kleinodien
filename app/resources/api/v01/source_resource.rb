@@ -3,5 +3,3 @@ class Api::V01::SourceResource < JSONAPI::Resource
 
   filter :name
 end
-
-

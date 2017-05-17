@@ -21,10 +21,10 @@ class Comment < ApplicationRecord
   private
 
   def only_one_content
-    contents = %i(
+    contents = %i[
       artist_credit artist compilation_head compilation_release
       piece_head piece_release repository season serial station
-    )
+    ]
 
     count = 0
     contents.each { |content| count += 1 if send content }

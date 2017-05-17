@@ -3,9 +3,9 @@ class OmdbImporter
   def self.import_movie(xml)
     omdb_movie = KleinodienOmdb.parse_movie(xml)
     movie_head = MovieHead.create!(
-      title:        omdb_movie.name,
-      #source:       Source::Omdb,
-      #source_ident: omdb_movie.id
+      title: omdb_movie.name,
+      # source:       Source::Omdb,
+      # source_ident: omdb_movie.id
     )
     import_countries(omdb_movie.countries, movie_head)
     import_departments(omdb_movie.departments, movie_head)

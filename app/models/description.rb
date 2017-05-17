@@ -1,9 +1,9 @@
 # Describe things
 class Description < ApplicationRecord
-  POSSIBLE_CONTENTS = %i(
+  POSSIBLE_CONTENTS = %i[
     artist_credit artist compilation_head compilation_release
     country piece_head piece_release season serial station
-  ).freeze
+  ].freeze
 
   belongs_to :user,   required: false
   belongs_to :source, required: false
