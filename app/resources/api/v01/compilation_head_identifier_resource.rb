@@ -1,5 +1,6 @@
 module Api
   module V01
+    # JSONAPI::Resources CompilationHeadIdentifier
     class CompilationHeadIdentifierResource < JSONAPI::Resource
       attributes :compilation_head_id, :source_id, :value
 

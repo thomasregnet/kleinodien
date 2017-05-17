@@ -1,5 +1,10 @@
-class Api::V01::CompilationHeadResource < JSONAPI::Resource
-  immutable
+module Api
+  module V01
+    # JSONAPI::Resources CompilationHead
+    class CompilationHeadResource < JSONAPI::Resource
+      immutable
 
-  attributes :disambiguation, :title
+      attributes :disambiguation, :title
+    end
+  end
 end

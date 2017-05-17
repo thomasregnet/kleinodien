@@ -1,5 +1,10 @@
-class Api::V01::SourceResource < JSONAPI::Resource
-  attributes :name, :description
+module Api
+  module V01
+    # JSONAPI::Resources Source
+    class SourceResource < JSONAPI::Resource
+      attributes :name, :description
 
-  filter :name
+      filter :name
+    end
+  end
 end
