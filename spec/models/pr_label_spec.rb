@@ -7,6 +7,6 @@ RSpec.describe PrLabel, type: :model do
     let(:label)        { FactoryGirl.build(:pr_label) }
     let(:label_with_catalog_no) do
       FactoryGirl.build(:pr_label_with_catalog_no)
-    end    
+    end
   end
 end

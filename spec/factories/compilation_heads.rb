@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :compilation_head do
-    sequence(:title) { |n| "compilation head ##{n}"}
+    sequence(:title) { |n| "compilation head ##{n}" }
     type 'CompilationHead'
-    
+
     factory :compilation_head_with_companies do
       transient do
         companies_count 2

@@ -15,7 +15,7 @@ FactoryGirl.define do
       transient do
         identifiers_count 2
       end
-      
+
       after(:create) do |artist, evaluator|
         create_list(
           :artist_identifier,

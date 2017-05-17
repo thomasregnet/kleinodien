@@ -68,9 +68,9 @@ RSpec.describe Rating, type: :model do
       @rating = FactoryGirl.build(:artist_credit_rating)
     end
 
-    factories = [
-      :artist, :compilation_head, :compilation_release,
-      :piece_head, :piece_release, :season, :serial, :station
+    factories = %i[
+      artist compilation_head compilation_release
+      piece_head piece_release season serial station
     ]
 
     factories.each do |factory|

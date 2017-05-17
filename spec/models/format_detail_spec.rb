@@ -7,7 +7,7 @@ RSpec.describe FormatDetail, type: :model do
   end
 
   it_behaves_like 'a format' do
-    #byebug
+    # byebug
     let(:format) { @format_detail }
   end
 end

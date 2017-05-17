@@ -1,6 +1,4 @@
 FactoryGirl.define do
-  factory :discogs_insert_tracklist, :class => 'Discogs::InsertTracklist' do
-    
+  factory :discogs_insert_tracklist, class: 'Discogs::InsertTracklist' do
   end
-
 end

@@ -24,7 +24,6 @@ FactoryGirl.define do
       end
     end
 
-
     factory :piece_release_with_credits do
       transient do
         credits_count 2

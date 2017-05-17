@@ -21,7 +21,8 @@ RSpec.describe TvSerial, type: :model do
   context 'with seassons' do
     before(:each) do
       @tv_serial = FactoryGirl.create(
-        :tv_serial_with_seasons, seasons_count: 3)
+        :tv_serial_with_seasons, seasons_count: 3
+      )
     end
 
     it 'has seasons' do

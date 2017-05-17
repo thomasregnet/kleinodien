@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :piece_head do
     sequence(:title) { |n| "piece ##{n}" }
-    type  'PieceHead'
-    #source Source::MusicBrainz
-    #sequence(:source_ident) { |n| "looks-like-a-brainz-id-#{n}" }
+    type 'PieceHead'
+    # source Source::MusicBrainz
+    # sequence(:source_ident) { |n| "looks-like-a-brainz-id-#{n}" }
 
     factory :piece_head_with_companies do
       transient do

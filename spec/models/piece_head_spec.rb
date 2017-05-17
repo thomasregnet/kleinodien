@@ -65,7 +65,7 @@ RSpec.describe PieceHead, type: :model do
       :song_head,
       title:          @ph.title,
       disambiguation: @ph.disambiguation,
-      #source_ident:   nil
+      # source_ident:   nil
     )
     expect(@s_head).to be_valid
     expect { @s_head.save! }.not_to raise_error

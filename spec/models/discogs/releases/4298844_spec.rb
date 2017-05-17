@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require 'rails_helper'
 require 'discogs_test_helper'
 require 'shared_examples_for_album_releases_imported_from_discogs'

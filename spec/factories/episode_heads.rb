@@ -4,8 +4,8 @@ FactoryGirl.define do
     sequence(:position) { |n| n }
     sequence(:title) { |n| "episode title ##{n}" }
     type 'EpisodeHead'
-    #source Source::Omdb
-    #sequence(:source_ident) { |n| n.to_s }
+    # source Source::Omdb
+    # sequence(:source_ident) { |n| n.to_s }
 
     factory :episode_head_with_identifiers do
       transient do
