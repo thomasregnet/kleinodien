@@ -40,7 +40,7 @@ RSpec.describe Description, type: :model do
         @description.send setter, FactoryGirl.create(factory)
         expect(@description).not_to be_valid
         expect { @description.save! validate: false }
-          .to raise_error /exact_one_content_on_descriptions/
+          .to raise_error(/exact_one_content_on_descriptions/)
       end
     end
 

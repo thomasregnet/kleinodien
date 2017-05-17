@@ -26,7 +26,7 @@ RSpec.describe Comment, type: :model do
 
     it 'raises an error when it is saved without validations' do
       expect { @comment.save! validate: false }
-        .to raise_error /exact_one_content/
+        .to raise_error(/exact_one_content/)
     end
   end
 
@@ -47,7 +47,7 @@ RSpec.describe Comment, type: :model do
         puts factory.to_s
         expect(@comment).not_to be_valid
         expect { @comment.save! validate: false }
-          .to raise_error /exact_one_content_on_comments/
+          .to raise_error(/exact_one_content_on_comments/)
       end
     end
   end

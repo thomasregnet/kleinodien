@@ -7,7 +7,7 @@ RSpec.shared_examples 'a rating with a wrong value' do
 
   it 'raises an error if it is saved without being validated' do
     expect { rating.save! validate: false }
-      .to raise_error /ratings_value_between_0_and_10/
+      .to raise_error(/ratings_value_between_0_and_10/)
   end
 end
 
@@ -79,7 +79,7 @@ RSpec.describe Rating, type: :model do
         @rating.send setter, FactoryGirl.create(factory)
         expect(@rating).not_to be_valid
         expect { @rating.save! validate: false }
-          .to raise_error /exact_one_content_on_ratings/
+          .to raise_error(/exact_one_content_on_ratings/)
       end
     end
   end
