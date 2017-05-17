@@ -7,5 +7,4 @@ FactoryGirl.define do
       sequence(:catalog_no) { |n| "catalog-##{n}" }
     end
   end
-
 end

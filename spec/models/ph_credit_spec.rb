@@ -6,6 +6,6 @@ RSpec.describe PhCredit, type: :model do
     let(:credit)           { FactoryGirl.create(:ph_credit) }
     let(:credit_with_job)  { FactoryGirl.create(:ph_credit_with_job) }
     let(:credit_with_role) { FactoryGirl.create(:ph_credit_with_role) }
-    let(:owner_setter)      { 'piece_head=' }
+    let(:owner_setter) { 'piece_head=' }
   end
 end

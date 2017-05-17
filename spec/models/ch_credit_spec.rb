@@ -6,6 +6,6 @@ RSpec.describe ChCredit, type: :model do
     let(:credit)           { FactoryGirl.create(:ch_credit) }
     let(:credit_with_job)  { FactoryGirl.create(:ch_credit_with_job) }
     let(:credit_with_role) { FactoryGirl.create(:ch_credit_with_role) }
-    let(:owner_setter)      { 'compilation_head=' }    
+    let(:owner_setter) { 'compilation_head=' }
   end
 end

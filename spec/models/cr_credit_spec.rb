@@ -6,6 +6,6 @@ RSpec.describe CrCredit, type: :model do
     let(:credit)           { FactoryGirl.create(:cr_credit) }
     let(:credit_with_job)  { FactoryGirl.create(:cr_credit_with_job) }
     let(:credit_with_role) { FactoryGirl.create(:cr_credit_with_role) }
-    let(:owner_setter)      { 'compilation_release=' }
+    let(:owner_setter) { 'compilation_release=' }
   end
 end

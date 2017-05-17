@@ -65,9 +65,9 @@ RSpec.describe CrFormat, type: :model do
       let(:entity) { @cr_format }
     end
 
-  #   it 'should handle its detalis' do
-  #     expect(@cr_format).to respond_to(:details)
-  #     expect(@cr_format.details.count).to eq(3)
-  #   end
+    #   it 'should handle its detalis' do
+    #     expect(@cr_format).to respond_to(:details)
+    #     expect(@cr_format.details.count).to eq(3)
+    #   end
   end
 end

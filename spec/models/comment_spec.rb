@@ -35,9 +35,9 @@ RSpec.describe Comment, type: :model do
       @comment = FactoryGirl.create(:comment_on_artist)
     end
 
-    factories = [
-      :artist_credit, :compilation_head, :compilation_release, :piece_head,
-      :piece_release, :repository, :season, :serial, :station
+    factories = %i[
+      artist_credit compilation_head compilation_release piece_head
+      piece_release repository season serial station
     ]
 
     factories.each do |factory|

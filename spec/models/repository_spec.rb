@@ -12,7 +12,7 @@ RSpec.describe Repository, type: :model do
     let(:commentable) { @compilation_release }
 
     after(:all) { DatabaseCleaner.clean }
-  end  
+  end
 
   context 'when live is simple' do
     before(:each) do
@@ -61,7 +61,7 @@ RSpec.describe Repository, type: :model do
       @repository = FactoryGirl.build(:repository)
       @repository.format = Format.find_by(name: 'CDr')
       @repos_format_detail = RepositoryFormatDetail.new(
-        #abbr:     'WAV',
+        # abbr:     'WAV',
         detail:   FormatDetail.find_by(name: 'WAV'),
         position: 0
       )

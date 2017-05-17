@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :movie_head do
     sequence(:position) { |n| n }
     sequence(:title) { |n| "movie title ##{n}" }
-    #type 'MovieHead'
+    # type 'MovieHead'
 
     factory :movie_head_with_identifiers do
       transient do

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :compilation_release do
     association :head, factory: :compilation_head
-    type "CompilationRelease"
- 
+    type 'CompilationRelease'
+
     factory :compilation_release_with_companies do
       transient do
         companies_count 2

@@ -29,9 +29,9 @@ RSpec.describe Description, type: :model do
       @description = FactoryGirl.create(:artist_credit_description)
     end
 
-    factories = [
-      :artist, :compilation_head, :compilation_release, :country,
-      :piece_head, :piece_release, :season, :serial, :station
+    factories = %i[
+      artist compilation_head compilation_release country
+      piece_head piece_release season serial station
     ]
 
     factories.each do |factory|

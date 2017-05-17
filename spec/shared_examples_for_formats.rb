@@ -1,4 +1,4 @@
-RSpec.shared_examples "a format" do
+RSpec.shared_examples 'a format' do
   it 'is valid with valid parameters' do
     expect(format).to be_valid
   end

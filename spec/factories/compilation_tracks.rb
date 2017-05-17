@@ -14,7 +14,6 @@ FactoryGirl.define do
     factory :compilation_track_with_format do
       association :format, factory: :format
 
-
       factory :compilation_track_with_details do
         transient do
           details_count 3
@@ -35,7 +34,7 @@ FactoryGirl.define do
         positions_count 3
       end
 
-      after(:create) do |track, evaluator|
+      after(:create) do |track, _evaluator|
         3.times do
           track.repository_positions << create(
             :repository_position_with_compilation_track,
