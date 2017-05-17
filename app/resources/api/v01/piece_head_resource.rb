@@ -1,5 +1,6 @@
 module Api
   module V01
+    # JSONAPI::Resources PieceHead
     class PieceHeadResource < JSONAPI::Resource
       immutable
 

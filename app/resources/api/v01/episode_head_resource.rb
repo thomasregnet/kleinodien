@@ -1,2 +1,7 @@
-class Api::V01::EpisodeHeadResource < Api::V01::PieceHeadResource
+module Api
+  module V01
+    # JSONAPI::Resources EpisodeHeadResource
+    class EpisodeHeadResource < Api::V01::PieceHeadResource
+    end
+  end
 end
