@@ -1,3 +1,4 @@
+# Included in concerned classes like Artist, AlbumHead, SongRelease ...
 module Identifyable
   extend ActiveSupport::Concern
 
@@ -8,6 +9,7 @@ module Identifyable
              foreign_key: ForeignKeyFinder.perform(self)
   end
 
+  # Class methods for Identifyable classes
   module ClassMethods
     def identify(source_name, value)
       identifier_class = "#{self}Identifier".constantize
@@ -21,6 +23,7 @@ module Identifyable
     end
   end
 
+  # Make a "private" method
   # http://stackoverflow.com/questions/318850/private-module-methods-in-ruby
   class ForeignKeyFinder
     def self.perform(klass)

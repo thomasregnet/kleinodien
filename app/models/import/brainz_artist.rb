@@ -1,4 +1,5 @@
 module Import
+  # Import an Artist from MusicBrainz
   class BrainzArtist
     attr_reader :artist, :data
 

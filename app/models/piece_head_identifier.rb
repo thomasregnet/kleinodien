@@ -1,3 +1,4 @@
+# Parent class for other Identifiers eg. SongHeadIdentifier
 class PieceHeadIdentifier < ApplicationRecord
   belongs_to :piece_head
   belongs_to :source
