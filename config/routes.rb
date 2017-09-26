@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v01 do
-      get 'music_brainz_releases/create'
-    end
-  end
+  # namespace :api do
+  #   namespace :v01 do
+  #     # get 'music_brainz_releases/create'
+  #     post 'music_brainz_releases/create'
+  #   end
+  # end
 
   namespace :api do
     namespace :v01 do
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
       resources :brainz_releases, only: [:create]
     end
     namespace :v01 do
+      resources :music_brainz_releases, only: [:create]
       jsonapi_resources :album_heads
       jsonapi_resources :artist_credits
       jsonapi_resources :artist_identifiers
