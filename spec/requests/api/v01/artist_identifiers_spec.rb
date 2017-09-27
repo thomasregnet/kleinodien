@@ -3,7 +3,7 @@ require 'api_helper'
 
 include ApiHelper
 
-RSpec.describe Api::V01::ArtistsController, type: :request do
+RSpec.describe Api::V01::ArtistIdentifiersController, type: :request do
   it 'sends a list of artist identifiers' do
     FactoryGirl.create_list(:artist_identifier, 2)
 
