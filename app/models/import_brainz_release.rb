@@ -1,0 +1,2 @@
+class ImportBrainzRelease < ApplicationRecord
+end
