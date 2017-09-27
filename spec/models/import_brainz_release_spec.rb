@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ImportBrainzRelease, type: :model do
-  specify '#perform' do
-    expect(subject.class).to respond_to(:perform)
-  end
-
   it 'returns a response object' do
     expect(ImportBrainzRelease.perform({}, ActionDispatch::Response.new))
       .to be_instance_of(ActionDispatch::Response)
@@ -24,5 +20,6 @@ RSpec.describe ImportBrainzRelease, type: :model do
     )
 
     expect(response.body).to match(/foobar/)
+    expect(response.status).to eq 202
   end
 end
