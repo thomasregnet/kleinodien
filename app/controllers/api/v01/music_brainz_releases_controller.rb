@@ -1,9 +1,9 @@
 class Api::V01::MusicBrainzReleasesController < ApplicationController
   def create
     x = brainz_params
-    response.status = 200
+    response.status = 202
     response.content_type = 'application/vnd.api+json'
-    render :json => {}
+   render :json => {foo: 'bar'}
   end
 
   private
