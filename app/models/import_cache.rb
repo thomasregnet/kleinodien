@@ -27,8 +27,8 @@ class ImportCache
 
   CACHED_SOURCE_NAMES.each do |source_name|
     CACHED_TYPE_NAMES.each do |type_name|
-      define_method("require_#{source_name}_#{type_name}") do |requirement|
-        required[source_name][type_name] = requirement
+      define_method("require_#{source_name}_#{type_name}") do |path, id=nil|
+        required[source_name][type_name][path] = id
       end
     end
   end
