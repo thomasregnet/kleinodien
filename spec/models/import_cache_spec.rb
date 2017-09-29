@@ -18,4 +18,10 @@ RSpec.describe ImportCache, type: :model do
     cache.store_discogs_artist('abc', 'foo')
     expect(cache.fetch_discogs_artist('abc')).to eq 'foo'
   end
+
+  specify 'write and read requirements' do
+    cache = ImportCache.new
+    cache.require_discogs_artist('http://foo/bar', 123)
+    # TODO: read the requirements
+  end
 end
