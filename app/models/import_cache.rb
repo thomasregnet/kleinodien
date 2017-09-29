@@ -1,0 +1,2 @@
+class ImportCache
+end
