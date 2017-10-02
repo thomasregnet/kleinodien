@@ -3,9 +3,9 @@ require 'api_helper'
 
 include ApiHelper
 
-RSpec.describe Api::V01::MusicBrainzReleasesController do
+RSpec.describe Api::V01::BrainzReleasesController do
   it 'accepts a request to import an MusicBraiz-release' do
-    api_post '/api/v01/music_brainz_releases',
+    api_post '/api/v01/brainz_releases',
              Hash[
                data: {
                  type: 'music-brainz-releases',
