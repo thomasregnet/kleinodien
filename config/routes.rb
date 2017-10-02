@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       resources :brainz_releases, only: [:create]
     end
     namespace :v01 do
-      resources :music_brainz_releases, only: [:create]
+      resources :brainz_releases, only: [:create]
       jsonapi_resources :album_heads
       jsonapi_resources :artist_credits
       jsonapi_resources :artist_identifiers

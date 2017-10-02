@@ -1,6 +1,6 @@
 When(/^I send a MusicBrainz id of a release i want to import$/) do
   post(
-    '/api/v01/music_brainz_releases',
+    '/api/v01/brainz_releases',
     {
       data:
         {

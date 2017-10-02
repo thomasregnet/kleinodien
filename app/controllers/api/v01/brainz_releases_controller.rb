@@ -1,7 +1,7 @@
 module Api
   module V01
     # Import releases from MusicBrainz
-    class MusicBrainzReleasesController < ApplicationController
+    class BrainzReleasesController < ApplicationController
       def create
         cache = ImportCache.new
         begin
