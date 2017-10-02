@@ -1,20 +1,20 @@
-# Post MusicBrainz data to kleinodien
+# Post MusicBrainz params to kleinodien
 class ImportBrainzRelease
-  attr_reader :data, :response
+  attr_reader :params, :cache
 
-  def self.perform(data, response)
-    new(data, response).perform
+  def self.perform(params, cache)
+    new(params, cache).perform
   end
 
-  def initialize(data, response)
-    @data     = data[:data]
-    @response = response
+  def initialize(params, cache)
+    @params  = params
+    @cache = cache
   end
 
   def perform
-    response.body = body
-    response.status = 202
-    response
+    #cache.body = body
+    #cache.status = 202
+    body
   end
 
   def body
@@ -25,7 +25,7 @@ class ImportBrainzRelease
             {
               required: {
                 musicbrainz: [
-                  required('release', data[:attributes][:wanted])
+                  required('release', params[:data][:attributes][:wanted])
                 ]
               }
             }
