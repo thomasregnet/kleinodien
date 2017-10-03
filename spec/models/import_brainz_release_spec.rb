@@ -17,14 +17,9 @@ RSpec.describe ImportBrainzRelease, type: :model do
     # TODO: check response status
     # expect(response.status).to eq 202
 
-    params = JSON.parse(response, symbolize_names: true)
-    required = params[:data][:attributes][:required][:musicbrainz][0]
-    required_attrs = required[:attributes]
-
-    expect(required[:id]). to eq brainz_id
-    expect(required_attrs[:path]). to eq "release/#{brainz_id}"
-    expect(required_attrs[:url])
-      .to eq "http://musicbrainz.org/ws/2/release/#{brainz_id}"
+    params = JSON.parse(response)
+    url = params['data']['attributes']['required']['brainz'][brainz_id]
+    expect(url).to eq "http://musicbrainz.org/ws/2/release/#{brainz_id}?inc=artists+labels+recordings+release-groups"
   end
 
   specify 'Sepultura - Arise' do
@@ -49,7 +44,7 @@ RSpec.describe ImportBrainzRelease, type: :model do
           }
         }
       ],
-      ActionDispatch::Response.new
+      ImportCache.new
     )
     # TODO: check response status
     # expect(response.status).to eq 202
