@@ -18,31 +18,24 @@ class ImportBrainzRelease
   end
 
   def body
+    brainz_id = params[:data][:attributes][:wanted]
+    cache.require_brainz_compilation_release(brainz_id, required(brainz_id))
     {
       data:
         {
           attributes:
             {
               required: {
-                musicbrainz: [
-                  required('release', params[:data][:attributes][:wanted])
-                ]
+                brainz: {
+                  brainz_id => required(brainz_id)
+                }
               }
             }
         }
     }.to_json
   end
 
-  def required(type, id)
-    path = "#{type}/#{id}"
-    {
-      type: type,
-      id:   id,
-      attributes: {
-        url: "http://musicbrainz.org/ws/2/#{path}",
-        query_string: 'inc=artists+labels+recordings+release-groups',
-        path: path
-      }
-    }
+  def required(brainz_id)
+    "http://musicbrainz.org/ws/2/release/#{brainz_id}?inc=artists+labels+recordings+release-groups"
   end
 end
