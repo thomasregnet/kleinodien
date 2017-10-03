@@ -1,5 +1,8 @@
 # Post MusicBrainz params to kleinodien
 class ImportBrainzRelease
+  URL_PREFIX = 'http://musicbrainz.org/ws/2/release/'.freeze
+  QUERY_STRING = '?inc=artists+labels+recordings+release-groups'.freeze
+
   attr_reader :params, :cache
 
   def self.perform(params, cache)
@@ -7,19 +10,17 @@ class ImportBrainzRelease
   end
 
   def initialize(params, cache)
-    @params  = params
-    @cache = cache
+    @params = params
+    @cache  = cache
   end
 
   def perform
-    #cache.body = body
-    #cache.status = 202
     body
   end
 
   def body
     brainz_id = params[:data][:attributes][:wanted]
-    cache.require_brainz_compilation_release(brainz_id, required(brainz_id))
+    cache.require_brainz_compilation_release(brainz_id, brainz_release_url_for(brainz_id))
     {
       data:
         {
@@ -27,7 +28,7 @@ class ImportBrainzRelease
             {
               required: {
                 brainz: {
-                  brainz_id => required(brainz_id)
+                  brainz_id => brainz_release_url_for(brainz_id)
                 }
               }
             }
@@ -35,7 +36,7 @@ class ImportBrainzRelease
     }.to_json
   end
 
-  def required(brainz_id)
-    "http://musicbrainz.org/ws/2/release/#{brainz_id}?inc=artists+labels+recordings+release-groups"
+  def brainz_release_url_for(brainz_id)
+    URL_PREFIX + brainz_id + QUERY_STRING
   end
 end
