@@ -20,7 +20,7 @@ class ImportBrainzRelease
 
   def body
     brainz_id = params[:data][:attributes][:wanted]
-    cache.require_brainz_compilation_release(brainz_id, brainz_release_url_for(brainz_id))
+    cache.require_brainz(brainz_release_url_for(brainz_id))
     {
       data:
         {
