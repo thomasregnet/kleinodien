@@ -24,16 +24,6 @@ class ImportCache
     @required = init_cache(Array)
   end
 
-  def render
-    {
-      data: {
-        attributes: {
-          required: required
-        }
-      }
-    }
-  end
-      
   private
 
   def init_cache(klass)
