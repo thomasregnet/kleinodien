@@ -29,8 +29,6 @@ Then(/^the response contains an url to get the release\-data$/) do
                  '?inc=artists+labels+recordings+release-groups'
 
   data = JSON.parse(last_response.body)
-  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
-  required = data['data']['attributes']['required']
-  url = required['brainz']['compilation_release'][brainz_id]
-  expect(url).to eq expected_url
+  uri = data['data']['attributes']['required']['brainz'][0]
+  expect(uri).to eq expected_url
 end
