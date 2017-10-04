@@ -1,10 +1,6 @@
 # Cache requirements and responses of foreign services needed for imports
 class ImportFlatCache
-  private
-
   attr_reader :known, :required
-
-  public
 
   CACHED_SOURCE_NAMES = %w[brainz discogs tmdb].freeze
   CACHED_TYPE_NAMES = %w[artist compilation compilation_release].freeze
