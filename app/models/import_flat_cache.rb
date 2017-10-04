@@ -3,7 +3,6 @@ class ImportFlatCache
   attr_reader :known, :required
 
   CACHED_SOURCE_NAMES = %w[brainz discogs tmdb].freeze
-  CACHED_TYPE_NAMES = %w[artist compilation compilation_release].freeze
 
   CACHED_SOURCE_NAMES.each do |source_name|
     define_method("fetch_#{source_name}") do |uri|
