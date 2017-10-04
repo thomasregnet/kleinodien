@@ -4,14 +4,12 @@ module Api
     class BrainzReleasesController < ApplicationController
       private
 
-      attr_reader :cache, :import
+      attr_reader :import
 
       public
 
-      before_action :initialize_cache
-
       def create
-        @import = ImportBrainzRelease.perform(brainz_params, cache)
+        @import = ImportBrainzRelease.perform(brainz_params)
       rescue ImportException => exception
         handle_import_exception(exception)
       else
@@ -25,14 +23,10 @@ module Api
         exception.render
       end
 
-      def initialize_cache
-        @cache = ImportCache.new
-      end
-
       def response_to_client
         response.content_type = 'application/vnd.api+json'
         response.status = 202
-        render json: cache.render
+        render json: import
       end
 
       def brainz_params

@@ -5,13 +5,13 @@ class ImportBrainzRelease
 
   attr_reader :params, :cache
 
-  def self.perform(params, cache)
-    new(params, cache).perform
+  def self.perform(params)
+    new(params).perform
   end
 
-  def initialize(params, cache)
+  def initialize(params)
     @params = params
-    @cache  = cache
+    @cache  = ImportCache.new
   end
 
   def perform
@@ -27,9 +27,9 @@ class ImportBrainzRelease
           attributes:
             {
               required: {
-                brainz: {
-                  brainz_id => brainz_release_url_for(brainz_id)
-                }
+                brainz: [
+                  brainz_release_url_for(brainz_id)
+                ]
               }
             }
         }
