@@ -14,13 +14,12 @@ RSpec.describe ImportBrainzRelease, type: :model do
 
     response = ImportBrainzRelease.perform(data)
 
-    # TODO: check response status
-    # expect(response.status).to eq 202
-
-    params = JSON.parse(response)
-    expect(params['data']['attributes']['http_status_code']).to eq(202)
-    url = params['data']['attributes']['required']['brainz'][0]
-    expect(url).to eq "http://musicbrainz.org/ws/2/release/#{brainz_id}?inc=artists+labels+recordings+release-groups"
+    expect(response[:data][:attributes][:http_status_code]).to eq(202)
+    url = response[:data][:attributes][:required][:brainz][0]
+    expected_url = 'http://musicbrainz.org/ws/2/release/'\
+                   "#{brainz_id}"\
+                   '?inc=artists+labels+recordings+release-groups'
+    expect(url).to eq(expected_url)
   end
 
   specify 'Sepultura - Arise' do
