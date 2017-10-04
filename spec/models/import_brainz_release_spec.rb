@@ -12,13 +12,13 @@ RSpec.describe ImportBrainzRelease, type: :model do
       }
     }
 
-    response = ImportBrainzRelease.perform(data, ImportCache.new)
+    response = ImportBrainzRelease.perform(data)
 
     # TODO: check response status
     # expect(response.status).to eq 202
 
     params = JSON.parse(response)
-    url = params['data']['attributes']['required']['brainz'][brainz_id]
+    url = params['data']['attributes']['required']['brainz'][0]
     expect(url).to eq "http://musicbrainz.org/ws/2/release/#{brainz_id}?inc=artists+labels+recordings+release-groups"
   end
 
@@ -44,7 +44,6 @@ RSpec.describe ImportBrainzRelease, type: :model do
           }
         }
       ],
-      ImportCache.new
     )
     # TODO: check response status
     # expect(response.status).to eq 202
