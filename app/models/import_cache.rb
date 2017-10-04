@@ -24,6 +24,13 @@ class ImportCache
     @required = init_cache(Array)
   end
 
+  def any_required?
+    CACHED_SOURCE_NAMES.each do |source_name| 
+      return true unless required[source_name].empty?
+    end
+
+    false
+  end
   private
 
   def init_cache(klass)
