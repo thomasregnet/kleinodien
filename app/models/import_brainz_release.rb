@@ -26,6 +26,7 @@ class ImportBrainzRelease
         {
           attributes:
             {
+              http_status_code: 202,
               required: {
                 brainz: [
                   brainz_release_url_for(brainz_id)
