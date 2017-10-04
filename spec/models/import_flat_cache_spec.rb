@@ -24,4 +24,15 @@ RSpec.describe ImportFlatCache, type: :model do
     cache.require_discogs('http://foo/bar')
     expect(cache.required['discogs'][0]).to eq 'http://foo/bar'
   end
+
+  it 'stores only one unique uri for a requirement' do
+    cache = ImportFlatCache.new
+    uri   = 'http://some/fake/url'
+
+    3.times do
+      cache.require_tmdb(uri)
+    end
+
+    expect(cache.required['tmdb'].length).to eq(1)
+  end
 end
