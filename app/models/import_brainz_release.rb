@@ -34,7 +34,7 @@ class ImportBrainzRelease
               }
             }
         }
-    }.to_json
+    }
   end
 
   def brainz_release_url_for(brainz_id)

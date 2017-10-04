@@ -26,8 +26,8 @@ module Api
       def response_to_client
         response.content_type = 'application/vnd.api+json'
         #response.status = 202
-        response.status = JSON.parse(import)['data']["attributes"]['http_status_code']
-        render json: import
+        response.status = import[:data][:attributes][:http_status_code]
+        render json: import.to_json
       end
 
       def brainz_params
