@@ -22,6 +22,6 @@ RSpec.describe ImportFlatCache, type: :model do
   specify 'write and read requirements' do
     cache = ImportFlatCache.new
     cache.require_discogs('http://foo/bar')
-    # TODO: read the requirements
+    expect(cache.required['discogs'][0]).to eq 'http://foo/bar'
   end
 end
