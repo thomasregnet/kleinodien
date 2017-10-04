@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ImportCache, type: :model do
-  specify '.fetch_brainz_artist' do
+  specify '#fetch_brainz_artist' do
     expect(subject).to respond_to(:fetch_brainz)
   end
 
-  specify '.store_brainz_artist' do
+  specify '#store_brainz_artist' do
     expect(subject).to respond_to(:store_brainz)
   end
 
-  specify '.require_brainz_artist' do
+  specify '#require_brainz_artist' do
     expect(subject).to respond_to(:require_brainz)
   end
 
