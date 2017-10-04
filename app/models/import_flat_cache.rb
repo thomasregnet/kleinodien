@@ -10,36 +10,32 @@ class ImportFlatCache
   CACHED_TYPE_NAMES = %w[artist compilation compilation_release].freeze
 
   CACHED_SOURCE_NAMES.each do |source_name|
-    CACHED_TYPE_NAMES.each do |type_name|
-      key_name = "#{source_name}_#{type_name}"
+    define_method("fetch_#{source_name}") do |uri|
+      known[source_name][uri]
+    end
 
-      define_method("fetch_#{source_name}_#{type_name}") do |id|
-        known[key_name][id]
-      end
+    define_method("store_#{source_name}") do |uri, data|
+      known[source_name][uri] = data
+    end
 
-      define_method("store_#{source_name}_#{type_name}") do |id, data|
-        known[key_name][id] = data
-      end
-
-      define_method("require_#{source_name}_#{type_name}") do |uri|
-        required[key_name][uri]
-      end
+    define_method("require_#{source_name}") do |uri|
+      return if required[source_name].include? uri
+      required[source_name].push(uri)
     end
   end
 
   def initialize
-    @known    = init_cache
-    @required = init_cache
+    @known    = init_cache(Hash)
+    @required = init_cache(Array)
   end
 
   private
 
-  def init_cache
+  def init_cache(klass)
     cache = {}
+
     CACHED_SOURCE_NAMES.each do |source_name|
-      CACHED_TYPE_NAMES.each do |type_name|
-        cache["#{source_name}_#{type_name}"] = {}
-      end
+      cache[source_name] = klass.new
     end
 
     cache
