@@ -32,3 +32,32 @@ Then(/^the response contains an url to get the release\-data$/) do
   uri = data['data']['attributes']['required']['brainz'][0]
   expect(uri).to eq expected_url
 end
+
+When(/^I send the MusicBrainz data of the release I want to import$/) do
+  brainz_uri = 'https://musicbrainz.org/ws/2/release/'\
+               '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'\
+               '?inc=artists+labels+recordings+release-groups'
+
+  post(
+    '/api/v01/brainz_releases',
+    {
+      data:
+        {
+          type: 'music_brainz_releases',
+          attributes: {
+              wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4',
+              known: {
+                musicbrainz: {
+                  brainz_uri => KoTestData.brainz_release('7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
+)
+              }
+            }
+          }
+        }
+    },
+    headers: {
+      'Accept'       => 'application/vnd.api+json',
+      'Content-Type' => 'application/vnd.api+json'
+    }
+  )
+end

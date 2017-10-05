@@ -1,8 +1,8 @@
 # Post MusicBrainz params to kleinodien
 class ImportBrainzRelease
   URL_PREFIX = 'http://musicbrainz.org/ws/2/release/'.freeze
+  # TODO: add '+url-rels+recording-level-rels' to QUERY_STRING?
   QUERY_STRING = '?inc=artists+labels+recordings+release-groups'.freeze
-
   attr_reader :params, :cache
 
   def self.perform(params)
