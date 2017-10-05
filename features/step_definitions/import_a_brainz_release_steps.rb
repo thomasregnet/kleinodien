@@ -1,3 +1,5 @@
+require 'ko_test_data'
+
 When(/^I send a MusicBrainz id of a release i want to import$/) do
   post(
     '/api/v01/brainz_releases',
@@ -48,7 +50,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
               wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4',
               known: {
                 musicbrainz: {
-                  brainz_uri => KoTestData.brainz_release('7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
+                  brainz_uri => KoTestData.brainz_release('7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
 )
               }
             }
