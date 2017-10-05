@@ -1,6 +1,14 @@
+# Fetch test Data
 module KoTestData
-  BRAINZ_RELEASE_QUERY_STRING = '_inc_artists_labels_recordings_release-groups'
-  def self.brainz_release(brainz_id, query_string = BRAINZ_RELEASE_QUERY_STRING)
+  # TODO: beautify this module
+  BRAINZ_RELEASE_QUERY_STRING = '?inc='\
+                                'artists+labels+recordings+release-groups'\
+                                ''.freeze
+
+  def self.brainz_release(
+        brainz_id,
+        query_string = BRAINZ_RELEASE_QUERY_STRING
+      )
     file_name = File.join(
       'fixtures',
       'brainz',
