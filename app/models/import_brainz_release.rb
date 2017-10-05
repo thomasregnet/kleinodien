@@ -50,9 +50,7 @@ class ImportBrainzRelease
 
   def get_cached_or_require
     release_url = brainz_release_url
-    fix_release_url = 'https://musicbrainz.org/ws/2/release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a?inc=artists+labels+recordings+release-groups'
     brainz_release = cache.fetch_brainz(release_url)
-    #brainz_release = params['data']['attributes']['known']['musicbrainz'][brainz_release_url]
     return brainz_release if brainz_release
     cache.require_brainz(release_url)
     false
