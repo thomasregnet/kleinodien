@@ -31,6 +31,21 @@ class ImportCache
 
     false
   end
+
+  def rebuild_from_params(params)
+    return unless params['data']
+    return unless params['data']['attributes']
+    to_know = params['data']['attributes']['known']
+    return unless to_know
+    CACHED_SOURCE_NAMES.each do |source_name|
+      next unless to_know[source_name]
+      to_know[source_name].each do |key, value|
+        known[source_name][key] = value
+      end
+      #known[source_name] = to_know[source_name]
+    end
+  end
+
   private
 
   def init_cache(klass)

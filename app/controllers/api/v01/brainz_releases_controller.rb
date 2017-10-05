@@ -32,6 +32,8 @@ module Api
 
       def brainz_params
         params.permit(data: {})
+        #params.require(data: {}).permit!
+        #params.require(:data).permit!(:attributes)
       end
     end
   end
