@@ -8,7 +8,7 @@ When(/^I send a MusicBrainz id of a release i want to import$/) do
         {
           type: 'music_brainz_releases',
           attributes: {
-            wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
+            wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
           }
         }
     },
@@ -24,9 +24,9 @@ Then(/^I receive a status of "([^"]*)"$/) do |status|
 end
 
 Then(/^the response contains an url to get the release\-data$/) do
-  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
+  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
 
-  expected_url = 'http://musicbrainz.org/ws/2/release/'\
+  expected_url = 'https://musicbrainz.org/ws/2/release/'\
                  "#{brainz_id}"\
                  '?inc=artists+labels+recordings+release-groups'
 
@@ -47,9 +47,9 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
         {
           type: 'music_brainz_releases',
           attributes: {
-              wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4',
+              wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
               known: {
-                musicbrainz: {
+                brainz: {
                   brainz_uri => KoTestData.brainz_release('7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
 )
               }
