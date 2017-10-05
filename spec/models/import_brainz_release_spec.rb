@@ -16,7 +16,7 @@ RSpec.describe ImportBrainzRelease, type: :model do
 
     expect(response[:data][:attributes][:http_status_code]).to eq(202)
     url = response[:data][:attributes][:required]['brainz'][0]
-    expected_url = 'http://musicbrainz.org/ws/2/release/'\
+    expected_url = 'https://musicbrainz.org/ws/2/release/'\
                    "#{brainz_id}"\
                    '?inc=artists+labels+recordings+release-groups'
     expect(url).to eq(expected_url)
