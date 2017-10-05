@@ -39,9 +39,14 @@ class ImportBrainzRelease
 
   def prepare
     # TODO: check if the brainz release already exists in the database
+    require_unless_cached
+    # TODO: call `prepare` on related classes
+  end
+
+  def require_unless_cached
     release_url = brainz_release_url
-    return if cache.known['brainz'][brainz_release_url]
-    cache.require_brainz(release_url) unless cache.fetch_brainz(release_url)
+    return if cache.fetch_brainz(release_url)
+    cache.require_brainz(release_url)
   end
 
   def brainz_release_url
