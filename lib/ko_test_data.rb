@@ -16,6 +16,6 @@ module KoTestData
       brainz_id + query_string + '.xml'
     )
 
-    File.open(file_name)
+    File.open(file_name).read
   end
 end
