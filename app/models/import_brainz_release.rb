@@ -42,7 +42,8 @@ class ImportBrainzRelease
     # TODO: check if the brainz release already exists in the database
     brainz_release_xml = get_cached_or_require
     if brainz_release_xml
-      brainz_release = MaschedBrainz.xml(brainz_release_xml)
+      # TODO: Use MaschedBrainz if they are available
+      # brainz_release = MaschedBrainz.xml(brainz_release_xml)
     end
     # TODO: call `prepare` on related classes
   end
@@ -51,7 +52,6 @@ class ImportBrainzRelease
     release_url = brainz_release_url
     fix_release_url = 'https://musicbrainz.org/ws/2/release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a?inc=artists+labels+recordings+release-groups'
     brainz_release = cache.fetch_brainz(release_url)
-    byebug
     #brainz_release = params['data']['attributes']['known']['musicbrainz'][brainz_release_url]
     return brainz_release if brainz_release
     cache.require_brainz(release_url)
