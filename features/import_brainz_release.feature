@@ -9,3 +9,7 @@ Feature: Import a MusicBrainz Release
     Then I receive a status of "202"
     And  the response contains an url to get the release-data
  
+  Scenario: Send the MusicBrainz release data
+    When I send the MusicBrainz data of the release I want to import
+    Then I recive a status of "202"
+    And I see the artist in the requirements
