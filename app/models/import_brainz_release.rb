@@ -43,7 +43,9 @@ class ImportBrainzRelease
     brainz_release_xml = get_cached_or_require
     if brainz_release_xml
       # TODO: Use MaschedBrainz if they are available
-      # brainz_release = MaschedBrainz.xml(brainz_release_xml)
+      ruby_data = MultiXml.parse(brainz_release_xml)
+      #mashed_brain = MashedBrainz.new(ruby_data)
+      brainz_release = MashedBrainz::Release.xml(brainz_release_xml)
     end
     # TODO: call `prepare` on related classes
   end

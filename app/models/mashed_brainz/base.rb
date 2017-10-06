@@ -6,6 +6,14 @@ module MashedBrainz
     include Hashie::Extensions::Coercion
     include Hashie::Extensions::MergeInitializer
 
+    def self.xml(xml_string)
+      new(MultiXml.parse(xml_string)).metadata
+    end
+
+    def self.parse_xml(xml_string)
+      MultiXml.parse(xml_string)['metadata']
+    end
+
     coerce_key :artist, lambda { |value|
       MashedBrainz::Artist.new(value)
     }
