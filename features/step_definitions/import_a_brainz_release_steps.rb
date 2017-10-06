@@ -47,11 +47,12 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
         {
           type: 'music_brainz_releases',
           attributes: {
-              wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
-              known: {
-                brainz: {
-                  brainz_uri => KoTestData.brainz_release('7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-)
+            wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+            known: {
+              brainz: {
+                brainz_uri => KoTestData.brainz_release(
+                  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+                )
               }
             }
           }
@@ -62,4 +63,15 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
       'Content-Type' => 'application/vnd.api+json'
     }
   )
+end
+
+Then(/^I see the artist in the requirements$/) do
+  brainz_id = '1d93c839-22e7-4f76-ad84-d27039efc048'
+  expected_url = 'https://musicbrainz.org/ws/2/artist/'\
+                 "#{brainz_id}"\
+                 '?inc=url-rels'
+
+  data = JSON.parse(last_response.body)
+  required = data['data']['attributes']['required']['brainz']
+  expect(required.include?(expected_url)).to be true
 end
