@@ -11,5 +11,5 @@ Feature: Import a MusicBrainz Release
  
   Scenario: Send the MusicBrainz release data
     When I send the MusicBrainz data of the release I want to import
-    Then I recive a status of "202"
+    Then I receive a status of "202"
     And I see the artist in the requirements
