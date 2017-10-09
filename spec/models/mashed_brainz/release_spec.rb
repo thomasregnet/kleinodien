@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'brainz_test_helper'
+require 'shared_examples_for_brainz_release_source_id'
 
 RSpec.describe MashedBrainz::Release, type: :model do
   before(:each) do
@@ -12,17 +13,19 @@ RSpec.describe MashedBrainz::Release, type: :model do
   end
 
   specify '#artist_credit' do
-    # byebug
     expect(@release.artist_credit)
       .to be_instance_of MashedBrainz::ArtistCredit
   end
 
-  specify '#brainz_id' do
-    expect(@release.brainz_id).to be_instance_of(BrainzReleaseId)
+  describe '#brainz_id' do
+    it_behaves_like 'a brainz release source id' do
+      let(:source_id) { @release.brainz_id.source_id }
+    end
   end
 
-  specify '#source_id' do
-    # TODO: Better expectation
-    expect(@release.source_id).to be_instance_of(String)
+  describe '#source_id' do
+    it_behaves_like 'a brainz release source id' do
+      let(:source_id) { @release.source_id }
+    end
   end
 end
