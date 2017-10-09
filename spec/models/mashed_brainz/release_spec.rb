@@ -16,4 +16,13 @@ RSpec.describe MashedBrainz::Release, type: :model do
     expect(@release.artist_credit)
       .to be_instance_of MashedBrainz::ArtistCredit
   end
+
+  specify '#brainz_id' do
+    expect(@release.brainz_id).to be_instance_of(BrainzReleaseId)
+  end
+
+  specify '#source_id' do
+    # TODO: Better expectation
+    expect(@release.source_id).to be_instance_of(String)
+  end
 end
