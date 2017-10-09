@@ -1,27 +1,17 @@
 require 'rails_helper'
+require 'shared_examples_for_brainz_release_source_id'
 
 RSpec.describe BrainzReleaseId do
-  def prefix_regex
-    %r{^https://musicbrainz.org/ws/2/release/}
+  describe '.source_id' do
+    it_behaves_like 'a brainz release source id' do
+      let(:source_id) { BrainzReleaseId.source_id(SecureRandom.uuid) }
+    end
   end
 
-  def query_string_regex
-    /\?inc=artists\+labels\+recordings\+release-groups$/
-  end
-
-  before(:each) do
-    @brainz_id = FactoryGirl.build(:brainz_release_id)
-  end
-
-  specify '.source_id' do
-    source_id = BrainzReleaseId.source_id(SecureRandom.uuid)
-    expect(source_id).to match(prefix_regex)
-    expect(source_id).to match(query_string_regex)
-  end
-
-  specify '#source_id' do
-    source_id = @brainz_id.source_id
-    expect(source_id).to match(prefix_regex)
-    expect(source_id).to match(query_string_regex)
+  describe '#source_id' do
+    it_behaves_like 'a brainz release source id' do
+      brainz_release_id = BrainzReleaseId.new(SecureRandom.uuid)
+      let(:source_id) { brainz_release_id.source_id }
+    end
   end
 end
