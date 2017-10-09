@@ -20,8 +20,9 @@ class ImportBrainzRelease
   end
 
   def body
-    brainz_id = params[:data][:attributes][:wanted]
-    cache.require_brainz(brainz_release_url_for(brainz_id))
+    wanted_id = params[:data][:attributes][:wanted]
+    brainz_id = BrainzReleaseId.new(wanted_id)
+    cache.require_brainz(brainz_id.source_id)
     {
       data:
         {
@@ -40,22 +41,19 @@ class ImportBrainzRelease
   def prepare
     cache.rebuild_from_params(params)
     # TODO: check if the brainz release already exists in the database
-    brainz_release_xml = get_cached_or_require
-    if brainz_release_xml
+    brainz_release = cached_or_require
+    if brainz_release
       # TODO: Use MaschedBrainz if they are available
-      ruby_data = MultiXml.parse(brainz_release_xml)
-      #mashed_brain = MashedBrainz.new(ruby_data)
-      brainz_release = MashedBrainz::Release.xml(brainz_release_xml)
     end
     # TODO: call `prepare` on related classes
   end
 
-  def get_cached_or_require
+  def cached_or_require
     release_url = brainz_release_url
-    brainz_release = cache.fetch_brainz(release_url)
-    return brainz_release if brainz_release
-    cache.require_brainz(release_url)
-    false
+    xml = cache.fetch_brainz(release_url)
+    cache.require_brainz(release_url) unless xml
+    return false unless xml
+    MashedBrainz::Release.xml(xml)
   end
 
   def brainz_release_url
