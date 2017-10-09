@@ -4,6 +4,10 @@ class BrainzReleaseId
 
   attr_reader :id
 
+  def self.source_id(uuid)
+    new(uuid).source_id
+  end
+
   def initialize(uuid)
     @id = uuid
   end
