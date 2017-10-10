@@ -4,7 +4,7 @@ require 'ko_test_data'
 RSpec.describe ImportBrainzArtistCredit do
   before(:each) do
     xml = KoTestData.brainz_release(
-      '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+      '693748be-7c18-39c3-af2e-2e62092090cf'
     )
     @artist_credit = MashedBrainz::Release.xml(xml).artist_credit
   end
