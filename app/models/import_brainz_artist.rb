@@ -1,6 +1,10 @@
 class ImportBrainzArtist
   attr_reader :brainz_id, :cache
 
+  def self.perform(id, cache)
+    new(id, cache).perform
+  end
+
   def initialize(id, cache)
     @brainz_id = BrainzArtistId.new(id)
     @cache     = cache
