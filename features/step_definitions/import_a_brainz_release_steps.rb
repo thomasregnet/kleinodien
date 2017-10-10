@@ -24,15 +24,13 @@ Then(/^I receive a status of "([^"]*)"$/) do |status|
 end
 
 Then(/^the response contains an url to get the release\-data$/) do
-  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-
-  expected_url = 'https://musicbrainz.org/ws/2/release/'\
-                 "#{brainz_id}"\
-                 '?inc=artists+labels+recordings+release-groups'
+  brainz_release_id = BrainzReleaseId.new(
+    '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  )
 
   data = JSON.parse(last_response.body)
   uri = data['data']['attributes']['required']['brainz'][0]
-  expect(uri).to eq expected_url
+  expect(uri).to eq brainz_release_id.source_id
 end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
@@ -73,5 +71,6 @@ Then(/^I see the artist in the requirements$/) do
 
   data = JSON.parse(last_response.body)
   required = data['data']['attributes']['required']['brainz']
+  #byebug
   expect(required.include?(expected_url)).to be true
 end
