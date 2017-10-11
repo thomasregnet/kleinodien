@@ -11,8 +11,27 @@ class ImportBrainzArtist
   end
 
   def perform
+    prepare
+    persist
+  end
+
+  def prepare
     source_id = brainz_id.source_id
     return if cache.required['brainz'].include? source_id
-    cache.require_brainz source_id
+    cache.require_brainz source_id unless cache.fetch_brainz(source_id)
+  end
+
+  def persist
+    return if cache.any_required?
+    artist = Artist.brainz(brainz_artist)
+    artist.save!
+    artist
+  end
+
+  private
+
+  def brainz_artist
+    source_id = brainz_id.source_id
+    MashedBrainz::Artist.xml(cache.fetch_brainz(source_id))
   end
 end

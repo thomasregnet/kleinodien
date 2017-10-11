@@ -18,4 +18,15 @@ module KoTestData
 
     File.open(file_name).read
   end
+
+  def self.brainz_artist(brainz_sid)
+    file_name = File.join(
+      'fixtures',
+      'brainz',
+      'artist',
+      brainz_sid.id + brainz_sid.class.query_string + '.xml'
+    )
+
+    File.open(file_name).read
+  end
 end

@@ -29,4 +29,12 @@ class Artist < ActiveRecord::Base
       disambiguation: brainz_artist.disambiguation
     ]
   end
+
+  def self.brainz(brainz_artist)
+    new(
+      name:           brainz_artist.name,
+      sort_name:      brainz_artist.sort_name,
+      disambiguation: brainz_artist.disambiguation
+    )
+  end
 end
