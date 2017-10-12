@@ -1,4 +1,5 @@
-class ImportException < Exception
+# Base class for import exceptions
+class ImportException < RunntimeError
   def status
     500
   end
