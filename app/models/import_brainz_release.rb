@@ -43,6 +43,7 @@ class ImportBrainzRelease
     # TODO: check if the brainz release already exists in the database
     brainz_release = cached_or_require
     if brainz_release
+      ImportBrainzArtistCredit.perform(brainz_release.artist_credit, cache)
       # TODO: Use MaschedBrainz if they are available
     end
     # TODO: call `prepare` on related classes
