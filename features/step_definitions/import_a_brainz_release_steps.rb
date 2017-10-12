@@ -64,13 +64,8 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
 end
 
 Then(/^I see the artist in the requirements$/) do
-  brainz_id = '1d93c839-22e7-4f76-ad84-d27039efc048'
-  expected_url = 'https://musicbrainz.org/ws/2/artist/'\
-                 "#{brainz_id}"\
-                 '?inc=url-rels'
-
+  brainz_sid = BrainzArtistId.new('1d93c839-22e7-4f76-ad84-d27039efc048')
   data = JSON.parse(last_response.body)
   required = data['data']['attributes']['required']['brainz']
-  #byebug
-  expect(required.include?(expected_url)).to be true
+  expect(required.include?(brainz_sid.source_id)).to be true
 end
