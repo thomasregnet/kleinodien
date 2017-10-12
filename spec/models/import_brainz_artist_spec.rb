@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 require 'ko_test_data'
 
 RSpec.describe ImportBrainzArtist do
