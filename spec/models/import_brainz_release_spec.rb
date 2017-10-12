@@ -43,7 +43,7 @@ RSpec.describe ImportBrainzRelease, type: :model do
             }
           }
         }
-      ],
+      ]
     )
     # TODO: check response status
     # expect(response.status).to eq 202
