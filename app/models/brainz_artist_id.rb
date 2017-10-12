@@ -1,3 +1,4 @@
+# Source id for a MusicBrainz Artist
 class BrainzArtistId
   @query_string = '?inc=url-rels'
   @path_prefix = 'ws/2/artist/'
