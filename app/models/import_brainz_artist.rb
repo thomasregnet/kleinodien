@@ -1,3 +1,4 @@
+# Import an Artist from MusicBrainz
 class ImportBrainzArtist
   attr_reader :brainz_id, :cache
 
