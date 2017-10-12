@@ -1,3 +1,4 @@
+# Import an ArtistCredit from MusicBrainz
 class ImportBrainzArtistCredit
   attr_reader :artist_credit, :cache
 
