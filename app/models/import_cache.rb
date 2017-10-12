@@ -25,7 +25,7 @@ class ImportCache
   end
 
   def any_required?
-    CACHED_SOURCE_NAMES.each do |source_name| 
+    CACHED_SOURCE_NAMES.each do |source_name|
       return true unless required[source_name].empty?
     end
 
@@ -42,7 +42,6 @@ class ImportCache
       to_know[source_name].each do |key, value|
         known[source_name][key] = value
       end
-      #known[source_name] = to_know[source_name]
     end
   end
 
