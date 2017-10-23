@@ -18,7 +18,7 @@ module Import
 
     def prepare
       artist_credit.name_credits.each do |name_credit|
-        ImportBrainzArtist.perform(name_credit.artist.id, cache)
+        Import::BrainzArtist.perform(name_credit.artist.id, cache)
       end
     end
   end

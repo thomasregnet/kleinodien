@@ -12,7 +12,7 @@ RSpec.describe Import::BrainzArtistCredit do
   specify '.perform' do
     ac_importer = Import::BrainzArtistCredit.new(
       @artist_credit,
-      ImportCache.new
+      Import::Cache.new
     )
     ac_importer.perform
     expect(ac_importer.cache.any_required?).to be true
