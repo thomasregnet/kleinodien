@@ -9,8 +9,8 @@ module Api
       public
 
       def create
-        @import = ImportBrainzRelease.perform(brainz_params)
-      rescue ImportException => exception
+        @import = ::Import::BrainzCompilationRelease.perform(brainz_params)
+      rescue ::Import::Exception => exception
         handle_import_exception(exception)
       else
         response_to_client
