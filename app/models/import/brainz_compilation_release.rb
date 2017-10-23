@@ -30,7 +30,7 @@ module Import
 
     def body
       wanted_id = params[:data][:attributes][:wanted]
-      brainz_id = BrainzReleaseId.new(wanted_id)
+      brainz_id = BrainzReleaseId.new(value: wanted_id)
       cache.require_brainz(brainz_id.source_id)
       {
         data:

@@ -16,7 +16,7 @@ RSpec.describe Prepare::BrainzArtist do
   end
 
   specify '.perform with cached artist' do
-    artist_sid = BrainzArtistId.new(@jello_biafra_id)
+    artist_sid = BrainzArtistId.new(value: @jello_biafra_id)
     xml = KoTestData.brainz_artist(artist_sid)
     cache = Import::Cache.new
     cache.store_brainz(artist_sid.source_id, xml)
