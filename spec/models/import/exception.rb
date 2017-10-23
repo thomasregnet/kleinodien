@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe ImportException do
+RSpec.describe Import::Exception do
   specify '.status returns 500' do
-    exception = ImportException.new
+    exception = Import::Exception.new
     expect(exception.status).to be 500
   end
 
