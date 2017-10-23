@@ -1,6 +1,6 @@
 module Import
   # Base class for import exceptions
-  class Exception < RunntimeError
+  class Exception < RuntimeError
     def status
       500
     end
