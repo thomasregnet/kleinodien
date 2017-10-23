@@ -8,15 +8,21 @@ class BrainzId < ForeignId
     attr_reader :host, :path_prefix, :schema
   end
 
+  # The following methods must call BrainzID.class_method
+  # otherwise, when calling self.class.class_method
+  # they return nil when inherited
+  # This method smells of :reek:UtilityFunction
   def host
-    self.class.host
+    BrainzId.host
   end
 
+  # This method smells of :reek:UtilityFunction
   def path_prefix
-    self.class.path_prefix
+    BrainzId.path_prefix
   end
 
+  # This method smells of :reek:UtilityFunction
   def schema
-    self.class.schema
+    BrainzId.schema
   end
 end
