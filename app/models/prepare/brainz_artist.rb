@@ -8,7 +8,7 @@ module Prepare
     end
 
     def initialize(id, cache)
-      @brainz_id = BrainzArtistId.new(id)
+      @brainz_id = BrainzArtistId.new(value: id)
       @cache     = cache
     end
 

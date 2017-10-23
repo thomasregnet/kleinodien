@@ -24,7 +24,7 @@ module KoTestData
       'fixtures',
       'brainz',
       'artist',
-      brainz_sid.id + brainz_sid.class.query_string + '.xml'
+      brainz_sid.value + brainz_sid.class.query_string + '.xml'
     )
 
     File.open(file_name).read
