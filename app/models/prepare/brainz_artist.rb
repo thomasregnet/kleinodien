@@ -14,7 +14,9 @@ module Prepare
 
     def using_id
       prepare
-      persist
+      return if cache.any_required?
+      # persist
+      ::Persist::BrainzArtist.using_id(brainz_id, cache)
     end
 
     def prepare
@@ -23,18 +25,18 @@ module Prepare
       cache.require_brainz source_id unless cache.fetch_brainz(source_id)
     end
 
-    def persist
-      return if cache.any_required?
-      artist = Artist.brainz(brainz_artist)
-      artist.save!
-      artist
-    end
+    # def persist
+    #   return if cache.any_required?
+    #   artist = Artist.brainz(brainz_artist)
+    #   artist.save!
+    #   artist
+    # end
 
-    private
+    # private
 
-    def brainz_artist
-      source_id = brainz_id.source_id
-      MashedBrainz::Artist.xml(cache.fetch_brainz(source_id))
-    end
+    # def brainz_artist
+    #   source_id = brainz_id.source_id
+    #   MashedBrainz::Artist.xml(cache.fetch_brainz(source_id))
+    # end
   end
 end
