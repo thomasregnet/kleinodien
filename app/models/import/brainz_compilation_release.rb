@@ -12,7 +12,8 @@ module Import
 
     def initialize(params)
       @params = params
-      @cache  = ImportCache.new
+      #@cache  = Import::Cache.new
+      @cache = Cache.new
     end
 
     def perform
