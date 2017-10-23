@@ -1,26 +1,27 @@
 require 'rails_helper'
-require 'brainz_test_helper'
+require 'ko_test_data'
 
-RSpec.describe Import::BrainzRelease, type: :model do
+RSpec.describe Import::BrainzArtist do
   before(:each) do
-    @brainz_id = 'af8e4cc5-ef54-458d-a194-7b210acf638f'
-    @xml = BrainzTestHelper.get_xml(:artist, @brainz_id)
-    @artist = Import::BrainzArtist.perform(@xml)
+    @jello_biafra_id = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
   end
 
-  it 'returns the expected Artist' do
-    expect(@artist).to be_instance_of Artist
-    expect(@artist.name).to eq 'Cannibal Corpse'
-    identifier_values = @artist.identifiers.map(&:value)
-    expect(identifier_values).to include @brainz_id
-    expect(identifier_values).to include '124774' # Discogs id
+  specify '.perform without cached artist' do
+    artist_importer = Import::BrainzArtist.new(
+      @jello_biafra_id,
+      ImportCache.new
+    )
+    artist_importer.perform
+    expect(artist_importer.cache.any_required?).to be true
   end
 
-  it 'returns an existing artist if it exists' do
-    @artist.name = 'Vegan Alive'
-    @artist.save!
-
-    artist = Import::BrainzArtist.perform(@xml)
-    expect(artist.name).to eq 'Vegan Alive'
+  specify '.perform with cached artist' do
+    artist_sid = BrainzArtistId.new(@jello_biafra_id)
+    xml = KoTestData.brainz_artist(artist_sid)
+    cache = ImportCache.new
+    cache.store_brainz(artist_sid.source_id, xml)
+    artist = Import::BrainzArtist.perform(@jello_biafra_id, cache)
+    expect(artist).to be_instance_of(Artist)
+    expect(artist.new_record?).to be false
   end
 end

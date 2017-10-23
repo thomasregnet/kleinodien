@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ImportCache, type: :model do
+RSpec.describe Import::Cache, type: :model do
   specify '#fetch_brainz_artist' do
     expect(subject).to respond_to(:fetch_brainz)
   end
@@ -14,19 +14,19 @@ RSpec.describe ImportCache, type: :model do
   end
 
   specify 'write and read known' do
-    cache = ImportCache.new
+    cache = Import::Cache.new
     cache.store_discogs('abc', 'foo')
     expect(cache.fetch_discogs('abc')).to eq 'foo'
   end
 
   specify 'write and read requirements' do
-    cache = ImportCache.new
+    cache = Import::Cache.new
     cache.require_discogs('http://foo/bar')
     expect(cache.required['discogs'][0]).to eq 'http://foo/bar'
   end
 
   it 'stores only one unique uri for a requirement' do
-    cache = ImportCache.new
+    cache = Import::Cache.new
     uri   = 'http://some/fake/url'
 
     3.times do
