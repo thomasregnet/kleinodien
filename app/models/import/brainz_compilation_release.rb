@@ -21,6 +21,10 @@ module Import
         params[:data][:attributes][:wanted],
         cache
       )
+      ::Persist::BrainzCompilationRelease.using_id(
+        params[:data][:attributes][:wanted],
+        cache
+      )
       body
     end
 
