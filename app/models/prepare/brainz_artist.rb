@@ -1,10 +1,10 @@
-module Import
-  # Import an Artist from MusicBrainz
+module Prepare
+  # Prapare an Artist from MusicBrainz for persistence
   class BrainzArtist
     attr_reader :brainz_id, :cache
 
-    def self.perform(id, cache)
-      new(id, cache).perform
+    def self.using_id(id, cache)
+      new(id, cache).using_id
     end
 
     def initialize(id, cache)
@@ -12,7 +12,7 @@ module Import
       @cache     = cache
     end
 
-    def perform
+    def using_id
       prepare
       persist
     end

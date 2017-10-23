@@ -1,10 +1,10 @@
-module Import
+module Prepare
   # Import an ArtistCredit from MusicBrainz
   class BrainzArtistCredit
     attr_reader :artist_credit, :cache
 
-    def self.perform(artist_credit, cache)
-      new(artist_credit, cache).perform
+    def self.using_data(artist_credit, cache)
+      new(artist_credit, cache).using_data
     end
 
     def initialize(artist_credit, cache)
@@ -12,13 +12,13 @@ module Import
       @cache         = cache
     end
 
-    def perform
+    def using_data
       prepare
     end
 
     def prepare
       artist_credit.name_credits.each do |name_credit|
-        Import::BrainzArtist.perform(name_credit.artist.id, cache)
+        BrainzArtist.using_id(name_credit.artist.id, cache)
       end
     end
   end
