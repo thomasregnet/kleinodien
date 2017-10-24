@@ -16,13 +16,19 @@ module Import
     end
 
     def perform
+      foreign_id = BrainzReleaseId.new(
+        value: params[:data][:attributes][:wanted]
+      )
+      #byebug
       cache.rebuild_from_params(params)
       ::Prepare::BrainzCompilationRelease.using_id(
-        params[:data][:attributes][:wanted],
+        # params[:data][:attributes][:wanted],
+        foreign_id,
         cache
       )
       ::Persist::BrainzCompilationRelease.using_id(
-        params[:data][:attributes][:wanted],
+        #params[:data][:attributes][:wanted],
+        foreign_id,
         cache
       )
       body
@@ -30,8 +36,9 @@ module Import
 
     def body
       wanted_id = params[:data][:attributes][:wanted]
+      #brainz_id = BrainzReleaseId.new(value: wanted_id)
       brainz_id = BrainzReleaseId.new(value: wanted_id)
-      cache.require_brainz(brainz_id.source_id)
+      cache.require_brainz(brainz_id)
       {
         data:
           {
