@@ -27,8 +27,7 @@ module Prepare
     end
 
     def cached_or_require
-      release_url = brainz_release_url
-      #byebug
+      # release_url = brainz_release_url
       xml = cache.fetch_brainz(foreign_id) #release_url)
       cache.require_brainz(foreign_id) unless xml #release_url) unless xml
       return false unless xml
