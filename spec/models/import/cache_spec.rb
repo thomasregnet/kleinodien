@@ -1,6 +1,18 @@
 require 'rails_helper'
 
+# Mock an id-class for testing
+class MockForeignId
+  def cache_key
+    'mocke/cache?key'
+  end
+end
+
 RSpec.describe Import::Cache, type: :model do
+  before(:each) do
+    @cache   = Import::Cache.new
+    @mocked_foreign_id = MockForeignId.new
+  end
+
   specify '#fetch_brainz_artist' do
     expect(subject).to respond_to(:fetch_brainz)
   end
@@ -14,25 +26,25 @@ RSpec.describe Import::Cache, type: :model do
   end
 
   specify 'write and read known' do
-    cache = Import::Cache.new
-    cache.store_discogs('abc', 'foo')
-    expect(cache.fetch_discogs('abc')).to eq 'foo'
+    @cache.store_discogs(@mocked_foreign_id, 'foo')
+    expect(@cache.fetch_discogs(@mocked_foreign_id)).to eq 'foo'
   end
 
   specify 'write and read requirements' do
     cache = Import::Cache.new
-    cache.require_discogs('http://foo/bar')
-    expect(cache.required['discogs'][0]).to eq 'http://foo/bar'
+    cache.require_discogs(@mocked_foreign_id)
+    expect(cache.required['discogs'][0]).to eq(@mocked_foreign_id.cache_key)
   end
 
   it 'stores only one unique uri for a requirement' do
-    cache = Import::Cache.new
+    #cache = Import::Cache.new
     uri   = 'http://some/fake/url'
 
     3.times do
-      cache.require_tmdb(uri)
+      #@cache.require_tmdb(uri)
+      @cache.require_tmdb(@mocked_foreign_id)
     end
 
-    expect(cache.required['tmdb'].length).to eq(1)
+    expect(@cache.required['tmdb'].length).to eq(1)
   end
 end
