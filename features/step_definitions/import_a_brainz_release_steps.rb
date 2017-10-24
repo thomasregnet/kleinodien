@@ -35,7 +35,8 @@ end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-  cache_key = BrainzReleaseId.new(value: brainz_id).cache_key
+  foreign_id = BrainzReleaseId.new(value: brainz_id)
+  cache_key = foreign_id.cache_key
 
   post(
     '/api/v01/brainz_releases',
@@ -47,9 +48,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
             wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
             known: {
               brainz: {
-                cache_key => KoTestData.brainz_release(
-                  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-                )
+                cache_key => KoTestData.brainz_release(foreign_id)
               }
             }
           }
