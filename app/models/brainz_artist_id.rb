@@ -1,16 +1,10 @@
 # Source id for a MusicBrainz Artist
 class BrainzArtistId < BrainzId
-  @query_string = '?inc=url-rels'
-  # @path_prefix = 'ws/2/artist/'
+  attr_reader :query_string
 
-  class << self
-    attr_reader :query_string #, :path_prefix
-  end
-
-  attr_reader :id
-
-  def query_string
-    self.class.query_string
+  def initialize(args)
+    super(args)
+    @query_string = args[:query_string] || '?inc=url-rels'
   end
 
   def self.source_id(uuid)
