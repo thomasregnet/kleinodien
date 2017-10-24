@@ -1,7 +1,7 @@
 class ForeignId
   attr_reader :value
 
-  def initialize(params)
-    @value = params[:value]
+  def initialize(args)
+    @value = args[:value]
   end
 end
