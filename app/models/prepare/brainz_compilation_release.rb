@@ -1,19 +1,19 @@
 module Prepare
   # Prepare a MusicBrainz release to be persisted
   class BrainzCompilationRelease
-    attr_reader :cache, :id
+    attr_reader :cache, :foreign_id
 
     URL_PREFIX = 'https://musicbrainz.org/ws/2/release/'.freeze
     # TODO: add '+url-rels+recording-level-rels' to QUERY_STRING?
     QUERY_STRING = '?inc=artists+labels+recordings+release-groups'.freeze
-    attr_reader :params, :cache
+    attr_reader :foreign_id, :params, :cache
 
-    def self.using_id(id, cache)
-      new(id, cache).using_id
+    def self.using_id(foreign_id, cache)
+      new(foreign_id, cache).using_id
     end
 
-    def initialize(id, cache)
-      @id = id
+    def initialize(foreign_id, cache)
+      @foreign_id = foreign_id
       @cache = cache
     end
 
@@ -28,14 +28,15 @@ module Prepare
 
     def cached_or_require
       release_url = brainz_release_url
-      xml = cache.fetch_brainz(release_url)
-      cache.require_brainz(release_url) unless xml
+      #byebug
+      xml = cache.fetch_brainz(foreign_id) #release_url)
+      cache.require_brainz(foreign_id) unless xml #release_url) unless xml
       return false unless xml
       MashedBrainz::Release.xml(xml)
     end
 
     def brainz_release_url
-      brainz_release_url_for(id)
+      brainz_release_url_for(foreign_id.value)
     end
 
     def brainz_release_url_for(brainz_id)
