@@ -18,7 +18,7 @@ module Prepare
 
     def prepare
       artist_credit.name_credits.each do |name_credit|
-        BrainzArtist.using_id(name_credit.artist.id, cache)
+        BrainzArtist.using_id(name_credit.artist.brainz_id, cache)
       end
     end
   end

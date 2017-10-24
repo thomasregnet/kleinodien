@@ -1,14 +1,14 @@
 module Persist
   class BrainzArtist
-    attr_reader :cache, :source_id
+    attr_reader :cache, :foreign_id
 
-    def self.using_id(id, cache)
-      new(id, cache).using_id
+    def self.using_id(foreign_id, cache)
+      new(foreign_id, cache).using_id
     end
 
-    def initialize(source_id, cache)
-      @source_id = source_id
-      @cache     = cache
+    def initialize(foreign_id, cache)
+      @foreign_id = foreign_id
+      @cache      = cache
     end
 
     def using_id
@@ -21,9 +21,7 @@ module Persist
     private
 
     def brainz_artist
-      # TODO: Call source_id.source_id looks wired, fix that
-      id = source_id.source_id
-      MashedBrainz::Artist.xml(cache.fetch_brainz(id))
+      MashedBrainz::Artist.xml(cache.fetch_brainz(foreign_id))
     end
   end
 end
