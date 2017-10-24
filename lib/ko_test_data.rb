@@ -1,32 +1,20 @@
 # Fetch test Data
 module KoTestData
-  # TODO: beautify this module
-  BRAINZ_RELEASE_QUERY_STRING = '?inc='\
-                                'artists+labels+recordings+release-groups'\
-                                ''.freeze
+  BRAINZ_FIXTURES = %w[fixtures brainz].freeze
 
-  def self.brainz_release(
-        brainz_id,
-        query_string = BRAINZ_RELEASE_QUERY_STRING
-      )
-    file_name = File.join(
-      'fixtures',
-      'brainz',
-      'release',
-      brainz_id + query_string + '.xml'
-    )
-
-    File.open(file_name).read
+  # TODO: Delete methods brainz_release and brainz_artist. Use read_brainz_file
+  # instead
+  def self.brainz_release(foreign_id)
+    read_brainz_file(foreign_id)
   end
 
-  def self.brainz_artist(brainz_sid)
-    file_name = File.join(
-      'fixtures',
-      'brainz',
-      'artist',
-      brainz_sid.value + brainz_sid.query_string + '.xml'
-    )
+  def self.brainz_artist(foreign_id)
+    read_brainz_file(foreign_id)
+  end
 
+  def self.read_brainz_file(foreign_id)
+    path = [BRAINZ_FIXTURES, foreign_id.cache_key + '.xml']
+    file_name = File.join(path.flatten)
     File.open(file_name).read
   end
 end
