@@ -13,15 +13,15 @@ RSpec.describe Import::Cache, type: :model do
     @mocked_foreign_id = MockForeignId.new
   end
 
-  specify '#fetch_brainz_artist' do
+  specify '#fetch_brainz' do
     expect(subject).to respond_to(:fetch_brainz)
   end
 
-  specify '#store_brainz_artist' do
+  specify '#store_brainz' do
     expect(subject).to respond_to(:store_brainz)
   end
 
-  specify '#require_brainz_artist' do
+  specify '#require_brainz' do
     expect(subject).to respond_to(:require_brainz)
   end
 
@@ -46,5 +46,10 @@ RSpec.describe Import::Cache, type: :model do
     end
 
     expect(@cache.required['tmdb'].length).to eq(1)
+  end
+
+  it '#fetch_<source_name>! raises Import::CacheMissingEntry on missing data' do
+    expect { @cache.fetch_brainz!(@mocked_foreign_id) }
+      .to raise_error(Import::CacheMissingEntry)
   end
 end
