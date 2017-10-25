@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 require 'ko_test_data'
 
 RSpec.describe Persist::BrainzArtist do
@@ -20,6 +20,6 @@ RSpec.describe Persist::BrainzArtist do
   it 'raises when .using_id is called without having data cached' do
     cache = Import::Cache.new
     expect { Persist::BrainzArtist.using_id(@foreign_id, cache) }
-      .to raise_error /artist.+not found/
+      .to raise_error(Import::CacheMissingEntry)
   end
 end
