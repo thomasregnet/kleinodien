@@ -10,6 +10,13 @@ module Import
         known[source_name][foreign_id.cache_key]
       end
 
+      define_method("fetch_#{source_name}!") do |foreign_id|
+        cache_key = foreign_id.cache_key
+        entry = known[source_name][cache_key]
+        raise Import::CacheMissingEntry, cache_key unless entry
+        entry
+      end
+
       define_method("store_#{source_name}") do |foreign_id, data|
         known[source_name][foreign_id.cache_key] = data
       end
