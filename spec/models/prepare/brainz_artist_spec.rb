@@ -7,21 +7,18 @@ RSpec.describe Prepare::BrainzArtist do
     @foreign_id = BrainzArtistId.new(
       value: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
     )
-    # @jello_biafra_id = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
   end
 
   specify '.perform without cached artist' do
     artist_importer = Prepare::BrainzArtist.new(@foreign_id, @cache)
     artist_importer.using_id
-    expect(artist_importer.cache.any_required?).to be true
+    expect(@cache.any_required?).to be true
   end
 
   specify '.perform with cached artist' do
-    # artist_sid = BrainzArtistId.new(value: @jello_biafra_id)
     xml = KoTestData.brainz_artist(@foreign_id)
     @cache.store_brainz(@foreign_id, xml)
-    artist = Prepare::BrainzArtist.using_id(@foreign_id, @cache)
-    expect(artist).to be_instance_of(Artist)
-    expect(artist.new_record?).to be false
+    Prepare::BrainzArtist.using_id(@foreign_id, @cache)
+    expect(@cache.any_required?).to be false
   end
 end

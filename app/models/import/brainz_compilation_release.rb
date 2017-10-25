@@ -22,12 +22,10 @@ module Import
       #byebug
       cache.rebuild_from_params(params)
       ::Prepare::BrainzCompilationRelease.using_id(
-        # params[:data][:attributes][:wanted],
         foreign_id,
         cache
       )
       ::Persist::BrainzCompilationRelease.using_id(
-        #params[:data][:attributes][:wanted],
         foreign_id,
         cache
       )

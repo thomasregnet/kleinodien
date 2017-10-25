@@ -12,7 +12,6 @@ module Persist
     end
 
     def using_id
-
     end
   end
 end
