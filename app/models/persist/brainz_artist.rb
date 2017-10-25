@@ -21,8 +21,7 @@ module Persist
     private
 
     def brainz_artist
-      xml = cache.fetch_brainz(foreign_id)
-      raise "#{foreign_id.cache_key} not found" unless xml
+      xml = cache.fetch_brainz!(foreign_id)
       MashedBrainz::Artist.xml(xml)
     end
   end
