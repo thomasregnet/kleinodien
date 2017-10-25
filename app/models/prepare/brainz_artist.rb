@@ -12,15 +12,15 @@ module Prepare
       @cache      = cache
     end
 
-    def using_id
-      prepare
-      return if cache.any_required?
-      # persist
-      ::Persist::BrainzArtist.using_id(foreign_id, cache)
-    end
+    # def using_id
+    #   prepare
+    #   return if cache.any_required?
+    #   # persist
+    #   ::Persist::BrainzArtist.using_id(foreign_id, cache)
+    # end
 
-    def prepare
-      return if cache.required['brainz'].include? foreign_id # source_id
+    def using_id
+      # return if cache.required['brainz'].include? foreign_id # source_id
       cache.require_brainz foreign_id unless cache.fetch_brainz(foreign_id)
     end
   end
