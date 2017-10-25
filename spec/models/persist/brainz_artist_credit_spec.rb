@@ -13,8 +13,16 @@ RSpec.describe Persist::BrainzArtistCredit do
   end
 
   it 'persists an artist_credit' do
+    %w[2280ca0e-6968-4349-8c36-cb0cbd6ee95f
+       37e9d7b2-7779-41b2-b2eb-3685351caad3].each do |brainz_id|
+      foreign_id = BrainzArtistId.new(value: brainz_id)
+      xml = KoTestData.brainz_xml_for(foreign_id)
+      @cache.store_brainz(foreign_id, xml)
+    end
     artist_credit = Persist::BrainzArtistCredit.using_data(
       @brainz_artist_credit, @cache
     )
+    expect(artist_credit.new_record?).to be false
+    expect(artist_credit.name).to eq('Jello Biafra With NoMeansNo')
   end
 end
