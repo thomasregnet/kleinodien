@@ -13,6 +13,11 @@ RSpec.describe Persist::BrainzParticipant do
   end
 
   it 'persists the participant' do
+    foreign_id = BrainzArtistId.new(
+     value: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
+    )
+    xml = KoTestData.brainz_xml_for(foreign_id)
+    @cache.store_brainz(foreign_id, xml)
     Persist::BrainzParticipant.using_data(@original, @cache)
   end
 end
