@@ -16,7 +16,7 @@ RSpec.describe Prepare::BrainzArtist do
   end
 
   specify '.perform with cached artist' do
-    xml = KoTestData.brainz_artist(@foreign_id)
+    xml = KoTestData.brainz_xml_for(@foreign_id)
     @cache.store_brainz(@foreign_id, xml)
     Prepare::BrainzArtist.using_id(@foreign_id, @cache)
     expect(@cache.any_required?).to be false
