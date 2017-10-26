@@ -17,4 +17,9 @@ module KoTestData
     file_name = File.join(path.flatten)
     File.open(file_name).read
   end
+
+  def self.store_brainz_cache(foreign_id, cache)
+    xml = brainz_xml_for(foreign_id)
+    cache.store_brainz(foreign_id, xml)
+  end
 end
