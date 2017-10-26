@@ -10,8 +10,13 @@ RSpec.describe MashedBrainz::ReleaseGroup do
     )
   end
 
-  it 'returns the foreign_id' do
+  specify '#foreign_id' do
     expect(@orig_release_group.brainz_id)
       .to be_instance_of(BrainzReleaseGroupId)
+  end
+
+  it '#title' do
+    expect(@orig_release_group.title)
+      .to eq 'The Sky Is Falling and I Want My Mommy'
   end
 end
