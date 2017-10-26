@@ -1,6 +1,9 @@
 module Persist
   # Persist a MusicBrainz release-group
   class BrainzCompilationHead
+
+    attr_reader :artist_credit, :cache, :foreign_id
+
     def self.using_id(foreign_id, cache, artist_credit)
       new(foreign_id, cache, artist_credit).using_id
     end
@@ -11,6 +14,10 @@ module Persist
       @artist_credit = artist_credit
     end
 
-    def using_id; end
+    def using_id
+      xml = cache.fetch_brainz!(foreign_id)
+      original = MashedBrainz::ReleleaseGroup.xml(xml)
+      byebug
+    end
   end
 end
