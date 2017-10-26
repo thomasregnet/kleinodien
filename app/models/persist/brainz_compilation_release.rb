@@ -12,6 +12,16 @@ module Persist
     end
 
     def using_id
+      xml = cache.fetch_brainz!(id)
+      original = ::MashedBrainz::Release.xml(xml)
+      artist_credit = BrainzArtistCredit.using_data(
+        original.artist_credit, cache
+      )
+      byebug
+      release_group_fid = BrainzReleaseGroupId.new(
+        value: original.release_group.brainz_id
+      )
+      compilation_head = Persist::CompilationHead.using_id()
     end
   end
 end
