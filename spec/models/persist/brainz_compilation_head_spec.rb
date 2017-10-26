@@ -9,6 +9,7 @@ RSpec.describe Persist::BrainzCompilationHead do
   end
 
   it 'persists a brainz release-group' do
+    KoTestData.store_brainz_cache(@foreign_id, @cache)
     artist_credit = 'fake artist credit'
     compi_head = Persist::BrainzCompilationHead.using_id(
       @foreign_id, @cache, artist_credit
