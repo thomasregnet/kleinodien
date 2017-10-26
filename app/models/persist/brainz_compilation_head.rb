@@ -16,8 +16,12 @@ module Persist
 
     def using_id
       xml = cache.fetch_brainz!(foreign_id)
-      original = MashedBrainz::ReleleaseGroup.xml(xml)
-      byebug
+      original = MashedBrainz::ReleaseGroup.xml(xml)
+      artist_credit.compilations.create!(
+        title:          original.title,
+        disambiguation: original.disambiguation,
+        type:           'AlbumHead'
+      )
     end
   end
 end

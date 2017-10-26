@@ -10,9 +10,10 @@ RSpec.describe Persist::BrainzCompilationHead do
 
   it 'persists a brainz release-group' do
     KoTestData.store_brainz_cache(@foreign_id, @cache)
-    artist_credit = 'fake artist credit'
-    compi_head = Persist::BrainzCompilationHead.using_id(
+    artist_credit = FactoryGirl.create(:artist_credit)
+    compilation_head = Persist::BrainzCompilationHead.using_id(
       @foreign_id, @cache, artist_credit
     )
+    expect(compilation_head.new_record?).to be false
   end
 end
