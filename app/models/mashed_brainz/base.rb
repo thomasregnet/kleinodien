@@ -42,6 +42,10 @@ module MashedBrainz
       end
     }
 
+    coerce_key :release_group, lambda { |value|
+      MashedBrainz::ReleaseGroup.new(value)
+    }
+
     def relations_for_target(type)
       return unless relation_lists
       relation_lists.each do |r_list|
