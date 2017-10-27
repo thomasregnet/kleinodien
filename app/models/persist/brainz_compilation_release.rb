@@ -1,4 +1,5 @@
 module Persist
+  # Persist a MusicBrainz release
   class BrainzCompilationRelease
     attr_reader :cache, :id
 
@@ -12,16 +13,21 @@ module Persist
     end
 
     def using_id
-      xml = cache.fetch_brainz!(id)
-      original = ::MashedBrainz::Release.xml(xml)
+      original = mashed_original
       artist_credit = BrainzArtistCredit.using_data(
         original.artist_credit, cache
       )
-      byebug
-      release_group_fid = BrainzReleaseGroupId.new(
-        value: original.release_group.brainz_id
+      compilation_head = Persist::BrainzCompilationHead.using_id(
+        original.release_group.brainz_id, cache, artist_credit
       )
-      compilation_head = Persist::CompilationHead.using_id()
+      compilation_head.releases.create!(
+        title: original.title
+      )
+    end
+
+    def mashed_original
+      xml = cache.fetch_brainz!(id)
+      ::MashedBrainz::Release.xml(xml)
     end
   end
 end
