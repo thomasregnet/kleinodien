@@ -14,6 +14,10 @@ RSpec.describe Persist::BrainzCompilationRelease do
       BrainzArtistId.new(value: '1d93c839-22e7-4f76-ad84-d27039efc048'),
       @cache
     )
+    KoTestData.store_brainz_cache(
+      BrainzReleaseGroupId.new(value: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'),
+      @cache
+    )
     compilation_release = Persist::BrainzCompilationRelease.using_id(
       @foreign_id, @cache
     )

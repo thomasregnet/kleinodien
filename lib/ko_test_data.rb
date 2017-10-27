@@ -19,6 +19,7 @@ module KoTestData
   end
 
   def self.store_brainz_cache(foreign_id, cache)
+    #byebug
     xml = brainz_xml_for(foreign_id)
     cache.store_brainz(foreign_id, xml)
   end

@@ -9,7 +9,7 @@ module Persist
     end
 
     def initialize(foreign_id, cache, artist_credit)
-      @foreign_id = foreign_id
+      @foreign_id    = foreign_id
       @cache         = cache
       @artist_credit = artist_credit
     end
