@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'ko_test_data'
 
-RSpec.describe Persist::BrainzArtistCredit do
+RSpec.describe Import::PersistBrainzArtistCredit do
   before(:each) do
     @cache = Import::Cache.new
     foreign_id = BrainzReleaseId.new(
@@ -19,7 +19,7 @@ RSpec.describe Persist::BrainzArtistCredit do
       xml = KoTestData.brainz_xml_for(foreign_id)
       @cache.store_brainz(foreign_id, xml)
     end
-    artist_credit = Persist::BrainzArtistCredit.using_data(
+    artist_credit = Import::PersistBrainzArtistCredit.using_data(
       @brainz_artist_credit, @cache
     )
     expect(artist_credit.new_record?).to be false

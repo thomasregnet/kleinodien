@@ -1,5 +1,5 @@
-module Persist
-  class BrainzArtist
+module Import
+  class PersistBrainzArtist
     attr_reader :cache, :foreign_id
 
     def self.using_id(foreign_id, cache)

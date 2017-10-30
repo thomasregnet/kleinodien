@@ -22,7 +22,7 @@ module Import
 
       return body if cache.any_required?
 
-      ::Persist::BrainzCompilationRelease.using_id(foreign_id, cache)
+      Persist::BrainzCompilationRelease.using_id(foreign_id, cache)
 
       body
     end
