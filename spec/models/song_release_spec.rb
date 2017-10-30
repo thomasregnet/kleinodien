@@ -23,4 +23,13 @@ RSpec.describe SongRelease, type: :model do
   it_behaves_like 'an identifyable model' do
     let(:identifyable) { FactoryGirl.create(:song_release_with_identifiers) }
   end
+
+  it 'belongs_to :artist_credit' do
+    song_release = FactoryGirl.create(:song_release)
+    song_release.artist_credit = FactoryGirl.create(:artist_credit)
+    expect { song_release.save! }.not_to raise_error
+
+    association = SongRelease.reflect_on_association(:artist_credit)
+    expect(association.macro).to eq(:belongs_to)
+  end
 end
