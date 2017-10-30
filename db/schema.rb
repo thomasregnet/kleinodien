@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030093316) do
+ActiveRecord::Schema.define(version: 20171030110248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -487,7 +487,9 @@ ActiveRecord::Schema.define(version: 20171030093316) do
     t.datetime "updated_at", null: false
     t.date "date"
     t.integer "date_mask", limit: 2
+    t.bigint "artist_credit_id"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true
+    t.index ["artist_credit_id"], name: "index_piece_releases_on_artist_credit_id"
     t.index ["station_id"], name: "index_piece_releases_on_station_id"
   end
 
@@ -798,6 +800,7 @@ ActiveRecord::Schema.define(version: 20171030093316) do
   add_foreign_key "piece_heads_tags", "tags"
   add_foreign_key "piece_release_identifiers", "piece_releases", name: "piece_release_identifiers_piece_release_id_fkey"
   add_foreign_key "piece_release_identifiers", "sources", name: "piece_release_identifiers_source_id_fkey"
+  add_foreign_key "piece_releases", "artist_credits"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
   add_foreign_key "piece_releases_tags", "piece_releases"
