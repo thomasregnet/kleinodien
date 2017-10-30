@@ -78,6 +78,18 @@ RSpec.describe ArtistCredit, type: :model do
     end
   end
 
+  context 'CompilationRelease' do
+    specify '#compilation_releases' do
+      artist_credit = FactoryGirl.create(:artist_credit)
+      compilation_release = artist_credit.compilation_releases.create!(
+        title: 'Awesome album',
+        type: 'AlbumRelease',
+        head: FactoryGirl.create(:compilation_head)
+      )
+      expect(compilation_release).to be_instance_of(AlbumRelease)
+    end
+  end
+
   context 'with Source' do
     before(:all) do
       DatabaseCleaner.start
