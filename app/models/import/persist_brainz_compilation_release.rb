@@ -1,6 +1,6 @@
-module Persist
+module Import
   # Persist a MusicBrainz release
-  class BrainzCompilationRelease
+  class PersistBrainzCompilationRelease
     attr_reader :cache, :id
 
     def self.using_id(id, cache)
@@ -14,10 +14,10 @@ module Persist
 
     def using_id
       original = mashed_original
-      artist_credit = BrainzArtistCredit.using_data(
+      artist_credit = PersistBrainzArtistCredit.using_data(
         original.artist_credit, cache
       )
-      compilation_head = Persist::BrainzCompilationHead.using_id(
+      compilation_head = PersistBrainzCompilationHead.using_id(
         original.release_group.brainz_id, cache, artist_credit
       )
       compilation_head.releases.create!(

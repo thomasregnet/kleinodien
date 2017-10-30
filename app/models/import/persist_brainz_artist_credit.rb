@@ -1,6 +1,6 @@
-module Persist
+module Import
   # Persist an artist_credit form MusicBrainz
-  class BrainzArtistCredit
+  class PersistBrainzArtistCredit
     attr_reader :cache, :original
 
     def self.using_data(original, cache)
@@ -23,7 +23,7 @@ module Persist
     end
 
     def build_name_credit_on(original_name_credit, artist_credit, position)
-      artist = BrainzArtist.using_id(
+      artist = PersistBrainzArtist.using_id(
         original_name_credit.artist.brainz_id, cache
       )
       join_phrase = original_name_credit.joinphrase
