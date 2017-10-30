@@ -1,6 +1,6 @@
-module Prepare
+module Import
   # Prapare an Artist from MusicBrainz for persistence
-  class BrainzArtist
+  class PrepareBrainzArtist
     attr_reader :foreign_id, :cache
 
     def self.using_id(foreign_id, cache)

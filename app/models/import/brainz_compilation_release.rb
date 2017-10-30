@@ -18,7 +18,7 @@ module Import
     end
 
     def perform
-      ::Prepare::BrainzCompilationRelease.using_id(foreign_id, cache)
+      PrepareBrainzCompilationRelease.using_id(foreign_id, cache)
 
       return body if cache.any_required?
 
