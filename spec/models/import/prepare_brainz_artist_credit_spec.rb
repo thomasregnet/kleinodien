@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'ko_test_data'
 
-RSpec.describe Prepare::BrainzArtistCredit do
+RSpec.describe Import::PrepareBrainzArtistCredit do
   before(:each) do
     @cache = Import::Cache.new
 
@@ -11,7 +11,7 @@ RSpec.describe Prepare::BrainzArtistCredit do
   end
 
   specify '.perform' do
-    ac_importer = Prepare::BrainzArtistCredit.new(@artist_credit, @cache)
+    ac_importer = Import::PrepareBrainzArtistCredit.new(@artist_credit, @cache)
     ac_importer.using_data
     expect(ac_importer.cache.any_required?).to be true
   end
