@@ -6,8 +6,12 @@ RSpec.describe AlbumRelease, type: :model do
     let(:identifyable) { FactoryGirl.create(:album_release_with_identifiers) }
   end
 
-  it 'has_one artist_credit' do
+  it 'belongs_to :artist_credit' do
     album_release = FactoryGirl.create(:album_release)
     album_release.artist_credit = FactoryGirl.create(:artist_credit)
+    expect { album_release.save! }.not_to raise_error
+
+    association = AlbumRelease.reflect_on_association(:artist_credit)
+    expect(association.macro).to eq(:belongs_to)
   end
 end
