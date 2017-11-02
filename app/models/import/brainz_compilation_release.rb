@@ -1,17 +1,16 @@
 module Import
   # Post MusicBrainz params to kleinodien
-  class BrainzCompilationRelease
-    attr_reader :cache, :foreign_id, :params
+  class BrainzCompilationRelease < Base
+    attr_reader :foreign_id
 
     def self.perform(params)
       new(params).perform
     end
 
     def initialize(params)
-      @params     = params
-      @cache      = Cache.new
+      super(params: params)
       @foreign_id = BrainzReleaseId.new(
-        value: params[:data][:attributes][:wanted]
+        value: wanted
       )
 
       cache.rebuild_from_params(params)
@@ -28,7 +27,7 @@ module Import
     end
 
     def body
-      wanted_id = params[:data][:attributes][:wanted]
+      wanted_id = wanted
       brainz_id = BrainzReleaseId.new(value: wanted_id)
       cache.require_brainz(brainz_id)
       {
