@@ -18,10 +18,11 @@ module Import
         original.artist_credit, cache
       )
       compilation_head = PersistBrainzCompilationHead.using_id(
-        original.release_group.brainz_id, cache, artist_credit
+        original.release_group.brainz_id, cache
       )
       compilation_head.releases.create!(
-        title: original.title
+        artist_credit: artist_credit,
+        title:         original.title
       )
     end
 
