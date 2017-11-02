@@ -1,17 +1,12 @@
 module Import
   # Post MusicBrainz params to kleinodien
   class BrainzCompilationRelease < Base
-    attr_reader :foreign_id
-
     def self.perform(params)
       new(params).perform
     end
 
     def initialize(args)
-      super(args)
-      @foreign_id = BrainzReleaseId.new(
-        value: wanted
-      )
+      super({ foreign_id_class: BrainzReleaseId }.merge args)
 
       cache.rebuild_from_params(params)
     end

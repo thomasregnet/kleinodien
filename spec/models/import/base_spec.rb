@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # For the testing of foreign_id
-class MockForeignId
+class FakeForeignId
   attr_reader :value
 
   def initialize(args)
@@ -65,7 +65,7 @@ RSpec.describe Import::Base do
     it "generates a foreign_id if it's class is given" do
       base = Import::Base.new(
         params: params,
-        foreign_id_class: MockForeignId
+        foreign_id_class: FakeForeignId
       )
       expect(base.foreign_id.value).to eq(wanted)
     end
