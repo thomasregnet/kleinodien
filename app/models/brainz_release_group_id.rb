@@ -1,7 +1,7 @@
 class BrainzReleaseGroupId < BrainzId
   include BrainzCacheKey
 
-  QUERY_STRING = '?inc=url-rels'.freeze
+  QUERY_STRING = '?inc=artists+url-rels'.freeze
 
   attr_reader :kind, :query_string
 
