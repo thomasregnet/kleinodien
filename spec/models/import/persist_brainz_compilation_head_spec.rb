@@ -21,7 +21,7 @@ RSpec.describe Import::PersistBrainzCompilationHead do
   it 'persists a brainz release-group' do
     artist_credit = FactoryGirl.create(:artist_credit)
     compilation_head = Import::PersistBrainzCompilationHead.using_id(
-      @foreign_id, @cache, artist_credit
+      @foreign_id, @cache
     )
     expect(compilation_head.new_record?).to be false
   end
