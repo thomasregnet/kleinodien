@@ -10,12 +10,16 @@ module Import
     def initialize(foreign_id, cache, artist_credit)
       @foreign_id    = foreign_id
       @cache         = cache
-      @artist_credit = artist_credit
+      # @artist_credit = artist_credit
     end
 
     def using_id
       xml = cache.fetch_brainz!(foreign_id)
       original = MashedBrainz::ReleaseGroup.xml(xml)
+      artist_credit = PersistBrainzArtistCredit.using_data(
+        original.artist_credit, cache
+      )
+
       artist_credit.compilations.create!(
         title:          original.title,
         disambiguation: original.disambiguation,
