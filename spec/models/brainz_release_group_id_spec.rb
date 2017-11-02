@@ -10,7 +10,7 @@ RSpec.describe BrainzReleaseGroupId do
   end
 
   def query_string
-    '?inc=url-rels'
+    '?inc=artists+url-rels'
   end
 
   specify '#cache_key' do
