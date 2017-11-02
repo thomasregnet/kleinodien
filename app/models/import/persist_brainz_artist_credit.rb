@@ -13,6 +13,17 @@ module Import
     end
 
     def using_data
+      artist_credit = find_by
+      return artist_credit if artist_credit
+
+      create
+    end
+
+    def find_by
+      ArtistCredit.find_by(name: original.name)
+    end
+
+    def create
       artist_credit = ArtistCredit.new(source: Source::MusicBrainz)
       original.name_credits.each_with_index do |original_name_credit, position|
         build_name_credit_on(original_name_credit, artist_credit, position)
