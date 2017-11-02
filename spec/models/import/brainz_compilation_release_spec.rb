@@ -12,7 +12,7 @@ RSpec.describe Import::BrainzCompilationRelease, type: :model do
       }
     }
 
-    response = Import::BrainzCompilationRelease.perform(data)
+    response = Import::BrainzCompilationRelease.perform(params: data)
 
     expect(response[:data][:attributes][:http_status_code]).to eq(202)
     cache_key = response[:data][:attributes][:required]['brainz'][0]
@@ -24,7 +24,7 @@ RSpec.describe Import::BrainzCompilationRelease, type: :model do
 
   specify 'Sepultura - Arise' do
     brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4'
-    response = Import::BrainzCompilationRelease.perform(
+    response = Import::BrainzCompilationRelease.perform(params: 
       Hash[
         data: {
           type: 'music-brainz-release',

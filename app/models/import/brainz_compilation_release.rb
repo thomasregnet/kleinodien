@@ -7,8 +7,8 @@ module Import
       new(params).perform
     end
 
-    def initialize(params)
-      super(params: params)
+    def initialize(args)
+      super(args)
       @foreign_id = BrainzReleaseId.new(
         value: wanted
       )
