@@ -2,6 +2,8 @@ require 'rails_helper'
 require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzArtistCredit do
+  # TODO: Specs for #find_by
+  # TODO: Specs for #create
   before(:each) do
     @cache = Import::Cache.new
     foreign_id = BrainzReleaseId.new(
