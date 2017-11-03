@@ -10,7 +10,10 @@ RSpec.describe Import::PrepareBrainzArtist do
   end
 
   specify '.perform without cached artist' do
-    artist_importer = Import::PrepareBrainzArtist.new(@foreign_id, @cache)
+    artist_importer = Import::PrepareBrainzArtist.new(
+      cache:      @cache,
+      foreign_id: @foreign_id
+    )
     artist_importer.using_id
     expect(@cache.any_required?).to be true
   end
@@ -18,7 +21,10 @@ RSpec.describe Import::PrepareBrainzArtist do
   specify '.perform with cached artist' do
     xml = KoTestData.brainz_xml_for(@foreign_id)
     @cache.store_brainz(@foreign_id, xml)
-    Import::PrepareBrainzArtist.using_id(@foreign_id, @cache)
+    Import::PrepareBrainzArtist.using_id(
+      cache:      @cache,
+      foreign_id: @foreign_id
+    )
     expect(@cache.any_required?).to be false
   end
 end
