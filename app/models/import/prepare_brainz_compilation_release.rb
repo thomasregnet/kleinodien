@@ -1,17 +1,16 @@
 module Import
   # Prepare a MusicBrainz release to be persisted
-  class PrepareBrainzCompilationRelease
+  class PrepareBrainzCompilationRelease < PrepareBase
     attr_reader :cache, :foreign_id
 
     attr_reader :foreign_id, :params, :cache
 
-    def self.using_id(foreign_id, cache)
-      new(foreign_id, cache).using_id
+    def self.using_id(args)
+      new(args).using_id
     end
 
-    def initialize(foreign_id, cache)
-      @foreign_id = foreign_id
-      @cache = cache
+    def initialize(args = {})
+      super(args)
     end
 
     def using_id
