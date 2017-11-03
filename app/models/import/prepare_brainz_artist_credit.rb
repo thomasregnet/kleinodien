@@ -1,15 +1,15 @@
 module Import
   # Import an ArtistCredit from MusicBrainz
-  class PrepareBrainzArtistCredit
-    attr_reader :artist_credit, :cache
+  class PrepareBrainzArtistCredit < PrepareBase
+    attr_reader :artist_credit
 
-    def self.using_data(artist_credit, cache)
-      new(artist_credit, cache).using_data
+    def self.using_data(args)
+      new(args).using_data
     end
 
-    def initialize(artist_credit, cache)
-      @artist_credit = artist_credit
-      @cache         = cache
+    def initialize(args)
+      @artist_credit = args[:artist_credit]
+      super(args)
     end
 
     def using_data
