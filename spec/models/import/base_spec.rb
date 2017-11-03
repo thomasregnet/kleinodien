@@ -1,13 +1,5 @@
 require 'rails_helper'
-
-# For the testing of foreign_id
-class FakeForeignId
-  attr_reader :value
-
-  def initialize(args)
-    @value = args[:value]
-  end
-end
+require 'fake_foreign_id'
 
 RSpec.describe Import::Base do
   def wanted
