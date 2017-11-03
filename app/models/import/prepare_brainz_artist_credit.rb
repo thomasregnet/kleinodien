@@ -18,7 +18,10 @@ module Import
 
     def prepare
       artist_credit.name_credits.each do |name_credit|
-        PrepareBrainzArtist.using_id(name_credit.artist.brainz_id, cache)
+        PrepareBrainzArtist.using_id(
+          cache:      cache,
+          foreign_id: name_credit.artist.brainz_id
+        )
       end
     end
   end
