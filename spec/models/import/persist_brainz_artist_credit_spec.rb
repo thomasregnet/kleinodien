@@ -22,7 +22,8 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       @cache.store_brainz(foreign_id, xml)
     end
     artist_credit = Import::PersistBrainzArtistCredit.using_data(
-      @brainz_artist_credit, @cache
+      template: @brainz_artist_credit,
+      cache:    @cache
     )
     expect(artist_credit.new_record?).to be false
     expect(artist_credit.name).to eq('Jello Biafra With NoMeansNo')

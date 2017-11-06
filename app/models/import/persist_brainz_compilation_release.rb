@@ -1,24 +1,26 @@
 module Import
   # Persist a MusicBrainz release
   class PersistBrainzCompilationRelease < PersistBase
-    attr_reader :cache, :id
+    attr_reader :cache, :id, :template
 
-    def self.using_id(id, cache)
-      new(id, cache).using_id
+    def self.using_id(args)
+      new(args).using_id
     end
 
-    def initialize(id, cache)
-      @id = id
-      @cache = cache
+    def initialize(args)
+      super(args)
+      @template = args[:template]
     end
 
     def using_id
       original = mashed_original
       artist_credit = PersistBrainzArtistCredit.using_data(
-        original.artist_credit, cache
+        template: original.artist_credit,
+        cache: cache
       )
       compilation_head = PersistBrainzCompilationHead.using_id(
-        original.release_group.brainz_id, cache
+        foreign_id: original.release_group.brainz_id,
+        cache: cache
       )
       compilation_head.releases.create!(
         artist_credit: artist_credit,
@@ -27,7 +29,7 @@ module Import
     end
 
     def mashed_original
-      xml = cache.fetch_brainz!(id)
+      xml = cache.fetch_brainz!(foreign_id)
       ::MashedBrainz::Release.xml(xml)
     end
   end

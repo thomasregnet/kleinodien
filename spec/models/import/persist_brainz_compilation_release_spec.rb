@@ -19,13 +19,18 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
       @cache
     )
     compilation_release = Import::PersistBrainzCompilationRelease.using_id(
-      @foreign_id, @cache
+      foreign_id: @foreign_id,
+      cache:      @cache
     )
     expect(compilation_release.title).to eq('Arise')
   end
 
   it 'raises when data is missing' do
-    expect { Import::PersistBrainzCompilationRelease.using_id(@foreign_id, @cache) }
-      .to raise_error(Import::CacheMissingEntry)
+    expect do
+      Import::PersistBrainzCompilationRelease.using_id(
+        foreign_id: @foreign_id,
+        cache: @cache
+      )
+    end.to raise_error(Import::CacheMissingEntry)
   end
 end
