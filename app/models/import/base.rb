@@ -24,5 +24,13 @@ module Import
       return unless foreign_id_class
       foreign_id_class.new(value: wanted)
     end
+
+    # TODO: respond_to_missing?
+    def method_missing(method, args = {})
+      klass = "Import::#{method.to_s.camelize}".constantize
+      merged_args = { cache: cache }.merge(args)
+      klass.send(:new, merged_args)
+      # TODO: call super
+    end
   end
 end
