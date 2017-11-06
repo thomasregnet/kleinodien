@@ -1,15 +1,12 @@
 module Import
   # Persist a MusicBrainz release
   class PersistBrainzCompilationRelease < PersistBase
-    attr_reader :template
-
     def self.using_id(args)
       new(args).using_id
     end
 
     def initialize(args)
       super(args)
-      @template = args[:template]
     end
 
     def using_id

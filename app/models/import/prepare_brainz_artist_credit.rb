@@ -1,14 +1,11 @@
 module Import
   # Import an ArtistCredit from MusicBrainz
   class PrepareBrainzArtistCredit < PrepareBase
-    attr_reader :template
-
     def self.using_data(args)
       new(args).using_data
     end
 
     def initialize(args)
-      @template = args[:template]
       super(args)
     end
 

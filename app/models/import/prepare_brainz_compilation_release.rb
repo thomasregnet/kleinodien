@@ -14,7 +14,7 @@ module Import
       brainz_release = cached_or_require
       return unless brainz_release
       PrepareBrainzArtistCredit.using_data(
-        artist_credit: brainz_release.artist_credit,
+        template: brainz_release.artist_credit,
         cache:         cache
       )
       # TODO: Use MaschedBrainz if they are available
