@@ -1,8 +1,6 @@
 module Import
   # Persist an artist from MusicBrainz
   class PersistBrainzArtist < PersistBase
-    attr_reader :cache, :foreign_id
-
     def self.using_id(args)
       new(args).using_id
     end
