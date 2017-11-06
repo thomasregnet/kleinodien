@@ -1,8 +1,6 @@
 module Import
   # Persist a MusicBrainz release-group
   class PersistBrainzCompilationHead < PersistBase
-    attr_reader :artist_credit, :cache, :foreign_id
-
     def self.using_id(args)
       new(args).using_id
     end

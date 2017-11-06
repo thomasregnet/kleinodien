@@ -1,14 +1,14 @@
 module Import
   # Import an ArtistCredit from MusicBrainz
   class PrepareBrainzArtistCredit < PrepareBase
-    attr_reader :artist_credit
+    attr_reader :template
 
     def self.using_data(args)
       new(args).using_data
     end
 
     def initialize(args)
-      @artist_credit = args[:artist_credit]
+      @template = args[:template]
       super(args)
     end
 
@@ -17,7 +17,7 @@ module Import
     end
 
     def prepare
-      artist_credit.name_credits.each do |name_credit|
+      template.name_credits.each do |name_credit|
         PrepareBrainzArtist.using_id(
           cache:      cache,
           foreign_id: name_credit.artist.brainz_id
