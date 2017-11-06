@@ -1,15 +1,12 @@
 module Import
   # Persist an artist_credit form MusicBrainz
   class PersistBrainzArtistCredit < PersistBase
-    attr_reader :template
-
     def self.using_data(args)
       new(args).using_data
     end
 
     def initialize(args)
       super(args)
-      @template = args[:template]
     end
 
     def using_data
