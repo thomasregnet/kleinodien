@@ -1,6 +1,6 @@
 module Import
   # Persist a MusicBrainz release
-  class PersistBrainzCompilationRelease
+  class PersistBrainzCompilationRelease < PersistBase
     attr_reader :cache, :id
 
     def self.using_id(id, cache)

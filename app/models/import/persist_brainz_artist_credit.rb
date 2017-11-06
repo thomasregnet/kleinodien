@@ -1,6 +1,6 @@
 module Import
   # Persist an artist_credit form MusicBrainz
-  class PersistBrainzArtistCredit
+  class PersistBrainzArtistCredit < PersistBase
     attr_reader :cache, :original
 
     def self.using_data(original, cache)
