@@ -1,6 +1,19 @@
 require 'rails_helper'
 require 'fake_foreign_id'
 
+module Import
+  # Fake a Import-service class for testing
+  class FakeServiceClass < Import::Base
+    def perform
+      {
+        cache:      cache,
+        foreign_id: foreign_id,
+        params:     params
+      }
+    end
+  end
+end
+
 RSpec.describe Import::Base do
   def wanted
     'abc123'
@@ -60,6 +73,15 @@ RSpec.describe Import::Base do
         foreign_id_class: FakeForeignId
       )
       expect(base.foreign_id.value).to eq(wanted)
+    end
+  end
+
+  describe 'method_missing' do
+    it 'passes the cache' do
+      cache = Import::Cache.new
+      base = Import::Base.new(cache: cache)
+      fake_result = base.fake_service_class
+      expect(fake_result.cache).to eq(cache)
     end
   end
 end
