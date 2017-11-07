@@ -1,21 +1,21 @@
 module Import
   # Persist a MusicBrainz release
   class PersistBrainzCompilationRelease < PersistBase
-    def self.using_id(args)
-      new(args).using_id
+    def self.perform(args)
+      new(args).perform
     end
 
     def initialize(args)
       super(args)
     end
 
-    def using_id
+    def perform
       original = mashed_original
-      artist_credit = PersistBrainzArtistCredit.using_data(
+      artist_credit = PersistBrainzArtistCredit.perform(
         template: original.artist_credit,
         cache: cache
       )
-      compilation_head = PersistBrainzCompilationHead.using_id(
+      compilation_head = PersistBrainzCompilationHead.perform(
         foreign_id: original.release_group.brainz_id,
         cache: cache
       )
