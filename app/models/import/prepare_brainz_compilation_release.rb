@@ -4,28 +4,21 @@ module Import
     def self.perform(args)
       new(args).perform
     end
-    def self.using_id(args)
-      new(args).using_id
-    end
 
     def initialize(args = {})
       super(args)
     end
 
-    def using_id
+    def perform
       # TODO: check if the brainz release already exists in the database
       brainz_release = cached_or_require
       return unless brainz_release
-      PrepareBrainzArtistCredit.using_data(
+      PrepareBrainzArtistCredit.perform(
         template: brainz_release.artist_credit,
         cache:         cache
       )
       # TODO: Use MaschedBrainz if they are available
       # TODO: call `prepare` on related classes
-    end
-
-    def perform
-      using_id
     end
 
     def cached_or_require

@@ -14,7 +14,7 @@ RSpec.describe Import::PrepareBrainzArtistCredit do
     ac_importer = Import::PrepareBrainzArtistCredit.new(
       template: @artist_credit
     )
-    ac_importer.using_data
+    ac_importer.perform
     expect(ac_importer.cache.any_required?).to be true
   end
 end

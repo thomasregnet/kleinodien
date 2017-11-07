@@ -1,15 +1,15 @@
 module Import
   # Prapare an Artist from MusicBrainz for persistence
   class PrepareBrainzArtist < PrepareBase
-    def self.using_id(args)
-      new(args).using_id
+    def self.perform(args)
+      new(args).perform
     end
 
     def initialize(args)
       super(args)
     end
 
-    def using_id
+    def perform
       cache.require_brainz foreign_id unless cache.fetch_brainz(foreign_id)
     end
   end
