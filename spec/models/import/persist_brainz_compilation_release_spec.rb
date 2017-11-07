@@ -18,7 +18,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
       BrainzReleaseGroupId.new(value: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'),
       @cache
     )
-    compilation_release = Import::PersistBrainzCompilationRelease.using_id(
+    compilation_release = Import::PersistBrainzCompilationRelease.perform(
       foreign_id: @foreign_id,
       cache:      @cache
     )
@@ -27,7 +27,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
 
   it 'raises when data is missing' do
     expect do
-      Import::PersistBrainzCompilationRelease.using_id(
+      Import::PersistBrainzCompilationRelease.perform(
         foreign_id: @foreign_id,
         cache: @cache
       )

@@ -1,15 +1,15 @@
 module Import
   # Persist an artist_credit form MusicBrainz
   class PersistBrainzArtistCredit < PersistBase
-    def self.using_data(args)
-      new(args).using_data
+    def self.perform(args)
+      new(args).perform
     end
 
     def initialize(args)
       super(args)
     end
 
-    def using_data
+    def perform
       artist_credit = find_by
       return artist_credit if artist_credit
 
@@ -31,7 +31,7 @@ module Import
     end
 
     def build_name_credit_on(template_name_credit, artist_credit, position)
-      artist = PersistBrainzArtist.using_id(
+      artist = PersistBrainzArtist.perform(
         foreign_id: template_name_credit.artist.brainz_id,
         cache: cache
       )

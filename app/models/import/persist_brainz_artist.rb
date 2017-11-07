@@ -1,15 +1,15 @@
 module Import
   # Persist an artist from MusicBrainz
   class PersistBrainzArtist < PersistBase
-    def self.using_id(args)
-      new(args).using_id
+    def self.perform(args)
+      new(args).perform
     end
 
     def initialize(args)
       super(args)
     end
 
-    def using_id
+    def perform
       return if cache.any_required?
       artist = Artist.brainz(brainz_artist)
       artist.save!

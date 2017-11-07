@@ -21,7 +21,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       xml = KoTestData.brainz_xml_for(foreign_id)
       @cache.store_brainz(foreign_id, xml)
     end
-    artist_credit = Import::PersistBrainzArtistCredit.using_data(
+    artist_credit = Import::PersistBrainzArtistCredit.perform(
       template: @brainz_artist_credit,
       cache:    @cache
     )
