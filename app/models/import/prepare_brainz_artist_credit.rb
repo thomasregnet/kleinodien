@@ -1,24 +1,25 @@
 module Import
   # Import an ArtistCredit from MusicBrainz
   class PrepareBrainzArtistCredit < PrepareBase
-    def self.using_data(args)
-      new(args).using_data
+    def self.perform(args)
+      new(args).perform
     end
 
     def initialize(args)
       super(args)
     end
 
-    def using_data
-      prepare
+    def perform
+      perform
     end
 
-    def prepare
+    def perform
       template.name_credits.each do |name_credit|
-        PrepareBrainzArtist.using_id(
-          cache:      cache,
-          foreign_id: name_credit.artist.brainz_id
-        )
+        prepare_brainz_artist(foreign_id: name_credit.artist.brainz_id)
+        # PrepareBrainzArtist.prepare(
+        #   cache:      cache,
+        #   foreign_id: name_credit.artist.brainz_id
+        # )
       end
     end
   end

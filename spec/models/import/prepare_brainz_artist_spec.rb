@@ -14,14 +14,14 @@ RSpec.describe Import::PrepareBrainzArtist do
       cache:      @cache,
       foreign_id: @foreign_id
     )
-    artist_importer.using_id
+    artist_importer.perform
     expect(@cache.any_required?).to be true
   end
 
   specify '.perform with cached artist' do
     xml = KoTestData.brainz_xml_for(@foreign_id)
     @cache.store_brainz(@foreign_id, xml)
-    Import::PrepareBrainzArtist.using_id(
+    Import::PrepareBrainzArtist.perform(
       cache:      @cache,
       foreign_id: @foreign_id
     )

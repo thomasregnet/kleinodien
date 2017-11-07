@@ -21,7 +21,8 @@ module Import
       # TODO: respond_to_missing?
       return body if cache.any_required?
 
-      PersistBrainzCompilationRelease.using_id(foreign_id, cache)
+      #PersistBrainzCompilationRelease.using_id(foreign_id, cache)
+      persist_brainz_compilation_release(foreign_id: foreign_id)
 
       body
     end
