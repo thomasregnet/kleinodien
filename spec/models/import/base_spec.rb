@@ -83,5 +83,15 @@ RSpec.describe Import::Base do
       fake_result = base.fake_service_class
       expect(fake_result.cache).to eq(cache)
     end
+
+    specify '#respond_to_missing?' do
+      base = Import::Base.new
+      expect(base.respond_to? 'fake_service_class').to be true
+    end
+
+    it 'does not respond to missing' do
+      base = Import::Base.new
+      expect(base.respond_to? :no_such_class).to be false
+    end
   end
 end

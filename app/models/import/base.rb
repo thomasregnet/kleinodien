@@ -25,12 +25,23 @@ module Import
       foreign_id_class.new(value: wanted)
     end
 
-    # TODO: respond_to_missing?
     def method_missing(method, args = {})
-      klass = "Import::#{method.to_s.camelize}".constantize
-      merged_args = { cache: cache }.merge(args)
-      klass.send(:new, merged_args)
-      # TODO: call super
+      class_name = import_service_class_name_for(method)
+      if Object.const_defined?(class_name)
+        klass = class_name.constantize
+        merged_args = { cache: cache }.merge(args)
+        return klass.send :new, merged_args
+      end
+      super
+    end
+
+    def respond_to_missing?(method_name, _, &_block)
+      class_name = import_service_class_name_for(method_name)
+      Object.const_defined?(class_name)
+    end
+
+    def import_service_class_name_for(method)
+      "Import::#{method.to_s.camelize}"
     end
   end
 end
