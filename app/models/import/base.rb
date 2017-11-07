@@ -27,17 +27,17 @@ module Import
 
     def method_missing(method, args = {})
       class_name = import_service_class_name_for(method)
-      if Object.const_defined?(class_name)
+      if Import.const_defined?(class_name)
         klass = class_name.constantize
         merged_args = { cache: cache }.merge(args)
-        return klass.send :new, merged_args
+        return klass.send :perform, merged_args
       end
       super
     end
 
     def respond_to_missing?(method_name, _, &_block)
       class_name = import_service_class_name_for(method_name)
-      Object.const_defined?(class_name)
+      Import.const_defined?(class_name)
     end
 
     def import_service_class_name_for(method)

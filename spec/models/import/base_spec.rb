@@ -4,6 +4,10 @@ require 'fake_foreign_id'
 module Import
   # Fake a Import-service class for testing
   class FakeServiceClass < Import::Base
+    def self.perform(args)
+      new(args).perform
+    end
+
     def perform
       {
         cache:      cache,
@@ -77,13 +81,6 @@ RSpec.describe Import::Base do
   end
 
   describe 'method_missing' do
-    it 'passes the cache' do
-      cache = Import::Cache.new
-      base = Import::Base.new(cache: cache)
-      fake_result = base.fake_service_class
-      expect(fake_result.cache).to eq(cache)
-    end
-
     specify '#respond_to_missing?' do
       base = Import::Base.new
       expect(base.respond_to? 'fake_service_class').to be true

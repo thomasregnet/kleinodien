@@ -1,6 +1,9 @@
 module Import
   # Prepare a MusicBrainz release to be persisted
   class PrepareBrainzCompilationRelease < PrepareBase
+    def self.perform(args)
+      new(args).perform
+    end
     def self.using_id(args)
       new(args).using_id
     end
@@ -19,6 +22,10 @@ module Import
       )
       # TODO: Use MaschedBrainz if they are available
       # TODO: call `prepare` on related classes
+    end
+
+    def perform
+      using_id
     end
 
     def cached_or_require

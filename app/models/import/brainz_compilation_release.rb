@@ -12,14 +12,16 @@ module Import
     end
 
     def perform
-      PrepareBrainzCompilationRelease.using_id(
-        cache:      cache,
-        foreign_id: foreign_id
-      )
-
+      # PrepareBrainzCompilationRelease.using_id(
+      #   cache:      cache,
+      #   foreign_id: foreign_id
+      # )
+      x = prepare_brainz_compilation_release(foreign_id: foreign_id)
+      # TODO: respond_to_missing?
+      # TODO: respond_to_missing?
       return body if cache.any_required?
 
-      Persist::BrainzCompilationRelease.using_id(foreign_id, cache)
+      PersistBrainzCompilationRelease.using_id(foreign_id, cache)
 
       body
     end
