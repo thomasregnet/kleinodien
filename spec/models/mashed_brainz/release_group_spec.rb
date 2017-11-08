@@ -3,7 +3,7 @@ require 'ko_test_data'
 RSpec.describe MashedBrainz::ReleaseGroup do
   before(:each) do
     foreign_id = BrainzReleaseGroupRef.new(
-      value: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
+      code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
     @orig_release_group = MashedBrainz::ReleaseGroup.xml(
       KoTestData.brainz_xml_for(foreign_id)

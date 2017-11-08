@@ -5,7 +5,7 @@ RSpec.describe Import::PrepareBrainzArtist do
   before(:each) do
     @cache      = Import::Cache.new
     @foreign_id = BrainzArtistRef.new(
-      value: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
+      code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
     )
   end
 

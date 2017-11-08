@@ -16,7 +16,7 @@ module Import
       #   cache:      cache,
       #   foreign_id: foreign_id
       # )
-      x = prepare_brainz_compilation_release(foreign_id: foreign_id)
+      prepare_brainz_compilation_release(foreign_id: foreign_id)
       # TODO: respond_to_missing?
       # TODO: respond_to_missing?
       return body if cache.any_required?
@@ -29,7 +29,7 @@ module Import
 
     def body
       wanted_id = wanted
-      brainz_id = BrainzReleaseRef.new(value: wanted_id)
+      brainz_id = BrainzReleaseRef.new(code: wanted_id)
       cache.require_brainz(brainz_id)
       {
         data:

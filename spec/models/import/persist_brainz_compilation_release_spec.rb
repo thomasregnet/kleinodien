@@ -5,17 +5,17 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
   before(:each) do
     @cache = Import::Cache.new
     @brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    @foreign_id = BrainzReleaseRef.new(value: @brainz_id)
+    @foreign_id = BrainzReleaseRef.new(code: @brainz_id)
   end
 
   it 'persists a MusicBrainz release' do
     KoTestData.store_brainz_cache(@foreign_id, @cache)
     KoTestData.store_brainz_cache(
-      BrainzArtistRef.new(value: '1d93c839-22e7-4f76-ad84-d27039efc048'),
+      BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048'),
       @cache
     )
     KoTestData.store_brainz_cache(
-      BrainzReleaseGroupRef.new(value: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'),
+      BrainzReleaseGroupRef.new(code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'),
       @cache
     )
     compilation_release = Import::PersistBrainzCompilationRelease.perform(
