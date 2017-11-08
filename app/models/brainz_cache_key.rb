@@ -1,5 +1,5 @@
 module BrainzCacheKey
-  def cache_key
+  def to_key
     "#{kind}/#{code}#{query_string}"
   end
 end 
