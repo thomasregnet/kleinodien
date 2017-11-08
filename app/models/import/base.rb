@@ -22,7 +22,7 @@ module Import
 
       foreign_id_class = args[:foreign_id_class]
       return unless foreign_id_class
-      foreign_id_class.new(value: wanted)
+      foreign_id_class.new(code: wanted)
     end
 
     def method_missing(method, args = {})

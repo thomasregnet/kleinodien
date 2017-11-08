@@ -25,7 +25,7 @@ end
 
 Then(/^the response contains an url to get the release\-data$/) do
   foreign_id = BrainzReleaseRef.new(
-    value: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+    code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   )
 
   data = JSON.parse(last_response.body)
@@ -35,7 +35,7 @@ end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-  foreign_id = BrainzReleaseRef.new(value: brainz_id)
+  foreign_id = BrainzReleaseRef.new(code: brainz_id)
   cache_key = foreign_id.cache_key
 
   post(
@@ -62,7 +62,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
 end
 
 Then(/^I see the artist in the requirements$/) do
-  foreign_id = BrainzArtistRef.new(value: '1d93c839-22e7-4f76-ad84-d27039efc048')
+  foreign_id = BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048')
   data = JSON.parse(last_response.body)
   required = data['data']['attributes']['required']['brainz']
   expect(required.include?(foreign_id.cache_key)).to be true

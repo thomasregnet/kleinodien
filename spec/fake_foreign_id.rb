@@ -1,10 +1,10 @@
 # Fake a ForeignId class for testing
 class FakeForeignId
   CACHE_KEY = 'fake/cache?key'.freeze
-  attr_reader :value
+  attr_reader :code
 
   def initialize(args)
-    @value = args[:value]
+    @code = args[:code]
   end
 
   def cache_key

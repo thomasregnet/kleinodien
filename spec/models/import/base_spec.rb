@@ -76,7 +76,7 @@ RSpec.describe Import::Base do
         params: params,
         foreign_id_class: FakeForeignId
       )
-      expect(base.foreign_id.value).to eq(wanted)
+      expect(base.foreign_id.code).to eq(wanted)
     end
   end
 
