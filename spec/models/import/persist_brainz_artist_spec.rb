@@ -5,7 +5,7 @@ RSpec.describe Import::PersistBrainzArtist do
   before(:each) do
     @cache      = Import::Cache.new
     @brainz_id  = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
-    @foreign_id = BrainzArtistId.new(value: @brainz_id)
+    @foreign_id = BrainzArtistRef.new(value: @brainz_id)
   end
   it 'persists an artist' do
     xml = KoTestData.brainz_xml_for(@foreign_id)

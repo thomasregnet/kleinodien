@@ -6,7 +6,7 @@ RSpec.describe Import::PrepareBrainzArtistCredit do
     @cache = Import::Cache.new
 
     brainz_id = '693748be-7c18-39c3-af2e-2e62092090cf'
-    xml = KoTestData.brainz_release(BrainzReleaseId.new(value: brainz_id))
+    xml = KoTestData.brainz_release(BrainzReleaseRef.new(value: brainz_id))
     @artist_credit = MashedBrainz::Release.xml(xml).artist_credit
   end
 
