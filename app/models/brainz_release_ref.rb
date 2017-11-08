@@ -1,5 +1,5 @@
 # Source id for a MusicBrainz Release
-class BrainzReleaseId < BrainzId
+class BrainzReleaseRef < BrainzRef
   include BrainzCacheKey
   URL_PREFIX   = 'https://musicbrainz.org/ws/2/release/'.freeze
   QUERY_STRING = '?inc=artists+labels+recordings+release-groups'.freeze

@@ -1,5 +1,5 @@
-# Base class for MusicBrainzIds
-class BrainzId < ForeignId
+# Base class for MusicBrainz references
+class BrainzRef < Reference
   attr_reader :host, :path_prefix, :schema
 
   def initialize(args)

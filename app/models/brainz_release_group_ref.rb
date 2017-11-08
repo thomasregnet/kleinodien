@@ -1,4 +1,4 @@
-class BrainzReleaseGroupId < BrainzId
+class BrainzReleaseGroupRef < BrainzRef
   include BrainzCacheKey
 
   QUERY_STRING = '?inc=artists+url-rels'.freeze

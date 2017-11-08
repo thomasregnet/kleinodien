@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe BrainzId do
+RSpec.describe BrainzRef do
   before(:all) do
-    @foreign_id = BrainzId.new(value: '354f6427-e2d8-47e5-99bc-538992120eb7')
+    @foreign_id = BrainzRef.new(value: '354f6427-e2d8-47e5-99bc-538992120eb7')
   end
 
   specify '#schema' do
