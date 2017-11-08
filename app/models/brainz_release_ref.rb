@@ -7,7 +7,7 @@ class BrainzReleaseRef < BrainzRef
   attr_reader :kind, :query_string, :url_prefix
 
   def self.source_id(uuid)
-    new(value: uuid).source_id
+    new(code: uuid).source_id
   end
 
   def initialize(args)
@@ -19,6 +19,6 @@ class BrainzReleaseRef < BrainzRef
 
   # TODO: source_id must return string without https://musicbrainz.org...
   def source_id
-    "#{schema}://#{host}/#{path_prefix}/#{kind}/#{value}#{query_string}"
+    "#{schema}://#{host}/#{path_prefix}/#{kind}/#{code}#{query_string}"
   end
 end

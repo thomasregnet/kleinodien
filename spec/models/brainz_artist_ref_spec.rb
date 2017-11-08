@@ -3,7 +3,7 @@ require 'shared_examples_for_brainz_artist_source_id'
 
 RSpec.describe BrainzArtistRef do
   before(:all) do
-    @foreign_id = BrainzArtistRef.new(value: uuid)
+    @foreign_id = BrainzArtistRef.new(code: uuid)
   end
 
   def uuid
@@ -22,7 +22,7 @@ RSpec.describe BrainzArtistRef do
 
   describe '#source_id' do
     it_behaves_like 'a brainz artist source id' do
-      brainz_artist_id = BrainzArtistRef.new(value: SecureRandom.uuid)
+      brainz_artist_id = BrainzArtistRef.new(code: SecureRandom.uuid)
       let(:source_id) { brainz_artist_id.source_id }
     end
   end
