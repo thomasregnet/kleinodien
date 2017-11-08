@@ -3,7 +3,7 @@ require 'shared_examples_for_brainz_release_source_id'
 
 RSpec.describe BrainzReleaseRef do
   before(:all) do
-    @foreign_id = BrainzReleaseRef.new(value: uuid)
+    @foreign_id = BrainzReleaseRef.new(code: uuid)
   end
 
   def query_string
@@ -23,7 +23,7 @@ RSpec.describe BrainzReleaseRef do
 
   describe '#source_id' do
     it_behaves_like 'a brainz release source id' do
-      brainz_release_id = BrainzReleaseRef.new(value: SecureRandom.uuid)
+      brainz_release_id = BrainzReleaseRef.new(code: SecureRandom.uuid)
       let(:source_id) { brainz_release_id.source_id }
     end
   end

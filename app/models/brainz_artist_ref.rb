@@ -12,10 +12,10 @@ class BrainzArtistRef < BrainzRef
 
   # TODO: remove source_id
   def self.source_id(uuid)
-    new(value: uuid).source_id
+    new(code: uuid).source_id
   end
 
   def source_id
-    path_prefix + value + query_string
+    path_prefix + code + query_string
   end
 end

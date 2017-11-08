@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe BrainzReleaseGroupRef do
   before(:all) do
-    @foreign_id = BrainzReleaseGroupRef.new(value: uuid)
+    @foreign_id = BrainzReleaseGroupRef.new(code: uuid)
   end
 
   def uuid

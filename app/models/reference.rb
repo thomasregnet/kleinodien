@@ -1,7 +1,7 @@
 # Base class for external references
 class Reference
-  attr_reader :value 
+  attr_reader :code 
   def initialize(args)
-    @value = args[:value]
+    @code = args[:code]
   end
 end
