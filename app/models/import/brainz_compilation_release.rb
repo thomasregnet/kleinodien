@@ -6,7 +6,7 @@ module Import
     end
 
     def initialize(args)
-      super({ foreign_id_class: BrainzReleaseId }.merge args)
+      super({ foreign_id_class: BrainzReleaseRef }.merge args)
 
       cache.rebuild_from_params(params)
     end
@@ -29,7 +29,7 @@ module Import
 
     def body
       wanted_id = wanted
-      brainz_id = BrainzReleaseId.new(value: wanted_id)
+      brainz_id = BrainzReleaseRef.new(value: wanted_id)
       cache.require_brainz(brainz_id)
       {
         data:
