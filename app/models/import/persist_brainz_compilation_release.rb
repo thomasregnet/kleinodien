@@ -11,13 +11,11 @@ module Import
 
     def perform
       original = mashed_original
-      artist_credit = PersistBrainzArtistCredit.perform(
-        template: original.artist_credit,
-        cache: cache
+      artist_credit = persist_brainz_artist_credit(
+        template: original.artist_credit
       )
-      compilation_head = PersistBrainzCompilationHead.perform(
-        foreign_id: original.release_group.brainz_id,
-        cache: cache
+      compilation_head = persist_brainz_compilation_head(
+        foreign_id: original.release_group.brainz_id
       )
       compilation_head.releases.create!(
         artist_credit: artist_credit,

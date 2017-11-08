@@ -13,9 +13,8 @@ module Import
       # TODO: check if the brainz release already exists in the database
       brainz_release = cached_or_require
       return unless brainz_release
-      PrepareBrainzArtistCredit.perform(
-        template: brainz_release.artist_credit,
-        cache:         cache
+      prepare_brainz_artist_credit(
+        template: brainz_release.artist_credit
       )
       # TODO: Use MaschedBrainz if they are available
       # TODO: call `prepare` on related classes
