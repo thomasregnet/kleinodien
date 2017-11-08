@@ -1,5 +1,5 @@
-# Source id for a MusicBrainz Artist
-class BrainzArtistId < BrainzId
+# References a MusicBrainz Artist
+class BrainzArtistRef < BrainzRef
   include BrainzCacheKey
 
   attr_reader :kind, :query_string

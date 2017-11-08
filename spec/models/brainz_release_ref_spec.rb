@@ -1,9 +1,9 @@
 require 'rails_helper'
 require 'shared_examples_for_brainz_release_source_id'
 
-RSpec.describe BrainzReleaseId do
+RSpec.describe BrainzReleaseRef do
   before(:all) do
-    @foreign_id = BrainzReleaseId.new(value: uuid)
+    @foreign_id = BrainzReleaseRef.new(value: uuid)
   end
 
   def query_string
@@ -17,13 +17,13 @@ RSpec.describe BrainzReleaseId do
   # TODO: delete source_id
   describe '.source_id' do
     it_behaves_like 'a brainz release source id' do
-      let(:source_id) { BrainzReleaseId.source_id(SecureRandom.uuid) }
+      let(:source_id) { BrainzReleaseRef.source_id(SecureRandom.uuid) }
     end
   end
 
   describe '#source_id' do
     it_behaves_like 'a brainz release source id' do
-      brainz_release_id = BrainzReleaseId.new(value: SecureRandom.uuid)
+      brainz_release_id = BrainzReleaseRef.new(value: SecureRandom.uuid)
       let(:source_id) { brainz_release_id.source_id }
     end
   end
