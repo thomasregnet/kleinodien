@@ -6,7 +6,7 @@ module MashedBrainz
     end
 
     def brainz_id
-      BrainzReleaseGroupId.new(value: id)
+      BrainzReleaseGroupRef.new(value: id)
     end
   end
 end
