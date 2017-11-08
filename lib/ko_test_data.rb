@@ -13,13 +13,12 @@ module KoTestData
   end
 
   def self.brainz_xml_for(foreign_id)
-    path = [BRAINZ_FIXTURES, foreign_id.cache_key + '.xml']
+    path = [BRAINZ_FIXTURES, foreign_id.to_key + '.xml']
     file_name = File.join(path.flatten)
     File.open(file_name).read
   end
 
   def self.store_brainz_cache(foreign_id, cache)
-    #byebug
     xml = brainz_xml_for(foreign_id)
     cache.store_brainz(foreign_id, xml)
   end

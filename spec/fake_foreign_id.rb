@@ -7,7 +7,7 @@ class FakeForeignId
     @code = args[:code]
   end
 
-  def cache_key
+  def to_key
     CACHE_KEY
   end
 end
