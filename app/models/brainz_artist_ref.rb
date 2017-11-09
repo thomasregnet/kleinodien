@@ -1,8 +1,6 @@
 # References a MusicBrainz Artist
 class BrainzArtistRef < BrainzRef
-  include BrainzCacheKey
-
-  attr_reader :kind, :query_string
+  attr_reader :query_string
 
   def initialize(args)
     super(args)
