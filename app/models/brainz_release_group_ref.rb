@@ -1,13 +1,11 @@
+# References a MusicBrainz release-group
 class BrainzReleaseGroupRef < BrainzRef
-  include BrainzCacheKey
-
+  BRAINZ_KIND  = 'release-group'.freeze
   QUERY_STRING = '?inc=artists+url-rels'.freeze
 
-  attr_reader :kind, :query_string
-
   def initialize(args)
+    args[:kind]         ||= BRAINZ_KIND
+    args[:query_string] ||= QUERY_STRING
     super(args)
-    @kind         = args[:kind] || 'release-group'
-    @query_string = args[:query_string] || QUERY_STRING
   end
 end

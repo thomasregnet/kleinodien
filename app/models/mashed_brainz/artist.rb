@@ -7,9 +7,5 @@ module MashedBrainz
     def brainz_id
       BrainzArtistRef.new(code: id)
     end
-
-    def source_id
-      brainz_id.source_id
-    end
   end
 end
