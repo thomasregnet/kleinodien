@@ -21,8 +21,8 @@ module Import
     end
 
     def cached_or_require
-      xml = cache.fetch_brainz(foreign_id)
-      cache.require_brainz(foreign_id) unless xml
+      xml = cache.fetch_brainz(reference)
+      cache.require_brainz(reference) unless xml
       return false unless xml
       MashedBrainz::Release.xml(xml)
     end

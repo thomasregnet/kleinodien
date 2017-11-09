@@ -15,10 +15,10 @@ module Import
 
     def perform
       template.name_credits.each do |name_credit|
-        prepare_brainz_artist(foreign_id: name_credit.artist.brainz_id)
+        prepare_brainz_artist(reference: name_credit.artist.brainz_id)
         # PrepareBrainzArtist.prepare(
         #   cache:      cache,
-        #   foreign_id: name_credit.artist.brainz_id
+        #   reference: name_credit.artist.brainz_id
         # )
       end
     end

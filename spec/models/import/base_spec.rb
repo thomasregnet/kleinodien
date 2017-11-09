@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'fake_foreign_id'
+require 'fake_reference'
 
 module Import
   # Fake a Import-service class for testing
@@ -11,7 +11,7 @@ module Import
     def perform
       {
         cache:      cache,
-        foreign_id: foreign_id,
+        reference: reference,
         params:     params
       }
     end
@@ -64,19 +64,19 @@ RSpec.describe Import::Base do
     end
   end
 
-  describe '#foreign_id' do
-    it 'returns the foreign_id' do
-      foreign_id = { just: 'a fake' }
-      base = Import::Base.new(foreign_id: foreign_id)
-      expect(base.foreign_id).to eq foreign_id
+  describe '#reference' do
+    it 'returns the reference' do
+      reference = { just: 'a fake' }
+      base = Import::Base.new(reference: reference)
+      expect(base.reference).to eq reference
     end
 
-    it "generates a foreign_id if it's class is given" do
+    it "generates a reference if it's class is given" do
       base = Import::Base.new(
         params: params,
-        foreign_id_class: FakeForeignId
+        reference_class: FakeReference
       )
-      expect(base.foreign_id.code).to eq(wanted)
+      expect(base.reference.code).to eq(wanted)
     end
   end
 

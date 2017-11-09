@@ -5,11 +5,11 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
   before(:each) do
     @cache = Import::Cache.new
     @brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    @foreign_id = BrainzReleaseRef.new(code: @brainz_id)
+    @reference = BrainzReleaseRef.new(code: @brainz_id)
   end
 
   it 'persists a MusicBrainz release' do
-    KoTestData.store_brainz_cache(@foreign_id, @cache)
+    KoTestData.store_brainz_cache(@reference, @cache)
     KoTestData.store_brainz_cache(
       BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048'),
       @cache
@@ -19,7 +19,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
       @cache
     )
     compilation_release = Import::PersistBrainzCompilationRelease.perform(
-      foreign_id: @foreign_id,
+      reference: @reference,
       cache:      @cache
     )
     expect(compilation_release.title).to eq('Arise')
@@ -28,7 +28,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
   it 'raises when data is missing' do
     expect do
       Import::PersistBrainzCompilationRelease.perform(
-        foreign_id: @foreign_id,
+        reference: @reference,
         cache: @cache
       )
     end.to raise_error(Import::CacheMissingEntry)

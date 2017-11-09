@@ -6,24 +6,24 @@ module Import
     CACHED_SOURCE_NAMES = %w[brainz discogs tmdb].freeze
 
     CACHED_SOURCE_NAMES.each do |source_name|
-      define_method("fetch_#{source_name}") do |foreign_id|
-        known[source_name][foreign_id.to_key]
+      define_method("fetch_#{source_name}") do |reference|
+        known[source_name][reference.to_key]
       end
 
-      define_method("fetch_#{source_name}!") do |foreign_id|
-        ref_key = foreign_id.to_key
+      define_method("fetch_#{source_name}!") do |reference|
+        ref_key = reference.to_key
         entry = known[source_name][ref_key]
         raise Import::CacheMissingEntry, ref_key unless entry
         entry
       end
 
-      define_method("store_#{source_name}") do |foreign_id, data|
-        known[source_name][foreign_id.to_key] = data
+      define_method("store_#{source_name}") do |reference, data|
+        known[source_name][reference.to_key] = data
       end
 
-      define_method("require_#{source_name}") do |foreign_id|
-        return if required[source_name].include? foreign_id.to_key
-        required[source_name].push(foreign_id.to_key)
+      define_method("require_#{source_name}") do |reference|
+        return if required[source_name].include? reference.to_key
+        required[source_name].push(reference.to_key)
       end
     end
 

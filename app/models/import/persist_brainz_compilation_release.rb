@@ -15,7 +15,7 @@ module Import
         template: original.artist_credit
       )
       compilation_head = persist_brainz_compilation_head(
-        foreign_id: original.release_group.brainz_id
+        reference: original.release_group.brainz_id
       )
       compilation_head.releases.create!(
         artist_credit: artist_credit,
@@ -24,7 +24,7 @@ module Import
     end
 
     def mashed_original
-      xml = cache.fetch_brainz!(foreign_id)
+      xml = cache.fetch_brainz!(reference)
       ::MashedBrainz::Release.xml(xml)
     end
   end

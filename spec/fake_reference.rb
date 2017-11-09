@@ -1,5 +1,5 @@
-# Fake a ForeignId class for testing
-class FakeForeignId
+# Fake a Reference class for testing
+class FakeReference
   CACHE_KEY = 'fake/cache?key'.freeze
   attr_reader :code
 

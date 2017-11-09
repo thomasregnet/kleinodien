@@ -1,12 +1,12 @@
 module Import
   # Base class for import, prepare and persist
   class Base
-    attr_reader :cache, :foreign_id, :params
+    attr_reader :cache, :reference, :params
 
     def initialize(args = {})
       @cache  = args[:cache] || Import::Cache.new
       @params = args[:params]
-      @foreign_id = init_foreign_id(args)
+      @reference = init_reference(args)
     end
 
     def wanted
@@ -16,13 +16,13 @@ module Import
 
     private
 
-    def init_foreign_id(args)
-      foreign_id = args[:foreign_id]
-      return foreign_id if foreign_id
+    def init_reference(args)
+      reference = args[:reference]
+      return reference if reference
 
-      foreign_id_class = args[:foreign_id_class]
-      return unless foreign_id_class
-      foreign_id_class.new(code: wanted)
+      reference_class = args[:reference_class]
+      return unless reference_class
+      reference_class.new(code: wanted)
     end
 
     def method_missing(method, args = {})
