@@ -15,11 +15,11 @@ RSpec.describe Import::BrainzCompilationRelease, type: :model do
     response = Import::BrainzCompilationRelease.perform(params: data)
 
     expect(response[:data][:attributes][:http_status_code]).to eq(202)
-    cache_key = response[:data][:attributes][:required]['brainz'][0]
-    expected_cache_key = 'release/'\
+    ref_key = response[:data][:attributes][:required]['brainz'][0]
+    expected_ref_key = 'release/'\
                    "#{brainz_id}"\
                    '?inc=artists+labels+recordings+release-groups'
-    expect(cache_key).to eq(expected_cache_key)
+    expect(ref_key).to eq(expected_ref_key)
   end
 
   specify 'Sepultura - Arise' do

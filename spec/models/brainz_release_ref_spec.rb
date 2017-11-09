@@ -28,8 +28,8 @@ RSpec.describe BrainzReleaseRef do
     end
   end
 
-  describe '#cache_key' do
-    it 'returns the cache_key' do
+  describe '#ref_key' do
+    it 'returns the ref_key' do
       expected = "release/#{uuid}#{query_string}"
       expect(@foreign_id.to_key).to eq(expected)
     end
