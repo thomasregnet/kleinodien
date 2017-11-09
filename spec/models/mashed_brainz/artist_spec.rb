@@ -13,15 +13,15 @@ RSpec.describe MashedBrainz::Artist, type: :model do
     @artist = release.artist_credit.name_credit[0].artist
   end
 
-  describe '#brainz_id' do
-    it_behaves_like 'a brainz artist source id' do
-      let(:source_id) { @artist.brainz_id.source_id }
-    end
-  end
+  # describe '#brainz_id' do
+  #   it_behaves_like 'a brainz artist source id' do
+  #     let(:source_id) { @artist.brainz_id.source_id }
+  #   end
+  # end
 
-  describe '#source_id' do
-    it_behaves_like 'a brainz artist source id' do
-      let(:source_id) { @artist.source_id }
-    end
-  end
+  # describe '#source_id' do
+  #   it_behaves_like 'a brainz artist source id' do
+  #     let(:source_id) { @artist.source_id }
+  #   end
+  # end
 end

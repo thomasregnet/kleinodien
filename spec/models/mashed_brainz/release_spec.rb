@@ -16,16 +16,4 @@ RSpec.describe MashedBrainz::Release, type: :model do
     expect(@release.artist_credit)
       .to be_instance_of MashedBrainz::ArtistCredit
   end
-
-  describe '#brainz_id' do
-    it_behaves_like 'a brainz release source id' do
-      let(:source_id) { @release.brainz_id.source_id }
-    end
-  end
-
-  describe '#source_id' do
-    it_behaves_like 'a brainz release source id' do
-      let(:source_id) { @release.source_id }
-    end
-  end
 end
