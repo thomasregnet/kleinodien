@@ -6,12 +6,11 @@ RSpec.describe BrainzArtistRef do
     @foreign_id = BrainzArtistRef.new(code: uuid)
   end
 
-  def uuid
-    '15251e27-d553-492e-ae81-2a6acb0ca8ad'
-  end
-
   def query_string
     '?inc=url-rels'
+  end
+  def uuid
+    '15251e27-d553-492e-ae81-2a6acb0ca8ad'
   end
 
   describe '.source_id' do

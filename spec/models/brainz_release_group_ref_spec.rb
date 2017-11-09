@@ -1,19 +1,19 @@
 require "rails_helper"
 
 RSpec.describe BrainzReleaseGroupRef do
-  before(:all) do
-    @foreign_id = BrainzReleaseGroupRef.new(code: uuid)
-  end
-
-  def uuid
-    '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'
-  end
-
   def query_string
     '?inc=artists+url-rels'
   end
 
-  specify '#ref_key' do
+  def uuid
+    '1ef054e8-8d38-49a9-9c57-1a7919577513'
+  end
+
+  before(:all) do
+    @foreign_id = BrainzReleaseGroupRef.new(code: uuid)
+  end
+
+  specify '#to_key' do
     expected = "release-group/#{uuid}#{query_string}"
     expect(@foreign_id.to_key).to eq(expected)
   end
