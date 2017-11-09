@@ -27,7 +27,7 @@ RSpec.describe BrainzArtistRef do
     end
   end
 
-  it 'returns the cache_key' do
+  it 'returns the ref_key' do
     expected = "artist/#{uuid}#{query_string}"
     expect(@foreign_id.to_key).to eq(expected)
   end

@@ -13,7 +13,7 @@ RSpec.describe BrainzReleaseGroupRef do
     '?inc=artists+url-rels'
   end
 
-  specify '#cache_key' do
+  specify '#ref_key' do
     expected = "release-group/#{uuid}#{query_string}"
     expect(@foreign_id.to_key).to eq(expected)
   end

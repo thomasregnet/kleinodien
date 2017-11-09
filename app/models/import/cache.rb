@@ -11,9 +11,9 @@ module Import
       end
 
       define_method("fetch_#{source_name}!") do |foreign_id|
-        cache_key = foreign_id.to_key
-        entry = known[source_name][cache_key]
-        raise Import::CacheMissingEntry, cache_key unless entry
+        ref_key = foreign_id.to_key
+        entry = known[source_name][ref_key]
+        raise Import::CacheMissingEntry, ref_key unless entry
         entry
       end
 
