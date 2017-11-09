@@ -4,8 +4,8 @@ require 'ko_test_data'
 RSpec.describe Import::PersistBrainzArtist do
   before(:each) do
     @cache      = Import::Cache.new
-    @brainz_id  = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
-    @reference = BrainzArtistRef.new(code: @brainz_id)
+    @reference  = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
+    @reference = BrainzArtistRef.new(code: @reference)
   end
   it 'persists an artist' do
     xml = KoTestData.brainz_xml_for(@reference)

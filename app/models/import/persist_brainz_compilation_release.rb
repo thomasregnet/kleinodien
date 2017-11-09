@@ -15,7 +15,7 @@ module Import
         template: original.artist_credit
       )
       compilation_head = persist_brainz_compilation_head(
-        reference: original.release_group.brainz_id
+        reference: original.release_group.reference
       )
       compilation_head.releases.create!(
         artist_credit: artist_credit,

@@ -11,7 +11,7 @@ RSpec.describe MashedBrainz::ReleaseGroup do
   end
 
   specify '#reference' do
-    expect(@orig_release_group.brainz_id)
+    expect(@orig_release_group.reference)
       .to be_instance_of(BrainzReleaseGroupRef)
   end
 
