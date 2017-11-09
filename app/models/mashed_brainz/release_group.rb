@@ -5,7 +5,7 @@ module MashedBrainz
       new(parse_xml(xml_string)['release_group'])
     end
 
-    def brainz_id
+    def reference
       BrainzReleaseGroupRef.new(code: id)
     end
   end

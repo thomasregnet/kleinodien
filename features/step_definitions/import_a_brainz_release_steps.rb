@@ -34,8 +34,8 @@ Then(/^the response contains an url to get the release\-data$/) do
 end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
-  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-  reference = BrainzReleaseRef.new(code: brainz_id)
+  reference = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  reference = BrainzReleaseRef.new(code: reference)
   cache_key = reference.to_key
 
   post(

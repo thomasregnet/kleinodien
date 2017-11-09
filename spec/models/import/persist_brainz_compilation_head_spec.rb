@@ -4,8 +4,8 @@ require 'ko_test_data'
 RSpec.describe Import::PersistBrainzCompilationHead do
   before(:each) do
     @cache = Import::Cache.new
-    brainz_id = '7d31891f-b9da-36de-ab08-98b1fdbbb023'
-    @reference = BrainzReleaseGroupRef.new(code: brainz_id)
+    reference = '7d31891f-b9da-36de-ab08-98b1fdbbb023'
+    @reference = BrainzReleaseGroupRef.new(code: reference)
     KoTestData.store_brainz_cache(@reference, @cache)
 
     jello_id = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'

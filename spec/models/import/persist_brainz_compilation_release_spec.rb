@@ -4,8 +4,8 @@ require 'ko_test_data'
 RSpec.describe Import::PersistBrainzCompilationRelease do
   before(:each) do
     @cache = Import::Cache.new
-    @brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    @reference = BrainzReleaseRef.new(code: @brainz_id)
+    @reference = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+    @reference = BrainzReleaseRef.new(code: @reference)
   end
 
   it 'persists a MusicBrainz release' do

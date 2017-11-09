@@ -29,8 +29,8 @@ module Import
 
     def body
       wanted_id = wanted
-      brainz_id = BrainzReleaseRef.new(code: wanted_id)
-      cache.require_brainz(brainz_id)
+      reference = BrainzReleaseRef.new(code: wanted_id)
+      cache.require_brainz(reference)
       {
         data:
           {
