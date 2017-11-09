@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      xml = cache.fetch_brainz!(foreign_id)
+      xml = cache.fetch_brainz!(reference)
       original = MashedBrainz::ReleaseGroup.xml(xml)
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit

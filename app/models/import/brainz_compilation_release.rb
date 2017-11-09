@@ -6,7 +6,7 @@ module Import
     end
 
     def initialize(args)
-      super({ foreign_id_class: BrainzReleaseRef }.merge args)
+      super({ reference_class: BrainzReleaseRef }.merge args)
 
       cache.rebuild_from_params(params)
     end
@@ -14,15 +14,15 @@ module Import
     def perform
       # PrepareBrainzCompilationRelease.using_id(
       #   cache:      cache,
-      #   foreign_id: foreign_id
+      #   reference: reference
       # )
-      prepare_brainz_compilation_release(foreign_id: foreign_id)
+      prepare_brainz_compilation_release(reference: reference)
       # TODO: respond_to_missing?
       # TODO: respond_to_missing?
       return body if cache.any_required?
 
-      #PersistBrainzCompilationRelease.using_id(foreign_id, cache)
-      persist_brainz_compilation_release(foreign_id: foreign_id)
+      #PersistBrainzCompilationRelease.using_id(reference, cache)
+      persist_brainz_compilation_release(reference: reference)
 
       body
     end

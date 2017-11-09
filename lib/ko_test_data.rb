@@ -4,22 +4,22 @@ module KoTestData
 
   # TODO: Delete methods brainz_release and brainz_artist. Use brainz_xml_for
   # instead
-  def self.brainz_release(foreign_id)
-    brainz_xml_for(foreign_id)
+  def self.brainz_release(reference)
+    brainz_xml_for(reference)
   end
 
-  def self.brainz_artist(foreign_id)
-    brainz_xml_for(foreign_id)
+  def self.brainz_artist(reference)
+    brainz_xml_for(reference)
   end
 
-  def self.brainz_xml_for(foreign_id)
-    path = [BRAINZ_FIXTURES, foreign_id.to_key + '.xml']
+  def self.brainz_xml_for(reference)
+    path = [BRAINZ_FIXTURES, reference.to_key + '.xml']
     file_name = File.join(path.flatten)
     File.open(file_name).read
   end
 
-  def self.store_brainz_cache(foreign_id, cache)
-    xml = brainz_xml_for(foreign_id)
-    cache.store_brainz(foreign_id, xml)
+  def self.store_brainz_cache(reference, cache)
+    xml = brainz_xml_for(reference)
+    cache.store_brainz(reference, xml)
   end
 end

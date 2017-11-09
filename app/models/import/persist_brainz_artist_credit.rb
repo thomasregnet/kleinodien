@@ -32,7 +32,7 @@ module Import
 
     def build_name_credit_on(template_name_credit, artist_credit, position)
       artist = persist_brainz_artist(
-        foreign_id: template_name_credit.artist.brainz_id
+        reference: template_name_credit.artist.brainz_id
       )
       join_phrase = template_name_credit.joinphrase
       join_phrase.strip! if join_phrase

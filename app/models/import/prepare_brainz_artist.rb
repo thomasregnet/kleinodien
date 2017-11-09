@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      cache.require_brainz foreign_id unless cache.fetch_brainz(foreign_id)
+      cache.require_brainz reference unless cache.fetch_brainz(reference)
     end
   end
 end

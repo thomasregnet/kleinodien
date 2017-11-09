@@ -19,7 +19,7 @@ module Import
     private
 
     def brainz_artist
-      xml = cache.fetch_brainz!(foreign_id)
+      xml = cache.fetch_brainz!(reference)
       MashedBrainz::Artist.xml(xml)
     end
   end

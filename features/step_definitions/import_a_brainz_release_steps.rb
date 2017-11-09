@@ -24,19 +24,19 @@ Then(/^I receive a status of "([^"]*)"$/) do |status|
 end
 
 Then(/^the response contains an url to get the release\-data$/) do
-  foreign_id = BrainzReleaseRef.new(
+  reference = BrainzReleaseRef.new(
     code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   )
 
   data = JSON.parse(last_response.body)
   cache_key = data['data']['attributes']['required']['brainz'][0]
-  expect(cache_key).to eq foreign_id.to_key
+  expect(cache_key).to eq reference.to_key
 end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-  foreign_id = BrainzReleaseRef.new(code: brainz_id)
-  cache_key = foreign_id.to_key
+  reference = BrainzReleaseRef.new(code: brainz_id)
+  cache_key = reference.to_key
 
   post(
     '/api/v01/brainz_releases',
@@ -48,7 +48,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
             wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
             known: {
               brainz: {
-                cache_key => KoTestData.brainz_release(foreign_id)
+                cache_key => KoTestData.brainz_release(reference)
               }
             }
           }
@@ -62,8 +62,8 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
 end
 
 Then(/^I see the artist in the requirements$/) do
-  foreign_id = BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048')
+  reference = BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048')
   data = JSON.parse(last_response.body)
   required = data['data']['attributes']['required']['brainz']
-  expect(required.include?(foreign_id.to_key)).to be true
+  expect(required.include?(reference.to_key)).to be true
 end
