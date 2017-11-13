@@ -25,7 +25,7 @@ module Import
 
     def mashed_original
       xml = cache.fetch_brainz!(reference)
-      ::MashedBrainz::Release.xml(xml)
+      ::MashedBrainz.from_xml(xml)
     end
   end
 end

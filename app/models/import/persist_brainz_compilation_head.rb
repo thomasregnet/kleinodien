@@ -11,7 +11,7 @@ module Import
 
     def perform
       xml = cache.fetch_brainz!(reference)
-      original = MashedBrainz::ReleaseGroup.xml(xml)
+      original = MashedBrainz.from_xml(xml)
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit
       )

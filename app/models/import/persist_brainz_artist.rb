@@ -20,7 +20,7 @@ module Import
 
     def brainz_artist
       xml = cache.fetch_brainz!(reference)
-      MashedBrainz::Artist.xml(xml)
+      MashedBrainz.from_xml(xml)
     end
   end
 end

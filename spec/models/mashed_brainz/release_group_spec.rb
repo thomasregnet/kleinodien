@@ -5,7 +5,7 @@ RSpec.describe MashedBrainz::ReleaseGroup do
     reference = BrainzReleaseGroupRef.new(
       code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
-    @orig_release_group = MashedBrainz::ReleaseGroup.xml(
+    @orig_release_group = MashedBrainz.from_xml(
       KoTestData.brainz_xml_for(reference)
     )
   end
