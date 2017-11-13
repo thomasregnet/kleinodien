@@ -24,7 +24,7 @@ module Import
       xml = cache.fetch_brainz(reference)
       cache.require_brainz(reference) unless xml
       return false unless xml
-      MashedBrainz::Release.xml(xml)
+      MashedBrainz.from_xml(xml)
     end
   end
 end

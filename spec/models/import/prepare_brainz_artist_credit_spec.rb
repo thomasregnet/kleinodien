@@ -7,7 +7,7 @@ RSpec.describe Import::PrepareBrainzArtistCredit do
 
     reference = '693748be-7c18-39c3-af2e-2e62092090cf'
     xml = KoTestData.brainz_release(BrainzReleaseRef.new(code: reference))
-    @artist_credit = MashedBrainz::Release.xml(xml).artist_credit
+    @artist_credit = MashedBrainz.from_xml(xml).artist_credit
   end
 
   specify '.perform' do

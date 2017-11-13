@@ -10,7 +10,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       code: '693748be-7c18-39c3-af2e-2e62092090cf'
     )
     xml = KoTestData.brainz_xml_for(reference)
-    release = MashedBrainz::Release.xml(xml)
+    release = MashedBrainz.from_xml(xml)
     @brainz_artist_credit = release.artist_credit
   end
 
