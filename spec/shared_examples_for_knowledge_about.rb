@@ -4,7 +4,7 @@ RSpec.shared_examples 'knowledge about' do
   let(:reference) { FakeReference.new(code: '123') }
 
   context 'without knowledge' do
-    let(:knowledge) { described_class.new() }
+    let(:knowledge) { described_class.new }
 
     describe '#about' do
       it 'returns nil' do
@@ -16,6 +16,28 @@ RSpec.shared_examples 'knowledge about' do
       it 'raises an exception' do
         expect { knowledge.about!(reference) }
           .to raise_error(Import::KnowledgeMissing)
+      end
+    end
+  end
+
+  context 'with knowledge' do
+    let(:knowledge) { described_class.new }
+
+    before(:each) do
+      @item = { this_is: 'known' }
+      @knowledge = described_class.new
+      @knowledge.known[reference.to_key] = @item
+    end
+
+    describe '#about' do
+      it 'returns the knowledge' do
+        expect(@knowledge.about(reference)).to eq(@item)
+      end
+    end
+
+    describe '#about!' do
+      it 'returns the knowledge' do
+        expect(@knowledge.about!(reference)).to eq(@item)
       end
     end
   end

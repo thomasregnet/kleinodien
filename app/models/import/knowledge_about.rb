@@ -13,6 +13,8 @@ module Import
     end
 
     def about!(reference)
+      response = known[reference.to_key]
+      return response if response
       raise Import::KnowledgeMissing
     end
   end
