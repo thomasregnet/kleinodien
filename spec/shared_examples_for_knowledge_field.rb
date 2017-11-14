@@ -47,31 +47,9 @@ RSpec.shared_examples 'a knowledge field' do
       end
 
       describe '#missing?' do
-        it 'retuns false' do
+        it 'retuns true' do
           expect(@knowledge.missing?).to be true
         end
-      end
-    end
-  end
-
-  context 'with knowledge' do
-    let(:knowledge) { described_class.new }
-
-    before(:each) do
-      @item = { this_is: 'known' }
-      @knowledge = described_class.new
-      @knowledge.known[reference.to_key] = @item
-    end
-
-    describe '#about' do
-      it 'returns the knowledge' do
-        expect(@knowledge.about(reference)).to eq(@item)
-      end
-    end
-
-    describe '#about!' do
-      it 'returns the knowledge' do
-        expect(@knowledge.about!(reference)).to eq(@item)
       end
     end
   end

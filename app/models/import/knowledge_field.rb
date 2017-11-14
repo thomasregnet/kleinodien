@@ -1,7 +1,8 @@
 module Import
   # Base class for Import::Knowledge*
   class KnowledgeField
-    # TODO: attr_reader :known should be protected
+    protected
+
     attr_reader :known
 
     private
