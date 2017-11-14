@@ -1,21 +1,55 @@
 require 'fake_reference'
 
-RSpec.shared_examples 'knowledge field' do 
+RSpec.shared_examples 'a knowledge field' do
   let(:reference) { FakeReference.new(code: '123') }
 
   context 'without knowledge' do
-    let(:knowledge) { described_class.new }
+    context 'when nothing was requested' do
+      let(:knowledge) { described_class.new }
 
-    describe '#field' do
-      it 'returns nil' do
-        expect(knowledge.about(reference)).to be_nil
+      describe '#about' do
+        it 'returns nil' do
+          expect(knowledge.about(reference)).to be_nil
+        end
+      end
+
+      describe '#about!' do
+        it 'raises an exception' do
+          expect { knowledge.about!(reference) }
+            .to raise_error(Import::KnowledgeMissing)
+        end
+      end
+
+      describe '#missing?' do
+        it 'retuns false' do
+          expect(knowledge.missing?).to be false
+        end
       end
     end
 
-    describe '#field!' do
-      it 'raises an exception' do
-        expect { knowledge.about!(reference) }
-          .to raise_error(Import::KnowledgeMissing)
+    context 'when something was requested' do
+      before(:each) do
+        @knowledge = described_class.new
+        @knowledge.about(reference)
+      end
+
+      describe '#about' do
+        it 'retuns nil' do
+          expect(@knowledge.about(reference)).to be nil
+        end
+      end
+
+      describe '#about!' do
+        it 'raises an exception' do
+          expect { @knowledge.about!(reference) }
+            .to raise_error(Import::KnowledgeMissing)
+        end
+      end
+
+      describe '#missing?' do
+        it 'retuns false' do
+          expect(@knowledge.missing?).to be true
+        end
       end
     end
   end
@@ -29,13 +63,13 @@ RSpec.shared_examples 'knowledge field' do
       @knowledge.known[reference.to_key] = @item
     end
 
-    describe '#field' do
+    describe '#about' do
       it 'returns the knowledge' do
         expect(@knowledge.about(reference)).to eq(@item)
       end
     end
 
-    describe '#field!' do
+    describe '#about!' do
       it 'returns the knowledge' do
         expect(@knowledge.about!(reference)).to eq(@item)
       end

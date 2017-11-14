@@ -10,5 +10,5 @@ class FakeKnowledge < Import::KnowledgeField
 end
 
 RSpec.describe Import::KnowledgeField do
-  it_behaves_like 'knowledge field'
+  it_behaves_like 'a knowledge field'
 end
