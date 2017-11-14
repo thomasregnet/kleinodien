@@ -1,10 +1,17 @@
 module Import
   # Base class for Import::Knowledge*
   class KnowledgeField
-    attr_reader :known, :required
+    # TODO: attr_reader :known should be protected
+    attr_reader :known
 
-    def initialize
-      @known = {}
+    private
+
+    attr_reader :required
+
+    public
+
+    def initialize(known = {})
+      @known    = known
       @required = Set.new
     end
 
