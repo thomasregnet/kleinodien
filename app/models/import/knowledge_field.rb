@@ -1,6 +1,6 @@
 module Import
   # Base class for Import::Knowledge*
-  class KnowledgeAbout
+  class KnowledgeField
     attr_reader :known
 
     def initialize
