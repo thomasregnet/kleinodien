@@ -1,11 +1,14 @@
 require 'fake_reference'
 
+class FakeKnowledgeStore < Import::KnowledgeStore
+end
+
 RSpec.shared_examples 'a knowledge field' do
   let(:reference) { FakeReference.new(code: '123') }
 
   context 'without knowledge' do
     context 'when nothing was requested' do
-      let(:knowledge) { described_class.new }
+      let(:knowledge) { described_class.new(transformer: proc {}) }
 
       describe '#about' do
         it 'returns nil' do
