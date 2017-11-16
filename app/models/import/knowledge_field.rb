@@ -27,6 +27,11 @@ module Import
       nil
     end
 
+    def collect
+      response = { known: store.raw, required: required.to_a }
+      response
+    end
+
     def missing?
       !required.empty?
     end
