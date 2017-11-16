@@ -17,9 +17,19 @@ module Import
 
     def initialize(args = {})
       @fields = {}
+      known = args.fetch(:known, {})
       KNOWLEDGE_FIELDS.each do |field, klass|
-        fields[field] = klass.new(args[field.to_s] || {})
+        raw = known[field] || {}
+        fields[field] = klass.new(known: raw)
       end
+    end
+
+    def collect
+      response = {}
+      fields.each do |name, field|
+        response[name] = field.collect
+      end
+      response
     end
 
     def missing?
