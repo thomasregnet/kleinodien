@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'fake_reference'
 require 'ko_test_data'
 
 RSpec.describe Import::Knowledge do
@@ -24,6 +25,27 @@ RSpec.describe Import::Knowledge do
           knowledge.collect.each_value do |knowledge_field|
             expect(knowledge_field[:known].length).to eq(0)
             expect(knowledge_field[:required].length).to eq(0)
+          end
+        end
+      end
+
+      context 'something requested' do
+        before(:context) do
+          @reference = FakeReference.new(code: 'abc')
+          @knowledge = described_class.new({})
+          @knowledge.brainz.about(@reference)
+        end
+
+        describe '#missing' do
+          it 'returns true' do
+            expect(@knowledge.missing?).to be true
+          end
+        end
+
+        describe '#collect' do
+          it 'has collected the requested data' do
+            collected = @knowledge.collect
+            expect(collected[:brainz][:required]).to include(@reference.to_key)
           end
         end
       end
