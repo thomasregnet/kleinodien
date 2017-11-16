@@ -19,8 +19,12 @@ RSpec.describe Import::Knowledge do
       end
 
       describe '#collect' do
-        it 'returns nil' do
-          #expect(knowledge.collect).to be nil
+        it 'returns a blank structure' do
+          expect(knowledge.collect.length).to be > 0
+          knowledge.collect.each_value do |knowledge_field|
+            expect(knowledge_field[:known].length).to eq(0)
+            expect(knowledge_field[:required].length).to eq(0)
+          end
         end
       end
     end
