@@ -5,7 +5,9 @@ module Import
 
     def initialize(args = {})
       @cache     = args[:cache] || Import::Cache.new
-      @knowledge = args[:knowledge] || Import::Knowledge.new
+      @knowledge = args[:knowledge] || Import::Knowledge.new(
+        args.fetch(:known, {})
+      )
       @params    = args[:params]
       @reference = init_reference(args)
     end
