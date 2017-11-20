@@ -34,6 +34,21 @@ RSpec.describe Import::Base do
     ]
   end
 
+  describe '#knowledge' do
+    let(:base) { Import::Base.new }
+
+    it 'retuns a Import::Knowledge object' do
+      expect(base.knowledge).to be_instance_of(Import::Knowledge)
+    end
+
+    context '#ask' do
+      it 'retuns an Import::Knowledge object' do
+        expect(base.ask).to be_instance_of(Import::Knowledge)
+      end
+    end
+  end
+
+
   describe '#cache' do
     it 'has the cache initialized' do
       base = Import::Base.new
