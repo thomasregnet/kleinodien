@@ -1,11 +1,12 @@
 module Import
   # Base class for import, prepare and persist
   class Base
-    attr_reader :cache, :reference, :params
+    attr_reader :cache, :knowledge, :reference, :params
 
     def initialize(args = {})
-      @cache  = args[:cache] || Import::Cache.new
-      @params = args[:params]
+      @cache     = args[:cache] || Import::Cache.new
+      @knowledge = args[:knowledge] || Import::Knowledge.new
+      @params    = args[:params]
       @reference = init_reference(args)
     end
 
@@ -13,6 +14,8 @@ module Import
       return unless params
       params[:data][:attributes][:wanted]
     end
+
+    alias ask knowledge
 
     private
 
