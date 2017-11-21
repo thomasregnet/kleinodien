@@ -11,11 +11,7 @@ module Import
 
     def perform
       template.name_credits.each do |name_credit|
-        x = prepare_brainz_artist(reference: name_credit.artist.reference)
-        # PrepareBrainzArtist.prepare(
-        #   cache:      cache,
-        #   reference: name_credit.artist.reference
-        # )
+        prepare_brainz_artist(reference: name_credit.artist.reference)
       end
     end
   end
