@@ -10,7 +10,8 @@ module Import
     end
 
     def perform
-      cache.require_brainz reference unless cache.fetch_brainz(reference)
+      #cache.require_brainz reference unless cache.fetch_brainz(reference)
+      ask.brainz.about(reference)
     end
   end
 end

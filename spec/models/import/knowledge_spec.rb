@@ -20,11 +20,14 @@ RSpec.describe Import::Knowledge do
       end
 
       describe '#collect' do
-        it 'returns a blank structure' do
-          expect(knowledge.collect.length).to be > 0
-          knowledge.collect.each_value do |knowledge_field|
-            expect(knowledge_field[:known].length).to eq(0)
-            expect(knowledge_field[:required].length).to eq(0)
+        it 'returns blank structures' do
+          collected = knowledge.collect
+          collected[:known].each_value do |knowledge_field| 
+            expect(knowledge_field.length).to eq(0)
+          end
+
+          collected[:required].each_value do |knowledge_field| 
+            expect(knowledge_field.length).to eq(0)
           end
         end
       end
@@ -45,7 +48,7 @@ RSpec.describe Import::Knowledge do
         describe '#collect' do
           it 'has collected the requested data' do
             collected = @knowledge.collect
-            expect(collected[:brainz][:required]).to include(@reference.to_key)
+            expect(collected[:required][:brainz]).to include(@reference.to_key)
           end
         end
       end
@@ -66,7 +69,7 @@ RSpec.describe Import::Knowledge do
         end
 
         it 'returns the known data' do
-          expect(@knowledge.collect[:brainz][:known][@reference.to_key])
+          expect(@knowledge.collect[:known][:brainz][@reference.to_key])
             .to eq(@xml)
         end
       end

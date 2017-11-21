@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      original = mashed_original
+      original = ask.brainz.about!(reference)
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit
       )
@@ -21,11 +21,6 @@ module Import
         artist_credit: artist_credit,
         title:         original.title
       )
-    end
-
-    def mashed_original
-      xml = cache.fetch_brainz!(reference)
-      ::MashedBrainz.from_xml(xml)
     end
   end
 end

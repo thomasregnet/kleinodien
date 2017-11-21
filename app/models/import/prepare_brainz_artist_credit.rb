@@ -14,6 +14,7 @@ module Import
     end
 
     def perform
+      #byebug
       template.name_credits.each do |name_credit|
         prepare_brainz_artist(reference: name_credit.artist.reference)
         # PrepareBrainzArtist.prepare(

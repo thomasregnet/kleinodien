@@ -3,24 +3,29 @@ require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzCompilationRelease do
   before(:each) do
-    @cache = Import::Cache.new
-    @reference = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    @reference = BrainzReleaseRef.new(code: @reference)
+    code       = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+    @reference = BrainzReleaseRef.new(code: code)
   end
 
   it 'persists a MusicBrainz release' do
-    KoTestData.store_brainz_cache(@reference, @cache)
-    KoTestData.store_brainz_cache(
-      BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048'),
-      @cache
+    brainz = {}
+    brainz[@reference.to_key] = KoTestData.brainz_xml_for(@reference)
+
+    artist_ref = BrainzArtistRef.new(
+      code: '1d93c839-22e7-4f76-ad84-d27039efc048'
     )
-    KoTestData.store_brainz_cache(
-      BrainzReleaseGroupRef.new(code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'),
-      @cache
+    brainz[artist_ref.to_key] = KoTestData.brainz_xml_for(artist_ref)
+
+    release_group_ref = BrainzReleaseGroupRef.new(
+      code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'
     )
+    brainz[release_group_ref.to_key] = KoTestData.brainz_xml_for(
+      release_group_ref
+    )
+
     compilation_release = Import::PersistBrainzCompilationRelease.perform(
-      reference: @reference,
-      cache:      @cache
+      knowledge: Import::Knowledge.new(known: { brainz: brainz }),
+      reference: @reference
     )
     expect(compilation_release.title).to eq('Arise')
   end
@@ -28,9 +33,8 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
   it 'raises when data is missing' do
     expect do
       Import::PersistBrainzCompilationRelease.perform(
-        reference: @reference,
-        cache: @cache
+        reference: @reference
       )
-    end.to raise_error(Import::CacheMissingEntry)
+    end.to raise_error(Import::KnowledgeMissing)
   end
 end
