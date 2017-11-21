@@ -35,13 +35,12 @@ module Import
         reference: template_name_credit.artist.reference
       )
       join_phrase = template_name_credit.joinphrase
-      join_phrase.strip! if join_phrase
+      join_phrase&.strip! # if join_phrase
       artist_credit.participants.build(
         artist:      artist,
         join_phrase: join_phrase,
         position:    position
       )
-
     end
   end
 end

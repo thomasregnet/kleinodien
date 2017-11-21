@@ -33,10 +33,10 @@ module Import
     end
 
     def body_attributes
-      attributes = {http_status_code: 202}.merge(knowledge.collect)
-      #attributes[:http_status_code] = 202
-      #attributes.merge(knowledge.collect)
-      #attributes[:required] = cache.required if cache.any_required?
+      attributes = { http_status_code: 202 }.merge(knowledge.collect)
+      # attributes[:http_status_code] = 202
+      # attributes.merge(knowledge.collect)
+      # attributes[:required] = cache.required if cache.any_required?
       attributes
     end
   end

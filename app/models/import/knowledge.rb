@@ -28,9 +28,8 @@ module Import
     def collect
       response = { known: {}, required: {} }
       fields.each do |name, field|
-        #response[name] = field.collect
         collected = field.collect
-        response[:known][name]   = collected[:known]
+        response[:known][name] = collected[:known]
         response[:required][name] = collected[:required]
       end
       response
