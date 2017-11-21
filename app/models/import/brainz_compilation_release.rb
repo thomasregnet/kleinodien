@@ -8,7 +8,7 @@ module Import
     def initialize(args)
       super({ reference_class: BrainzReleaseRef }.merge args)
 
-      cache.rebuild_from_params(params)
+      #cache.rebuild_from_params(params)
     end
 
     def perform
@@ -19,7 +19,8 @@ module Import
       prepare_brainz_compilation_release(reference: reference)
       # TODO: respond_to_missing?
       # TODO: respond_to_missing?
-      return body if cache.any_required?
+      #return body if cache.any_required?
+      return body if knowledge.missing?
 
       #PersistBrainzCompilationRelease.using_id(reference, cache)
       persist_brainz_compilation_release(reference: reference)
@@ -30,7 +31,8 @@ module Import
     def body
       wanted_id = wanted
       reference = BrainzReleaseRef.new(code: wanted_id)
-      cache.require_brainz(reference)
+      #cache.require_brainz(reference)
+      ask.brainz.about(reference)
       {
         data:
           {
@@ -40,9 +42,10 @@ module Import
     end
 
     def body_attributes
-      attributes = {}
-      attributes[:http_status_code] = 202
-      attributes[:required] = cache.required if cache.any_required?
+      attributes = {http_status_code: 202}.merge(knowledge.collect)
+      #attributes[:http_status_code] = 202
+      #attributes.merge(knowledge.collect)
+      #attributes[:required] = cache.required if cache.any_required?
       attributes
     end
   end

@@ -5,7 +5,8 @@ RSpec.describe Import::PersistBrainzArtistCredit do
   # TODO: Specs for #find_by
   # TODO: Specs for #create
   before(:each) do
-    @cache = Import::Cache.new
+    #@cache = Import::Cache.new
+    @knowledge = Import::Knowledge.new
     reference = BrainzReleaseRef.new(
       code: '693748be-7c18-39c3-af2e-2e62092090cf'
     )
@@ -15,16 +16,21 @@ RSpec.describe Import::PersistBrainzArtistCredit do
   end
 
   it 'persists an artist_credit' do
+    brainz = {}
     %w[2280ca0e-6968-4349-8c36-cb0cbd6ee95f
        37e9d7b2-7779-41b2-b2eb-3685351caad3].each do |reference|
       reference = BrainzArtistRef.new(code: reference)
       xml = KoTestData.brainz_xml_for(reference)
-      @cache.store_brainz(reference, xml)
+      brainz[reference.to_key] = xml
     end
+
+    knowledge = Import::Knowledge.new(known: { brainz: brainz })
+
     artist_credit = Import::PersistBrainzArtistCredit.perform(
-      template: @brainz_artist_credit,
-      cache:    @cache
+      knowledge: knowledge,
+      template: @brainz_artist_credit
     )
+
     expect(artist_credit.new_record?).to be false
     expect(artist_credit.name).to eq('Jello Biafra With NoMeansNo')
   end

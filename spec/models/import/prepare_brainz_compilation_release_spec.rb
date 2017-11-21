@@ -8,9 +8,4 @@ RSpec.describe Import::PrepareBrainzCompilationRelease do
     )
     expect(prepare.reference).not_to be nil
   end
-
-  it 'has the initialized the cache' do
-    prepare = Import::PrepareBrainzCompilationRelease.new
-    expect(prepare.cache).to be_instance_of(Import::Cache)
-  end
 end

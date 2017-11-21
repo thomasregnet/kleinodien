@@ -15,7 +15,8 @@ RSpec.describe Import::BrainzCompilationRelease, type: :model do
     response = Import::BrainzCompilationRelease.perform(params: data)
 
     expect(response[:data][:attributes][:http_status_code]).to eq(202)
-    ref_key = response[:data][:attributes][:required]['brainz'][0]
+    #byebug
+    ref_key = response[:data][:attributes][:required][:brainz][0]
     expected_ref_key = 'release/'\
                    "#{reference}"\
                    '?inc=artists+labels+recordings+release-groups'

@@ -48,20 +48,6 @@ RSpec.describe Import::Base do
     end
   end
 
-
-  describe '#cache' do
-    it 'has the cache initialized' do
-      base = Import::Base.new
-      expect(base.cache).to be_instance_of(Import::Cache)
-    end
-
-    it 'can take the cache as an argument' do
-      cache = Import::Cache.new
-      base = Import::Base.new(cache: cache)
-      expect(base.cache).to eq(cache)
-    end
-  end
-
   describe '#params' do
     it 'can take params as an argument' do
       base = Import::Base.new(params: params)

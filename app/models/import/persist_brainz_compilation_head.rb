@@ -10,8 +10,7 @@ module Import
     end
 
     def perform
-      xml = cache.fetch_brainz!(reference)
-      original = MashedBrainz.from_xml(xml)
+      original = ask.brainz.about!(reference)
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit
       )

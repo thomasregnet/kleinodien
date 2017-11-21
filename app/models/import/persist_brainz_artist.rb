@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      return if cache.any_required?
+      return if knowledge.missing?
       artist = Artist.brainz(brainz_artist)
       artist.save!
       artist
@@ -19,8 +19,7 @@ module Import
     private
 
     def brainz_artist
-      xml = cache.fetch_brainz!(reference)
-      MashedBrainz.from_xml(xml)
+      ask.brainz.about!(reference)
     end
   end
 end

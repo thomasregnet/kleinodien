@@ -3,18 +3,23 @@ require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzArtist do
   before(:each) do
-    @cache      = Import::Cache.new
-    @reference  = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
-    @reference = BrainzArtistRef.new(code: @reference)
+    code       = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
+    @reference = BrainzArtistRef.new(code: code)
   end
   it 'persists an artist' do
     xml = KoTestData.brainz_xml_for(@reference)
 
-    @cache.store_brainz(@reference, xml)
+    knowledge = Import::Knowledge.new(
+      known: {
+        brainz: {
+          @reference.to_key => xml
+        }
+      }
+    )
 
     artist = Import::PersistBrainzArtist.perform(
-      reference: @reference,
-      cache:      @cache
+      knowledge: knowledge,
+      reference: @reference
     )
     expect(artist.new_record?).to be false
     expect(artist.name).to eq('Jello Biafra')
@@ -23,9 +28,9 @@ RSpec.describe Import::PersistBrainzArtist do
   it 'raises when .perform is called without having data cached' do
     expect do
       Import::PersistBrainzArtist.perform(
-        reference: @reference,
-        cache:      @cache
+        knowledge: Import::Knowledge.new,
+        reference: @reference
       )
-    end.to raise_error(Import::CacheMissingEntry)
+    end.to raise_error(Import::KnowledgeMissing)
   end
 end
