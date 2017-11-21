@@ -16,6 +16,7 @@ module Import
     end
 
     def initialize(args = {})
+      args ||= {}
       @fields = {}
       known = args.fetch(:known, {})
       KNOWLEDGE_FIELDS.each do |field, klass|

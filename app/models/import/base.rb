@@ -6,16 +6,19 @@ module Import
 
     def initialize(args = {})
       #@cache     = args[:cache] || Import::Cache.new
-      @knowledge = args[:knowledge] || Import::Knowledge.new(
-        args.fetch(:known, {})
-      )
       @params    = args[:params]
+      @knowledge = args[:knowledge] || Import::Knowledge.new(attributes)
       @reference = init_reference(args)
     end
 
     def wanted
       return unless params
       params[:data][:attributes][:wanted]
+    end
+
+    def attributes
+      return unless params
+      params[:data][:attributes]
     end
 
     alias ask knowledge
