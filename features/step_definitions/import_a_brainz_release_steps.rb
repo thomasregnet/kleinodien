@@ -29,7 +29,7 @@ Then(/^the response contains an url to get the release\-data$/) do
   )
 
   data = JSON.parse(last_response.body)
-  cache_key = data['data']['attributes']['required']['brainz'][0]
+  cache_key = data.dig('data', 'attributes', 'required', 'brainz')[0]
   expect(cache_key).to eq reference.to_key
 end
 
@@ -64,6 +64,6 @@ end
 Then(/^I see the artist in the requirements$/) do
   reference = BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048')
   data = JSON.parse(last_response.body)
-  required = data['data']['attributes']['required']['brainz']
+  required = data.dig('data', 'attributes', 'required', 'brainz')
   expect(required.include?(reference.to_key)).to be true
 end

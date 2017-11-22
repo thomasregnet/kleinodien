@@ -11,12 +11,12 @@ module Import
 
     def wanted
       return unless params
-      params[:data][:attributes][:wanted]
+      params.dig(:data, :attributes, :wanted)
     end
 
     def attributes
       return unless params
-      params[:data][:attributes]
+      params.dig(:data, :attributes)
     end
 
     alias ask knowledge

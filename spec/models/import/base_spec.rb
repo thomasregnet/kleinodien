@@ -84,12 +84,12 @@ RSpec.describe Import::Base do
   describe 'method_missing' do
     specify '#respond_to_missing?' do
       base = Import::Base.new
-      expect(base.respond_to? 'fake_service_class').to be true
+      expect(base.respond_to?('fake_service_class')).to be true
     end
 
     it 'does not respond to missing' do
       base = Import::Base.new
-      expect(base.respond_to? :no_such_class).to be false
+      expect(base.respond_to?(:no_such_class)).to be false
     end
   end
 end
