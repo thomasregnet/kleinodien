@@ -10,7 +10,7 @@ RSpec.describe Import::PrepareBrainzArtist do
 
   specify '.perform without knowledged artist' do
     knowledge = Import::Knowledge.new
-    artist_importer = Import::PrepareBrainzArtist.new(
+    artist_importer = described_class.new(
       knowledge: knowledge,
       reference: @reference
     )
@@ -28,7 +28,7 @@ RSpec.describe Import::PrepareBrainzArtist do
       }
     )
 
-    Import::PrepareBrainzArtist.perform(
+    described_class.perform(
       knowledge: knowledge,
       reference: @reference
     )
