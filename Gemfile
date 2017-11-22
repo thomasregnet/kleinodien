@@ -58,6 +58,7 @@ group :development do
   gem 'pry-rails'
   gem 'reek'
   gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'rails_best_practices'
   gem 'rubycritic', require: false
   gem 'web-console', '~> 3.0'
