@@ -35,7 +35,7 @@ RSpec.describe Import::Base do
   end
 
   describe '#knowledge' do
-    let(:base) { Import::Base.new }
+    let(:base) { described_class.new }
 
     it 'retuns a Import::Knowledge object' do
       expect(base.knowledge).to be_instance_of(Import::Knowledge)
@@ -50,17 +50,17 @@ RSpec.describe Import::Base do
 
   describe '#params' do
     it 'can take params as an argument' do
-      base = Import::Base.new(params: params)
+      base = described_class.new(params: params)
       expect(base.params).to eq params
     end
 
     it 'returns the wanted id if correct params are given' do
-      base = Import::Base.new(params: params)
+      base = described_class.new(params: params)
       expect(base.wanted).to eq(wanted)
     end
 
     it 'without params it returns nil for "wanted"' do
-      base = Import::Base.new
+      base = described_class.new
       expect(base.wanted).to be nil
     end
   end
@@ -68,12 +68,12 @@ RSpec.describe Import::Base do
   describe '#reference' do
     it 'returns the reference' do
       reference = { just: 'a fake' }
-      base = Import::Base.new(reference: reference)
+      base = described_class.new(reference: reference)
       expect(base.reference).to eq reference
     end
 
     it "generates a reference if it's class is given" do
-      base = Import::Base.new(
+      base = described_class.new(
         params: params,
         reference_class: FakeReference
       )
@@ -83,12 +83,12 @@ RSpec.describe Import::Base do
 
   describe 'method_missing' do
     specify '#respond_to_missing?' do
-      base = Import::Base.new
+      base = described_class.new
       expect(base.respond_to?('fake_service_class')).to be true
     end
 
     it 'does not respond to missing' do
-      base = Import::Base.new
+      base = described_class.new
       expect(base.respond_to?(:no_such_class)).to be false
     end
   end
