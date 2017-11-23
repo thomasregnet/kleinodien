@@ -1,36 +1,57 @@
 require 'rails_helper'
+require 'fake_reference'
 require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzArtist do
-  before(:each) do
-    code       = '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
-    @reference = BrainzArtistRef.new(code: code)
-  end
-  it 'persists an artist' do
-    xml = KoTestData.brainz_xml_for(@reference)
-
-    knowledge = Import::Knowledge.new(
-      known: {
-        brainz: {
-          @reference.to_key => xml
-        }
-      }
-    )
-
-    artist = Import::PersistBrainzArtist.perform(
-      knowledge: knowledge,
-      reference: @reference
-    )
-    expect(artist.new_record?).to be false
-    expect(artist.name).to eq('Jello Biafra')
+  let(:reference) do
+    BrainzArtistRef.new(code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f')
   end
 
-  it 'raises when .perform is called without having data cached' do
-    expect do
-      Import::PersistBrainzArtist.perform(
-        knowledge: Import::Knowledge.new,
-        reference: @reference
+  describe 'persist an artist' do
+    before(:context) do
+      DatabaseCleaner.start
+
+      reference = BrainzArtistRef.new(
+        code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
       )
-    end.to raise_error(Import::KnowledgeMissing)
+
+      knowledge = Import::Knowledge.new(
+        known: {
+          brainz: {
+            reference.to_key => KoTestData.brainz_xml_for(reference)
+          }
+        }
+      )
+
+      @artist = described_class.perform(
+        knowledge: knowledge,
+        reference: reference
+      )
+    end
+
+    it 'is persisted' do
+      expect(@artist.new_record?).to be false
+    end
+
+    it 'has the right name set' do
+      expect(@artist.name).to eq('Jello Biafra')
+    end
+
+    after(:context) do
+      DatabaseCleaner.clean
+    end
+  end
+
+  context 'with missing data' do
+    let(:persister) do
+      described_class.new(
+        knowledge: Import::Knowledge.new,
+        reference: FakeReference.new(code: 'foo')
+      )
+    end
+
+    it 'raises Import::KnowledgeMissing' do
+      expect { persister.perform }.to raise_error(Import::KnowledgeMissing)
+    end
   end
 end
