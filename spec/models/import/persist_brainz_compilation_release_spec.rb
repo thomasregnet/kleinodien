@@ -2,14 +2,13 @@ require 'rails_helper'
 require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzCompilationRelease do
-  before(:each) do
-    code       = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    @reference = BrainzReleaseRef.new(code: code)
+  let(:reference) do
+    BrainzReleaseRef.new(code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a')
   end
 
   it 'persists a MusicBrainz release' do
     brainz = {}
-    brainz[@reference.to_key] = KoTestData.brainz_xml_for(@reference)
+    brainz[reference.to_key] = KoTestData.brainz_xml_for(reference)
 
     artist_ref = BrainzArtistRef.new(
       code: '1d93c839-22e7-4f76-ad84-d27039efc048'
@@ -23,17 +22,17 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
       release_group_ref
     )
 
-    compilation_release = Import::PersistBrainzCompilationRelease.perform(
+    compilation_release = described_class.perform(
       knowledge: Import::Knowledge.new(known: { brainz: brainz }),
-      reference: @reference
+      reference: reference
     )
     expect(compilation_release.title).to eq('Arise')
   end
 
   it 'raises when data is missing' do
     expect do
-      Import::PersistBrainzCompilationRelease.perform(
-        reference: @reference
+      described_class.perform(
+        reference: reference
       )
     end.to raise_error(Import::KnowledgeMissing)
   end
