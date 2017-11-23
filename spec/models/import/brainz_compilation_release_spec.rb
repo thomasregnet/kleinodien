@@ -6,7 +6,6 @@ require 'import/prepare_brainz_compilation_release'
 require 'import/prepare_brainz_artist'
 require 'import/prepare_brainz_artist_credit'
 
-
 RSpec.describe Import::BrainzCompilationRelease do
   context 'without konwledge' do
     describe '.perform' do
