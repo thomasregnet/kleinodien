@@ -20,7 +20,7 @@ module Import
     end
 
     def data_import
-      @data_import ||= ::DataImport.new
+      @data_import ||= ::DataImport.create!(note: 'foobar')
     end
 
     alias ask knowledge
