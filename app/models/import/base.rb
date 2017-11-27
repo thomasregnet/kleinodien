@@ -19,6 +19,10 @@ module Import
       params.dig(:data, :attributes)
     end
 
+    def data_import
+      @data_import ||= ::DataImport.new
+    end
+
     alias ask knowledge
 
     private
