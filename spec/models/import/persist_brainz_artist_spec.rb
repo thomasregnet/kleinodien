@@ -24,6 +24,7 @@ RSpec.describe Import::PersistBrainzArtist do
       )
 
       @artist = described_class.perform(
+        data_import: FactoryGirl.create(:data_import),
         knowledge: knowledge,
         reference: reference
       )

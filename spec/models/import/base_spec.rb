@@ -35,10 +35,7 @@ RSpec.describe Import::Base do
   end
 
   describe '#data_import' do
-    it 'returns an DataImport object' do
-      base = described_class.new
-      expect(base.data_import).to be_instance_of(DataImport)
-    end
+    it 'returns an DataImport object'
   end
 
   describe '#knowledge' do
