@@ -37,6 +37,10 @@ RSpec.describe Import::PersistBrainzArtist do
       expect(@artist.name).to eq('Jello Biafra')
     end
 
+    it 'has the data_import set' do
+      expect(@artist.data_import).not_to be_nil
+    end
+
     after(:context) do
       DatabaseCleaner.clean
     end
