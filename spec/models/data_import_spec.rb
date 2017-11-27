@@ -5,6 +5,8 @@ RSpec.describe DataImport, type: :model do
     expect(FactoryGirl.build(:data_import)).to be_valid
   end
 
+  it { is_expected.to(have_many(:artists)) }
+
   context 'without a note' do
     let(:data_import) { described_class.new }
 

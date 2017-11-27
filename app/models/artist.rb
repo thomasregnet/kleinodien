@@ -3,6 +3,8 @@ class Artist < ActiveRecord::Base
   include BrainzConstructors
   include Identifyable
 
+  belongs_to :data_import, required: false
+
   composed_of :begin_date,
               class_name: 'IncompleteDate',
               mapping: [%w[begin_date date], %w[begin_date_mask mask]]
