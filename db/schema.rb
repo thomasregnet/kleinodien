@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127185704) do
+ActiveRecord::Schema.define(version: 20171127195345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20171127185704) do
     t.date "end_date"
     t.integer "end_date_mask", limit: 2
     t.citext "sort_name"
+    t.bigint "data_import_id"
+    t.index ["data_import_id"], name: "index_artists_on_data_import_id"
   end
 
   create_table "artists_tags", id: false, force: :cascade do |t|
@@ -713,6 +715,7 @@ ActiveRecord::Schema.define(version: 20171127185704) do
   add_foreign_key "artist_credits_tags", "tags"
   add_foreign_key "artist_identifiers", "artists", name: "artist_identifiers_artist_id_fkey"
   add_foreign_key "artist_identifiers", "sources", name: "artist_identifiers_source_id_fkey"
+  add_foreign_key "artists", "data_imports"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "brainz_releases", "compilation_releases", name: "brainz_releases_compilation_release_id_fkey"
