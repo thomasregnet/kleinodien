@@ -10,12 +10,11 @@ module Import
     end
 
     def perform
-      prepare_brainz_compilation_release(reference: reference)
-      # TODO: respond_to_missing?
-      # TODO: respond_to_missing?
-      return body if knowledge.missing?
-
-      persist_brainz_compilation_release(reference: reference)
+      DataImport.transaction do
+        prepare_brainz_compilation_release(reference: reference)
+        raise ActiveRecord::Rollback, 'data missing' if knowledge.missing?
+        persist_brainz_compilation_release(reference: reference)
+      end
 
       body
     end
