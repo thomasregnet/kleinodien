@@ -13,7 +13,10 @@ module Import
       DataImport.transaction do
         prepare_brainz_compilation_release(reference: reference)
         raise ActiveRecord::Rollback, 'data missing' if knowledge.missing?
-        persist_brainz_compilation_release(reference: reference)
+        persist_brainz_compilation_release(
+          data_import: init_data_import,
+          reference:   reference
+        )
       end
 
       body
@@ -37,6 +40,12 @@ module Import
       # attributes.merge(knowledge.collect)
       # attributes[:required] = cache.required if cache.any_required?
       attributes
+    end
+
+    def init_data_import
+      release = ask.brainz.about!(reference)
+      note = "MusicBrainz release #{release.title}"
+      DataImport.create(note: note)
     end
   end
 end
