@@ -18,7 +18,8 @@ module Import
       artist_credit.compilations.create!(
         title:          original.title,
         disambiguation: original.disambiguation,
-        type:           'AlbumHead'
+        type:           'AlbumHead',
+        data_import:    data_import
       )
     end
   end

@@ -22,11 +22,21 @@ RSpec.describe Import::PersistBrainzCompilationHead do
     @knowledge = Import::Knowledge.new(known: { brainz: brainz })
   end
 
-  it 'persists a brainz release-group' do
-    compilation_head = Import::PersistBrainzCompilationHead.perform(
-      reference: @reference,
-      knowledge: @knowledge
-    )
-    expect(compilation_head.new_record?).to be false
+  describe 'persisting a brainz release-group' do
+    let(:compilation_head) do
+      Import::PersistBrainzCompilationHead.perform(
+        data_import: FactoryGirl.create(:data_import),
+        knowledge:   @knowledge,
+        reference:   @reference
+      )
+    end
+
+    it 'is persisted' do
+      expect(compilation_head.new_record?).to be false
+    end
+
+    it 'has the data_import set' do
+      expect(compilation_head.data_import).to be_instance_of(DataImport)
+    end
   end
 end

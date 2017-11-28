@@ -10,15 +10,19 @@ module Import
     end
 
     def perform
-      original = ask.brainz.about!(reference)
+      original = template
+      original ||= ask.brainz.about!(reference)
+
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit
       )
       compilation_head = persist_brainz_compilation_head(
         reference: original.release_group.reference
       )
+
       compilation_head.releases.create!(
         artist_credit: artist_credit,
+        data_import:   data_import,
         title:         original.title
       )
     end
