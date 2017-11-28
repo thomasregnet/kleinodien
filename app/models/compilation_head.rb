@@ -2,6 +2,7 @@
 class CompilationHead < ActiveRecord::Base
   include BrainzConstructors
 
+  belongs_to :data_import, required: false
   has_and_belongs_to_many :tags
   has_many :comments
   has_many :descriptions

@@ -14,6 +14,8 @@ RSpec.describe CompilationHead, type: :model do
     @c_head = FactoryGirl.create(:compilation_head)
   end
 
+  it { is_expected.to(belong_to(:data_import)) }
+
   it 'is valid with valid attributes' do
     expect(@c_head).to be_valid
   end
