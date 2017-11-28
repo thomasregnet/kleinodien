@@ -4,4 +4,5 @@ class DataImport < ApplicationRecord
   has_many :artists
   has_many :artist_credits
   has_many :compilation_heads
+  has_many :compilation_releases
 end
