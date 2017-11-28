@@ -1,10 +1,10 @@
 module Import
   # Base class for import, prepare and persist
   class Base
-    attr_reader :data_import, :knowledge, :params, :reference
+    attr_reader :knowledge, :params, :reference
 
     def initialize(args = {})
-      @data_import = args[:data_import]
+      #@data_import = args[:data_import]
       @params      = args[:params]
       @knowledge   = args[:knowledge] || Import::Knowledge.new(attributes)
       @reference   = init_reference(args)
@@ -41,10 +41,7 @@ module Import
       class_name = import_service_class_name_for(method)
       if Import.const_defined?(class_name)
         klass = class_name.constantize
-        merged_args = {
-          data_import: data_import,
-          knowledge: knowledge
-        }.merge(args)
+        merged_args = { knowledge: knowledge}.merge(args)
         return klass.send :perform, merged_args
       end
       super
