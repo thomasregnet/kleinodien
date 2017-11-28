@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127195345) do
+ActiveRecord::Schema.define(version: 20171128193405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20171127195345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "source_id"
+    t.bigint "data_import_id"
+    t.index ["data_import_id"], name: "index_artist_credits_on_data_import_id"
   end
 
   create_table "artist_credits_tags", id: false, force: :cascade do |t|
@@ -710,6 +712,7 @@ ActiveRecord::Schema.define(version: 20171127195345) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "artist_credits", "data_imports"
   add_foreign_key "artist_credits", "sources", name: "fk_artist_credits_source_id"
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
