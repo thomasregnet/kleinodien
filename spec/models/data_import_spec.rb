@@ -6,6 +6,7 @@ RSpec.describe DataImport, type: :model do
   end
 
   it { is_expected.to(have_many(:artists)) }
+  it { is_expected.to(have_many(:artist_credits)) }
 
   context 'without a note' do
     let(:data_import) { described_class.new }
