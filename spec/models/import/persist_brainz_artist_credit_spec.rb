@@ -27,11 +27,13 @@ RSpec.describe Import::PersistBrainzArtistCredit do
     knowledge = Import::Knowledge.new(known: { brainz: brainz })
 
     artist_credit = Import::PersistBrainzArtistCredit.perform(
-      knowledge: knowledge,
-      template: @brainz_artist_credit
+      data_import: FactoryGirl.create(:data_import),
+      knowledge:   knowledge,
+      template:    @brainz_artist_credit
     )
 
     expect(artist_credit.new_record?).to be false
     expect(artist_credit.name).to eq('Jello Biafra With NoMeansNo')
+    expect(artist_credit.data_import).to be_instance_of(DataImport)
   end
 end
