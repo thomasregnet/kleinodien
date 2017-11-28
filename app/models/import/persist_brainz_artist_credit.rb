@@ -21,7 +21,10 @@ module Import
     end
 
     def create
-      artist_credit = ArtistCredit.new(source: Source::MusicBrainz)
+      artist_credit = ArtistCredit.new(
+        data_import: data_import,
+        source:      Source::MusicBrainz
+      )
       template.name_credits.each_with_index do |template_name_credit, position|
         build_name_credit_on(template_name_credit, artist_credit, position)
       end
