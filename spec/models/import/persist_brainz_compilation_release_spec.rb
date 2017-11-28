@@ -23,10 +23,13 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
     )
 
     compilation_release = described_class.perform(
-      knowledge: Import::Knowledge.new(known: { brainz: brainz }),
-      reference: reference
+      data_import: FactoryGirl.create(:data_import),
+      knowledge:   Import::Knowledge.new(known: { brainz: brainz }),
+      reference:   reference
     )
     expect(compilation_release.title).to eq('Arise')
+    expect(compilation_release.new_record?).to be false
+    expect(compilation_release.data_import).to be_instance_of(DataImport)
   end
 
   it 'raises when data is missing' do
