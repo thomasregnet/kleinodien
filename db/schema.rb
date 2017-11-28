@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128193405) do
+ActiveRecord::Schema.define(version: 20171128200034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,9 @@ ActiveRecord::Schema.define(version: 20171128193405) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "data_import_id"
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id"
+    t.index ["data_import_id"], name: "index_compilation_heads_on_data_import_id"
   end
 
   create_table "compilation_heads_countries", id: false, force: :cascade do |t|
@@ -746,6 +748,7 @@ ActiveRecord::Schema.define(version: 20171128193405) do
   add_foreign_key "compilation_head_identifiers", "compilation_heads", name: "ch_identifiers_compilation_head_id_fkey"
   add_foreign_key "compilation_head_identifiers", "sources", name: "ch_identifiers_source_id_fkey"
   add_foreign_key "compilation_heads", "artist_credits"
+  add_foreign_key "compilation_heads", "data_imports"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_heads_tags", "compilation_heads"
