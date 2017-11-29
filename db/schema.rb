@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171129184435) do
     t.citext "sort_name"
     t.bigint "data_import_id"
     t.uuid "brainz_code"
+    t.index ["brainz_code"], name: "index_on_artists_brainz_code", unique: true
     t.index ["data_import_id"], name: "index_artists_on_data_import_id"
   end
 
