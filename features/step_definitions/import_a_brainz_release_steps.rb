@@ -67,3 +67,11 @@ Then(/^I see the artist in the requirements$/) do
   required = data.dig('data', 'attributes', 'required', 'brainz')
   expect(required.include?(reference.to_key)).to be true
 end
+
+Given(/^The release already exists$/) do
+  #pending # Write code here that turns the phrase above into concrete actions
+  FactoryGirl.create(
+    :compilation_release,
+    brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  )
+end
