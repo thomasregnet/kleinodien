@@ -10,6 +10,22 @@ require 'shared_examples_for_models_with_brainz_constructors'
 RSpec.describe Artist, type: :model do
   it { is_expected.to(belong_to(:data_import)) }
 
+  context 'with brainz_code' do
+    let(:artist) do
+      FactoryGirl.build(
+        :artist,
+        brainz_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
+      )
+    end
+
+    it 'accepts a string as uuid' do
+      expect { artist.save! }.not_to raise_error
+    end
+
+    it 'returns the value as string' do
+      expect(artist.brainz_code).to be_instance_of(String)
+    end
+  end
   # TODO: spec Artist has_many: identifiers
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
