@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128201249) do
+ActiveRecord::Schema.define(version: 20171129184435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20171128201249) do
     t.integer "end_date_mask", limit: 2
     t.citext "sort_name"
     t.bigint "data_import_id"
+    t.uuid "brainz_code"
     t.index ["data_import_id"], name: "index_artists_on_data_import_id"
   end
 
