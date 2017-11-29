@@ -1,3 +1,5 @@
+require 'import/find_brainz_release'
+
 module Import
   # Post MusicBrainz params to kleinodien
   class BrainzCompilationRelease < Base
@@ -10,6 +12,8 @@ module Import
     end
 
     def perform
+      return already_exists if find_brainz_release(reference: reference)
+
       DataImport.transaction do
         prepare_brainz_compilation_release(reference: reference)
         raise ActiveRecord::Rollback, 'data missing' if knowledge.missing?
@@ -20,6 +24,15 @@ module Import
       end
 
       body
+    end
+
+    def already_exists
+      {
+        data: {
+          errors: ['already exists'],
+          attributes: { http_status_code: 403 }
+        }
+      }
     end
 
     def body
