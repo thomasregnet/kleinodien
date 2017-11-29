@@ -19,6 +19,7 @@ class Artist < ActiveRecord::Base
   has_many :participants, inverse_of: :artist
   has_many :ratings
 
+  validates :brainz_code, uniqueness: { allow_blank: true }
   validates :name, presence: true
   validates :name, uniqueness: { scope: :disambiguation, case_sensitive: false }
 
