@@ -16,6 +16,17 @@ RSpec.describe CompilationRelease, type: :model do
 
   it { is_expected.to(belong_to(:data_import)) }
 
+  describe '#brainz_code' do
+    subject do
+      FactoryGirl.create(
+        :compilation_release,
+        brainz_code: 'd255e468-c944-436c-9f73-129246d3394d' 
+      )
+    end
+
+    it { should validate_uniqueness_of(:brainz_code).case_insensitive }
+  end
+
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start

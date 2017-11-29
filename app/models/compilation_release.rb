@@ -25,6 +25,7 @@ class CompilationRelease < ActiveRecord::Base
 
   has_and_belongs_to_many :countries
 
+  validates :brainz_code, uniqueness: { allow_blank: true }
   validates :type, presence: true
   validates :version, uniqueness: { scope: :head, case_sensitive: false }
 
