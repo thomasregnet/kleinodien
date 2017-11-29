@@ -26,6 +26,18 @@ RSpec.describe Artist, type: :model do
       expect(artist.brainz_code).to be_instance_of(String)
     end
   end
+
+  describe '#brainz_code' do
+    subject do
+      FactoryGirl.create(
+        :artist,
+        brainz_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
+      )
+    end
+
+    it { should validate_uniqueness_of(:brainz_code).case_insensitive }
+  end
+
   # TODO: spec Artist has_many: identifiers
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
