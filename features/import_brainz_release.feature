@@ -13,3 +13,8 @@ Feature: Import a MusicBrainz Release
     When I send the MusicBrainz data of the release I want to import
     Then I receive a status of "202"
     And I see the artist in the requirements
+    
+  Scenario: Try to import an existing release
+    Given The release already exists
+    When I send a MusicBrainz id of a release i want to import
+    Then I receive a status of "403"
