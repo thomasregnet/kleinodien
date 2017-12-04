@@ -35,6 +35,7 @@ module MashedBrainz
     }
 
     coerce_key :relation_list, lambda { |value|
+      return MashedBrainz::UrlRels.new(value) if value['target_type'] == 'url'
       MashedBrainz::RelationList.new(value)
     }
 
