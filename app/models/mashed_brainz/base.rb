@@ -34,6 +34,10 @@ module MashedBrainz
       end
     }
 
+    coerce_key :relation_list, lambda { |value|
+      MashedBrainz::RelationList.new(value)
+    }
+
     coerce_key :release, lambda { |value|
       MashedBrainz::Release.new(value)
     }
