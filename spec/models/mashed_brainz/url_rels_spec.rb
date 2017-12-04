@@ -26,7 +26,18 @@ RSpec.describe MashedBrainz::UrlRels do
     end
   end
 
-  describe '#wikidata_code' do
-    it 'returns the wikidata code'
+  context 'with a wikidata url' do
+    specify '#wikidata' do
+      expect(url_rels.wikidata).to be_instance_of(MashedBrainz::Relation)
+    end
+
+    specify '#wikidata_code' do
+      expect(url_rels.wikidata_code).to eq('Q17062070')
+    end
+
+    specify '#wikidata_url' do
+      expect(url_rels.wikidata_url)
+        .to eq('https://www.wikidata.org/wiki/Q17062070')
+    end
   end
 end
