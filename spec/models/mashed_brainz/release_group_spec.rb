@@ -19,4 +19,11 @@ RSpec.describe MashedBrainz::ReleaseGroup do
     expect(@orig_release_group.title)
       .to eq 'The Sky Is Falling and I Want My Mommy'
   end
+
+  describe '#relation_list_for' do
+    it 'returns the relations of a given type' do
+      expect(@orig_release_group.relation_list_for(:url))
+        .to be_instance_of(MashedBrainz::RelationList)
+    end
+  end
 end
