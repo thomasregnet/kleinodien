@@ -38,6 +38,28 @@ RSpec.describe Artist, type: :model do
     it { should validate_uniqueness_of(:brainz_code).case_insensitive }
   end
 
+  describe '#discogs_code' do
+    subject do
+      FactoryGirl.create(
+        :artist,
+        discogs_code: 123
+      )
+    end
+
+    it { should validate_uniqueness_of(:discogs_code) }
+  end
+
+  describe '#wikidata_code' do
+    subject do
+      FactoryGirl.create(
+        :artist,
+        wikidata_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
+      )
+    end
+
+    it { should validate_uniqueness_of(:wikidata_code).case_insensitive }
+  end
+
   # TODO: spec Artist has_many: identifiers
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
