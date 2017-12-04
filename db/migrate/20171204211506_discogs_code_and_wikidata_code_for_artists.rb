@@ -1,6 +1,6 @@
 class DiscogsCodeAndWikidataCodeForArtists < ActiveRecord::Migration[5.1]
   def change
-    add_column :artists, :discogs_code, :text
+    add_column :artists, :discogs_code, :bigint
     add_column :artists, :wikidata_code, :bigint
 
     add_index :artists,
