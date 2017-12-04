@@ -23,7 +23,7 @@ RSpec.describe MashedBrainz::ReleaseGroup do
   describe '#relation_list_for' do
     it 'returns the relations of a given type' do
       expect(@orig_release_group.relation_list_for(:url))
-        .to be_instance_of(MashedBrainz::RelationList)
+        .to be_instance_of(MashedBrainz::UrlRels)
     end
   end
 end
