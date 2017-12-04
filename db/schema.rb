@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129200459) do
+ActiveRecord::Schema.define(version: 20171204211506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,12 @@ ActiveRecord::Schema.define(version: 20171129200459) do
     t.citext "sort_name"
     t.bigint "data_import_id"
     t.uuid "brainz_code"
+    t.text "discogs_code"
+    t.bigint "wikidata_code"
     t.index ["brainz_code"], name: "index_on_artists_brainz_code", unique: true
     t.index ["data_import_id"], name: "index_artists_on_data_import_id"
+    t.index ["discogs_code"], name: "index_on_artists_discogs_code", unique: true
+    t.index ["wikidata_code"], name: "index_on_artists_wikidata_code", unique: true
   end
 
   create_table "artists_tags", id: false, force: :cascade do |t|
