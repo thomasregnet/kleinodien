@@ -1,13 +1,18 @@
-#require 'brainz_release_ref'
-
+# Define and retrieve test data for developing Kleinodien
 class TestData
-  attr_reader :name
+  @test_sets = {}
+
+  class << self
+    attr_reader :test_sets
+  end
 
   def self.define(name)
-    yield TestSet.new
+    test_set = TestSet.new
+    test_sets[name] = test_set
+    yield test_set
   end
 
   def self.retrieve(name)
-    name
+    test_sets[name] || raise(ArgumentError, "no such test set: #{name}")
   end
 end
