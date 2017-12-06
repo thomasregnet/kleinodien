@@ -5,7 +5,7 @@ RSpec.describe TestSet do
 
   describe '#define' do
     it 'yields' do
-      expect { |block| test_set.define(&block) }. to yield_control
+      expect { |block| test_set.define(&block) }. to yield_with_args(TestSubset)
     end
   end
 end
