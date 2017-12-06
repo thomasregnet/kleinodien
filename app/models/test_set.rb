@@ -11,4 +11,10 @@ class TestSet < TestSubset
     subsets << sub_set
     yield sub_set
   end
+
+  def retrieve(sub_set_no)
+    subsets[sub_set_no] || raise(
+      ArgumentError, "no such sub set: #{sub_set_no}"
+    )
+  end
 end

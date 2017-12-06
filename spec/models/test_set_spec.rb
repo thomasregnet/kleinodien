@@ -8,4 +8,6 @@ RSpec.describe TestSet do
       expect { |block| test_set.define(&block) }. to yield_with_args(TestSubset)
     end
   end
+
+  specify '#retrieve'
 end
