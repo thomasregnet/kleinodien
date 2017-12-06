@@ -7,7 +7,7 @@ class TestData
     yield TestSet.new
   end
 
-  def self.fetch(name)
+  def self.retrieve(name)
     name
   end
 end

@@ -8,13 +8,13 @@ RSpec.describe TestData do
     end
   end
 
-  describe '.define' do
+  describe '.retrieve' do
     described_class.define(:brainz_arise) do |set|
       set.add(:brainz_release, '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a')
     end
 
     it 'returns the testset' do
-      expect(described_class.fetch(:brainz_arise)).not_to be nil
+      expect(described_class.retrieve(:brainz_arise)).not_to be nil
     end
   end
 end
