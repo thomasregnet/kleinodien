@@ -7,14 +7,14 @@ class TestSet < TestSubset
   end
 
   def define
-    sub_set = TestSubset.new
-    subsets << sub_set
-    yield sub_set
+    subset = TestSubset.new
+    subsets << subset
+    yield subset
   end
 
-  def retrieve(sub_set_no)
-    subsets[sub_set_no] || raise(
-      ArgumentError, "no such sub set: #{sub_set_no}"
+  def retrieve(subset_no)
+    subsets[subset_no] || raise(
+      ArgumentError, "no such sub set: #{subset_no}"
     )
   end
 end

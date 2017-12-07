@@ -12,10 +12,10 @@ class TestData
     yield test_set
   end
 
-  def self.retrieve(name, sub_set_no = nil)
+  def self.retrieve(name, subset_no = nil)
     test_set = test_sets[name]
     raise ArgumentError, "no such test set: #{name}" unless test_set
-    return test_set unless sub_set_no
-    test_set.retrieve(sub_set_no)
+    return test_set unless subset_no
+    test_set.retrieve(subset_no)
   end
 end
