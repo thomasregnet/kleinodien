@@ -12,8 +12,8 @@ RSpec.describe TestData do
     described_class.define(:brainz_arise) do |test_set|
       test_set.add(:brainz_release, '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a')
 
-      test_set.define do |sub_set|
-        sub_set.add(:brainz_release, '4f56d426-7283-4202-bd2d-0959bf44f80c')
+      test_set.define do |subset|
+        subset.add(:brainz_release, '4f56d426-7283-4202-bd2d-0959bf44f80c')
       end
     end
 
