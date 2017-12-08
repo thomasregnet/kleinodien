@@ -35,6 +35,12 @@ RSpec.shared_examples 'a new reference' do
         expect(reference.uri).to be_nil
       end
     end
+
+    describe '#to_code' do
+      it 'returns the code' do
+        expect(reference.to_code).to eq(code)
+      end
+    end
   end
 
   context 'with :key set' do
@@ -57,6 +63,12 @@ RSpec.shared_examples 'a new reference' do
         expect(reference.uri).to be_nil
       end
     end
+
+    describe '#to_code' do
+      it 'returns the code' do
+        expect(reference.to_code).to eq(code)
+      end
+    end
   end
 
   context 'with :uri set' do
@@ -77,6 +89,12 @@ RSpec.shared_examples 'a new reference' do
     describe '#uri' do
       it 'returns the uri' do
         expect(reference.uri).to eq(uri)
+      end
+    end
+
+    describe '#to_code' do
+      it 'returns the code' do
+        expect(reference.to_code).to eq(code)
       end
     end
   end
