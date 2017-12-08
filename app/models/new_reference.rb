@@ -1,3 +1,4 @@
+# Base class for references
 class NewReference
   attr_reader :code, :key, :uri
 
@@ -13,8 +14,7 @@ class NewReference
     new(uri: uri)
   end
 
-  #private
-  #protected
+  private
 
   def initialize(args)
     @code = args[:code]
@@ -22,6 +22,12 @@ class NewReference
     @uri  = args[:uri]
   end
 
-  #public
+  public
 
+  def to_code
+    return code if code
+    source = key || uri
+    match = %r{/([^?/]+)(\?.+)?$}.match(source)
+    match[1]
+  end
 end
