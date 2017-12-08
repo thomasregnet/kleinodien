@@ -1,0 +1,3 @@
+class NewBrainzArtistReference < NewReference
+
+end
