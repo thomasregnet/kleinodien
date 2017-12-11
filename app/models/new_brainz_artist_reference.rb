@@ -10,9 +10,4 @@ class NewBrainzArtistReference < NewBrainzReference
   def query_string
     URI_QUERY_STRING
   end
-
-  def to_uri
-    return uri if uri
-    "#{scheme}://#{host}/#{path_prefix}/#{kind}/#{to_code}?#{query_string}"
-  end
 end
