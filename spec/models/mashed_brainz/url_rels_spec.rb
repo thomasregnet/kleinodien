@@ -3,8 +3,8 @@ require 'ko_test_data'
 
 RSpec.describe MashedBrainz::UrlRels do
   let(:url_rels) do
-    reference = BrainzReleaseGroupRef.new(
-      code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
+    reference = BrainzReleaseGroupReference.from_code(
+      '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
     release_group = MashedBrainz.from_xml(
       KoTestData.brainz_xml_for(reference)

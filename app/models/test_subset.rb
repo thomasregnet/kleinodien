@@ -12,7 +12,7 @@ class TestSubset
   def add(kind, code)
     require_kind(kind)
     ref_class = ref_to_require(kind).camelize.constantize
-    reference = ref_class.new(code: code)
+    reference = ref_class.from_code(code)
     references[reference.to_key] = reference
     reference
   end
@@ -20,14 +20,12 @@ class TestSubset
   private
 
   def require_kind(kind)
-    begin
-      require ref_to_require(kind)
-    rescue LoadError
-      raise ArgumentError, "invalid kind: #{kind}"
-    end
+    require ref_to_require(kind)
+  rescue LoadError
+    raise ArgumentError, "invalid kind: #{kind}"
   end
 
   def ref_to_require(kind)
-   "#{kind.to_s}_ref" 
+    "#{kind}_reference"
   end
 end
