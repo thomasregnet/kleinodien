@@ -1,5 +1,7 @@
 # Base class for references
 class NewReference
+  URI_SCHEME = 'https'.freeze
+
   attr_reader :code, :key, :uri
 
   def self.from_code(code)
@@ -12,6 +14,10 @@ class NewReference
 
   def self.from_uri(uri)
     new(uri: uri)
+  end
+
+  def scheme
+    URI_SCHEME
   end
 
   private
