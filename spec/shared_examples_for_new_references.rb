@@ -30,159 +30,163 @@ RSpec.shared_examples 'a new reference' do
 
     it { is_expected.to respond_to('eql?').with(1).argument }
   end
-  context 'with :code set' do
-    let(:reference) { described_class.from_code(code) }
+end
 
-    describe '#code' do
-      it 'returns the code' do
-        expect(reference.code).to eq(code)
-      end
-    end
 
-    describe '#key' do
-      it 'returns nil' do
-        expect(reference.key).to be_nil
-      end
-    end
+RSpec.shared_examples  'a reference initialized from_code' do
+  let(:reference) { described_class.from_code(code) }
 
-    describe '#uri' do
-      it 'returns nil' do
-        expect(reference.uri).to be_nil
-      end
-    end
-
-    describe '#to_code' do
-      it 'returns the code' do
-        expect(reference.to_code).to eq(code)
-      end
-    end
-
-    describe '#to_key' do
-      it 'returns the key' do
-        expect(reference.to_key).to eq(key)
-      end
-    end
-
-    describe '#to_uri' do
-      it 'returns the uri' do
-        expect(reference.to_uri).to eq(uri)
-      end
-    end
-
-    describe 'eql?' do
-      it 'is eql with the same code' do
-        expect(reference.eql?(described_class.from_code(code))).to be true
-      end
-    end
-
-    describe '#hash' do
-      it 'returns the hash of the uri' do
-        expect(reference.hash).to eq(reference.to_uri.hash)
-      end
+  describe '#code' do
+    it 'returns the code' do
+      expect(reference.code).to eq(code)
     end
   end
 
-  context 'with :key set' do
-    let(:reference) { described_class.from_key(key) }
-
-    describe '#code' do
-      it 'returns nil' do
-        expect(reference.code).to be_nil
-      end
-    end
-
-    describe '#key' do
-      it 'returns the key' do
-        expect(reference.key).to eq(key)
-      end
-    end
-
-    describe '#to_key' do
-      it 'returns the key' do
-        expect(reference.to_key).to eq(key)
-      end
-    end
-
-    describe '#uri' do
-      it 'returns nil' do
-        expect(reference.uri).to be_nil
-      end
-    end
-
-    describe '#to_code' do
-      it 'returns the code' do
-        expect(reference.to_code).to eq(code)
-      end
-    end
-
-    describe '#to_uri' do
-      it 'returns the uri' do
-        expect(reference.to_uri).to eq(uri)
-      end
-    end
-
-    describe 'eql?' do
-      it 'is eql with the same key' do
-        expect(reference.eql?(described_class.from_key(key))).to be true
-      end
-    end
-
-    describe '#hash' do
-      it 'returns the hash of the uri' do
-        expect(reference.hash).to eq(reference.to_uri.hash)
-      end
+  describe '#key' do
+    it 'returns nil' do
+      expect(reference.key).to be_nil
     end
   end
 
-  context 'with :uri set' do
-    let(:reference) { described_class.from_uri(uri) }
-
-    describe '#code' do
-      it 'returns nil' do
-        expect(reference.code).to be_nil
-      end
+  describe '#uri' do
+    it 'returns nil' do
+      expect(reference.uri).to be_nil
     end
+  end
 
-    describe '#key' do
-      it 'returns nil' do
-        expect(reference.key).to be_nil
-      end
+  describe '#to_code' do
+    it 'returns the code' do
+      expect(reference.to_code).to eq(code)
     end
+  end
 
-    describe '#uri' do
-      it 'returns the uri' do
-        expect(reference.uri).to eq(uri)
-      end
+  describe '#to_key' do
+    it 'returns the key' do
+      expect(reference.to_key).to eq(key)
     end
+  end
 
-    describe '#to_code' do
-      it 'returns the code' do
-        expect(reference.to_code).to eq(code)
-      end
+  describe '#to_uri' do
+    it 'returns the uri' do
+      expect(reference.to_uri).to eq(uri)
     end
+  end
 
-    describe '#to_key' do
-      it 'returns the key' do
-        expect(reference.to_key).to eq(key)
-      end
+  describe 'eql?' do
+    it 'is eql with the same code' do
+      expect(reference.eql?(described_class.from_code(code))).to be true
     end
+  end
 
-    describe '#to_uri' do
-      it 'returns the uri' do
-        expect(reference.to_uri).to eq(uri)
-      end
+  describe '#hash' do
+    it 'returns the hash of the uri' do
+      expect(reference.hash).to eq(reference.to_uri.hash)
     end
+  end
+end
 
-    describe 'eql?' do
-      it 'is eql with the same uri' do
-        expect(reference.eql?(described_class.from_uri(uri))).to be true
-      end
+#  context 'with :key set' do
+RSpec.shared_examples 'a reference initialized from_key' do
+  let(:reference) { described_class.from_key(key) }
+
+  describe '#code' do
+    it 'returns nil' do
+      expect(reference.code).to be_nil
     end
+  end
 
-    describe '#hash' do
-      it 'returns the hash of the uri' do
-        expect(reference.hash).to eq(reference.to_uri.hash)
-      end
+  describe '#key' do
+    it 'returns the key' do
+      expect(reference.key).to eq(key)
+    end
+  end
+
+  describe '#to_key' do
+    it 'returns the key' do
+      expect(reference.to_key).to eq(key)
+    end
+  end
+
+  describe '#uri' do
+    it 'returns nil' do
+      expect(reference.uri).to be_nil
+    end
+  end
+
+  describe '#to_code' do
+    it 'returns the code' do
+      expect(reference.to_code).to eq(code)
+    end
+  end
+
+  describe '#to_uri' do
+    it 'returns the uri' do
+      expect(reference.to_uri).to eq(uri)
+    end
+  end
+
+  describe 'eql?' do
+    it 'is eql with the same key' do
+      expect(reference.eql?(described_class.from_key(key))).to be true
+    end
+  end
+
+  describe '#hash' do
+    it 'returns the hash of the uri' do
+      expect(reference.hash).to eq(reference.to_uri.hash)
+    end
+  end
+end
+
+#context 'with :uri set' do
+RSpec.shared_examples 'a reference initialized from_uri' do
+  let(:reference) { described_class.from_uri(uri) }
+
+  describe '#code' do
+    it 'returns nil' do
+      expect(reference.code).to be_nil
+    end
+  end
+
+  describe '#key' do
+    it 'returns nil' do
+      expect(reference.key).to be_nil
+    end
+  end
+
+  describe '#uri' do
+    it 'returns the uri' do
+      expect(reference.uri).to eq(uri)
+    end
+  end
+
+  describe '#to_code' do
+    it 'returns the code' do
+      expect(reference.to_code).to eq(code)
+    end
+  end
+
+  describe '#to_key' do
+    it 'returns the key' do
+      expect(reference.to_key).to eq(key)
+    end
+  end
+
+  describe '#to_uri' do
+    it 'returns the uri' do
+      expect(reference.to_uri).to eq(uri)
+    end
+  end
+
+  describe 'eql?' do
+    it 'is eql with the same uri' do
+      expect(reference.eql?(described_class.from_uri(uri))).to be true
+    end
+  end
+
+  describe '#hash' do
+    it 'returns the hash of the uri' do
+      expect(reference.hash).to eq(reference.to_uri.hash)
     end
   end
 end
