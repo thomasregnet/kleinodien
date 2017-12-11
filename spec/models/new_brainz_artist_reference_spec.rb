@@ -39,4 +39,10 @@ RSpec.describe NewBrainzArtistReference do
     let(:uri) { test_uri }
     let(:key) { test_key }
   end
+
+  it_behaves_like 'a hash key' do
+    let(:code) { test_code }
+    let(:uri) { test_uri }
+    let(:key) { test_key }
+  end
 end
