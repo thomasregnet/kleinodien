@@ -9,7 +9,7 @@ RSpec.describe NewBrainzArtistReference do
       + '4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=url-rels'
     end
     let(:key) do
-      'musicbrainz/artist/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=url-rels'
+      'musicbrainz.org/artist/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=url-rels'
     end
   end
 end

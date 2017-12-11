@@ -42,6 +42,12 @@ RSpec.shared_examples 'a new reference' do
       end
     end
 
+    describe '#to_key' do
+      it 'returns the key' do
+        expect(reference.to_key).to eq(key)
+      end
+    end
+
     describe '#to_uri' do
       it 'returns the uri' do
         expect(reference.to_uri).to eq(uri)
@@ -61,6 +67,12 @@ RSpec.shared_examples 'a new reference' do
     describe '#key' do
       it 'returns the key' do
         expect(reference.key).to eq(key)
+      end
+    end
+
+    describe '#to_key' do
+      it 'returns the key' do
+        expect(reference.to_key).to eq(key)
       end
     end
 
@@ -107,6 +119,12 @@ RSpec.shared_examples 'a new reference' do
     describe '#to_code' do
       it 'returns the code' do
         expect(reference.to_code).to eq(code)
+      end
+    end
+
+    describe '#to_key' do
+      it 'returns the key' do
+        expect(reference.to_key).to eq(key)
       end
     end
 
