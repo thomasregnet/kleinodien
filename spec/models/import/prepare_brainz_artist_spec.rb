@@ -3,7 +3,7 @@ require 'ko_test_data'
 
 RSpec.describe Import::PrepareBrainzArtist do
   let(:reference) do
-    BrainzArtistRef.new(code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f')
+    BrainzArtistReference.from_code('2280ca0e-6968-4349-8c36-cb0cbd6ee95f')
   end
 
   context 'with an unknown artist' do

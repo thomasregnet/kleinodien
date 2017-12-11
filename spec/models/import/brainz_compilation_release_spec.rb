@@ -27,7 +27,7 @@ RSpec.describe Import::BrainzCompilationRelease do
 
       it 'requires the release data' do
         ref_key = response.dig(:data, :attributes, :required, :brainz)[0]
-        reference = BrainzReleaseRef.new(code: brainz_id)
+        reference = BrainzReleaseReference.from_code(brainz_id)
         expect(ref_key).to eq(reference.to_key)
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe Import::BrainzCompilationRelease do
 
   context 'with knowledge of the release' do
     brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-    reference = BrainzReleaseRef.new(code: brainz_id)
+    reference = BrainzReleaseReference.from_code(brainz_id)
     response = described_class.perform(
       params:
       Hash[

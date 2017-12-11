@@ -1,6 +1,6 @@
 # Fetch test Data
 module KoTestData
-  BRAINZ_FIXTURES = %w[fixtures brainz].freeze
+  BRAINZ_FIXTURES = %w[fixtures].freeze # brainz].freeze
 
   # TODO: Delete methods brainz_release and brainz_artist. Use brainz_xml_for
   # instead

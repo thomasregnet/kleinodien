@@ -7,8 +7,8 @@ RSpec.describe Import::BrainzKnowledge do
 
   context 'with knowledge' do
     before(:each) do
-      @reference = BrainzArtistRef.new(
-        code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
+      @reference = BrainzArtistReference.from_code(
+        '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
       )
       ref_key = @reference.to_key
       @knowledge = Import::BrainzKnowledge.new(
