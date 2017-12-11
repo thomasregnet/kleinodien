@@ -1,5 +1,5 @@
 # A reference to a MusicBrainz Artist
-class NewBrainzArtistReference < NewBrainzReference
+class BrainzArtistReference < BrainzReference
   URI_KIND         = 'artist'.freeze
   URI_QUERY_STRING = 'inc=url-rels'.freeze
 
