@@ -10,4 +10,9 @@ class NewBrainzReference < NewReference
   def path_prefix
     URI_PATH_PREFIX
   end
+
+  def to_key
+    return key if key
+    "#{host}/#{kind}/#{to_code}?#{query_string}"
+  end
 end
