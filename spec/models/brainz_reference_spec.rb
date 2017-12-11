@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NewBrainzReference do
+RSpec.describe BrainzReference do
   let(:brainz) do
     described_class.from_code('07ba5f4d-af2e-4c17-8901-79fa2d5bcfa9')
   end

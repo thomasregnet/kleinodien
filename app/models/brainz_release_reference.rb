@@ -1,5 +1,5 @@
 # Reference to a MusicBrainz release
-class NewBrainzReleaseReference < NewBrainzReference
+class BrainzReleaseReference < BrainzReference
   URI_KIND         = 'release'.freeze
   URI_QUERY_STRING = 'inc=artists+labels+recordings+release-groups'.freeze
 

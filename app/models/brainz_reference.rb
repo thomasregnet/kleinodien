@@ -1,5 +1,5 @@
 # Base class for MusicBrainz references
-class NewBrainzReference < NewReference
+class BrainzReference < Reference
   URI_HOST        = 'musicbrainz.org'.freeze
   URI_PATH_PREFIX = 'ws/2'.freeze
 

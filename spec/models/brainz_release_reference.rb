@@ -1,21 +1,21 @@
 require 'rails_helper'
 require 'shared_examples_for_new_references'
 
-RSpec.describe NewBrainzArtistReference do
+RSpec.describe BrainzReleaseReference do
   def test_code
     '4509c51e-b790-41aa-a2b3-e3bbf62cbf3f'
   end
 
   def test_key
-    "musicbrainz.org/artist/#{test_code}?#{test_query_string}"
+    "musicbrainz.org/release/#{test_code}?#{test_query_string}"
   end
 
   def test_query_string
-    'inc=url-rels'
+    'inc=artists+labels+recordings+release-groups'
   end
 
   def test_uri
-    "https://musicbrainz.org/ws/2/artist/#{test_code}?#{test_query_string}"
+    "https://musicbrainz.org/ws/2/release/#{test_code}?#{test_query_string}"
   end
 
   it_behaves_like 'a new reference' do
