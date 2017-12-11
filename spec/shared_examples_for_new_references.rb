@@ -190,3 +190,53 @@ RSpec.shared_examples 'a reference initialized from_uri' do
     end
   end
 end
+
+RSpec.shared_examples 'a hash key' do
+  context 'initialized with a code' do
+    let(:reference) { described_class.from_code(code) }
+
+    describe 'compared with an object initialized from_key' do
+      it 'is equal' do
+        expect(reference.eql?(described_class.from_key(key))).to be true
+      end
+    end
+
+    describe 'compared with an object initialized from_uri' do
+      it 'is equal' do
+        expect(reference.eql?(described_class.from_uri(uri))).to be true
+      end
+    end
+
+    describe '#hash' do
+      it 'returns the uri hash' do
+        expect(reference.hash).to eq(uri.hash)
+      end
+    end
+  end
+
+  context 'initialized with a key' do
+    let(:reference) { described_class.from_key(key) }
+
+    describe 'compared with an object initialized from_uri' do
+      it 'is equal' do
+        expect(reference.eql?(described_class.from_uri(uri))).to be true
+      end
+    end
+
+    describe '#hash' do
+      it 'returns the uri hash' do
+        expect(reference.hash).to eq(uri.hash)
+      end
+    end
+  end
+
+  context 'initialized with an uri' do
+    let(:reference) { described_class.from_uri(uri) }
+
+    describe '#hash' do
+      it 'returns the uri hash' do
+        expect(reference.hash).to eq(uri.hash)
+      end
+    end
+  end
+end
