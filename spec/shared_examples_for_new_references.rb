@@ -1,4 +1,6 @@
 RSpec.shared_examples 'a new reference' do
+  let(:example_uri) { 'ftp://does/not/exist.example.con' }
+
   describe 'constructors' do
     subject { described_class }
 
@@ -15,6 +17,19 @@ RSpec.shared_examples 'a new reference' do
     it { is_expected.to respond_to(:uri).with(0).arguments }
   end
 
+  describe '#to_*' do
+    subject { described_class.from_code(code) }
+
+    it { is_expected.to respond_to(:to_code).with(0).arguments }
+    it { is_expected.to respond_to(:to_key).with(0).arguments }
+    it { is_expected.to respond_to(:to_uri).with(0).arguments }
+  end
+
+  describe '#eql?' do
+    subject { described_class.from_code(code) }
+
+    it { is_expected.to respond_to('eql?').with(1).argument }
+  end
   context 'with :code set' do
     let(:reference) { described_class.from_code(code) }
 
@@ -51,6 +66,12 @@ RSpec.shared_examples 'a new reference' do
     describe '#to_uri' do
       it 'returns the uri' do
         expect(reference.to_uri).to eq(uri)
+      end
+    end
+
+    describe 'eql?' do
+      it 'is eql with the same code' do
+        expect(reference.eql?(described_class.from_code(code))).to be true
       end
     end
   end
@@ -93,6 +114,12 @@ RSpec.shared_examples 'a new reference' do
         expect(reference.to_uri).to eq(uri)
       end
     end
+
+    describe 'eql?' do
+      it 'is eql with the same key' do
+        expect(reference.eql?(described_class.from_key(key))).to be true
+      end
+    end
   end
 
   context 'with :uri set' do
@@ -131,6 +158,12 @@ RSpec.shared_examples 'a new reference' do
     describe '#to_uri' do
       it 'returns the uri' do
         expect(reference.to_uri).to eq(uri)
+      end
+    end
+
+    describe 'eql?' do
+      it 'is eql with the same uri' do
+        expect(reference.eql?(described_class.from_uri(uri))).to be true
       end
     end
   end
