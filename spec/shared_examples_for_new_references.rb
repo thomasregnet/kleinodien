@@ -71,21 +71,8 @@ RSpec.shared_examples  'a reference initialized from_code' do
       expect(reference.to_uri).to eq(uri)
     end
   end
-
-  describe 'eql?' do
-    it 'is eql with the same code' do
-      expect(reference.eql?(described_class.from_code(code))).to be true
-    end
-  end
-
-  describe '#hash' do
-    it 'returns the hash of the uri' do
-      expect(reference.hash).to eq(reference.to_uri.hash)
-    end
-  end
 end
 
-#  context 'with :key set' do
 RSpec.shared_examples 'a reference initialized from_key' do
   let(:reference) { described_class.from_key(key) }
 
@@ -124,21 +111,8 @@ RSpec.shared_examples 'a reference initialized from_key' do
       expect(reference.to_uri).to eq(uri)
     end
   end
-
-  describe 'eql?' do
-    it 'is eql with the same key' do
-      expect(reference.eql?(described_class.from_key(key))).to be true
-    end
-  end
-
-  describe '#hash' do
-    it 'returns the hash of the uri' do
-      expect(reference.hash).to eq(reference.to_uri.hash)
-    end
-  end
 end
 
-#context 'with :uri set' do
 RSpec.shared_examples 'a reference initialized from_uri' do
   let(:reference) { described_class.from_uri(uri) }
 
@@ -175,18 +149,6 @@ RSpec.shared_examples 'a reference initialized from_uri' do
   describe '#to_uri' do
     it 'returns the uri' do
       expect(reference.to_uri).to eq(uri)
-    end
-  end
-
-  describe 'eql?' do
-    it 'is eql with the same uri' do
-      expect(reference.eql?(described_class.from_uri(uri))).to be true
-    end
-  end
-
-  describe '#hash' do
-    it 'returns the hash of the uri' do
-      expect(reference.hash).to eq(reference.to_uri.hash)
     end
   end
 end
