@@ -6,7 +6,7 @@ RSpec.describe Import::PersistBrainzCompilationHead do
     brainz = {}
 
     code = '7d31891f-b9da-36de-ab08-98b1fdbbb023'
-    @reference = BrainzReleaseGroupRef.new(code: code)
+    @reference = BrainzReleaseGroupReference.from_code(code)
     brainz[@reference.to_key] = KoTestData.brainz_xml_for(@reference)
 
     artist_codes = [
@@ -15,7 +15,7 @@ RSpec.describe Import::PersistBrainzCompilationHead do
     ]
 
     artist_codes.each do |artist_code|
-      reference = BrainzArtistRef.new(code: artist_code)
+      reference = BrainzArtistReference.from_code(artist_code)
       brainz[reference.to_key] = KoTestData.brainz_xml_for(reference)
     end
 

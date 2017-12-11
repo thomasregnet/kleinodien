@@ -8,7 +8,7 @@ module Import
     end
 
     def initialize(args)
-      super({ reference_class: BrainzReleaseRef }.merge args)
+      super({ reference_class: BrainzReleaseReference }.merge args)
     end
 
     def perform
@@ -37,7 +37,7 @@ module Import
 
     def body
       wanted_id = wanted
-      reference = BrainzReleaseRef.new(code: wanted_id)
+      reference = BrainzReleaseReference.from_code(wanted_id)
       ask.brainz.about(reference)
       {
         data:

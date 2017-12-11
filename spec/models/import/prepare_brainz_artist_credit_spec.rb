@@ -2,12 +2,12 @@ require 'rails_helper'
 require 'ko_test_data'
 
 RSpec.describe Import::PrepareBrainzArtistCredit do
-  def reference
+  def code
     '693748be-7c18-39c3-af2e-2e62092090cf'
   end
 
   def xml
-    KoTestData.brainz_release(BrainzReleaseRef.new(code: reference))
+    KoTestData.brainz_release(BrainzReleaseReference.from_code(code))
   end
 
   def artist_credit

@@ -8,8 +8,8 @@ RSpec.describe Import::PersistBrainzArtistCredit do
     before(:context) do
       DatabaseCleaner.start
 
-      reference = BrainzReleaseRef.new(
-        code: '693748be-7c18-39c3-af2e-2e62092090cf'
+      reference = BrainzReleaseReference.from_code(
+        '693748be-7c18-39c3-af2e-2e62092090cf'
       )
       xml = KoTestData.brainz_xml_for(reference)
       release = MashedBrainz.from_xml(xml)
@@ -18,7 +18,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       brainz = {}
       %w[2280ca0e-6968-4349-8c36-cb0cbd6ee95f
          37e9d7b2-7779-41b2-b2eb-3685351caad3].each do |code|
-        reference = BrainzArtistRef.new(code: code)
+        reference = BrainzArtistReference.from_code(code)
         xml = KoTestData.brainz_xml_for(reference)
         brainz[reference.to_key] = xml
       end

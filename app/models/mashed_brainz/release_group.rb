@@ -2,7 +2,7 @@ module MashedBrainz
   # MusicBrainz release-group
   class ReleaseGroup < Base
     def reference
-      BrainzReleaseGroupRef.new(code: id)
+      BrainzReleaseGroupReference.from_code(id)
     end
 
     def relation_list_for(type_symbol)

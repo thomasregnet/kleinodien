@@ -1,7 +1,7 @@
 module MashedBrainz
   class Artist < Base
     def reference
-      BrainzArtistRef.new(code: id)
+      BrainzArtistReference.from_code(id)
     end
   end
 end
