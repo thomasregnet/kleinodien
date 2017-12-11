@@ -36,4 +36,12 @@ class NewReference
     match = %r{/([^?/]+)(\?.+)?$}.match(source)
     match[1]
   end
+
+  def ==(other)
+    return false unless self.class == other.class
+    return false unless to_uri == other.to_uri
+    true
+  end
+
+  alias_method 'eql?', '=='
 end
