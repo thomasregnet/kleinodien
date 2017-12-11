@@ -1,9 +1,10 @@
 require 'rails_helper'
 require 'ko_test_data'
+
 RSpec.describe MashedBrainz::ReleaseGroup do
   before(:each) do
-    reference = BrainzReleaseGroupRef.new(
-      code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
+    reference = BrainzReleaseGroupReference.from_code(
+      '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
     @orig_release_group = MashedBrainz.from_xml(
       KoTestData.brainz_xml_for(reference)
@@ -12,7 +13,7 @@ RSpec.describe MashedBrainz::ReleaseGroup do
 
   specify '#reference' do
     expect(@orig_release_group.reference)
-      .to be_instance_of(BrainzReleaseGroupRef)
+      .to be_instance_of(BrainzReleaseGroupReference)
   end
 
   it '#title' do

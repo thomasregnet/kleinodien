@@ -8,7 +8,7 @@ RSpec.describe TestSubset do
 
       it 'returns the right reference' do
         expect(subset.add(:brainz_release, :brainz_code))
-          .to be_instance_of(BrainzReleaseRef)
+          .to be_instance_of(BrainzReleaseReference)
       end
     end
   end
