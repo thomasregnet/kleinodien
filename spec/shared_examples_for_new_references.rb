@@ -74,6 +74,12 @@ RSpec.shared_examples 'a new reference' do
         expect(reference.eql?(described_class.from_code(code))).to be true
       end
     end
+
+    describe '#hash' do
+      it 'returns the hash of the uri' do
+        expect(reference.hash).to eq(reference.to_uri.hash)
+      end
+    end
   end
 
   context 'with :key set' do
@@ -120,6 +126,12 @@ RSpec.shared_examples 'a new reference' do
         expect(reference.eql?(described_class.from_key(key))).to be true
       end
     end
+
+    describe '#hash' do
+      it 'returns the hash of the uri' do
+        expect(reference.hash).to eq(reference.to_uri.hash)
+      end
+    end
   end
 
   context 'with :uri set' do
@@ -164,6 +176,12 @@ RSpec.shared_examples 'a new reference' do
     describe 'eql?' do
       it 'is eql with the same uri' do
         expect(reference.eql?(described_class.from_uri(uri))).to be true
+      end
+    end
+
+    describe '#hash' do
+      it 'returns the hash of the uri' do
+        expect(reference.hash).to eq(reference.to_uri.hash)
       end
     end
   end

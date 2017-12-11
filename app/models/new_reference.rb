@@ -37,6 +37,10 @@ class NewReference
     match[1]
   end
 
+  # The eql?, == and hash methods are required to use a reference
+  # as a hash key. For more information see
+  # https://ruby-doc.org/core-2.4.2/Hash.html#class-Hash-label-Hash+Keys
+
   def ==(other)
     return false unless self.class == other.class
     return false unless to_uri == other.to_uri
@@ -44,4 +48,8 @@ class NewReference
   end
 
   alias_method 'eql?', '=='
+
+  def hash
+    to_uri.hash
+  end
 end
