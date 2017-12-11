@@ -15,4 +15,9 @@ class NewBrainzReference < NewReference
     return key if key
     "#{host}/#{kind}/#{to_code}?#{query_string}"
   end
+
+  def to_uri
+    return uri if uri
+    "#{scheme}://#{host}/#{path_prefix}/#{kind}/#{to_code}?#{query_string}"
+  end
 end
