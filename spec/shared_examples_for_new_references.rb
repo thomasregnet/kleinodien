@@ -30,8 +30,21 @@ RSpec.shared_examples 'a new reference' do
 
     it { is_expected.to respond_to('eql?').with(1).argument }
   end
+
+  describe '#category' do
+    subject { described_class.from_code(code) }
+
+    it 'returns the category' do
+      expect(subject.category).to eq(category)
+    end
+  end
 end
 
+RSpec.shared_examples 'a reference with a category' do
+  it 'returns the category' do
+    expect(reference.category).to eq(category)
+  end
+end
 
 RSpec.shared_examples  'a reference initialized from_code' do
   let(:reference) { described_class.from_code(code) }

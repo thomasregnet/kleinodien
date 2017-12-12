@@ -1,7 +1,12 @@
 # Base class for MusicBrainz references
 class BrainzReference < Reference
-  URI_HOST        = 'musicbrainz.org'.freeze
-  URI_PATH_PREFIX = 'ws/2'.freeze
+  REFERENCE_CATEGORY = 'musicbrainz'.freeze
+  URI_HOST           = 'musicbrainz.org'.freeze
+  URI_PATH_PREFIX    = 'ws/2'.freeze
+
+  def category
+    REFERENCE_CATEGORY
+  end
 
   def host
     URI_HOST
