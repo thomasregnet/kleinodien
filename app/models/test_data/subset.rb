@@ -19,6 +19,10 @@ module TestData
       reference
     end
 
+    def fetch(reference)
+      Fetch.perform(reference)
+    end
+
     private
 
     def require_kind(kind)

@@ -7,3 +7,11 @@ When(/^I define test data$/) do
     end
   end
 end
+
+Then(/^I can retrieve that data$/) do
+  test_set = TestData.retrieve(:brainz_arise)
+  reference = BrainzReleaseReference.from_code(
+    '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  )
+  expect(test_set.fetch(reference)).to match(/^<\?xml/)
+end
