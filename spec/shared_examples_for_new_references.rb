@@ -19,7 +19,6 @@ RSpec.shared_examples 'a new reference' do
 
   describe '#to_*' do
     subject { described_class.from_code(code) }
-
     it { is_expected.to respond_to(:to_code).with(0).arguments }
     it { is_expected.to respond_to(:to_key).with(0).arguments }
     it { is_expected.to respond_to(:to_uri).with(0).arguments }
