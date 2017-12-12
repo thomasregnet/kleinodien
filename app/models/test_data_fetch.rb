@@ -14,6 +14,7 @@ class TestDataFetch
 
   def perform
     # TODO: remove '.xml' from test data files
+    # TODO: raise a "nicer" error if data does not exist
     path = [TEST_DATA_ROOT, reference.to_key + '.xml']
     file_name = File.join(path.flatten)
     File.open(file_name).read
