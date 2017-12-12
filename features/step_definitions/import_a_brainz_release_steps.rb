@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ko_test_data'
 
 When(/^I send a MusicBrainz id of a release i want to import$/) do
@@ -24,8 +26,8 @@ Then(/^I receive a status of "([^"]*)"$/) do |status|
 end
 
 Then(/^the response contains an url to get the release\-data$/) do
-  reference = BrainzReleaseRef.new(
-    code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  reference = BrainzReleaseReference.from_code(
+    '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   )
 
   data = JSON.parse(last_response.body)
@@ -34,8 +36,8 @@ Then(/^the response contains an url to get the release\-data$/) do
 end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
-  reference = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-  reference = BrainzReleaseRef.new(code: reference)
+  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  reference = BrainzReleaseReference.from_code(brainz_id)
   cache_key = reference.to_key
 
   post(
@@ -62,14 +64,15 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
 end
 
 Then(/^I see the artist in the requirements$/) do
-  reference = BrainzArtistRef.new(code: '1d93c839-22e7-4f76-ad84-d27039efc048')
+  reference = BrainzArtistReference.from_code(
+    '1d93c839-22e7-4f76-ad84-d27039efc048'
+  )
   data = JSON.parse(last_response.body)
   required = data.dig('data', 'attributes', 'required', 'brainz')
   expect(required.include?(reference.to_key)).to be true
 end
 
 Given(/^The release already exists$/) do
-  #pending # Write code here that turns the phrase above into concrete actions
   FactoryGirl.create(
     :compilation_release,
     brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
