@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TestDataFetch do
+RSpec.describe TestData::Fetch do
   context 'with existing data' do
     let(:reference) do
       BrainzArtistReference.from_code('1d93c839-22e7-4f76-ad84-d27039efc048')
