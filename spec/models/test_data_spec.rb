@@ -4,7 +4,7 @@ RSpec.describe TestData do
   describe '.define' do
     specify do
       expect { |b| described_class.define(:test, &b) }
-        .to yield_with_args(TestSet)
+        .to yield_with_args(TestData::TestSet)
     end
   end
 
@@ -20,14 +20,14 @@ RSpec.describe TestData do
     context 'with a valid test-set name' do
       it 'returns the test set' do
         expect(described_class.retrieve(:brainz_arise))
-          .to be_instance_of(TestSet)
+          .to be_instance_of(TestData::TestSet)
       end
     end
 
     context 'with valid test-set name and valid sub-set' do
       it 'returns the subset' do
         expect(described_class.retrieve(:brainz_arise, 0))
-          .to be_instance_of(TestSubset)
+          .to be_instance_of(TestData::Subset)
       end
     end
 

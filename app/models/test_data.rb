@@ -1,5 +1,5 @@
 # Define and retrieve test data for developing Kleinodien
-class TestData
+module TestData
   @test_sets = {}
 
   class << self
