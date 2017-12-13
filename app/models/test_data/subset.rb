@@ -20,6 +20,10 @@ module TestData
       reference
     end
 
+    def add_reference(reference)
+      @references[reference] = nil
+    end
+
     def fetch(reference)
       response = references[reference]
       return response if response
