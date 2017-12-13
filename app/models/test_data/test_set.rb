@@ -24,11 +24,12 @@ module TestData
     private
 
     def fill_subset(subset)
-      references.each_key do |reference|
-        subset.add_reference(reference)
+      collected_references = references
+      subsets.each do |predecessor|
+        collected_references << predecessor.references
       end
 
-      # TODO: add references of the other subsets
+      subset.add_references(collected_references.flatten)
     end
   end
 end
