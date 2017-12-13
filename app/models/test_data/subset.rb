@@ -15,12 +15,19 @@ module TestData
       require_kind(kind)
       ref_class = ref_to_require(kind).camelize.constantize
       reference = ref_class.from_code(code)
-      references[reference.to_key] = reference
+      #references[reference.to_key] = reference
+      references[reference] = nil
       reference
     end
 
     def fetch(reference)
-      Fetch.perform(reference)
+      response = references[reference]
+      return response if response
+      # TODO: raise when reference is not part of references
+      return unless references.key? reference
+      response = Fetch.perform(reference)
+      #byebug
+      response
     end
 
     private
