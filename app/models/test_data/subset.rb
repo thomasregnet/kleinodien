@@ -3,35 +3,44 @@ module TestData
   class Subset
     private
 
-    attr_reader :references
+    attr_reader :data_for
 
     public
 
     def initialize
-      @references = {}
+      @data_for = {}
     end
 
     def add(kind, code)
       require_kind(kind)
       ref_class = ref_to_require(kind).camelize.constantize
       reference = ref_class.from_code(code)
-      #references[reference.to_key] = reference
-      references[reference] = nil
+      #data_for[reference.to_key] = reference
+      data_for[reference] = nil
       reference
     end
 
     def add_reference(reference)
-      @references[reference] = nil
+      @data_for[reference] = nil
+    end
+
+    def add_references(new_references)
+      new_references.each do |reference|
+        add_reference(reference)
+      end
     end
 
     def fetch(reference)
-      response = references[reference]
+      response = data_for[reference]
       return response if response
-      # TODO: raise when reference is not part of references
-      return unless references.key? reference
+      # TODO: raise when reference is not part of data_for
+      return unless data_for.key? reference
       response = Fetch.perform(reference)
-      #byebug
       response
+    end
+
+    def references
+      data_for.keys
     end
 
     private
