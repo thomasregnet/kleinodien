@@ -12,7 +12,7 @@ RSpec.describe Import::OfferKnowledge do
 
     it 'stores the data in the category of the reference' do
       knowledge.add_with_reference(reference, data)
-      expect(knowledge.collect.dig(:fake_catagory)[reference.to_key])
+      expect(knowledge.collected.dig(:fake_catagory)[reference.to_key])
         .to eq '<fake data>'
     end
   end
