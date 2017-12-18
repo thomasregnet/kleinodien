@@ -14,7 +14,7 @@ RSpec.describe Import::BrainzCompilationRelease do
         data: {
           type: 'music-brainz-release',
           attributes: {
-            wanted: brainz_id
+            offered: brainz_id
           }
         }
       }
@@ -42,7 +42,7 @@ RSpec.describe Import::BrainzCompilationRelease do
         data: {
           type: 'music-brainz-release',
           attributes: {
-            wanted: brainz_id,
+            offered: brainz_id,
             known: {
               brainz: {
                 reference.to_key => KoTestData.brainz_release(reference)

@@ -10,9 +10,9 @@ module Import
       @reference   = init_reference(args)
     end
 
-    def wanted
+    def offered
       return unless params
-      params.dig(:data, :attributes, :wanted)
+      params.dig(:data, :attributes, :offered)
     end
 
     def attributes
@@ -34,7 +34,7 @@ module Import
 
       reference_class = args[:reference_class]
       return unless reference_class
-      reference_class.new(code: wanted)
+      reference_class.new(code: offered)
     end
 
     def method_missing(method, args = {})

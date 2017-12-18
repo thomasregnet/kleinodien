@@ -19,7 +19,7 @@ module Import
 end
 
 RSpec.describe Import::Base do
-  def wanted
+  def offered
     'abc123'
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Import::Base do
       data: {
         type: 'some-test-data',
         attributes: {
-          wanted: wanted
+          offered: offered
         }
       }
     ]
@@ -58,14 +58,14 @@ RSpec.describe Import::Base do
       expect(base.params).to eq params
     end
 
-    it 'returns the wanted id if correct params are given' do
+    it 'returns the offered id if correct params are given' do
       base = described_class.new(params: params)
-      expect(base.wanted).to eq(wanted)
+      expect(base.offered).to eq(offered)
     end
 
-    it 'without params it returns nil for "wanted"' do
+    it 'without params it returns nil for "offered"' do
       base = described_class.new
-      expect(base.wanted).to be nil
+      expect(base.offered).to be nil
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe Import::Base do
         params: params,
         reference_class: FakeReference
       )
-      expect(base.reference.code).to eq(wanted)
+      expect(base.reference.code).to eq(offered)
     end
   end
 

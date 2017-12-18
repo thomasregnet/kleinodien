@@ -36,8 +36,8 @@ module Import
     end
 
     def body
-      wanted_id = wanted
-      reference = BrainzReleaseReference.from_code(wanted_id)
+      offered_id = offered
+      reference = BrainzReleaseReference.from_code(offered_id)
       ask.brainz.about(reference)
       {
         data:
