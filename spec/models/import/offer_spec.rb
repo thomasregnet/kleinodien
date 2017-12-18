@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'fake_reference'
 
 RSpec.describe Import::Offer do
   subject(:offer) { described_class.new(offered: '123', type: :some_type) }
