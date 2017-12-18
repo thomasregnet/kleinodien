@@ -10,7 +10,7 @@ When(/^I send a MusicBrainz id of a release i want to import$/) do
         {
           type: 'music_brainz_releases',
           attributes: {
-            wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+            offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
           }
         }
     },
@@ -47,7 +47,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
         {
           type: 'music_brainz_releases',
           attributes: {
-            wanted: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+            offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
             known: {
               brainz: {
                 cache_key => KoTestData.brainz_release(reference)

@@ -10,7 +10,7 @@ RSpec.describe Api::V01::BrainzReleasesController do
                data: {
                  type: 'music-brainz-releases',
                  attributes: {
-                   wanted: 'b3b2ee43-57d4-4f82-b14a-999fd46821de'
+                   offered: 'b3b2ee43-57d4-4f82-b14a-999fd46821de'
                  }
                }
              ]
