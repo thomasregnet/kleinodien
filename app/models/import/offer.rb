@@ -3,9 +3,17 @@ module Import
     attr_reader :known, :offered, :type
 
     def initialize(args)
-      @known   = args[:known] || {}
+      @known   = OfferKnowledge.new
       @offered = args[:offered]
       @type    = args[:type]
+    end
+
+    def to_hash
+      {data: {attributes: {known: known.collected} }}
+    end
+
+    def teach
+      yield known
     end
   end
 end
