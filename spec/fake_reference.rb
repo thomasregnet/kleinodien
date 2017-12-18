@@ -10,4 +10,8 @@ class FakeReference
   def to_key
     CACHE_KEY
   end
+
+  def category
+    :fake_catagory
+  end
 end
