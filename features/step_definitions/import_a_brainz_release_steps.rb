@@ -3,17 +3,14 @@
 require 'ko_test_data'
 
 When(/^I send a MusicBrainz id of a release i want to import$/) do
+  i_offer = Import::Offer.new(
+    offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+    type: 'music_brainz_releases'
+  )
+
   post(
     '/api/v01/brainz_releases',
-    {
-      data:
-        {
-          type: 'music_brainz_releases',
-          attributes: {
-            offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-          }
-        }
-    },
+    i_offer.to_hash,
     headers: {
       'Accept'       => 'application/vnd.api+json',
       'Content-Type' => 'application/vnd.api+json'
