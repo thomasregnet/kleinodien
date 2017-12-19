@@ -16,6 +16,14 @@ RSpec.describe Import::Offer do
     end
   end
 
+  describe '#to_hash' do
+    describe '[data][attributes][offered]' do
+      it 'returns the offered id' do
+        expect(offer.to_hash.dig(:data, :attributes, :offered))
+          .to eq('123')
+      end
+    end
+  end
   describe '#type' do
     it 'returns the type' do
       expect(offer.type).to eq(:some_type)

@@ -9,7 +9,15 @@ module Import
     end
 
     def to_hash
-      {data: {attributes: {known: known.collected} }}
+      {
+        data:
+          {
+            attributes: {
+              known: known.collected,
+              offered: offered
+            }
+          }
+      }
     end
 
     def teach
