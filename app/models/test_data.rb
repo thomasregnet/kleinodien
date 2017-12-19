@@ -12,6 +12,10 @@ module TestData
     yield test_set
   end
 
+  def self.fetch(reference)
+    Fetch.perform(reference)
+  end
+
   def self.retrieve(name, subset_no = nil)
     test_set = test_sets[name]
     raise ArgumentError, "no such test set: #{name}" unless test_set

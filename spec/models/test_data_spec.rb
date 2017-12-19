@@ -8,6 +8,16 @@ RSpec.describe TestData do
     end
   end
 
+  describe '.fetch' do
+    let(:reference) do\
+      BrainzArtistReference.from_code('2280ca0e-6968-4349-8c36-cb0cbd6ee95f')
+    end
+
+    it 'returns the test data' do
+      expect(described_class.fetch(reference)).to match(/^<\?xml/)
+    end
+  end
+
   describe '.retrieve' do
     described_class.define(:brainz_arise) do |test_set|
       test_set.add(:brainz_release, '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a')
