@@ -42,7 +42,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
   )
 
   i_offer.teach do |knowledge|
-    knowledge.add_with_reference(reference, TestData::Fetch.perform(reference))
+    knowledge.add_with_reference(reference, TestData.fetch(reference))
   end
 
   post(
