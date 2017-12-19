@@ -1,6 +1,7 @@
 # Base class for MusicBrainz references
 class BrainzReference < Reference
-  REFERENCE_CATEGORY = 'musicbrainz'.freeze
+  # REFERENCE_CATEGORY = 'musicbrainz'.freeze
+  REFERENCE_CATEGORY = :brainz # 'musicbrainz'.freeze
   URI_HOST           = 'musicbrainz.org'.freeze
   URI_PATH_PREFIX    = 'ws/2'.freeze
 
