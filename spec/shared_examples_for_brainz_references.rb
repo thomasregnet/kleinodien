@@ -1,4 +1,4 @@
-require 'shared_examples_for_new_references'
+require 'shared_examples_for_references'
 
 RSpec.shared_examples 'a MusicBrainz reference' do
   let(:category) { :brainz }

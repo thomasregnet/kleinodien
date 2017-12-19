@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'shared_examples_for_new_references'
+require 'shared_examples_for_references'
 require 'shared_examples_for_brainz_references'
 
 RSpec.describe BrainzReleaseReference do
