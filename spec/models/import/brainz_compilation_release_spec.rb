@@ -9,17 +9,12 @@ require 'import/prepare_brainz_artist_credit'
 RSpec.describe Import::BrainzCompilationRelease do
   context 'without konwledge' do
     describe '.perform' do
-      brainz_id = '404e67be-0b5e-47bc-81db-1e8c408e9e3f'
-      data = {
-        data: {
-          type: 'music-brainz-release',
-          attributes: {
-            offered: brainz_id
-          }
-        }
-      }
+      i_offer = Import::Offer.new(
+        offered: '404e67be-0b5e-47bc-81db-1e8c408e9e3f',
+        type: 'music-brainz-release'
+      )
 
-      response = described_class.perform(params: data)
+      response = described_class.perform(params: i_offer.to_hash)
 
       it 'returns a http status code of 202' do
         expect(response.dig(:data, :attributes, :http_status_code)).to eq(202)
@@ -27,7 +22,7 @@ RSpec.describe Import::BrainzCompilationRelease do
 
       it 'requires the release data' do
         ref_key = response.dig(:data, :attributes, :required, :brainz)[0]
-        reference = BrainzReleaseReference.from_code(brainz_id)
+        reference = BrainzReleaseReference.from_code(i_offer.offered)
         expect(ref_key).to eq(reference.to_key)
       end
     end
@@ -36,22 +31,19 @@ RSpec.describe Import::BrainzCompilationRelease do
   context 'with knowledge of the release' do
     brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
     reference = BrainzReleaseReference.from_code(brainz_id)
-    response = described_class.perform(
-      params:
-      Hash[
-        data: {
-          type: 'music-brainz-release',
-          attributes: {
-            offered: brainz_id,
-            known: {
-              brainz: {
-                reference.to_key => KoTestData.brainz_release(reference)
-              }
-            }
-          }
-        }
-      ]
+    i_offer = Import::Offer.new(
+      offered: brainz_id,
+      type: 'music-brainz-release'
     )
+
+    i_offer.teach do |knowledge|
+      knowledge.add_with_reference(reference, TestData.fetch(reference))
+    end
+
+    response = described_class.perform(
+      params: i_offer.to_hash
+    )
+
     it 'returns a http status code of 202' do
       expect(response.dig(:data, :attributes, :http_status_code)).to eq(202)
     end
