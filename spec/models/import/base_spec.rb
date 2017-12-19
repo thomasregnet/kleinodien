@@ -24,14 +24,10 @@ RSpec.describe Import::Base do
   end
 
   def params
-    Hash[
-      data: {
-        type: 'some-test-data',
-        attributes: {
-          offered: offered
-        }
-      }
-    ]
+    Import::Offer.new(
+      offered: offered,
+      type: 'some-test-data'
+    ).to_hash
   end
 
   describe '#data_import' do
