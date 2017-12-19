@@ -35,24 +35,19 @@ end
 When(/^I send the MusicBrainz data of the release I want to import$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   reference = BrainzReleaseReference.from_code(brainz_id)
-  cache_key = reference.to_key
+
+  i_offer = Import::Offer.new(
+    offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+    type: 'music_brainz_releases'
+  )
+
+  i_offer.teach do |knowledge|
+    knowledge.add_with_reference(reference, TestData::Fetch.perform(reference))
+  end
 
   post(
     '/api/v01/brainz_releases',
-    {
-      data:
-        {
-          type: 'music_brainz_releases',
-          attributes: {
-            offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
-            known: {
-              brainz: {
-                cache_key => KoTestData.brainz_release(reference)
-              }
-            }
-          }
-        }
-    },
+    i_offer.to_hash,
     headers: {
       'Accept'       => 'application/vnd.api+json',
       'Content-Type' => 'application/vnd.api+json'

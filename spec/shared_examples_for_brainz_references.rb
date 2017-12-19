@@ -1,7 +1,7 @@
 require 'shared_examples_for_new_references'
 
 RSpec.shared_examples 'a MusicBrainz reference' do
-  let(:category) { 'musicbrainz' }
+  let(:category) { :brainz }
 
   it_behaves_like 'a new reference'
   it_behaves_like 'a reference initialized from_code'
