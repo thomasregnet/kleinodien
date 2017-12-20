@@ -79,5 +79,5 @@ Given(/^I have send the MusicBrainz data of the release I want to import$/) do
 end
 
 When(/^I send the data for the MusicBrainz release artist$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  subset = TestData.retrieve(:brainz_sepultura_arise, 0)
 end
