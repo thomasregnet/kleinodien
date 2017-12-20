@@ -39,6 +39,17 @@ module TestData
       response
     end
 
+    def to_hash
+      response = {}
+      data_for.each do |reference, value|
+        data_for[reference] = Fetch.perform(reference)
+        category = reference.category
+        response[category] = {} unless response[category]
+        response[category][reference.to_key] = data_for[reference]
+      end
+      response
+    end
+
     def references
       data_for.keys
     end
