@@ -15,7 +15,6 @@ module TestData
       require_kind(kind)
       ref_class = ref_to_require(kind).camelize.constantize
       reference = ref_class.from_code(code)
-      #data_for[reference.to_key] = reference
       data_for[reference] = nil
       reference
     end
@@ -34,19 +33,18 @@ module TestData
       response = data_for[reference]
       return response if response
       # TODO: raise when reference is not part of data_for
+      # make shure that the required data belongs to this subset
       return unless data_for.key? reference
-      response = Fetch.perform(reference)
-      response
+      data_for[reference] = Fetch.perform(reference)
     end
 
     def to_hash
       response = {}
-      data_for.each do |reference, value|
-        data_for[reference] = Fetch.perform(reference)
-        category = reference.category
-        response[category] = {} unless response[category]
-        response[category][reference.to_key] = data_for[reference]
+      references.each do |reference|
+        category_hash = response[reference.category] ||= {}
+        category_hash[reference.to_key] = fetch(reference)
       end
+
       response
     end
 
