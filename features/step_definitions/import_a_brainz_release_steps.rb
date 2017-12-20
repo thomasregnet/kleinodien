@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'test_data_definitions/brainz_sepultura_arise'
 
 require 'ko_test_data'
 
