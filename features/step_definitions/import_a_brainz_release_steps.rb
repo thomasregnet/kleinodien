@@ -70,3 +70,13 @@ Given(/^The release already exists$/) do
     brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   )
 end
+
+Given(/^I have send the MusicBrainz data of the release I want to import$/) do
+  step 'I send the MusicBrainz data of the release I want to import'
+  step 'I receive a status of "202"'
+  step 'I see the artist in the requirements'
+end
+
+When(/^I send the data for the MusicBrainz release artist$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
