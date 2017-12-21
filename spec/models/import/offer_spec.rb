@@ -76,4 +76,13 @@ RSpec.describe Import::Offer do
       end
     end
   end
+
+  describe 'constructor parameter "knowledge"' do
+    let(:knowledge) { Import::OfferKnowledge.new }
+
+    it 'returns the given knowledge' do
+      offer = described_class.new(knowledge: knowledge)
+      expect(offer.known).to eq(knowledge)
+    end
+  end
 end
