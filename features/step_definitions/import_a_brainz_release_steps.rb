@@ -79,5 +79,21 @@ Given(/^I have send the MusicBrainz data of the release I want to import$/) do
 end
 
 When(/^I send the data for the MusicBrainz release artist$/) do
+  brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+  reference = BrainzReleaseReference.from_code(brainz_id)
   subset = TestData.retrieve(:brainz_sepultura_arise, 0)
+  i_offer = Import::Offer.new(
+    knowledge: subset.to_import_offer_knowledge,
+    offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+    type: 'music_brainz_releases'
+  )
+
+  post(
+    '/api/v01/brainz_releases',
+    i_offer.to_hash,
+    headers: {
+      'Accept'       => 'application/vnd.api+json',
+      'Content-Type' => 'application/vnd.api+json'
+    }
+  )
 end
