@@ -3,7 +3,7 @@ module Import
     attr_reader :known, :offered, :type
 
     def initialize(args)
-      @known   = OfferKnowledge.new
+      @known   = args[:knowledge] || OfferKnowledge.new
       @offered = args[:offered]
       @type    = args[:type]
     end
