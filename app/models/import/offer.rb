@@ -1,9 +1,9 @@
 module Import
   class Offer
-    attr_reader :known, :offered, :type
+    attr_reader :knowledge, :offered, :type
 
     def initialize(args)
-      @known   = args[:knowledge] || OfferKnowledge.new
+      @knowledge   = args[:knowledge] || OfferKnowledge.new
       @offered = args[:offered]
       @type    = args[:type]
     end
@@ -13,7 +13,7 @@ module Import
         data:
           {
             attributes: {
-              known: known.collected,
+              known: knowledge.collected,
               offered: offered
             }
           }
@@ -21,7 +21,7 @@ module Import
     end
 
     def teach
-      yield known
+      yield knowledge
     end
   end
 end
