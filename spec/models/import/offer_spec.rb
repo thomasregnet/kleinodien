@@ -6,7 +6,7 @@ require 'fake_reference'
 RSpec.describe Import::Offer do
   subject(:offer) { described_class.new(offered: '123', type: :some_type) }
 
-  it { is_expected.to respond_to(:known).with(0).argument }
+  it { is_expected.to respond_to(:knowledge).with(0).argument }
   it { is_expected.to respond_to(:offered).with(0).argument }
   it { is_expected.to respond_to(:type).with(0).argument }
 
@@ -31,9 +31,9 @@ RSpec.describe Import::Offer do
   end
 
   context 'without knowledge' do
-    describe '#known' do
+    describe '#knowledge' do
       it 'returns an empty hash' do
-        expect(offer.known).to be_instance_of(Import::OfferKnowledge)
+        expect(offer.knowledge).to be_instance_of(Import::OfferKnowledge)
       end
     end
   end
@@ -82,7 +82,7 @@ RSpec.describe Import::Offer do
 
     it 'returns the given knowledge' do
       offer = described_class.new(knowledge: knowledge)
-      expect(offer.known).to eq(knowledge)
+      expect(offer.knowledge).to eq(knowledge)
     end
   end
 end
