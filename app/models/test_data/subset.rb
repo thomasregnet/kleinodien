@@ -48,6 +48,15 @@ module TestData
       response
     end
 
+    def to_import_offer_knowledge
+      i_knowledge = Import::OfferKnowledge.new
+      references.each do |reference|
+        i_knowledge.add_with_reference(reference, fetch(reference))
+      end
+
+      i_knowledge
+    end
+
     def references
       data_for.keys
     end
