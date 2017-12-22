@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'fake_reference'
 
 RSpec.describe Import::PrepareRawData do
   context 'with a  Brainz reference' do
@@ -11,6 +12,17 @@ RSpec.describe Import::PrepareRawData do
       it 'returns the prepared data' do
         expect(described_class.perform(reference, xml_data))
           .to be_instance_of(MashedBrainz::Release)
+      end
+    end
+  end
+
+  context 'with a reference containing an unknown catagory' do
+    describe '.perform' do
+      let(:reference) { FakeReference.new(code: '13') }
+
+      it 'raises an error' do
+        expect { described_class.perform(reference, 'fake data') }
+          .to raise_error(/can't prepare data for/)
       end
     end
   end
