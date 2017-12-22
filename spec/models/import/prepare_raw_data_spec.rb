@@ -10,7 +10,7 @@ RSpec.describe Import::PrepareRawData do
     describe '.perform' do
       it 'returns the prepared data' do
         expect(described_class.perform(reference, xml_data))
-          .to be_instance_of(Hashie::Mash)
+          .to be_instance_of(MashedBrainz::Release)
       end
     end
   end
