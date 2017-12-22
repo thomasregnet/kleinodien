@@ -1,4 +1,5 @@
 module Import
+  # Prepare raw data depending on the category of it's reference
   class PrepareRawData
     attr_reader :data, :reference
 
@@ -11,11 +12,15 @@ module Import
       @data      = data
     end
 
+    # TODO: prepare Discogs data
+    # TODO: prepare Tmdb data
     def perform
-      #byebug
-      case reference.category
+      category = reference.category
+      case category
       when :brainz
         MashedBrainz.from_xml(data)
+      else
+        raise "can't prepare data for #{category}"
       end
     end
   end
