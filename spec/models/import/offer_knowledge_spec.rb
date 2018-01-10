@@ -3,6 +3,7 @@
 require 'rails_helper'
 require 'fake_reference'
 
+
 RSpec.describe Import::OfferKnowledge do
   let(:knowledge) { described_class.new }
 
