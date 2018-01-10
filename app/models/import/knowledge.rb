@@ -13,6 +13,11 @@ module Import
       missing.add(reference) unless response
       response
     end
+
+    def missing?
+      #byebug
+      !missing.empty?
+    end
   end
 end
 # module Import
