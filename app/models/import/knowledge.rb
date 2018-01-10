@@ -9,8 +9,15 @@ module Import
     end
 
     def about(reference)
-      response = having[reference]
-      missing.add(reference) unless response
+      known = having[reference]
+      missing.add(reference) unless known
+      return unless known
+      PrepareRawData.perform(reference, known)
+    end
+
+    def about!(reference)
+      response = about(reference)
+      raise KnowledgeMissing unless response
       response
     end
 
