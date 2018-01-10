@@ -4,9 +4,8 @@ module Import
     attr_reader :knowledge, :params, :reference
 
     def initialize(args = {})
-      #@data_import = args[:data_import]
       @params      = args[:params]
-      @knowledge   = args[:knowledge] || Import::Knowledge.new(attributes)
+      @knowledge   = init_knowledge
       @reference   = init_reference(args)
     end
 
@@ -20,13 +19,15 @@ module Import
       params.dig(:data, :attributes)
     end
 
-    # def data_import
-    #   @data_import ||= ::DataImport.create!(note: 'foobar')
-    # end
-
     alias ask knowledge
 
     private
+
+    def init_knowledge
+      @knowledge = Knowledge.new(attributes) if attributes
+      return if knowledge
+      @knowledge = Knowledge.new
+    end
 
     def init_reference(args)
       reference = args[:reference]
