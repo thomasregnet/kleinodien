@@ -3,6 +3,10 @@ class FakeReference
   CACHE_KEY = 'fake/cache?key'.freeze
   attr_reader :code
 
+  def self.from_code(code)
+    new(code: code)
+  end
+
   def initialize(args)
     @code = args[:code]
   end
