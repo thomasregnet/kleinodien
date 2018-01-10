@@ -11,7 +11,7 @@ module Import
 
     def perform
       original = template
-      original ||= ask.brainz.about!(reference)
+      original ||= ask.about!(reference)
 
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit

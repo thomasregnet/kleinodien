@@ -7,24 +7,24 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
   end
 
   it 'persists a MusicBrainz release' do
-    brainz = {}
-    brainz[reference.to_key] = KoTestData.brainz_xml_for(reference)
+    having = {}
+    having[reference] = KoTestData.brainz_xml_for(reference)
 
     artist_ref = BrainzArtistReference.from_code(
       '1d93c839-22e7-4f76-ad84-d27039efc048'
     )
-    brainz[artist_ref.to_key] = KoTestData.brainz_xml_for(artist_ref)
+    having[artist_ref] = KoTestData.brainz_xml_for(artist_ref)
 
     release_group_ref = BrainzReleaseGroupReference.from_code(
       '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933'
     )
-    brainz[release_group_ref.to_key] = KoTestData.brainz_xml_for(
+    having[release_group_ref] = KoTestData.brainz_xml_for(
       release_group_ref
     )
 
     compilation_release = described_class.perform(
       data_import: FactoryGirl.create(:data_import),
-      knowledge:   Import::Knowledge.new(known: { brainz: brainz }),
+      knowledge:   Import::Knowledge.new(having: having),
       reference:   reference
     )
     expect(compilation_release.title).to eq('Arise')
