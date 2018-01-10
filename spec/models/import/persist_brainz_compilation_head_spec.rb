@@ -3,11 +3,11 @@ require 'ko_test_data'
 
 RSpec.describe Import::PersistBrainzCompilationHead do
   before(:each) do
-    brainz = {}
+    having = {}
 
     code = '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     @reference = BrainzReleaseGroupReference.from_code(code)
-    brainz[@reference.to_key] = KoTestData.brainz_xml_for(@reference)
+    having[@reference] = KoTestData.brainz_xml_for(@reference)
 
     artist_codes = [
       '2280ca0e-6968-4349-8c36-cb0cbd6ee95f',
@@ -16,10 +16,10 @@ RSpec.describe Import::PersistBrainzCompilationHead do
 
     artist_codes.each do |artist_code|
       reference = BrainzArtistReference.from_code(artist_code)
-      brainz[reference.to_key] = KoTestData.brainz_xml_for(reference)
+      having[reference] = KoTestData.brainz_xml_for(reference)
     end
 
-    @knowledge = Import::Knowledge.new(known: { brainz: brainz })
+    @knowledge = Import::Knowledge.new(having: having)
   end
 
   describe 'persisting a brainz release-group' do

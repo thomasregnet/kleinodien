@@ -40,6 +40,12 @@ RSpec.describe Import::Knowledge do
       @knowledge.about(@reference)
     end
 
+    describe '#about!' do
+      it 'raises an error' do
+        expect { @knowledge.about!(reference) }
+          .to raise_error(KnowledgeMissing)
+      end
+    end
     describe '#having' do
       it 'is empty' do
         expect(@knowledge.having).to be_empty

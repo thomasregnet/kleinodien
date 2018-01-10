@@ -16,10 +16,8 @@ RSpec.describe Import::PersistBrainzArtist do
       )
 
       knowledge = Import::Knowledge.new(
-        known: {
-          brainz: {
-            reference.to_key => KoTestData.brainz_xml_for(reference)
-          }
+        having: {
+          reference => KoTestData.brainz_xml_for(reference)
         }
       )
 

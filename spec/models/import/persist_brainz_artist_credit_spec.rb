@@ -15,15 +15,15 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       release = MashedBrainz.from_xml(xml)
       @brainz_artist_credit = release.artist_credit
 
-      brainz = {}
+      having = {}
       %w[2280ca0e-6968-4349-8c36-cb0cbd6ee95f
          37e9d7b2-7779-41b2-b2eb-3685351caad3].each do |code|
         reference = BrainzArtistReference.from_code(code)
         xml = KoTestData.brainz_xml_for(reference)
-        brainz[reference.to_key] = xml
+        having[reference] = xml
       end
 
-      knowledge = Import::Knowledge.new(known: { brainz: brainz })
+      knowledge = Import::Knowledge.new(having: having)
 
       @artist_credit = Import::PersistBrainzArtistCredit.perform(
         data_import: FactoryGirl.create(:data_import),
