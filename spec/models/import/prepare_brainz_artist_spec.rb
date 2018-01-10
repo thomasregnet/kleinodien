@@ -22,11 +22,7 @@ RSpec.describe Import::PrepareBrainzArtist do
     describe '#knowledge.missing?' do
       it 'returns false' do
         knowledge = Import::Knowledge.new(
-          known: {
-            brainz: {
-              reference.to_key => KoTestData.brainz_xml_for(reference)
-            }
-          }
+          having: { reference => KoTestData.brainz_xml_for(reference) }
         )
 
         artist_importer = described_class.new(
@@ -35,6 +31,7 @@ RSpec.describe Import::PrepareBrainzArtist do
         )
 
         artist_importer.perform
+        #byebug
         expect(artist_importer.knowledge.missing?).to be false
       end
     end

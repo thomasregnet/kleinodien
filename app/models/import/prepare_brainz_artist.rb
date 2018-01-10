@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      ask.brainz.about(reference)
+      ask.about(reference)
     end
   end
 end
