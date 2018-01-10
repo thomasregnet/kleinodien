@@ -25,6 +25,12 @@ RSpec.describe Import::Knowledge do
         expect(knowledge.missing).to be_empty
       end
     end
+
+    describe '#missing?' do
+      it 'returns false' do
+        expect(knowledge).not_to be_missing
+      end
+    end
   end
 
   context 'ask about something unknown' do
@@ -43,6 +49,12 @@ RSpec.describe Import::Knowledge do
     describe '#missing' do
       it 'includes the reference' do
         expect(@knowledge.missing).to include(@reference)
+      end
+    end
+
+    describe '#missing?' do
+      it 'returns true' do
+        expect(@knowledge).to be_missing
       end
     end
   end
