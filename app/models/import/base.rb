@@ -5,7 +5,7 @@ module Import
 
     def initialize(args = {})
       @params      = args[:params]
-      @knowledge   = init_knowledge
+      @knowledge   = init_knowledge(args)
       @reference   = init_reference(args)
     end
 
@@ -23,10 +23,13 @@ module Import
 
     private
 
-    def init_knowledge
-      @knowledge = Knowledge.new(attributes) if attributes
-      return if knowledge
-      @knowledge = Knowledge.new
+    def init_knowledge(args)
+      knowledge = args[:knowledge]
+      return knowledge if knowledge
+
+      return Knowledge.new(attributes) if attributes
+
+      Knowledge.new
     end
 
     def init_reference(args)
