@@ -42,8 +42,8 @@ RSpec.describe Import::Knowledge do
 
     describe '#about!' do
       it 'raises an error' do
-        expect { @knowledge.about!(reference) }
-          .to raise_error(KnowledgeMissing)
+        expect { @knowledge.about!(@reference) }
+          .to raise_error(Import::KnowledgeMissing)
       end
     end
     describe '#having' do
@@ -71,12 +71,6 @@ RSpec.describe Import::Knowledge do
       @knowledge = described_class.new(
         having: { @reference => 'foo' }
       )
-    end
-
-    describe '#about' do
-      it 'returns the content' do
-        expect(@knowledge.about(@reference)).to eq('foo')
-      end
     end
 
     describe '#missing' do
