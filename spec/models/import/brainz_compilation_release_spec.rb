@@ -21,9 +21,9 @@ RSpec.describe Import::BrainzCompilationRelease do
       end
 
       it 'requires the release data' do
-        ref_key = response.dig(:data, :attributes, :required, :brainz)[0]
+        ref_uri = response.dig(:data, :attributes, :required, :brainz)[0]
         reference = BrainzReleaseReference.from_code(i_offer.offered)
-        expect(ref_key).to eq(reference.to_key)
+        expect(ref_uri).to eq(reference.to_uri)
       end
     end
   end

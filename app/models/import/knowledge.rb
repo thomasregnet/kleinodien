@@ -21,6 +21,22 @@ module Import
       response
     end
 
+    def collect
+      {
+        required: collect_required
+      }
+    end
+
+    def collect_required
+      required = {}
+      missing.each do |reference|
+        category = reference.category
+        list = required[category] ||= []
+        list << reference.to_uri
+      end
+      required
+    end
+
     def missing?
       !missing.empty?
     end
