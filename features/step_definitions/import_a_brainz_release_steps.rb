@@ -30,7 +30,7 @@ Then(/^the response contains an url to get the release\-data$/) do
 
   data = JSON.parse(last_response.body)
   cache_key = data.dig('data', 'attributes', 'required', 'brainz')[0]
-  expect(cache_key).to eq reference.to_key
+  expect(cache_key).to eq reference.to_uri
 end
 
 When(/^I send the MusicBrainz data of the release I want to import$/) do
@@ -62,7 +62,9 @@ Then(/^I see the artist in the requirements$/) do
   )
   data = JSON.parse(last_response.body)
   required = data.dig('data', 'attributes', 'required', 'brainz')
-  expect(required.include?(reference.to_key)).to be true
+  #required = data.dig('data', 'attributes', 'required')
+  byebug
+  expect(required.include?(reference.to_uri)).to be true
 end
 
 Given(/^The release already exists$/) do
