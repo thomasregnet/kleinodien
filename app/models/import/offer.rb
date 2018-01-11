@@ -3,7 +3,7 @@ module Import
     attr_reader :knowledge, :offered, :type
 
     def initialize(args)
-      @knowledge   = args[:knowledge] || OfferKnowledge.new
+      @knowledge   = args[:knowledge] || {}
       @offered = args[:offered]
       @type    = args[:type]
     end
@@ -13,15 +13,15 @@ module Import
         data:
           {
             attributes: {
-              known: knowledge.collected,
+              known: knowledge,
               offered: offered
             }
           }
       }
     end
 
-    def teach
-      yield knowledge
+    def teach(reference, data)
+      knowledge[reference.to_uri] = data
     end
   end
 end

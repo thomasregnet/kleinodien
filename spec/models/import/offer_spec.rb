@@ -33,17 +33,17 @@ RSpec.describe Import::Offer do
   context 'without knowledge' do
     describe '#knowledge' do
       it 'returns an empty hash' do
-        expect(offer.knowledge).to be_instance_of(Import::OfferKnowledge)
+        expect(offer.knowledge).to be_instance_of(Hash)
       end
     end
   end
 
-  describe '#teach' do
-    it 'yields an instance of Import::OfferKnowledge' do
-      expect { |knowledge| offer.teach(&knowledge) }
-        .to yield_successive_args(Import::OfferKnowledge)
-    end
-  end
+  # describe '#teach' do
+  #   it 'yields an instance of Import::OfferKnowledge' do
+  #     expect { |knowledge| offer.teach(&knowledge) }
+  #       .to yield_successive_args(Import::OfferKnowledge)
+  #   end
+  # end
 
   context 'without knowledge' do
     describe '#to_hash[data]' do
@@ -54,15 +54,11 @@ RSpec.describe Import::Offer do
   end
 
   context 'with knowledge' do
-    let(:key) { FakeReference.new(code: 'xxx').to_key }
+    let(:uri) { FakeReference.new(code: 'xxx').to_uri }
     let(:offer) do
-      offer = described_class.new(offered: 'abc, type: :other_type')
-      offer.teach do |knowledge|
-        knowledge.add_with_reference(
-          FakeReference.new(code: 'xxx'), '<fake data>'
-        )
-      end
-
+      offer = described_class.new(offered: 'abc', type: :other_type)
+      reference = FakeReference.from_code('xxx')
+      offer.teach(reference, '<fake data>')
       offer
     end
 
@@ -70,7 +66,7 @@ RSpec.describe Import::Offer do
       it 'returns the knowledge' do
         expect(
           offer.to_hash.dig(
-            :data, :attributes, :known, :fake_catagory, key
+            :data, :attributes, :known, uri 
           )
         ).to eq('<fake data>')
       end
@@ -78,7 +74,7 @@ RSpec.describe Import::Offer do
   end
 
   describe 'constructor parameter "knowledge"' do
-    let(:knowledge) { Import::OfferKnowledge.new }
+    let(:knowledge) { { 'http://fake/uri' => '<fake data>' } }
 
     it 'returns the given knowledge' do
       offer = described_class.new(knowledge: knowledge)
