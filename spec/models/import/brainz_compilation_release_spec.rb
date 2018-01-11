@@ -36,9 +36,7 @@ RSpec.describe Import::BrainzCompilationRelease do
       type: 'music-brainz-release'
     )
 
-    i_offer.teach do |knowledge|
-      knowledge.add_with_reference(reference, TestData.fetch(reference))
-    end
+    i_offer.teach(reference, TestData.fetch(reference))
 
     response = described_class.perform(
       params: i_offer.to_hash

@@ -15,6 +15,10 @@ class FakeReference
     CACHE_KEY
   end
 
+  def to_uri
+    "https>//fake/#{code}"
+  end
+
   def category
     :fake_catagory
   end
