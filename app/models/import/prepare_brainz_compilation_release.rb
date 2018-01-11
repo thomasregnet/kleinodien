@@ -11,7 +11,7 @@ module Import
 
     def perform
       # TODO: check if the brainz release already exists in the database
-      brainz_release = ask.brainz.about(reference)
+      brainz_release = ask.about(reference)
       return unless brainz_release
       prepare_brainz_artist_credit(
         template: brainz_release.artist_credit
