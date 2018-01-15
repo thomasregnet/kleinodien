@@ -13,7 +13,8 @@ module Import
         data:
           {
             attributes: {
-              known: knowledge,
+              #known: knowledge,
+              knowledge: knowledge,
               offered: offered
             }
           }

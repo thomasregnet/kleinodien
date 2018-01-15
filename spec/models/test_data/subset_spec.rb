@@ -15,7 +15,8 @@ RSpec.describe TestData::Subset do
     describe '#to_hash' do
       it 'returns a hash of the data' do
         subset.add(:brainz_release, brainz_code)
-        subset.to_hash[:brainz].each_value do |xml|
+        #subset.to_hash[:brainz].each_value do |xml|
+        subset.to_hash.each_value do |xml|
           expect(xml).to match(/^<\?xml/)
         end
       end

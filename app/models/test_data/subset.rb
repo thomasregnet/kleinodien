@@ -40,13 +40,20 @@ module TestData
 
     def to_hash
       response = {}
-      references.each do |reference|
-        category_hash = response[reference.category] ||= {}
-        category_hash[reference.to_key] = fetch(reference)
+      references.each do |reference| 
+        response[reference.to_uri] = fetch(reference)
       end
-
       response
     end
+    # def to_hash
+    #   response = {}
+    #   references.each do |reference|
+    #     category_hash = response[reference.category] ||= {}
+    #     category_hash[reference.to_key] = fetch(reference)
+    #   end
+
+    #   response
+    # end
 
     def references
       data_for.keys
