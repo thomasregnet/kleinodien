@@ -20,13 +20,5 @@ RSpec.describe TestData::Subset do
         end
       end
     end
-
-    describe '#to_import_offer_knowledge' do
-      it 'returns an instance of Import::OfferKnowledge' do
-        subset.add(:brainz_release, brainz_code)
-        expect(subset.to_import_offer_knowledge)
-          .to be_instance_of(Import::OfferKnowledge)
-      end
-    end
   end
 end
