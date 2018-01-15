@@ -41,11 +41,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
     offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
     type: 'music_brainz_releases'
   )
-
-  i_offer.teach do |knowledge|
-    knowledge.add_with_reference(reference, TestData.fetch(reference))
-  end
-
+  i_offer.teach(reference, TestData.fetch(reference))
   post(
     '/api/v01/brainz_releases',
     i_offer.to_hash,
@@ -63,7 +59,6 @@ Then(/^I see the artist in the requirements$/) do
   data = JSON.parse(last_response.body)
   required = data.dig('data', 'attributes', 'required', 'brainz')
   #required = data.dig('data', 'attributes', 'required')
-  byebug
   expect(required.include?(reference.to_uri)).to be true
 end
 
@@ -84,8 +79,10 @@ When(/^I send the data for the MusicBrainz release artist$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   reference = BrainzReleaseReference.from_code(brainz_id)
   subset = TestData.retrieve(:brainz_sepultura_arise, 0)
+  #byebug
   i_offer = Import::Offer.new(
-    knowledge: subset.to_import_offer_knowledge,
+    #knowledge: subset.to_import_offer_knowledge,
+    knowledge: subset.to_hash,
     offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
     type: 'music_brainz_releases'
   )

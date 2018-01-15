@@ -27,7 +27,8 @@ module Import
       knowledge = args[:knowledge]
       return knowledge if knowledge
 
-      return Knowledge.new(attributes) if attributes
+      #return Knowledge.new(having: attributes[:knowledge]) if attributes
+      return Knowledge.from_uris(attributes[:knowledge]) if attributes
 
       Knowledge.new
     end

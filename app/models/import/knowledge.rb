@@ -3,6 +3,15 @@ module Import
   class Knowledge
     attr_reader :having, :missing
 
+    def self.from_uris(uri_data)
+      return new unless uri_data
+      having = {}
+      uri_data.each do |uri, data|
+        having[::UriToReference.perform(uri)] = data
+      end
+      new(having: having)
+    end
+
     def initialize(args = {})
       @having  = args[:having] || {}
       @missing = Set.new

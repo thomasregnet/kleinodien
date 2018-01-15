@@ -66,7 +66,7 @@ RSpec.describe Import::Offer do
       it 'returns the knowledge' do
         expect(
           offer.to_hash.dig(
-            :data, :attributes, :known, uri 
+            :data, :attributes, :knowledge, uri 
           )
         ).to eq('<fake data>')
       end
