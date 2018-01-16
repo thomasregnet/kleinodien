@@ -1,11 +1,11 @@
 module Import
   # Base class for import, prepare and persist
   class Base
-    attr_reader :knowledge, :params, :reference
+    attr_reader :store, :params, :reference
 
     def initialize(args = {})
       @params      = args[:params]
-      @knowledge   = init_knowledge(args)
+      @store   = init_store(args)
       @reference   = init_reference(args)
     end
 
@@ -19,11 +19,11 @@ module Import
       params.dig(:data, :attributes)
     end
 
-    alias ask knowledge
+    alias ask store
 
     private
 
-    def init_knowledge(args)
+    def init_store(args)
       knowledge = args[:knowledge]
       return knowledge if knowledge
 
