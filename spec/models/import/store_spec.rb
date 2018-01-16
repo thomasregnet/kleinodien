@@ -33,16 +33,16 @@ RSpec.describe Import::Store do
     end
   end
 
-  context 'ask about something unknown' do
+  context 'ask ask_for something unknown' do
     before do
       @reference = FakeReference.from_code("abc")
       @knowledge = described_class.new
-      @knowledge.about(@reference)
+      @knowledge.ask_for(@reference)
     end
 
-    describe '#about!' do
+    describe '#ask_for!' do
       it 'raises an error' do
-        expect { @knowledge.about!(@reference) }
+        expect { @knowledge.ask_for!(@reference) }
           .to raise_error(Import::KnowledgeMissing)
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe Import::Store do
     end
   end
 
-  context 'ask about something known' do
+  context 'ask ask_for something known' do
     before do
       @reference = FakeReference.from_code('xyz')
       @knowledge = described_class.new(
@@ -80,74 +80,3 @@ RSpec.describe Import::Store do
     end
   end
 end
-
-# RSpec.describe Import::Store do
-#   context 'nothing known, nothing requested' do
-#     let(:knowledge) { described_class.new({}) }
-
-#     describe '#missing?' do
-#       it 'returns false' do
-#         expect(knowledge.missing?).to be false
-#       end
-#     end
-
-#     describe '#brainz' do
-#       it 'returns an Import::BrainzStore instance' do
-#         expect(knowledge.brainz).to be_instance_of(Import::BrainzStore)
-#       end
-#     end
-
-#     describe '#collect' do
-#       it 'returns blank structures' do
-#         collected = knowledge.collect
-#         collected[:known].each_value do |knowledge_field|
-#           expect(knowledge_field.length).to eq(0)
-#         end
-
-#         collected[:required].each_value do |knowledge_field|
-#           expect(knowledge_field.length).to eq(0)
-#         end
-#       end
-#     end
-#   end
-
-#   context 'nothing known, something requested' do
-#     let(:knowledge) do
-#       reference = FakeReference.new(code: 'abc')
-#       knowledge = described_class.new
-#       knowledge.brainz.about(reference)
-#       knowledge
-#     end
-
-#     describe '#missing?' do
-#       it 'returns true' do
-#         expect(knowledge.missing?).to be true
-#       end
-#     end
-
-#     describe '#collect' do
-#       it 'has collected the requested data' do
-#         collected = knowledge.collect
-#         expect(collected.dig(:required, :brainz).length).to eq(1)
-#       end
-#     end
-#   end
-
-#   describe 'with some brainz knowledge' do
-#     describe '#collect' do
-#       it 'returns the known data' do
-#         key = 'test/key'
-#         xml = '<xml>fake</xml>'
-#         knowledge = described_class.new(
-#           known: {
-#             brainz: {
-#               key => xml
-#             }
-#           }
-#         )
-
-#         expect(knowledge.collect.dig(:known, :brainz, key)).to eq(xml)
-#       end
-#     end
-#   end
-# end
