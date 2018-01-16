@@ -4,7 +4,7 @@ require 'shared_examples_for_disambiguations'
 RSpec.describe PodcastSerial, type: :model do
   context 'without season' do
     before(:each) do
-      @podcast_serial = FactoryGirl.create(:podcast_serial)
+      @podcast_serial = FactoryBot.create(:podcast_serial)
     end
 
     it 'is valid with valid attributes' do

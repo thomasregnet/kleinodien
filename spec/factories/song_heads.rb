@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :song_head do
     # season
     association :artist_credit, factory: :artist_credit

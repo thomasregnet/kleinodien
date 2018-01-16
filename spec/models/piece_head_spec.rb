@@ -18,7 +18,7 @@ RSpec.describe PieceHead, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @piece_head = FactoryGirl.create(:piece_head)
+      @piece_head = FactoryBot.create(:piece_head)
     end
 
     let(:commentable) { @piece_head }
@@ -31,7 +31,7 @@ RSpec.describe PieceHead, type: :model do
   end
 
   before(:each) do
-    @ph = FactoryGirl.build(:piece_head)
+    @ph = FactoryBot.build(:piece_head)
   end
 
   it 'is valid with valid attributes' do
@@ -41,7 +41,7 @@ RSpec.describe PieceHead, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @piece_head = FactoryGirl.create(:piece_head)
+      @piece_head = FactoryBot.create(:piece_head)
     end
 
     let(:rateable) { @piece_head }
@@ -52,7 +52,7 @@ RSpec.describe PieceHead, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:piece_head)
+      @tagable = FactoryBot.create(:piece_head)
     end
 
     let(:tagable) { @tagable }
@@ -61,7 +61,7 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
-    @s_head = FactoryGirl.build(
+    @s_head = FactoryBot.build(
       :song_head,
       title:          @ph.title,
       disambiguation: @ph.disambiguation,
@@ -85,19 +85,19 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryGirl.create(:piece_head_with_companies) }
+    let(:candidate) { FactoryBot.create(:piece_head_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryGirl.create(:piece_head_with_countries) }
+    let(:candidate) { FactoryBot.create(:piece_head_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryGirl.create(:piece_head_with_credits) }
+    let(:candidate) { FactoryBot.create(:piece_head_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do
-    let(:candidate) { FactoryGirl.create(:piece_head_with_labels) }
+    let(:candidate) { FactoryBot.create(:piece_head_with_labels) }
   end
 
   it_behaves_like 'a model with disambiguations' do
@@ -107,6 +107,6 @@ RSpec.describe PieceHead, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:candidate) { FactoryGirl.create(:piece_head) }
+    let(:candidate) { FactoryBot.create(:piece_head) }
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CrFormatDetail, type: :model do
   before(:each) do
-    @cr_format_detail = FactoryGirl.build(:cr_format_detail)
+    @cr_format_detail = FactoryBot.build(:cr_format_detail)
   end
 
   it 'is valid with valid parameters' do

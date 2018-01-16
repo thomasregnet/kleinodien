@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :compilation_track do
     association :piece_release, factory: :piece_release
     association :compilation_release, factory: :compilation_release

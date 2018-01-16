@@ -4,7 +4,7 @@ RSpec.shared_examples 'a rateable model' do
   end
 
   it 'accepts a rating' do
-    rateable.ratings << FactoryGirl.build(:rating)
+    rateable.ratings << FactoryBot.build(:rating)
     expect(rateable.ratings.length).to eq 1
   end
 end

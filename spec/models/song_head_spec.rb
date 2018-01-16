@@ -4,7 +4,7 @@ require 'shared_examples_for_identifyable'
 
 RSpec.describe SongHead, type: :model do
   before(:each) do
-    @song_head = FactoryGirl.create(:song_head)
+    @song_head = FactoryBot.create(:song_head)
   end
 
   it 'is valid with valid attributes' do
@@ -23,6 +23,6 @@ RSpec.describe SongHead, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryGirl.create(:song_head_with_identifiers) }
+    let(:identifyable) { FactoryBot.create(:song_head_with_identifiers) }
   end
 end

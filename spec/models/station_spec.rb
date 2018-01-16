@@ -12,7 +12,7 @@ RSpec.describe Station, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryGirl.create(:station)
+      @commentable = FactoryBot.create(:station)
     end
 
     let(:commentable) { @commentable }
@@ -23,7 +23,7 @@ RSpec.describe Station, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @station = FactoryGirl.create(:station)
+      @station = FactoryBot.create(:station)
     end
 
     let(:rateable) { @station }
@@ -34,7 +34,7 @@ RSpec.describe Station, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:station)
+      @tagable = FactoryBot.create(:station)
     end
 
     let(:tagable) { @tagable }
@@ -43,7 +43,7 @@ RSpec.describe Station, type: :model do
   end
 
   before(:each) do
-    @station = FactoryGirl.build(:station)
+    @station = FactoryBot.build(:station)
   end
 
   it 'is valid with valid parameters' do

@@ -3,7 +3,7 @@ require 'shared_examples_for_pieces'
 
 RSpec.describe TvEpisodeRelease, type: :model do
   before(:each) do
-    @tv_episode_release = FactoryGirl.create(:tv_episode_release)
+    @tv_episode_release = FactoryBot.create(:tv_episode_release)
   end
 
   it 'is valid with valid attributes' do

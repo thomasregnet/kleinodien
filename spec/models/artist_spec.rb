@@ -12,7 +12,7 @@ RSpec.describe Artist, type: :model do
 
   context 'with brainz_code' do
     let(:artist) do
-      FactoryGirl.build(
+      FactoryBot.build(
         :artist,
         brainz_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
       )
@@ -29,7 +29,7 @@ RSpec.describe Artist, type: :model do
 
   describe '#brainz_code' do
     subject do
-      FactoryGirl.create(
+      FactoryBot.create(
         :artist,
         brainz_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
       )
@@ -40,7 +40,7 @@ RSpec.describe Artist, type: :model do
 
   describe '#discogs_code' do
     subject do
-      FactoryGirl.create(
+      FactoryBot.create(
         :artist,
         discogs_code: 123
       )
@@ -51,7 +51,7 @@ RSpec.describe Artist, type: :model do
 
   describe '#wikidata_code' do
     subject do
-      FactoryGirl.create(
+      FactoryBot.create(
         :artist,
         wikidata_code: '51648f70-382a-47c2-aeb4-04fd125b928a'
       )
@@ -72,7 +72,7 @@ RSpec.describe Artist, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @artist = FactoryGirl.create(:artist)
+      @artist = FactoryBot.create(:artist)
     end
 
     let(:commentable) { @artist }
@@ -81,13 +81,13 @@ RSpec.describe Artist, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryGirl.create(:artist_with_identifiers) }
+    let(:identifyable) { FactoryBot.create(:artist_with_identifiers) }
   end
 
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @artist = FactoryGirl.create(:artist)
+      @artist = FactoryBot.create(:artist)
     end
 
     let(:rateable) { @artist }
@@ -97,14 +97,14 @@ RSpec.describe Artist, type: :model do
 
   context 'with a begin date' do
     it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate)     { FactoryGirl.build(:artist) }
+      let(:candidate)     { FactoryBot.build(:artist) }
       let(:date_naming) { 'begin_date' }
     end
   end
 
   context 'with an end date' do
     it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate)     { FactoryGirl.build(:artist) }
+      let(:candidate)     { FactoryBot.build(:artist) }
       let(:date_naming) { 'end_date' }
     end
   end
@@ -112,7 +112,7 @@ RSpec.describe Artist, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:artist)
+      @tagable = FactoryBot.create(:artist)
     end
 
     let(:tagable) { @tagable }
@@ -126,7 +126,7 @@ RSpec.describe Artist, type: :model do
 
   context 'usual artist' do
     before(:each) do
-      @artist = FactoryGirl.build(:artist)
+      @artist = FactoryBot.build(:artist)
     end
 
     it 'is valid with with valid attributes' do

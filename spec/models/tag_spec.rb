@@ -4,7 +4,7 @@ RSpec.describe Tag, type: :model do
   context 'without associations' do
     before(:each) do
       DatabaseCleaner.start
-      @tag = FactoryGirl.create(:tag)
+      @tag = FactoryBot.create(:tag)
     end
 
     it 'is valid' do
@@ -17,7 +17,7 @@ RSpec.describe Tag, type: :model do
     end
 
     it 'must have an unique name' do
-      clone = FactoryGirl.build(:tag, name: @tag.name)
+      clone = FactoryBot.build(:tag, name: @tag.name)
       expect(clone).not_to be_valid
     end
 

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :original_exemplar do
     association :compilation_release, factory: :album_release
     association :user, factory: :user

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DataImport, type: :model do
   it 'is valid with valid parameters' do
-    expect(FactoryGirl.build(:data_import)).to be_valid
+    expect(FactoryBot.build(:data_import)).to be_valid
   end
 
   it { is_expected.to(have_many(:artists)) }

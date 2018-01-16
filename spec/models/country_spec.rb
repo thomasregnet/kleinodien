@@ -7,6 +7,6 @@ RSpec.describe Country, type: :model do
   end
 
   it_behaves_like 'an entity with an unique name' do
-    let(:candidate) { FactoryGirl.build(:country) }
+    let(:candidate) { FactoryBot.build(:country) }
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe Api::V01::ArtistCreditsController, type: :request do
   context '#get' do
     before(:all) do
       DatabaseCleaner.start
-      @credits = FactoryGirl.create_list(:artist_credit, 2)
+      @credits = FactoryBot.create_list(:artist_credit, 2)
     end
 
     it 'sends a list of artist_credits' do

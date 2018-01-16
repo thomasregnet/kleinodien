@@ -26,7 +26,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       store = Import::Store.new(having: having)
 
       @artist_credit = Import::PersistBrainzArtistCredit.perform(
-        data_import: FactoryGirl.create(:data_import),
+        data_import: FactoryBot.create(:data_import),
         store:   store,
         template:    @brainz_artist_credit
       )

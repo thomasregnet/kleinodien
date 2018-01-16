@@ -5,7 +5,7 @@ include ApiHelper
 
 RSpec.describe Api::V01::ArtistIdentifiersController, type: :request do
   it 'sends a list of artist identifiers' do
-    FactoryGirl.create_list(:artist_identifier, 2)
+    FactoryBot.create_list(:artist_identifier, 2)
 
     api_get '/api/v01/artist-identifiers'
 
@@ -13,8 +13,8 @@ RSpec.describe Api::V01::ArtistIdentifiersController, type: :request do
   end
 
   it 'accepts an artist identifier' do
-    artist = FactoryGirl.create(:artist)
-    source = FactoryGirl.create(:source)
+    artist = FactoryBot.create(:artist)
+    source = FactoryBot.create(:source)
 
     api_post '/api/v01/artist-identifiers',
              Hash[

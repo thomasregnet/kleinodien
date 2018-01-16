@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :compilation_head do
     sequence(:title) { |n| "compilation head ##{n}" }
     type 'CompilationHead'
@@ -19,8 +19,8 @@ FactoryGirl.define do
 
     factory :compilation_head_with_countries do
       after(:create) do |compilation_head|
-        compilation_head.countries << FactoryGirl.create(:country)
-        compilation_head.countries << FactoryGirl.create(:country)
+        compilation_head.countries << FactoryBot.create(:country)
+        compilation_head.countries << FactoryBot.create(:country)
       end
     end
 

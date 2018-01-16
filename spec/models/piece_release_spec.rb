@@ -16,7 +16,7 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryGirl.create(:piece_release)
+      @commentable = FactoryBot.create(:piece_release)
     end
 
     let(:commentable) { @commentable }
@@ -27,7 +27,7 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @piece_release = FactoryGirl.create(:piece_release)
+      @piece_release = FactoryBot.create(:piece_release)
     end
 
     let(:rateable) { @piece_release }
@@ -38,7 +38,7 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:piece_release)
+      @tagable = FactoryBot.create(:piece_release)
     end
 
     let(:tagable) { @tagable }
@@ -48,7 +48,7 @@ RSpec.describe PieceRelease, type: :model do
 
   context 'without tracks' do
     before(:each) do
-      @piece_release = FactoryGirl.build(:piece_release)
+      @piece_release = FactoryBot.build(:piece_release)
     end
 
     it 'is valid with valid attributes' do
@@ -62,7 +62,7 @@ RSpec.describe PieceRelease, type: :model do
 
   context 'with tracks' do
     before(:each) do
-      @piece_release = FactoryGirl.create(:piece_release_with_tracks)
+      @piece_release = FactoryBot.create(:piece_release_with_tracks)
     end
 
     it 'has some tracks' do
@@ -71,23 +71,23 @@ RSpec.describe PieceRelease, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryGirl.create(:piece_release_with_companies) }
+    let(:candidate) { FactoryBot.create(:piece_release_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryGirl.create(:piece_release_with_countries) }
+    let(:candidate) { FactoryBot.create(:piece_release_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryGirl.create(:piece_release_with_credits) }
+    let(:candidate) { FactoryBot.create(:piece_release_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do
-    let(:candidate) { FactoryGirl.create(:piece_release_with_labels) }
+    let(:candidate) { FactoryBot.create(:piece_release_with_labels) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do
-    let(:candidate) { FactoryGirl.create(:piece_release) }
+    let(:candidate) { FactoryBot.create(:piece_release) }
     let(:date_naming) { 'date' }
   end
 end

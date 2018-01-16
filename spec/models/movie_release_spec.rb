@@ -4,7 +4,7 @@ require 'shared_examples_for_identifyable'
 
 RSpec.describe MovieRelease, type: :model do
   before(:each) do
-    @movie_release = FactoryGirl.create(:movie_release)
+    @movie_release = FactoryBot.create(:movie_release)
   end
 
   it 'is valid with valid attributes' do
@@ -16,6 +16,6 @@ RSpec.describe MovieRelease, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryGirl.create(:movie_release_with_identifiers) }
+    let(:identifyable) { FactoryBot.create(:movie_release_with_identifiers) }
   end
 end

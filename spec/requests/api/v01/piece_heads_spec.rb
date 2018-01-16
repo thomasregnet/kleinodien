@@ -5,9 +5,9 @@ include ApiHelper
 
 RSpec.describe Api::V01::PieceHeadsController, type: :request do
   it 'sends a list of piece_heads' do
-    FactoryGirl.create(:episode_head)
-    FactoryGirl.create(:movie_head)
-    FactoryGirl.create(:song_head)
+    FactoryBot.create(:episode_head)
+    FactoryBot.create(:movie_head)
+    FactoryBot.create(:song_head)
 
     a = api_get '/api/v01/piece-heads'
 

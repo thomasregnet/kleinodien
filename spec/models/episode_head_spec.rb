@@ -3,7 +3,7 @@ require 'shared_examples_for_identifyable'
 
 RSpec.describe EpisodeHead, type: :model do
   before(:each) do
-    @episode_head = FactoryGirl.create(:episode_head)
+    @episode_head = FactoryBot.create(:episode_head)
   end
 
   it 'is valid with valid attributes' do
@@ -19,6 +19,6 @@ RSpec.describe EpisodeHead, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryGirl.create(:episode_head_with_identifiers) }
+    let(:identifyable) { FactoryBot.create(:episode_head_with_identifiers) }
   end
 end

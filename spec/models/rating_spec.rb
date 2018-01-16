@@ -15,8 +15,8 @@ RSpec.describe Rating, type: :model do
   describe '#value' do
     before(:all) do
       DatabaseCleaner.start
-      @bigger_rating = FactoryGirl.build(:artist_credit_rating, value: -1)
-      @lower_rating  = FactoryGirl.build(:artist_credit_rating, value: 11)
+      @bigger_rating = FactoryBot.build(:artist_credit_rating, value: -1)
+      @lower_rating  = FactoryBot.build(:artist_credit_rating, value: 11)
     end
 
     context 'with a value bigger than 10' do
@@ -37,7 +37,7 @@ RSpec.describe Rating, type: :model do
   context 'valid values' do
     (0..10).to_a.each do |value|
       it "is valid with #{value} as value" do
-        @rating = FactoryGirl.build(:artist_credit_rating, value: value)
+        @rating = FactoryBot.build(:artist_credit_rating, value: value)
         expect(@rating).to be_valid
       end
     end
@@ -45,7 +45,7 @@ RSpec.describe Rating, type: :model do
 
   context 'with or without a content' do
     before(:each) do
-      @rating = FactoryGirl.build(:artist_credit_rating)
+      @rating = FactoryBot.build(:artist_credit_rating)
     end
 
     it 'is valid' do
@@ -65,7 +65,7 @@ RSpec.describe Rating, type: :model do
 
   context 'with more than one content' do
     before(:each) do
-      @rating = FactoryGirl.build(:artist_credit_rating)
+      @rating = FactoryBot.build(:artist_credit_rating)
     end
 
     factories = %i[
@@ -76,7 +76,7 @@ RSpec.describe Rating, type: :model do
     factories.each do |factory|
       setter = factory.to_s + '='
       it "is not valid when artist_credit and #{factory} are set" do
-        @rating.send setter, FactoryGirl.create(factory)
+        @rating.send setter, FactoryBot.create(factory)
         expect(@rating).not_to be_valid
         expect { @rating.save! validate: false }
           .to raise_error(/exact_one_content_on_ratings/)

@@ -11,7 +11,7 @@ require 'shared_examples_for_tagable_models'
 
 RSpec.describe CompilationHead, type: :model do
   before(:each) do
-    @c_head = FactoryGirl.create(:compilation_head)
+    @c_head = FactoryBot.create(:compilation_head)
   end
 
   it { is_expected.to(belong_to(:data_import)) }
@@ -21,7 +21,7 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
-    @a_head = FactoryGirl.create(
+    @a_head = FactoryBot.create(
       :album_head,
       title:          @c_head.title,
       disambiguation: @c_head.disambiguation
@@ -40,7 +40,7 @@ RSpec.describe CompilationHead, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryGirl.create(:compilation_head)
+      @commentable = FactoryBot.create(:compilation_head)
     end
 
     let(:commentable) { @commentable }
@@ -51,7 +51,7 @@ RSpec.describe CompilationHead, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @compilation_head = FactoryGirl.create(:compilation_head)
+      @compilation_head = FactoryBot.create(:compilation_head)
     end
 
     let(:rateable) { @compilation_head }
@@ -62,7 +62,7 @@ RSpec.describe CompilationHead, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:compilation_head)
+      @tagable = FactoryBot.create(:compilation_head)
     end
 
     let(:tagable) { @tagable }
@@ -71,19 +71,19 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryGirl.create(:compilation_head_with_companies) }
+    let(:candidate) { FactoryBot.create(:compilation_head_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryGirl.create(:compilation_head_with_countries) }
+    let(:candidate) { FactoryBot.create(:compilation_head_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryGirl.create(:compilation_head_with_credits) }
+    let(:candidate) { FactoryBot.create(:compilation_head_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do
-    let(:candidate) { FactoryGirl.create(:compilation_head_with_labels) }
+    let(:candidate) { FactoryBot.create(:compilation_head_with_labels) }
   end
 
   it_behaves_like 'a model with disambiguations' do
@@ -93,6 +93,6 @@ RSpec.describe CompilationHead, type: :model do
   end
 
   it_behaves_like 'an object with a source' do
-    let(:candidate) { FactoryGirl.create(:compilation_head) }
+    let(:candidate) { FactoryBot.create(:compilation_head) }
   end
 end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :album_release do
     association :head, factory: :album_head
 

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Participant, type: :model do
   before(:each) do
     @participant = Participant.new(
-      artist:        FactoryGirl.create(:artist),
-      artist_credit: FactoryGirl.create(:artist_credit),
+      artist:        FactoryBot.create(:artist),
+      artist_credit: FactoryBot.create(:artist_credit),
       position:      0
     )
   end

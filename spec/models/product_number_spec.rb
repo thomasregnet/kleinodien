@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProductNumber, type: :model do
   before(:each) do
-    @ci = FactoryGirl.build(:product_number)
+    @ci = FactoryBot.build(:product_number)
   end
 
   it 'is valid with valid attributes' do
@@ -31,7 +31,7 @@ RSpec.describe ProductNumber, type: :model do
 
   it 'must have an unique code' do
     @ci.save!
-    clone = FactoryGirl.build(:product_number) do |c|
+    clone = FactoryBot.build(:product_number) do |c|
       c.release = @ci.release
       c.type    = @ci.type
       c.code    = @ci.code

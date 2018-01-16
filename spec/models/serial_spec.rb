@@ -12,7 +12,7 @@ RSpec.describe Serial, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryGirl.create(:serial)
+      @commentable = FactoryBot.create(:serial)
     end
 
     let(:commentable) { @commentable }
@@ -23,7 +23,7 @@ RSpec.describe Serial, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @serial = FactoryGirl.create(:serial)
+      @serial = FactoryBot.create(:serial)
     end
 
     let(:rateable) { @serial }
@@ -34,7 +34,7 @@ RSpec.describe Serial, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:serial)
+      @tagable = FactoryBot.create(:serial)
     end
 
     let(:tagable) { @tagable }
@@ -44,7 +44,7 @@ RSpec.describe Serial, type: :model do
 
   context 'without seasons' do
     before(:each) do
-      @serial = FactoryGirl.build(:serial)
+      @serial = FactoryBot.build(:serial)
     end
 
     it 'is valid with valid attributes' do
@@ -60,7 +60,7 @@ RSpec.describe Serial, type: :model do
 
   context 'with seasons and episodes' do
     before(:each) do
-      @season = FactoryGirl.create(:season_with_tv_episode_heads)
+      @season = FactoryBot.create(:season_with_tv_episode_heads)
       @serial = @season.serial
     end
 
