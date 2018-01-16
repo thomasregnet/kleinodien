@@ -15,7 +15,7 @@ RSpec.describe Import::PersistBrainzArtist do
         '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
       )
 
-      knowledge = Import::Knowledge.new(
+      knowledge = Import::Store.new(
         having: {
           reference => KoTestData.brainz_xml_for(reference)
         }
@@ -48,12 +48,12 @@ RSpec.describe Import::PersistBrainzArtist do
   context 'with missing data' do
     let(:persister) do
       described_class.new(
-        knowledge: Import::Knowledge.new,
+        knowledge: Import::Store.new,
         reference: FakeReference.new(code: 'foo')
       )
     end
 
-    it 'raises Import::KnowledgeMissing' do
+    it 'raises Import::StoreMissing' do
       expect { persister.perform }.to raise_error(Import::KnowledgeMissing)
     end
   end

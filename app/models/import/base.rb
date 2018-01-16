@@ -27,10 +27,10 @@ module Import
       knowledge = args[:knowledge]
       return knowledge if knowledge
 
-      #return Knowledge.new(having: attributes[:knowledge]) if attributes
-      return Knowledge.from_uris(attributes[:knowledge]) if attributes
+      #return Store.new(having: attributes[:knowledge]) if attributes
+      return Store.from_uris(attributes[:knowledge]) if attributes
 
-      Knowledge.new
+      Store.new
     end
 
     def init_reference(args)

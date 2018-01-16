@@ -37,13 +37,13 @@ RSpec.describe Import::Base do
   describe '#knowledge' do
     let(:base) { described_class.new }
 
-    it 'retuns a Import::Knowledge object' do
-      expect(base.knowledge).to be_instance_of(Import::Knowledge)
+    it 'retuns a Import::Store object' do
+      expect(base.knowledge).to be_instance_of(Import::Store)
     end
 
     context '#ask' do
-      it 'retuns an Import::Knowledge object' do
-        expect(base.ask).to be_instance_of(Import::Knowledge)
+      it 'retuns an Import::Store object' do
+        expect(base.ask).to be_instance_of(Import::Store)
       end
     end
   end
