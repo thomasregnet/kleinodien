@@ -20,7 +20,7 @@ module Import
     private
 
     def brainz_artist
-      ask.about!(reference)
+      store.ask_for!(reference)
     end
   end
 end

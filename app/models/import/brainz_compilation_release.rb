@@ -38,7 +38,7 @@ module Import
     def body
       offered_id = offered
       reference = BrainzReleaseReference.from_code(offered_id)
-      ask.about(reference)
+      store.ask_for(reference)
       {
         data:
           {
@@ -56,7 +56,7 @@ module Import
     end
 
     def init_data_import
-      release = ask.about!(reference)
+      release = store.ask_for!(reference)
       note = "MusicBrainz release #{release.title}"
       DataImport.create(note: note)
     end
