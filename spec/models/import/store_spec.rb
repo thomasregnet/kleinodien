@@ -35,37 +35,37 @@ RSpec.describe Import::Store do
 
   context 'ask_for something unknown' do
     before do
-      @reference = FakeReference.from_code("abc")
-      @knowledge = described_class.new
-      @knowledge.ask_for(@reference)
+      @reference = FakeReference.from_code('abc')
+      @store     = described_class.new
+      @store.ask_for(@reference)
     end
 
     describe '#ask_for_raw' do
       it 'returns nil' do
-        expect(@knowledge.ask_for_raw(@reference)).to be nil
+        expect(@store.ask_for_raw(@reference)).to be nil
       end
     end
     describe '#ask_for!' do
       it 'raises an error' do
-        expect { @knowledge.ask_for!(@reference) }
+        expect { @store.ask_for!(@reference) }
           .to raise_error(Import::KnowledgeMissing)
       end
     end
     describe '#having' do
       it 'is empty' do
-        expect(@knowledge.having).to be_empty
+        expect(@store.having).to be_empty
       end
     end
 
     describe '#missing' do
       it 'includes the reference' do
-        expect(@knowledge.missing).to include(@reference)
+        expect(@store.missing).to include(@reference)
       end
     end
 
     describe '#missing?' do
       it 'returns true' do
-        expect(@knowledge).to be_missing
+        expect(@store).to be_missing
       end
     end
   end
@@ -73,19 +73,19 @@ RSpec.describe Import::Store do
   context 'ask_for something known' do
     before do
       @reference = FakeReference.from_code('xyz')
-      @knowledge = described_class.new(
+      @store = described_class.new(
         having: { @reference => 'foo' }
       )
     end
 
     describe '#ask_for_raw' do
       it 'returns the raw data' do
-        expect(@knowledge.ask_for_raw(@reference)).to eq('foo')
+        expect(@store.ask_for_raw(@reference)).to eq('foo')
       end
     end
     describe '#missing' do
       it 'is empty' do
-        expect(@knowledge.missing).to be_empty
+        expect(@store.missing).to be_empty
       end
     end
   end
