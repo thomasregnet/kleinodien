@@ -16,7 +16,7 @@ module Import
 
       DataImport.transaction do
         prepare_brainz_compilation_release(reference: reference)
-        raise ActiveRecord::Rollback, 'data missing' if knowledge.missing?
+        raise ActiveRecord::Rollback, 'data missing' if store.missing?
         persist_brainz_compilation_release(
           data_import: init_data_import,
           reference:   reference
@@ -48,7 +48,7 @@ module Import
     end
 
     def body_attributes
-      attributes = { http_status_code: 202 }.merge(knowledge.collect)
+      attributes = { http_status_code: 202 }.merge(store.collect)
       # attributes[:http_status_code] = 202
       # attributes.merge(knowledge.collect)
       # attributes[:required] = cache.required if cache.any_required?

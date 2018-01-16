@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      return if knowledge.missing?
+      return if store.missing?
       artist = Artist.brainz(brainz_artist)
       artist.data_import = data_import
       artist.save!

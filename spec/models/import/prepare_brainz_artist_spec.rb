@@ -7,32 +7,31 @@ RSpec.describe Import::PrepareBrainzArtist do
   end
 
   context 'with an unknown artist' do
-    describe '#knowledge.missing?' do
+    describe '#store.missing?' do
       it 'returns true' do
         artist_importer = described_class.new(
           reference: reference
         )
         artist_importer.perform
-        expect(artist_importer.knowledge.missing?).to be true
+        expect(artist_importer.store.missing?).to be true
       end
     end
   end
 
   context 'with a known artist' do
-    describe '#knowledge.missing?' do
+    describe '#store.missing?' do
       it 'returns false' do
-        knowledge = Import::Store.new(
+        store = Import::Store.new(
           having: { reference => KoTestData.brainz_xml_for(reference) }
         )
 
         artist_importer = described_class.new(
-          knowledge: knowledge,
-          reference: reference
+          reference: reference,
+          store:     store
         )
 
         artist_importer.perform
-        #byebug
-        expect(artist_importer.knowledge.missing?).to be false
+        expect(artist_importer.store.missing?).to be false
       end
     end
   end

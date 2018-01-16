@@ -4,9 +4,9 @@ module Import
     attr_reader :store, :params, :reference
 
     def initialize(args = {})
-      @params      = args[:params]
-      @store   = init_store(args)
-      @reference   = init_reference(args)
+      @params     = args[:params]
+      @store      = init_store(args)
+      @reference  = init_reference(args)
     end
 
     def offered
@@ -24,8 +24,8 @@ module Import
     private
 
     def init_store(args)
-      knowledge = args[:knowledge]
-      return knowledge if knowledge
+      store = args[:store]
+      return store if store
 
       #return Store.new(having: attributes[:knowledge]) if attributes
       return Store.from_uris(attributes[:knowledge]) if attributes
@@ -46,7 +46,7 @@ module Import
       class_name = import_service_class_name_for(method)
       if Import.const_defined?(class_name)
         klass = class_name.constantize
-        merged_args = { knowledge: knowledge}.merge(args)
+        merged_args = { store: store }.merge(args)
         return klass.send :perform, merged_args
       end
       super
