@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'fake_reference'
 require 'ko_test_data'
 
-RSpec.describe Import::Knowledge do
+RSpec.describe Import::Store do
   let(:knowledge) { described_class.new }
 
   context 'without parameters' do
@@ -81,7 +81,7 @@ RSpec.describe Import::Knowledge do
   end
 end
 
-# RSpec.describe Import::Knowledge do
+# RSpec.describe Import::Store do
 #   context 'nothing known, nothing requested' do
 #     let(:knowledge) { described_class.new({}) }
 
@@ -92,8 +92,8 @@ end
 #     end
 
 #     describe '#brainz' do
-#       it 'returns an Import::BrainzKnowledge instance' do
-#         expect(knowledge.brainz).to be_instance_of(Import::BrainzKnowledge)
+#       it 'returns an Import::BrainzStore instance' do
+#         expect(knowledge.brainz).to be_instance_of(Import::BrainzStore)
 #       end
 #     end
 

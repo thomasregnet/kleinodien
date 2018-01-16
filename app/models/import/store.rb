@@ -1,6 +1,6 @@
 module Import
   # Known and required data to import
-  class Knowledge
+  class Store
     attr_reader :having, :missing
 
     def self.from_uris(uri_data)
