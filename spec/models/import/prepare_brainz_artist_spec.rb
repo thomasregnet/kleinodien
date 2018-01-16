@@ -21,7 +21,7 @@ RSpec.describe Import::PrepareBrainzArtist do
   context 'with a known artist' do
     describe '#knowledge.missing?' do
       it 'returns false' do
-        knowledge = Import::Knowledge.new(
+        knowledge = Import::Store.new(
           having: { reference => KoTestData.brainz_xml_for(reference) }
         )
 

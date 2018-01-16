@@ -23,7 +23,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
         having[reference] = xml
       end
 
-      knowledge = Import::Knowledge.new(having: having)
+      knowledge = Import::Store.new(having: having)
 
       @artist_credit = Import::PersistBrainzArtistCredit.perform(
         data_import: FactoryGirl.create(:data_import),
