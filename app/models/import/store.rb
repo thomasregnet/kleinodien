@@ -22,10 +22,13 @@ module Import
     end
 
     def ask_for(reference)
-      known = having[reference]
-      missing.add(reference) unless known
-      return unless known
-      PrepareRawData.perform(reference, known)
+      raw_data = ask_for_raw(reference)
+      unless raw_data
+        missing.add(reference) # unless raw_data
+        return                 # unless raw_data
+      end
+
+      PrepareRawData.perform(reference, raw_data)
     end
 
     def ask_for!(reference)
