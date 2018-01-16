@@ -19,8 +19,6 @@ module Import
       params.dig(:data, :attributes)
     end
 
-    alias ask store
-
     private
 
     def init_store(args)

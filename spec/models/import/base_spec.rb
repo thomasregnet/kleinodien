@@ -40,12 +40,6 @@ RSpec.describe Import::Base do
     it 'retuns an Import::Store object' do
       expect(base.store).to be_instance_of(Import::Store)
     end
-
-    context '#ask' do
-      it 'retuns an Import::Store object' do
-        expect(base.ask).to be_instance_of(Import::Store)
-      end
-    end
   end
 
   describe '#params' do
