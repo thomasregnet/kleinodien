@@ -15,7 +15,7 @@ RSpec.describe Import::PersistBrainzArtist do
         '2280ca0e-6968-4349-8c36-cb0cbd6ee95f'
       )
 
-      knowledge = Import::Store.new(
+      store = Import::Store.new(
         having: {
           reference => KoTestData.brainz_xml_for(reference)
         }
@@ -23,7 +23,7 @@ RSpec.describe Import::PersistBrainzArtist do
 
       @artist = described_class.perform(
         data_import: FactoryGirl.create(:data_import),
-        knowledge: knowledge,
+        store: store,
         reference: reference
       )
     end
@@ -48,7 +48,7 @@ RSpec.describe Import::PersistBrainzArtist do
   context 'with missing data' do
     let(:persister) do
       described_class.new(
-        knowledge: Import::Store.new,
+        store: Import::Store.new,
         reference: FakeReference.new(code: 'foo')
       )
     end

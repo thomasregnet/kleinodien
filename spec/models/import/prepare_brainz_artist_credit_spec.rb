@@ -14,14 +14,14 @@ RSpec.describe Import::PrepareBrainzArtistCredit do
     MashedBrainz.from_xml(xml).artist_credit
   end
 
-  context 'without knowledge' do
-    describe '#knowledge.missing?' do
+  context 'without store' do
+    describe '#store.missing?' do
       it 'returns true' do
         ac_preparer = described_class.new(
           template: artist_credit
         )
         ac_preparer.perform
-        expect(ac_preparer.knowledge.missing?).to be true
+        expect(ac_preparer.store.missing?).to be true
       end
     end
   end

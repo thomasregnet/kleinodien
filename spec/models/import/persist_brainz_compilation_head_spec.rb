@@ -19,14 +19,14 @@ RSpec.describe Import::PersistBrainzCompilationHead do
       having[reference] = KoTestData.brainz_xml_for(reference)
     end
 
-    @knowledge = Import::Store.new(having: having)
+    @store = Import::Store.new(having: having)
   end
 
   describe 'persisting a brainz release-group' do
     let(:compilation_head) do
       Import::PersistBrainzCompilationHead.perform(
         data_import: FactoryGirl.create(:data_import),
-        knowledge:   @knowledge,
+        store:   @store,
         reference:   @reference
       )
     end

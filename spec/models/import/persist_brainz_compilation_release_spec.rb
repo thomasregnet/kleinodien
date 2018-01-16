@@ -24,7 +24,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
 
     compilation_release = described_class.perform(
       data_import: FactoryGirl.create(:data_import),
-      knowledge:   Import::Store.new(having: having),
+      store:       Import::Store.new(having: having),
       reference:   reference
     )
     expect(compilation_release.title).to eq('Arise')
