@@ -17,6 +17,10 @@ module Import
       @missing = Set.new
     end
 
+    def ask_for_raw(reference)
+      having[reference]
+    end
+
     def ask_for(reference)
       known = having[reference]
       missing.add(reference) unless known
