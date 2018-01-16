@@ -4,9 +4,9 @@ require 'shared_examples_for_labels'
 RSpec.describe ChLabel, type: :model do
   it_behaves_like 'a label' do
     let(:owner_setter) { 'compilation_head=' }
-    let(:label)        { FactoryGirl.build(:ch_label) }
+    let(:label)        { FactoryBot.build(:ch_label) }
     let(:label_with_catalog_no) do
-      FactoryGirl.build(:ch_label_with_catalog_no)
+      FactoryBot.build(:ch_label_with_catalog_no)
     end
   end
 end

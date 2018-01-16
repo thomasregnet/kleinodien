@@ -23,7 +23,7 @@ RSpec.describe Import::PersistBrainzCompilationRelease do
     )
 
     compilation_release = described_class.perform(
-      data_import: FactoryGirl.create(:data_import),
+      data_import: FactoryBot.create(:data_import),
       store:       Import::Store.new(having: having),
       reference:   reference
     )

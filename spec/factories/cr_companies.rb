@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :cr_company do
     company
     company_role

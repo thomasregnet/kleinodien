@@ -3,7 +3,7 @@ require 'shared_examples_for_disambiguations'
 
 RSpec.describe TvEpisodeHead, type: :model do
   before(:each) do
-    @tv_episode_head = FactoryGirl.create(:tv_episode_head)
+    @tv_episode_head = FactoryBot.create(:tv_episode_head)
   end
 
   it 'is valid with valid attributes' do

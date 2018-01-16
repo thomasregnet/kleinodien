@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProductNumberType, type: :model do
   before(:each) do
-    @id_type = FactoryGirl.build(:product_number_type)
+    @id_type = FactoryBot.build(:product_number_type)
   end
 
   it 'is valid with valid attributes' do

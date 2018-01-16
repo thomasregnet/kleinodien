@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :movie_release_identifier do
     sequence(:value) { |n| "movie-release-identifier-#{n}" }
     association :identified, factory: :movie_release

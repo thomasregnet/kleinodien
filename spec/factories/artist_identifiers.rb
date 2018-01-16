@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :artist_identifier do
     sequence(:value) { |n| "artist-identifier-#{n}" }
     association :artist, factory: :artist

@@ -4,9 +4,9 @@ require 'shared_examples_for_labels'
 RSpec.describe PhLabel, type: :model do
   it_behaves_like 'a label' do
     let(:owner_setter) { 'piece_head=' }
-    let(:label)        { FactoryGirl.build(:ph_label) }
+    let(:label)        { FactoryBot.build(:ph_label) }
     let(:label_with_catalog_no) do
-      FactoryGirl.build(:ph_label_with_catalog_no)
+      FactoryBot.build(:ph_label_with_catalog_no)
     end
   end
 end

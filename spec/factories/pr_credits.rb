@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :pr_credit do
     artist_credit
     piece_release

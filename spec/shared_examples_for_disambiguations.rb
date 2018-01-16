@@ -2,7 +2,7 @@
 RSpec.shared_examples 'a model with disambiguations' do
   let(:get_name) { naming }
   let(:set_name) { naming + '=' }
-  let(:clone) { FactoryGirl.build(factory) }
+  let(:clone) { FactoryBot.build(factory) }
   let(:disambiguation) { 'another one' }
 
   it 'is not valid without a naming' do

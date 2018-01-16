@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   # TODO: maybe delete this factory
   factory :participant do
     sequence(:position) { |n| n }

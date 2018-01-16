@@ -5,7 +5,7 @@ RSpec.describe CompilationTrack, type: :model do
   context 'simple track' do
     before(:all) do
       DatabaseCleaner.start
-      @track = FactoryGirl.build(:compilation_track)
+      @track = FactoryBot.build(:compilation_track)
     end
 
     it 'is valid with valid attributes' do
@@ -24,7 +24,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'belonging to a CompilationRelease' do
     before(:each) do
-      @track = FactoryGirl.build(:compilation_track_with_compilation_release)
+      @track = FactoryBot.build(:compilation_track_with_compilation_release)
     end
 
     it 'knows its CompilationRelease' do
@@ -34,7 +34,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'with a format' do
     before(:each) do
-      @track = FactoryGirl.build(:compilation_track_with_format)
+      @track = FactoryBot.build(:compilation_track_with_format)
     end
 
     it 'belongs to its format' do
@@ -44,7 +44,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'with format_details' do
     before(:each) do
-      @track = FactoryGirl.create(:compilation_track_with_details)
+      @track = FactoryBot.create(:compilation_track_with_details)
     end
 
     it_behaves_like 'an entity with format_details' do
@@ -54,7 +54,7 @@ RSpec.describe CompilationTrack, type: :model do
 
   context 'with repository_positions' do
     before(:each) do
-      @track = FactoryGirl.create(:compilation_track_with_repository_positions)
+      @track = FactoryBot.create(:compilation_track_with_repository_positions)
     end
 
     it 'can use repository positions' do
@@ -70,7 +70,7 @@ RSpec.describe CompilationTrack, type: :model do
   context 'with duration' do
     before(:each) do
       DatabaseCleaner.start
-      @track = FactoryGirl.build(:compilation_track)
+      @track = FactoryBot.build(:compilation_track)
       @track.duration = Duration.new(311_000, 'second')
     end
 
@@ -95,7 +95,7 @@ RSpec.describe CompilationTrack, type: :model do
   # context 'with a format' do
   #   before(:all) do
   #     DatabaseCleaner.start
-  #     @track = FactoryGirl.build(
+  #     @track = FactoryBot.build(
   #       :compilation_track,
   #       new_format: CtFormat.find('FLAC')
   #     )

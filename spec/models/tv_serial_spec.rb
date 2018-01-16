@@ -4,7 +4,7 @@ require 'shared_examples_for_disambiguations'
 RSpec.describe TvSerial, type: :model do
   context 'without seasons' do
     before(:each) do
-      @tv_serial = FactoryGirl.create(:tv_serial)
+      @tv_serial = FactoryBot.create(:tv_serial)
     end
 
     it 'is valid with valid attributes' do
@@ -20,7 +20,7 @@ RSpec.describe TvSerial, type: :model do
 
   context 'with seassons' do
     before(:each) do
-      @tv_serial = FactoryGirl.create(
+      @tv_serial = FactoryBot.create(
         :tv_serial_with_seasons, seasons_count: 3
       )
     end

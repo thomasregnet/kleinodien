@@ -26,7 +26,7 @@ Then(/^I should see the logout link$/) do
 end
 
 Given(/^User exists$/) do
-  @user = FactoryGirl.create(:user)
+  @user = FactoryBot.create(:user)
 end
 
 When(/^I visit the Sign in page$/) do

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :product_number do
     association :release, factory: :compilation_release
     association :type, factory: :product_number_type

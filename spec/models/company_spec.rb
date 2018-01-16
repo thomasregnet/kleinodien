@@ -3,6 +3,6 @@ require 'shared_examples_for_unique_names'
 
 RSpec.describe Company, type: :model do
   it_behaves_like 'an entity with an unique name' do
-    let(:candidate) { FactoryGirl.build(:company) }
+    let(:candidate) { FactoryBot.build(:company) }
   end
 end

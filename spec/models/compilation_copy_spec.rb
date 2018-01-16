@@ -4,7 +4,7 @@ require 'brainz_test_helper'
 RSpec.describe CompilationCopy, type: :model do
   context 'test in a lab' do
     before(:each) do
-      @copy = FactoryGirl.create(:compilation_copy)
+      @copy = FactoryBot.create(:compilation_copy)
     end
 
     it 'is valid with valid attributes' do
@@ -41,8 +41,8 @@ RSpec.describe CompilationCopy, type: :model do
                      .get_release('c8f7094d-ce27-365e-961f-0af27321be08')
       @x_release = Brainz::InsertRelease.perform(@brz_release)
       @release = AlbumRelease.find(@x_release.id)
-      @repository = FactoryGirl.create(:repository)
-      @co_copy    = FactoryGirl.create(
+      @repository = FactoryBot.create(:repository)
+      @co_copy    = FactoryBot.create(
         :compilation_copy,
         release: @release,
         user:    @repository.user

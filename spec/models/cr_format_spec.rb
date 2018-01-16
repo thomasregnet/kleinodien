@@ -3,7 +3,7 @@ require 'shared_examples_for_entities_with_format_details'
 
 RSpec.describe CrFormat, type: :model do
   before(:each) do
-    @cr_format = FactoryGirl.create(:cr_format)
+    @cr_format = FactoryBot.create(:cr_format)
   end
 
   it 'is valid with valid attributes' do
@@ -58,7 +58,7 @@ RSpec.describe CrFormat, type: :model do
 
   context 'with details' do
     before(:each) do
-      @cr_format = FactoryGirl.create(:cr_format_with_details)
+      @cr_format = FactoryBot.create(:cr_format_with_details)
     end
 
     it_behaves_like 'an entity with format_details' do

@@ -19,7 +19,7 @@ end
 RSpec.describe RepositoryPosition, type: :model do
   context 'with a CompilationTrack' do
     before(:each) do
-      @position = FactoryGirl.build(
+      @position = FactoryBot.build(
         :repository_position_with_compilation_track
       )
     end
@@ -34,7 +34,7 @@ RSpec.describe RepositoryPosition, type: :model do
 
   context 'with a PieceTrack' do
     before(:each) do
-      @position = FactoryGirl.build(:repository_position_with_piece_track)
+      @position = FactoryBot.build(:repository_position_with_piece_track)
     end
 
     include_examples 'repository_positions', @position
@@ -42,10 +42,10 @@ RSpec.describe RepositoryPosition, type: :model do
 
   context 'with CompilationTrack and PieceTrack' do
     before(:each) do
-      @position = FactoryGirl.build(
+      @position = FactoryBot.build(
         :repository_position_with_compilation_track
       )
-      @position.piece_track = FactoryGirl.build(:piece_track)
+      @position.piece_track = FactoryBot.build(:piece_track)
     end
 
     it 'is not valid' do

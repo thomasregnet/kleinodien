@@ -25,7 +25,7 @@ RSpec.describe Import::PersistBrainzCompilationHead do
   describe 'persisting a brainz release-group' do
     let(:compilation_head) do
       Import::PersistBrainzCompilationHead.perform(
-        data_import: FactoryGirl.create(:data_import),
+        data_import: FactoryBot.create(:data_import),
         store:   @store,
         reference:   @reference
       )

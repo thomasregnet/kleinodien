@@ -13,7 +13,7 @@ RSpec.describe ArtistCredit, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @artist_credit = FactoryGirl.create(:artist_credit)
+      @artist_credit = FactoryBot.create(:artist_credit)
     end
 
     let(:commentable) { @artist_credit }
@@ -24,7 +24,7 @@ RSpec.describe ArtistCredit, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @artist_credit = FactoryGirl.create(:artist_credit)
+      @artist_credit = FactoryBot.create(:artist_credit)
     end
 
     let(:rateable) { @artist_credit }
@@ -35,7 +35,7 @@ RSpec.describe ArtistCredit, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:artist_credit)
+      @tagable = FactoryBot.create(:artist_credit)
     end
 
     let(:tagable) { @tagable }
@@ -46,7 +46,7 @@ RSpec.describe ArtistCredit, type: :model do
   context 'without a Source' do
     context 'not saved to the database' do
       before(:each) do
-        @artist_credit = FactoryGirl.build(:artist_credit)
+        @artist_credit = FactoryBot.build(:artist_credit)
       end
 
       it { is_expected.to respond_to(:artists) }
@@ -65,7 +65,7 @@ RSpec.describe ArtistCredit, type: :model do
     context 'saved to the database' do
       before(:all) do
         DatabaseCleaner.start
-        @artist_credit = FactoryGirl.create(:artist_credit)
+        @artist_credit = FactoryBot.create(:artist_credit)
       end
 
       # TODO: let this test pass again
@@ -87,11 +87,11 @@ RSpec.describe ArtistCredit, type: :model do
 
   context 'CompilationRelease' do
     specify '#compilation_releases' do
-      artist_credit = FactoryGirl.create(:artist_credit)
+      artist_credit = FactoryBot.create(:artist_credit)
       compilation_release = artist_credit.compilation_releases.create!(
         title: 'Awesome album',
         type: 'AlbumRelease',
-        head: FactoryGirl.create(:compilation_head)
+        head: FactoryBot.create(:compilation_head)
       )
       expect(compilation_release).to be_instance_of(AlbumRelease)
     end
@@ -100,12 +100,12 @@ RSpec.describe ArtistCredit, type: :model do
   context 'SongRelease' do
     before(:all) do
       DatabaseCleaner.start
-      @artist_credit = FactoryGirl.create(:artist_credit)
+      @artist_credit = FactoryBot.create(:artist_credit)
     end
 
     it 'foobar' do
       song_release = @artist_credit.song_releases.create!(
-        head: FactoryGirl.create(:song_head)
+        head: FactoryBot.create(:song_head)
       )
 
       expect { song_release.save! }.not_to raise_error
@@ -118,7 +118,7 @@ RSpec.describe ArtistCredit, type: :model do
   context 'with Source' do
     before(:all) do
       DatabaseCleaner.start
-      @artist_credit = FactoryGirl.create(:artist_credit_with_source)
+      @artist_credit = FactoryBot.create(:artist_credit_with_source)
     end
 
     it 'is valid' do
@@ -136,7 +136,7 @@ RSpec.describe ArtistCredit, type: :model do
     it 'must not have an unique name when the Source differs' do
       clone = ArtistCredit.new(
         participants:  @artist_credit.participants,
-        source:        FactoryGirl.create(:source)
+        source:        FactoryBot.create(:source)
       )
       expect { clone.save! }.not_to raise_error
     end

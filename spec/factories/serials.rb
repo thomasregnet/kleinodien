@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :serial do
     sequence(:title) { |n| "serial ##{n}" }
     type 'Serial'

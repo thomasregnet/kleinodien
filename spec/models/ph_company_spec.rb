@@ -3,7 +3,7 @@ require 'shared_examples_for_companies'
 
 RSpec.describe PhCompany, type: :model do
   it_behaves_like 'a company' do
-    let(:company)      { FactoryGirl.create(:ph_company) }
+    let(:company)      { FactoryBot.create(:ph_company) }
     let(:owner_setter) { 'piece_head=' }
   end
 end

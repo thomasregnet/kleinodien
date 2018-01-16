@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :cr_format do
     association :release, factory: :compilation_release
     association :format, factory: :format

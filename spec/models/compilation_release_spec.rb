@@ -18,7 +18,7 @@ RSpec.describe CompilationRelease, type: :model do
 
   describe '#brainz_code' do
     subject do
-      FactoryGirl.create(
+      FactoryBot.create(
         :compilation_release,
         brainz_code: 'd255e468-c944-436c-9f73-129246d3394d' 
       )
@@ -30,7 +30,7 @@ RSpec.describe CompilationRelease, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @compilation_release = FactoryGirl.create(:compilation_release)
+      @compilation_release = FactoryBot.create(:compilation_release)
     end
 
     let(:commentable) { @compilation_release }
@@ -41,7 +41,7 @@ RSpec.describe CompilationRelease, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @compilation_release = FactoryGirl.create(:compilation_release)
+      @compilation_release = FactoryBot.create(:compilation_release)
     end
 
     let(:rateable) { @compilation_release }
@@ -52,7 +52,7 @@ RSpec.describe CompilationRelease, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:compilation_release)
+      @tagable = FactoryBot.create(:compilation_release)
     end
 
     let(:tagable) { @tagable }
@@ -62,7 +62,7 @@ RSpec.describe CompilationRelease, type: :model do
 
   context 'with product_numbers' do
     before(:each) do
-      @product_number = FactoryGirl.create(:product_number)
+      @product_number = FactoryBot.create(:product_number)
       @c_release      = @product_number.release
     end
 
@@ -76,27 +76,27 @@ RSpec.describe CompilationRelease, type: :model do
   end
 
   it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryGirl.create(:compilation_release_with_companies) }
+    let(:candidate) { FactoryBot.create(:compilation_release_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryGirl.create(:compilation_release_with_countries) }
+    let(:candidate) { FactoryBot.create(:compilation_release_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryGirl.create(:compilation_release_with_credits) }
+    let(:candidate) { FactoryBot.create(:compilation_release_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do
-    let(:candidate) { FactoryGirl.create(:compilation_release_with_labels) }
+    let(:candidate) { FactoryBot.create(:compilation_release_with_labels) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do
-    let(:candidate) { FactoryGirl.create(:compilation_release) }
+    let(:candidate) { FactoryBot.create(:compilation_release) }
     let(:date_naming) { 'date' }
   end
 
   it_behaves_like 'an object with a source' do
-    let(:candidate) { FactoryGirl.create(:compilation_release) }
+    let(:candidate) { FactoryBot.create(:compilation_release) }
   end
 end

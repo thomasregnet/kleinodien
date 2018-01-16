@@ -4,7 +4,7 @@ RSpec.describe OriginalExemplar, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   before(:each) do
-    @original = FactoryGirl.build(:original_exemplar)
+    @original = FactoryBot.build(:original_exemplar)
   end
 
   it 'is valid with valid parameters' do

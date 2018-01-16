@@ -5,7 +5,7 @@ include ApiHelper
 
 RSpec.describe Api::V01::ArtistsController, type: :request do
   it 'sends a list of artists' do
-    a = FactoryGirl.create_list(:artist, 2)
+    a = FactoryBot.create_list(:artist, 2)
 
     api_get '/api/v01/artists'
 

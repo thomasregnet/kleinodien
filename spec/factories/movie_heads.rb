@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :movie_head do
     sequence(:position) { |n| n }
     sequence(:title) { |n| "movie title ##{n}" }

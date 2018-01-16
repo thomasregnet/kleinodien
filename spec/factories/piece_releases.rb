@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :piece_release do
     association :head, factory: :piece_head
     type 'PieceRelease'
@@ -19,8 +19,8 @@ FactoryGirl.define do
 
     factory :piece_release_with_countries do
       after(:create) do |piece_release|
-        piece_release.countries << FactoryGirl.create(:country)
-        piece_release.countries << FactoryGirl.create(:country)
+        piece_release.countries << FactoryBot.create(:country)
+        piece_release.countries << FactoryBot.create(:country)
       end
     end
 

@@ -63,7 +63,7 @@ Then(/^I see the artist in the requirements$/) do
 end
 
 Given(/^The release already exists$/) do
-  FactoryGirl.create(
+  FactoryBot.create(
     :compilation_release,
     brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   )

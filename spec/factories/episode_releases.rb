@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :episode_release do
     association :head, factory: :episode_head
 

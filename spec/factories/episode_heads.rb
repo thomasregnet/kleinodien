@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :episode_head do
     season
     sequence(:position) { |n| n }

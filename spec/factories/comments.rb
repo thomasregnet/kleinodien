@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment do
     sequence(:text) { |n| "this is comment #{n}" }
     association :user, factory: :user

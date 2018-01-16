@@ -11,7 +11,7 @@ RSpec.describe Season, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryGirl.create(:season)
+      @commentable = FactoryBot.create(:season)
     end
 
     let(:commentable) { @commentable }
@@ -22,7 +22,7 @@ RSpec.describe Season, type: :model do
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @season = FactoryGirl.create(:season)
+      @season = FactoryBot.create(:season)
     end
 
     let(:rateable) { @season }
@@ -33,7 +33,7 @@ RSpec.describe Season, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryGirl.create(:season)
+      @tagable = FactoryBot.create(:season)
     end
 
     let(:tagable) { @tagable }
@@ -43,7 +43,7 @@ RSpec.describe Season, type: :model do
 
   context 'without episodes' do
     before(:each) do
-      @season = FactoryGirl.build(:season)
+      @season = FactoryBot.build(:season)
     end
 
     it 'is valid with valid attributes' do
@@ -63,7 +63,7 @@ RSpec.describe Season, type: :model do
 
   context 'with episodes of a tv-serial' do
     before(:each) do
-      @season = FactoryGirl.create(
+      @season = FactoryBot.create(
         :season_with_tv_episode_heads,
         episodes_count: 7
       )

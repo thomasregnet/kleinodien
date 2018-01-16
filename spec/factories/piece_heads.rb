@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :piece_head do
     sequence(:title) { |n| "piece ##{n}" }
     type 'PieceHead'
@@ -21,8 +21,8 @@ FactoryGirl.define do
 
     factory :piece_head_with_countries do
       after(:create) do |piece_head|
-        piece_head.countries << FactoryGirl.create(:country)
-        piece_head.countries << FactoryGirl.create(:country)
+        piece_head.countries << FactoryBot.create(:country)
+        piece_head.countries << FactoryBot.create(:country)
       end
     end
 

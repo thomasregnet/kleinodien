@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :data_import do
     sequence(:note) { |n| "data import #{n}" }
   end

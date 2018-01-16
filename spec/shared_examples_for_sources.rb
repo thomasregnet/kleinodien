@@ -6,7 +6,7 @@ RSpec.shared_examples 'an object with a source' do
   # TODO: check 'source_name, source_ident and type must be unique'
   # describe 'source_name, source_ident and type must be unique' do
   #   before(:each) do
-  #     @bad_object = FactoryGirl.build(factory)
+  #     @bad_object = FactoryBot.build(factory)
   #     @bad_object.source_name  = @object.source_name
   #     @bad_object.source_ident = @object.source_ident
   #   end

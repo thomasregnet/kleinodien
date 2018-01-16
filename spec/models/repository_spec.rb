@@ -6,7 +6,7 @@ RSpec.describe Repository, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @compilation_release = FactoryGirl.create(:repository)
+      @compilation_release = FactoryBot.create(:repository)
     end
 
     let(:commentable) { @compilation_release }
@@ -17,7 +17,7 @@ RSpec.describe Repository, type: :model do
   context 'when live is simple' do
     before(:each) do
       DatabaseCleaner.start
-      @repository = FactoryGirl.build(:repository)
+      @repository = FactoryBot.build(:repository)
     end
 
     it 'is valid with valid attributes' do
@@ -42,7 +42,7 @@ RSpec.describe Repository, type: :model do
   context 'with a format' do
     before(:all) do
       DatabaseCleaner.start
-      @repository = FactoryGirl.build(:repository)
+      @repository = FactoryBot.build(:repository)
       @repository.format = Format.find_by(name: 'CDr')
     end
 
@@ -58,7 +58,7 @@ RSpec.describe Repository, type: :model do
   context 'with format details' do
     before(:all) do
       DatabaseCleaner.start
-      @repository = FactoryGirl.build(:repository)
+      @repository = FactoryBot.build(:repository)
       @repository.format = Format.find_by(name: 'CDr')
       @repos_format_detail = RepositoryFormatDetail.new(
         # abbr:     'WAV',

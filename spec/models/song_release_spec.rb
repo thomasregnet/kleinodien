@@ -4,7 +4,7 @@ require 'shared_examples_for_identifyable'
 
 RSpec.describe SongRelease, type: :model do
   before(:each) do
-    @song_release = FactoryGirl.create(:song_release)
+    @song_release = FactoryBot.create(:song_release)
   end
 
   it 'is valid with valid attributes' do
@@ -21,12 +21,12 @@ RSpec.describe SongRelease, type: :model do
   end
 
   it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryGirl.create(:song_release_with_identifiers) }
+    let(:identifyable) { FactoryBot.create(:song_release_with_identifiers) }
   end
 
   it 'belongs_to :artist_credit' do
-    song_release = FactoryGirl.create(:song_release)
-    song_release.artist_credit = FactoryGirl.create(:artist_credit)
+    song_release = FactoryBot.create(:song_release)
+    song_release.artist_credit = FactoryBot.create(:artist_credit)
     expect { song_release.save! }.not_to raise_error
 
     association = SongRelease.reflect_on_association(:artist_credit)
