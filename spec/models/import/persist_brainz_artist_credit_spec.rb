@@ -28,7 +28,7 @@ RSpec.describe Import::PersistBrainzArtistCredit do
       @artist_credit = Import::PersistBrainzArtistCredit.perform(
         data_import: FactoryBot.create(:data_import),
         store:   store,
-        template:    @brainz_artist_credit
+        blueprint:    @brainz_artist_credit
       )
     end
 

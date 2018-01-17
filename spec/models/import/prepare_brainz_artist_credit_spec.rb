@@ -18,7 +18,7 @@ RSpec.describe Import::PrepareBrainzArtistCredit do
     describe '#store.missing?' do
       it 'returns true' do
         ac_preparer = described_class.new(
-          template: artist_credit
+          blueprint: artist_credit
         )
         ac_preparer.perform
         expect(ac_preparer.store.missing?).to be true

@@ -17,7 +17,7 @@ module Import
     end
 
     def find_by
-      ArtistCredit.find_by(name: template.name)
+      ArtistCredit.find_by(name: blueprint.name)
     end
 
     def create
@@ -25,19 +25,19 @@ module Import
         data_import: data_import,
         source:      Source::MusicBrainz
       )
-      template.name_credits.each_with_index do |template_name_credit, position|
-        build_name_credit_on(template_name_credit, artist_credit, position)
+      blueprint.name_credits.each_with_index do |blueprint_name_credit, position|
+        build_name_credit_on(blueprint_name_credit, artist_credit, position)
       end
 
       artist_credit.save!
       artist_credit
     end
 
-    def build_name_credit_on(template_name_credit, artist_credit, position)
+    def build_name_credit_on(blueprint_name_credit, artist_credit, position)
       artist = persist_brainz_artist(
-        reference: template_name_credit.artist.reference
+        reference: blueprint_name_credit.artist.reference
       )
-      join_phrase = template_name_credit.joinphrase
+      join_phrase = blueprint_name_credit.joinphrase
       join_phrase&.strip! # if join_phrase
       artist_credit.participants.build(
         artist:      artist,

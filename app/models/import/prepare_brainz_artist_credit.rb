@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      template.name_credits.each do |name_credit|
+      blueprint.name_credits.each do |name_credit|
         prepare_brainz_artist(reference: name_credit.artist.reference)
       end
     end

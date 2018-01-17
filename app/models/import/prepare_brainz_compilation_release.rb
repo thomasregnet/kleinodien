@@ -14,7 +14,7 @@ module Import
       brainz_release = store.request(reference)
       return unless brainz_release
       prepare_brainz_artist_credit(
-        template: brainz_release.artist_credit
+        blueprint: brainz_release.artist_credit
       )
       # TODO: Use MaschedBrainz if they are available
       # TODO: call `prepare` on related classes
