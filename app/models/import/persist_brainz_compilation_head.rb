@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      original = store.ask_for!(reference)
+      original = store.request!(reference)
       artist_credit = persist_brainz_artist_credit(
         template: original.artist_credit
       )

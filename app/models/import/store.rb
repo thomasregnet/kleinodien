@@ -17,12 +17,12 @@ module Import
       @missing = Set.new
     end
 
-    def ask_for_raw(reference)
+    def request_raw(reference)
       having[reference]
     end
 
-    def ask_for(reference)
-      raw_data = ask_for_raw(reference)
+    def request(reference)
+      raw_data = request_raw(reference)
       unless raw_data
         missing.add(reference) # unless raw_data
         return                 # unless raw_data
@@ -31,8 +31,8 @@ module Import
       PrepareRawData.perform(reference, raw_data)
     end
 
-    def ask_for!(reference)
-      response = ask_for(reference)
+    def request!(reference)
+      response = request(reference)
       raise KnowledgeMissing unless response
       response
     end

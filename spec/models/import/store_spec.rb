@@ -33,21 +33,21 @@ RSpec.describe Import::Store do
     end
   end
 
-  context 'ask_for something unknown' do
+  context 'request something unknown' do
     before do
       @reference = FakeReference.from_code('abc')
       @store     = described_class.new
-      @store.ask_for(@reference)
+      @store.request(@reference)
     end
 
-    describe '#ask_for_raw' do
+    describe '#request_raw' do
       it 'returns nil' do
-        expect(@store.ask_for_raw(@reference)).to be nil
+        expect(@store.request_raw(@reference)).to be nil
       end
     end
-    describe '#ask_for!' do
+    describe '#request!' do
       it 'raises an error' do
-        expect { @store.ask_for!(@reference) }
+        expect { @store.request!(@reference) }
           .to raise_error(Import::KnowledgeMissing)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Import::Store do
     end
   end
 
-  context 'ask_for something known' do
+  context 'request something known' do
     before do
       @reference = FakeReference.from_code('xyz')
       @store = described_class.new(
@@ -78,9 +78,9 @@ RSpec.describe Import::Store do
       )
     end
 
-    describe '#ask_for_raw' do
+    describe '#request_raw' do
       it 'returns the raw data' do
-        expect(@store.ask_for_raw(@reference)).to eq('foo')
+        expect(@store.request_raw(@reference)).to eq('foo')
       end
     end
     describe '#missing' do

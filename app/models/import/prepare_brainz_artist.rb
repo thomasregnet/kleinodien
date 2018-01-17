@@ -10,7 +10,7 @@ module Import
     end
 
     def perform
-      store.ask_for(reference)
+      store.request(reference)
     end
   end
 end
