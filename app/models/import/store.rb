@@ -18,16 +18,18 @@ module Import
     end
 
     def request_raw(reference)
-      having[reference]
+      raw_data = having[reference]
+      unless raw_data
+        missing.add(reference)
+        return
+      end
+
+      raw_data
     end
 
     def request(reference)
       raw_data = request_raw(reference)
-      unless raw_data
-        missing.add(reference) # unless raw_data
-        return                 # unless raw_data
-      end
-
+      return unless raw_data
       PrepareRawData.perform(reference, raw_data)
     end
 
