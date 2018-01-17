@@ -12,7 +12,7 @@ module Import
     def perform
       original = store.request!(reference)
       artist_credit = persist_brainz_artist_credit(
-        template: original.artist_credit
+        blueprint: original.artist_credit
       )
 
       artist_credit.compilations.create!(

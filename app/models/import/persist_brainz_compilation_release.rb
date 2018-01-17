@@ -10,11 +10,11 @@ module Import
     end
 
     def perform
-      original = template
+      original = blueprint
       original ||= store.request!(reference)
 
       artist_credit = persist_brainz_artist_credit(
-        template: original.artist_credit
+        blueprint: original.artist_credit
       )
       compilation_head = persist_brainz_compilation_head(
         reference: original.release_group.reference
