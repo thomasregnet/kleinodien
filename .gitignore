@@ -43,3 +43,5 @@ doc/
 /.reek
 /rails_best_practices_output.html
 /.rubocop.yml
+/config/database_docker.yml
+/vendor/cache/
