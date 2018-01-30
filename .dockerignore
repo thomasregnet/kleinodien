@@ -1,0 +1,6 @@
+.git
+.dockerignore
+
+# must be ignored because otherwise config/database_docker.yml can't
+# be copied to it's place
+config/database.yml
