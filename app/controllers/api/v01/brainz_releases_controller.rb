@@ -2,6 +2,12 @@ module Api
   module V01
     # Import releases from MusicBrainz
     class BrainzReleasesController < ApplicationController
+      # TODO: Verify if "skip_before_action :verify_authenticity_token""
+      # TODO: is a security issue.
+      # The "skip_before_action" was introduced to let development
+      # with the import-api continue, maybe it is a bad idea.
+      skip_before_action :verify_authenticity_token
+
       private
 
       attr_reader :import
