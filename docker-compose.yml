@@ -2,7 +2,7 @@ version: '2'
 services:
   db:
     image: postgres
-  web:
+  app:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     # The following line about volumes was taken from
@@ -11,6 +11,18 @@ services:
     # to the root owner. Therefore it was commented out.
     # volumes:
     #   - .:/var/www/kleinodien
+
+    # env_file: .env
+
+    environment:
+      RAILS_ENV: $RAILS_ENV
+
+    links:
+      - db
+
+    ports:
+      - 3000:3000
+
     ports:
       - "3000:3000"
     depends_on:

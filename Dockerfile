@@ -18,4 +18,4 @@ RUN bundle install --local
 RUN cp config/database_docker.yml config/database.yml
 
 #CMD [ "/bin/bash" ]
-# TODO: CMD [ "config/containers/app_cmd.sh" ]
+CMD [ "config/containers/app_cmd.sh" ]
