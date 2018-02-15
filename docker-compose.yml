@@ -2,19 +2,11 @@ version: '2'
 services:
   db:
     image: postgres
+    volumes:
+      - kleinodien_postgresql_data:/var/lib/postgresql/data
+
   app:
     build: .
-    # command: bundle exec rails s -p 3000 -b '0.0.0.0'
-
-    # The following line about volumes was taken from
-    # https://docs.docker.com/compose/rails/
-    # It causes errors because it sets some paths under tmp/
-    # to the root owner. Therefore it was commented out.
-    # volumes:
-    #   - .:/var/www/kleinodien
-
-    # env_file: .env
-
     environment:
       RAILS_ENV: $RAILS_ENV
 
@@ -24,6 +16,7 @@ services:
       - "3000"
     depends_on:
       - db
+
   web:
     build:
       context: .
@@ -32,4 +25,7 @@ services:
       - app
     ports:
       - "8888:80"
+
+volumes:
+  kleinodien_postgresql_data:
 
