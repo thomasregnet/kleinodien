@@ -45,3 +45,4 @@ doc/
 /.rubocop.yml
 /config/database_docker.yml
 /vendor/cache/
+/.env
