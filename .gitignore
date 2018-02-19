@@ -46,3 +46,4 @@ doc/
 /config/database_docker.yml
 /vendor/cache/
 /.env
+/docker-compose-development.yml
