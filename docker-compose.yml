@@ -17,6 +17,12 @@ services:
     depends_on:
       - db
 
+  fetcher:
+    build: .
+    depends_on:
+      - app
+    entrypoint: bin/fetcher.rb
+
   web:
     build:
       context: .
