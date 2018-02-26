@@ -15,6 +15,7 @@ gem 'devise', '~> 4.3'
 gem 'hashie', '~> 3.5'
 gem 'jsonapi-resources'
 gem 'multi_xml', '~> 0.6'
+gem 'redis', '~> 4.0'
 gem 'unicorn', '~> 5.4'
 
 gem 'kleinodien_brainz',
