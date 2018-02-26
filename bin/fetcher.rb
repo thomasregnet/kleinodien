@@ -1,18 +1,10 @@
 #!/usr/bin/env ruby
 
+$LOAD_PATH.unshift File.expand_path('../../app/models', __FILE__)
+
 require 'redis'
+require 'fetcher'
+
 $stdout.sync = true
-puts 'starting fetcher'
 
-# while 1 == 1
-#   sleep 9999
-# end
-
-redis = Redis.new(host: 'redis', timeout: 3)
-
-redis.subscribe('kleinodien:test') do |on|
-  puts 'subscribing'
-  on.message do |chanel, message|
-    puts "#{chanel}: #{message}"
-  end
-end
+Fetcher.run('brainz')
