@@ -7,4 +7,4 @@ require 'fetcher'
 
 $stdout.sync = true
 
-Fetcher.run('brainz')
+Fetcher.run(ENV['FETCHER_NAME'])
