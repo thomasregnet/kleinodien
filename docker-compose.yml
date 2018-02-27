@@ -22,12 +22,14 @@ services:
     depends_on:
       - db
       - redis
-  fetcher:
+  brainz_fetcher:
     build: .
     depends_on:
       - app
       - redis
     entrypoint: bin/fetcher.rb
+    environment:
+      - FETCHER_NAME=brainz
 
   web:
     build:

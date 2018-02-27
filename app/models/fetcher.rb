@@ -1,13 +1,13 @@
 require 'redis'
 
 module Fetcher
-  def self.run(name)
+  def self.run(fetcher_name)
     redis = Redis.new(host: 'redis', timeout: 3)
 
-    redis.subscribe('kleinodien:test') do |on|
-      puts 'subscribing'
-      on.message do |chanel, message|
-        puts "#{chanel}: #{message}"
+    redis.subscribe(fetcher_name) do |on|
+      puts "subscribing to #{fetcher_name}"
+      on.message do |channel, message|
+        puts "#{channel}: #{message}"
       end
     end
   end
