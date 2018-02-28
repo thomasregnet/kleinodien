@@ -15,6 +15,7 @@ RSpec.describe Fetcher::WorkingQueue do
 
   context 'with jobs in the queue' do
     before do
+      DatabaseCleaner.start
       @redis = Redis.new(host: 'redis', timeout: 3)
       @wq_name = 'test:http://example.com/foo/bar'
       @redis.lpush(@wq_name, 'https://example.com/foo/bar?baz')
@@ -26,5 +27,7 @@ RSpec.describe Fetcher::WorkingQueue do
         expect(described_class.perform(args)).to be true
       end
     end
+
+    after { DatabaseCleaner.clean }
   end
 end
