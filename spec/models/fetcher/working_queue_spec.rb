@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'fake_fetcher_getter'
 
 RSpec.describe Fetcher::WorkingQueue do
   context 'when nothing is queued' do
@@ -23,7 +24,11 @@ RSpec.describe Fetcher::WorkingQueue do
 
     describe '.perform' do
       it 'returns true' do
-        args = { redis: @redis, working_queue_name: @wq_name }
+        args = {
+          getter_class:       FakeFetcherGetter,
+          redis:              @redis,
+          working_queue_name: @wq_name,
+        }
         expect(described_class.perform(args)).to be true
       end
     end
