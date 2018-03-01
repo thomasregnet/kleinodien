@@ -27,7 +27,7 @@ module Fetcher
     end
 
     def store_data(data, uri)
-      key = "#{data}:#{uri}"
+      key = Conventions.key_name_for(uri)
       redis.multi do |multi| # transaction
         # TODO: set expiration seconds for key
         multi.set(key, data)
