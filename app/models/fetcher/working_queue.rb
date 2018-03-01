@@ -1,5 +1,5 @@
 module Fetcher
-  class WorkingQueue
+  class WorkingQueue < Base
     attr_reader :getter_class, :redis, :working_queue_name
 
     def self.perform(args)
@@ -10,6 +10,8 @@ module Fetcher
       @getter_class       = args[:getter_class]
       @redis              = args[:redis]
       @working_queue_name = args[:working_queue_name]
+
+      super(args)
     end
 
     def perform
@@ -27,7 +29,7 @@ module Fetcher
     end
 
     def store_data(data, uri)
-      key = Conventions.key_name_for(uri)
+      key = conventions.key_name_for(uri)
       redis.multi do |multi| # transaction
         # TODO: set expiration seconds for key
         multi.set(key, data)
