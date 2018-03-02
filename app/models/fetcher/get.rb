@@ -12,7 +12,7 @@ module Fetcher
 
     def perform
       # TODO: return some real data
-      Faraday::Response.new
+      Faraday.get(uri)
     end
   end
 end
