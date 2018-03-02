@@ -1,7 +1,7 @@
 require 'sinatra/base'
 
 class FakeMusicBrainz < Sinatra::Base
-  BRAINZ_FILE_BASE = 'fixtures/musicbrainz.org/'.freeze
+  BRAINZ_FILE_BASE = File.expand_path('../../fixtures/musicbrainz.org/', __FILE__).freeze
 
   get '/ws/2/:type/:id' do
     xml_response 200, build_path(params)
@@ -17,13 +17,13 @@ class FakeMusicBrainz < Sinatra::Base
 
   def build_path(params)
     path = BRAINZ_FILE_BASE
-    path += "#{params[:type]}/#{params[:id]}"
+    path += "/#{params[:type]}/#{params[:id]}"
     path += build_inc(params)
-    path + '.xml'
+    # path + '.xml'
   end
 
   def build_inc(params)
     return '' unless params[:inc]
-    '_inc_' + params[:inc].gsub(/\s+/, '_')
+    '?inc='+ params[:inc].gsub(/\s+/, '_')
   end
 end
