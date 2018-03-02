@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'faker',  '~> 1.5'
 gem 'devise', '~> 4.3'
+gem 'faraday'
 gem 'hashie', '~> 3.5'
 gem 'jsonapi-resources'
 gem 'multi_xml', '~> 0.6'
@@ -70,5 +71,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.0'
+  gem 'sinatra', '~> 2.0'
   gem 'simplecov', require: false
+  gem 'webmock', '~> 3.0'
 end
