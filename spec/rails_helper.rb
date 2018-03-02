@@ -6,7 +6,7 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
-# require 'webmock'
+# Mock requests to external APIs
 require 'fake_music_brainz'
 require 'webmock/rspec'
 
@@ -35,7 +35,9 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner[:redis, connection: 'redis://redis/'].strategy = :truncation
     DatabaseCleaner[:active_record].strategy = :transaction
+  end
 
+  config.before(:each) do
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
