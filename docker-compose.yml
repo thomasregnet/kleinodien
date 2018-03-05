@@ -27,7 +27,7 @@ services:
     depends_on:
       - app
       - redis
-    entrypoint: bin/fetcher.rb
+    entrypoint: config/containers/import_queue/queue_cmd.rb
     environment:
       - FETCHER_NAME=brainz
 
