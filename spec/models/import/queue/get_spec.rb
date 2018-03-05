@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Fetcher::Get do
+RSpec.describe Import::Queue::Get do
   describe '.perform' do
     let(:uri) do
       'http://musicbrainz.org/ws/2/artist/'\

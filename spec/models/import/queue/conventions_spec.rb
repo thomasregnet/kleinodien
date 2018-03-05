@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Fetcher::Conventions do
+RSpec.describe Import::Queue::Conventions do
   let(:conventions) { described_class.new }
 
   describe 'key_name_for' do

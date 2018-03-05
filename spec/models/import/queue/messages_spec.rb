@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Fetcher::Messages do
+RSpec.describe Import::Queue::Messages do
   # TODO: Find a way to test subscribe
   # describe '.subscribe' do
   #   it 'subscribes' do
