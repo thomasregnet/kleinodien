@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Fetcher::Settings do
+RSpec.describe Import::Queue::Settings do
   it { is_expected.to respond_to(:fetcher_name) }
   it { is_expected.to respond_to(:name) }
 

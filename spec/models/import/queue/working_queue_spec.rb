@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'fake_fetcher_getter'
 
-RSpec.describe Fetcher::WorkingQueue do
+RSpec.describe Import::Queue::WorkingQueue do
   context 'when nothing is queued' do
     let(:redis) { Redis.new(host: 'redis', timeout: 3) }
     let(:wq_name) { 'test:https://example.com/no/such/data' }
