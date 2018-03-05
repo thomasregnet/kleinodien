@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'fake_fetcher_getter'
+require 'fake_import_queue_getter'
 
 RSpec.describe Import::Queue::WorkingQueue do
   context 'when nothing is queued' do
@@ -25,7 +25,7 @@ RSpec.describe Import::Queue::WorkingQueue do
     describe '.perform' do
       it 'returns true' do
         args = {
-          getter_class:       FakeFetcherGetter,
+          getter_class:       FakeImportQueueGetter,
           redis:              @redis,
           working_queue_name: @wq_name,
         }
