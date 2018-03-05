@@ -34,7 +34,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: config/containers/Dockerfile-nginx
+      dockerfile: config/containers/nginx/Dockerfile
     links:
       - app
     ports:
