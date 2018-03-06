@@ -1,0 +1,2 @@
+class ImportBrainzReleasesController < ApplicationController
+end
