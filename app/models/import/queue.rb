@@ -1,8 +1,9 @@
-require 'redis'
+require 'import_connection'
 
 module Import
   # Queue Import Requests with redis
   module Queue
+    include ImportConnection
     def self.run(fetcher_name)
       redis = ImportConnection.redis
 
