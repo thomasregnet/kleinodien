@@ -1,6 +1,6 @@
 module Import
   module Queue
-    class WorkingQueue < Base
+    class WorkingQueue < ::Import::Queue::Base
       attr_reader :getter_class, :redis, :working_queue_name
 
       def self.perform(args)
@@ -9,7 +9,7 @@ module Import
 
       def initialize(args)
         @getter_class       = args[:getter_class]
-        @redis              = args[:redis]
+        @redis              = ImportConnection.redis
         @working_queue_name = args[:working_queue_name]
 
         super(args)

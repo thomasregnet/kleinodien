@@ -1,0 +1,15 @@
+# Redis connections for imports
+# TODO: configure via environment variables
+default: &default
+  url: redis://redis:6379
+  db: 5
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  db: 6
+
+production:
+  <<: *default

@@ -8,8 +8,7 @@ module Import
       end
 
       def initialize(fetcher_name)
-        # TODO: Redis "host" must be a parameter
-        @redis = Redis.new(host: 'redis', timeout: 3)
+        @redis = ImportConnection.redis
         @fetcher_name = fetcher_name
       end
 

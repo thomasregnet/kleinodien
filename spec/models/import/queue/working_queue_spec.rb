@@ -2,8 +2,9 @@ require 'rails_helper'
 require 'fake_import_queue_getter'
 
 RSpec.describe Import::Queue::WorkingQueue do
+  let(:redis) { ImportConnection.redis }
+
   context 'when nothing is queued' do
-    let(:redis) { Redis.new(host: 'redis', timeout: 3) }
     let(:wq_name) { 'test:https://example.com/no/such/data' }
 
     describe '.perform' do
@@ -17,17 +18,15 @@ RSpec.describe Import::Queue::WorkingQueue do
   context 'with jobs in the queue' do
     before do
       DatabaseCleaner.start
-      @redis = Redis.new(host: 'redis', timeout: 3)
       @wq_name = 'test:http://example.com/foo/bar'
-      @redis.lpush(@wq_name, 'https://example.com/foo/bar?baz')
+      redis.lpush(@wq_name, 'https://example.com/foo/bar?baz')
     end
 
     describe '.perform' do
       it 'returns true' do
         args = {
           getter_class:       FakeImportQueueGetter,
-          redis:              @redis,
-          working_queue_name: @wq_name,
+          working_queue_name: @wq_name
         }
         expect(described_class.perform(args)).to be true
       end

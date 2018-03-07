@@ -9,7 +9,7 @@ class QueueBrainzReleaseImport
   end
 
   def perform
-    redis = Redis.new(host: 'redis', timeout: 3)
+    redis = ImportConnection.redis # Redis.new(host: 'redis', timeout: 3)
     redis.rpush('brainz:wait', code)
   end
 end
