@@ -11,7 +11,7 @@ module Import
 
       def initialize(args)
         @fetcher_name = args[:fetcher_name]
-        @redis        = args[:redis]
+        @redis        = ImportConnection.redis
       end
 
       def perform

@@ -6,7 +6,8 @@ RSpec.describe QueueBrainzReleaseImport, type: :model do
   describe '.perform' do
     before { DatabaseCleaner.start }
 
-    let(:redis) { Redis.new(host: 'redis', timeout: 3) }
+    # let(:redis) { Redis.new(host: 'redis', timeout: 3) }
+    let(:redis) { ImportConnection.redis }
 
     it 'queues to redis' do
       described_class.perform(code: 'abc')
