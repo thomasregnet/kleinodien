@@ -4,7 +4,7 @@ RSpec.describe QueueBrainzReleaseImport, type: :model do
   it { is_expected.to respond_to(:code) }
 
   describe '.perform' do
-    before { DatabaseCleaner.start }
+    before(:each) { DatabaseCleaner.start }
 
     # let(:redis) { Redis.new(host: 'redis', timeout: 3) }
     let(:redis) { ImportConnection.redis }
@@ -14,6 +14,6 @@ RSpec.describe QueueBrainzReleaseImport, type: :model do
       expect(redis.lindex('brainz:wait', 0)).to eq('abc')
     end
 
-    after { DatabaseCleaner.clean }
+    after(:each) { DatabaseCleaner.clean }
   end
 end
