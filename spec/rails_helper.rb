@@ -33,7 +33,11 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner[:redis, connection: 'redis://redis/'].strategy = :truncation
+    # DatabaseCleaner[:redis, connection: 'redis://redis:6379/6']
+    #   .strategy = :truncation
+    DatabaseCleaner[:redis, connection: ImportConnection.uri]
+      .strategy = :truncation
+
     DatabaseCleaner[:active_record].strategy = :transaction
   end
 
