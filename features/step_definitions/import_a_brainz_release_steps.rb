@@ -4,7 +4,7 @@ require 'test_data_definitions/brainz_sepultura_arise'
 require 'ko_test_data'
 
 When(/^I send a MusicBrainz id of a release i want to import$/) do
-  i_offer = Import::Offer.new(
+  i_offer = Importer::Offer.new(
     offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
     type: 'music_brainz_releases'
   )
@@ -37,7 +37,7 @@ When(/^I send the MusicBrainz data of the release I want to import$/) do
   brainz_id = '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
   reference = BrainzReleaseReference.from_code(brainz_id)
 
-  i_offer = Import::Offer.new(
+  i_offer = Importer::Offer.new(
     offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
     type: 'music_brainz_releases'
   )
@@ -80,7 +80,7 @@ When(/^I send the data for the MusicBrainz release artist$/) do
   reference = BrainzReleaseReference.from_code(brainz_id)
   subset = TestData.retrieve(:brainz_sepultura_arise, 0)
   #byebug
-  i_offer = Import::Offer.new(
+  i_offer = Importer::Offer.new(
     #knowledge: subset.to_import_offer_knowledge,
     knowledge: subset.to_hash,
     offered: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
