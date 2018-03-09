@@ -8,9 +8,13 @@ RSpec.describe ImportCacheFetchService do
     let(:cache_key) { 'cache:my_key' }
     let(:value)     { 'my_value' }
 
+    before { DatabaseCleaner.start }
+
     it 'returns the data' do
       GetImportStoreService.call.set(cache_key, value)
       expect(described_class.call(key)).to eq(value)
     end
+
+    after { DatabaseCleaner.clean }
   end
 end
