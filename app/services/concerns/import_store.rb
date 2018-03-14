@@ -7,4 +7,8 @@ module ImportStore
       @redis ||= Redis.new(Rails.application.config_for(:import_connection))
     end
   end
+
+  def import_store
+    @redis ||= Redis.new(Rails.application.config_for(:import_connection))
+  end
 end
