@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe QueueBrainzReleaseImport, type: :model do
+RSpec.describe BrainzReleaseImportRequest, type: :model do
   it { is_expected.to respond_to(:code) }
 
   describe '.perform' do

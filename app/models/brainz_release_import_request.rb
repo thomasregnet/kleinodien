@@ -1,4 +1,4 @@
-class QueueBrainzReleaseImport
+class BrainzReleaseImportRequest
   include ActiveModel::Model
 
   attr_accessor :code

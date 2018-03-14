@@ -1,5 +1,5 @@
 When("I visit the import brainz release page") do
-  visit new_queue_brainz_release_import_path
+  visit new_brainz_release_import_request_path
 end
 
 When("I fill in a code") do
