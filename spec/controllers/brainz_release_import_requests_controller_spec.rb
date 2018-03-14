@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe QueueBrainzReleaseImportsController, type: :controller do
+RSpec.describe BrainzReleaseImportRequestsController, type: :controller do
 
   describe "GET #new" do
     it "returns http success" do
