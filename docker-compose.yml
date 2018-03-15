@@ -29,7 +29,7 @@ services:
       - redis
     entrypoint: config/containers/importers/importer_cmd.sh
     environment:
-      - IMPORT_QUEUE_NAME=brainz
+      - IMPORTER_NAME=brainz
   web:
     build:
       context: .
