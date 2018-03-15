@@ -22,12 +22,12 @@ services:
     depends_on:
       - db
       - redis
-  brainz_fetcher:
+  brainz_importer:
     build: .
     depends_on:
       - app
       - redis
-    entrypoint: config/containers/import_queue/queue_cmd.sh
+    entrypoint: config/containers/importers/importer_cmd.sh
     environment:
       - IMPORT_QUEUE_NAME=brainz
   web:
