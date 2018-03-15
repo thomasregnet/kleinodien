@@ -11,7 +11,7 @@ RSpec.describe BrainzReleaseImportRequest, type: :model do
 
     it 'queues to redis' do
       described_class.perform(code: 'abc')
-      expect(redis.lindex('brainz:wait', 0)).to eq('abc')
+      expect(redis.lindex('brainz:requests', 0)).to eq('abc')
     end
 
     after(:each) { DatabaseCleaner.clean }

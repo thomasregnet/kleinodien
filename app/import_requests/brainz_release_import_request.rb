@@ -1,5 +1,8 @@
 class BrainzReleaseImportRequest
   include ActiveModel::Model
+  include ImportRequest
+
+  prefix :brainz
 
   attr_accessor :code
   validates :code, presence: true
@@ -10,6 +13,7 @@ class BrainzReleaseImportRequest
 
   def perform
     redis = ImportConnection.redis # Redis.new(host: 'redis', timeout: 3)
-    redis.rpush('brainz:wait', code)
+    # redis.rpush('brainz:wait', code)
+    redis.rpush(requests_key, code)
   end
 end

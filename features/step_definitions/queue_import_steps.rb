@@ -10,5 +10,5 @@ end
 
 Then("that code is queued") do
   redis = ImportConnection.redis
-  expect(redis.lindex('brainz:wait', 0)).to eq(@code)
+  expect(redis.lindex('brainz:requests', 0)).to eq(@code)
 end
