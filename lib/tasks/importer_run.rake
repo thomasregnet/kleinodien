@@ -1,6 +1,6 @@
-namespace :import do
+namespace :importer do
   desc 'run an import queue'
-  task :run_queue => :environment do
+  task :run => :environment do
     $stdout.sync = true
 
     if ENV['RAILS_ENV'] && ENV['RAILS_ENV'] == 'test'
