@@ -4,11 +4,11 @@ module ImportStore
 
   module ClassMethods
     def import_store
-      @redis ||= Redis.new(Rails.application.config_for(:import_connection))
+      @redis ||= Redis.new(Rails.application.config_for(:import_store))
     end
   end
 
   def import_store
-    @redis ||= Redis.new(Rails.application.config_for(:import_connection))
+    @redis ||= Redis.new(Rails.application.config_for(:import_store))
   end
 end
