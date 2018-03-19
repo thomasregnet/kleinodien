@@ -1,9 +1,18 @@
 # returns cached data
 class ImportCacheFetchService
-  include ImportCacheKey
-  include ImportStore
+  include CallWithArgs
+  include ImportStoreCommons
 
-  def self.call(key)
-    import_store.get(cache_key(key))
+  private
+
+  attr_reader :key
+
+  def initialize(key)
+    @key = key
+  end
+
+  def private_call
+    cache_key = cache_key_for(key)
+    import_store.get(cache_key)
   end
 end
