@@ -1,12 +1,23 @@
 # Store key and value to redis using a expiration
 class ImportCacheStoreService
-  include ImportCacheKey
-  include ImportStore
+  include ImportStoreCommons
 
-  DEFAULT_TIMEOUT_SECONDS = 3_600
+  DEFAULT_EXPIRE_SECONDS = 3_600
 
-  # TODO: make the default timeout configurable
-  def self.call(key, value, expire = DEFAULT_TIMEOUT_SECONDS)
-    import_store.set(cache_key(key), value, ex: expire)
+  def self.call(key, value, expire = DEFAULT_EXPIRE_SECONDS)
+    new(key, value, expire).call
+  end
+
+  attr_reader :key, :value, :expire
+
+  def initialize(key, value, expire)
+    @key    = key
+    @value  = value
+    @expire = expire
+  end
+
+  def call
+    cache_key = cache_key_for(key)
+    import_store.set(cache_key, value, ex: expire)
   end
 end
