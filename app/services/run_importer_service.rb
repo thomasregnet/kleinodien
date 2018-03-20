@@ -12,7 +12,22 @@ class RunImporterService
   end
 
   def private_call
+    clear_uris unless condition_valid?
+    fetch_data
+    import
+  end
+
+  def clear_uris; end
+
+  def fetch_data; end
+
+  def import
+    # TODO: do the import
     subscribe
+  end
+
+  def condition_valid?
+    true
   end
 
   def subscription_prohibited?
