@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-RSpec.describe QueueBrainzReleaseRequestService do
+RSpec.describe RequestBrainzReleaseImportService do
   before { DatabaseCleaner.start }
 
   let(:import_request) { FactoryBot.build(:brainz_release_import_request) }

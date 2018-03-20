@@ -1,4 +1,4 @@
-class QueueBrainzReleaseRequestService
+class RequestBrainzReleaseImportService
   include CallWithArgs
   include ImportStore
   include QueueRequest
