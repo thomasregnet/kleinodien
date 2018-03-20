@@ -3,11 +3,11 @@ class RunImporterService
 
   private
 
-  attr_reader :importer_name
+  attr_reader :importer_name, :prohibit_subscription
 
-  def initialize(importer_name)
-    @importer_name = importer_name
-
+  def initialize(args)
+    @importer_name         = args[:importer_name]
+    @prohibit_subscription = args[:prohibit_subscription]
   end
 
   def private_call

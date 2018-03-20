@@ -12,6 +12,6 @@ namespace :importer do
       WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
     end
 
-    RunImporterService.call(ENV['IMPORTER_NAME'])
+    RunImporterService.call(importer_name: ENV['IMPORTER_NAME'])
   end
 end
