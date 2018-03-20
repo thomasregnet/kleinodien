@@ -3,7 +3,7 @@ namespace :importer do
   task :run => :environment do
     $stdout.sync = true
 
-    if ENV['RAILS_ENV'] && ENV['RAILS_ENV'] == 'test'
+    if ENV['RAILS_ENV'] == 'test'
       require 'fake_music_brainz'
       require 'webmock'
       include WebMock::API
