@@ -1,6 +1,7 @@
 class ValidateImportRequestsService
   include CallWithArgs
   include ImportStoreCommons
+  include ImportStoreRequestsAndUrisKey
 
   private
 
@@ -22,13 +23,5 @@ class ValidateImportRequestsService
 
   def uris_length
     import_store.llen uris_key
-  end
-
-  def requests_key
-    "#{importer_name}:requests"
-  end
-
-  def uris_key
-    "#{importer_name}:uris"
   end
 end
