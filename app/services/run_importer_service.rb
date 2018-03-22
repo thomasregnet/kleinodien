@@ -17,7 +17,9 @@ class RunImporterService
     import
   end
 
-  def clear_uris; end
+  def clear_uris
+    ClearImportRequestsService.call(importer_name: importer_name)
+  end
 
   def fetch_data; end
 
@@ -27,7 +29,7 @@ class RunImporterService
   end
 
   def condition_valid?
-    true
+    ValidateImportRequestsService.call(importer_name: importer_name)
   end
 
   def subscription_prohibited?
