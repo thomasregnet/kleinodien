@@ -21,10 +21,11 @@ class FetchDataService
     uri = import_store.lindex(uris_key, 0)
     response = Faraday.get(uri)
     store_and_pop(uri, response) if response.status == 200
-    call_interrupter(response)
+    suspend_fetching(response)
   end
 
-  def call_interrupter(response)
+  def suspend_fetching(response)
+    SuspendFetchingService.call(response: response)
   end
 
   def store_and_pop(uri, response)
