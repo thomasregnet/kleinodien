@@ -1,3 +1,4 @@
+# Fetch data and store it to the cache
 class FetchDataService
   include CallWithArgs
   include ImportStoreCommons
@@ -13,16 +14,22 @@ class FetchDataService
 
   def private_call
     return false unless any_uris?
-    fetch
+    fetch while any_uris?
   end
 
   def fetch
     uri = import_store.lindex(uris_key, 0)
     response = Faraday.get(uri)
-    if response.status == 200
-      ImportCacheStoreService.call(uri, response.body)
-      import_store.lpop(uris_key)
-    end
+    store_and_pop(uri, response) if response.status == 200
+    call_interrupter(response)
+  end
+
+  def call_interrupter(response)
+  end
+
+  def store_and_pop(uri, response)
+    ImportCacheStoreService.call(uri, response.body)
+    import_store.lpop(uris_key)
   end
 
   def any_uris?
