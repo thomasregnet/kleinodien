@@ -1,19 +1,6 @@
 require 'rails_helper'
+require 'shared_examples_for_import_requests'
 
 RSpec.describe BrainzReleaseImportRequest, type: :model do
-  it { is_expected.to respond_to(:code) }
-
-  describe '.perform' do
-    before(:each) { DatabaseCleaner.start }
-
-    # let(:redis) { Redis.new(host: 'redis', timeout: 3) }
-    let(:redis) { ImportConnection.redis }
-
-    it 'queues to redis' do
-      described_class.perform(code: 'abc')
-      expect(redis.lindex('brainz:requests', 0)).to eq('abc')
-    end
-
-    after(:each) { DatabaseCleaner.clean }
-  end
+  it_behaves_like 'an import request'
 end

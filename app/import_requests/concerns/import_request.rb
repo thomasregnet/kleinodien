@@ -2,16 +2,16 @@ module ImportRequest
   extend ActiveSupport::Concern
 
   included do
-    define_singleton_method :prefix do |value|
-      define_method(:prefix) { value }
+    attr_accessor :code
+
+    validates :code, presence: true
+
+    define_singleton_method :importer_class do |value|
+      define_method(:importer_class) { value }
     end
-  end
 
-  def requests_key
-    "#{prefix}:requests"
-  end
-
-  def uris_key
-    "#{prefix}:uris"
+    define_singleton_method :reference_class do |value|
+      define_method(:reference_class) { value }
+    end
   end
 end
