@@ -4,6 +4,7 @@ RSpec.shared_examples 'an import request' do
   it { is_expected.to respond_to(:to_json).with(0).arguments }
 
   it 'is not valid without a code' do
+    byebug
     expect(described_class.new).not_to be_valid
   end
 
