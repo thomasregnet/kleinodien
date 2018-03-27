@@ -1,5 +1,9 @@
 When("I visit the import brainz release page") do
   visit new_brainz_release_import_request_path
+  # visit new_brainz_release_import_request_path
+  # visit new_brainz_release_import_request_path
+  # visit new_brainz_release_import_requests_path
+  # visit new_import_requests_path
 end
 
 When("I fill in a code") do
@@ -10,5 +14,6 @@ end
 
 Then("that code is queued") do
   redis = ImportConnection.redis
-  expect(redis.lindex('brainz:requests', 0)).to eq(@code)
+  # expect(redis.lindex('brainz:requests', 0)).to eq(@code)
+  expect(redis.lindex('brainz:requests', 0)).to match(/ImportRequest/)
 end
