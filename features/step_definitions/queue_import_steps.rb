@@ -1,9 +1,9 @@
-When("I visit the import brainz release page") do
-  visit new_brainz_release_import_request_path
-  # visit new_brainz_release_import_request_path
-  # visit new_brainz_release_import_request_path
-  # visit new_brainz_release_import_requests_path
-  # visit new_import_requests_path
+When("I visit the new import requests page") do
+  visit new_import_request_path
+end
+
+When("I choose MusicBrainz release") do
+  choose('MusicBrainz release')
 end
 
 When("I fill in a code") do
