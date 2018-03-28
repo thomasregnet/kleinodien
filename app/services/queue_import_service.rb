@@ -16,6 +16,6 @@ class QueueImportService
   end
 
   def private_call
-    import_store.rpush(requests_key, request)
+    import_store.rpush(requests_key, request.as_json)
   end
 end
