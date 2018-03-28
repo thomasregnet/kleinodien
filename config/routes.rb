@@ -19,11 +19,8 @@ Rails.application.routes.draw do
 
   resources :repositories
 
-  resources :import_brainz_releases, only: [:create, :new]
-
   resources :import_requests, only: [:create, :new]
 
-  resources :brainz_release_import_requests, only: [:create, :new]
   get 'pages/index'
 
   root to: 'pages#index'
