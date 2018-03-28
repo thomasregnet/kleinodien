@@ -5,6 +5,7 @@ Feature: Queue an import
   I want to queue imports
 
   Scenario: Queue a MusicBrainz release
-    When I visit the import brainz release page
+    When I visit the new import requests page
+    And I choose MusicBrainz release
     And I fill in a code
     Then that code is queued

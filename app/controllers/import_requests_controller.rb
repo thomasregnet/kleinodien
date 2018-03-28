@@ -5,6 +5,7 @@ class ImportRequestsController < ApplicationController
 
   def create
     @import_request = ImportRequest.new(import_params)
+    QueueImportService.call(importer_name: 'brainz', request: @import_request)
   end
 
   private
