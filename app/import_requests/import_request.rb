@@ -4,19 +4,33 @@
 class ImportRequest
   include ActiveModel::Model
 
-  # This method smells of :reek:Attribute
-  attr_accessor :code, :importer_class, :reference_class, :requested
+  IMPORTER_CLASS_FOR = {
+    brainz_release: 'ImportBrainzReleaseService'
+  }.freeze
 
-  def self.brainz_release(args)
-    new(
-      args.merge(
-        importer_class:  'ImportBrainzReleaseService',
-        reference_class: 'BrainzReleaseReference'
-      )
-    )
-  end
+  REFERENCE_CLASS_FOR = {
+    brainz_release: 'BrainzReleaseReference'
+  }.freeze
+
+  # This method smells of :reek:Attribute
+  attr_accessor :code, :type
+  # This method smells of :reek:Attribute
+  attr_writer :requested
 
   validates :code, presence: true
-  validates :importer_class, presence: true
-  validates :reference_class, presence: true
+  validates :type, presence: true
+
+  def importer_class
+    return unless type
+    IMPORTER_CLASS_FOR[type.to_sym]
+  end
+
+  def reference_class
+    return unless type
+    REFERENCE_CLASS_FOR[type.to_sym]
+  end
+
+  def requested
+    @requested ||= Time.now
+  end
 end
