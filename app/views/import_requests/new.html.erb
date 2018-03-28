@@ -3,12 +3,12 @@
 
 <%= form_for @import_request do |form| %>
     <p>
-        <%= radio_button_tag :type, 'brainz_release' %>
-        <%= label_tag :type_brainz_release, 'MusicBrainz release' %>
+        <%= form.radio_button :type, 'brainz_release' %>
+        <%= form.label :type_brainz_release, 'MusicBrainz release' %>
     </p>
     <p>
-        <%= radio_button_tag :type, 'uri', checked: true %>
-        <%= label_tag :type_brainz_release, 'Uri' %>
+        <%= form.radio_button :type, 'uri', checked: true %>
+        <%= form.label :type_brainz_release, 'Uri' %>
     </p>
     <p>
         <%= form.label :code %>
