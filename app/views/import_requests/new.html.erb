@@ -1,0 +1,18 @@
+<h1>ImportRequests#new</h1>
+<p>Find me in app/views/import_requests/new.html.erb</p>
+
+<%= form_for @import_request do |form| %>
+    <p>
+        <%= radio_button_tag :type, 'brainz_release' %>
+        <%= label_tag :type_brainz_release, 'MusicBrainz release' %>
+    </p>
+    <p>
+        <%= radio_button_tag :type, 'uri', checked: true %>
+        <%= label_tag :type_brainz_release, 'Uri' %>
+    </p>
+    <p>
+        <%= form.label :code %>
+        <%= form.text_field :code, size: 80 %>
+        <%= form.submit :import %>
+    </p>
+<% end %>

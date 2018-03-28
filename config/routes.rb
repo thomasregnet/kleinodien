@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # get 'import_requests/new'
+
+  # get 'import_requests/create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
@@ -16,6 +20,8 @@ Rails.application.routes.draw do
   resources :repositories
 
   resources :import_brainz_releases, only: [:create, :new]
+
+  resources :import_requests, only: [:create, :new]
 
   resources :brainz_release_import_requests, only: [:create, :new]
   get 'pages/index'
