@@ -3,6 +3,7 @@
 # An import request to be queued on for import
 class ImportRequest
   include ActiveModel::Model
+  include ActiveRecord::Callbacks
 
   IMPORTER_CLASS_FOR = {
     brainz_release: 'ImportBrainzReleaseService'
@@ -13,9 +14,12 @@ class ImportRequest
   }.freeze
 
   # This method smells of :reek:Attribute
-  attr_accessor :code, :type
-  # This method smells of :reek:Attribute
-  attr_writer :requested
+  attr_accessor :code, :requested, :type
+
+  def initialize(args = {})
+    super(args)
+    @requested = Time.now unless requested
+  end
 
   validates :code, presence: true
   validates :type, presence: true
@@ -28,9 +32,5 @@ class ImportRequest
   def reference_class
     return unless type
     REFERENCE_CLASS_FOR[type.to_sym]
-  end
-
-  def requested
-    @requested ||= Time.now
   end
 end
