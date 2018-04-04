@@ -6,7 +6,7 @@ require 'shared_examples_for_services'
 RSpec.describe ImportBrainzReleaseService do
   it_behaves_like 'a service'
 
-  context 'when nothig is cached' do
+  context 'when nothing is cached' do
     let(:args) do
       {
         code:          '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
