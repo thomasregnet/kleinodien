@@ -1,0 +1,15 @@
+class PrepareBrainzReleaseService
+  include CallWithArgs
+
+  private
+
+  # attr_reader
+
+  def initialize(args)
+
+  end
+
+  def private_call
+    # the code for the service belongs here
+  end
+end
