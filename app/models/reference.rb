@@ -47,12 +47,6 @@ class Reference
     true
   end
 
-  # https://musicbrainz.org/ws/2/artist/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=url-rels
-  # https://musicbrainz.org/ws/2/artist/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=url-rels
-
-  # https://musicbrainz.org/ws/2/release/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=artists+labels+recordings+release-groups
-  # https://musicbrainz.org/ws/2/release/4509c51e-b790-41aa-a2b3-e3bbf62cbf3f?inc=artists+labels+recordings+release-groups
-
   def to_s
     to_uri
   end
