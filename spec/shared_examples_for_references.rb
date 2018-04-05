@@ -1,6 +1,4 @@
 RSpec.shared_examples 'a new reference' do
-  let(:example_uri) { 'ftp://does/not/exist.example.con' }
-
   describe 'constructors' do
     subject { described_class }
 
@@ -19,9 +17,20 @@ RSpec.shared_examples 'a new reference' do
 
   describe '#to_*' do
     subject { described_class.from_code(code) }
+
     it { is_expected.to respond_to(:to_code).with(0).arguments }
     it { is_expected.to respond_to(:to_key).with(0).arguments }
     it { is_expected.to respond_to(:to_uri).with(0).arguments }
+  end
+
+  describe '#to_s' do
+    # This spec will fail if there is any Reference that uses
+    # another protocol than http or https. But it works for now
+    let(:reference) { described_class.from_code(code) }
+
+    it 'return the uri front of the string' do
+      expect(reference.to_s).to match(/^http/)
+    end
   end
 
   describe '#eql?' do
