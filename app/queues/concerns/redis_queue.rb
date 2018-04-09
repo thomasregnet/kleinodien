@@ -7,7 +7,7 @@ module RedisQueue
 
   included do
     define_singleton_method(:name) do |name|
-      define_method(:queue_name) { "#{importer_name}:#{name}.queue" }
+      define_method(:queue_name) { "#{importer_name}:#{name}:queue" }
     end
   end
 
