@@ -14,7 +14,7 @@ RSpec.describe QueueImportService do
       importer_name: 'test',
       request: 'just a string'
     )
-    expect(RedisHelper.import_store.llen('test:requests')).to eq(1)
+    expect(RedisHelper.import_store.llen('test:requests:queue')).to eq(1)
   end
 
   after do

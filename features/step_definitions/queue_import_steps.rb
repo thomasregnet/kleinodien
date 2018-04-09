@@ -14,6 +14,6 @@ end
 
 Then("that code is queued") do
   redis = ImportConnection.redis
-  expect(redis.lindex('brainz:requests', 0)).to match(/#{@code}/)
-  expect(redis.lindex('brainz:requests', 0)).to match(/brainz_release/)
+  expect(redis.lindex('brainz:requests:queue', 0)).to match(/#{@code}/)
+  expect(redis.lindex('brainz:requests:queue', 0)).to match(/brainz_release/)
 end

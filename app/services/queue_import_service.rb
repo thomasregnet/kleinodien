@@ -3,8 +3,7 @@
 # Append an Import request to an importer queue
 class QueueImportService
   include CallWithArgs
-  include ImportStoreRequestsAndUrisKey
-  include ImportStoreCommons
+  include ImportQueuesConsumption
 
   private
 
@@ -16,6 +15,6 @@ class QueueImportService
   end
 
   def private_call
-    import_store.rpush(requests_key, request.as_json)
+    import_requests.enq(request.as_json)
   end
 end
