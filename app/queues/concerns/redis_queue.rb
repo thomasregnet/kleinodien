@@ -3,6 +3,14 @@ module RedisQueue
   extend ActiveSupport::Concern
   include ImportStore
 
+  attr_reader 'importer_name'
+
+  included do
+    define_singleton_method(:name) do |name|
+      define_method(:queue_name) { "#{importer_name}:#{name}.queue" }
+    end
+  end
+
   def deq
     import_store.lpop(queue_name)
   end
