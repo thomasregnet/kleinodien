@@ -11,6 +11,10 @@ module RedisQueue
     end
   end
 
+  def clear
+    import_store.del(queue_name)
+  end
+
   def deq
     import_store.lpop(queue_name)
   end
