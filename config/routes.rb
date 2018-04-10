@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'import_requests/new'
 
   # get 'import_requests/create'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
   resources :compilation_copies, only: [:create, :edit, :index, :new, :show]

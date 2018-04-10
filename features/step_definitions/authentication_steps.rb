@@ -34,8 +34,8 @@ When(/^I visit the Sign in page$/) do
 end
 
 When(/^I Fill in email and password$/) do
-  fill_in 'Email',    with: @user.email
-  fill_in 'Password', with: @user.password
+  fill_in('Email',    with: @user.email)
+  fill_in('Password', with: @user.password)
   click_button('Log in')
 end
 
