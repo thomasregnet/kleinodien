@@ -1,7 +1,8 @@
 class ClearImportRequestsService
   include CallWithArgs
   include ImportStoreCommons
-  include ImportStoreRequestsAndUrisKey
+  # include ImportStoreRequestsAndUrisKey
+  include ImportQueuesConsumption
 
   private
 
@@ -12,7 +13,9 @@ class ClearImportRequestsService
   end
 
   def private_call
-    import_store.del(requests_key)
-    import_store.del(uris_key)
+    # import_store.del(requests_key)
+    # import_store.del(uris_key)
+    import_requests.clear
+    import_uris.clear
   end
 end
