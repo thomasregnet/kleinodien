@@ -13,7 +13,7 @@ RSpec.describe FetchDataService do
 
   context 'without uris' do
     it 'does nothing' do
-      expect(described_class.call(args)).to be false
+      expect(described_class.call(args)).to be_nil
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe FetchDataService do
     end
 
     before do
-      RedisHelper.import_store.lpush('test:uris', uri)
+      RedisHelper.import_store.lpush('test:uris:queue', uri)
       described_class.call(args)
     end
 
@@ -33,7 +33,7 @@ RSpec.describe FetchDataService do
     end
 
     it 'removes the uri' do
-      expect(RedisHelper.import_store.llen('test:uris')).not_to be_positive
+      expect(RedisHelper.import_store.llen('test:uris:queue')).not_to be_positive
     end
   end
 
