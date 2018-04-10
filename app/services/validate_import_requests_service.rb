@@ -1,7 +1,6 @@
 class ValidateImportRequestsService
   include CallWithArgs
-  include ImportStoreCommons
-  include ImportStoreRequestsAndUrisKey
+  include ImportQueuesConsumption
 
   private
 
@@ -12,16 +11,8 @@ class ValidateImportRequestsService
   end
 
   def private_call
-    return true unless uris_length.positive?
-    return true if requests_lenght.positive?
+    return true unless import_uris.length.positive?
+    return true if import_requests.length.positive?
     false
-  end
-
-  def requests_lenght
-    import_store.llen requests_key
-  end
-
-  def uris_length
-    import_store.llen uris_key
   end
 end

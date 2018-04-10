@@ -16,15 +16,15 @@ RSpec.describe ValidateImportRequestsService do
 
   context 'with requests and without uris' do
     it 'returns true' do
-      RedisHelper.import_store.lpush('test:requests', 'test')
+      RedisHelper.import_store.lpush('test:requests:queue', 'test')
       expect(described_class.call(args)).to be true
     end
   end
 
   context 'with requests and with uris' do
     it 'returns true' do
-      RedisHelper.import_store.lpush('test:requests', 'test')
-      RedisHelper.import_store.lpush('test:uris', 'test')
+      RedisHelper.import_store.lpush('test:requests:queue', 'test')
+      RedisHelper.import_store.lpush('test:uris:queue', 'test')
 
       expect(described_class.call(args)).to be true
     end
@@ -32,7 +32,7 @@ RSpec.describe ValidateImportRequestsService do
 
   context 'without requests and with uris' do
     it 'returns false' do
-      RedisHelper.import_store.lpush('test:uris', 'test')
+      RedisHelper.import_store.lpush('test:uris:queue', 'test')
       expect(described_class.call(args)).to be false
     end
   end
