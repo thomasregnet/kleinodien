@@ -2,7 +2,6 @@
 class FetchDataService
   include CallWithArgs
   include ImportQueuesConsumption
-  include ImportStoreRequestsAndUrisKey
 
   private
 
