@@ -7,6 +7,7 @@ RSpec.shared_examples 'a queue' do
   it { is_expected.to respond_to(:deq).with(0).arguments }
   it { is_expected.to respond_to(:enq).with(1).argument }
   it { is_expected.to respond_to('empty?').with(0).arguments }
+  it { is_expected.to respond_to(:length).with(0).arguments }
   it { is_expected.to respond_to(:peek).with(0).arguments }
 
   context 'when nothing is queued' do
@@ -25,6 +26,12 @@ RSpec.shared_examples 'a queue' do
     describe '#empty?' do
       it 'returns true' do
         expect(queue).to be_empty
+      end
+    end
+
+    describe '#length' do
+      it 'returns 0' do
+        expect(queue.length).to eq(0)
       end
     end
 
@@ -55,6 +62,12 @@ RSpec.shared_examples 'a queue' do
     describe '#empty?' do
       it 'returns false' do
         expect(queue).not_to be_empty
+      end
+    end
+
+    describe '#length' do
+      it 'returns 1' do
+        expect(queue.length).to eq(1)
       end
     end
 

@@ -27,6 +27,10 @@ module RedisQueue
     !import_store.llen(queue_name).positive?
   end
 
+  def length
+    import_store.llen(queue_name)
+  end
+
   def peek
     import_store.lindex(queue_name, 0)
   end
