@@ -1,9 +1,15 @@
 module RedisCache
   extend ActiveSupport::Concern
-  include ImportStore
+  # include ImportStore
 
   CACHE_PREFIX = 'cache:'.freeze
   DEFAULT_EXPIRE = 3600
+
+  included do
+    define_singleton_method(:redis) do |redis|
+      define_method(:redis) { redis }
+    end
+  end
 
   def fetch(key)
     import_store.get(cache_key_for(key))
