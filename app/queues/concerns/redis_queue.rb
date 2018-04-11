@@ -1,37 +1,42 @@
 module RedisQueue
   # https://www.tutorialspoint.com/data_structures_algorithms/dsa_queue.htm
   extend ActiveSupport::Concern
-  include ImportStore
+  # include ImportStore
 
-  attr_reader 'importer_name'
+  # attr_reader 'importer_name'
+  attr_reader :importer_name
 
   included do
-    define_singleton_method(:name) do |name|
+    define_singleton_method(:queue_name) do |name|
       define_method(:queue_name) { "#{importer_name}:#{name}:queue" }
+    end
+
+    define_singleton_method(:redis) do |redis|
+      define_method(:redis) { redis }
     end
   end
 
   def clear
-    import_store.del(queue_name)
+    redis.del(queue_name)
   end
 
   def deq
-    import_store.lpop(queue_name)
+    redis.lpop(queue_name)
   end
 
   def enq(object)
-    import_store.rpush(queue_name, object)
+    redis.rpush(queue_name, object)
   end
 
   def empty?
-    !import_store.llen(queue_name).positive?
+    !redis.llen(queue_name).positive?
   end
 
   def length
-    import_store.llen(queue_name)
+    redis.llen(queue_name)
   end
 
   def peek
-    import_store.lindex(queue_name, 0)
+    redis.lindex(queue_name, 0)
   end
 end
