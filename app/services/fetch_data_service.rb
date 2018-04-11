@@ -1,6 +1,7 @@
 # Fetch data and store it to the cache
 class FetchDataService
   include CallWithArgs
+  include ImportCacheConsumption
   include ImportQueuesConsumption
 
   private
@@ -27,7 +28,7 @@ class FetchDataService
   end
 
   def store_and_pop(uri, response)
-    ImportCacheStoreService.call(uri, response.body)
+    import_cache.store(uri, response.body)
     import_uris.deq
   end
 
