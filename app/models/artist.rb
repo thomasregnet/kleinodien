@@ -2,6 +2,7 @@
 class Artist < ActiveRecord::Base
   include BrainzConstructors
   include Identifyable
+  include CodeFindable
 
   belongs_to :data_import, required: false
 

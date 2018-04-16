@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_rateable_models'
+require 'shared_examples_for_code_findable'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_identifyable'
@@ -9,6 +10,12 @@ require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe Artist, type: :model do
   it { is_expected.to(belong_to(:data_import)) }
+
+  it_behaves_like 'a code findable entity' do
+    before { DatabaseCleaner.start }
+    let(:factory) { :artist }
+    after { DatabaseCleaner.clean }
+  end
 
   context 'with brainz_code' do
     let(:artist) do
