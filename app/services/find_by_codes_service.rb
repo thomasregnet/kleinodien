@@ -12,11 +12,10 @@ class FindByCodesService
 
   def private_call
     return unless findable_codes
-    # model_class.find_by(findable_codes)
-    # byebug
     opts = [query, params].flatten
-    # model_class.where(query, params)
-    model_class.where(opts)
+    result = model_class.where(opts)
+    return unless result
+    result.first
   end
 
   def query
