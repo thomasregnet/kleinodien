@@ -15,7 +15,7 @@ RSpec.shared_examples 'a code findable entity' do
 
   context 'when no model with that codes exists' do
     it 'returns an empty ActiveRecord::Relation' do
-      expect(described_class.find_by_codes(codes).length).to eq(0)
+      expect(described_class.find_by_codes(codes)).to be_nil
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.shared_examples 'a code findable entity' do
       it 'returns an ActiveRecord::Relation containing that entity' do
         FactoryBot.create(factory, key => code)
 
-        expect(described_class.find_by_codes(codes).first)
+        expect(described_class.find_by_codes(codes))
           .to be_instance_of(described_class)
       end
     end

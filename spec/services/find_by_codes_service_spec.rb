@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_services'
 
@@ -21,20 +23,19 @@ RSpec.describe FindByCodesService do
     }
   end
 
-  context 'when no result can be found' do
-    it 'returns nothing' do
-      expect(described_class.call(args).length).to eq(0)
-      # expect(nil).to be_nil
+  context 'when nothing can be found by codes' do
+    it 'returns nil' do
+      expect(described_class.call(args)).to be_nil
     end
   end
 
-  context 'when a result can be found' do
+  context 'when an entity can be found by codes' do
     before do
       FactoryBot.create(:artist, brainz_code: brainz_code)
     end
 
     it 'returns the model' do
-      expect(described_class.call(args).first).to be_instance_of(Artist)
+      expect(described_class.call(args)).to be_instance_of(Artist)
     end
   end
   after { DatabaseCleaner.clean }
