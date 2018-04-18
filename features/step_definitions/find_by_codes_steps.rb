@@ -8,6 +8,7 @@ def code_for(code_key)
     Random.rand(999)
   end
 end
+
 Given("The Artist with {string} exists") do |code_key|
   @model    = Artist
   @code_key = code_key
@@ -22,6 +23,14 @@ Given("The CompilationHead with {string} exists") do |code_key|
   @code     = code_for(code_key)
 
   FactoryBot.create(:compilation_head, code_key => @code)
+end
+
+Given("The CompilationRelease with {string} exists") do |code_key|
+  @model    = CompilationRelease
+  @code_key = code_key
+  @code     = code_for(code_key)
+
+  FactoryBot.create(:compilation_release, code_key => @code)
 end
 
 When("I call Model#find_by_codes") do
