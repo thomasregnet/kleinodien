@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_191707) do
+ActiveRecord::Schema.define(version: 2018_04_18_192938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -522,6 +522,11 @@ ActiveRecord::Schema.define(version: 2018_04_18_191707) do
     t.date "date"
     t.integer "date_mask", limit: 2
     t.bigint "artist_credit_id"
+    t.uuid "brainz_code"
+    t.bigint "discogs_code"
+    t.bigint "imdb_code"
+    t.bigint "tmdb_code"
+    t.bigint "wikidata_code"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true
     t.index ["artist_credit_id"], name: "index_piece_releases_on_artist_credit_id"
     t.index ["station_id"], name: "index_piece_releases_on_station_id"
