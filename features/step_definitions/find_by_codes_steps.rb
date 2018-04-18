@@ -41,6 +41,14 @@ Given("The PieceHead with {string} exists") do |code_key|
   FactoryBot.create(:piece_head, code_key => @code)
 end
 
+Given("The PieceRelease with {string} exists") do |code_key|
+  @model    = PieceRelease
+  @code_key = code_key
+  @code     = code_for(code_key)
+
+  FactoryBot.create(:piece_release, code_key => @code)
+end
+
 When("I call Model#find_by_codes") do
   @result = @model.find_by_codes(@code_key => @code)
 end

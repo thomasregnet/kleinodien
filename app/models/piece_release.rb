@@ -1,5 +1,7 @@
 # A release of a song, movie ...
 class PieceRelease < ActiveRecord::Base
+  include CodeFindable
+
   composed_of :date,
               class_name: 'IncompleteDate',
               mapping: [%w[date date], %w[date_mask mask]]
