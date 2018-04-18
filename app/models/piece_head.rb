@@ -1,5 +1,7 @@
 # A PieceHead my be a song, movie ...
 class PieceHead < ActiveRecord::Base
+  include CodeFindable
+
   has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
   has_many :comments
