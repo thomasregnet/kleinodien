@@ -1,6 +1,7 @@
 # The name giving group of one or many releases
 class CompilationHead < ActiveRecord::Base
   include BrainzConstructors
+  include CodeFindable
 
   belongs_to :data_import, required: false
   has_and_belongs_to_many :tags

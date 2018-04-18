@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204211506) do
+ActiveRecord::Schema.define(version: 2018_04_17_195250) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "citext"
+  enable_extension "plpgsql"
 
   create_table "artist_credits", id: :serial, force: :cascade do |t|
     t.string "name", null: false
@@ -183,6 +183,9 @@ ActiveRecord::Schema.define(version: 20171204211506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "data_import_id"
+    t.uuid "brainz_code"
+    t.bigint "discogs_code"
+    t.bigint "wikidata_code"
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id"
     t.index ["data_import_id"], name: "index_compilation_heads_on_data_import_id"
   end
