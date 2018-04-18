@@ -1,4 +1,4 @@
-Feature: Veiw a movie-head imported from omdb
+Feature: View a movie-head imported from omdb
 
   Anyone can see the contents of a movie-head
   imported from omdb.
