@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
+require 'shared_examples_for_code_findable'
 require 'shared_examples_for_commentable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_models_with_companies'
@@ -18,6 +21,12 @@ RSpec.describe CompilationHead, type: :model do
 
   it 'is valid with valid attributes' do
     expect(@c_head).to be_valid
+  end
+
+  it_behaves_like 'a code findable entity' do
+    before { DatabaseCleaner.start }
+    let(:factory) { :compilation_head }
+    after { DatabaseCleaner.clean }
   end
 
   it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do

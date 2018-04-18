@@ -1,13 +1,31 @@
-Given("The Artist with {string} {string}") do |column_name, code|
-  @model       = Artist
-  @column_name = column_name
-  @code        = code
+# frozen_string_literal: true
 
-  FactoryBot.create(:artist, column_name=> code)
+def code_for(code_key)
+  case code_key
+  when 'brainz_code'
+    SecureRandom.uuid
+  else
+    Random.rand(999)
+  end
+end
+Given("The Artist with {string} exists") do |code_key|
+  @model    = Artist
+  @code_key = code_key
+  @code     = code_for(code_key)
+
+  FactoryBot.create(:artist, code_key=> @code)
+end
+
+Given("The CompilationHead with {string} exists") do |code_key|
+  @model    = CompilationHead
+  @code_key = code_key
+  @code     = code_for(code_key)
+
+  FactoryBot.create(:compilation_head, code_key => @code)
 end
 
 When("I call Model#find_by_codes") do
-  @result = @model.find_by_codes(@column_name => @code)
+  @result = @model.find_by_codes(@code_key => @code)
 end
 
 Then("I get this model") do

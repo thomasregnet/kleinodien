@@ -5,13 +5,24 @@ Feature: Find an entity by it's codes
   I want to find entities by it's code
   
   Scenario Outline: Find an Artist by it's codes
-    Given The Artist with <column_name> <code>
+    Given The Artist with <code_key> exists
     When I call Model#find_by_codes
     Then I get this model 
 
     Examples:
-      | column_name     | code                                   |
-      | "brainz_code"   | "8e853607-aa21-442d-a2b1-fead127b9493" |
-      | "discogs_code"  | "5432"                                 |
-      | "wikidata_code" | "5432"                                 |
+      | code_key |
+      | "brainz_code"   |
+      | "discogs_code"  |
+      | "wikidata_code" |
+
+  Scenario Outline: Find an CompilationHead by it's codes
+    Given The CompilationHead with <code_key> exists
+    When I call Model#find_by_codes
+    Then I get this model 
+
+    Examples:
+      | code_key |
+      | "brainz_code"   |
+      | "discogs_code"  |
+      | "wikidata_code" |
 
