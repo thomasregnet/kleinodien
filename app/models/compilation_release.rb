@@ -1,5 +1,7 @@
 # A CompilationRelease may be an Album, a movie box ...
 class CompilationRelease < ActiveRecord::Base
+  include CodeFindable
+
   composed_of :date,
               class_name: 'IncompleteDate',
               mapping: [%w[date date], %w[date_mask mask]]

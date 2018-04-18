@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_commentable'
+require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
@@ -15,6 +18,12 @@ RSpec.describe CompilationRelease, type: :model do
   end
 
   it { is_expected.to(belong_to(:data_import)) }
+
+  it_behaves_like 'a code findable entity' do
+    before { DatabaseCleaner.start }
+    let(:factory) { :compilation_release }
+    after { DatabaseCleaner.clean }
+  end
 
   describe '#brainz_code' do
     subject do
