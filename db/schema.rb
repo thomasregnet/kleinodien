@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_194635) do
+ActiveRecord::Schema.define(version: 2018_04_18_201302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2018_04_18_194635) do
     t.uuid "brainz_code"
     t.bigint "discogs_code"
     t.bigint "wikidata_code"
+    t.bigint "imdb_code"
+    t.bigint "tmdb_code"
     t.index ["brainz_code"], name: "index_on_artists_brainz_code", unique: true
     t.index ["data_import_id"], name: "index_artists_on_data_import_id"
     t.index ["discogs_code"], name: "index_on_artists_discogs_code", unique: true
@@ -186,6 +188,8 @@ ActiveRecord::Schema.define(version: 2018_04_18_194635) do
     t.uuid "brainz_code"
     t.bigint "discogs_code"
     t.bigint "wikidata_code"
+    t.bigint "imdb_code"
+    t.bigint "tmdb_code"
     t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id"
     t.index ["data_import_id"], name: "index_compilation_heads_on_data_import_id"
   end

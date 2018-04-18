@@ -13,6 +13,8 @@ Feature: Find an entity by it's codes
       | code_key        |
       | "brainz_code"   |
       | "discogs_code"  |
+      | "imdb_code"     |
+      | "tmdb_code"     |
       | "wikidata_code" |
 
   Scenario Outline: Find a CompilationHead by it's codes
@@ -24,6 +26,8 @@ Feature: Find an entity by it's codes
       | code_key        |
       | "brainz_code"   |
       | "discogs_code"  |
+      | "imdb_code"     |
+      | "tmdb_code"     |
       | "wikidata_code" |
 
   Scenario Outline: Find a CompilationRelease by it's codes
