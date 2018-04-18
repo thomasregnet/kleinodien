@@ -39,3 +39,16 @@ Feature: Find an entity by it's codes
       | "tmdb_code"     |
       | "wikidata_code" |
 
+  Scenario Outline: Find a PieceHead by it's codes
+    Given The PieceHead with <code_key> exists
+    When I call Model#find_by_codes
+    Then I get this model 
+
+    Examples:
+      | code_key        |
+      | "brainz_code"   |
+      | "discogs_code"  |
+      | "imdb_code"     |
+      | "tmdb_code"     |
+      | "wikidata_code" |
+

@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_commentable'
+require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
@@ -24,6 +25,12 @@ RSpec.describe PieceHead, type: :model do
     let(:commentable) { @piece_head }
 
     after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a code findable entity' do
+    before { DatabaseCleaner.start }
+    let(:factory) { :piece_head }
+    after { DatabaseCleaner.clean }
   end
 
   it_behaves_like 'a model with BrainzConstructors' do
