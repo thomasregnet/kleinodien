@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_192938) do
+ActiveRecord::Schema.define(version: 2018_04_18_193820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -664,6 +664,11 @@ ActiveRecord::Schema.define(version: 2018_04_18_192938) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "brainz_code"
+    t.bigint "discogs_code"
+    t.bigint "imdb_code"
+    t.bigint "tmdb_code"
+    t.bigint "wikidata_code"
     t.index ["position", "serial_id"], name: "index_seasons_on_position_and_serial_id", unique: true
   end
 

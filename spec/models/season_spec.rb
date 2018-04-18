@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_commentable'
+require 'shared_examples_for_code_findable'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
@@ -17,6 +20,12 @@ RSpec.describe Season, type: :model do
     let(:commentable) { @commentable }
 
     after(:all) { DatabaseCleaner.clean }
+  end
+
+  it_behaves_like 'a code findable entity' do
+    before { DatabaseCleaner.start }
+    let(:factory) { :season }
+    after { DatabaseCleaner.clean }
   end
 
   it_behaves_like 'a rateable model' do
