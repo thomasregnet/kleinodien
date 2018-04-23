@@ -1,6 +1,8 @@
-# Base class for references
-class Reference
-  URI_SCHEME = 'https'.freeze
+# frozen_string_literal: true
+
+# Base class for all references
+class ReferenceBase
+  include Referenceable
 
   attr_reader :code, :key, :uri
 
@@ -14,10 +16,6 @@ class Reference
 
   def self.from_uri(uri)
     new(uri: uri)
-  end
-
-  def scheme
-    URI_SCHEME
   end
 
   private
