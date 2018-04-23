@@ -1,21 +1,11 @@
+# frozen_string_literal: true
+
 # Base class for MusicBrainz references
-class BrainzReference < Reference
-  # REFERENCE_CATEGORY = 'musicbrainz'.freeze
-  REFERENCE_CATEGORY = :brainz # 'musicbrainz'.freeze
-  URI_HOST           = 'musicbrainz.org'.freeze
-  URI_PATH_PREFIX    = 'ws/2'.freeze
-
-  def category
-    REFERENCE_CATEGORY
-  end
-
-  def host
-    URI_HOST
-  end
-
-  def path_prefix
-    URI_PATH_PREFIX
-  end
+class BrainzReference < ReferenceBase
+  scheme          :https
+  category        :brainz
+  host            'musicbrainz.org'
+  path_prefix     'ws/2'
 
   def to_key
     return key if key

@@ -1,13 +1,7 @@
+# frozen_string_literal: true
+
 # References a MusicBrainz release-group
 class BrainzReleaseGroupReference < BrainzReference
-  URI_KIND         = 'release-group'.freeze
-  URI_QUERY_STRING = 'inc=artists+url-rels'.freeze
-
-  def kind
-    URI_KIND
-  end
-
-  def query_string
-    URI_QUERY_STRING
-  end
+  kind 'release-group'
+  query_string 'inc=artists+url-rels'
 end
