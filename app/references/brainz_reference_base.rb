@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base class for MusicBrainz references
-class BrainzReference < ReferenceBase
+class BrainzReferenceBase < ReferenceBase
   scheme          :https
   category        :brainz
   host            'musicbrainz.org'
