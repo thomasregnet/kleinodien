@@ -9,11 +9,11 @@ RSpec.describe BrainzReleaseBlueprint, type: :model do
       '28e723f2-1c0a-38a0-8109-038cca05ffca'
     )
     multi_xml = MultiXml.parse(xml)
-    @release = MashedBrainz::Release.new(multi_xml['metadata']['release'])
+    @release = BrainzReleaseBlueprint.new(multi_xml['metadata']['release'])
   end
 
   specify '#artist_credit' do
     expect(@release.artist_credit)
-      .to be_instance_of MashedBrainz::ArtistCredit
+      .to be_instance_of BrainzArtistCreditBlueprint
   end
 end

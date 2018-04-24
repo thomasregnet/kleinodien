@@ -6,7 +6,7 @@ RSpec.describe BrainzReleaseGroupBlueprint do
     reference = BrainzReleaseGroupReference.from_code(
       '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
-    @orig_release_group = MashedBrainz.from_xml(
+    @orig_release_group = BrainzBaseBlueprint.from_xml(
       KoTestData.brainz_xml_for(reference)
     )
   end
@@ -24,7 +24,7 @@ RSpec.describe BrainzReleaseGroupBlueprint do
   describe '#relation_list_for' do
     it 'returns the relations of a given type' do
       expect(@orig_release_group.relation_list_for(:url))
-        .to be_instance_of(MashedBrainz::UrlRels)
+        .to be_instance_of(BrainzUrlRelsBlueprint)
     end
   end
 end

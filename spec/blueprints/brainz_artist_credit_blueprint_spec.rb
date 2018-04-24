@@ -4,7 +4,7 @@ require 'brainz_test_helper'
 RSpec.describe BrainzArtistCreditBlueprint, type: :model do
   context 'Butcherd at Birth' do
     before(:each) do
-      @release = BrainzTestHelper.get_mashed_brainz(
+      @release = BrainzTestHelper.get_brainz_blueprint(
         :release,
         '28e723f2-1c0a-38a0-8109-038cca05ffca'
       )
@@ -28,7 +28,7 @@ RSpec.describe BrainzArtistCreditBlueprint, type: :model do
 
   context 'The Sky is Falling and I Want My Mommy' do
     before(:each) do
-      @release = BrainzTestHelper.get_mashed_brainz(
+      @release = BrainzTestHelper.get_brainz_blueprint(
         :release,
         '693748be-7c18-39c3-af2e-2e62092090cf'
       )
