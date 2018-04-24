@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Base class for representations of MusicBrainz entities
 class BrainzBaseBlueprint < Hashie::Mash
   disable_warnings
@@ -5,18 +7,28 @@ class BrainzBaseBlueprint < Hashie::Mash
   include Hashie::Extensions::Coercion
   include Hashie::Extensions::MergeInitializer
 
-   def self.from_xml(xml_string)
+  def self.from_xml(xml_string)
     intermediate = BrainzBaseBlueprint.new(MultiXml.parse(xml_string)).metadata
     key_name = intermediate.keys.first
     intermediate[key_name]
   end
 
+  # To avoid circular coercion we use coercion procs instead of
+  # coerce_key :key, ClassName
   coerce_key :artist, lambda { |value|
     BrainzArtistBlueprint.new(value)
   }
 
   coerce_key :artist_credit, lambda { |value|
     BrainzArtistCreditBlueprint.new(value)
+  }
+
+  coerce_key :release, lambda { |value|
+    BrainzReleaseBlueprint.new(value)
+  }
+
+  coerce_key :release_group, lambda { |value|
+    BrainzReleaseGroupBlueprint.new(value)
   }
 
   coerce_key :name_credit, lambda { |value|
@@ -35,21 +47,13 @@ class BrainzBaseBlueprint < Hashie::Mash
         BrainzRelationBlueprint.new(nc)
       end
     else
-      [BrainzRelationBlueprint.new(value)]
+      Hashie::Array.new([BrainzRelationBlueprint.new(value)])
     end
   }
 
   coerce_key :relation_list, lambda { |value|
     return BrainzUrlRelsBlueprint.new(value) if value['target_type'] == 'url'
     BrainzRelationListBlueprint.new(value)
-  }
-
-  coerce_key :release, lambda { |value|
-    BrainzReleaseBlueprint.new(value)
-  }
-
-  coerce_key :release_group, lambda { |value|
-    BrainzReleaseGroupBlueprint.new(value)
   }
 
   def relations_for_target(type)
