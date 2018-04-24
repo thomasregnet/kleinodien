@@ -11,10 +11,18 @@ module BrainzTestHelper
     File.open(file_name).read
   end
 
+  # TODO: delete BrainzTestHelper.get_mashed_brainz
   def self.get_mashed_brainz(type, mbid)
     xml = get_xml(type, mbid)
     multi_xml = MultiXml.parse(xml)
     klass = "MashedBrainz::#{type.to_s.camelize}".constantize
+    klass.new(multi_xml['metadata']['release'])
+  end
+
+  def self.get_brainz_blueprint(type, mbid)
+    xml = get_xml(type, mbid)
+    multi_xml = MultiXml.parse(xml)
+    klass = "Brainz#{type.to_s.camelize}Blueprint".constantize
     klass.new(multi_xml['metadata']['release'])
   end
 end

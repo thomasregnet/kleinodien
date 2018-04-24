@@ -5,6 +5,12 @@ class BrainzBaseBlueprint < Hashie::Mash
   include Hashie::Extensions::Coercion
   include Hashie::Extensions::MergeInitializer
 
+   def self.from_xml(xml_string)
+    intermediate = BrainzBaseBlueprint.new(MultiXml.parse(xml_string)).metadata
+    key_name = intermediate.keys.first
+    intermediate[key_name]
+  end
+
   coerce_key :artist, lambda { |value|
     BrainzArtistBlueprint.new(value)
   }
