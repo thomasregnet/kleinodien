@@ -17,12 +17,12 @@ RSpec.describe BrainzArtistCreditBlueprint, type: :model do
 
     specify '#name_credit' do
       expect(@artist_credit.name_credit)
-        .to be_instance_of Hashie::Array
+        .to be_kind_of Array
     end
 
     specify '#name_credits' do
       expect(@artist_credit.name_credit)
-        .to be_kind_of Hashie::Array
+        .to be_kind_of Array
     end
   end
 
@@ -41,12 +41,12 @@ RSpec.describe BrainzArtistCreditBlueprint, type: :model do
 
     specify '#name_credit' do
       expect(@artist_credit.name_credit)
-        .to be_kind_of Hashie::Array
+        .to be_kind_of Array
     end
 
     specify '#name_credits' do
       expect(@artist_credit.name_credit)
-        .to be_kind_of Hashie::Array
+        .to be_kind_of Array
     end
   end
 end
