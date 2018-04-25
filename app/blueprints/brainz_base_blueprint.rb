@@ -32,23 +32,17 @@ class BrainzBaseBlueprint < Hashie::Mash
   }
 
   coerce_key :name_credit, lambda { |value|
-    if value.is_a? Array
-      value.map do |nc|
-        BrainzNameCreditBlueprint.new(nc)
-      end
-    else
-      [BrainzNameCreditBlueprint.new(value)]
-    end
+    ForceHashieArrayOfObjectsService.call(
+      klass: BrainzNameCreditBlueprint,
+      value: value
+    )
   }
 
   coerce_key :relation, lambda { |value|
-    if value.is_a? Array
-      value.map do |nc|
-        BrainzRelationBlueprint.new(nc)
-      end
-    else
-      Hashie::Array.new([BrainzRelationBlueprint.new(value)])
-    end
+    ForceHashieArrayOfObjectsService.call(
+      klass: BrainzRelationBlueprint,
+      value: value
+    )
   }
 
   coerce_key :relation_list, lambda { |value|
@@ -73,4 +67,6 @@ class BrainzBaseBlueprint < Hashie::Mash
     return gizmo if gizmo.is_a? Array
     Hashie::Array.new([gizmo])
   end
+
+
 end
