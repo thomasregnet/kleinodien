@@ -7,7 +7,7 @@ class TestClass
   end
 end
 
-RSpec.describe ForceHashieArrayOfObjectsService do
+RSpec.describe ForceArrayOfObjectsService do
   it_behaves_like 'a service'
 
   context 'when there is no value' do

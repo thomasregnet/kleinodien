@@ -32,14 +32,14 @@ class BrainzBaseBlueprint < Hashie::Mash
   }
 
   coerce_key :name_credit, lambda { |value|
-    ForceHashieArrayOfObjectsService.call(
+    ForceArrayOfObjectsService.call(
       klass: BrainzNameCreditBlueprint,
       value: value
     )
   }
 
   coerce_key :relation, lambda { |value|
-    ForceHashieArrayOfObjectsService.call(
+    ForceArrayOfObjectsService.call(
       klass: BrainzRelationBlueprint,
       value: value
     )

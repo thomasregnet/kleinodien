@@ -1,4 +1,4 @@
-class ForceHashieArrayOfObjectsService
+class ForceArrayOfObjectsService
   include CallWithArgs
 
   private
