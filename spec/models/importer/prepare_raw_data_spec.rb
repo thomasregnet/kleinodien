@@ -11,7 +11,7 @@ RSpec.describe Importer::PrepareRawData do
     describe '.perform' do
       it 'returns the prepared data' do
         expect(described_class.perform(reference, xml_data))
-          .to be_instance_of(MashedBrainz::Release)
+          .to be_instance_of(BrainzReleaseBlueprint)
       end
     end
   end

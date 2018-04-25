@@ -1,5 +1,5 @@
 class BrainzArtistBlueprint < BrainzBaseBlueprint
   def reference
-    BrainzArtistReferenceBlueprint.from_code(id)
+    BrainzArtistReference.from_code(id)
   end
 end

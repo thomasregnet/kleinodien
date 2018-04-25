@@ -18,7 +18,7 @@ module Importer
       category = reference.category
       case category
       when :brainz
-        MashedBrainz.from_xml(data)
+        BrainzBaseBlueprint.from_xml(data)
       else
         raise "can't prepare data for #{category}"
       end

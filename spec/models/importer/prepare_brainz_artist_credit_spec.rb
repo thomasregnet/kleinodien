@@ -11,7 +11,7 @@ RSpec.describe Importer::PrepareBrainzArtistCredit do
   end
 
   def artist_credit
-    MashedBrainz.from_xml(xml).artist_credit
+    BrainzBaseBlueprint.from_xml(xml).artist_credit
   end
 
   context 'without store' do
