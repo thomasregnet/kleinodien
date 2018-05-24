@@ -46,4 +46,3 @@ doc/
 /vendor/cache/
 /.env
 /docker-compose-development.yml
-/agenda.org
