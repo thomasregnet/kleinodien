@@ -3,7 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "artist ##{n}" }
 
     factory :artist_brainz do
-      source Source::MusicBrainz
+      source { Source::MusicBrainz }
       sequence(:source_ident) { |n| "looks-like-an-artist-uuid-#{n}" }
     end
 
@@ -13,7 +13,7 @@ FactoryBot.define do
 
     factory :artist_with_identifiers do
       transient do
-        identifiers_count 2
+        identifiers_count { 2 }
       end
 
       after(:create) do |artist, evaluator|

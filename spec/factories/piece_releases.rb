@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :piece_release do
     association :head, factory: :piece_head
-    type 'PieceRelease'
+    type { 'PieceRelease' }
 
     factory :piece_release_with_tracks do
       transient do
-        tracks_count 2
+        tracks_count { 2 }
       end
 
       after(:create) do |piece_release, evaluator|
@@ -26,7 +26,7 @@ FactoryBot.define do
 
     factory :piece_release_with_credits do
       transient do
-        credits_count 2
+        credits_count { 2 }
       end
 
       after(:create) do |piece_release, evaluator|
@@ -40,7 +40,7 @@ FactoryBot.define do
 
     factory :piece_release_with_companies do
       transient do
-        companies_count 2
+        companies_count { 2 }
       end
 
       after(:create) do |piece_release, evaluator|
@@ -54,7 +54,7 @@ FactoryBot.define do
 
     factory :piece_release_with_labels do
       transient do
-        labels_count 2
+        labels_count { 2 }
       end
 
       after(:create) do |piece_release, evaluator|
@@ -77,12 +77,12 @@ FactoryBot.define do
     # end
 
     factory :podcast_episode_release, class: PodcastEpisodeRelease do
-      type 'PodcastEpisodeRelease'
+      type { 'PodcastEpisodeRelease' }
       association :head, factory: :podcast_episode_head
     end
 
     factory :tv_episode_release, class: TvEpisodeRelease do
-      type 'TvEpisodeRelease'
+      type { 'TvEpisodeRelease' }
       association :head, factory: :tv_episode_head
     end
   end

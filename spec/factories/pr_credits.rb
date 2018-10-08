@@ -4,7 +4,7 @@ FactoryBot.define do
     piece_release
 
     factory :pr_credit_with_role do
-      role 'a PieceReleaseRole'
+      role { 'a PieceReleaseRole' }
     end
 
     factory :pr_credit_with_job do

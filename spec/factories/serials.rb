@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :serial do
     sequence(:title) { |n| "serial ##{n}" }
-    type 'Serial'
+    type { 'Serial' }
 
     factory :tv_serial, class: TvSerial do
-      type 'TvSerial'
+      type { 'TvSerial' }
 
       factory :tv_serial_with_seasons, class: TvSerial do
         transient do
-          seasons_count 3
+          seasons_count { 3 }
         end
 
         after(:create) do |tv_serial, evaluator|
@@ -18,7 +18,7 @@ FactoryBot.define do
     end
 
     factory :podcast_serial, class: PodcastSerial do
-      type 'PodcastSerial'
+      type { 'PodcastSerial' }
     end
   end
 end

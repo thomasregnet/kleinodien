@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :compilation_release do
     association :head, factory: :compilation_head
-    type 'CompilationRelease'
+    type { 'CompilationRelease' }
 
     factory :compilation_release_with_companies do
       transient do
-        companies_count 2
+        companies_count { 2 }
       end
 
       after(:create) do |compilation_release, evaluator|
@@ -19,7 +19,7 @@ FactoryBot.define do
 
     factory :compilation_release_with_credits do
       transient do
-        credits_count 2
+        credits_count { 2 }
       end
 
       after(:create) do |compilation_release, evaluator|
@@ -41,7 +41,7 @@ FactoryBot.define do
 
     factory :compilation_release_with_labels do
       transient do
-        labels_count 2
+        labels_count { 2 }
       end
 
       after(:create) do |compilation_release, evaluator|

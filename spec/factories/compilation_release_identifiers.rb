@@ -3,6 +3,6 @@ FactoryBot.define do
     sequence(:value) { |n| "compilation-release-identifier-#{n}" }
     association :compilation_release, factory: :compilation_release
     association :source, factory: :source
-    type CompilationReleaseIdentifier
+    type { CompilationReleaseIdentifier }
   end
 end

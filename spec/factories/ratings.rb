@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :rating do
-    value 1
+    value { 1 }
     association :user, factory: :user
 
     factory :artist_credit_rating do

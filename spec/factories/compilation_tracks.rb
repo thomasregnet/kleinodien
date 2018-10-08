@@ -16,7 +16,7 @@ FactoryBot.define do
 
       factory :compilation_track_with_details do
         transient do
-          details_count 3
+          details_count { 3 }
         end
 
         after(:create) do |track, evaluator|
@@ -31,7 +31,7 @@ FactoryBot.define do
 
     factory :compilation_track_with_repository_positions do
       transient do
-        positions_count 3
+        positions_count { 3 }
       end
 
       after(:create) do |track, _evaluator|

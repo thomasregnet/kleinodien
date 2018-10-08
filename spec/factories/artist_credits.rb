@@ -14,7 +14,7 @@ FactoryBot.define do
     # data_supplier
     # end
     factory :artist_credit_with_source do
-      source Source::MusicBrainz
+      source { Source::MusicBrainz }
     end
   end
 end
