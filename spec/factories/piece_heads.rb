@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :piece_head do
     sequence(:title) { |n| "piece ##{n}" }
-    type 'PieceHead'
+    type { 'PieceHead' }
     # source Source::MusicBrainz
     # sequence(:source_ident) { |n| "looks-like-a-brainz-id-#{n}" }
 
     factory :piece_head_with_companies do
       transient do
-        companies_count 2
+        companies_count { 2 }
       end
 
       after(:create) do |piece_head, evaluator|
@@ -28,7 +28,7 @@ FactoryBot.define do
 
     factory :piece_head_with_credits do
       transient do
-        credits_count 2
+        credits_count { 2 }
       end
 
       after(:create) do |piece_head, evaluator|
@@ -42,7 +42,7 @@ FactoryBot.define do
 
     factory :piece_head_with_labels do
       transient do
-        labels_count 2
+        labels_count { 2 }
       end
 
       after(:create) do |piece_head, evaluator|
@@ -59,7 +59,7 @@ FactoryBot.define do
     # end
 
     factory :podcast_episode_head, class: PodcastEpisodeHead do
-      type 'PodcastEpisodeHead'
+      type { 'PodcastEpisodeHead' }
     end
 
     # factory :song_head, class: SongHead do
@@ -68,7 +68,7 @@ FactoryBot.define do
     # end
 
     factory :tv_episode_head, class: TvEpisodeHead do
-      type 'TvEpisodeHead'
+      type { 'TvEpisodeHead' }
     end
   end
 end

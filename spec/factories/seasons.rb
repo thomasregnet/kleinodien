@@ -6,7 +6,7 @@ FactoryBot.define do
     factory :season_with_tv_episode_heads do
       association :serial, factory: :tv_serial
       transient do
-        episodes_count 5
+        episodes_count { 5 }
       end
 
       after(:create) do |season, evaluator|

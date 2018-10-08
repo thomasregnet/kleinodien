@@ -4,7 +4,7 @@ FactoryBot.define do
     compilation_head
 
     factory :ch_credit_with_role do
-      role 'a role'
+      role { 'a role' }
     end
 
     factory :ch_credit_with_job do

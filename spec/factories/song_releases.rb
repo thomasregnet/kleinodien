@@ -4,7 +4,7 @@ FactoryBot.define do
 
     factory :song_release_with_identifiers do
       transient do
-        identifiers_count 2
+        identifiers_count { 2 }
       end
 
       after(:create) do |song_release, evaluator|

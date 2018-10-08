@@ -4,7 +4,7 @@ FactoryBot.define do
     piece_head
 
     factory :ph_credit_with_role do
-      role 'a PieceHead role'
+      role { 'a PieceHead role' }
     end
 
     factory :ph_credit_with_job do
