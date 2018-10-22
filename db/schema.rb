@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_201302) do
+ActiveRecord::Schema.define(version: 2018_10_22_193016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -410,6 +410,18 @@ ActiveRecord::Schema.define(version: 2018_04_18_201302) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
+  end
+
+  create_table "import_orders", force: :cascade do |t|
+    t.text "code", null: false
+    t.text "kind", null: false
+    t.text "state", null: false
+    t.text "type", null: false
+    t.text "uri"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_import_orders_on_user_id"
   end
 
   create_table "jobs", id: :serial, force: :cascade do |t|
@@ -837,6 +849,7 @@ ActiveRecord::Schema.define(version: 2018_04_18_201302) do
   add_foreign_key "descriptions", "sources"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
+  add_foreign_key "import_orders", "users"
   add_foreign_key "original_exemplars", "compilation_releases"
   add_foreign_key "original_exemplars", "users"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
