@@ -4,8 +4,8 @@ Feature: Order an import
   as a user
   I want to order imports
 
-  Scenario: Order an import
-    When I visit the import_orders page
-    And I fill in an suitable url
-    And I click the import button
-    Then the import is ordered
+#  Scenario: Order an import
+#    When I visit the import_orders page
+#    And I fill in an suitable url
+#    And I click the import button
+#    Then the import is ordered
