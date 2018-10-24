@@ -16,6 +16,8 @@ RSpec.describe ExtractImportOrderParamsService do
       expect(result[:kind]).to eq 'artist'
     end
 
-    # TODO it returns the type
+    it 'returns the type' do
+      expect(result[:type]).to eq 'MusicBrainzImportOrder'
+    end
   end
 end

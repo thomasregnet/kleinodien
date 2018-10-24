@@ -1,10 +1,8 @@
+# Extract import parameters from an uri-string
 class ExtractImportOrderParamsService
-  # include CallWithArgs
-
   def self.call(uri_string)
     new(uri_string).call
   end
-
 
   attr_reader :uri
 
@@ -13,7 +11,10 @@ class ExtractImportOrderParamsService
   end
 
   def call
-    { code: 123.to_s, kind: 'artist' }
-    # the code for the service belongs here
+    # TODO: add and choose other specific parameter extractors
+    result = ExtractBrainzImportParamsService.call(uri)
+    # TODO: replace hard coded type
+    result[:type] = 'MusicBrainzImportOrder'
+    result
   end
 end
