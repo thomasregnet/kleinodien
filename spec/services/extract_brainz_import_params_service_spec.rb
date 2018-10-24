@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
+require 'shared_examples_for_import_params_services'
 
 RSpec.describe ExtractBrainzImportParamsService do
   it_behaves_like 'a service'
@@ -12,19 +13,28 @@ RSpec.describe ExtractBrainzImportParamsService do
     'release-group'
   end
 
-  def web_uri_string
-    ['https://musicbrainz.org/release-group', code, kind].join('/')
+  def web_uri
+    URI(
+      ['https://musicbrainz.org/release-group', code, kind].join('/')
+    )
   end
 
-  context 'with a valid non ws uri' do
-    let(:result) { described_class.call(URI(web_uri_string)) }
+  # Web-service (/ws/2)
+  def api_uri
+    URI(
+      ['https://musicbrainz.org/ws/2/release-group', code, kind].join('/')
+    )
+  end
 
-    it 'returns the expected code' do
-      expect(result[:code]).to eq('74292121-e345-3f10-85ae-013f4e5a8cae')
-    end
+  it_behaves_like 'an import params service' do
+    let(:uri)           { web_uri }
+    let(:expected_code) { code }
+    let(:expected_kind) { kind }
+  end
 
-    it 'returns the expected kind' do
-      expect(result[:kind]).to eq('release-group')
-    end
+  it_behaves_like 'an import params service' do
+    let(:uri)           { api_uri }
+    let(:expected_code) { code }
+    let(:expected_kind) { kind }
   end
 end
