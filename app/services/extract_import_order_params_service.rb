@@ -12,7 +12,7 @@ class ExtractImportOrderParamsService
 
   def call
     # TODO: add and choose other specific parameter extractors
-    result = ExtractBrainzImportParamsService.call(uri)
+    result = ExtractBrainzImportOrderParamsService.call(uri)
     # TODO: replace hard coded type
     result[:type] = 'MusicBrainzImportOrder'
     result

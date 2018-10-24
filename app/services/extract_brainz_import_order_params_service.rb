@@ -1,4 +1,4 @@
-class ExtractBrainzImportParamsService
+class ExtractBrainzImportOrderParamsService
   def self.call(uri)
     new(uri).call
   end

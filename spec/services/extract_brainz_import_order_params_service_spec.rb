@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 require 'shared_examples_for_import_params_services'
 
-RSpec.describe ExtractBrainzImportParamsService do
+RSpec.describe ExtractBrainzImportOrderParamsService do
   it_behaves_like 'a service'
 
   def code
