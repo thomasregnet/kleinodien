@@ -3,6 +3,7 @@ require 'rails_helper'
 def uri
   'https://musicbrainz.org/release/9424ad78-73f1-4148-aac5-cbff55652e22'
 end
+
 RSpec.feature 'Place import order', type: :feature do
   scenario 'User places a valid order' do
     user = FactoryBot.create(:user)
