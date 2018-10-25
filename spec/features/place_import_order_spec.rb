@@ -13,5 +13,7 @@ RSpec.feature 'Place import order', type: :feature do
 
     fill_in 'Uri', with: uri
     click_button 'Submit'
+
+    expect(page).to have_text('Successfully added an import orde')
   end
 end
