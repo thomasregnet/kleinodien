@@ -8,7 +8,7 @@ class ImportOrdersController < ApplicationController
     @import_order.user = current_user
 
     if @import_order.save!
-      flash[:success] = 'Successfully added an import order'
+      flash[:success] = 'Successfully added your import order'
     else
       flash[:error] = 'Failed to queue import order'
     end
