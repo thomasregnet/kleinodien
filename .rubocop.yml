@@ -3,3 +3,5 @@ require: rubocop-rspec
 Capybara/FeatureMethods:
   Enabled: false
 
+RSpec/ExampleLength:
+  Max: 10
