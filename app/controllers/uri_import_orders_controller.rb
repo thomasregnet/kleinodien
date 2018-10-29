@@ -1,4 +1,4 @@
-class ImportOrdersController < ApplicationController
+class UriImportOrdersController < ApplicationController
   def new
     @import_order = ImportOrder.new
   end

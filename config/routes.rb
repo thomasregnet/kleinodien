@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :album_releases, only: [:index, :show]
 
-  resources :import_orders, only: [:create, :new]
+  resources :uri_import_orders, only: [:create, :new]
 
   resources :movie_heads, only: [:index, :show]
 
