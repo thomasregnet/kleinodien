@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
   belongs_to :user
 
@@ -11,6 +14,7 @@ class ImportOrder < ApplicationRecord
 
     self.state = 'placed'
   end
+
   def try_to_assign_missing_params
     return if !uri || code || kind || type
 
