@@ -1,7 +1,14 @@
 class GetImportStoreService
-  include ImportStore
+  def self.call(uri_string)
+    new(uri_string).call
+    'MusicBrainzImportOrder'
+  end
 
-  def self.call
-    import_store
+  def new(uri_string)
+    @uri_string = uri_string
+  end
+
+  def call
+    'MusicBrainzImportOrder'
   end
 end
