@@ -7,25 +7,15 @@ class UriImportOrdersController < ApplicationController
   end
 
   def create
-    if class_name
-      @import_order = class_name.constantize.new(import_order_params)
-    else
+    @import_order = BuildImportOrderFromUriService.call(uri_string)
+
+    unless @import_order
       flash[:error] = "can't import from #{uri_string}"
-      render :new
     end
 
-    # @import_order = ImportOrder.new(import_order_params)
     @import_order.user = current_user
-
-    # Evil
-    @import_order.code = 'abc'
-    @import_order.kind = 'some-kind'
-    # /Evil
-
     if @import_order.save
       flash[:success] = 'Successfully added your import order'
-    else
-      flash[:error] = 'Failed to queue import order'
     end
 
     render :new
