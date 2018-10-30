@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Takes an uri and stores an ImportOrder
 class UriImportOrdersController < ApplicationController
   def new
     @import_order = ImportOrder.new
@@ -8,10 +11,16 @@ class UriImportOrdersController < ApplicationController
       @import_order = class_name.constantize.new(import_order_params)
     else
       flash[:error] = "can't import from #{uri_string}"
+      render :new
     end
 
     # @import_order = ImportOrder.new(import_order_params)
     @import_order.user = current_user
+
+    # Evil
+    @import_order.code = 'abc'
+    @import_order.kind = 'some-kind'
+    # /Evil
 
     if @import_order.save
       flash[:success] = 'Successfully added your import order'
@@ -25,11 +34,11 @@ class UriImportOrdersController < ApplicationController
   private
 
   def class_name
-    @class_name ||= GetImportOrderClassNameFromUri.call(uri_string)
+    @class_name ||= GetImportOrderClassNameFromUriService.call(uri_string)
   end
 
   def uri_string
-    @uri_string ||= params.require(:import_order).permit(:uri)
+    import_order_params[:uri]
   end
 
   def import_order_params
