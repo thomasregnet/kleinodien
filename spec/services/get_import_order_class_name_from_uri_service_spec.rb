@@ -19,8 +19,8 @@ RSpec.describe GetImportOrderClassNameFromUriService do
       'https://musicbrainz.org/release/7d73370a-546d-4037-a40f-72669b6772e4'
     end
 
-    it 'returns "MusicBrainzImportOrder"' do
-      expect(described_class.call(uri_string)).to eq 'MusicBrainzImportOrder'
+    it 'returns "BrainzImportOrder"' do
+      expect(described_class.call(uri_string)).to eq 'BrainzImportOrder'
     end
   end
 

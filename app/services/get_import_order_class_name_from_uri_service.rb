@@ -4,7 +4,7 @@
 class GetImportOrderClassNameFromUriService
   CLASS_NAME_FOR = {
     'discogs'     => 'DiscogsImportOrder',
-    'musicbrainz' => 'MusicBrainzImportOrder'
+    'musicbrainz' => 'BrainzImportOrder'
   }.freeze
 
   def self.call(uri_string)

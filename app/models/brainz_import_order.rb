@@ -1,0 +1,2 @@
+class BrainzImportOrder < ImportOrder
+end
