@@ -7,7 +7,7 @@ RSpec.describe BuildImportOrderFromUriService do
   it_behaves_like 'a service'
 
   def prefix
-    'https://musicbrainz.org/release-group'
+    'https://musicbrainz.org'
   end
 
   def kind
