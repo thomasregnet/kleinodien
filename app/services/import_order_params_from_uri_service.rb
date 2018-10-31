@@ -32,7 +32,10 @@ class ImportOrderParamsFromUriService
   def path_items
     return unless path_string
 
-    path_string.split('/')
+    items = path_string.split('/')
+    return unless items.length >= 2
+
+    items
   end
 
   def path_string
