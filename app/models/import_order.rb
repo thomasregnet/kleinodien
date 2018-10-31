@@ -7,6 +7,8 @@ class ImportOrder < ApplicationRecord
   after_initialize :set_default_state
   after_initialize :try_to_assign_missing_params
 
+  validates :code, :kind, :user, presence: true
+
   private
 
   def set_default_state
