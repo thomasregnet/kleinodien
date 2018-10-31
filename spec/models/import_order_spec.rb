@@ -1,6 +1,11 @@
 require 'rails_helper'
+require 'shared_examples_for_import_orders'
+
 
 RSpec.describe ImportOrder, type: :model do
+
+  include_examples 'for ImportOrders', :import_order
+
   context 'only called with an uri' do
     let(:user) { FactoryBot.create(:user) }
     def expected_code
