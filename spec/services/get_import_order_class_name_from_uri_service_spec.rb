@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_services'
 
@@ -30,9 +32,17 @@ RSpec.describe GetImportOrderClassNameFromUriService do
     end
   end
 
-  # context 'with nonsense as uri' do
-  #   it 'returns nil' do
-  #     expect(described_class.call('foobar')).to eq nil
-  #   end
-  # end
+  context 'with an uri that contains no top level domain' do
+    let(:uri_string) { 'https://notoplevel/release/123' }
+
+    it 'returns nil' do
+      expect(described_class.call(uri_string)).to be nil
+    end
+  end
+
+  context 'with nonsense as uri' do
+    it 'returns nil' do
+      expect(described_class.call('foobar')).to eq nil
+    end
+  end
 end

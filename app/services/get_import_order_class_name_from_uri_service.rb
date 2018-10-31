@@ -18,7 +18,7 @@ class GetImportOrderClassNameFromUriService
   end
 
   def call
-    return unless uri
+    return unless host_name
 
     class_key = host_name.split('.')[-2]
     CLASS_NAME_FOR[class_key]
