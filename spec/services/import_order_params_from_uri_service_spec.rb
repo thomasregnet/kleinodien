@@ -17,4 +17,24 @@ RSpec.describe ImportOrderParamsFromUriService do
       expect(params[:kind]).to eq 'some-kind'
     end
   end
+
+  context 'with an uri with no path elements' do
+    let(:params) do
+      described_class.call(URI('https://test.example.com'))
+    end
+
+    it 'returns nil' do
+      expect(params).to be nil
+    end
+  end
+
+  context 'with an uri with only one path elements' do
+    let(:params) do
+      described_class.call(URI('https://test.example.com/some-kind'))
+    end
+
+    it 'returns nil' do
+      expect(params).to be nil
+    end
+  end
 end
