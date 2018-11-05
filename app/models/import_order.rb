@@ -6,7 +6,8 @@ class ImportOrder < ApplicationRecord
 
   after_initialize :set_default_state
 
-  validates :code, :kind, :user, presence: true
+  validates :code, :kind, :state, :user, presence: true
+  validates :state, inclusion: { in: %w(pending processing done failed) }
 
   private
 

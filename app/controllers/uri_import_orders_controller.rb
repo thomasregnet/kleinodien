@@ -8,6 +8,7 @@ class UriImportOrdersController < ApplicationController
 
   def create
     @import_order = BuildImportOrderFromUriService.call(uri_string)
+    @import_order.state = 'pending'
 
     unless @import_order
       flash[:error] = "can't import from #{uri_string}"
