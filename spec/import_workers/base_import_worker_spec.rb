@@ -4,35 +4,37 @@ require 'rails_helper'
 
 # Fake an ImportService for testing
 class DummyImporterService
-  def self.call(import_order)
+  def self.call(_import_order)
     true
   end
 end
 
-# Dummy importer for testing
-class DummyImporter < ImportOrder; end
+# ImportOrder for testing
+class DummyImportOrder < ImportOrder; end
 
 RSpec.describe BaseImportWorker do
-  describe '.run' do
-    # OPTIMIZE: nicer specs for .run
-    it 'responds to .run' do
-      expect(described_class).to respond_to(:run)
-    end
-  end
+  context 'with an appropriate queued ImportOrder' do
+    before { DatabaseCleaner.start }
 
-  context 'with a queued ImportOrder' do
-    before do
-      ImportOrder.create!(
+    after { DatabaseCleaner.clean }
+
+    let(:import_order) do
+      DummyImportOrder.create!(
         code: '123',
         kind: 'some-kind',
-        state: 'pending',
-        type: 'DummyImporter',
         user: FactoryBot.create(:user)
       )
     end
 
-    it 'foo' do
-      expect(described_class.run(DummyImporter)).to be true
+    let(:args) do
+      {
+        import_order_class: DummyImportOrder,
+        import_service_class: DummyImporterService
+      }
+    end
+
+    it 'calls .run on the importer service' do
+      expect(described_class.run(args)).to be nil
     end
   end
 end
