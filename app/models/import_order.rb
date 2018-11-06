@@ -14,6 +14,6 @@ class ImportOrder < ApplicationRecord
   def set_default_state
     return if state
 
-    self.state = 'placed'
+    self.state = 'pending'
   end
 end
