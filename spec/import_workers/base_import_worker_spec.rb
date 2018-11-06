@@ -21,7 +21,7 @@ RSpec.describe BaseImportWorker do
       )
     end
 
-    it 'calls #run on the importer service' do
+    it 'calls #run on the root-importer' do
       importer = spy
       described_class.run(
         importer:           importer,
