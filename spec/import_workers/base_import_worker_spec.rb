@@ -2,23 +2,18 @@
 
 require 'rails_helper'
 
-# Fake an ImportService for testing
-class DummyImporterService
-  def self.call(_import_order)
-    true
-  end
-end
-
 # ImportOrder for testing
 class DummyImportOrder < ImportOrder; end
 
 RSpec.describe BaseImportWorker do
   context 'with an appropriate queued ImportOrder' do
-    before { DatabaseCleaner.start }
+    before do
+      DatabaseCleaner.start
+    end
 
     after { DatabaseCleaner.clean }
 
-    let(:import_order) do
+    let!(:import_order) do
       DummyImportOrder.create!(
         code: '123',
         kind: 'some-kind',
@@ -26,15 +21,13 @@ RSpec.describe BaseImportWorker do
       )
     end
 
-    let(:args) do
-      {
-        import_order_class: DummyImportOrder,
-        import_service_class: DummyImporterService
-      }
-    end
-
-    it 'calls .run on the importer service' do
-      expect(described_class.run(args)).to be nil
+    it 'calls #run on the importer service' do
+      importer = spy
+      described_class.run(
+        importer:           importer,
+        import_order_class: 'DummyImportOrder'
+      )
+      expect(importer).to have_received(:run).with(import_order)
     end
   end
 end
