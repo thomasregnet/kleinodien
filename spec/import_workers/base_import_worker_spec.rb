@@ -42,6 +42,8 @@ RSpec.describe BaseImportWorker do
       )
     end
 
+    after(:all) { DatabaseCleaner.clean }
+
     it 'calls #run on the root-importer' do
       expect(worker.importer).to have_received(:run).with(@import_order)
     end
@@ -49,8 +51,6 @@ RSpec.describe BaseImportWorker do
     it 'subscribes when there are no more pending orders' do
       expect(worker.subscription_spy).to have_received(:called).with(true)
     end
-
-    after(:all) { DatabaseCleaner.clean }
   end
 
   context 'without an appropriate ImportOrderder' do

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Takes ImportOrders from the database and triggers its processing
 class BaseImportWorker
   def self.run(args)
     new(args).run
@@ -14,12 +15,15 @@ class BaseImportWorker
 
   def run
     import_order = prepare_order
-    # beyebug
-    unless import_order
+    if import_order
+      run_import(import_order)
+    else
       subscribe
-      return
     end
+  end
 
+  def run_import(import_order)
+    unsubscribe
     importer.run(import_order)
     run
   end
@@ -44,5 +48,9 @@ class BaseImportWorker
 
   def subscribe
     # byebug
+  end
+
+  def unsubscribe
+
   end
 end
