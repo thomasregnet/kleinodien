@@ -51,6 +51,7 @@ RSpec.describe BaseImportWorker do
     it 'calls #unsubscribe' do
       expect(worker.unsubscribe_spy).to have_received(:called).with(true)
     end
+
     it 'calls #run on the root-importer' do
       expect(worker.importer).to have_received(:run).with(@import_order)
     end
