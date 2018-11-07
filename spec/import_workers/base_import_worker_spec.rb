@@ -24,6 +24,7 @@ class TestImportWorker < BaseImportWorker
   end
 end
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe BaseImportWorker do
   let(:worker) do
     worker = TestImportWorker.new(
@@ -37,7 +38,9 @@ RSpec.describe BaseImportWorker do
   end
 
   context 'with an appropriate ImportOrder' do
+    # rubocop:disable RSpec/BeforeAfterAll
     before(:all) do
+      # rubocop:disable RSpec/InstanceVariable
       DatabaseCleaner.start
       @import_order = DummyImportOrder.create!(
         code: '123',
@@ -48,6 +51,8 @@ RSpec.describe BaseImportWorker do
 
     after(:all) { DatabaseCleaner.clean }
 
+    # rubocop:enable RSpec/BeforeAfterAll
+
     it 'calls #unsubscribe' do
       expect(worker.unsubscribe_spy).to have_received(:called).with(true)
     end
@@ -55,6 +60,8 @@ RSpec.describe BaseImportWorker do
     it 'calls #run on the root-importer' do
       expect(worker.importer).to have_received(:run).with(@import_order)
     end
+
+    # rubocop:enable RSpec/InstanceVariable
 
     it 'subscribes when there are no more pending orders' do
       expect(worker.subscribe_spy).to have_received(:called).with(true)
@@ -76,3 +83,4 @@ RSpec.describe BaseImportWorker do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
