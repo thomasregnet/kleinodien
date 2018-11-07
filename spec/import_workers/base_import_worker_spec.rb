@@ -8,25 +8,29 @@ class DummyImportOrder < ImportOrder; end
 # Overwrite some methods for testing
 class TestImportWorker < BaseImportWorker
   def initialize(args)
-    @subscription_spy = args[:subscription_spy]
+    @subscribe_spy   = args[:subscribe_spy]
+    @unsubscribe_spy = args[:unsubscribe_spy]
     super(args)
   end
 
-  attr_reader :subscription_spy
+  attr_reader :subscribe_spy, :unsubscribe_spy
 
   def subscribe
-    subscription_spy.called(true)
+    subscribe_spy.called(true)
+  end
+
+  def unsubscribe
+    unsubscribe_spy.called(true)
   end
 end
 
 RSpec.describe BaseImportWorker do
   let(:worker) do
-    importer_spy     = spy
-    subscription_spy = spy
     worker = TestImportWorker.new(
-      importer:           importer_spy,
+      importer:           spy,
       import_order_class: 'DummyImportOrder',
-      subscription_spy:   subscription_spy
+      subscribe_spy:      spy,
+      unsubscribe_spy:    spy
     )
     worker.run
     worker
@@ -44,12 +48,15 @@ RSpec.describe BaseImportWorker do
 
     after(:all) { DatabaseCleaner.clean }
 
+    it 'calls #unsubscribe' do
+      expect(worker.unsubscribe_spy).to have_received(:called).with(true)
+    end
     it 'calls #run on the root-importer' do
       expect(worker.importer).to have_received(:run).with(@import_order)
     end
 
     it 'subscribes when there are no more pending orders' do
-      expect(worker.subscription_spy).to have_received(:called).with(true)
+      expect(worker.subscribe_spy).to have_received(:called).with(true)
     end
   end
 
@@ -59,8 +66,12 @@ RSpec.describe BaseImportWorker do
       expect(worker.importer).not_to have_received(:run)
     end
 
+    it 'does not call #unsubscribe' do
+      expect(worker.unsubscribe_spy).not_to have_received(:called)
+    end
+
     it 'subscribes' do
-      expect(worker.subscription_spy).to have_received(:called).with(true)
+      expect(worker.subscribe_spy).to have_received(:called).with(true)
     end
   end
 end
