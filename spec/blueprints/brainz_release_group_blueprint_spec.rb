@@ -6,6 +6,7 @@ RSpec.describe BrainzReleaseGroupBlueprint do
     reference = BrainzReleaseGroupReference.from_code(
       '7d31891f-b9da-36de-ab08-98b1fdbbb023'
     )
+
     @orig_release_group = BrainzBaseBlueprint.from_xml(
       KoTestData.brainz_xml_for(reference)
     )

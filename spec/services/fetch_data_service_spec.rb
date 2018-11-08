@@ -20,7 +20,7 @@ RSpec.describe FetchDataService do
   context 'with an uri' do
     let(:uri) do
       'http://musicbrainz.org/ws/2/artist/'\
-      '1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
+      '1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels'
     end
 
     before do
