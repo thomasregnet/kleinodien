@@ -24,11 +24,10 @@ class FakeMusicBrainz < Sinatra::Base
     path += "/#{params[:type]}/#{params[:id]}"
     path += build_inc(params)
     path += '.xml'
-    path
   end
 
   def build_inc(params)
     return '' unless params[:inc]
-    '?inc='+ params[:inc].gsub(/\s+/, '_')
+    '?inc='+ params[:inc].gsub(/\s+/, '+')
   end
 end

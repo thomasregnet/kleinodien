@@ -15,8 +15,7 @@ class BrainzDataFetcher
     uri = 'https://musicbrainz.org/ws/2/release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a?inc=artists+labels+recordings+release-groups'
 
     result = Faraday.get(uri)
-    # byebug
-    result
+    BrainzBaseBlueprint.from_xml(result.body)
   end
 
   def last_request

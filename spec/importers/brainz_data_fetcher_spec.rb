@@ -17,9 +17,9 @@ RSpec.describe BrainzDataFetcher do
     end
   end
 
-  # describe '#get' do
-  #   it 'returns a Brainz blueprint' do
-  #     expect(fetcher.get(:foo)).to be_instance_of BrainzReleaseBlueprint
-  #   end
-  # end
+  describe '#get' do
+    it 'returns a Brainz blueprint' do
+      expect(fetcher.get(:foo)).to be_instance_of BrainzReleaseBlueprint
+    end
+  end
 end
