@@ -2,7 +2,7 @@
 
 # Import of MusicBrainz releases
 class BrainzReleaseImporter
-  def self.call(import_order)
+  def self.from_import_order(import_order)
     new(import_order).call
   end
 
