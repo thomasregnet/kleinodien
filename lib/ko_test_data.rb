@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Fetch test Data
 module KoTestData
   BRAINZ_FIXTURES = %w[fixtures].freeze # brainz].freeze
@@ -13,8 +15,8 @@ module KoTestData
   end
 
   def self.brainz_xml_for(reference)
-    path = [BRAINZ_FIXTURES, reference.to_key + '.xml']
-    file_name = File.join(path.flatten)
+    path = [BRAINZ_FIXTURES, reference.to_key]
+    file_name = File.join(path.flatten) + '.xml'
     File.open(file_name).read
   end
 

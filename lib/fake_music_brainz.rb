@@ -23,6 +23,8 @@ class FakeMusicBrainz < Sinatra::Base
     path = BRAINZ_FILE_BASE
     path += "/#{params[:type]}/#{params[:id]}"
     path += build_inc(params)
+    path += '.xml'
+    path
   end
 
   def build_inc(params)
