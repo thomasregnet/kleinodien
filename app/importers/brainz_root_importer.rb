@@ -8,6 +8,6 @@ class BrainzRootImporter
 
   def self.run(import_order)
     importer_class = IMPORTER_FOR[importorder.kind]
-    importer_class.call(import_order)
+    importer_class.from_import_order(import_order)
   end
 end
