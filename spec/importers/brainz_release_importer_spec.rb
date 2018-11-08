@@ -7,7 +7,7 @@ RSpec.describe BrainzReleaseImporter do
 
   after { DatabaseCleaner.clean }
 
-  context 'nothing exists' do
+  context 'when nothing exists' do
     let(:import_order) do
       BrainzImportOrder.new(
         code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
