@@ -26,12 +26,19 @@ RSpec.describe BrainzReleaseImporter do
 
     context 'when the release is already stored in the database' do
       before do
-        FactoryBot.create!(brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a')
+        DatabaseCleaner.start
+
+        FactoryBot.create(
+          :compilation_release,
+          brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+        )
       end
 
+      after { DatabaseCleaner.clean }
+
       it 'raises an exception' do
-        expect(described_class.from_import_order(import_order))
-          .to raise_exception
+        expect { described_class.from_import_order(import_order) }
+          .to raise_error ImportError::AlreadyExists
       end
     end
   end

@@ -9,14 +9,13 @@ class BrainzReleaseImporter
   # TODO: use the fetcher when it is implemented
   def initialize(args)
     @import_order = args[:import_order]
-    @fetcher      = args[:fetcher] # || BrainzDataFetcher.new
+    @fetcher      = args[:fetcher] || BrainzDataFetcher.new
   end
 
   attr_reader :import_order
 
   def from_import_order
-    release = find_persisted
-    return release if release
+    raise ImportError::AlreadyExists, 'foo' if find_persisted
 
     fetch_from_external_data_source
     AlbumRelease.new
