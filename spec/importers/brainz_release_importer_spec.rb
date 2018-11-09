@@ -17,6 +17,7 @@ RSpec.describe BrainzReleaseImporter do
   end
 
   describe '.from_import_order' do
+    # TODO: Mock out BrainzReleaseImporter#fetch_from_external_data_source
     context 'when the release does not exist' do
       it 'returns an AlbumRelease' do
         expect(described_class.from_import_order(import_order))
