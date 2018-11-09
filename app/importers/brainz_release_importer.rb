@@ -15,7 +15,7 @@ class BrainzReleaseImporter
   attr_reader :import_order
 
   def from_import_order
-    raise ImportError::AlreadyExists, 'foo' if find_persisted
+    raise ImportError::AlreadyExists, 'release exists' if find_persisted
 
     fetch_from_external_data_source
     AlbumRelease.new
