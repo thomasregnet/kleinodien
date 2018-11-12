@@ -9,30 +9,53 @@ RSpec.shared_examples 'for ImportRequests' do |model|
     end
   end
 
-  # context 'without a code' do
-  #   let(:import_request) { FactoryBot.build(model, code: nil) }
+  context 'without a code' do
+    let(:import_request) { FactoryBot.build(model, code: nil) }
 
-  #   it 'is not valid' do
-  #     expect(import_request).not_to be_valid
-  #   end
-  # end
+    it 'is not valid' do
+      expect(import_request).not_to be_valid
+    end
+  end
 
-  # it { is_expected.to respond_to(:to_json).with(0).arguments }
+  describe '#state' do
+    context 'when pending' do
+      let(:import_request) { FactoryBot.build(model, state: :pending) }
 
-  # it 'is not valid without a code' do
-  #   byebug
-  #   expect(described_class.new).not_to be_valid
-  # end
+      it 'is valid' do
+        expect(import_request).to be_valid
+      end
+    end
 
-  # it 'is valid with a code' do
-  #   expect(described_class.new(code: 'abc')).to be_valid
-  # end
+    context 'when processing' do
+      let(:import_request) { FactoryBot.build(model, state: :processing) }
 
-  # it 'has the importer_class set' do
-  #   expect(described_class.new.importer_class).not_to be_nil
-  # end
+      it 'is valid' do
+        expect(import_request).to be_valid
+      end
+    end
 
-  # it 'has the reference_class set' do
-  #   expect(described_class.new.reference_class).not_to be_nil
-  # end
+    context 'when done' do
+      let(:import_request) { FactoryBot.build(model, state: :done) }
+
+      it 'is valid' do
+        expect(import_request).to be_valid
+      end
+    end
+
+    context 'when failed' do
+      let(:import_request) { FactoryBot.build(model, state: :failed) }
+
+      it 'is valid' do
+        expect(import_request).to be_valid
+      end
+    end
+
+    context 'when wrong' do
+      let(:import_request) { FactoryBot.build(model, state: :wrong) }
+
+      it 'is not valid' do
+        expect(import_request).not_to be_valid
+      end
+    end
+  end
 end
