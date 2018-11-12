@@ -1,5 +1,5 @@
 # frozen_string_literal true
 
 # ImportRequest for MusicBrainz Releases
-class BrainzReleaseImportRequest < ImportRequest
+class BrainzReleaseImportRequest < BrainzImportRequest
 end
