@@ -4,7 +4,7 @@ class CreateImportRequests < ActiveRecord::Migration[5.2]
       t.integer :attempts_cache, null: false, default: 0
       t.text :code, null: false
       t.text :state, null: false, default: :pending
-      t.text :type, null: false
+      t.text :type
       t.references :import_order, foreign_key: true, null: false
 
       t.timestamps

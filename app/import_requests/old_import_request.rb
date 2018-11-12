@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # An import request to be queued on for import
-class ImportRequest
+class OldImportRequest
   include ActiveModel::Model
   include ActiveRecord::Callbacks
 
