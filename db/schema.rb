@@ -428,7 +428,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_090005) do
     t.integer "attempts_cache", default: 0, null: false
     t.text "code", null: false
     t.text "state", default: "pending", null: false
-    t.text "type", null: false
+    t.text "type"
     t.bigint "import_order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
