@@ -18,7 +18,7 @@ class TransformBrainzOrderToRequestService
     validate
 
     request_class = BRAINZ_REQUEST_CLASS_FOR[import_order.kind]
-    request_class.new(
+    request_class.create!(
       code:         import_order.code,
       import_order: import_order
     )
