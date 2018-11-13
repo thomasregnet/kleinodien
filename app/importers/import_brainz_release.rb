@@ -15,7 +15,8 @@ class ImportBrainzRelease
   def call
     validate
 
-    PrepareBrainzRelease.call
+    # TODO: call PrepareBrainzRelease with useful args
+    PrepareBrainzRelease.call(:some_thing)
   end
 
   def validate
