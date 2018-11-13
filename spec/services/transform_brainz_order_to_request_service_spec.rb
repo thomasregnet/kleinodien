@@ -11,19 +11,46 @@ RSpec.describe TransformBrainzOrderToRequestService do
 
   # the specs for the service belongs here
 
-  it 'raises with a wrong ImportOrder class' do
-    expect { described_class.call(TestWrongImportOrder.new) }
-      .to raise_error ArgumentError
+  context 'raises with a wrong ImportOrder class' do
+    let(:args) do
+      {
+        expected_kind: :artist,
+        import_order:  TestWrongImportOrder
+      }
+    end
+
+    it 'raises an ArgumentError' do
+      expect { described_class.call(args) }.to raise_error ArgumentError
+    end
   end
 
   context 'when the kind is "release"' do
-    let(:import_order) do
-      FactoryBot.build(:brainz_import_order, kind: 'release')
+    let(:args) do
+      import_order = FactoryBot.build(:brainz_import_order, kind: 'release')
+      {
+        expected_kind: :release,
+        import_order: import_order
+      }
     end
 
     it 'returns a BrainzReleaseImportRequest object' do
-      expect(described_class.call(import_order))
+      expect(described_class.call(args))
         .to be_instance_of BrainzReleaseImportRequest
+    end
+  end
+
+  context 'when the expected_kind does not fit' do
+    let(:args) do
+      import_order = FactoryBot.build(:brainz_import_order, kind: 'release')
+      {
+        expected_kind: :artist,
+        import_order:  import_order
+      }
+    end
+
+    it 'raises an ArgumentError' do
+      expect { described_class.call(args) }
+        .to raise_error ArgumentError
     end
   end
 end
