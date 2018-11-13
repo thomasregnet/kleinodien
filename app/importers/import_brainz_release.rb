@@ -15,6 +15,7 @@ class ImportBrainzRelease
   def call
     validate
 
+    import_request = TransformBrainzOrderToRequestService.call(import_order)
     # TODO: call PrepareBrainzRelease with useful args
     PrepareBrainzRelease.call(:some_thing)
   end
