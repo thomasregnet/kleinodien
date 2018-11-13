@@ -2,9 +2,14 @@
 
 require 'rails_helper'
 require 'shared_examples_for_import_requests'
+require 'shared_examples_for_code_uuid_validations'
 
 RSpec.describe BrainzReleaseImportRequest, type: :model do
   include_examples 'for ImportRequests', :brainz_release_import_request
+  include_examples(
+    'for code fields that must be an uuid',
+    :brainz_import_request
+  )
 
   def uuid
     @uuid ||= SecureRandom.uuid.to_s
