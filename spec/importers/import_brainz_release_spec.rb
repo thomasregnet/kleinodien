@@ -7,10 +7,6 @@ require 'shared_examples_for_services'
 class TestImportClass
 end
 
-class PrepareBrainzRelease
-  def self.call
-  end
-end
 RSpec.describe ImportBrainzRelease do
   it_behaves_like 'a service'
 
