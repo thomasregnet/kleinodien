@@ -4,12 +4,15 @@ FactoryBot.define do
   factory :import_request do
     sequence(:code) { |n| }
 
-    factory(
-      :brainz_release_import_request,
-      class: 'BrainzReleaseImportRequest'
-    ) do
+    factory :brainz_import_request, class: 'BrainzImportRequest' do
       sequence(:code) { SecureRandom.uuid.to_s }
       association :import_order, factory: :brainz_import_order
+
+      factory(
+        :brainz_release_import_request,
+        class: 'BrainzReleaseImportRequest'
+      ) do
+      end
     end
   end
 end
