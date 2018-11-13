@@ -13,9 +13,12 @@ class ImportBrainzRelease
   attr_reader :import_order
 
   def call
-    validate
+    # validate
 
-    import_request = TransformBrainzOrderToRequestService.call(import_order)
+    import_request = TransformBrainzOrderToRequestService.call(
+      expected_kind: :release,
+      import_order:  import_order
+    )
     # TODO: call PrepareBrainzRelease with useful args
     PrepareBrainzRelease.call(:some_thing)
   end
