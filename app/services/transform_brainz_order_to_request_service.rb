@@ -11,6 +11,15 @@ class TransformBrainzOrderToRequestService
   end
 
   def call
+    validate_import_order
+  end
 
+  attr_reader :import_order
+
+  def validate_import_order
+    klass = import_order.class
+    return if klass == 'BrainzImportOrder'
+
+    raise ArgumentError, "Expected a BrainzImportOrder, not #{klass}"
   end
 end
