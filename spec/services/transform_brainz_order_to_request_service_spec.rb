@@ -5,6 +5,7 @@ require 'shared_examples_for_services'
 
 class TestWrongImportOrder
 end
+
 RSpec.describe TransformBrainzOrderToRequestService do
   it_behaves_like 'a service'
 
@@ -16,6 +17,13 @@ RSpec.describe TransformBrainzOrderToRequestService do
   end
 
   context 'when the kind is "release"' do
-    it 'returns a BrainzReleaseImportRequest object'
+    let(:import_order) do
+      FactoryBot.build(:brainz_import_order, kind: 'release')
+    end
+
+    it 'returns a BrainzReleaseImportRequest object' do
+      expect(described_class.call(import_order))
+        .to be_instance_of BrainzReleaseImportRequest
+    end
   end
 end
