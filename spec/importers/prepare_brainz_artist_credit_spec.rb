@@ -17,7 +17,7 @@ RSpec.describe PrepareBrainzArtistCredit do
     it 'requests the artist' do
       proxy = spy
       described_class.call(
-        blueprint: blueprint,
+        blueprint: blueprint.artist_credit,
         proxy:     proxy
       )
       expect(proxy).to have_received(:get)
