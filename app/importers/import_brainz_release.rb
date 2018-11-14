@@ -17,8 +17,13 @@ class ImportBrainzRelease
       expected_kind: :release,
       import_order:  import_order
     )
+
+    proxy = BrainzProxy.new
     # TODO: call PrepareBrainzRelease with useful args
     # PrepareBrainzRelease.call(:some_thing)
-    PrepareBrainzRelease.call(import_request)
+    PrepareBrainzRelease.call(
+      import_request: import_request,
+      proxy:          proxy
+    )
   end
 end
