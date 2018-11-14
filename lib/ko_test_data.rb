@@ -2,6 +2,42 @@
 
 # Fetch test Data
 module KoTestData
+  # Get MusicBrainz blueprints
+  class GetBrainzBlueprintFor
+    BRAINZ_DATA = %w[fixtures musicbrainz.org].freeze
+
+    def self.request(request)
+      new(request.to_uri).get
+    end
+
+    def self.uri(uri)
+      new(uri).get
+    end
+
+    def self.path(path)
+      new(path).get
+    end
+
+    def initialize(uri)
+      #@uri = URI(uri)
+      @path = uri # TODO: !!!
+    end
+
+    attr_reader :uri, :path
+
+    def get
+      xml = File.open(file_name).read
+      BrainzBaseBlueprint.from_xml(xml)
+    end
+
+    def file_name
+      File.join(BRAINZ_DATA, path)
+      # path = uri.path.sub(%r{^.*ws/2/}, '') + '?' + uri.query
+      # File.join(BRAINZ_DATA, path) + '.xml'
+    end
+  end
+
+  # TODO: the code behind this comment is old and should be deleted sometime
   BRAINZ_FIXTURES = %w[fixtures].freeze # brainz].freeze
 
   # TODO: Delete methods brainz_release and brainz_artist. Use brainz_xml_for
