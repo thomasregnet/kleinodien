@@ -13,5 +13,7 @@ class PrepareBrainzArtistCredit
 
   attr_reader :blueprint, :proxy
 
-  def call; end
+  def call
+    artists = proxy.get(:foo)
+  end
 end
