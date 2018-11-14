@@ -19,6 +19,7 @@ class PrepareBrainzRelease
   end
 
   def prepare
+    # TODO: hand over right blueprint
     PrepareBrainzArtistCredit.call(
       blueprint: blueprint,
       proxy:     proxy
