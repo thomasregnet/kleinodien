@@ -1,6 +1,6 @@
 module Importer
   # Prapare an Artist from MusicBrainz for persistence
-  class PrepareBrainzArtist < PrepareBase
+  class OldPrepareBrainzArtist < PrepareBase
     def self.perform(args)
       new(args).perform
     end
