@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe BrainzDataFetcher do
+RSpec.describe BrainzProxy do
   let(:fetcher) { described_class.new }
   let(:uri) do
     'https://musicbrainz.org/ws/2/release/' \

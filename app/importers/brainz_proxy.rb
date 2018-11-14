@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Get data from MusicBrainz
-class BrainzDataFetcher
+class BrainzProxy
   class << self; attr_reader :last_request end
   @last_request = 0
 

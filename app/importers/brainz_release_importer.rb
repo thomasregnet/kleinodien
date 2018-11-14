@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
+# TODO: Delete this class?
 # Import of MusicBrainz releases
 class BrainzReleaseImporter
   def self.from_import_order(import_order)
     new(import_order: import_order).from_import_order
   end
 
-  # TODO: use the fetcher when it is implemented
   def initialize(args)
     @import_order = args[:import_order]
-    @fetcher      = args[:fetcher] || BrainzDataFetcher.new
+    @proxy        = args[:proxy] || BrainzProxy.new
   end
 
   attr_reader :import_order
@@ -27,7 +27,6 @@ class BrainzReleaseImporter
 
   # TODO: use the fetcher when it is implemented
   def fetch_from_external_data_source
-    # fetcher.get(import_order)
+    # proxy.get(import_order)
   end
 end
-

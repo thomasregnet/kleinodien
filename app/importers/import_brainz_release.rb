@@ -18,6 +18,7 @@ class ImportBrainzRelease
       import_order:  import_order
     )
     # TODO: call PrepareBrainzRelease with useful args
-    PrepareBrainzRelease.call(:some_thing)
+    # PrepareBrainzRelease.call(:some_thing)
+    PrepareBrainzRelease.call(import_request)
   end
 end
