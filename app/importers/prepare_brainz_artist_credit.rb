@@ -16,7 +16,7 @@ class PrepareBrainzArtistCredit
   def call
     return if already_have
 
-    blueprint.name_credits.each do |name_credit| 
+    blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit)
     end
   end
