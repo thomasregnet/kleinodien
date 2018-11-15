@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -20,6 +19,5 @@ RSpec.describe PrepareBrainzArtist do
       )
       expect(proxy).to have_received(:get)
     end
-
   end
 end
