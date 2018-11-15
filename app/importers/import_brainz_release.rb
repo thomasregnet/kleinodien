@@ -10,18 +10,35 @@ class ImportBrainzRelease
     @import_order = import_order
   end
 
-  attr_reader :import_order
+  attr_reader :import_order, :import_request
 
   def call
-    import_request = TransformBrainzOrderToRequestService.call(
+    # By creating the import_request the import_order values is validated.
+    # So we create the import_request at the very first time.
+    @import_request = TransformBrainzOrderToRequestService.call(
       expected_kind: :release,
       import_order:  import_order
     )
 
-    proxy = BrainzProxy.new
+    result = find_already_existing || prepare
+    return { result: result, new_record: false } if result
+
+    result = persist
+    { result: result, new_record: true }
+  end
+
+  def find_already_existing
+    CompilationRelease.find_by(brainz_code: import_request.code)
+  end
+
+  def prepare
     PrepareBrainzRelease.call(
       import_request: import_request,
-      proxy:          proxy
+      proxy:          BrainzProxy.new
     )
+  end
+
+  def persist
+    # TODO: implement persist
   end
 end
