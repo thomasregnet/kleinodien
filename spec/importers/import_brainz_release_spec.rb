@@ -7,8 +7,44 @@ require 'shared_examples_for_services'
 class TestImportClass
 end
 
+class MockImportBrainzReleasePrepareAndPersist
+  def initialize
+  end
+end
+
 RSpec.describe ImportBrainzRelease do
   it_behaves_like 'a service'
+
+  def brainz_code
+    'ad6f9162-e8b2-11e8-8a59-abffd0f2862f'
+  end
+
+  context 'when the requested import already exists' do
+    before do
+      DatabaseCleaner.start
+      FactoryBot.create(:compilation_release, brainz_code: brainz_code)
+    end
+
+    after { DatabaseCleaner.clean }
+
+    let(:import_order) do
+      FactoryBot.build(
+        :brainz_import_order,
+        code: brainz_code,
+        kind:        :release
+      )
+    end
+
+    specify 'the :result contains the release' do
+      expect(described_class.call(import_order)[:result])
+        .to be_instance_of CompilationRelease
+    end
+
+    specify ':new_record is false' do
+      expect(described_class.call(import_order)[:new_record])
+        .to be false
+    end
+  end
 
   context 'when it is called with an object of the wrong class' do
     it 'raises without a BrainzImportOrder' do
