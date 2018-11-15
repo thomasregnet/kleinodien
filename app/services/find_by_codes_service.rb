@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Find entieies by codes from foreign data-sources such as MusicBrainz or TMDB
 class FindByCodesService
   include CallWithArgs
 
@@ -12,9 +15,11 @@ class FindByCodesService
 
   def private_call
     return unless findable_codes
+
     opts = [query, params].flatten
     result = model_class.where(opts)
     return unless result
+
     result.first
   end
 
