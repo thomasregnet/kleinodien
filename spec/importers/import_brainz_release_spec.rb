@@ -7,8 +7,31 @@ require 'shared_examples_for_services'
 class TestImportClass
 end
 
-class MockImportBrainzReleasePrepareAndPersist
-  def initialize
+# Mock #persist and #prepare
+class MockImportBrainzReleasePrepareAndPersist < ImportBrainzRelease
+  def self.call(args)
+    me = new(args[:import_order])
+    me.init_spies(args)
+    me.call
+  end
+
+  def init_spies(args)
+    @persist_spy = args[:persist_spy]
+    @prepare_spy = args[:prepare_spy]
+  end
+
+  attr_reader :persist_spy, :prepare_spy
+
+  def persist
+    return unless persist_spy
+
+    persist_spy.called
+  end
+
+  def prepare
+    return unless prepare_spy
+
+    prepare_spy.called
   end
 end
 
@@ -73,7 +96,35 @@ RSpec.describe ImportBrainzRelease do
     )
   end
 
-  it 'calls PersistBrainzRelease'
+  describe 'when the release does not exist' do
+    let(:import_order) do
+      FactoryBot.build(
+        :brainz_import_order,
+        code: brainz_code,
+        kind: :release
+      )
+    end
+
+    it 'calls #persist' do
+      persist_spy = spy
+      MockImportBrainzReleasePrepareAndPersist.call(
+        import_order:  import_order,
+        expected_kind: :release,
+        persist_spy:   persist_spy
+      )
+      expect(persist_spy).to have_received(:called)
+    end
+
+    it 'calls #prepare' do
+      prepare_spy = spy
+      MockImportBrainzReleasePrepareAndPersist.call(
+        import_order:  import_order,
+        expected_kind: :release,
+        prepare_spy:   prepare_spy
+      )
+      expect(prepare_spy).to have_received(:called)
+    end
+  end
 
   it 'persists within a transaction'
 end
