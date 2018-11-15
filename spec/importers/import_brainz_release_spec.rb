@@ -8,7 +8,7 @@ class TestImportClass
 end
 
 # Mock #persist and #prepare
-class MockImportBrainzReleasePrepareAndPersist < ImportBrainzRelease
+class MockImportBrainzReleasePersistAndPrepare < ImportBrainzRelease
   def self.call(args)
     me = new(args[:import_order])
     me.init_spies(args)
@@ -35,11 +35,16 @@ class MockImportBrainzReleasePrepareAndPersist < ImportBrainzRelease
   end
 end
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportBrainzRelease do
   it_behaves_like 'a service'
 
   def brainz_code
     'ad6f9162-e8b2-11e8-8a59-abffd0f2862f'
+  end
+
+  def import_order_args
+    { code: brainz_code, kind: :release }
   end
 
   context 'when the requested import already exists' do
@@ -51,11 +56,7 @@ RSpec.describe ImportBrainzRelease do
     after { DatabaseCleaner.clean }
 
     let(:import_order) do
-      FactoryBot.build(
-        :brainz_import_order,
-        code: brainz_code,
-        kind:        :release
-      )
+      FactoryBot.build(:brainz_import_order,  import_order_args)
     end
 
     specify 'the :result contains the release' do
@@ -87,8 +88,6 @@ RSpec.describe ImportBrainzRelease do
     end
   end
 
-  it 'initializes the store'
-
   it 'calls PrepareBrainzRelease' do
     allow(PrepareBrainzRelease).to receive(:call)
     described_class.call(
@@ -98,18 +97,14 @@ RSpec.describe ImportBrainzRelease do
 
   describe 'when the release does not exist' do
     let(:import_order) do
-      FactoryBot.build(
-        :brainz_import_order,
-        code: brainz_code,
-        kind: :release
-      )
+      FactoryBot.build(:brainz_import_order, import_order_args)
     end
 
     it 'calls #persist' do
       persist_spy = spy
-      MockImportBrainzReleasePrepareAndPersist.call(
-        import_order:  import_order,
+      MockImportBrainzReleasePersistAndPrepare.call(
         expected_kind: :release,
+        import_order:  import_order,
         persist_spy:   persist_spy
       )
       expect(persist_spy).to have_received(:called)
@@ -117,7 +112,7 @@ RSpec.describe ImportBrainzRelease do
 
     it 'calls #prepare' do
       prepare_spy = spy
-      MockImportBrainzReleasePrepareAndPersist.call(
+      MockImportBrainzReleasePersistAndPrepare.call(
         import_order:  import_order,
         expected_kind: :release,
         prepare_spy:   prepare_spy
@@ -128,3 +123,4 @@ RSpec.describe ImportBrainzRelease do
 
   it 'persists within a transaction'
 end
+# rubocop:enable Metrics/BlockLength
