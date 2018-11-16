@@ -55,7 +55,7 @@ class BrainzBaseBlueprint < Hashie::Mash
   def relation_lists
     return unless relation_list
 
-    relation_list
+    force_array(relation_list)
   end
 
   def relations_for_target(type)
