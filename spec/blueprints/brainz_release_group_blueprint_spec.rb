@@ -22,10 +22,11 @@ RSpec.describe BrainzReleaseGroupBlueprint do
       .to eq 'The Sky Is Falling and I Want My Mommy'
   end
 
-  describe '#relation_list_for' do
-    it 'returns the relations of a given type' do
-      expect(@orig_release_group.relation_list_for(:url))
-        .to be_instance_of(BrainzUrlRelsBlueprint)
-    end
-  end
+  # Comment out 2019-11-16
+  # describe '#relation_list_for' do
+  #   it 'returns the relations of a given type' do
+  #     expect(@orig_release_group.relation_list_for(:url))
+  #       .to be_instance_of(BrainzUrlRelsBlueprint)
+  #   end
+  # end
 end
