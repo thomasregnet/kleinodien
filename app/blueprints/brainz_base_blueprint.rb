@@ -45,24 +45,6 @@ class BrainzBaseBlueprint < Hashie::Mash
     )
   }
 
-  # coerce_key :relation_list, lambda { |value|
-  #   # byebug
-  #    if value['target_type'] == 'url'
-  #      # byebug
-  #      ForceArrayOfObjectsService.call(
-  #       klass: BrainzUrlRelsBlueprint, value: value, ossi: 'toll'
-  #      )
-  #    else
-  #   #   ForceArrayOfObjectsService.call(
-  #   #     klass: BrainzRelationBlueprint, value: value
-  #   #   )
-  #    end
-  # }
-  # coerce_key :relation_list, lambda { |value|
-  #   return BrainzUrlRelsBlueprint.new(value) if value['target_type'] == 'url'
-  #   BrainzRelationListBlueprint.new(value)
-  # }
-
   def url_relations
     url_rels = relation_lists.find { |rel| rel.target_type == 'url' }
     return unless url_rels
@@ -72,35 +54,24 @@ class BrainzBaseBlueprint < Hashie::Mash
 
   def relation_lists
     return unless relation_list
-    relation_list
-  end
 
-  def more_than_one_relation_list?(relation_list)
-    return false if relation_list['target_type']
-    true
+    relation_list
   end
 
   def relations_for_target(type)
     return unless relation_lists
+
     relation_lists.each do |r_list|
       next unless r_list.target_type == type.to_s
+
       return r_list.relation
     end
   end
 
-  # def relation_lists
-  #   return unless relation_list
-  #   byebug
-  # end
-  # def relation_lists
-  #   force_array(relation_list)
-  # end
-
   def force_array(gizmo)
     return unless gizmo
     return gizmo if gizmo.is_a? Array
+
     Hashie::Array.new([gizmo])
   end
-
-
 end
