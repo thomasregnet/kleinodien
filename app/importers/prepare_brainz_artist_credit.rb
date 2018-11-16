@@ -14,15 +14,15 @@ class PrepareBrainzArtistCredit
   attr_reader :blueprint, :proxy
 
   def call
-    return if already_have
+    return if find_already_existing
 
     blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit)
     end
   end
 
-  def already_have
-    # TODO: implement already_have
+  def find_already_existing
+    # TODO: implement find_already_existing
   end
 
   def prepare_brainz_artist(name_credit)

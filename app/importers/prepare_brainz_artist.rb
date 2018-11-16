@@ -14,13 +14,13 @@ class PrepareBrainzArtist
   attr_reader :blueprint, :proxy
 
   def call
-    return if already_have
+    return if find_already_existing
 
     proxy.get(request)
   end
 
-  def already_have
-    # TODO: implement already_have
+  def find_already_existing
+    # TODO: implement find_already_existing
   end
 
   def request
