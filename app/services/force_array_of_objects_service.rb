@@ -12,6 +12,7 @@ class ForceArrayOfObjectsService
 
   def private_call
     return unless value
+    # byebug
     if value.is_a? Array
       value.map do |args|
         klass.new(args)
