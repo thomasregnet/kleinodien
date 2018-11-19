@@ -7,6 +7,8 @@ RSpec.describe BrainzBlueprint do
 
   it '#relation_lists'
   it '#url_relations'
+  it '#codes_hash'
+  it 'brainz_code'
 
   describe '.from_xml' do
     let(:xml) do

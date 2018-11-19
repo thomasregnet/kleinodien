@@ -3,6 +3,7 @@
 # Blueprint for MusicBrainz-imports
 class BrainzBlueprint < Hashie::Mash
   # disable_warnings
+  CODE_NAMES = %w[brainz_code discogs_code wikidata_code].freeze
 
   include Hashie::Extensions::MergeInitializer
 
@@ -26,6 +27,10 @@ class BrainzBlueprint < Hashie::Mash
     url_rels.relation
   end
 
+  def brainz_code
+    id
+  end
+
   def discogs_uri
     return unless url_relations
 
@@ -37,6 +42,12 @@ class BrainzBlueprint < Hashie::Mash
     uri = discogs_uri || return
 
     uri.path.split('/')[-1]
+  end
+
+  def codes_hash
+    codes = {}
+    CODE_NAMES.each { |code_name| codes[code_name] = send code_name }
+    codes
   end
 
   # This method smells of :reek:UtilityFunction
