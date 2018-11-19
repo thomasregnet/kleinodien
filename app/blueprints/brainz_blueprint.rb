@@ -18,6 +18,8 @@ class BrainzBlueprint < Hashie::Mash
   end
 
   def url_relations
+    return unless relation_lists
+
     url_rels = relation_lists.find { |rel| rel.target_type == 'url' }
     return unless url_rels
 
