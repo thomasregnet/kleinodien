@@ -14,20 +14,11 @@ class PrepareBrainzRelease
   attr_reader :import_request, :proxy
 
   def call
-    prepare
-    persist
+    return if find_already_existing
   end
 
-  def prepare
-    # TODO: hand over right blueprint
-    PrepareBrainzArtistCredit.call(
-      blueprint: blueprint,
-      proxy:     proxy
-    )
-  end
-
-  def persist
-    # TODO: implement persist
+  def find_already_existing
+    # TODO: implement find_already_existing
   end
 
   def blueprint
