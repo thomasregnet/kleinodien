@@ -22,7 +22,7 @@ RSpec.describe PrepareBrainzArtist do
       )
     end
 
-    it 'return the artist' do
+    it 'returns the artist' do
       proxy = double
       allow(proxy).to receive(:get).and_return(:foo)
       expect(described_class.call(blueprint: blueprint, proxy: proxy))
