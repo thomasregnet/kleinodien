@@ -2,6 +2,29 @@
 
 # Fetch test Data
 module KoTestData
+  class GetBrainzXmlFor
+    BRAINZ_DATA = %w[fixtures musicbrainz.org].freeze
+
+    def self.path(path)
+      new(path).get
+    end
+
+    def initialize(path)
+      @path = path
+    end
+
+    attr_reader :path
+
+    def get
+      File.open(file_name).read
+    end
+
+    def file_name
+      File.join(BRAINZ_DATA, path)
+      # path = uri.path.sub(%r{^.*ws/2/}, '') + '?' + uri.query
+      # File.join(BRAINZ_DATA, path) + '.xml'
+    end
+  end
   # Get MusicBrainz blueprints
   class GetBrainzBlueprintFor
     BRAINZ_DATA = %w[fixtures musicbrainz.org].freeze
