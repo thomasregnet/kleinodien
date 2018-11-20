@@ -1,0 +1,2 @@
+class BrainzArtistImportRequest < BrainzImportRequest
+end
