@@ -5,11 +5,12 @@ class BrainzProxy
   class << self; attr_reader :last_request end
   @last_request = 0
 
-  def initialize
+  def initialize(args)
+    @import_order = args[:import_order]
     @store = {}
   end
 
-  attr_reader :store
+  attr_reader :import_order, :store
 
   def get(import_request)
     result = Faraday.get(import_request.to_uri)
