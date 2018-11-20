@@ -38,6 +38,6 @@ class PrepareBrainzArtist
   end
 
   def request
-    # TODO: implement request
+    BrainzArtistImportRequest.new(code: blueprint.brainz_code)
   end
 end
