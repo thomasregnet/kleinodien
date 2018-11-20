@@ -11,10 +11,9 @@ class BrainzProxy
 
   attr_reader :store
 
-  # TODO: Take an ImportRequest object as parameter
   def get(import_request)
     result = Faraday.get(import_request)
-    BrainzBaseBlueprint.from_xml(result.body)
+    BrainzBlueprint.from_xml(result.body)
   end
 
   def last_request

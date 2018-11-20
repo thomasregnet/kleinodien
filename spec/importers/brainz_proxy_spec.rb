@@ -24,7 +24,7 @@ RSpec.describe BrainzProxy do
 
   describe '#get' do
     it 'returns a Brainz blueprint' do
-      expect(fetcher.get(uri)).to be_instance_of BrainzReleaseBlueprint
+      expect(fetcher.get(uri)).to be_instance_of BrainzBlueprint
     end
   end
 end
