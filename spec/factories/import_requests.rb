@@ -9,6 +9,12 @@ FactoryBot.define do
       association :import_order, factory: :brainz_import_order
 
       factory(
+        :brainz_artist_import_request,
+        class: 'BrainzArtistImportRequest'
+      ) do
+      end
+
+      factory(
         :brainz_release_import_request,
         class: 'BrainzReleaseImportRequest'
       ) do

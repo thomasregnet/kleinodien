@@ -29,7 +29,7 @@ RSpec.describe BrainzImportRequest, type: :model do
   end
 
   def query_string
-    '?inc=some-more-data'
+    'inc=some-more-data'
   end
 
   describe '#to_uri' do
@@ -42,7 +42,7 @@ RSpec.describe BrainzImportRequest, type: :model do
       end
 
       let(:uri) do
-        "https://musicbrainz.org/ws/2/some-kind/#{uuid}#{query_string}"
+        "https://musicbrainz.org/ws/2/some-kind/#{uuid}?#{query_string}"
       end
 
       it 'returns the uri' do
