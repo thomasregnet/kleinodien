@@ -3,11 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe BrainzProxy do
+  def brainz_code
+    '37e9d7b2-7779-41b2-b2eb-3685351caad3' # NoMeansNo
+  end
+
   let(:proxy) { described_class.new }
-  let(:uri) do
-    'https://musicbrainz.org/ws/2/release/' \
-      '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
-      '?inc=artists+labels+recordings+release-groups'
+  let(:import_request) do
+    FactoryBot.build(:brainz_artist_import_request, code: brainz_code)
   end
 
   describe '.last_request' do
@@ -24,7 +26,7 @@ RSpec.describe BrainzProxy do
 
   describe '#get' do
     it 'returns a Brainz blueprint' do
-      expect(proxy.get(uri)).to be_instance_of BrainzBlueprint
+      expect(proxy.get(import_request)).to be_instance_of BrainzBlueprint
     end
   end
 end

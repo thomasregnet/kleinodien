@@ -12,7 +12,7 @@ class BrainzProxy
   attr_reader :store
 
   def get(import_request)
-    result = Faraday.get(import_request)
+    result = Faraday.get(import_request.to_uri)
     BrainzBlueprint.from_xml(result.body)
   end
 
