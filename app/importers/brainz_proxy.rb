@@ -6,16 +6,22 @@ class BrainzProxy
   @last_request = 0
 
   def initialize(args)
-    @import_order = args[:import_order]
-    @store = {}
+    @import_order  = args[:import_order]
+    @request_cache = {}
+    @result_cache  = {}
   end
 
-  attr_reader :import_order, :store
+  attr_reader :import_order, :request_cache, :result_cache
 
   def get(import_request)
     import_request_import_order(import_request)
     result = Faraday.get(import_request.to_uri)
-    BrainzBlueprint.from_xml(result.body)
+    result_cache_store(import_request, result)
+  end
+
+  def result_cache_store(import_request, result)
+    blueprint = BrainzBlueprint.from_xml(result.body)
+    result_cache[import_request.to_uri] = blueprint
   end
 
   def import_request_import_order(import_request)
