@@ -33,11 +33,18 @@ class BrainzFetcher
   def fetch
     max_tries.times do
       take_a_nap
-      @response = Faraday.get(import_request.to_uri)
+      @response = Faraday.get(uri)
       return response if good_response?
     end
+
+    raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
   end
 
+  def uri
+    import_request.to_uri
+  end
+
+  # TODO: make max_tries configurable
   def max_tries
     3
   end
