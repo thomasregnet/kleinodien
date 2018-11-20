@@ -12,7 +12,9 @@ class BrainzImportRequest < ImportRequest
   end
 
   def to_uri
-    "#{prefix}/#{kind}/#{code}#{query_string}"
+    uri = "#{prefix}/#{kind}/#{code}"
+    uri += "?#{query_string}" unless query_string.blank?
+    uri
   end
 
   def kind

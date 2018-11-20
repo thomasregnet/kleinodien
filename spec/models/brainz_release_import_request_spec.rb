@@ -26,7 +26,7 @@ RSpec.describe BrainzReleaseImportRequest, type: :model do
     let(:uri) do
       'https://musicbrainz.org/ws/2/release/' \
         + uuid \
-        + 'inc=artists+labels+recordings+release-groups'
+        + '?inc=artists+labels+recordings+release-groups'
     end
 
     it 'returns the uri' do
