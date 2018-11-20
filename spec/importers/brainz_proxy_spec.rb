@@ -7,7 +7,13 @@ RSpec.describe BrainzProxy do
     '37e9d7b2-7779-41b2-b2eb-3685351caad3' # NoMeansNo
   end
 
-  let(:proxy) { described_class.new }
+  # This method smells of :reek:UtilityFunction
+  def import_order
+    FactoryBot.create(:brainz_import_order)
+  end
+
+  let(:proxy) { described_class.new(import_order: import_order) }
+  # let(:import_order) { FactoryBot.create(:brainz_import_order) }
   let(:import_request) do
     FactoryBot.build(
       :brainz_artist_import_request,
