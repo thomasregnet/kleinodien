@@ -9,7 +9,7 @@ class BrainzReleaseImporter
 
   def initialize(args)
     @import_order = args[:import_order]
-    @proxy        = args[:proxy] || BrainzProxy.new
+    @proxy        = args[:proxy] || BrainzProxy.new(import_order: import_order)
   end
 
   attr_reader :import_order

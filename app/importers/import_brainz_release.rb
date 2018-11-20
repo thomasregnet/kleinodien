@@ -34,7 +34,7 @@ class ImportBrainzRelease
   def prepare
     PrepareBrainzRelease.call(
       import_request: import_request,
-      proxy:          BrainzProxy.new
+      proxy:          BrainzProxy.new(import_order: import_order)
     )
   end
 
