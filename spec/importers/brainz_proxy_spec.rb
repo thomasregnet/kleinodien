@@ -9,7 +9,11 @@ RSpec.describe BrainzProxy do
 
   let(:proxy) { described_class.new }
   let(:import_request) do
-    FactoryBot.build(:brainz_artist_import_request, code: brainz_code)
+    FactoryBot.build(
+      :brainz_artist_import_request,
+      code: brainz_code,
+      import_order: nil
+    )
   end
 
   describe '.last_request' do
