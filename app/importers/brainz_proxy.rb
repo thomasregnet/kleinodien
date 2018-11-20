@@ -13,8 +13,16 @@ class BrainzProxy
   attr_reader :import_order, :store
 
   def get(import_request)
+    import_request_import_order(import_request)
     result = Faraday.get(import_request.to_uri)
     BrainzBlueprint.from_xml(result.body)
+  end
+
+  def import_request_import_order(import_request)
+    pre_existing_import_order = import_request.import_order ||= import_order
+    return if pre_existing_import_order == import_order
+
+    raise ArgumentError, 'ImportOrder missmatch'
   end
 
   def last_request
