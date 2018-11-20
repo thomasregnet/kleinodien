@@ -15,8 +15,12 @@ class BrainzProxy
 
   def get(import_request)
     import_request_import_order(import_request)
-    result = Faraday.get(import_request.to_uri)
+    result = api_connection.get(import_request.to_uri)
     result_cache_store(import_request, result)
+  end
+
+  def api_connection
+    Faraday.new
   end
 
   def result_cache_store(import_request, result)
