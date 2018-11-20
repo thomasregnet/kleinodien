@@ -11,10 +11,9 @@ class BrainzProxy
 
   attr_reader :store
 
-  # TODO: Remove the hard-coded uri
   # TODO: Take an ImportRequest object as parameter
-  def get(uri)
-    result = Faraday.get(uri)
+  def get(import_request)
+    result = Faraday.get(import_request)
     BrainzBaseBlueprint.from_xml(result.body)
   end
 
