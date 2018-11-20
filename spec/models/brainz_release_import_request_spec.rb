@@ -8,7 +8,7 @@ RSpec.describe BrainzReleaseImportRequest, type: :model do
   include_examples 'for ImportRequests', :brainz_release_import_request
   include_examples(
     'for code fields that must be an uuid',
-    :brainz_import_request
+    :brainz_release_import_request
   )
 
   def uuid
