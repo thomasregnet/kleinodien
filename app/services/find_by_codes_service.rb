@@ -14,7 +14,7 @@ class FindByCodesService
   end
 
   def private_call
-    return unless findable_codes
+    return if findable_codes.empty?
 
     opts = [query, params].flatten
     result = model_class.where(opts)
@@ -33,14 +33,17 @@ class FindByCodesService
   end
 
   def findable_codes
-    model_codes = model_class.column_names.select do |attr|
-      attr.match?(/_code$/)
+    @findable_codes ||= select_codes_hash.select do |key, _|
+      model_codes.include? key.to_s
     end
-
-    code_codes_hash.select { |key, _| model_codes.include? key.to_s }
   end
 
-  def code_codes_hash
+  def model_codes
+    model_class.column_names.select do |column_name|
+      column_name.match?(/_code$/)
+    end
+  end
+  def select_codes_hash
     codes_hash.select { |key, value| key.to_s.match?(/_code$/) && value }
   end
 end
