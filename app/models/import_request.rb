@@ -6,4 +6,22 @@ class ImportRequest < ApplicationRecord
 
   validates :attempts_cache, :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
+
+  def processing
+    return unless state == 'pending'
+
+    self.state = 'processing'
+  end
+
+  def done
+    return unless state == 'processing' || state == 'pending'
+
+    self.state = 'done'
+  end
+
+  def failed
+    return unless state == 'pending' || state == 'processing'
+
+    self.state = 'failed'
+  end
 end
