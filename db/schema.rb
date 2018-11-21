@@ -412,14 +412,6 @@ ActiveRecord::Schema.define(version: 2018_11_21_071611) do
     t.index ["abbr"], name: "formats_abbr_key", unique: true
   end
 
-  create_table "import_attempts", force: :cascade do |t|
-    t.text "message"
-    t.integer "status_code", limit: 2, null: false
-    t.bigint "import_request_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["import_request_id"], name: "index_import_attempts_on_import_request_id"
-  end
-
   create_table "import_orders", force: :cascade do |t|
     t.text "code", null: false
     t.text "kind", null: false
@@ -430,6 +422,14 @@ ActiveRecord::Schema.define(version: 2018_11_21_071611) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_import_orders_on_user_id"
+  end
+
+  create_table "import_request_attempts", force: :cascade do |t|
+    t.text "message"
+    t.integer "status_code", limit: 2, null: false
+    t.bigint "import_request_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["import_request_id"], name: "index_import_request_attempts_on_import_request_id"
   end
 
   create_table "import_requests", force: :cascade do |t|
@@ -868,8 +868,8 @@ ActiveRecord::Schema.define(version: 2018_11_21_071611) do
   add_foreign_key "descriptions", "sources"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
-  add_foreign_key "import_attempts", "import_requests"
   add_foreign_key "import_orders", "users"
+  add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_requests", "import_orders"
   add_foreign_key "original_exemplars", "compilation_releases"
   add_foreign_key "original_exemplars", "users"
