@@ -23,6 +23,10 @@ class PrepareBrainzRelease
   end
 
   def prepare_artist_credit
+    PrepareBrainzArtistCredit.call(
+      blueprint: blueprint.artist_credit,
+      proxy:     proxy
+    )
   end
 
   def prepare_release_group
