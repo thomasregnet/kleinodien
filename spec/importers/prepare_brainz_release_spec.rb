@@ -8,29 +8,16 @@ RSpec.describe PrepareBrainzRelease do
 
   describe '.call' do
     context 'when the release is not already persisted' do
-      def brainz_code
-        '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
-      end
-
-      def import_request
-        @import_request ||= FactoryBot.build(
+      let(:import_request) do
+        FactoryBot.build(
           :brainz_release_import_request,
-          code: brainz_code
+          code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
         )
       end
 
-      def proxy
-        BrainzProxy.new(import_order: import_request.import_order)
-      end
-
-      def args
-        {
-          import_request: import_request,
-          proxy:          proxy
-        }
-      end
-
       it 'returns nil' do
+        proxy = spy
+        args = { import_request: import_request, proxy: proxy }
         expect(described_class.call(args)).to be_nil
       end
     end
