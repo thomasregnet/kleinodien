@@ -9,6 +9,8 @@ RSpec.describe ImportRequest, type: :model do
   # all specs fail because in rails the "type" of the base-class is nil.
   # https://stackoverflow.com/questions/4858122/rails-sti-and-the-setting-of-the-type-string
   # include_examples 'for ImportRequests', :import_request
+  it { should have_many(:attempts) }
+
   describe '#processing' do
     context 'when state is "pending"' do
       let(:import_request) { FactoryBot.build(:import_request) }

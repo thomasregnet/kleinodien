@@ -46,13 +46,11 @@ class BrainzFetcher
   end
 
   def fetch_attempt
-    respone = Faraday.get(uri)
-    status_code = respone.status
-    attemt = import_request.attempts.new(status_code: status_code)
-    attemt.message = respone.body unless status_code == 200
+    @response = Faraday.get(uri)
+    status_code = response.status
+    attemt = import_request.attempts.build(status_code: status_code)
+    attemt.message = response.body unless status_code == 200
     attemt.save!
-
-    respone
   end
 
   # TODO: make max_tries configurable

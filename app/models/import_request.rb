@@ -3,6 +3,7 @@
 # Base class for ImportRequests
 class ImportRequest < ApplicationRecord
   belongs_to :import_order
+  has_many :attempts, class_name: 'ImportRequestAttempt'
 
   validates :attempts_cache, :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
