@@ -17,18 +17,26 @@ class PrepareBrainzRelease
     compilation_release = find_already_existing
     return compilation_release if compilation_release
 
-    compilation_release = find_already_existing(blueprint.codes_hash)
-    return compilation_release if compilation_release
-
+    prepare_artist_credit
+    prepare_release_group
     nil
   end
 
-  def find_already_existing(codes_hash = nil)
-    codes_hash ||= import_request_codes_hash
+  def prepare_artist_credit
+  end
+
+  def prepare_release_group
+  end
+
+  def find_already_existing
+    compilation_release = CompilationRelease.find_by(
+      brainz_code: import_request.code
+    )
+    return compilation_release if compilation_release
 
     FindByCodesService.call(
       model_class: CompilationRelease,
-      attributes: codes_hash
+      attributes:  blueprint.codes_hash
     )
   end
 
