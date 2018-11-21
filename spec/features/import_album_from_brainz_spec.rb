@@ -19,6 +19,8 @@ RSpec.feature 'MusicBrainz imports' do
 
     scenario 'import' do
       BrainzRootImporter.run(import_order)
+
+      expect(:foo).to eq(:foo)
     end
   end
 end

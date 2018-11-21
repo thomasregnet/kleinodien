@@ -14,14 +14,29 @@ class PrepareBrainzRelease
   attr_reader :import_request, :proxy
 
   def call
-    return if find_already_existing
+    compilation_release = find_already_existing
+    return compilation_release if compilation_release
+
+    compilation_release = find_already_existing(blueprint.codes_hash)
+    return compilation_release if compilation_release
+
+    nil
   end
 
-  def find_already_existing
-    # TODO: implement find_already_existing
+  def find_already_existing(codes_hash = nil)
+    codes_hash ||= import_request_codes_hash
+
+    FindByCodesService.call(
+      model_class: CompilationRelease,
+      attributes: codes_hash
+    )
+  end
+
+  def import_request_codes_hash
+    { brainz_code: import_request.code }
   end
 
   def blueprint
-    @blueprint ||= proxy.get(import_request)
+    proxy.get(import_request)
   end
 end
