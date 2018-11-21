@@ -48,5 +48,21 @@ RSpec.describe FindByCodesService do
       expect(described_class.call(args)).to be_instance_of(Artist)
     end
   end
+
+  context 'when no codes can be compared' do
+    let(:args) do
+      {
+        model_class: Artist,
+        codes_hash: {
+          foo_code: 123,
+          bar_code: 'thirsty'
+        }
+      }
+    end
+
+    it 'returns nil' do
+      expect(described_class.call(args)).to be_nil
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
