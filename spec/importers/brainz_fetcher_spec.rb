@@ -23,30 +23,25 @@ RSpec.describe BrainzFetcher do
         code: brainz_code
       )
     end
-    it 'returns a BrainzBlueprint' do
-      # import_request = instance_double('Fake ImportRequest')
-      # allow(import_request).to receive_messages(to_uri: uri, processing: true)
-      # allow(import_request).to receive_messages('save!' => true)
-      # allow(import_request).to receive_messages(done: true, 'save!' => true)
 
+    it 'returns a BrainzBlueprint' do
       expect(described_class.call(import_request: import_request))
         .to be_instance_of(BrainzBlueprint)
     end
   end
 
-  # TODO: uncomment this
-  # context "when data can't be requested" do
-  #   let(:uri) { 'https://musicbrainz.org/can/not/be/found' }
+  context "when data can't be requested" do
+    def brainz_code
+      '60ede5a2-ed6f-11e8-8b18-df985781dfef'
+    end
 
-  #   it 'raises an error' do
-  #     import_request = instance_double('Fake ImportRequest')
-  #     allow(import_request).to receive_messages(to_uri: uri, processing: true)
-  #     allow(import_request).to receive_messages('save!' => true)
-  #     allow(import_request).to receive_messages(failed: true)
-  #     allow(import_request).to receive_messages('save!' => true)
+    let(:import_request) do
+      FactoryBot.build(:brainz_artist_import_request, code: brainz_code)
+    end
 
-  #     expect { described_class.call(import_request: import_request) }
-  #       .to raise_error(ImportError::CanNotFetch, /#{uri}/)
-  #   end
-  # end
+    it 'raises an error' do
+      expect { described_class.call(import_request: import_request) }
+        .to raise_error(ImportError::CanNotFetch, /#{brainz_code}/)
+    end
+  end
 end
