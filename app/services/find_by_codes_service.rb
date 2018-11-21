@@ -6,11 +6,11 @@ class FindByCodesService
 
   private
 
-  attr_reader :model_class, :attributes
+  attr_reader :model_class, :codes_hash
 
   def initialize(args)
     @model_class = args[:model_class]
-    @attributes  = args[:attributes]
+    @codes_hash  = args[:codes_hash]
   end
 
   def private_call
@@ -37,10 +37,10 @@ class FindByCodesService
       attr.match?(/_code$/)
     end
 
-    code_attributes.select { |key, _| model_codes.include? key.to_s }
+    code_codes_hash.select { |key, _| model_codes.include? key.to_s }
   end
 
-  def code_attributes
-    attributes.select { |key, value| key.to_s.match?(/_code$/) && value }
+  def code_codes_hash
+    codes_hash.select { |key, value| key.to_s.match?(/_code$/) && value }
   end
 end

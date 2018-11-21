@@ -14,7 +14,7 @@ RSpec.describe FindByCodesService do
   def default_args
     {
       model_class: Artist,
-      attributes: {
+      codes_hash: {
         unused:       nil,
         brainz_code:  brainz_code,
         discogs_code: 123
