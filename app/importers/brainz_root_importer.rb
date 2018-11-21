@@ -3,11 +3,11 @@
 # Choose the right class for MusicBrainz imports and call it
 class BrainzRootImporter
   IMPORTER_FOR = {
-    'releae' => 'BrainzReleaseImporter'
+    'release' => 'ImportBrainzRelease'
   }.freeze
 
   def self.run(import_order)
-    importer_class = IMPORTER_FOR[importorder.kind]
-    importer_class.from_import_order(import_order)
+    importer_class = IMPORTER_FOR[import_order.kind]
+    importer_class.constantize.call(import_order)
   end
 end
