@@ -40,7 +40,7 @@ class PrepareBrainzRelease
 
     FindByCodesService.call(
       model_class: CompilationRelease,
-      attributes:  blueprint.codes_hash
+      codes_hash:  blueprint.codes_hash
     )
   end
 
