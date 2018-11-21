@@ -12,6 +12,12 @@ class BrainzBlueprint < Hashie::Mash
     intermidiate[intermidiate.keys.first]
   end
 
+  def name_credits
+    return unless name_credit
+
+    force_array(name_credit)
+  end
+
   def relation_lists
     return unless relation_list
 
