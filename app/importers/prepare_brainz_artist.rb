@@ -19,7 +19,7 @@ class PrepareBrainzArtist
 
     return if blueprint_complete?
 
-    find_already_existing(full_blueprint)
+    find_already_existing(full_blueprint.codes_hash)
   end
 
   def blueprint_complete?
@@ -29,7 +29,8 @@ class PrepareBrainzArtist
     false
   end
 
-  def find_already_existing(codes_hash = blueprint.codes_hash)
+  def find_already_existing(codes_hash = nil)
+    codes_hash ||= blueprint.codes_hash
     FindByCodesService.call(model_class: Artist, attributes: codes_hash)
   end
 

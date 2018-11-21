@@ -17,7 +17,7 @@ class PrepareBrainzArtistCredit
     return if find_already_existing
 
     blueprint.name_credits.each do |name_credit|
-      prepare_brainz_artist(name_credit)
+      prepare_brainz_artist(name_credit.artist)
     end
   end
 
