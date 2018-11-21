@@ -31,7 +31,7 @@ class PrepareBrainzArtist
 
   def find_already_existing(codes_hash = nil)
     codes_hash ||= blueprint.codes_hash
-    FindByCodesService.call(model_class: Artist, attributes: codes_hash)
+    FindByCodesService.call(model_class: Artist, codes_hash: codes_hash)
   end
 
   def full_blueprint
