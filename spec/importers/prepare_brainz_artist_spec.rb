@@ -90,16 +90,23 @@ RSpec.describe PrepareBrainzArtist do
   context 'when the artist does not exists in the database' do
     let(:blueprint) do
       xml_string = KoTestData::GetBrainzXmlFor.path(
-        'release/693748be-7c18-39c3-af2e-2e62092090cf' \
+        'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
           '?inc=artists+labels+recordings+release-groups.xml'
       )
       BrainzBlueprint.from_xml(xml_string)
-                     .artist_credit.name_credit.first.artist
+                     .artist_credit.name_credit.artist
     end
 
+    let(:full_blueprint) do
+      KoTestData::GetBrainzBlueprintFor.path(
+        'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
+      )
+    end
+
+    # let(:proxy) { BrainzProxy.new()}
     it 'returns the artist' do
-      proxy = double
-      allow(proxy).to receive(:get).and_return(blueprint.codes_hash)
+      proxy = instance_double('Fake proxy')
+      allow(proxy).to receive(:get).and_return(full_blueprint)
       expect(described_class.call(blueprint: blueprint, proxy: proxy))
         .to be_nil
     end
