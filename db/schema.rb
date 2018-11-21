@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_073409) do
+ActiveRecord::Schema.define(version: 2018_11_21_071611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -410,6 +410,14 @@ ActiveRecord::Schema.define(version: 2018_11_13_073409) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
+  end
+
+  create_table "import_attempts", force: :cascade do |t|
+    t.text "message"
+    t.integer "status_code", limit: 2, null: false
+    t.bigint "import_request_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["import_request_id"], name: "index_import_attempts_on_import_request_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -860,6 +868,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_073409) do
   add_foreign_key "descriptions", "sources"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
+  add_foreign_key "import_attempts", "import_requests"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_requests", "import_orders"
   add_foreign_key "original_exemplars", "compilation_releases"
