@@ -19,7 +19,6 @@ class ImportBrainzRelease
       expected_kind: :release,
       import_order:  import_order
     )
-
     result = find_already_existing || prepare
     return { result: result, new_record: false } if result
 
@@ -33,9 +32,17 @@ class ImportBrainzRelease
 
   def prepare
     PrepareBrainzRelease.call(
-      import_request: import_request,
-      proxy:          BrainzProxy.new(import_order: import_order)
+      blueprint: blueprint,
+      proxy:     proxy
     )
+  end
+
+  def blueprint
+    proxy.get(import_request)
+  end
+
+  def proxy
+    @proxy ||= BrainzProxy.new(import_order: import_order)
   end
 
   def persist

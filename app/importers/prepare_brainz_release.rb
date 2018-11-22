@@ -7,11 +7,11 @@ class PrepareBrainzRelease
   end
 
   def initialize(args)
-    @import_request = args[:import_request]
-    @proxy          = args[:proxy]
+    @blueprint = args[:blueprint]
+    @proxy     = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :blueprint, :proxy
 
   def call
     compilation_release = find_already_existing
@@ -43,11 +43,6 @@ class PrepareBrainzRelease
   end
 
   def find_already_existing
-    compilation_release = CompilationRelease.find_by(
-      brainz_code: import_request.code
-    )
-    return compilation_release if compilation_release
-
     FindByCodesService.call(
       model_class: CompilationRelease,
       codes_hash:  blueprint.codes_hash
@@ -56,9 +51,5 @@ class PrepareBrainzRelease
 
   def import_request_codes_hash
     { brainz_code: import_request.code }
-  end
-
-  def blueprint
-    proxy.get(import_request)
   end
 end

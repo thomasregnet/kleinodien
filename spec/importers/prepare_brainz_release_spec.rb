@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'ko_test_data'
 require 'shared_examples_for_services'
 
 class MockPrepareBrainzRelease < PrepareBrainzRelease
@@ -26,11 +27,12 @@ RSpec.describe PrepareBrainzRelease do
 
   describe '.call' do
     context 'when the release is not already persisted' do
-      let(:import_request) do
-        FactoryBot.build(
-          :brainz_release_import_request,
-          code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
+      let(:blueprint) do
+        xml_string = KoTestData::GetBrainzXmlFor.path(
+          'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
+            '?inc=artists+labels+recordings+release-groups.xml'
         )
+        BrainzBlueprint.from_xml(xml_string)
       end
 
       it 'returns nil' do
@@ -38,9 +40,9 @@ RSpec.describe PrepareBrainzRelease do
         prepare_release_group_spy = spy
         proxy                     = spy
         args = {
+          blueprint:                 blueprint,
           prepare_artist_credit_spy: prepare_artist_credit_spy,
           prepare_release_group_spy: prepare_release_group_spy,
-          import_request:            import_request,
           proxy:                     proxy
         }
         expect(MockPrepareBrainzRelease.call(args)).to be_nil
