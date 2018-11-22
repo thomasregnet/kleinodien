@@ -30,6 +30,16 @@ class PrepareBrainzRelease
   end
 
   def prepare_release_group
+    PrepareBrainzReleaseGroup.call(
+      blueprint: proxy.get(prepare_release_group_request),
+      proxy:     proxy
+    )
+  end
+
+  def prepare_release_group_request
+    BrainzReleaseGroupImportRequest.new(
+      code: blueprint.release_group.brainz_code
+    )
   end
 
   def find_already_existing
