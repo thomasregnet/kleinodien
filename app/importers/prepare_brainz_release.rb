@@ -55,8 +55,4 @@ class PrepareBrainzRelease
   def find_already_existing_release_group
     CompilationHead.find_by(brainz_code: blueprint.code)
   end
-
-  def import_request_codes_hash
-    { brainz_code: import_request.code }
-  end
 end
