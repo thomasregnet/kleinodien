@@ -88,12 +88,12 @@ RSpec.describe ImportBrainzRelease do
     end
   end
 
-  it 'calls PrepareBrainzRelease' do
-    allow(PrepareBrainzRelease).to receive(:call)
-    described_class.call(
-      FactoryBot.build(:brainz_import_order, kind: 'release')
-    )
-  end
+  # it 'calls PrepareBrainzRelease' do
+  #   allow(PrepareBrainzRelease).to receive(:call)
+  #   described_class.call(
+  #     FactoryBot.build(:brainz_import_order, kind: 'release')
+  #   )
+  # end
 
   describe 'when the release does not exist' do
     let(:import_order) do
