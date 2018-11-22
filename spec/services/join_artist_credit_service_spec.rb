@@ -30,5 +30,17 @@ RSpec.describe JoinArtistCreditService do
         expect(described_class.call(args)).to eq('A and B')
       end
     end
+
+    context 'with a superfluous join-phrase at the end' do
+      it 'returns the joined names without the superfluous join-phrase' do
+        candidates = [
+          instance_double('To be joined', name: 'A', join_phrase: '&'),
+          instance_double('To be joined', name: 'B', join_phrase: 'and')
+        ]
+
+        expect(described_class.call(candidates: candidates))
+          .to eq('A & B')
+      end
+    end
   end
 end
