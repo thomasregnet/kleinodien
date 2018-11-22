@@ -8,7 +8,7 @@ class JoinArtistCreditService
 
   def initialize(args)
     @candidates         = args[:candidates]
-    @name_method        = args[:name_method] || :name
+    @name_method        = args[:name_method]        || :name
     @join_phrase_method = args[:join_phrase_method] || :join_phrase
   end
 
@@ -16,7 +16,9 @@ class JoinArtistCreditService
 
   def call
     tokens = candidates.map { |candidate| candidate_tokens_for(candidate) }
-    tokens.flatten.join(' ')
+    tokens = tokens.flatten
+    tokens.pop if superfluous_join_phrase?
+    tokens.join(' ')
   end
 
   def candidate_tokens_for(candidate)
@@ -31,5 +33,10 @@ class JoinArtistCreditService
 
     false
   end
-end
 
+  def superfluous_join_phrase?
+    return false unless candidates.last.send(join_phrase_method)
+
+    true
+  end
+end
