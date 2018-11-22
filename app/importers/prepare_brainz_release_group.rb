@@ -5,12 +5,21 @@ class PrepareBrainzReleaseGroup
   end
 
   def initialize(args)
-    @import_request = args[:import_request]
-    @proxy          = args[:proxy]
+    @blueprint = args[:blueprint]
+    @proxy     = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :blueprint, :proxy
 
   def call
+    prepare_artist_credit
+    nil
+  end
+
+  def prepare_artist_credit
+    PrepareBrainzArtistCredit.call(
+      blueprint: blueprint.artist_credit,
+      proxy:     proxy
+    )
   end
 end
