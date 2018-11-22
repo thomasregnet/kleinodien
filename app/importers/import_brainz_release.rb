@@ -10,15 +10,13 @@ class ImportBrainzRelease
     @import_order = import_order
   end
 
-  attr_reader :import_order, :import_request
+  attr_reader :import_order
 
   def call
     # By creating the import_request the import_order values is validated.
     # So we create the import_request at the very first time.
-    @import_request = TransformBrainzOrderToRequestService.call(
-      expected_kind: :release,
-      import_order:  import_order
-    )
+    import_request
+
     result = find_already_existing || prepare
     return { result: result, new_record: false } if result
 
@@ -28,6 +26,13 @@ class ImportBrainzRelease
 
   def find_already_existing
     CompilationRelease.find_by(brainz_code: import_request.code)
+  end
+
+  def import_request
+    @import_request ||= TransformBrainzOrderToRequestService.call(
+      expected_kind: :release,
+      import_order:  import_order
+    )
   end
 
   def prepare
