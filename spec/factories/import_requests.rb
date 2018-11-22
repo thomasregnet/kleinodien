@@ -15,6 +15,12 @@ FactoryBot.define do
       end
 
       factory(
+        :brainz_release_group_import_request,
+        class: 'BrainzReleaseGroupImportRequest'
+      ) do
+      end
+
+      factory(
         :brainz_release_import_request,
         class: 'BrainzReleaseImportRequest'
       ) do
