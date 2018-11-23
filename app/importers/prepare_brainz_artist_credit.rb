@@ -19,6 +19,8 @@ class PrepareBrainzArtistCredit
     blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit.artist)
     end
+
+    nil
   end
 
   def find_already_existing

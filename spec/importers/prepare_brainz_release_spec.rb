@@ -51,4 +51,23 @@ RSpec.describe PrepareBrainzRelease do
       end
     end
   end
+
+  describe '#prepare_artist_credit' do
+    context 'when the artist_credist does not exist' do
+      let(:preparer) do
+        xml_string = KoTestData::GetBrainzXmlFor.path(
+          'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
+            '?inc=artists+labels+recordings+release-groups.xml'
+        )
+        described_class.new(
+          blueprint: BrainzBlueprint.from_xml(xml_string),
+          proxy:     spy
+        )
+      end
+
+      it 'returns nil' do
+        expect(preparer.prepare_artist_credit).to be_nil
+      end
+    end
+  end
 end
