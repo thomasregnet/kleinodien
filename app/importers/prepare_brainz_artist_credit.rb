@@ -25,10 +25,22 @@ class PrepareBrainzArtistCredit
     nil
   end
 
-  def prepare_brainz_artist(name_credit)
+  def prepare_brainz_artist(artist_blueprint)
+    return if find_already_existing_artist(artist_blueprint)
+
     PrepareBrainzArtist.call(
-      blueprint: name_credit,
+      blueprint: proxy.get(artist_import_request(artist_blueprint)),
       proxy:     proxy
     )
+  end
+
+  # This method smells of :reek:UtilityFunction
+  def artist_import_request(artist_blueprint)
+    BrainzArtistImportRequest.new(code: artist_blueprint.brainz_code)
+  end
+
+  # This method smells of :reek:UtilityFunction
+  def find_already_existing_artist(artist_blueprint)
+    Artist.find_by(brainz_code: artist_blueprint.brainz_code)
   end
 end
