@@ -2,6 +2,10 @@
 
 # Prepare a MusicBrainz Artist for import
 class PrepareBrainzArtistCredit
+  # This class does not implement +find_already_existing+
+  # An artist-credit does not contain it's own id respective code.
+  # So we can't search for it. The initial search with the joined name
+  # is done by the calling class.
   def self.call(args)
     new(args).call
   end
@@ -14,17 +18,11 @@ class PrepareBrainzArtistCredit
   attr_reader :blueprint, :proxy
 
   def call
-    return if find_already_existing
-
     blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit.artist)
     end
 
     nil
-  end
-
-  def find_already_existing
-    # TODO: implement find_already_existing
   end
 
   def prepare_brainz_artist(name_credit)
