@@ -17,28 +17,16 @@ class PrepareBrainzArtist
     artist = find_already_existing
     return artist if artist
 
-    return if blueprint_complete?
-
-    find_already_existing(full_blueprint.codes_hash)
+    proxy.get(import_request)
+    nil
   end
 
-  def blueprint_complete?
-    return false unless blueprint
-    return true if blueprint.type
-
-    false
-  end
-
-  def find_already_existing(codes_hash = nil)
-    codes_hash ||= blueprint.codes_hash
+  def find_already_existing
+    codes_hash = blueprint.codes_hash
     FindByCodesService.call(model_class: Artist, codes_hash: codes_hash)
   end
 
-  def full_blueprint
-    proxy.get(request)
-  end
-
-  def request
+  def import_request
     BrainzArtistImportRequest.new(code: blueprint.brainz_code)
   end
 end
