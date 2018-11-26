@@ -17,9 +17,16 @@ class PrepareBrainzReleaseGroup
   end
 
   def prepare_artist_credit
+    return if find_already_existing_artist_credit
+
     PrepareBrainzArtistCredit.call(
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
+  end
+
+  def find_already_existing_artist_credit
+    ac_name = JoinBrainzArtistCreditService.call(blueprint: blueprint)
+    ArtistCredit.find_by(name: ac_name)
   end
 end
