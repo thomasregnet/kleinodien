@@ -6,4 +6,8 @@ module ImportError
   # When data can't be received
   class CanNotFetch < RuntimeError
   end
+
+  # When a Proxy is locked and the requested data is not cached
+  class ProxyLocked < RuntimeError
+  end
 end
