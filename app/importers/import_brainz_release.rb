@@ -51,6 +51,13 @@ class ImportBrainzRelease
   end
 
   def persist
-    # TODO: implement persist
+    proxy.lock
+
+    import_order.transaction do
+      PersistBrainzCompilationRelease.call(
+        import_request: import_request,
+        proxy:          proxy
+      )
+    end
   end
 end

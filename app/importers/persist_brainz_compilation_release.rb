@@ -13,8 +13,12 @@ class PersistBrainzCompilationRelease
   attr_reader :import_request, :proxy
 
   def call
-    persist_artist_credit
-    persist_compilation_head
+    artist_credit    = persist_artist_credit
+    compilation_head = persist_compilation_head
+    # AlbumRelease.create!(
+    #   artist_credit:    artist_credit,
+    #   head:             compilation_head
+    # )
   end
 
   def persist_artist_credit
