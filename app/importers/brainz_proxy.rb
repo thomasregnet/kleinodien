@@ -32,7 +32,7 @@ class BrainzProxy
     if locked?
       raise(
         ImportError::ProxyLocked,
-        "Proxy is locked but #{uri} is  not cached"
+        "Proxy is locked but #{import_request.to_uri} is  not cached"
       )
     end
 
