@@ -6,21 +6,29 @@ class BrainzProxy
   @last_request = 0
 
   def initialize(args)
-    @import_order  = args[:import_order]
-    @locked        = false
-    @result_cache  = {}
+    @import_order = args[:import_order]
+    @locked       = false
+    @cache        = {}
   end
 
-  attr_reader :import_order, :result_cache
+  attr_reader :import_order, :cache
+
+  def cache_store(import_request, blueprint)
+    cache[import_request.to_uri] = blueprint
+  end
 
   def get(import_request)
-    import_request_import_order(import_request)
+    validate_import_request(import_request)
 
     uri = import_request.to_uri
 
-    result = result_cache[uri]
-    return result if result
+    blueprint = cache[uri]
+    return blueprint if blueprint
 
+    fetch(import_request)
+  end
+
+  def fetch(import_request)
     if locked?
       raise(
         ImportError::ProxyLocked,
@@ -28,24 +36,8 @@ class BrainzProxy
       )
     end
 
-    result = api_connection.get(uri)
-    result_cache_store(import_request, result)
-  end
-
-  def api_connection
-    Faraday.new
-  end
-
-  def result_cache_store(import_request, result)
-    blueprint = BrainzBlueprint.from_xml(result.body)
-    result_cache[import_request.to_uri] = blueprint
-  end
-
-  def import_request_import_order(import_request)
-    pre_existing_import_order = import_request.import_order ||= import_order
-    return if pre_existing_import_order == import_order
-
-    raise ArgumentError, 'ImportOrder missmatch'
+    blueprint = BrainzFetcher.call(import_request: import_request)
+    cache_store(import_request, blueprint)
   end
 
   def last_request
@@ -58,5 +50,12 @@ class BrainzProxy
 
   def locked?
     @locked
+  end
+
+  def validate_import_request(import_request)
+    pre_existing_import_order = import_request.import_order ||= import_order
+    return if pre_existing_import_order == import_order
+
+    raise ArgumentError, 'ImportOrder missmatch'
   end
 end
