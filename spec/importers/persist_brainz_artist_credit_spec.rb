@@ -27,4 +27,27 @@ RSpec.describe PersistBrainzArtistCredit do
       end
     end
   end
+
+  # TODO: call and realy persist. Or mock.
+  # context 'when the ArtistCredit is not persisted' do
+  #   describe '.call' do
+  #     let(:blueprint) do
+  #       xml_string = KoTestData::GetBrainzXmlFor.path(
+  #         'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
+  #           'inc=artists+labels+recordings+release-groups.xml'
+  #       )
+  #       BrainzBlueprint.from_xml(xml_string).artist_credit
+  #     end
+
+  #     let(:jello_biafra) do
+
+  #     end
+  #     let(:proxy) { BrainzProxy.new } # Note that proxy is not locked
+
+  #     it 'returns the ArtistCredit' do
+  #       expect(described_class.call(blueprint: blueprint, proxy: proxy))
+  #         .to be_instance_of(ArtistCredit)
+  #     end
+  #   end
+  # end
 end
