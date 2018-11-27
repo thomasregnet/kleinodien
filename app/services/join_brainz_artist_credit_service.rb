@@ -24,18 +24,18 @@ class JoinBrainzArtistCreditService < JoinArtistCreditService
   end
 
   def initialize(args)
-    @blueprint = args[:blueprint]
+    @name_credits = args[:name_credits]
   end
 
-  attr_reader :blueprint
+  attr_reader :name_credits
 
   def call
     JoinArtistCreditService.call(candidates: candidates)
   end
 
   def candidates
-    # blueprint.artist_credit.name_credits.map do |name_credit|
-    blueprint.name_credits.map do |name_credit|
+    # name_credits.artist_credit.name_credits.map do |name_credit|
+    name_credits.map do |name_credit|
       BrainzArtistNameCredit.new(name_credit: name_credit)
     end
   end

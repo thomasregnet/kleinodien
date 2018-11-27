@@ -55,7 +55,8 @@ class PrepareBrainzRelease
   end
 
   def find_already_existing_artist_credit
-    ac_name = JoinBrainzArtistCreditService.call(blueprint: blueprint)
+    name_credits = blueprint.artist_credit.name_credits
+    ac_name = JoinBrainzArtistCreditService.call(name_credits: name_credits)
     ArtistCredit.find_by(name: ac_name)
   end
 
