@@ -12,6 +12,13 @@ class BrainzBlueprint < Hashie::Mash
     intermidiate[intermidiate.keys.first]
   end
 
+  def join_name
+    credits = name_credits
+    return unless credits
+
+    JoinBrainzArtistCreditService.call(name_credits: credits)
+  end
+
   def name_credits
     return unless name_credit
 
