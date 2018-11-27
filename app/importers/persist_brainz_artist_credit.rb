@@ -38,7 +38,9 @@ class PersistBrainzArtistCredit
   end
 
   def ac_name
-    @ac_name ||= JoinBrainzArtistCreditService.call(blueprint: blueprint)
+    @ac_name ||= JoinBrainzArtistCreditService.call(
+      name_credits: blueprint.name_credits
+    )
   end
 
   def join_phrases
