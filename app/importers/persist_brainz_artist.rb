@@ -33,7 +33,7 @@ class PersistBrainzArtist
   end
 
   def begin_date?
-    return true if blueprint.dig('live_span', 'begin')
+    return true if blueprint.dig(:life_span, :begin)
 
     false
   end
@@ -45,7 +45,7 @@ class PersistBrainzArtist
   end
 
   def end_date?
-    return true if blueprint.dig('livespan', 'end')
+    return true if blueprint.dig(:life_span, :end)
 
     false
   end
