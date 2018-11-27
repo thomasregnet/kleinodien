@@ -23,6 +23,20 @@ RSpec.describe BrainzBlueprint do
     end
   end
 
+  describe '#join_name' do
+    let(:artist_credit) do
+      xml_string = KoTestData::GetBrainzXmlFor.path(
+        'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
+          'inc=artists+labels+recordings+release-groups.xml'
+      )
+      BrainzBlueprint.from_xml(xml_string).artist_credit
+    end
+
+    it 'returns the join_name' do
+      expect(artist_credit.join_name).to eq('Jello Biafra With NoMeansNo')
+    end
+  end
+
   describe '#discogs_code' do
     context 'when the blueprint contains a discogs url' do
       let(:blueprint) do
