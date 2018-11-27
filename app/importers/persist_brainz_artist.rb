@@ -14,6 +14,13 @@ class PersistBrainzArtist
   attr_reader :blueprint, :proxy
 
   def call
+    artist = find_already_existing
+    return artist if artist
+
+    persist_artist
+  end
+
+  def persist_artist
     args = {
       name:           blueprint.name,
       sort_name:      blueprint.sort_name,
@@ -24,6 +31,13 @@ class PersistBrainzArtist
     args[:end_date] = begin_date if end_date?
 
     Artist.create!(args)
+  end
+
+  def find_already_existing
+    FindByCodesService.call(
+      model_class: Artist,
+      codes_hash: blueprint.codes_hash
+    )
   end
 
   def begin_date
