@@ -3,7 +3,7 @@
 # Persist ArtistCredit-participants
 class PersistParticipantsService
   def self.call(args)
-    new(args)
+    new(args).call
   end
 
   def initialize(args)
@@ -15,6 +15,12 @@ class PersistParticipantsService
   attr_reader :artists, :artist_credit, :join_phrases
 
   def call
-    # the code for the service belongs here
+    artists.each_with_index do |artist, position|
+      artist_credit.participants.create!(
+        artist:      artist,
+        join_phrase: join_phrases[position],
+        position:    position
+      )
+    end
   end
 end
