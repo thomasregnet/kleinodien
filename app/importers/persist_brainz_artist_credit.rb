@@ -21,11 +21,11 @@ class PersistBrainzArtistCredit
   end
 
   def find_already_existing
-    ArtistCredit.find_by(name: ac_name)
+    ArtistCredit.find_by(name: join_name)
   end
 
   def persist
-    artist_credit = ArtistCredit.create!(name: ac_name)
+    artist_credit = ArtistCredit.create!(name: join_name)
 
     artists.each_with_index do |artist, position|
       Participant.create!(
@@ -37,10 +37,8 @@ class PersistBrainzArtistCredit
     end
   end
 
-  def ac_name
-    @ac_name ||= JoinBrainzArtistCreditService.call(
-      name_credits: blueprint.name_credits
-    )
+  def join_name
+    @join_name ||= blueprint.join_name
   end
 
   def join_phrases
