@@ -34,7 +34,8 @@ class JoinBrainzArtistCreditService < JoinArtistCreditService
   end
 
   def candidates
-    blueprint.artist_credit.name_credits.map do |name_credit|
+    # blueprint.artist_credit.name_credits.map do |name_credit|
+    blueprint.name_credits.map do |name_credit|
       BrainzArtistNameCredit.new(name_credit: name_credit)
     end
   end

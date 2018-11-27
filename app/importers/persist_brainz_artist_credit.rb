@@ -11,7 +11,7 @@ class PersistBrainzArtistCredit
     @proxy     = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :blueprint, :proxy
 
   def call
     artist_credit = find_already_existing
@@ -38,7 +38,7 @@ class PersistBrainzArtistCredit
   end
 
   def ac_name
-    @ac_name ||= JoinBrainzArtistCredit.call(blueprint)
+    @ac_name ||= JoinBrainzArtistCreditService.call(blueprint: blueprint)
   end
 
   def join_phrases
