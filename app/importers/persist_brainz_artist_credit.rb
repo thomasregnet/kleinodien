@@ -27,14 +27,11 @@ class PersistBrainzArtistCredit
   def persist
     artist_credit = ArtistCredit.create!(name: join_name)
 
-    artists.each_with_index do |artist, position|
-      Participant.create!(
-        artist:        artist,
-        artist_credit: artist_credit,
-        join_phrase:   join_phrases[position],
-        position:      position
-      )
-    end
+    PersistParticipantsService.call(
+      artist_credit: artist_credit,
+      artists:       artists,
+      join_phrases:  join_phrases
+    )
   end
 
   def join_name
@@ -46,7 +43,7 @@ class PersistBrainzArtistCredit
   end
 
   def artists
-    blueprint.name_credits.map do |artist|
+    @artists ||= blueprint.name_credits.map do |artist|
       import_request = BrainzArtistImportRequest.new(code: artist.brainz_code)
       blueprint = proxy.get(import_request)
       PersistBrainzArtist.call(
