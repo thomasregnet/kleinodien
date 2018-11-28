@@ -43,13 +43,19 @@ class PersistBrainzArtistCredit
   end
 
   def artists
-    @artists ||= blueprint.name_credits.map do |artist|
-      import_request = BrainzArtistImportRequest.new(code: artist.brainz_code)
-      blueprint = proxy.get(import_request)
-      PersistBrainzArtist.call(
-        blueprint: blueprint,
-        proxy:     proxy
-      )
+    @artists ||= blueprint.name_credits.map do |artist_blueprint|
+      brainz_code = artist_blueprint.brainz_code
+      artist = Artist.find_by(brainz_code: brainz_code)
+      artist || persist_artist(brainz_code)
     end
+  end
+
+  def persist_artist(brainz_code)
+    import_request = BrainzArtistImportRequest.new(code: brainz_code)
+    artist_blueprint = proxy.get(import_request)
+    PersistBrainzArtist.call(
+      blueprint: artist_blueprint,
+      proxy:     proxy
+    )
   end
 end
