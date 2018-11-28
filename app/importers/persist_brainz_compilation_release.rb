@@ -1,24 +1,31 @@
 # frozen_string_literal: true
 
+# Persist a CompilationRelease using data retrieved from MusicBrainz
 class PersistBrainzCompilationRelease
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
-    @import_request = args[:import_request]
-    @proxy          = args[:proxy]
+    # @import_request = args[:import_request]
+    @blueprint = args[:blueprint]
+    @proxy     = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :blueprint, :proxy
 
   def call
-    artist_credit    = persist_artist_credit
-    compilation_head = persist_compilation_head
-    # AlbumRelease.create!(
-    #   artist_credit:    artist_credit,
-    #   head:             compilation_head
-    # )
+    find_already_existing || persist
+  end
+
+  def find_already_existing
+    FindByCodesService.call(
+      codes_hash:  blueprint.codes_hash,
+      model_class: CompilationRelease
+    )
+  end
+
+  def persist
   end
 
   def persist_artist_credit
