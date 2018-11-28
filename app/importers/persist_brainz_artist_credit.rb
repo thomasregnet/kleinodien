@@ -32,6 +32,8 @@ class PersistBrainzArtistCredit
       artists:       artists,
       join_phrases:  join_phrases
     )
+
+    artist_credit
   end
 
   def join_phrases
@@ -39,8 +41,8 @@ class PersistBrainzArtistCredit
   end
 
   def artists
-    @artists ||= blueprint.name_credits.map do |artist_blueprint|
-      brainz_code = artist_blueprint.brainz_code
+    @artists ||= blueprint.name_credits.map do |name_credit|
+      brainz_code = name_credit.artist.brainz_code
       artist = Artist.find_by(brainz_code: brainz_code)
       artist || persist_artist(brainz_code)
     end

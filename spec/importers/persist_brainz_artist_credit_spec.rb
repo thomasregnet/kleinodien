@@ -29,25 +29,38 @@ RSpec.describe PersistBrainzArtistCredit do
   end
 
   # TODO: call and realy persist. Or mock.
-  # context 'when the ArtistCredit is not persisted' do
-  #   describe '.call' do
-  #     let(:blueprint) do
-  #       xml_string = KoTestData::GetBrainzXmlFor.path(
-  #         'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
-  #           'inc=artists+labels+recordings+release-groups.xml'
-  #       )
-  #       BrainzBlueprint.from_xml(xml_string).artist_credit
-  #     end
+  context 'when the ArtistCredit is not persisted' do
+    describe '.call' do
+      def blueprint
+        xml_string = KoTestData::GetBrainzXmlFor.path(
+          'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
+            'inc=artists+labels+recordings+release-groups.xml'
+        )
+        BrainzBlueprint.from_xml(xml_string).artist_credit
+      end
 
-  #     let(:jello_biafra) do
+      def jello_biafra
+        xml_string = KoTestData::GetBrainzXmlFor.path(
+          'artist/2280ca0e-6968-4349-8c36-cb0cbd6ee95f?inc=url-rels.xml'
+        )
+        BrainzBlueprint.from_xml(xml_string)
+      end
 
-  #     end
-  #     let(:proxy) { BrainzProxy.new } # Note that proxy is not locked
+      def nomeansno
+        xml_string = KoTestData::GetBrainzXmlFor.path(
+          'artist/37e9d7b2-7779-41b2-b2eb-3685351caad3?inc=url-rels.xml'
+        )
+        BrainzBlueprint.from_xml(xml_string)
+      end
 
-  #     it 'returns the ArtistCredit' do
-  #       expect(described_class.call(blueprint: blueprint, proxy: proxy))
-  #         .to be_instance_of(ArtistCredit)
-  #     end
-  #   end
-  # end
+      it 'returns the ArtistCredit' do
+        proxy = instance_double('Proxy')
+        expect(proxy).to receive(:get).and_return(jello_biafra)
+        expect(proxy).to receive(:get).and_return(nomeansno)
+
+        expect(described_class.call(blueprint: blueprint, proxy: proxy))
+          .to be_instance_of(ArtistCredit)
+      end
+    end
+  end
 end
