@@ -4,6 +4,7 @@ require 'ko_test_data'
 require 'rails_helper'
 require 'shared_examples_for_services'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzArtistCredit do
   it_behaves_like 'a service'
 
@@ -28,10 +29,9 @@ RSpec.describe PersistBrainzArtistCredit do
     end
   end
 
-  # TODO: call and realy persist. Or mock.
   context 'when the ArtistCredit is not persisted' do
     describe '.call' do
-      def blueprint
+      let(:blueprint) do
         xml_string = KoTestData::GetBrainzXmlFor.path(
           'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
             'inc=artists+labels+recordings+release-groups.xml'
@@ -39,28 +39,33 @@ RSpec.describe PersistBrainzArtistCredit do
         BrainzBlueprint.from_xml(xml_string).artist_credit
       end
 
-      def jello_biafra
+      let(:jello_biafra) do
         xml_string = KoTestData::GetBrainzXmlFor.path(
           'artist/2280ca0e-6968-4349-8c36-cb0cbd6ee95f?inc=url-rels.xml'
         )
         BrainzBlueprint.from_xml(xml_string)
       end
 
-      def nomeansno
+      let(:nomeansno) do
         xml_string = KoTestData::GetBrainzXmlFor.path(
           'artist/37e9d7b2-7779-41b2-b2eb-3685351caad3?inc=url-rels.xml'
         )
         BrainzBlueprint.from_xml(xml_string)
       end
 
+      # rubocop:disable RSpec/MultipleExpectations
+      # rubocop:disable RSpec/MessageSpies
       it 'returns the ArtistCredit' do
-        proxy = instance_double('Proxy')
+        proxy = spy
         expect(proxy).to receive(:get).and_return(jello_biafra)
         expect(proxy).to receive(:get).and_return(nomeansno)
 
         expect(described_class.call(blueprint: blueprint, proxy: proxy))
           .to be_instance_of(ArtistCredit)
       end
+      # rubocop:enable RSpec/MessageSpies
+      # rubocop:enable RSpec/MultipleExpectations
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
