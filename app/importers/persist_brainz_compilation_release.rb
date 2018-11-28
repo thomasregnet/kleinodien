@@ -7,7 +7,6 @@ class PersistBrainzCompilationRelease
   end
 
   def initialize(args)
-    # @import_request = args[:import_request]
     @blueprint = args[:blueprint]
     @proxy     = args[:proxy]
   end
@@ -26,9 +25,21 @@ class PersistBrainzCompilationRelease
   end
 
   def persist
+    artist_credit = persist_artist_credit
   end
 
   def persist_artist_credit
+    artist_credit = find_already_existing_artist_credit
+    return artist_credit if artist_credit
+
+    PersistBrainzArtistCredit.call(
+      blueprint: blueprint.artist_credit,
+      proxy:     proxy
+    )
+  end
+
+  def find_already_existing_artist_credit
+    ArtistCredit.find_by(name: blueprint.artist_credit.join_name)
   end
 
   def persist_compilation_head
