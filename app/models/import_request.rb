@@ -2,7 +2,7 @@
 
 # Base class for ImportRequests
 class ImportRequest < ApplicationRecord
-  belongs_to :import_order
+  belongs_to :import_order, counter_cache: :requests_count
   has_one :body, class_name: 'ImportRequestBody'
   has_many :attempts, class_name: 'ImportRequestAttempt'
 

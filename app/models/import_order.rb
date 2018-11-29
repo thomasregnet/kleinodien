@@ -3,11 +3,12 @@
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
   belongs_to :user
+  has_many :import_requests
 
   after_initialize :set_default_state
 
   validates :code, :kind, :state, :user, presence: true
-  validates :state, inclusion: { in: %w(pending processing done failed) }
+  validates :state, inclusion: { in: %w[pending processing done failed] }
 
   private
 
