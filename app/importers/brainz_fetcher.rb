@@ -10,11 +10,11 @@ class BrainzFetcher
     @import_request = args[:import_request]
   end
 
-  attr_reader :import_request, :response
+  attr_reader :import_request
 
   def call
     change_import_request_status_to(:processing)
-    fetch
+    response = fetch
     change_import_request_status_to(:done)
     BrainzBlueprint.from_xml(response.body)
   end
@@ -26,11 +26,10 @@ class BrainzFetcher
 
   def fetch
     max_tries.times do
-      take_a_nap
-      fetch_attempt
+      response = fetch_attempt
       if response.success?
-        save_response_body
-        return
+        save_response_body(response)
+        return response
       end
     end
 
@@ -47,12 +46,13 @@ class BrainzFetcher
   end
 
   def fetch_attempt
-    @response = Faraday.get(uri)
-    status_code = response.status
-    attemt = import_request.attempts.build(status_code: status_code)
-    # attemt.message = response.body unless response.success?
-    attemt.message = response.reason_phrase
-    attemt.save!
+    take_a_nap
+    response = Faraday.get(uri)
+    import_request.attempts.create!(
+      message:     response.reason_phrase,
+      status_code: response.status
+    )
+    response
   end
 
   # TODO: make max_tries configurable
@@ -60,7 +60,7 @@ class BrainzFetcher
     3
   end
 
-  def save_response_body
+  def save_response_body(response)
     # TODO: Make saving a ImportRequest#body optional per configuration
     import_request.create_body!(content: response.body)
   end
