@@ -28,12 +28,17 @@ class BrainzFetcher
     max_tries.times do
       take_a_nap
       fetch_attempt
-      if good_response?
+      if response.success?
         save_response_body
-        return response
+        return
       end
     end
 
+    can_not_fetch
+  end
+
+  def can_not_fetch
+    change_import_request_status_to(:failed)
     raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
   end
 
@@ -45,20 +50,13 @@ class BrainzFetcher
     @response = Faraday.get(uri)
     status_code = response.status
     attemt = import_request.attempts.build(status_code: status_code)
-    attemt.message = response.body unless status_code == 200
+    attemt.message = response.body unless response.success?
     attemt.save!
   end
 
   # TODO: make max_tries configurable
   def max_tries
     3
-  end
-
-  def good_response?
-    return false unless response
-    return true if response.status == 200
-
-    false
   end
 
   def save_response_body
