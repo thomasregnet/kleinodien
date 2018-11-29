@@ -28,6 +28,11 @@ RSpec.describe BrainzFetcher do
       expect(described_class.call(import_request: import_request))
         .to be_instance_of(BrainzBlueprint)
     end
+
+    it 'saves the response body' do
+      described_class.call(import_request: import_request)
+      expect(import_request.body.content).not_to be_blank
+    end
   end
 
   context "when data can't be requested" do

@@ -15,7 +15,6 @@ class BrainzFetcher
   def call
     start_processing
     fetch
-
     done_processing
     BrainzBlueprint.from_xml(response.body)
   end
@@ -35,7 +34,11 @@ class BrainzFetcher
       take_a_nap
       # @response = Faraday.get(uri)
       fetch_attempt
-      return response if good_response?
+      # return response if good_response?
+      if good_response?
+        save_response_body
+        return response
+      end
     end
 
     raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
@@ -63,6 +66,11 @@ class BrainzFetcher
     return true if response.status == 200
 
     false
+  end
+
+  def save_response_body
+    # TODO: Make saving a ImportRequest#body optional per configuration
+    import_request.create_body!(content: response.body)
   end
 
   def take_a_nap
