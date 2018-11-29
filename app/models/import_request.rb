@@ -6,7 +6,7 @@ class ImportRequest < ApplicationRecord
   has_one :body, class_name: 'ImportRequestBody'
   has_many :attempts, class_name: 'ImportRequestAttempt'
 
-  validates :attempts_cache, :code, :state, :type, presence: true
+  validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
   def processing
