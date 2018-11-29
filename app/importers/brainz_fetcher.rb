@@ -50,7 +50,8 @@ class BrainzFetcher
     @response = Faraday.get(uri)
     status_code = response.status
     attemt = import_request.attempts.build(status_code: status_code)
-    attemt.message = response.body unless response.success?
+    # attemt.message = response.body unless response.success?
+    attemt.message = response.reason_phrase
     attemt.save!
   end
 
