@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_103344) do
+ActiveRecord::Schema.define(version: 2018_11_29_192009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(version: 2018_11_29_103344) do
     t.bigint "import_order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "attempts_count"
     t.index ["import_order_id"], name: "index_import_requests_on_import_order_id"
   end
 
