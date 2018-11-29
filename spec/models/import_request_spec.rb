@@ -12,6 +12,12 @@ RSpec.describe ImportRequest, type: :model do
   it { is_expected.to have_many(:attempts) }
   it { is_expected.to have_one(:body) }
 
+  it 'has a counter_cache for import_request_attempts' do
+    import_request = FactoryBot.create(:brainz_artist_import_request)
+    import_request.attempts.create!(status_code: 200)
+    expect(import_request.attempts_count).to eq(1)
+  end
+
   describe '#processing' do
     context 'when state is "pending"' do
       let(:import_request) { FactoryBot.build(:import_request) }

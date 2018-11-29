@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_192009) do
+ActiveRecord::Schema.define(version: 2018_11_29_200915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -441,7 +441,6 @@ ActiveRecord::Schema.define(version: 2018_11_29_192009) do
   end
 
   create_table "import_requests", force: :cascade do |t|
-    t.integer "attempts_cache", default: 0, null: false
     t.text "code", null: false
     t.text "state", default: "pending", null: false
     t.text "type", null: false

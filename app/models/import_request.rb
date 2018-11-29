@@ -4,7 +4,9 @@
 class ImportRequest < ApplicationRecord
   belongs_to :import_order, counter_cache: :requests_count
   has_one :body, class_name: 'ImportRequestBody'
-  has_many :attempts, class_name: 'ImportRequestAttempt'
+  has_many :attempts,
+           class_name: 'ImportRequestAttempt',
+           inverse_of: :import_request
 
   validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
