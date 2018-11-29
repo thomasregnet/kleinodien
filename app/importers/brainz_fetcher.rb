@@ -13,28 +13,21 @@ class BrainzFetcher
   attr_reader :import_request, :response
 
   def call
-    start_processing
+    change_import_request_status_to(:processing)
     fetch
-    done_processing
+    change_import_request_status_to(:done)
     BrainzBlueprint.from_xml(response.body)
   end
 
-  def start_processing
-    import_request.processing
-    import_request.save!
-  end
-
-  def done_processing
-    import_request.done
+  def change_import_request_status_to(status)
+    import_request.send status
     import_request.save!
   end
 
   def fetch
     max_tries.times do
       take_a_nap
-      # @response = Faraday.get(uri)
       fetch_attempt
-      # return response if good_response?
       if good_response?
         save_response_body
         return response
