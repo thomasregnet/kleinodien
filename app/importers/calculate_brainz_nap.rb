@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 # Calculate interruptions for MusicBrainz import requests
-class BrainzNapCalculator
-  class << self; attr_reader :last end
-  @last = 0
+class CalculateBrainzNap
+  class << self
+    attr_reader :last, :last_multiplier
+  end
+
+  @last            = 0
+  @last_multiplier = 1
 
   def self.call(args)
     new(args).call
@@ -29,18 +33,10 @@ class BrainzNapCalculator
   end
 
   def multiplier
-    return reset_multiplier unless error
-    return @multiplier if @multiplier >= max_multiplier
-
-    @multiplier += 1
-  end
-
-  def reset_multiplier
-    @multiplier = 1
-  end
-
-  def max_multiplier
-    5
+    CalculateBrainzNapMultiplier.call(
+      error:           error,
+      last_multiplier: last_multiplier
+    )
   end
 
   def min_nap_time
