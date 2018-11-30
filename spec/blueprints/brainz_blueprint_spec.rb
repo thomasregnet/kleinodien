@@ -3,8 +3,8 @@
 require 'rails_helper'
 require 'ko_test_data'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzBlueprint do
-
   it '#relation_lists'
   it '#url_relations'
   it '#codes_hash'
@@ -29,7 +29,7 @@ RSpec.describe BrainzBlueprint do
         'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
           'inc=artists+labels+recordings+release-groups.xml'
       )
-      BrainzBlueprint.from_xml(xml_string).artist_credit
+      described_class.from_xml(xml_string).artist_credit
     end
 
     it 'returns the join_name' do
@@ -72,3 +72,4 @@ RSpec.describe BrainzBlueprint do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
