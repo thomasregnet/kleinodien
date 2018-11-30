@@ -50,7 +50,7 @@ module KoTestData
 
     def get
       xml = File.open(file_name).read
-      BrainzBaseBlueprint.from_xml(xml)
+      BrainzBlueprint.from_xml(xml)
     end
 
     def file_name

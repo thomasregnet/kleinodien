@@ -1,2 +1,0 @@
-class BrainzRelationListBlueprint < BrainzBaseBlueprint
-end
