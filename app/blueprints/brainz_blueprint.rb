@@ -12,6 +12,8 @@ class BrainzBlueprint < Hashie::Mash
     intermidiate[intermidiate.keys.first]
   end
 
+  # artist-credit related
+
   def join_name
     credits = name_credits
     return unless credits
@@ -24,6 +26,8 @@ class BrainzBlueprint < Hashie::Mash
 
     force_array(name_credit)
   end
+
+  # relations
 
   def relation_lists
     return unless relation_list
@@ -39,6 +43,8 @@ class BrainzBlueprint < Hashie::Mash
 
     url_rels.relation
   end
+
+  # codes
 
   def brainz_code
     id
@@ -63,6 +69,8 @@ class BrainzBlueprint < Hashie::Mash
     codes
   end
 
+  # make sure we return a Hashie::Array even when there is only
+  # one value
   # This method smells of :reek:UtilityFunction
   def force_array(gizmo)
     return unless gizmo
