@@ -11,7 +11,7 @@ module TestData
 
     def self.blueprint(kind, code)
       path = "musicbrainz.org/#{kind}/#{code}?inc=#{INC_FOR[kind]}"
-      new(path).blueprint
+      new(path: path).blueprint
     end
 
     def blueprint

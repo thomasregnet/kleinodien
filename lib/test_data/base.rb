@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module TestData
+  # Base class for retrieving test-data
   class Base
     FILE_EXTENSIONS = %w[.json .xml].freeze
     TEST_DATA_BASE  = 'fixtures'
 
-    def initialize(path)
-      @path = path
+    def initialize(args)
+      @path = args[:path]
     end
 
     attr_reader :path
