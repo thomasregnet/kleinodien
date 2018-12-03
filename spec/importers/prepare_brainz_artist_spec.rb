@@ -25,17 +25,17 @@ RSpec.describe PrepareBrainzArtist do
       DatabaseCleaner.start
       FactoryBot.create(
         :artist,
-        brainz_code: '1d93c839-22e7-4f76-ad84-d27039efc048'
+        brainz_code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
       )
     end
 
     after { DatabaseCleaner.clean }
 
     let(:blueprint) do
-      xml_string = KoTestData::GetBrainzXmlFor.path(
-        'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
+      TestData::Brainz.blueprint(
+        :artist,
+        'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
       )
-      BrainzBlueprint.from_xml(xml_string)
     end
 
     it 'returns the artist' do
