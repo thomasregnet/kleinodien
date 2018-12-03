@@ -1,0 +1,22 @@
+module TestData
+  class Base
+    FILE_EXTENSIONS = %w[.json .xml].freeze
+    TEST_DATA_BASE  = 'fixtures'
+
+    def initialize(path)
+      @path = path
+    end
+
+    attr_reader :path
+
+    def raw
+      ['', FILE_EXTENSIONS].flatten.each do |extension|
+        full_path = File.join(TEST_DATA_BASE, path) + extension
+        pathname = Pathname(full_path)
+        return File.open(full_path).read if pathname.file?
+      end
+
+      raise ArgumentError, "can't open #{path}"
+    end
+  end
+end
