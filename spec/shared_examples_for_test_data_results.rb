@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'a test-data result' do |blueprint_class, raw_data|
+RSpec.shared_examples 'a test-data result' do |raw_data, blueprint_class|
   def string
     'a test string'
   end

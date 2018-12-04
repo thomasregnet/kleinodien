@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared_examples_for_test_data_results'
 require 'test_data/result_base'
 
-RSpec.describe TestData::ResultBase do
+# Mock the #blueprint-method to use the shared examples
+class TestData::MockResultBaseBlueprint < TestData::ResultBase
+  def blueprint
+    raw
+  end
+end
+
+RSpec.describe TestData::MockResultBaseBlueprint do
+  it_behaves_like 'a test-data result', 'a test string', String
   # context 'when initialized with a string' do
   #   def string
   #     'a test string'
