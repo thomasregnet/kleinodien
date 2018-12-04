@@ -10,5 +10,5 @@ RSpec.describe TestData::BrainzResult do
     '<some_fake_data with="a fake attribute"></some_fake_data>' \
     '</metadata>'
 
-  it_behaves_like 'a test-data result', BrainzBlueprint, xml_string
+  it_behaves_like 'a test-data result', xml_string, BrainzBlueprint
 end
