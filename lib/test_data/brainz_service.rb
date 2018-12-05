@@ -5,7 +5,7 @@ require 'test_data/brainz_result'
 
 module TestData
   # Get MusicBrainz test-data
-  class Brainz < TestData::Base
+  class BrainzService < TestData::Base
     INC_FOR = {
       artist:  'artist-rels+url-rels',
       release: 'artists+labels+recordings+release-groups'

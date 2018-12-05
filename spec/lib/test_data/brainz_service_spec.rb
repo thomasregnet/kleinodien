@@ -1,7 +1,9 @@
-require 'rails_helper'
-require 'test_data/brainz'
+# frozen_string_literal: true
 
-RSpec.describe TestData::Brainz do
+require 'rails_helper'
+require 'test_data/brainz_service'
+
+RSpec.describe TestData::BrainzService do
   describe '.blueprint' do
     it 'returns a BrainzBlueprint' do
       code = 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
