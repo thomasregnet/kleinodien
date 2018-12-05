@@ -10,8 +10,8 @@ module TestData
       new(path).call
     end
 
-    def initialize(path)
-      @path = path
+    def initialize(args)
+      @path = args[:path]
     end
 
     attr_reader :path
