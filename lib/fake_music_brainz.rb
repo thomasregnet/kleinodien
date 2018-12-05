@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra/base'
+require 'test_data/path_service'
 
 # Fake API calls to musicbrainz.org
 class FakeMusicBrainz < Sinatra::Base
@@ -10,24 +11,25 @@ class FakeMusicBrainz < Sinatra::Base
   ).freeze
 
   get '/ws/2/:type/:id' do
-    xml_response build_path
+    content_type :xml
+    status 200
+    xml_string = call_path_service
+    return xml_string if xml_string
+
+    status 404
+    nil
   end
 
   private
 
-  def xml_response(file)
-    content_type :xml
-
-    if File.file?(file)
-      status 200
-      File.open(file).read
-    else
-      status 404
-    end
+  def relative_path
+    "musicbrainz.org/#{params[:type]}/#{params[:id]}#{build_inc}"
   end
 
-  def build_path
-    "#{BRAINZ_FILE_BASE}/#{params[:type]}/#{params[:id]}#{build_inc}.xml"
+  def call_path_service
+    TestData::PathService.call(path: relative_path)
+  rescue ArgumentError
+    nil
   end
 
   def build_inc

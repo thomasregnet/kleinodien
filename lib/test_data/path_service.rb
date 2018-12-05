@@ -4,7 +4,7 @@ module TestData
   # Get test-data by path
   class PathService
     FILE_EXTENSIONS = %w[.json .xml].freeze
-    TEST_DATA_BASE  = 'fixtures'
+    TEST_DATA_BASE = File.expand_path('../../fixtures', __dir__).freeze
 
     def self.call(path)
       new(path).call
