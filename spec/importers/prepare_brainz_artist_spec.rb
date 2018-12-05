@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 require 'ko_test_data'
+require 'test_data/brainz_service'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzArtist do
@@ -32,10 +33,10 @@ RSpec.describe PrepareBrainzArtist do
     after { DatabaseCleaner.clean }
 
     let(:blueprint) do
-      TestData::Brainz.blueprint(
-        :artist,
-        'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-      )
+      TestData::BrainzService.call(
+        kind: :artist,
+        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
+      ).blueprint
     end
 
     it 'returns the artist' do
