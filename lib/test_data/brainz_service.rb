@@ -24,7 +24,7 @@ module TestData
 
     def call
       path = "musicbrainz.org/#{kind}/#{code}?inc=#{INC_FOR[kind]}"
-      raw = TestData::PathService.call(path)
+      raw = TestData::PathService.call(path: path)
       TestData::BrainzResult.new(raw)
     end
   end
