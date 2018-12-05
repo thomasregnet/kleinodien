@@ -2,7 +2,7 @@
 
 module TestData
   # Get test-data by path
-  class Path
+  class PathService
     FILE_EXTENSIONS = %w[.json .xml].freeze
     TEST_DATA_BASE  = 'fixtures'
 
