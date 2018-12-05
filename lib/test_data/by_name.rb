@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'test_data/brainz'
+require 'test_data/brainz_service'
 
 module TestData
   # Get test-data by name
   class ByName
     CLASS_AND_ARTUMENTS_FOR = {
       brainz_arise_cd: {
-        class_name: 'TestData::Brainz',
+        class_name: 'TestData::BrainzService',
         arguments: {
           code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
           kind: :release
