@@ -6,8 +6,8 @@ module TestData
     FILE_EXTENSIONS = %w[.json .xml].freeze
     TEST_DATA_BASE  = 'fixtures'
 
-    def self.get(path)
-      new(path).get
+    def self.call(path)
+      new(path).call
     end
 
     def initialize(path)
@@ -16,7 +16,7 @@ module TestData
 
     attr_reader :path
 
-    def get
+    def call
       ['', FILE_EXTENSIONS].flatten.each do |extension|
         full_path = File.join(TEST_DATA_BASE, path) + extension
         pathname = Pathname(full_path)
