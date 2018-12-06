@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.1'
+gem 'rails', '5.2.2'
 gem 'pg', '~> 1.0'
 # Restrict capybara to a version lower than 3.
 # With 3.0.1 there was trouble with 'Wrong number of arguments'
