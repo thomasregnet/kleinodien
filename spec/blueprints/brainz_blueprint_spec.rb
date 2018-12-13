@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'test_data'
 require 'ko_test_data'
 
 # rubocop:disable Metrics/BlockLength
@@ -12,10 +13,7 @@ RSpec.describe BrainzBlueprint do
 
   describe '.from_xml' do
     let(:xml) do
-      KoTestData::GetBrainzXmlFor.path(
-        'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a?' \
-          'inc=artists+labels+recordings+release-groups.xml'
-      )
+      TestData.by_name(:brainz_release_arise_jp_cd).raw
     end
 
     it 'returns the blueprint' do
@@ -25,11 +23,8 @@ RSpec.describe BrainzBlueprint do
 
   describe '#join_name' do
     let(:artist_credit) do
-      xml_string = KoTestData::GetBrainzXmlFor.path(
-        'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
-          'inc=artists+labels+recordings+release-groups.xml'
-      )
-      described_class.from_xml(xml_string).artist_credit
+      TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
+              .blueprint.artist_credit
     end
 
     it 'returns the join_name' do
@@ -40,13 +35,7 @@ RSpec.describe BrainzBlueprint do
   describe '#discogs_code' do
     context 'when the blueprint contains a discogs url' do
       let(:blueprint) do
-        KoTestData::GetBrainzBlueprintFor.path(
-          'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
-        )
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
-        )
-        described_class.from_xml(xml_string)
+        TestData.by_name(:brainz_artist_sepultura).blueprint
       end
 
       it 'returns the discogs-code' do
@@ -56,14 +45,7 @@ RSpec.describe BrainzBlueprint do
 
     context 'when the blueprint does not contain a discogs url' do
       let(:blueprint) do
-        KoTestData::GetBrainzBlueprintFor.path(
-          'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
-        )
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a?'\
-            'inc=artists+labels+recordings+release-groups.xml'
-        )
-        described_class.from_xml(xml_string)
+        TestData.by_name(:brainz_release_arise_jp_cd).blueprint
       end
 
       it 'returns the discogs-code' do

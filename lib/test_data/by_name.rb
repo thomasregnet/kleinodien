@@ -14,6 +14,13 @@ module TestData
           kind: :release
         }
       },
+      brainz_artist_sepultura: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '1d93c839-22e7-4f76-ad84-d27039efc048',
+          kind: :artist
+        }
+      },
       brainz_release_arise_jp_cd: {
         class_name: 'TestData::BrainzService',
         arguments: {
