@@ -21,6 +21,13 @@ module TestData
           kind: :artist
         }
       },
+      brainz_artist_slayer: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec',
+          kind: :artist
+        }
+      },
       brainz_release_arise_jp_cd: {
         class_name: 'TestData::BrainzService',
         arguments: {
