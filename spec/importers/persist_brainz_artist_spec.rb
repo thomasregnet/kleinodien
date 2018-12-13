@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
-require 'ko_test_data'
+require 'test_data'
 require 'rails_helper'
 
 RSpec.describe PersistBrainzArtist do
-  def path
-    'artist/bdacc37b-8633-4bf8-9dd5-4662ee651aec?inc=artist-rels+url-rels.xml'
-  end
-
-  def blueprint
-    xml_string = KoTestData::GetBrainzXmlFor.path(path)
-    BrainzBlueprint.from_xml(xml_string)
+  let(:blueprint) do
+    TestData.by_name(:brainz_artist_slayer).blueprint
   end
 
   context 'when the Artist does not exist' do

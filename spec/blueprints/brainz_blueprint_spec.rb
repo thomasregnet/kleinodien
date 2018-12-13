@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 require 'test_data'
-require 'ko_test_data'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzBlueprint do
