@@ -7,8 +7,9 @@ module TestData
   # Get MusicBrainz test-data
   class BrainzService
     INC_FOR = {
-      artist:  'artist-rels+url-rels',
-      release: 'artists+labels+recordings+release-groups'
+      artist: 'artist-rels+url-rels',
+      release: 'artists+labels+recordings+release-groups',
+      release_group: 'artists+artist-rels+label-rels+url-rels'
     }.freeze
 
     def self.call(args)
@@ -23,9 +24,13 @@ module TestData
     attr_reader :code, :kind
 
     def call
-      path = "musicbrainz.org/#{kind}/#{code}?inc=#{INC_FOR[kind]}"
+      path = "musicbrainz.org/#{kind_to_s}/#{code}?inc=#{INC_FOR[kind]}"
       raw = TestData::PathService.call(path: path)
       TestData::BrainzResult.new(raw)
+    end
+
+    def kind_to_s
+      kind.to_s.tr('_', '-')
     end
   end
 end

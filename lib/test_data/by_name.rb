@@ -41,6 +41,13 @@ module TestData
           code: '693748be-7c18-39c3-af2e-2e62092090cf',
           kind: :release
         }
+      },
+      brainz_release_group_arise: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933',
+          kind: :release_group
+        }
       }
     }.freeze
 
