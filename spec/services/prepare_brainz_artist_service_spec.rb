@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-# require 'ko_test_data'
 require 'redis_helper'
 require 'shared_examples_for_services'
 
