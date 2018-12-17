@@ -3,5 +3,8 @@ require: rubocop-rspec
 Capybara/FeatureMethods:
   Enabled: false
 
+Style/AlignHash:
+  EnforcedColonStyle: table
+
 RSpec/ExampleLength:
   Max: 10
