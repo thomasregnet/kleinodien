@@ -23,10 +23,6 @@ RSpec.describe PrepareBrainzReleaseGroup do
 
   context 'with a valid blueprint' do
     let(:blueprint) do
-      # KoTestData::GetBrainzBlueprintFor.path(
-      #   'release-group/5fc9ba9d-bc39-38fc-a479-eadbf0f3a933' \
-      #     '?inc=artists+artist-rels+label-rels+url-rels.xml'
-      # )
       TestData.by_name(:brainz_release_group_arise).blueprint
     end
 
