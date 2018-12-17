@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'ko_test_data'
 require 'shared_examples_for_services'
+require 'test_data'
 
 class MockPrepareBrainzRelease < PrepareBrainzRelease
   def initialize(args)
@@ -28,11 +28,7 @@ RSpec.describe PrepareBrainzRelease do
   describe '.call' do
     context 'when the release is not already persisted' do
       let(:blueprint) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
-            '?inc=artists+labels+recordings+release-groups.xml'
-        )
-        BrainzBlueprint.from_xml(xml_string)
+        TestData.by_name(:brainz_release_arise_jp_cd).blueprint
       end
 
       it 'returns nil' do
@@ -55,10 +51,7 @@ RSpec.describe PrepareBrainzRelease do
   describe '#prepare_artist_credit' do
     context 'when the artist_credist does not exist' do
       let(:preparer) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
-            '?inc=artists+labels+recordings+release-groups.xml'
-        )
+        xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
         described_class.new(
           blueprint: BrainzBlueprint.from_xml(xml_string),
           proxy:     spy
