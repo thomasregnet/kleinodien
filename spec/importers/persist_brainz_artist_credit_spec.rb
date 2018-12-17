@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'ko_test_data'
 require 'rails_helper'
 require 'shared_examples_for_services'
+require 'test_data'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzArtistCredit do
@@ -15,11 +15,8 @@ RSpec.describe PersistBrainzArtistCredit do
       end
 
       let(:blueprint) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
-            'inc=artists+labels+recordings+release-groups.xml'
-        )
-        BrainzBlueprint.from_xml(xml_string).artist_credit
+        TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
+                .blueprint.artist_credit
       end
 
       it 'returns the ArtistCredit' do
@@ -32,25 +29,16 @@ RSpec.describe PersistBrainzArtistCredit do
   context 'when the ArtistCredit is not persisted' do
     describe '.call' do
       let(:blueprint) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'release/693748be-7c18-39c3-af2e-2e62092090cf?' \
-            'inc=artists+labels+recordings+release-groups.xml'
-        )
-        BrainzBlueprint.from_xml(xml_string).artist_credit
+        TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
+                .blueprint.artist_credit
       end
 
       let(:jello_biafra) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'artist/2280ca0e-6968-4349-8c36-cb0cbd6ee95f?inc=url-rels.xml'
-        )
-        BrainzBlueprint.from_xml(xml_string)
+        TestData.by_name(:brainz_artist_jello_biafra).blueprint
       end
 
       let(:nomeansno) do
-        xml_string = KoTestData::GetBrainzXmlFor.path(
-          'artist/37e9d7b2-7779-41b2-b2eb-3685351caad3?inc=url-rels.xml'
-        )
-        BrainzBlueprint.from_xml(xml_string)
+        TestData.by_name(:brainz_artist_nomeansno).blueprint
       end
 
       # rubocop:disable RSpec/MultipleExpectations

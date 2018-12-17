@@ -14,6 +14,20 @@ module TestData
           kind: :release
         }
       },
+      brainz_artist_jello_biafra: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f',
+          kind: :artist
+        }
+      },
+      brainz_artist_nomeansno: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '37e9d7b2-7779-41b2-b2eb-3685351caad3',
+          kind: :artist
+        }
+      },
       brainz_artist_sepultura: {
         class_name: 'TestData::BrainzService',
         arguments: {
