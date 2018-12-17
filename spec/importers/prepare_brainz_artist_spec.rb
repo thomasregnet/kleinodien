@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'ko_test_data'
 require 'test_data/brainz_service'
+require 'test_data'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzArtist do
@@ -33,10 +33,7 @@ RSpec.describe PrepareBrainzArtist do
     after { DatabaseCleaner.clean }
 
     let(:blueprint) do
-      TestData::BrainzService.call(
-        kind: :artist,
-        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-      ).blueprint
+      TestData.by_name(:brainz_artist_slayer).blueprint
     end
 
     it 'returns the artist' do
@@ -48,18 +45,11 @@ RSpec.describe PrepareBrainzArtist do
 
   context 'when the artist does not exists in the database' do
     let(:blueprint) do
-      xml_string = KoTestData::GetBrainzXmlFor.path(
-        'release/7452f8c9-f9bc-3ca7-859e-3220e57e4e4a' \
-          '?inc=artists+labels+recordings+release-groups.xml'
-      )
-      BrainzBlueprint.from_xml(xml_string)
-                     .artist_credit.name_credit.artist
+      TestData.by_name(:brainz_release_arise_jp_cd).blueprint
     end
 
     let(:full_blueprint) do
-      KoTestData::GetBrainzBlueprintFor.path(
-        'artist/1d93c839-22e7-4f76-ad84-d27039efc048?inc=url-rels.xml'
-      )
+      TestData.by_name(:brainz_artist_sepultura).blueprint
     end
 
     it 'returns the artist' do
