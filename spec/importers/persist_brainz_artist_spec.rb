@@ -8,22 +8,23 @@ RSpec.describe PersistBrainzArtist do
     TestData.by_name(:brainz_artist_slayer).blueprint
   end
 
+  let(:import_request) do
+    BrainzArtistImportRequest.new(
+      code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
+    )
+  end
+
   context 'when the Artist does not exist' do
     describe '.call' do
-      let(:artist) do
-        described_class.call(blueprint: blueprint)
-      end
-
       it 'persists the Artist' do
-        expect(artist).to be_instance_of(Artist)
-      end
+        proxy = double
+        allow(proxy).to receive(:get).and_return(blueprint)
 
-      it 'sets the name' do
-        expect(artist.name).to eq('Slayer')
-      end
-
-      it 'sets the begin_date' do
-        expect(artist.begin_date.year).to eq(1981)
+        artist = described_class.call(
+          import_request: import_request,
+          proxy:          proxy
+        )
+        expect(artist).not_to be_new_record
       end
     end
   end
@@ -39,7 +40,11 @@ RSpec.describe PersistBrainzArtist do
       end
 
       it 'returns that artist' do
-        expect(described_class.call(blueprint: blueprint).name)
+        proxy = double
+        allow(proxy).to receive(:get).and_return(blueprint)
+        args = { import_request: import_request, proxy: proxy }
+
+        expect(described_class.call(args).name)
           .to eq('No more slaying')
       end
     end

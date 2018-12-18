@@ -7,11 +7,12 @@ class PersistBrainzArtist
   end
 
   def initialize(args)
-    @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
+    # @blueprint = args[:blueprint]
+    @import_request = args[:import_request]
+    @proxy          = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :import_request, :proxy
 
   def call
     artist = find_already_existing
@@ -33,10 +34,14 @@ class PersistBrainzArtist
     Artist.create!(args)
   end
 
+  def blueprint
+    proxy.get(import_request)
+  end
+
   def find_already_existing
     FindByCodesService.call(
       model_class: Artist,
-      codes_hash: blueprint.codes_hash
+      codes_hash:  blueprint.codes_hash
     )
   end
 
