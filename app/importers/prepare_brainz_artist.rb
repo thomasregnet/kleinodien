@@ -18,6 +18,7 @@ class PrepareBrainzArtist
     return artist if artist
 
     proxy.get(import_request)
+
     nil
   end
 
