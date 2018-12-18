@@ -37,23 +37,13 @@ class PersistBrainzCompilationRelease
   end
 
   def persist_artist_credit
-    artist_credit = find_already_existing_artist_credit
-    return artist_credit if artist_credit
-
     PersistBrainzArtistCredit.call(
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
   end
 
-  def find_already_existing_artist_credit
-    ArtistCredit.find_by(name: blueprint.artist_credit.join_name)
-  end
-
   def persist_compilation_head
-    compilation_head = find_already_existing_compilation_head
-    return compilation_head if compilation_head
-
     import_request = BrainzReleaseGroupImportRequest.new(
       code: blueprint.release_group.brainz_code
     )
@@ -62,9 +52,5 @@ class PersistBrainzCompilationRelease
       blueprint: proxy.get(import_request),
       proxy:     proxy
     )
-  end
-
-  def find_already_existing_compilation_head
-    CompilationHead.find_by(brainz_code: blueprint.brainz_code)
   end
 end
