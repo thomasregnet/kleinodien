@@ -5,27 +5,25 @@ class PrepareBrainzReleaseGroup
   end
 
   def initialize(args)
-    @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
+    @import_request = args[:import_request]
+    @proxy          = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :import_request, :proxy
 
   def call
     prepare_artist_credit
     nil
   end
 
-  def prepare_artist_credit
-    return if find_already_existing_artist_credit
+  def blueprint
+    proxy.get(import_request)
+  end
 
+  def prepare_artist_credit
     PrepareBrainzArtistCredit.call(
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
-  end
-
-  def find_already_existing_artist_credit
-    ArtistCredit.find_by(name: blueprint.artist_credit.join_name)
   end
 end
