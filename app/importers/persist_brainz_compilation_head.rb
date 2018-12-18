@@ -19,7 +19,7 @@ class PersistBrainzCompilationHead
 
   def find_already_existing
     FindByCodesService.call(
-      codes_hash: blueprint.codes_hash,
+      codes_hash:  blueprint.codes_hash,
       model_class: CompilationHead
     )
   end
@@ -36,16 +36,9 @@ class PersistBrainzCompilationHead
   end
 
   def persist_artist_credit
-    artist_credit = find_already_existing_artist_credit
-    return artist_credit if artist_credit
-
     PersistBrainzArtistCredit.call(
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
-  end
-
-  def find_already_existing_artist_credit
-    ArtistCredit.find_by(name: blueprint.artist_credit.join_name)
   end
 end
