@@ -25,6 +25,10 @@ class PrepareBrainzArtistCredit
     nil
   end
 
+  def find_already_existing
+    ArtistCredit.find_by(name: blueprint.join_name)
+  end
+
   def prepare_brainz_artist(artist_blueprint)
     artist_import_request = BrainzArtistImportRequest.new(
       code: artist_blueprint.brainz_code
