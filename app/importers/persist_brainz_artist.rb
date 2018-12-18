@@ -27,8 +27,8 @@ class PersistBrainzArtist
       disambiguation: blueprint.disambiguation
     }
 
-    args[:begin_date]
-    args[:end_date]
+    args[:begin_date] = begin_date if begin_date?
+    args[:end_date]   = end_date   if end_date?
 
     Artist.create!(args)
   end
@@ -45,14 +45,26 @@ class PersistBrainzArtist
   end
 
   def begin_date
-    return unless blueprint.dig(:life_span, :begin)
+    return unless begin_date?
 
     IncompleteDate.from_string(blueprint.life_span.begin)
   end
 
+  def begin_date?
+    return true if blueprint.dig(:life_span, :begin)
+
+    false
+  end
+
   def end_date
-    return unless blueprint.dig(:life_span, :end)
+    return unless end_date?
 
     IncompleteDate.from_string(blueprint.life_span.end)
+  end
+
+  def end_date?
+    return true if blueprint.dig(:life_span, :end)
+
+    false
   end
 end
