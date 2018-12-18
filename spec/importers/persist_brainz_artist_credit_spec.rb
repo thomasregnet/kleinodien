@@ -4,6 +4,21 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
 
+# Fake a BrainzProxy
+class MockPersistBrainzArtistCreditProxy
+  def initialize
+    @jello_biafra = TestData.by_name(:brainz_artist_jello_biafra).blueprint
+    @nomeansno    = TestData.by_name(:brainz_artist_nomeansno).blueprint
+  end
+
+  attr_reader :jello_biafra, :nomeansno
+  def get(import_request)
+    return jello_biafra if import_request.to_uri =~ /2280ca0e/
+
+    nomeansno
+  end
+end
+
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzArtistCredit do
   it_behaves_like 'a service'
@@ -41,18 +56,12 @@ RSpec.describe PersistBrainzArtistCredit do
         TestData.by_name(:brainz_artist_nomeansno).blueprint
       end
 
-      # rubocop:disable RSpec/MultipleExpectations
-      # rubocop:disable RSpec/MessageSpies
       it 'returns the ArtistCredit' do
-        proxy = spy
-        expect(proxy).to receive(:get).and_return(jello_biafra)
-        expect(proxy).to receive(:get).and_return(nomeansno)
+        proxy = MockPersistBrainzArtistCreditProxy.new
 
         expect(described_class.call(blueprint: blueprint, proxy: proxy))
           .to be_instance_of(ArtistCredit)
       end
-      # rubocop:enable RSpec/MessageSpies
-      # rubocop:enable RSpec/MultipleExpectations
     end
   end
 end
