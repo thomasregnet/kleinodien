@@ -7,7 +7,6 @@ class PersistBrainzArtist
   end
 
   def initialize(args)
-    # @blueprint = args[:blueprint]
     @import_request = args[:import_request]
     @proxy          = args[:proxy]
   end
@@ -18,18 +17,18 @@ class PersistBrainzArtist
     artist = find_already_existing
     return artist if artist
 
-    persist_artist
+    persist
   end
 
-  def persist_artist
+  def persist
     args = {
       name:           blueprint.name,
       sort_name:      blueprint.sort_name,
       disambiguation: blueprint.disambiguation
     }
 
-    args[:begin_date] = begin_date if begin_date?
-    args[:end_date] = begin_date if end_date?
+    args[:begin_date]
+    args[:end_date]
 
     Artist.create!(args)
   end
@@ -46,26 +45,14 @@ class PersistBrainzArtist
   end
 
   def begin_date
-    return unless begin_date?
+    return unless blueprint.dig(:life_span, :begin)
 
     IncompleteDate.from_string(blueprint.life_span.begin)
   end
 
-  def begin_date?
-    return true if blueprint.dig(:life_span, :begin)
-
-    false
-  end
-
   def end_date
-    return unless end_date?
+    return unless blueprint.dig(:life_span, :end)
 
     IncompleteDate.from_string(blueprint.life_span.end)
-  end
-
-  def end_date?
-    return true if blueprint.dig(:life_span, :end)
-
-    false
   end
 end
