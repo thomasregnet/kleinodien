@@ -32,14 +32,12 @@ class PrepareBrainzRelease
 
   def prepare_release_group
     PrepareBrainzReleaseGroup.call(
-      blueprint: proxy.get(release_group_import_request),
-      proxy:     proxy
+      import_request: release_group_import_request,
+      proxy:          proxy
     )
   end
 
   def release_group_import_request
-    return if find_already_existing_release_group
-
     BrainzReleaseGroupImportRequest.new(
       code: blueprint.release_group.brainz_code
     )
@@ -50,9 +48,5 @@ class PrepareBrainzRelease
       model_class: CompilationRelease,
       codes_hash:  blueprint.codes_hash
     )
-  end
-
-  def find_already_existing_release_group
-    CompilationHead.find_by(brainz_code: blueprint.code)
   end
 end
