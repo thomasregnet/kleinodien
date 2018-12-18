@@ -28,9 +28,12 @@ class PrepareBrainzArtistCredit
   def prepare_brainz_artist(artist_blueprint)
     return if find_already_existing_artist(artist_blueprint)
 
+    artist_import_request = BrainzArtistImportRequest.new(
+      code: artist_blueprint.brainz_code
+    )
     PrepareBrainzArtist.call(
-      blueprint: proxy.get(artist_import_request(artist_blueprint)),
-      proxy:     proxy
+      import_request: artist_import_request,
+      proxy:          proxy
     )
   end
 
