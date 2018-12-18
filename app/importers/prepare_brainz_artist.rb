@@ -7,11 +7,11 @@ class PrepareBrainzArtist
   end
 
   def initialize(args)
-    @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
+    @import_request = args[:import_request]
+    @proxy          = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :import_request, :proxy
 
   def call
     artist = find_already_existing
@@ -21,12 +21,12 @@ class PrepareBrainzArtist
     nil
   end
 
+  def blueprint
+    proxy.get(import_request)
+  end
+
   def find_already_existing
     codes_hash = blueprint.codes_hash
     FindByCodesService.call(model_class: Artist, codes_hash: codes_hash)
-  end
-
-  def import_request
-    BrainzArtistImportRequest.new(code: blueprint.brainz_code)
   end
 end
