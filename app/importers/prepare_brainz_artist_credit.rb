@@ -2,10 +2,6 @@
 
 # Prepare a MusicBrainz Artist for import
 class PrepareBrainzArtistCredit
-  # This class does not implement +find_already_existing+
-  # An artist-credit does not contain it's own id respective code.
-  # So we can't search for it. The initial search with the joined name
-  # is done by the calling class.
   def self.call(args)
     new(args).call
   end
