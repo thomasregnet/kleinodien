@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzReleaseImporter do
   before { DatabaseCleaner.start }
 
@@ -9,10 +10,10 @@ RSpec.describe BrainzReleaseImporter do
 
   let(:import_order) do
     BrainzImportOrder.new(
-      code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
-      kind: 'release',
+      code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+      kind:  'release',
       state: 'pending',
-      user: FactoryBot.build(:user)
+      user:  FactoryBot.build(:user)
     )
   end
 
@@ -44,3 +45,4 @@ RSpec.describe BrainzReleaseImporter do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

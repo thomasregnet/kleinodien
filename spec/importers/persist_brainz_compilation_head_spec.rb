@@ -19,6 +19,7 @@ class MockPersistBrainzCompilationHeadProxy
   end
 end
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzCompilationHead do
   describe '.call' do
     context 'when the CompilationHead already exists' do
@@ -74,3 +75,4 @@ RSpec.describe PersistBrainzCompilationHead do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

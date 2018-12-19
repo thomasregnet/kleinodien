@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Prepare a MusicBrainz release-group for import
 class PrepareBrainzReleaseGroup
   def self.call(args)
