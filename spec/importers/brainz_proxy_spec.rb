@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzProxy do
   def brainz_code
     '37e9d7b2-7779-41b2-b2eb-3685351caad3' # NoMeansNo
@@ -16,7 +17,7 @@ RSpec.describe BrainzProxy do
   let(:import_request) do
     FactoryBot.build(
       :brainz_artist_import_request,
-      code: brainz_code,
+      code:         brainz_code,
       import_order: nil
     )
   end
@@ -75,3 +76,4 @@ RSpec.describe BrainzProxy do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

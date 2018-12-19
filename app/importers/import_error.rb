@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ImportError
   # When an entity already exists in the database
   class AlreadyExists < RuntimeError

@@ -26,6 +26,7 @@ RSpec.describe PrepareBrainzReleaseGroup do
       TestData.by_name(:brainz_release_group_arise).blueprint
     end
 
+    # rubocop:disable RSpec/MultipleExpectations
     it 'prepares the artist-credit' do
       prepare_artist_credit_spy = spy
       proxy                     = spy
@@ -38,5 +39,6 @@ RSpec.describe PrepareBrainzReleaseGroup do
       expect(MockPrepareBrainzReleaseGroup.call(args)).to be_nil
       expect(prepare_artist_credit_spy).to have_received(:call)
     end
+    # rubocop:enable RSpec/MultipleExpectations
   end
 end

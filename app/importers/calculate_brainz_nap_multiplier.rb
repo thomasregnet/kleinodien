@@ -2,5 +2,4 @@
 
 # Calculate nap-time multiplier for MusicBrainz
 class CalculateBrainzNapMultiplier < CalculateNapMultiplier
-
 end
