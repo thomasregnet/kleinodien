@@ -7,14 +7,18 @@ class PersistBrainzCompilationHead
   end
 
   def initialize(args)
-    @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
+    @import_request = args[:import_request]
+    @proxy          = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :import_request, :proxy
 
   def call
     find_already_existing || persist
+  end
+
+  def blueprint
+    @blueprint ||= proxy.get(import_request)
   end
 
   def find_already_existing

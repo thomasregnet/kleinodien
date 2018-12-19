@@ -3,6 +3,22 @@
 require 'rails_helper'
 require 'test_data'
 
+# Fake a BrainzProxy
+class MockPersistBrainzCompilationHeadProxy
+  def initialize
+    @arise     = TestData.by_name(:brainz_release_group_arise).blueprint
+    @sepultura = TestData.by_name(:brainz_artist_sepultura).blueprint
+  end
+
+  attr_reader :arise, :sepultura
+
+  def get(import_request)
+    return arise if import_request.to_uri =~ /5fc9ba9d/
+
+    sepultura
+  end
+end
+
 RSpec.describe PersistBrainzCompilationHead do
   describe '.call' do
     context 'when the CompilationHead already exists' do
@@ -18,9 +34,18 @@ RSpec.describe PersistBrainzCompilationHead do
         TestData.by_name(:brainz_release_group_arise).blueprint
       end
 
+      let(:import_request) do
+        brainz_code = TestData.by_name(:brainz_release_group_arise)
+                              .blueprint.brainz_code
+        BrainzReleaseGroupImportRequest.new(code: brainz_code)
+      end
+
       it 'returns the persisted CompilationHead' do
-        expect(described_class.call(blueprint: blueprint).title)
-          .to eq('Dummy Head')
+        args = {
+          import_request: import_request,
+          proxy:          MockPersistBrainzCompilationHeadProxy.new
+        }
+        expect(described_class.call(args).title).to eq('Dummy Head')
       end
     end
 
@@ -34,10 +59,16 @@ RSpec.describe PersistBrainzCompilationHead do
       end
 
       it 'returns a CompilationHead' do
-        proxy = instance_double('Proxy')
-        allow(proxy).to receive(:get).and_return(sepultura)
+        proxy = MockPersistBrainzCompilationHeadProxy.new
 
-        expect(described_class.call(blueprint: blueprint, proxy: proxy))
+        args = {
+          import_request: BrainzReleaseGroupImportRequest.new(
+            code: blueprint.brainz_code
+          ),
+          proxy:          proxy
+        }
+
+        expect(described_class.call(args))
           .to be_instance_of(AlbumHead)
       end
     end
