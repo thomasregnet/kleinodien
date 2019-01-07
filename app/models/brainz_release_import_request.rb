@@ -2,14 +2,13 @@
 
 # ImportRequest for MusicBrainz Releases
 class BrainzReleaseImportRequest < BrainzImportRequest
-  QUERY_KIND   = 'release'
-  QUERY_STRING = 'inc=artists+labels+recordings+release-groups'
+  QUERY_KIND = 'release'
 
   def kind
     QUERY_KIND
   end
 
   def query_string
-    QUERY_STRING
+    BRAINZ_RELEASE_QUERY_STRING
   end
 end
