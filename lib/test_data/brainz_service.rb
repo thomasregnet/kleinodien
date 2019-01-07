@@ -6,12 +6,6 @@ require 'test_data/path_service'
 module TestData
   # Get MusicBrainz test-data
   class BrainzService
-    INC_FOR = {
-      artist: 'artist-rels+url-rels',
-      release: 'artists+labels+recordings+release-groups',
-      release_group: 'artists+artist-rels+label-rels+url-rels'
-    }.freeze
-
     def self.call(args)
       new(args).call
     end
@@ -24,7 +18,8 @@ module TestData
     attr_reader :code, :kind
 
     def call
-      path = "musicbrainz.org/#{kind_to_s}/#{code}?inc=#{INC_FOR[kind]}"
+      # BRAINZ_INC_FOR is defined in config/initializers/constants.rb
+      path = "musicbrainz.org/#{kind_to_s}/#{code}?#{BRAINZ_INC_FOR[kind]}"
       raw = TestData::PathService.call(path: path)
       TestData::BrainzResult.new(raw)
     end

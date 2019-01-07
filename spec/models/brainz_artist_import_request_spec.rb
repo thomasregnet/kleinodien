@@ -23,7 +23,7 @@ RSpec.describe BrainzArtistImportRequest, type: :model do
     let(:uri) do
       'https://musicbrainz.org/ws/2/artist/' \
         + uuid \
-        + '?inc=url-rels'
+        + '?inc=artist-rels+url-rels'
     end
 
     it 'returns the uri' do
