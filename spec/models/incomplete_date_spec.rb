@@ -1,89 +1,63 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe IncompleteDate, type: :model do
-  # context 'with a date-object' do
-  #   before(:each) do
-  #     @idate = IncompleteDate.new(Date.new(2015, 3, 16))
-  #   end
+  describe '.new' do
+    let(:incomplete_date) do
+      KleinodienDateTime::IncompleteDate.new(Date.new(2015, 12, 13), 7)
+    end
 
-  #   it 'returns the date-object' do
-  #     expect(@idate.date).to be_instance_of(Date)
-  #   end
+    specify '#date' do
+      expect(incomplete_date.date).to be_instance_of Date
+    end
 
-  #   it 'returns 7 as mask' do
-  #     expect(@idate.mask).to eq(7)
-  #   end
-  # end
+    specify '#mask' do
+      expect(incomplete_date.mask).to eq 7
+    end
+  end
 
-  # context 'with a number' do
-  #   before(:each) do
-  #     @idate = IncompleteDate.new(2015)
-  #   end
+  describe '.from_string' do
+    context 'with a complete date' do
+      let(:incomplete_date) do
+        KleinodienDateTime::IncompleteDate.from_string('2015-12-13')
+      end
 
-  #   it 'returns a date object' do
-  #     expect(@idate.date).to be_instance_of(Date)
-  #   end
+      specify '#mask' do
+        expect(incomplete_date.mask).to eq 7
+      end
 
-  #   it 'returns 4 as mask' do
-  #     expect(@idate.mask).to eq(4)
-  #   end
+      specify '#to_s' do
+        expect(incomplete_date.to_s).to eq '2015-12-13'
+      end
+    end
 
-  #   it 'has set month and day to 1' do
-  #     expect(@idate.date.month).to eq(1)
-  #     expect(@idate.date.day).to eq(1)
-  #   end
-  # end
+    context 'with year and month (2015-12)' do
+      let(:incomplete_date) do
+        KleinodienDateTime::IncompleteDate.from_string('2015-12')
+      end
 
-  # context 'with a complete date-string' do
-  #   before(:each) do
-  #     @idate = IncompleteDate.new('2015-03-16')
-  #   end
+      specify '#mask' do
+        expect(incomplete_date.mask).to eq 6
+      end
 
-  #   it 'returns a date-object' do
-  #     expect(@idate.date).to be_instance_of(Date)
-  #   end
+      specify '#to_s' do
+        expect(incomplete_date.to_s).to eq '2015-12-01'
+      end
+    end
 
-  #   it 'returns 7 as mask' do
-  #     expect(@idate.mask).to eq(7)
-  #   end
-  # end
+    context 'with year only (2015-12)' do
+      let(:incomplete_date) do
+        KleinodienDateTime::IncompleteDate.from_string('2015')
+      end
 
-  # context 'with a incomplete date-string' do
-  #   context 'with year and month' do
-  #     before(:each) do
-  #       @idate = IncompleteDate.new('2015-03')
-  #     end
+      specify '#mask' do
+        expect(incomplete_date.mask).to eq 4
+      end
 
-  #     it 'returns a date-object' do
-  #       expect(@idate.date).to be_instance_of(Date)
-  #     end
-
-  #     it 'returns 6 as mask' do
-  #       expect(@idate.mask).to eq(6)
-  #     end
-
-  #     it 'has set the day to 1' do
-  #       expect(@idate.date.day).to eq(1)
-  #     end
-  #   end
-
-  #   context 'with year only' do
-  #     before(:each) do
-  #       @idate = IncompleteDate.new('2015')
-  #     end
-
-  #     it 'returns a date-object' do
-  #       expect(@idate.date).to be_instance_of(Date)
-  #     end
-
-  #     it 'returns 4 as mask' do
-  #       expect(@idate.mask).to eq(4)
-  #     end
-
-  #     it 'has set month and day to 1' do
-  #       expect(@idate.date.month).to eq(1)
-  #       expect(@idate.date.day).to eq(1)
-  #     end
-  #   end
-  # end
+      specify '#to_s' do
+        expect(incomplete_date.to_s).to eq '2015-01-01'
+      end
+    end
+  end
 end
