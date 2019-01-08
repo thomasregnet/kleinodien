@@ -6,13 +6,6 @@ GIT
     kleinodien_brainz (0.0.8)
 
 GIT
-  remote: /home/ossi/oStuff/develop/kleinodien_discogs
-  revision: 0c6652bb3fc518f6afea08863bac9112a14db96d
-  branch: develop
-  specs:
-    kleinodien_discogs (0.0.29)
-
-GIT
   remote: /home/ossi/oStuff/develop/kleinodien_fill_media
   revision: e4a1929ab81b48c88ccfa4ddf10da301d433f5ff
   branch: master
@@ -432,7 +425,6 @@ DEPENDENCIES
   jquery-rails
   jsonapi-resources
   kleinodien_brainz (= 0.0.8)!
-  kleinodien_discogs!
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
   kleinodien_util (= 0.0.1)!
