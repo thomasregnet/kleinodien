@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe IncompleteDate, type: :model do
   describe '.new' do
     let(:incomplete_date) do
-      KleinodienDateTime::IncompleteDate.new(Date.new(2015, 12, 13), 7)
+      IncompleteDate.new(Date.new(2015, 12, 13), 7)
     end
 
     specify '#date' do
@@ -20,7 +20,7 @@ RSpec.describe IncompleteDate, type: :model do
   describe '.from_string' do
     context 'with a complete date' do
       let(:incomplete_date) do
-        KleinodienDateTime::IncompleteDate.from_string('2015-12-13')
+        IncompleteDate.from_string('2015-12-13')
       end
 
       specify '#mask' do
@@ -34,7 +34,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year and month (2015-12)' do
       let(:incomplete_date) do
-        KleinodienDateTime::IncompleteDate.from_string('2015-12')
+        IncompleteDate.from_string('2015-12')
       end
 
       specify '#mask' do
@@ -48,7 +48,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year only (2015-12)' do
       let(:incomplete_date) do
-        KleinodienDateTime::IncompleteDate.from_string('2015')
+        IncompleteDate.from_string('2015')
       end
 
       specify '#mask' do
