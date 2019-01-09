@@ -11,3 +11,11 @@ BRAINZ_INC_FOR = {
   release_group: BRAINZ_RELEASE_GROUP_QUERY_STRING
 }.freeze
 
+ACCURACY_MILLISECOND = 'millisecond'
+ACCURACY_SECOND      = 'second'
+ACCURACY_MINUTE      = 'minute'
+ACCURACY_HOUR        = 'hour'
+
+SECOND_MS = 1_000
+MINUTE_MS = 60_000
+HOUR_MS   = 3_600_000

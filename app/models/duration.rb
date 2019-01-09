@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Duration
-  ACCURACY_MILLISECOND = 'millisecond'
-  ACCURACY_SECOND      = 'second'
-  ACCURACY_MINUTE      = 'minute'
-  ACCURACY_HOUR        = 'hour'
+  # 2019-01-08: Moved constants to config/initializers/constants.rb
+  # ACCURACY_MILLISECOND = 'millisecond'
+  # ACCURACY_SECOND      = 'second'
+  # ACCURACY_MINUTE      = 'minute'
+  # ACCURACY_HOUR        = 'hour'
 
-  SECOND_MS = 1_000
-  MINUTE_MS = 60_000
-  HOUR_MS   = 3_600_000
+  # SECOND_MS = 1_000
+  # MINUTE_MS = 60_000
+  # HOUR_MS   = 3_600_000
 
   attr_reader :milliseconds, :accuracy
 
@@ -29,17 +30,17 @@ class Duration
   end
 
   def self.mmss(mmss)
-    milliseconds = KleinodienDateTime::Mmss.milliseconds(mmss)
+    milliseconds = Mmss.milliseconds(mmss)
     new(milliseconds, ACCURACY_SECOND)
   end
 
   def self.hhmm(hhmm)
-    milliseconds = KleinodienDateTime::Hhmm.milliseconds(hhmm)
+    milliseconds = Hhmm.milliseconds(hhmm)
     new(milliseconds, ACCURACY_MINUTE)
   end
 
   def self.hhmmss(hhmmss)
-    milliseconds = KleinodienDateTime::Hhmmss.milliseconds(hhmmss)
+    milliseconds = Hhmmss.milliseconds(hhmmss)
     new(milliseconds, ACCURACY_SECOND)
   end
 
@@ -89,10 +90,10 @@ class Duration
       padding(minutes_left),
       padding(seconds_left_rounded)
     ]
-    .join(':')
+      .join(':')
   end
 
   def padding(number)
-      format('%02d', number)
+    format('%02d', number)
   end
 end
