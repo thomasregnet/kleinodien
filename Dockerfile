@@ -11,7 +11,7 @@ RUN gem install bundler
 
 COPY . .
 
-RUN bundle install --local
+RUN bundle install
 
 # config/database.yml is ignored by .dockerignore.
 # Otherwise it can't be copied.
