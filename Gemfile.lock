@@ -5,13 +5,6 @@ GIT
   specs:
     kleinodien_fill_media (0.0.7)
 
-GIT
-  remote: /home/ossi/oStuff/develop/kleinodien_omdb
-  revision: ec2a61b9a2ee4a2b802a99937756a4c3aeac29e2
-  branch: master
-  specs:
-    kleinodien_omdb (0.0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -411,7 +404,6 @@ DEPENDENCIES
   jquery-rails
   jsonapi-resources
   kleinodien_fill_media (= 0.0.7)!
-  kleinodien_omdb (= 0.0.2)!
   listen
   multi_xml (~> 0.6)
   pg (~> 1.0)
