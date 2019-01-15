@@ -23,11 +23,6 @@ gem 'multi_xml', '~> 0.6'
 gem 'redis', '~> 4.0'
 gem 'unicorn', '~> 5.4'
 
-gem 'kleinodien_fill_media',
-    '0.0.7',
-    git:    '/home/ossi/oStuff/develop/kleinodien_fill_media',
-    branch: 'master'
-
 group :development, :test do
   gem 'byebug'
   gem 'spring'
