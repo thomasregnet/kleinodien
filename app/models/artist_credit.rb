@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ArtistCredit joins Artists with join_phrases by using Participants
 class ArtistCredit < ActiveRecord::Base
   belongs_to :data_import, required: false
@@ -16,8 +18,8 @@ class ArtistCredit < ActiveRecord::Base
   has_many :song_releases
 
   validates :name,
-            presence: true,
-            blank:    false,
+            presence:   true,
+            blank:      false,
             uniqueness: { case_sensitive: false, scope: :source }
 
   before_save { self.name = forced_name }
@@ -25,14 +27,14 @@ class ArtistCredit < ActiveRecord::Base
 
   def forced_name
     return name if name
+
     combined_name
   end
 
   def combined_name
     return unless participants
     return if participants.empty?
-    KleinodienUtil::JoinNames.perform(
-      participants
-    )
+
+    JoinArtistCreditService.call(candidates: participants)
   end
 end

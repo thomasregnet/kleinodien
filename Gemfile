@@ -33,11 +33,6 @@ gem 'kleinodien_omdb',
     git:    '/home/ossi/oStuff/develop/kleinodien_omdb',
     branch: 'master'
 
-gem 'kleinodien_util',
-    '0.0.1',
-    git: '/home/ossi/oStuff/develop/kleinodien_util',
-    branch: 'master'
-
 group :development, :test do
   gem 'byebug'
   gem 'spring'

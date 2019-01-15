@@ -12,13 +12,6 @@ GIT
   specs:
     kleinodien_omdb (0.0.2)
 
-GIT
-  remote: /home/ossi/oStuff/develop/kleinodien_util
-  revision: 7013299dea4329869b93a381cc7678e8b7b3f244
-  branch: master
-  specs:
-    kleinodien_util (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -419,7 +412,6 @@ DEPENDENCIES
   jsonapi-resources
   kleinodien_fill_media (= 0.0.7)!
   kleinodien_omdb (= 0.0.2)!
-  kleinodien_util (= 0.0.1)!
   listen
   multi_xml (~> 0.6)
   pg (~> 1.0)
