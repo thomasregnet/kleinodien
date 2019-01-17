@@ -7,6 +7,8 @@ require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe Season, type: :model do
+  it { is_expected.to have_many(:set_heads) }
+
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
   end

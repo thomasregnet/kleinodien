@@ -15,6 +15,7 @@ class ArtistCredit < ActiveRecord::Base
   has_many :compilation_releases
   has_many :pieces, class_name: 'PieceHead'
   has_many :ratings
+  has_many :set_heads
   has_many :song_releases
 
   validates :name,

@@ -8,5 +8,7 @@ class Season < ActiveRecord::Base
   has_many :descriptions
   has_many :episodes, class_name: 'EpisodeHead', inverse_of: :season
   has_many :ratings
+  has_many :set_heads
+
   validates :position, presence: true
 end
