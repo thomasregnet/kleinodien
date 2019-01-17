@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_200915) do
+ActiveRecord::Schema.define(version: 2019_01_17_191445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -744,6 +744,25 @@ ActiveRecord::Schema.define(version: 2018_11_29_200915) do
     t.index ["tag_id"], name: "index_serials_tags_on_tag_id"
   end
 
+  create_table "set_heads", force: :cascade do |t|
+    t.string "disambiguation"
+    t.integer "no"
+    t.string "title", null: false
+    t.string "type"
+    t.uuid "brainz_code"
+    t.integer "imdb_code"
+    t.integer "tmdb_code"
+    t.integer "wikidata_code"
+    t.bigint "artist_credit_id"
+    t.bigint "import_order_id"
+    t.bigint "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_credit_id"], name: "index_set_heads_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_set_heads_on_import_order_id"
+    t.index ["season_id"], name: "index_set_heads_on_season_id"
+  end
+
   create_table "sources", id: :serial, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -941,6 +960,9 @@ ActiveRecord::Schema.define(version: 2018_11_29_200915) do
   add_foreign_key "seasons_tags", "tags"
   add_foreign_key "serials_tags", "serials"
   add_foreign_key "serials_tags", "tags"
+  add_foreign_key "set_heads", "artist_credits"
+  add_foreign_key "set_heads", "import_orders"
+  add_foreign_key "set_heads", "seasons"
   add_foreign_key "stations_tags", "stations"
   add_foreign_key "stations_tags", "tags"
 end
