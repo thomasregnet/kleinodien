@@ -4,6 +4,7 @@
 class ImportOrder < ApplicationRecord
   belongs_to :user
   has_many :import_requests
+  has_many :set_heads
 
   after_initialize :set_default_state
 

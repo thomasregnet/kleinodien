@@ -6,6 +6,8 @@ require 'shared_examples_for_import_orders'
 RSpec.describe ImportOrder, type: :model do
   include_examples 'for ImportOrders', :import_order
 
+  it { is_expected.to have_many(:set_heads) }
+
   it 'has a counter_cache for import_requests' do
     request_args = {
       type: 'BrainzArtistImportRequest',
