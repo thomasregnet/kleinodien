@@ -2,7 +2,6 @@ class CreateSetHeads < ActiveRecord::Migration[5.2]
   def change
     create_table :set_heads do |t|
       t.string :disambiguation
-      t.integer :no
       t.string :title, null: false
       t.string :type
       t.uuid :brainz_code
@@ -11,7 +10,6 @@ class CreateSetHeads < ActiveRecord::Migration[5.2]
       t.integer :wikidata_code
       t.references :artist_credit, foreign_key: true
       t.references :import_order, foreign_key: true
-      t.references :season, foreign_key: true
 
       t.timestamps
     end
