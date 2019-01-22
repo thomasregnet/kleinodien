@@ -13,9 +13,9 @@ class ArtistCredit < ActiveRecord::Base
   has_many :participants, inverse_of: :artist_credit
   has_many :compilations, class_name: 'CompilationHead'
   has_many :compilation_releases
+  has_many :heap_heads
   has_many :pieces, class_name: 'PieceHead'
   has_many :ratings
-  has_many :set_heads
   has_many :song_releases
 
   validates :name,

@@ -412,6 +412,22 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
     t.index ["abbr"], name: "formats_abbr_key", unique: true
   end
 
+  create_table "heap_heads", force: :cascade do |t|
+    t.string "disambiguation"
+    t.string "title", null: false
+    t.string "type"
+    t.uuid "brainz_code"
+    t.integer "imdb_code"
+    t.integer "tmdb_code"
+    t.integer "wikidata_code"
+    t.bigint "artist_credit_id"
+    t.bigint "import_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_credit_id"], name: "index_heap_heads_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_heap_heads_on_import_order_id"
+  end
+
   create_table "import_orders", force: :cascade do |t|
     t.text "code", null: false
     t.text "kind", null: false
@@ -744,22 +760,6 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
     t.index ["tag_id"], name: "index_serials_tags_on_tag_id"
   end
 
-  create_table "set_heads", force: :cascade do |t|
-    t.string "disambiguation"
-    t.string "title", null: false
-    t.string "type"
-    t.uuid "brainz_code"
-    t.integer "imdb_code"
-    t.integer "tmdb_code"
-    t.integer "wikidata_code"
-    t.bigint "artist_credit_id"
-    t.bigint "import_order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_set_heads_on_artist_credit_id"
-    t.index ["import_order_id"], name: "index_set_heads_on_import_order_id"
-  end
-
   create_table "sources", id: :serial, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -892,6 +892,8 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
   add_foreign_key "descriptions", "sources"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
+  add_foreign_key "heap_heads", "artist_credits"
+  add_foreign_key "heap_heads", "import_orders"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
@@ -957,8 +959,6 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
   add_foreign_key "seasons_tags", "tags"
   add_foreign_key "serials_tags", "serials"
   add_foreign_key "serials_tags", "tags"
-  add_foreign_key "set_heads", "artist_credits"
-  add_foreign_key "set_heads", "import_orders"
   add_foreign_key "stations_tags", "stations"
   add_foreign_key "stations_tags", "tags"
 end

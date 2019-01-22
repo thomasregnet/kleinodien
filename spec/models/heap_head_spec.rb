@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe SetHead, type: :model do
+RSpec.describe HeapHead, type: :model do
   it { is_expected.to belong_to(:artist_credit) }
   it { is_expected.to belong_to(:import_order) }
 
   describe '#title' do
-    let(:head) { FactoryBot.build(:set_head) }
+    let(:head) { FactoryBot.build(:heap_head) }
 
     context 'when nil' do
       it 'is not valid' do
