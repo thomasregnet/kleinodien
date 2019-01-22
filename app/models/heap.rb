@@ -1,5 +1,5 @@
 class Heap < ApplicationRecord
-  belongs_to :artist_credit
-  belongs_to :import_order
-  belongs_to :heap_head
+  belongs_to :artist_credit, required: false
+  belongs_to :import_order, required: false
+  belongs_to :head, class_name: 'HeapHead', foreign_key: :heap_head_id
 end

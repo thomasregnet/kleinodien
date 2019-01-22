@@ -14,6 +14,7 @@ class ArtistCredit < ActiveRecord::Base
   has_many :compilations, class_name: 'CompilationHead'
   has_many :compilation_releases
   has_many :heap_heads
+  has_many :heaps
   has_many :pieces, class_name: 'PieceHead'
   has_many :ratings
   has_many :song_releases

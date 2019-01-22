@@ -5,6 +5,7 @@ require 'shared_examples_for_tagable_models'
 
 RSpec.describe ArtistCredit, type: :model do
   it { is_expected.to have_many(:heap_heads) }
+  it { is_expected.to have_many(:heaps) }
 
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
