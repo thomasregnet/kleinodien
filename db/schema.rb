@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_191445) do
+ActiveRecord::Schema.define(version: 2019_01_22_195708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -426,6 +426,28 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_heap_heads_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_heap_heads_on_import_order_id"
+  end
+
+  create_table "heaps", force: :cascade do |t|
+    t.integer "barcode"
+    t.date "date"
+    t.integer "data_mask"
+    t.string "title"
+    t.string "type"
+    t.string "version"
+    t.uuid "brainz_code"
+    t.integer "discogs_code"
+    t.integer "imdb_code"
+    t.integer "tmdb_code"
+    t.integer "wikidata_code"
+    t.bigint "artist_credit_id"
+    t.bigint "import_order_id"
+    t.bigint "heap_head_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_credit_id"], name: "index_heaps_on_artist_credit_id"
+    t.index ["heap_head_id"], name: "index_heaps_on_heap_head_id"
+    t.index ["import_order_id"], name: "index_heaps_on_import_order_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -894,6 +916,9 @@ ActiveRecord::Schema.define(version: 2019_01_17_191445) do
   add_foreign_key "descriptions", "users"
   add_foreign_key "heap_heads", "artist_credits"
   add_foreign_key "heap_heads", "import_orders"
+  add_foreign_key "heaps", "artist_credits"
+  add_foreign_key "heaps", "heap_heads"
+  add_foreign_key "heaps", "import_orders"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
