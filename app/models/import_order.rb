@@ -3,8 +3,8 @@
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
   belongs_to :user
+  has_many :heap_heads
   has_many :import_requests
-  has_many :set_heads
 
   after_initialize :set_default_state
 

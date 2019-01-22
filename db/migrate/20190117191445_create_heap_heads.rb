@@ -1,6 +1,6 @@
-class CreateSetHeads < ActiveRecord::Migration[5.2]
+class CreateHeapHeads < ActiveRecord::Migration[5.2]
   def change
-    create_table :set_heads do |t|
+    create_table :heap_heads do |t|
       t.string :disambiguation
       t.string :title, null: false
       t.string :type
