@@ -25,7 +25,7 @@ class ImportBrainzRelease
   end
 
   def find_already_existing
-    CompilationRelease.find_by(brainz_code: import_request.code)
+    Heap.find_by(brainz_code: import_request.code)
   end
 
   def import_request

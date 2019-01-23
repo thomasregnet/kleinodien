@@ -25,17 +25,17 @@ class PersistBrainzCompilationRelease
   def find_already_existing
     FindByCodesService.call(
       codes_hash:  blueprint.codes_hash,
-      model_class: CompilationRelease
+      model_class: Heap
     )
   end
 
   def persist
     artist_credit = persist_artist_credit
-    compilation_head = persist_compilation_head
+    heap_head = persist_heap_head
     # TODO: Persist the right type, not always 'album'
-    CompilationRelease.create!(
+    Heap.create!(
       artist_credit: artist_credit,
-      head:          compilation_head,
+      head:          heap_head,
       title:         blueprint.title,
       type:          AlbumRelease
     )
@@ -48,7 +48,7 @@ class PersistBrainzCompilationRelease
     )
   end
 
-  def persist_compilation_head
+  def persist_heap_head
     import_request = BrainzReleaseGroupImportRequest.new(
       code: blueprint.release_group.brainz_code
     )

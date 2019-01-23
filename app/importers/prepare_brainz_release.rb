@@ -14,8 +14,8 @@ class PrepareBrainzRelease
   attr_reader :blueprint, :proxy
 
   def call
-    compilation_release = find_already_existing
-    return compilation_release if compilation_release
+    heap = find_already_existing
+    return heap if heap
 
     prepare_artist_credit
     prepare_release_group
@@ -45,7 +45,7 @@ class PrepareBrainzRelease
 
   def find_already_existing
     FindByCodesService.call(
-      model_class: CompilationRelease,
+      model_class: Heap,
       codes_hash:  blueprint.codes_hash
     )
   end
