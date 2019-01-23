@@ -33,9 +33,9 @@ RSpec.describe PieceHead, type: :model do
     after { DatabaseCleaner.clean }
   end
 
-  it_behaves_like 'a model with BrainzConstructors' do
-    let(:klass) { AlbumHead }
-  end
+  # it_behaves_like 'a model with BrainzConstructors' do
+  #   let(:klass) { AlbumHead }
+  # end
 
   before(:each) do
     @ph = FactoryBot.build(:piece_head)
