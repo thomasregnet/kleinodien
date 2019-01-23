@@ -1,11 +1,6 @@
 require 'rails_helper'
-require 'shared_examples_for_identifyable'
 
 RSpec.describe AlbumRelease, type: :model do
-  it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryBot.create(:album_release_with_identifiers) }
-  end
-
   it 'belongs_to :artist_credit' do
     album_release = FactoryBot.create(:album_release)
     album_release.artist_credit = FactoryBot.create(:artist_credit)

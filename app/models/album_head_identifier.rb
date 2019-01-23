@@ -1,2 +1,0 @@
-class AlbumHeadIdentifier < CompilationHeadIdentifier
-end

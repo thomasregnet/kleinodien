@@ -1,2 +1,0 @@
-class MovieHeadIdentifier < PieceHeadIdentifier
-end

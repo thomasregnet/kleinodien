@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
   include BrainzConstructors
-  include Identifyable
   include CodeFindable
 
   belongs_to :data_import, required: false
 
   composed_of :begin_date,
               class_name: 'IncompleteDate',
-              mapping: [%w[begin_date date], %w[begin_date_mask mask]]
+              mapping:    [%w[begin_date date], %w[begin_date_mask mask]]
   composed_of :end_date,
               class_name: 'IncompleteDate',
-              mapping: [%w[end_date date], %w[end_date_mask mask]]
+              mapping:    [%w[end_date date], %w[end_date_mask mask]]
 
   has_and_belongs_to_many :tags
   has_many :comments

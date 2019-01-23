@@ -34,9 +34,7 @@ Rails.application.routes.draw do
       resources :brainz_releases, only: [:create]
       jsonapi_resources :album_heads
       jsonapi_resources :artist_credits
-      jsonapi_resources :artist_identifiers
       jsonapi_resources :artists
-      jsonapi_resources :compilation_head_identifiers
       jsonapi_resources :compilation_heads
       jsonapi_resources :episode_heads
       jsonapi_resources :movie_heads
