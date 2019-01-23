@@ -1,2 +1,0 @@
-class EpisodeHeadIdentifier < PieceHeadIdentifier
-end

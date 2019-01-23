@@ -1,2 +1,0 @@
-class SongReleaseIdentifier < PieceReleaseIdentifier
-end

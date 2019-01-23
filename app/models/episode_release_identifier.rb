@@ -1,2 +1,0 @@
-class EpisodeReleaseIdentifier < PieceReleaseIdentifier
-end

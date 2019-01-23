@@ -5,10 +5,6 @@ module Api
       attributes :name, :disambiguation, :sort_name
 
       filters :name, :disambiguation
-
-      relationship :identifiers,
-                   to: :many,
-                   class_name: ArtistIdentifier.to_s
     end
   end
 end

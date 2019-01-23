@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_pieces'
-require 'shared_examples_for_identifyable'
 
 RSpec.describe MovieRelease, type: :model do
   before(:each) do
@@ -13,9 +14,5 @@ RSpec.describe MovieRelease, type: :model do
 
   it_behaves_like 'a piece' do
     let(:piece) { @movie_release }
-  end
-
-  it_behaves_like 'an identifyable model' do
-    let(:identifyable) { FactoryBot.create(:movie_release_with_identifiers) }
   end
 end
