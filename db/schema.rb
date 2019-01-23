@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_195708) do
+ActiveRecord::Schema.define(version: 2019_01_23_193335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -30,16 +30,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
     t.integer "tag_id", null: false
     t.index ["artist_credit_id"], name: "index_artist_credits_tags_on_artist_credit_id"
     t.index ["tag_id"], name: "index_artist_credits_tags_on_tag_id"
-  end
-
-  create_table "artist_identifiers", force: :cascade do |t|
-    t.text "value", null: false
-    t.integer "artist_id", null: false
-    t.integer "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_id", "source_id"], name: "artist_identifiers_artist_id_source_id_idx", unique: true
-    t.index ["source_id", "value"], name: "artist_identifiers_source_id_value_idx", unique: true
   end
 
   create_table "artists", id: :serial, force: :cascade do |t|
@@ -168,15 +158,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
     t.index ["user_id"], name: "index_compilation_copies_on_user_id"
   end
 
-  create_table "compilation_head_identifiers", force: :cascade do |t|
-    t.text "value", null: false
-    t.integer "compilation_head_id", null: false
-    t.integer "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "type", null: false
-  end
-
   create_table "compilation_heads", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id"
     t.string "title", null: false
@@ -207,15 +188,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
     t.integer "tag_id", null: false
     t.index ["compilation_head_id"], name: "index_compilation_heads_tags_on_compilation_head_id"
     t.index ["tag_id"], name: "index_compilation_heads_tags_on_tag_id"
-  end
-
-  create_table "compilation_release_identifiers", force: :cascade do |t|
-    t.text "value", null: false
-    t.integer "compilation_release_id", null: false
-    t.integer "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "type", null: false
   end
 
   create_table "compilation_releases", id: :serial, force: :cascade do |t|
@@ -551,14 +523,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
     t.index ["piece_head_id"], name: "index_ph_labels_on_piece_head_id"
   end
 
-  create_table "piece_head_identifiers", force: :cascade do |t|
-    t.text "value", null: false
-    t.integer "piece_head_id", null: false
-    t.integer "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "piece_heads", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id"
     t.integer "season_id"
@@ -583,14 +547,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
     t.integer "tag_id", null: false
     t.index ["piece_head_id"], name: "index_piece_heads_tags_on_piece_head_id"
     t.index ["tag_id"], name: "index_piece_heads_tags_on_tag_id"
-  end
-
-  create_table "piece_release_identifiers", force: :cascade do |t|
-    t.text "value", null: false
-    t.integer "piece_release_id", null: false
-    t.integer "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "piece_releases", id: :serial, force: :cascade do |t|
@@ -836,8 +792,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
   add_foreign_key "artist_credits", "sources", name: "fk_artist_credits_source_id"
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
-  add_foreign_key "artist_identifiers", "artists", name: "artist_identifiers_artist_id_fkey"
-  add_foreign_key "artist_identifiers", "sources", name: "artist_identifiers_source_id_fkey"
   add_foreign_key "artists", "data_imports"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
@@ -863,16 +817,12 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
   add_foreign_key "comments", "users"
   add_foreign_key "compilation_copies", "compilation_releases"
   add_foreign_key "compilation_copies", "users"
-  add_foreign_key "compilation_head_identifiers", "compilation_heads", name: "ch_identifiers_compilation_head_id_fkey"
-  add_foreign_key "compilation_head_identifiers", "sources", name: "ch_identifiers_source_id_fkey"
   add_foreign_key "compilation_heads", "artist_credits"
   add_foreign_key "compilation_heads", "data_imports"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_heads_tags", "compilation_heads"
   add_foreign_key "compilation_heads_tags", "tags"
-  add_foreign_key "compilation_release_identifiers", "compilation_releases", name: "cr_identifiers_compilation_release_id_fkey"
-  add_foreign_key "compilation_release_identifiers", "sources", name: "cr_identifiers_source_id_fkey"
   add_foreign_key "compilation_releases", "artist_credits"
   add_foreign_key "compilation_releases", "compilation_heads"
   add_foreign_key "compilation_releases", "data_imports"
@@ -935,14 +885,10 @@ ActiveRecord::Schema.define(version: 2019_01_22_195708) do
   add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
-  add_foreign_key "piece_head_identifiers", "piece_heads", name: "piece_head_identifiers_piece_head_id_fkey"
-  add_foreign_key "piece_head_identifiers", "sources", name: "piece_head_identifiers_source_id_fkey"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
-  add_foreign_key "piece_release_identifiers", "piece_releases", name: "piece_release_identifiers_piece_release_id_fkey"
-  add_foreign_key "piece_release_identifiers", "sources", name: "piece_release_identifiers_source_id_fkey"
   add_foreign_key "piece_releases", "artist_credits"
   add_foreign_key "piece_releases", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "piece_releases", "stations", name: "pieces_fk_stations"
