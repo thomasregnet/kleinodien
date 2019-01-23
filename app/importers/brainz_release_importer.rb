@@ -22,7 +22,7 @@ class BrainzReleaseImporter
   end
 
   def find_persisted
-    CompilationRelease.find_by(brainz_code: import_order.code)
+    Heap.find_by(brainz_code: import_order.code)
   end
 
   # TODO: use the fetcher when it is implemented

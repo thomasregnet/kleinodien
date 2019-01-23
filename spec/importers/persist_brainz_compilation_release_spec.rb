@@ -16,7 +16,8 @@ RSpec.describe PersistBrainzCompilationRelease do
 
       before do
         FactoryBot.create(
-          :compilation_release,
+          # :compilation_release,
+          :heap,
           brainz_code: brainz_code, # '693748be-7c18-39c3-af2e-2e62092090cf',
           title:       'Test Dummy'
         )

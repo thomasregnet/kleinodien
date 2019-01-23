@@ -31,7 +31,7 @@ RSpec.describe BrainzReleaseImporter do
         DatabaseCleaner.start
 
         FactoryBot.create(
-          :compilation_release,
+          :heap,
           brainz_code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a'
         )
       end
