@@ -6,12 +6,11 @@ require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
-require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
-RSpec.describe PieceRelease, type: :model do
+RSpec.describe Piece, type: :model do
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
   end
@@ -19,7 +18,7 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start
-      @commentable = FactoryBot.create(:piece_release)
+      @commentable = FactoryBot.create(:piece)
     end
 
     let(:commentable) { @commentable }
@@ -29,17 +28,17 @@ RSpec.describe PieceRelease, type: :model do
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
-    let(:factory) { :piece_release }
+    let(:factory) { :piece }
     after { DatabaseCleaner.clean }
   end
 
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start
-      @piece_release = FactoryBot.create(:piece_release)
+      @piece = FactoryBot.create(:piece)
     end
 
-    let(:rateable) { @piece_release }
+    let(:rateable) { @piece }
 
     after(:all) { DatabaseCleaner.clean }
   end
@@ -47,7 +46,7 @@ RSpec.describe PieceRelease, type: :model do
   it_behaves_like 'a tagable model' do
     before(:all) do
       DatabaseCleaner.start
-      @tagable = FactoryBot.create(:piece_release)
+      @tagable = FactoryBot.create(:piece)
     end
 
     let(:tagable) { @tagable }
@@ -57,46 +56,42 @@ RSpec.describe PieceRelease, type: :model do
 
   context 'without tracks' do
     before(:each) do
-      @piece_release = FactoryBot.build(:piece_release)
+      @piece = FactoryBot.build(:piece)
     end
 
     it 'is valid with valid attributes' do
-      expect(@piece_release).to be_valid
+      expect(@piece).to be_valid
     end
 
     it 'delegates title to its head' do
-      expect(@piece_release.title).to eq(@piece_release.head.title)
+      expect(@piece.title).to eq(@piece.head.title)
     end
   end
 
   context 'with tracks' do
     before(:each) do
-      @piece_release = FactoryBot.create(:piece_release_with_tracks)
+      @piece = FactoryBot.create(:piece_with_tracks)
     end
 
     it 'has some tracks' do
-      expect(@piece_release.tracks.count).to be > 0
+      expect(@piece.tracks.count).to be > 0
     end
   end
 
   it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryBot.create(:piece_release_with_companies) }
+    let(:candidate) { FactoryBot.create(:piece_with_companies) }
   end
 
   it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryBot.create(:piece_release_with_countries) }
+    let(:candidate) { FactoryBot.create(:piece_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryBot.create(:piece_release_with_credits) }
-  end
-
-  it_behaves_like 'a model with labels' do
-    let(:candidate) { FactoryBot.create(:piece_release_with_labels) }
+    let(:candidate) { FactoryBot.create(:piece_with_credits) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do
-    let(:candidate) { FactoryBot.create(:piece_release) }
+    let(:candidate) { FactoryBot.create(:piece) }
     let(:date_naming) { 'date' }
   end
 end

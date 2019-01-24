@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
   belongs_to :compilation_head,    required: false
   belongs_to :compilation_release, required: false
   belongs_to :piece_head,          required: false
-  belongs_to :piece_release,       required: false
+  belongs_to :piece,               required: false
   belongs_to :repository,          required: false
   belongs_to :season,              required: false
   belongs_to :serial,              required: false
@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
   def only_one_content
     contents = %i[
       artist_credit artist compilation_head compilation_release
-      piece_head piece_release repository season serial station
+      piece_head piece repository season serial station
     ]
 
     count = 0

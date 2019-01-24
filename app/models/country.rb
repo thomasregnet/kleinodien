@@ -4,7 +4,7 @@ class Country < ActiveRecord::Base
   has_and_belongs_to_many :compilation_heads
   has_and_belongs_to_many :compilation_releases
   has_and_belongs_to_many :piece_heads
-  has_and_belongs_to_many :piece_releases
+  has_and_belongs_to_many :pieces
 
   validates :name,
             presence:   true,

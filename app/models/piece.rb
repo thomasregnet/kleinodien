@@ -1,5 +1,5 @@
 # A release of a song, movie ...
-class PieceRelease < ActiveRecord::Base
+class Piece < ActiveRecord::Base
   include CodeFindable
 
   composed_of :date,

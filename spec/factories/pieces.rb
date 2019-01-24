@@ -1,67 +1,67 @@
 FactoryBot.define do
-  factory :piece_release do
+  factory :piece do
     association :head, factory: :piece_head
-    type { 'PieceRelease' }
+    type { 'Piece' }
 
-    factory :piece_release_with_tracks do
+    factory :piece_with_tracks do
       transient do
         tracks_count { 2 }
       end
 
-      after(:create) do |piece_release, evaluator|
+      after(:create) do |piece, evaluator|
         create_list(
           :compilation_track,
           evaluator.tracks_count,
-          piece_release: piece_release
+          piece: piece
         )
       end
     end
 
-    factory :piece_release_with_countries do
-      after(:create) do |piece_release|
-        piece_release.countries << FactoryBot.create(:country)
-        piece_release.countries << FactoryBot.create(:country)
+    factory :piece_with_countries do
+      after(:create) do |piece|
+        piece.countries << FactoryBot.create(:country)
+        piece.countries << FactoryBot.create(:country)
       end
     end
 
-    factory :piece_release_with_credits do
+    factory :piece_with_credits do
       transient do
         credits_count { 2 }
       end
 
-      after(:create) do |piece_release, evaluator|
+      after(:create) do |piece, evaluator|
         create_list(
           :pr_credit,
           evaluator.credits_count,
-          piece_release: piece_release
+          piece: piece
         )
       end
     end
 
-    factory :piece_release_with_companies do
+    factory :piece_with_companies do
       transient do
         companies_count { 2 }
       end
 
-      after(:create) do |piece_release, evaluator|
+      after(:create) do |piece, evaluator|
         create_list(
           :pr_company,
           evaluator.companies_count,
-          piece_release: piece_release
+          piece: piece
         )
       end
     end
 
-    factory :piece_release_with_labels do
+    factory :piece_with_labels do
       transient do
         labels_count { 2 }
       end
 
-      after(:create) do |piece_release, evaluator|
+      after(:create) do |piece, evaluator|
         create_list(
           :pr_label,
           evaluator.labels_count,
-          piece_release: piece_release
+          piece: piece
         )
       end
     end

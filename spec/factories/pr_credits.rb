@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :pr_credit do
     artist_credit
-    piece_release
+    piece
 
     factory :pr_credit_with_role do
       role { 'a PieceReleaseRole' }
