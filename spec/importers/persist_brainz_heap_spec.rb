@@ -5,7 +5,7 @@ require 'shared_examples_for_services'
 require 'test_data'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe PersistBrainzCompilationRelease do
+RSpec.describe PersistBrainzHeap do
   it_behaves_like 'a service'
 
   describe '.call' do

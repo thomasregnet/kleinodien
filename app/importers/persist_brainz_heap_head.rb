@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Persist a CompilationHead using data from MusicBrainz
-class PersistBrainzCompilationHead
+class PersistBrainzHeapHead
   def self.call(args)
     new(args).call
   end

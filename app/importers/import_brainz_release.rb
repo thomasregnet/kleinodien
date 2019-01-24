@@ -54,7 +54,7 @@ class ImportBrainzRelease
     proxy.lock
 
     import_order.transaction do
-      PersistBrainzCompilationRelease.call(
+      PersistBrainzHeap.call(
         # blueprint: blueprint,
         import_request: import_request,
         proxy:          proxy

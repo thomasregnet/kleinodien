@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Persist a CompilationRelease using data retrieved from MusicBrainz
-class PersistBrainzCompilationRelease
+class PersistBrainzHeap
   def self.call(args)
     new(args).call
   end
@@ -53,7 +53,7 @@ class PersistBrainzCompilationRelease
       code: blueprint.release_group.brainz_code
     )
 
-    PersistBrainzCompilationHead.call(
+    PersistBrainzHeapHead.call(
       # blueprint: proxy.get(import_request),
       import_request: import_request,
       proxy:          proxy
