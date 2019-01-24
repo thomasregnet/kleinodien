@@ -20,7 +20,7 @@ class MockPersistBrainzHeapHeadProxy
 end
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe PersistBrainzCompilationHead do
+RSpec.describe PersistBrainzHeapHead do
   describe '.call' do
     context 'when the HeapHead already exists' do
       before do
