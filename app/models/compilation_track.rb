@@ -1,4 +1,4 @@
-# A PieceRelease that maybe exists on a CompilationRelease
+# A Piece that maybe exists on a CompilationRelease
 class CompilationTrack < ActiveRecord::Base
   default_scope { order('position ASC') }
 
@@ -10,9 +10,9 @@ class CompilationTrack < ActiveRecord::Base
              class_name:  'CompilationRelease',
              foreign_key: :compilation_release_id
   belongs_to :format, required: false
-  belongs_to :piece_release,
-             class_name:  'PieceRelease',
-             foreign_key: :piece_release_id
+  belongs_to :piece
+             # class_name:  'Piece',
+             # foreign_key: :piece_id
 
   has_many :format_details,
            class_name: 'CtFormatDetail',

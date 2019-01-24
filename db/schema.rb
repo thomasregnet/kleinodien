@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_044948) do
+ActiveRecord::Schema.define(version: 2019_01_24_060826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.integer "compilation_head_id"
     t.integer "compilation_release_id"
     t.integer "piece_head_id"
-    t.integer "piece_release_id"
+    t.integer "piece_id"
     t.integer "repository_id"
     t.integer "season_id"
     t.integer "serial_id"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["compilation_head_id"], name: "index_comments_on_compilation_head_id"
     t.index ["compilation_release_id"], name: "index_comments_on_compilation_release_id"
     t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
-    t.index ["piece_release_id"], name: "index_comments_on_piece_release_id"
+    t.index ["piece_id"], name: "index_comments_on_piece_id"
     t.index ["repository_id"], name: "index_comments_on_repository_id"
     t.index ["season_id"], name: "index_comments_on_season_id"
     t.index ["serial_id"], name: "index_comments_on_serial_id"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   end
 
   create_table "compilation_tracks", id: :serial, force: :cascade do |t|
-    t.integer "piece_release_id", null: false
+    t.integer "piece_id", null: false
     t.integer "position"
     t.string "path"
     t.datetime "created_at", null: false
@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.integer "format_id"
     t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id"
     t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true
-    t.index ["piece_release_id"], name: "index_compilation_tracks_on_piece_release_id"
+    t.index ["piece_id"], name: "index_compilation_tracks_on_piece_id"
   end
 
   create_table "countries", id: :serial, force: :cascade do |t|
@@ -269,12 +269,12 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["piece_head_id"], name: "index_countries_piece_heads_on_piece_head_id"
   end
 
-  create_table "countries_piece_releases", id: false, force: :cascade do |t|
+  create_table "countries_pieces", id: false, force: :cascade do |t|
     t.integer "country_id", null: false
-    t.integer "piece_release_id", null: false
-    t.index ["country_id", "piece_release_id"], name: "index_cpr_on_country_id_and_piece_release_id", unique: true
-    t.index ["country_id"], name: "index_countries_piece_releases_on_country_id"
-    t.index ["piece_release_id"], name: "index_countries_piece_releases_on_piece_release_id"
+    t.integer "piece_id", null: false
+    t.index ["country_id", "piece_id"], name: "index_cpr_on_country_id_and_piece_release_id", unique: true
+    t.index ["country_id"], name: "index_countries_pieces_on_country_id"
+    t.index ["piece_id"], name: "index_countries_pieces_on_piece_id"
   end
 
   create_table "cr_companies", id: :serial, force: :cascade do |t|
@@ -350,7 +350,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.integer "compilation_release_id"
     t.integer "country_id"
     t.integer "piece_head_id"
-    t.integer "piece_release_id"
+    t.integer "piece_id"
     t.integer "season_id"
     t.integer "serial_id"
     t.integer "station_id"
@@ -362,7 +362,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["compilation_release_id"], name: "index_descriptions_on_compilation_release_id"
     t.index ["country_id"], name: "index_descriptions_on_country_id"
     t.index ["piece_head_id"], name: "index_descriptions_on_piece_head_id"
-    t.index ["piece_release_id"], name: "index_descriptions_on_piece_release_id"
+    t.index ["piece_id"], name: "index_descriptions_on_piece_id"
     t.index ["season_id"], name: "index_descriptions_on_season_id"
     t.index ["serial_id"], name: "index_descriptions_on_serial_id"
     t.index ["source_id"], name: "index_descriptions_on_source_id"
@@ -549,13 +549,6 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["tag_id"], name: "index_piece_heads_tags_on_tag_id"
   end
 
-  create_table "piece_releases_tags", id: false, force: :cascade do |t|
-    t.integer "piece_release_id", null: false
-    t.integer "tag_id", null: false
-    t.index ["piece_release_id"], name: "index_piece_releases_tags_on_piece_release_id"
-    t.index ["tag_id"], name: "index_piece_releases_tags_on_tag_id"
-  end
-
   create_table "piece_tracks", id: :serial, force: :cascade do |t|
     t.integer "piece_release_id", null: false
     t.integer "tr_format_kind_id"
@@ -587,8 +580,15 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["station_id"], name: "index_pieces_on_station_id"
   end
 
+  create_table "pieces_tags", id: false, force: :cascade do |t|
+    t.integer "piece_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["piece_id"], name: "index_pieces_tags_on_piece_id"
+    t.index ["tag_id"], name: "index_pieces_tags_on_tag_id"
+  end
+
   create_table "pr_companies", id: :serial, force: :cascade do |t|
-    t.integer "piece_release_id", null: false
+    t.integer "piece_id", null: false
     t.integer "company_id", null: false
     t.integer "company_role_id", null: false
     t.string "catalog_no"
@@ -596,29 +596,29 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_pr_companies_on_company_id"
     t.index ["company_role_id"], name: "index_pr_companies_on_company_role_id"
-    t.index ["piece_release_id"], name: "index_pr_companies_on_piece_release_id"
+    t.index ["piece_id"], name: "index_pr_companies_on_piece_id"
   end
 
   create_table "pr_credits", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id", null: false
-    t.integer "piece_release_id", null: false
+    t.integer "piece_id", null: false
     t.integer "job_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_pr_credits_on_artist_credit_id"
     t.index ["job_id"], name: "index_pr_credits_on_job_id"
-    t.index ["piece_release_id"], name: "index_pr_credits_on_piece_release_id"
+    t.index ["piece_id"], name: "index_pr_credits_on_piece_id"
   end
 
   create_table "pr_labels", id: :serial, force: :cascade do |t|
-    t.integer "piece_release_id", null: false
+    t.integer "piece_id", null: false
     t.integer "company_id", null: false
     t.string "catalog_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_pr_labels_on_company_id"
-    t.index ["piece_release_id"], name: "index_pr_labels_on_piece_release_id"
+    t.index ["piece_id"], name: "index_pr_labels_on_piece_id"
   end
 
   create_table "product_number_types", force: :cascade do |t|
@@ -648,7 +648,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.integer "compilation_head_id"
     t.integer "compilation_release_id"
     t.integer "piece_head_id"
-    t.integer "piece_release_id"
+    t.integer "piece_id"
     t.integer "season_id"
     t.integer "serial_id"
     t.integer "station_id"
@@ -659,7 +659,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
     t.index ["compilation_head_id"], name: "index_ratings_on_compilation_head_id"
     t.index ["compilation_release_id"], name: "index_ratings_on_compilation_release_id"
     t.index ["piece_head_id"], name: "index_ratings_on_piece_head_id"
-    t.index ["piece_release_id"], name: "index_ratings_on_piece_release_id"
+    t.index ["piece_id"], name: "index_ratings_on_piece_id"
     t.index ["season_id"], name: "index_ratings_on_season_id"
     t.index ["serial_id"], name: "index_ratings_on_serial_id"
     t.index ["station_id"], name: "index_ratings_on_station_id"
@@ -686,7 +686,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   create_table "repository_positions", id: :serial, force: :cascade do |t|
     t.integer "compilation_track_id"
     t.integer "compilation_release_id"
-    t.integer "piece_release_id"
+    t.integer "piece_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "repository_id", null: false
@@ -809,7 +809,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "comments", "compilation_heads"
   add_foreign_key "comments", "compilation_releases"
   add_foreign_key "comments", "piece_heads"
-  add_foreign_key "comments", "pieces", column: "piece_release_id"
+  add_foreign_key "comments", "pieces"
   add_foreign_key "comments", "repositories"
   add_foreign_key "comments", "seasons"
   add_foreign_key "comments", "serials"
@@ -833,11 +833,11 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
   add_foreign_key "compilation_tracks", "compilation_releases"
   add_foreign_key "compilation_tracks", "formats", name: "fk_compilation_tracks_format_id"
-  add_foreign_key "compilation_tracks", "pieces", column: "piece_release_id"
+  add_foreign_key "compilation_tracks", "pieces"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
-  add_foreign_key "countries_piece_releases", "countries"
-  add_foreign_key "countries_piece_releases", "pieces", column: "piece_release_id"
+  add_foreign_key "countries_pieces", "countries"
+  add_foreign_key "countries_pieces", "pieces"
   add_foreign_key "cr_companies", "companies"
   add_foreign_key "cr_companies", "company_roles"
   add_foreign_key "cr_companies", "compilation_releases"
@@ -858,7 +858,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "descriptions", "compilation_releases"
   add_foreign_key "descriptions", "countries"
   add_foreign_key "descriptions", "piece_heads"
-  add_foreign_key "descriptions", "pieces", column: "piece_release_id"
+  add_foreign_key "descriptions", "pieces"
   add_foreign_key "descriptions", "seasons"
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "sources"
@@ -889,20 +889,20 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
-  add_foreign_key "piece_releases_tags", "pieces", column: "piece_release_id"
-  add_foreign_key "piece_releases_tags", "tags"
   add_foreign_key "piece_tracks", "pieces", column: "piece_release_id"
   add_foreign_key "pieces", "artist_credits"
   add_foreign_key "pieces", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "pieces", "stations", name: "pieces_fk_stations"
+  add_foreign_key "pieces_tags", "pieces"
+  add_foreign_key "pieces_tags", "tags"
   add_foreign_key "pr_companies", "companies"
   add_foreign_key "pr_companies", "company_roles"
-  add_foreign_key "pr_companies", "pieces", column: "piece_release_id"
+  add_foreign_key "pr_companies", "pieces"
   add_foreign_key "pr_credits", "artist_credits"
   add_foreign_key "pr_credits", "jobs"
-  add_foreign_key "pr_credits", "pieces", column: "piece_release_id"
+  add_foreign_key "pr_credits", "pieces"
   add_foreign_key "pr_labels", "companies"
-  add_foreign_key "pr_labels", "pieces", column: "piece_release_id"
+  add_foreign_key "pr_labels", "pieces"
   add_foreign_key "product_numbers", "compilation_releases", name: "product_numbers_compilation_release_id_fkey"
   add_foreign_key "product_numbers", "product_number_types", name: "product_numbers_product_number_type_id_fkey"
   add_foreign_key "ratings", "artist_credits"
@@ -910,7 +910,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "ratings", "compilation_heads"
   add_foreign_key "ratings", "compilation_releases"
   add_foreign_key "ratings", "piece_heads"
-  add_foreign_key "ratings", "pieces", column: "piece_release_id"
+  add_foreign_key "ratings", "pieces"
   add_foreign_key "ratings", "seasons"
   add_foreign_key "ratings", "serials"
   add_foreign_key "ratings", "stations"
@@ -922,7 +922,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_044948) do
   add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
   add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
-  add_foreign_key "repository_positions", "pieces", column: "piece_release_id", name: "repository_positions_piece_release_id_fkey"
+  add_foreign_key "repository_positions", "pieces", name: "repository_positions_piece_release_id_fkey"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
   add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"

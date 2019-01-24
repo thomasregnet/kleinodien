@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :compilation_track do
-    association :piece_release, factory: :piece_release
+    association :piece, factory: :piece
     association :compilation_release, factory: :compilation_release
 
     factory :compilation_track_with_compilation_release do

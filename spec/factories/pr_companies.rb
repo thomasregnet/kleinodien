@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :pr_company do
-    piece_release
+    piece
     company
     company_role
     sequence(:catalog_no) { |n| "catalog-##{n}" }

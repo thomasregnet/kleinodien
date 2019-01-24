@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # A single track, not belonging to an Compilation
 class PieceTrack < ApplicationRecord
   belongs_to :release,
-             class_name: 'PieceRelease',
+             class_name:  'Piece',
              foreign_key: :piece_release_id
   belongs_to :tr_format_kinds,
              required: false

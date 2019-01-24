@@ -9,7 +9,7 @@ RSpec.describe PieceTrack, type: :model do
     expect(@track).to be_valid
   end
 
-  it 'is not valid without a PieceRelease' do
+  it 'is not valid without a Piece' do
     @track.release = nil
     expect(@track).not_to be_valid
   end
