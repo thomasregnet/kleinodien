@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Kleinodien
   class Application
-    VERSION = '0.0.108'
+    VERSION = '0.0.109'
   end
 end
