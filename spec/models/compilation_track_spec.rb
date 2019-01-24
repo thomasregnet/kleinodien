@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_entities_with_format_details'
 
@@ -13,7 +15,7 @@ RSpec.describe CompilationTrack, type: :model do
     end
 
     it 'is not valid without a release' do
-      @track.piece_release = nil
+      @track.piece = nil
       expect(@track).not_to be_valid
     end
 

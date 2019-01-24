@@ -6,6 +6,6 @@ RSpec.describe PrCredit, type: :model do
     let(:credit)           { FactoryBot.create(:pr_credit) }
     let(:credit_with_job)  { FactoryBot.create(:pr_credit_with_job) }
     let(:credit_with_role) { FactoryBot.create(:pr_credit_with_role) }
-    let(:owner_setter)     { 'piece_release=' }
+    let(:owner_setter)     { 'piece=' }
   end
 end

@@ -23,6 +23,7 @@ RSpec.describe Description, type: :model do
 
     after(:all) { DatabaseCleaner.clean }
   end
+
   context 'with more than one content' do
     before(:each) do
       DatabaseCleaner.start
@@ -31,7 +32,7 @@ RSpec.describe Description, type: :model do
 
     factories = %i[
       artist compilation_head compilation_release country
-      piece_head piece_release season serial station
+      piece_head piece season serial station
     ]
 
     factories.each do |factory|
