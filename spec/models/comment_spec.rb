@@ -36,8 +36,8 @@ RSpec.describe Comment, type: :model do
     end
 
     factories = %i[
-      artist_credit compilation_head compilation_release piece_head
-      piece_release repository season serial station
+      artist_credit heap_head piece_head
+      piece repository season serial station
     ]
 
     factories.each do |factory|

@@ -2,7 +2,7 @@
 class Description < ApplicationRecord
   POSSIBLE_CONTENTS = %i[
     artist_credit artist compilation_head compilation_release
-    country piece_head piece_release season serial station
+    country piece_head piece season serial station
   ].freeze
 
   belongs_to :user,   required: false
@@ -14,7 +14,7 @@ class Description < ApplicationRecord
   belongs_to :compilation_release, required: false
   belongs_to :country,             required: false
   belongs_to :piece_head,          required: false
-  belongs_to :piece_release,       required: false
+  belongs_to :piece,               required: false
   belongs_to :season,              required: false
   belongs_to :serial,              required: false
   belongs_to :station,             required: false

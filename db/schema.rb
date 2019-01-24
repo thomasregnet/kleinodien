@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_060826) do
+ActiveRecord::Schema.define(version: 2019_01_24_190800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 2019_01_24_060826) do
     t.integer "user_id", null: false
     t.integer "artist_credit_id"
     t.integer "artist_id"
-    t.integer "compilation_head_id"
-    t.integer "compilation_release_id"
+    t.integer "heap_head_id"
+    t.integer "heap_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
     t.integer "repository_id"
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 2019_01_24_060826) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_comments_on_artist_credit_id"
     t.index ["artist_id"], name: "index_comments_on_artist_id"
-    t.index ["compilation_head_id"], name: "index_comments_on_compilation_head_id"
-    t.index ["compilation_release_id"], name: "index_comments_on_compilation_release_id"
+    t.index ["heap_head_id"], name: "index_comments_on_heap_head_id"
+    t.index ["heap_id"], name: "index_comments_on_heap_id"
     t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
     t.index ["piece_id"], name: "index_comments_on_piece_id"
     t.index ["repository_id"], name: "index_comments_on_repository_id"
@@ -806,8 +806,8 @@ ActiveRecord::Schema.define(version: 2019_01_24_060826) do
   add_foreign_key "ch_labels", "compilation_heads"
   add_foreign_key "comments", "artist_credits"
   add_foreign_key "comments", "artists"
-  add_foreign_key "comments", "compilation_heads"
-  add_foreign_key "comments", "compilation_releases"
+  add_foreign_key "comments", "compilation_heads", column: "heap_head_id"
+  add_foreign_key "comments", "compilation_releases", column: "heap_id"
   add_foreign_key "comments", "piece_heads"
   add_foreign_key "comments", "pieces"
   add_foreign_key "comments", "repositories"

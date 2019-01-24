@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'shared_examples_for_commentable'
+# require 'shared_examples_for_commentable'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_companies'
@@ -36,16 +36,16 @@ RSpec.describe CompilationRelease, type: :model do
     it { should validate_uniqueness_of(:brainz_code).case_insensitive }
   end
 
-  it_behaves_like 'a commentable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @compilation_release = FactoryBot.create(:compilation_release)
-    end
+  # it_behaves_like 'a commentable model' do
+  #   before(:all) do
+  #     DatabaseCleaner.start
+  #     @compilation_release = FactoryBot.create(:compilation_release)
+  #   end
 
-    let(:commentable) { @compilation_release }
+  #   let(:commentable) { @compilation_release }
 
-    after(:all) { DatabaseCleaner.clean }
-  end
+  #   after(:all) { DatabaseCleaner.clean }
+  # end
 
   it_behaves_like 'a rateable model' do
     before(:all) do

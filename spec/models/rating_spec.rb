@@ -70,7 +70,7 @@ RSpec.describe Rating, type: :model do
 
     factories = %i[
       artist compilation_head compilation_release
-      piece_head piece_release season serial station
+      piece_head piece season serial station
     ]
 
     factories.each do |factory|

@@ -2,7 +2,7 @@
 
 # A single track, not belonging to an Compilation
 class PieceTrack < ApplicationRecord
-  belongs_to :release,
+  belongs_to :piece,
              class_name:  'Piece',
              foreign_key: :piece_release_id
   belongs_to :tr_format_kinds,

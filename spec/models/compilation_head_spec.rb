@@ -46,16 +46,16 @@ RSpec.describe CompilationHead, type: :model do
     expect { @c_head.save! }.not_to raise_error
   end
 
-  it_behaves_like 'a commentable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @commentable = FactoryBot.create(:compilation_head)
-    end
+  # it_behaves_like 'a commentable model' do
+  #   before(:all) do
+  #     DatabaseCleaner.start
+  #     @commentable = FactoryBot.create(:compilation_head)
+  #   end
 
-    let(:commentable) { @commentable }
+  #   let(:commentable) { @commentable }
 
-    after(:all) { DatabaseCleaner.clean }
-  end
+  #   after(:all) { DatabaseCleaner.clean }
+  # end
 
   it_behaves_like 'a rateable model' do
     before(:all) do

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :pr_label do
-    piece_release
+    piece
     company
 
     factory :pr_label_with_catalog_no do
