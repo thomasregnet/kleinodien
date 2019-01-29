@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_190800) do
+ActiveRecord::Schema.define(version: 2019_01_29_191556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -561,7 +561,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_190800) do
   end
 
   create_table "pieces", id: :serial, force: :cascade do |t|
-    t.integer "piece_head_id", null: false
+    t.integer "piece_head_id"
     t.integer "station_id"
     t.string "version"
     t.string "type", null: false
