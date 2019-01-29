@@ -56,7 +56,7 @@ RSpec.describe Piece, type: :model do
 
   context 'without tracks' do
     before(:each) do
-      @piece = FactoryBot.build(:piece)
+      @piece = FactoryBot.build(:piece_with_head)
     end
 
     it 'is valid with valid attributes' do
