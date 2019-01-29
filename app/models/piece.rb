@@ -4,11 +4,12 @@ class Piece < ActiveRecord::Base
 
   composed_of :date,
               class_name: 'IncompleteDate',
-              mapping: [%w[date date], %w[date_mask mask]]
+              mapping:    [%w[date date], %w[date_mask mask]]
 
   belongs_to :head,
-             class_name: 'PieceHead',
-             foreign_key: :piece_head_id
+             class_name:  'PieceHead',
+             foreign_key: :piece_head_id,
+             required:    false
 
   has_and_belongs_to_many :tags
 

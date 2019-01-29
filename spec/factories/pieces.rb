@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :piece do
-    association :head, factory: :piece_head
     type { 'Piece' }
 
+    factory :piece_with_head do
+      association :head, factory: :piece_head
+    end
     factory :piece_with_tracks do
       transient do
         tracks_count { 2 }
