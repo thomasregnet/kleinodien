@@ -31,4 +31,24 @@ RSpec.describe PrepareBrainzRecording do
         .to be_instance_of(Piece)
     end
   end
+
+  context 'when the recording does not exist in the database' do
+    let(:import_request) do
+      BrainzRecordingImportRequest.new(
+        code: '5935ec91-8124-42ff-937f-f31a20ffe58f'
+      )
+    end
+
+    let(:blueprint) do
+      TestData.by_name(:brainz_recording_highway_to_hell).blueprint
+    end
+
+    it 'returns the artist' do
+      proxy = double
+      allow(proxy).to receive(:get).and_return(blueprint)
+
+      expect(described_class.call(import_request: import_request, proxy: proxy))
+        .to be_nil
+    end
+  end
 end
