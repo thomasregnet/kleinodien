@@ -34,6 +34,13 @@ module TestData
           kind: :artist
         }
       },
+      brainz_recording_highway_to_hell: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '5935ec91-8124-42ff-937f-f31a20ffe58f',
+          kind: :recording
+        }
+      },
       brainz_release_arise_jp_cd: {
         class_name: 'TestData::BrainzService',
         arguments: {
