@@ -4,6 +4,7 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzPiece do
   it_behaves_like 'a service'
 
@@ -22,11 +23,11 @@ RSpec.describe PersistBrainzPiece do
       end
 
       let(:blueprint) do
-        TestData.by_name(:brainz_recording_highway_to_hell)
+        TestData.by_name(:brainz_recording_highway_to_hell).blueprint
       end
 
       let(:import_request) do
-        BrainzRecordingImport_request.new(code: brainz_code)
+        BrainzRecordingImportRequest.new(code: brainz_code)
       end
 
       it 'returns the Piece' do
@@ -36,5 +37,23 @@ RSpec.describe PersistBrainzPiece do
         expect(described_class.call(args).title).to eq('Test Dummy')
       end
     end
+
+    context 'when the Piece does not exist' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_recording_highway_to_hell).blueprint
+      end
+
+      let(:import_request) do
+        BrainzRecordingImportRequest.new(code: brainz_code)
+      end
+
+      it 'returns the Piece' do
+        proxy = spy
+        allow(proxy).to receive(:get).and_return(blueprint)
+        args = { import_request: import_request, proxy: proxy }
+        expect(described_class.call(args).title).to eq('Highway to Hell')
+      end
+    end
   end
 end
+# rubocop:enable Metrics/BlockLength

@@ -23,6 +23,4 @@ class Piece < ActiveRecord::Base
   has_many :tracks, class_name: 'CompilationTrack'
 
   has_and_belongs_to_many :countries
-
-  delegate :title, to: :head
 end
