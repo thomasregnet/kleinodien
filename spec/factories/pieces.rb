@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :piece do
+    sequence(:title) { |n| "title #{n}" }
     type { 'Piece' }
 
     factory :piece_with_head do
