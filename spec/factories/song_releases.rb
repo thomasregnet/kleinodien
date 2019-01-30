@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :song_release do
+    sequence(:title) { |n| "song release #{n}" }
     association :head, factory: :song_head
 
     factory :song_release_with_identifiers do

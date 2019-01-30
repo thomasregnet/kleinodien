@@ -88,24 +88,6 @@ RSpec.describe ArtistCredit, type: :model do
     end
   end
 
-  context 'SongRelease' do
-    before(:all) do
-      DatabaseCleaner.start
-      @artist_credit = FactoryBot.create(:artist_credit)
-    end
-
-    it 'foobar' do
-      song_release = @artist_credit.song_releases.create!(
-        head: FactoryBot.create(:song_head)
-      )
-
-      expect { song_release.save! }.not_to raise_error
-    end
-
-    after(:all) do
-      DatabaseCleaner.clean
-    end
-  end
   context 'with Source' do
     before(:all) do
       DatabaseCleaner.start
