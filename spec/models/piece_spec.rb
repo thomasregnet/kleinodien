@@ -62,10 +62,6 @@ RSpec.describe Piece, type: :model do
     it 'is valid with valid attributes' do
       expect(@piece).to be_valid
     end
-
-    it 'delegates title to its head' do
-      expect(@piece.title).to eq(@piece.head.title)
-    end
   end
 
   context 'with tracks' do

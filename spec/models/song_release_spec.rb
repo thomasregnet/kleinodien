@@ -12,11 +12,6 @@ RSpec.describe SongRelease, type: :model do
     expect(@song_release).to be_valid
   end
 
-  it 'is not valid without a head' do
-    @song_release.head = nil
-    expect(@song_release).not_to be_valid
-  end
-
   it_behaves_like 'a piece' do
     let(:piece) { @song_release }
   end

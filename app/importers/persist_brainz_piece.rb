@@ -18,9 +18,23 @@ class PersistBrainzPiece
   end
 
   def find_already_existing
+    # TODO: add artist credit
+    # TODO: add disambiguation
+    # TODO: handle model class
     FindByCodesService.call(
       codes_hash:  blueprint.codes_hash,
-      model_class: 'Piece'
+      model_class: Piece
+    )
+  end
+
+  def blueprint
+    proxy.get(import_request)
+  end
+
+  def persist
+    Piece.create!(
+      title: blueprint.title,
+      type:  'SongRelease'
     )
   end
 end

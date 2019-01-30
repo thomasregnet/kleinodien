@@ -5,5 +5,6 @@ class SongRelease < Piece
   belongs_to :artist_credit, required: false
   belongs_to :head,
              class_name:  'SongHead',
-             foreign_key: :piece_head_id
+             foreign_key: :piece_head_id,
+             required:    false
 end
