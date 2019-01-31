@@ -31,12 +31,12 @@ class PersistBrainzPiece
   end
 
   def persist
-    # TODO: add disambiguation
     # TODO: handle model class
     Piece.create!(
-      artist_credit: persist_artist_credit,
-      title:         blueprint.title,
-      type:          'SongRelease'
+      artist_credit:  persist_artist_credit,
+      disambiguation: blueprint.disambiguation,
+      title:          blueprint.title,
+      type:           'SongRelease'
     )
   end
 
