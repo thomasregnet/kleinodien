@@ -18,7 +18,6 @@ class PersistBrainzPiece
   end
 
   def find_already_existing
-    # TODO: add artist credit
     # TODO: add disambiguation
     # TODO: handle model class
     FindByCodesService.call(
@@ -32,9 +31,19 @@ class PersistBrainzPiece
   end
 
   def persist
+    # TODO: add disambiguation
+    # TODO: handle model class
     Piece.create!(
-      title: blueprint.title,
-      type:  'SongRelease'
+      artist_credit: persist_artist_credit,
+      title:         blueprint.title,
+      type:          'SongRelease'
+    )
+  end
+
+  def persist_artist_credit
+    PersistBrainzArtistCredit.call(
+      blueprint: blueprint.artist_credit,
+      proxy:     proxy
     )
   end
 end

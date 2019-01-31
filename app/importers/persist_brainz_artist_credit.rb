@@ -42,12 +42,14 @@ class PersistBrainzArtistCredit
 
   def artists
     @artists ||= blueprint.name_credits.map do |name_credit|
+      # byebug
       persist_artist(name_credit.artist.brainz_code)
     end
   end
 
   def persist_artist(brainz_code)
     import_request = BrainzArtistImportRequest.new(code: brainz_code)
+    # byebug
     PersistBrainzArtist.call(
       import_request: import_request,
       proxy:          proxy
