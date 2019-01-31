@@ -43,9 +43,11 @@ RSpec.describe PrepareBrainzRecording do
       TestData.by_name(:brainz_recording_highway_to_hell).blueprint
     end
 
-    it 'returns the artist' do
+    it 'prepares the artist' do
       proxy = double
       allow(proxy).to receive(:get).and_return(blueprint)
+
+      allow(PrepareBrainzArtistCredit).to receive(:call)
 
       expect(described_class.call(import_request: import_request, proxy: proxy))
         .to be_nil

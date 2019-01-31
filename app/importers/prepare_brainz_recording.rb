@@ -18,6 +18,7 @@ class PrepareBrainzRecording
     return piece if piece
 
     blueprint
+    prepare_artist_credit
 
     nil
   end
@@ -29,5 +30,12 @@ class PrepareBrainzRecording
   def find_already_existing
     codes_hash = blueprint.codes_hash
     FindByCodesService.call(model_class: Piece, codes_hash: codes_hash)
+  end
+
+  def prepare_artist_credit
+    PrepareBrainzArtistCredit.call(
+      blueprint: blueprint.artist_credit,
+      proxy:     proxy
+    )
   end
 end
