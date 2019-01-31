@@ -6,6 +6,13 @@ module TestData
   # Get test-data by name
   class ByName
     CLASS_AND_ARTUMENTS_FOR = {
+      brainz_artist_ac_dc: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '66c662b6-6e2f-4930-8610-912e24c63ed1',
+          kind: :artist
+        }
+      },
       brainz_artist_jello_biafra: {
         class_name: 'TestData::BrainzService',
         arguments: {
