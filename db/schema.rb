@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_185831) do
+ActiveRecord::Schema.define(version: 2019_02_04_193141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -549,6 +549,18 @@ ActiveRecord::Schema.define(version: 2019_02_04_185831) do
     t.index ["tag_id"], name: "index_piece_heads_tags_on_tag_id"
   end
 
+  create_table "piece_releases", force: :cascade do |t|
+    t.string "position"
+    t.bigint "heap_id"
+    t.bigint "import_order_id"
+    t.bigint "piece_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["heap_id"], name: "index_piece_releases_on_heap_id"
+    t.index ["import_order_id"], name: "index_piece_releases_on_import_order_id"
+    t.index ["piece_id"], name: "index_piece_releases_on_piece_id"
+  end
+
   create_table "piece_tracks", id: :serial, force: :cascade do |t|
     t.integer "piece_release_id", null: false
     t.integer "tr_format_kind_id"
@@ -893,6 +905,9 @@ ActiveRecord::Schema.define(version: 2019_02_04_185831) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
+  add_foreign_key "piece_releases", "heaps"
+  add_foreign_key "piece_releases", "import_orders"
+  add_foreign_key "piece_releases", "pieces"
   add_foreign_key "piece_tracks", "pieces", column: "piece_release_id"
   add_foreign_key "pieces", "artist_credits"
   add_foreign_key "pieces", "import_orders"
