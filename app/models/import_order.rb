@@ -6,6 +6,7 @@ class ImportOrder < ApplicationRecord
   has_many :heap_heads
   has_many :heaps
   has_many :import_requests
+  has_many :pieces
 
   after_initialize :set_default_state
 

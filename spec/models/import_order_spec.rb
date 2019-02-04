@@ -8,6 +8,7 @@ RSpec.describe ImportOrder, type: :model do
 
   it { is_expected.to have_many(:heap_heads) }
   it { is_expected.to have_many(:heaps) }
+  it { is_expected.to have_many(:pieces) }
 
   it 'has a counter_cache for import_requests' do
     request_args = {
