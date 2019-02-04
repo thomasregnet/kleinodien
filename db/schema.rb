@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_193953) do
+ActiveRecord::Schema.define(version: 2019_02_04_185831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -577,8 +577,10 @@ ActiveRecord::Schema.define(version: 2019_01_30_193953) do
     t.bigint "wikidata_code"
     t.string "title", null: false
     t.string "disambiguation"
+    t.bigint "import_order_id"
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true
     t.index ["artist_credit_id"], name: "index_pieces_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_pieces_on_import_order_id"
     t.index ["station_id"], name: "index_pieces_on_station_id"
   end
 
@@ -893,6 +895,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_193953) do
   add_foreign_key "piece_heads_tags", "tags"
   add_foreign_key "piece_tracks", "pieces", column: "piece_release_id"
   add_foreign_key "pieces", "artist_credits"
+  add_foreign_key "pieces", "import_orders"
   add_foreign_key "pieces", "piece_heads", name: "pieces_fk_piece_heads"
   add_foreign_key "pieces", "stations", name: "pieces_fk_stations"
   add_foreign_key "pieces_tags", "pieces"
