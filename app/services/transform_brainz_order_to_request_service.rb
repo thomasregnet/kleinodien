@@ -12,8 +12,7 @@ class TransformBrainzOrderToRequestService
   end
 
   def initialize(args)
-    @expected_kind = args[:expected_kind]
-    @import_order  = args[:import_order]
+    @import_order = args[:import_order]
   end
 
   def call
@@ -26,7 +25,7 @@ class TransformBrainzOrderToRequestService
     )
   end
 
-  attr_reader :expected_kind, :import_order
+  attr_reader :import_order
 
   def validate
     validate_import_order
@@ -34,6 +33,8 @@ class TransformBrainzOrderToRequestService
   end
 
   def validate_import_order
+    raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
+
     klass = import_order.class
     return if klass == EXPECTED_ORDER_CLASS
 
@@ -41,21 +42,10 @@ class TransformBrainzOrderToRequestService
   end
 
   def validate_kind
-    raise ArgumentError, missing_kind_error_message unless expected_kind
-    raise ArgumentError, kinds_do_not_match_error_message unless kinds_match?
-
     kind = import_order.kind
     return if BRAINZ_REQUEST_CLASS_FOR[kind]
 
     raise ArgumentError, "Can't handle kind \"#{kind}\""
-  end
-
-  def missing_kind_error_message
-    'missing parmeter "expected_kind"'
-  end
-
-  def kinds_match?
-    expected_kind.to_s == import_order.kind.to_s
   end
 
   def kinds_do_not_match_error_message
