@@ -4,4 +4,9 @@
 class PieceRelease < ApplicationRecord
   belongs_to :import_order, required: false
   belongs_to :piece
+
+  composed_of(
+    :duration,
+    mapping: [%w[milliseconds milliseconds], %w[accuracy accuracy]]
+  )
 end
