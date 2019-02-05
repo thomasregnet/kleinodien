@@ -1,23 +1,5 @@
 # frozen_string_literal: true
 
-class ImportResult < SimpleDelegator
-  def initialize(args)
-    @result  = args[:result]
-    @created = args[:created] || false
-    super(@result)
-  end
-
-  attr_reader :created, :result
-
-  def created?
-    created
-  end
-
-  def existed?
-    !created
-  end
-end
-
 # Import a Release from MusicBrainz
 class ImportBrainzRelease
   def self.call(import_order)
@@ -31,18 +13,13 @@ class ImportBrainzRelease
   attr_reader :import_order
 
   def call
-    # By creating the import_request the import_order values is validated.
-    # So we create the import_request at the very first time.
     validate_import_order
 
     result = find_already_existing || prepare
     return ImportResult.new(result: result) if result
-    # result = find_already_existing || prepare
-    # return { result: result, new_record: false } if result
 
-    # result = persist
-    # { result: result, new_record: true }
-    ImportResult.new(created: true, result: persist)
+    result = persist
+    ImportResult.new(created: true, result: result)
   end
 
   def find_already_existing
