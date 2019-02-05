@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
+# Duration of a Piece or a Heap, to be used with composed_of
 class Duration
-  # 2019-01-08: Moved constants to config/initializers/constants.rb
-  # ACCURACY_MILLISECOND = 'millisecond'
-  # ACCURACY_SECOND      = 'second'
-  # ACCURACY_MINUTE      = 'minute'
-  # ACCURACY_HOUR        = 'hour'
-
-  # SECOND_MS = 1_000
-  # MINUTE_MS = 60_000
-  # HOUR_MS   = 3_600_000
-
   attr_reader :milliseconds, :accuracy
 
   def self.milliseconds(milliseconds)
