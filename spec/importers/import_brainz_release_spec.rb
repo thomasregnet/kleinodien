@@ -56,7 +56,7 @@ RSpec.describe ImportBrainzRelease do
     after { DatabaseCleaner.clean }
 
     let(:import_order) do
-      FactoryBot.build(:brainz_import_order,  import_order_args)
+      FactoryBot.build(:brainz_import_order, import_order_args)
     end
 
     specify 'the :result contains the release' do
@@ -77,7 +77,7 @@ RSpec.describe ImportBrainzRelease do
 
     it 'raises if the kind is not "release"' do
       expect { described_class.call(import_order: import_order) }
-        .to raise_error ArgumentError
+        .to raise_error(ArgumentError, /expected kind "release"/)
     end
   end
 

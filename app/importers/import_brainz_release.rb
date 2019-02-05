@@ -15,7 +15,7 @@ class ImportBrainzRelease
   def call
     # By creating the import_request the import_order values is validated.
     # So we create the import_request at the very first time.
-    import_request
+    validate_import_order
 
     result = find_already_existing || prepare
     return { result: result, new_record: false } if result
@@ -58,5 +58,13 @@ class ImportBrainzRelease
         proxy:          proxy
       )
     end
+  end
+
+  def validate_import_order
+    raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
+
+    kind = import_order.kind
+    raise ArgumentError, "expected kind \"release\" not #{kind}" \
+      unless kind == 'release'
   end
 end
