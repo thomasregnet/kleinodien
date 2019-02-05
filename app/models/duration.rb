@@ -50,19 +50,19 @@ class Duration
   end
 
   def hours
-    @milliseconds / HOUR_MS
+    milliseconds / HOUR_MS
   end
 
   def minutes
-    @milliseconds / MINUTE_MS
+    milliseconds / MINUTE_MS
   end
 
   def seconds
-    @milliseconds / SECOND_MS
+    milliseconds / SECOND_MS
   end
 
   def minutes_left
-    @milliseconds % HOUR_MS / MINUTE_MS
+    milliseconds % HOUR_MS / MINUTE_MS
   end
 
   def minutes_left_rounded
@@ -73,7 +73,7 @@ class Duration
   end
 
   def seconds_left_rounded
-    (@milliseconds % MINUTE_MS / SECOND_MS.to_f).round
+    (milliseconds % MINUTE_MS / SECOND_MS.to_f).round
   end
 
   def mmss
