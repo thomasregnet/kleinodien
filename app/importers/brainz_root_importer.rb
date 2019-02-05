@@ -6,8 +6,18 @@ class BrainzRootImporter
     'release' => 'ImportBrainzRelease'
   }.freeze
 
-  def self.run(import_order)
+  def self.run(args)
+    new(args).run
+  end
+
+  def initialize(args)
+    @import_order = args[:import_order]
+  end
+
+  attr_reader :import_order
+
+  def run
     importer_class = IMPORTER_FOR[import_order.kind]
-    importer_class.constantize.call(import_order)
+    importer_class.constantize.call(import_order: import_order)
   end
 end

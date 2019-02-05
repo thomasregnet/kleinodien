@@ -10,7 +10,7 @@ end
 # Mock #persist and #prepare
 class MockImportBrainzReleasePersistAndPrepare < ImportBrainzRelease
   def self.call(args)
-    me = new(args[:import_order])
+    me = new(args)
     me.init_spies(args)
     me.call
   end
@@ -60,20 +60,13 @@ RSpec.describe ImportBrainzRelease do
     end
 
     specify 'the :result contains the release' do
-      expect(described_class.call(import_order)[:result])
+      expect(described_class.call(import_order: import_order)[:result])
         .to be_instance_of Heap
     end
 
     specify ':new_record is false' do
-      expect(described_class.call(import_order)[:new_record])
+      expect(described_class.call(import_order: import_order)[:new_record])
         .to be false
-    end
-  end
-
-  context 'when it is called with an object of the wrong class' do
-    it 'raises without a BrainzImportOrder' do
-      expect { described_class.call(TestImportClass.new) }
-        .to raise_error ArgumentError
     end
   end
 
@@ -83,17 +76,10 @@ RSpec.describe ImportBrainzRelease do
     end
 
     it 'raises if the kind is not "release"' do
-      expect { described_class.call(import_order) }
+      expect { described_class.call(import_order: import_order) }
         .to raise_error ArgumentError
     end
   end
-
-  # it 'calls PrepareBrainzRelease' do
-  #   allow(PrepareBrainzRelease).to receive(:call)
-  #   described_class.call(
-  #     FactoryBot.build(:brainz_import_order, kind: 'release')
-  #   )
-  # end
 
   describe 'when the release does not exist' do
     let(:import_order) do

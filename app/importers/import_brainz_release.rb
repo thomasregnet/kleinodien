@@ -6,8 +6,8 @@ class ImportBrainzRelease
     new(import_order).call
   end
 
-  def initialize(import_order)
-    @import_order = import_order
+  def initialize(args)
+    @import_order = args[:import_order]
   end
 
   attr_reader :import_order
@@ -30,8 +30,7 @@ class ImportBrainzRelease
 
   def import_request
     @import_request ||= TransformBrainzOrderToRequestService.call(
-      expected_kind: :release,
-      import_order:  import_order
+      import_order: import_order
     )
   end
 
@@ -55,7 +54,6 @@ class ImportBrainzRelease
 
     import_order.transaction do
       PersistBrainzHeap.call(
-        # blueprint: blueprint,
         import_request: import_request,
         proxy:          proxy
       )

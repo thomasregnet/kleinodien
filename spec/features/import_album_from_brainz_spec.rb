@@ -10,15 +10,15 @@ RSpec.feature 'MusicBrainz imports' do
 
     let(:import_order) do
       BrainzImportOrder.create!(
-        code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
-        kind: 'release',
+        code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
+        kind:  'release',
         state: 'pending',
-        user: FactoryBot.create(:user)
+        user:  FactoryBot.create(:user)
       )
     end
 
     scenario 'import' do
-      BrainzRootImporter.run(import_order)
+      BrainzRootImporter.run(import_order: import_order)
 
       expect(:foo).to eq(:foo)
     end
