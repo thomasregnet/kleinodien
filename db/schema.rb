@@ -550,13 +550,12 @@ ActiveRecord::Schema.define(version: 2019_02_04_193141) do
   end
 
   create_table "piece_releases", force: :cascade do |t|
-    t.string "position"
-    t.bigint "heap_id"
+    t.string "accuracy"
+    t.integer "milliseconds"
     t.bigint "import_order_id"
     t.bigint "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["heap_id"], name: "index_piece_releases_on_heap_id"
     t.index ["import_order_id"], name: "index_piece_releases_on_import_order_id"
     t.index ["piece_id"], name: "index_piece_releases_on_piece_id"
   end
@@ -905,7 +904,6 @@ ActiveRecord::Schema.define(version: 2019_02_04_193141) do
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
-  add_foreign_key "piece_releases", "heaps"
   add_foreign_key "piece_releases", "import_orders"
   add_foreign_key "piece_releases", "pieces"
   add_foreign_key "piece_tracks", "pieces", column: "piece_release_id"
