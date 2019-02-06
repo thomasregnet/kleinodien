@@ -2,8 +2,6 @@
 
 # Duration of a Piece or a Heap, to be used with composed_of
 class Duration
-  attr_reader :milliseconds, :accuracy
-
   def self.milliseconds(milliseconds)
     new(milliseconds, ACCURACY_MILLISECOND)
   end
@@ -40,6 +38,8 @@ class Duration
     @accuracy     = accuracy
   end
 
+  attr_reader :milliseconds, :accuracy
+
   def hours
     milliseconds / HOUR_MS
   end
@@ -58,7 +58,7 @@ class Duration
 
   def minutes_left_rounded
     minutes = minutes_left
-    ms_left = @milliseconds - (minutes * MINUTE_MS) - (hours * HOUR_MS)
+    ms_left = milliseconds - (minutes * MINUTE_MS) - (hours * HOUR_MS)
     minutes += 1 if ms_left >= 30_000
     minutes
   end
