@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_193141) do
+ActiveRecord::Schema.define(version: 2019_02_06_190909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -398,6 +398,21 @@ ActiveRecord::Schema.define(version: 2019_02_04_193141) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_heap_heads_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_heap_heads_on_import_order_id"
+  end
+
+  create_table "heap_tracks", force: :cascade do |t|
+    t.string "accuracy"
+    t.integer "milliseconds"
+    t.string "position", null: false
+    t.uuid "brainz_code"
+    t.bigint "heap_id", null: false
+    t.bigint "import_order_id"
+    t.bigint "piece_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["heap_id"], name: "index_heap_tracks_on_heap_id"
+    t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
+    t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
   end
 
   create_table "heaps", force: :cascade do |t|
@@ -881,6 +896,9 @@ ActiveRecord::Schema.define(version: 2019_02_04_193141) do
   add_foreign_key "descriptions", "users"
   add_foreign_key "heap_heads", "artist_credits"
   add_foreign_key "heap_heads", "import_orders"
+  add_foreign_key "heap_tracks", "heaps"
+  add_foreign_key "heap_tracks", "import_orders"
+  add_foreign_key "heap_tracks", "pieces"
   add_foreign_key "heaps", "artist_credits"
   add_foreign_key "heaps", "heap_heads"
   add_foreign_key "heaps", "import_orders"
