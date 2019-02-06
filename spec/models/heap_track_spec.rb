@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared_examples_for_models_with_duration'
 
 RSpec.describe HeapTrack, type: :model do
-  subject { FactoryBot.build(:heap_track) }
+  # subject { FactoryBot.build(:heap_track) }
 
   it { is_expected.to belong_to(:heap) }
   it { is_expected.to belong_to(:import_order) }
@@ -12,4 +13,6 @@ RSpec.describe HeapTrack, type: :model do
   it { is_expected.to validate_presence_of(:heap) }
   it { is_expected.to validate_presence_of(:piece) }
   it { is_expected.to validate_presence_of(:position) }
+
+  it_behaves_like 'a model with duration'
 end
