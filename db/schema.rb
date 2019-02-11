@@ -418,8 +418,8 @@ ActiveRecord::Schema.define(version: 2019_02_11_193507) do
     t.bigint "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "heap_subsets_id", null: false
-    t.index ["heap_subsets_id"], name: "index_heap_tracks_on_heap_subsets_id"
+    t.bigint "heap_subset_id", null: false
+    t.index ["heap_subset_id"], name: "index_heap_tracks_on_heap_subset_id"
     t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
     t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
   end
