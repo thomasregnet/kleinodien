@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_193109) do
+ActiveRecord::Schema.define(version: 2019_02_11_193507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -414,12 +414,12 @@ ActiveRecord::Schema.define(version: 2019_02_11_193109) do
     t.integer "milliseconds"
     t.string "position", null: false
     t.uuid "brainz_code"
-    t.bigint "heap_id", null: false
     t.bigint "import_order_id"
     t.bigint "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["heap_id"], name: "index_heap_tracks_on_heap_id"
+    t.bigint "heap_subsets_id", null: false
+    t.index ["heap_subsets_id"], name: "index_heap_tracks_on_heap_subsets_id"
     t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
     t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
   end
@@ -906,7 +906,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_193109) do
   add_foreign_key "heap_heads", "artist_credits"
   add_foreign_key "heap_heads", "import_orders"
   add_foreign_key "heap_subsets", "heaps"
-  add_foreign_key "heap_tracks", "heaps"
   add_foreign_key "heap_tracks", "import_orders"
   add_foreign_key "heap_tracks", "pieces"
   add_foreign_key "heaps", "artist_credits"
