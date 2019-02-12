@@ -5,7 +5,9 @@ require 'test_data'
 
 RSpec.describe PersistBrainzHeapTrack do
   context 'with valid arguments' do
-    args = {}
+    args = {
+      subset: FactoryBot.create(:heap_subset)
+    }
     it 'persists the track' do
       expect(described_class.call(args)).to be true
     end
