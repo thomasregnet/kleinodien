@@ -906,6 +906,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_193507) do
   add_foreign_key "heap_heads", "artist_credits"
   add_foreign_key "heap_heads", "import_orders"
   add_foreign_key "heap_subsets", "heaps"
+  add_foreign_key "heap_tracks", "heap_subsets"
   add_foreign_key "heap_tracks", "import_orders"
   add_foreign_key "heap_tracks", "pieces"
   add_foreign_key "heaps", "artist_credits"
