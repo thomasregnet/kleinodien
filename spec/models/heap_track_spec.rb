@@ -10,8 +10,8 @@ RSpec.describe HeapTrack, type: :model do
   it { is_expected.to belong_to(:import_order) }
   it { is_expected.to belong_to(:piece) }
 
+  it { is_expected.to validate_presence_of(:no) }
   it { is_expected.to validate_presence_of(:piece) }
-  it { is_expected.to validate_presence_of(:position) }
 
   it_behaves_like 'a model with duration'
 end

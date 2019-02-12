@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_193507) do
+ActiveRecord::Schema.define(version: 2019_02_12_200153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -412,13 +412,13 @@ ActiveRecord::Schema.define(version: 2019_02_11_193507) do
   create_table "heap_tracks", force: :cascade do |t|
     t.string "accuracy"
     t.integer "milliseconds"
-    t.string "position", null: false
     t.uuid "brainz_code"
     t.bigint "import_order_id"
     t.bigint "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "heap_subset_id", null: false
+    t.integer "no", limit: 2, null: false
     t.index ["heap_subset_id"], name: "index_heap_tracks_on_heap_subset_id"
     t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
     t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
