@@ -16,4 +16,25 @@ RSpec.describe PersistBrainzHeapSubset do
     }
     expect(described_class.call(args).new_record?).to be false
   end
+
+  # rubocop:disable RSpec/VerifiedDoubles
+  describe '#title' do
+    context 'when a title is given' do
+      it 'returns that title' do
+        blueprint = double(title: 'fake title')
+        subset = described_class.new(blueprint: blueprint)
+        expect(subset.title).to eq('fake title')
+      end
+    end
+
+    context 'when no title is given' do
+      it 'returns a generic title' do
+        format = double(__content__: 'Vinyl')
+        blueprint = double(format: format, position: 3, title: nil)
+        subset = described_class.new(blueprint: blueprint)
+        expect(subset.title).to eq('Vinyl 3')
+      end
+    end
+  end
+  # rubocop:enable RSpec/VerifiedDoubles
 end
