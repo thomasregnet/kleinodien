@@ -11,6 +11,6 @@ class HeapTrack < ApplicationRecord
     mapping: [%w[milliseconds milliseconds], %w[accuracy accuracy]]
   )
 
+  validates :no, presence: true
   validates :piece, presence: true
-  validates :position, presence: true, blank: false
 end
