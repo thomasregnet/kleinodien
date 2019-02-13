@@ -2,7 +2,6 @@
 
 # Persist a MusicBrainz medium
 class PersistBrainzHeapSubset
-  # TODO: persist_heap_tracks
   def self.call(args)
     new(args).call
   end
@@ -16,7 +15,22 @@ class PersistBrainzHeapSubset
   attr_reader :blueprint, :heap, :proxy
 
   def call
-    heap.subsets.create!(no: blueprint.position, title: title)
+    subset = heap.subsets.create!(no: blueprint.position, title: title)
+    persist_tracks(subset)
+    subset
+  end
+
+  def persist_tracks(subset)
+    blueprint.track_list.track.each.with_index(1) do |track, no|
+      # TODO: don't take import_order form proxy
+      PersistBrainzHeapTrack.call(
+        blueprint:    track,
+        import_order: proxy.import_order,
+        no:           no,
+        proxy:        proxy,
+        subset:       subset
+      )
+    end
   end
 
   def title
