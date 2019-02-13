@@ -8,13 +8,20 @@ RSpec.describe PersistBrainzHeapSubset do
 
   # TODO: test medium with a given title
   # Suggestion: "The Making of the Wretched Spawn"
-  it 'persists the subset' do
-    args = {
-      blueprint: blueprint.media[0],
-      heap:      FactoryBot.create(:heap),
-      proxy:     nil
-    }
-    expect(described_class.call(args).new_record?).to be false
+  context 'with valid parameters' do
+    let(:import_order) do
+      FactoryBot.create(:brainz_import_order)
+    end
+
+    it 'persists the subset' do
+      args = {
+        blueprint: blueprint.media[0],
+        heap:      FactoryBot.create(:heap),
+        proxy:     BrainzProxy.new(import_order: import_order)
+      }
+      allow(PersistBrainzHeapTrack).to receive(:call)
+      expect(described_class.call(args).new_record?).to be false
+    end
   end
 
   # rubocop:disable RSpec/VerifiedDoubles
