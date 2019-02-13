@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ImportRequest for a MusicBrainz recording
-class BrainzRecordingImportRequest < ImportRequest
+class BrainzRecordingImportRequest < BrainzImportRequest
   QUERY_KIND = 'recording'
 
   def kind
