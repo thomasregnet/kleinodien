@@ -63,12 +63,12 @@ class PersistBrainzHeap
   end
 
   def persist_subsets(heap)
-    # blueprint.media.each do |medium|
-    #   PersistBrainzHeapSubset.call(
-    #     blueprint: medium,
-    #     heap:      heap,
-    #     proxy:     proxy
-    #   )
-    # end
+    blueprint.media.each do |medium|
+      PersistBrainzHeapSubset.call(
+        blueprint: medium,
+        heap:      heap,
+        proxy:     proxy
+      )
+    end
   end
 end
