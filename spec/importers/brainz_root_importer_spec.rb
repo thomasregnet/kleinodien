@@ -7,7 +7,7 @@ RSpec.describe BrainzRootImporter do
   context 'release' do
     it 'foo' do
       # TODO: make a real test of this
-      allow(BrainzReleaseImporter).to receive(:from_import_order)
+      allow(ImportBrainzRelease).to receive(:call)
     end
   end
 end
