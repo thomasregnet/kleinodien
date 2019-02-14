@@ -18,9 +18,8 @@ RSpec.feature 'MusicBrainz imports' do
     end
 
     scenario 'import' do
-      BrainzRootImporter.call(import_order: import_order)
-
-      expect(:foo).to eq(:foo)
+      result = BrainzRootImporter.call(import_order: import_order)
+      expect(result).to be_created
     end
   end
 end
