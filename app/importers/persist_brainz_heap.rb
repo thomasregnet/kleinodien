@@ -33,12 +33,14 @@ class PersistBrainzHeap
     artist_credit = persist_artist_credit
     heap_head = persist_heap_head
     # TODO: Persist the right type, not always 'album'
-    Heap.create!(
+    heap = Heap.create!(
       artist_credit: artist_credit,
       head:          heap_head,
       title:         blueprint.title,
       type:          AlbumRelease
     )
+    persist_subsets(heap)
+    heap
   end
 
   def persist_artist_credit
@@ -58,5 +60,15 @@ class PersistBrainzHeap
       import_request: import_request,
       proxy:          proxy
     )
+  end
+
+  def persist_subsets(heap)
+    # blueprint.media.each do |medium|
+    #   PersistBrainzHeapSubset.call(
+    #     blueprint: medium,
+    #     heap:      heap,
+    #     proxy:     proxy
+    #   )
+    # end
   end
 end
