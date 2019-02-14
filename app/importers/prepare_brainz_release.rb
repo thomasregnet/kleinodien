@@ -19,6 +19,7 @@ class PrepareBrainzRelease
 
     prepare_artist_credit
     prepare_release_group
+    prepare_media
 
     nil
   end
@@ -28,6 +29,25 @@ class PrepareBrainzRelease
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
+  end
+
+  def prepare_media
+    blueprint.media.each do |medium|
+      prepare_recordings(medium)
+    end
+  end
+
+  def prepare_recordings(medium)
+    medium.track_list.track.each do |track|
+      import_request = BrainzRecordingImportRequest.new(
+        code: track.recording.brainz_code
+      )
+
+      PrepareBrainzRecording.call(
+        import_request: import_request,
+        proxy:          proxy
+      )
+    end
   end
 
   def prepare_release_group
