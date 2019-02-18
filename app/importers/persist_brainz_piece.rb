@@ -18,8 +18,6 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def find_already_existing
-    # TODO: add disambiguation
-    # TODO: handle model class
     FindByCodesService.call(
       codes_hash:  blueprint.codes_hash,
       model_class: Piece
