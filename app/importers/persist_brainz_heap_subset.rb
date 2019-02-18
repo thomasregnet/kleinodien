@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 # Persist a MusicBrainz medium
-class PersistBrainzHeapSubset
+class PersistBrainzHeapSubset < PersistBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @blueprint = args[:blueprint]
     @heap      = args[:heap]
-    @proxy     = args[:proxy]
   end
 
-  attr_reader :blueprint, :heap, :proxy
+  attr_reader :blueprint, :heap
 
   def call
     subset = heap.subsets.create!(no: blueprint.position, title: title)

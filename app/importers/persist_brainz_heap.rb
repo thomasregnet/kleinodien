@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
 # Persist a CompilationRelease using data retrieved from MusicBrainz
-class PersistBrainzHeap
+class PersistBrainzHeap < PersistBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
-    # @blueprint = args[:blueprint]
+    super(args)
     @import_request = args[:import_request]
-    @proxy          = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :import_request
 
   def call
     find_already_existing || persist

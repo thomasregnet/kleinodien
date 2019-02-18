@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 # Persist an ArtistCredit from MusicBrainz
-class PersistBrainzArtistCredit
+class PersistBrainzArtistCredit < PersistBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :blueprint
 
   def call
     artist_credit = find_already_existing
