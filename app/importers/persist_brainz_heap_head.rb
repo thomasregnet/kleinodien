@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 # Persist a CompilationHead using data from MusicBrainz
-class PersistBrainzHeapHead
+class PersistBrainzHeapHead < PersistBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @import_request = args[:import_request]
-    @proxy          = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :import_request
 
   def call
     find_already_existing || persist
