@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 # Prepare a MusicBrainz release-group for import
-class PrepareBrainzReleaseGroup
+class PrepareBrainzReleaseGroup < PrepareBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @import_request = args[:import_request]
-    @proxy          = args[:proxy]
   end
 
-  attr_reader :import_request, :proxy
+  attr_reader :import_request
 
   def call
     prepare_artist_credit
