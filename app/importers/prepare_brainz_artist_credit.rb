@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 # Prepare a MusicBrainz Artist for import
-class PrepareBrainzArtistCredit
+class PrepareBrainzArtistCredit < PrepareBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :blueprint
 
   def call
     blueprint.name_credits.each do |name_credit|

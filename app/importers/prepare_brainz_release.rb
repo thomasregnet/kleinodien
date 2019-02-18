@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 # Prepare a MusicBrainz release for import
-class PrepareBrainzRelease
+class PrepareBrainzRelease < PrepareBrainzBase
   def self.call(args)
     new(args).call
   end
 
   def initialize(args)
+    super(args)
     @blueprint = args[:blueprint]
-    @proxy     = args[:proxy]
   end
 
-  attr_reader :blueprint, :proxy
+  attr_reader :blueprint
 
   def call
     heap = find_already_existing
