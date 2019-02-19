@@ -2,10 +2,6 @@
 
 # Persist a MusicBrainz medium
 class PersistBrainzHeapSubset < PersistBrainzBase
-  def self.call(args)
-    new(args).call
-  end
-
   def initialize(args)
     super(args)
     @blueprint = args[:blueprint]
