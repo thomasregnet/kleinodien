@@ -7,6 +7,7 @@ RSpec.describe ImportOrder, type: :model do
   include_examples 'for ImportOrders', :import_order
 
   it { is_expected.to have_many(:artist_credits) }
+  it { is_expected.to have_many(:artists) }
   it { is_expected.to have_many(:heap_heads) }
   it { is_expected.to have_many(:heap_tracks) }
   it { is_expected.to have_many(:heaps) }

@@ -4,6 +4,7 @@
 class ImportOrder < ApplicationRecord
   belongs_to :user
   has_many :artist_credits
+  has_many :artists
   has_many :heap_heads
   has_many :heap_tracks
   has_many :heaps
