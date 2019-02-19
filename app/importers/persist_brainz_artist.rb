@@ -20,7 +20,8 @@ class PersistBrainzArtist < PersistBrainzBase
     args = {
       name:           blueprint.name,
       sort_name:      blueprint.sort_name,
-      disambiguation: blueprint.disambiguation
+      disambiguation: blueprint.disambiguation,
+      import_order:   import_order
     }
 
     args[:begin_date] = begin_date if begin_date?
