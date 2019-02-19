@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_193557) do
+ActiveRecord::Schema.define(version: 2019_02_19_201423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -565,8 +565,10 @@ ActiveRecord::Schema.define(version: 2019_02_19_193557) do
     t.bigint "imdb_code"
     t.bigint "tmdb_code"
     t.bigint "wikidata_code"
+    t.bigint "import_order_id"
     t.index "artist_credit_id, type, lower((title)::text), lower((disambiguation)::text)", name: "index_piece_heads_on_lower_title_disambiguation", unique: true
     t.index ["artist_credit_id"], name: "index_piece_heads_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_piece_heads_on_import_order_id"
     t.index ["season_id"], name: "index_piece_heads_on_season_id"
   end
 
@@ -935,6 +937,7 @@ ActiveRecord::Schema.define(version: 2019_02_19_193557) do
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
+  add_foreign_key "piece_heads", "import_orders"
   add_foreign_key "piece_heads", "seasons", name: "piece_heads_fk_seasons"
   add_foreign_key "piece_heads_tags", "piece_heads"
   add_foreign_key "piece_heads_tags", "tags"
