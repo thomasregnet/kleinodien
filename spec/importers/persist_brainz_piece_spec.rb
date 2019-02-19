@@ -12,8 +12,6 @@ class MockPersistBrainzPieceProxy
 
     TestData.by_name(:brainz_artist_ac_dc).blueprint
   end
-
-  attr_reader :import_order
 end
 
 # rubocop:disable Metrics/BlockLength
