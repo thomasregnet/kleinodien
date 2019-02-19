@@ -9,6 +9,7 @@ require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe Artist, type: :model do
   it { is_expected.to(belong_to(:data_import)) }
+  it { is_expected.to belong_to(:import_order) }
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }

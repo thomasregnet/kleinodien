@@ -6,6 +6,7 @@ class Artist < ActiveRecord::Base
   include CodeFindable
 
   belongs_to :data_import, required: false
+  belongs_to :import_order, required: false
 
   composed_of :begin_date,
               class_name: 'IncompleteDate',
