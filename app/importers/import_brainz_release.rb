@@ -52,6 +52,7 @@ class ImportBrainzRelease
 
     import_order.transaction do
       PersistBrainzHeap.call(
+        import_order:   import_order,
         import_request: import_request,
         proxy:          proxy
       )

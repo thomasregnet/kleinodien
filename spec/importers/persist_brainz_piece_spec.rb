@@ -7,13 +7,15 @@ require 'test_data'
 # Fake a BrainzProxy
 class MockPersistBrainzPieceProxy
   def get(import_request)
-    # byebug
     return TestData.by_name(:brainz_recording_highway_to_hell).blueprint \
       if import_request.code =~ /5935ec91-8124-42ff-937f-f31a20ffe58f/
 
     TestData.by_name(:brainz_artist_ac_dc).blueprint
   end
+
+  attr_reader :import_order
 end
+
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzPiece do
   it_behaves_like 'a service'

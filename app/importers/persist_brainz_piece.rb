@@ -29,6 +29,7 @@ class PersistBrainzPiece < PersistBrainzBase
     Piece.create!(
       artist_credit:  persist_artist_credit,
       disambiguation: blueprint.disambiguation,
+      import_order:   import_order,
       title:          blueprint.title,
       type:           'SongRelease'
     )
