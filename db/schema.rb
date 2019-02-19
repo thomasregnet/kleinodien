@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_191128) do
+ActiveRecord::Schema.define(version: 2019_02_19_193557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -50,9 +50,11 @@ ActiveRecord::Schema.define(version: 2019_02_19_191128) do
     t.bigint "wikidata_code"
     t.bigint "imdb_code"
     t.bigint "tmdb_code"
+    t.bigint "import_order_id"
     t.index ["brainz_code"], name: "index_on_artists_brainz_code", unique: true
     t.index ["data_import_id"], name: "index_artists_on_data_import_id"
     t.index ["discogs_code"], name: "index_on_artists_discogs_code", unique: true
+    t.index ["import_order_id"], name: "index_artists_on_import_order_id"
     t.index ["wikidata_code"], name: "index_on_artists_wikidata_code", unique: true
   end
 
@@ -835,6 +837,7 @@ ActiveRecord::Schema.define(version: 2019_02_19_191128) do
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
   add_foreign_key "artists", "data_imports"
+  add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "brainz_releases", "compilation_releases", name: "brainz_releases_compilation_release_id_fkey"
