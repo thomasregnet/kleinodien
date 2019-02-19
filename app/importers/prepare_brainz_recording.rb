@@ -2,10 +2,6 @@
 
 # Prepares a MusicBrainz Recording for import.
 class PrepareBrainzRecording < PrepareBrainzBase
-  def self.call(args)
-    new(args).call
-  end
-
   def initialize(args)
     super(args)
     @import_request = args[:import_request]

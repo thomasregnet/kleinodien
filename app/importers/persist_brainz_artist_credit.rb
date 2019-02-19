@@ -2,10 +2,6 @@
 
 # Persist an ArtistCredit from MusicBrainz
 class PersistBrainzArtistCredit < PersistBrainzBase
-  def self.call(args)
-    new(args).call
-  end
-
   def initialize(args)
     super(args)
     @blueprint = args[:blueprint]

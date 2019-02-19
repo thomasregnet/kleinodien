@@ -2,10 +2,6 @@
 
 # Persist a MusicBrainz Artist
 class PersistBrainzArtist < PersistBrainzBase
-  def self.call(args)
-    new(args).call
-  end
-
   def initialize(args)
     super(args)
     @import_request = args[:import_request]
