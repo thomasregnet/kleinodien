@@ -12,8 +12,6 @@ RSpec.describe ArtistCredit, type: :model do
     expect(subject).to respond_to(:descriptions)
   end
 
-  it { is_expected.to(belong_to(:data_import)) }
-
   it_behaves_like 'a commentable model' do
     before(:all) do
       DatabaseCleaner.start

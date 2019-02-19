@@ -17,8 +17,6 @@ RSpec.describe CompilationRelease, type: :model do
     expect(subject).to respond_to(:comments)
   end
 
-  it { is_expected.to(belong_to(:data_import)) }
-
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
     let(:factory) { :compilation_release }
