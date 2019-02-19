@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_200153) do
+ActiveRecord::Schema.define(version: 2019_02_19_191128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2019_02_12_200153) do
     t.datetime "updated_at", null: false
     t.integer "source_id"
     t.bigint "data_import_id"
+    t.bigint "import_order_id"
     t.index ["data_import_id"], name: "index_artist_credits_on_data_import_id"
+    t.index ["import_order_id"], name: "index_artist_credits_on_import_order_id"
   end
 
   create_table "artist_credits_tags", id: false, force: :cascade do |t|
@@ -828,6 +830,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_200153) do
   end
 
   add_foreign_key "artist_credits", "data_imports"
+  add_foreign_key "artist_credits", "import_orders"
   add_foreign_key "artist_credits", "sources", name: "fk_artist_credits_source_id"
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
