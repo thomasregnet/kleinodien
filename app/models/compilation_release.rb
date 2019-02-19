@@ -6,7 +6,6 @@ class CompilationRelease < ActiveRecord::Base
               class_name: 'IncompleteDate',
               mapping: [%w[date date], %w[date_mask mask]]
 
-  belongs_to :data_import, required: false
   belongs_to :head,
              class_name: 'CompilationHead',
              foreign_key: :compilation_head_id

@@ -2,7 +2,6 @@
 
 # ArtistCredit joins Artists with join_phrases by using Participants
 class ArtistCredit < ActiveRecord::Base
-  belongs_to :data_import, required: false
   belongs_to :import_order, required: false
   belongs_to :source, required: false
 
