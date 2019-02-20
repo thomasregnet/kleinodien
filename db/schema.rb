@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_205518) do
+ActiveRecord::Schema.define(version: 2019_02_20_210151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205518) do
     t.integer "heap_head_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
-    t.integer "repository_id"
     t.integer "season_id"
     t.integer "serial_id"
     t.integer "station_id"
@@ -122,7 +121,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205518) do
     t.index ["heap_head_id"], name: "index_comments_on_heap_head_id"
     t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
     t.index ["piece_id"], name: "index_comments_on_piece_id"
-    t.index ["repository_id"], name: "index_comments_on_repository_id"
     t.index ["season_id"], name: "index_comments_on_season_id"
     t.index ["serial_id"], name: "index_comments_on_serial_id"
     t.index ["station_id"], name: "index_comments_on_station_id"
@@ -547,34 +545,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205518) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
-  create_table "repositories", id: :serial, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "format_id"
-    t.index ["id", "user_id"], name: "index_repositories_id_and_user_id", unique: true
-    t.index ["user_id"], name: "index_repositories_on_user_id"
-  end
-
-  create_table "repository_format_details", id: :serial, force: :cascade do |t|
-    t.integer "repository_id", null: false
-    t.integer "position", null: false
-    t.integer "format_detail_id"
-    t.index ["repository_id", "position"], name: "repository_format_details_repository_id_position_idx", unique: true
-  end
-
-  create_table "repository_positions", id: :serial, force: :cascade do |t|
-    t.integer "compilation_track_id"
-    t.integer "piece_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "repository_id", null: false
-    t.integer "user_id", null: false
-    t.integer "compilation_copy_id"
-    t.integer "piece_track_id"
-  end
-
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.integer "serial_id", null: false
     t.integer "position", null: false
@@ -679,7 +649,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205518) do
   add_foreign_key "comments", "compilation_heads", column: "heap_head_id"
   add_foreign_key "comments", "piece_heads"
   add_foreign_key "comments", "pieces"
-  add_foreign_key "comments", "repositories"
   add_foreign_key "comments", "seasons"
   add_foreign_key "comments", "serials"
   add_foreign_key "comments", "stations"
@@ -760,14 +729,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205518) do
   add_foreign_key "ratings", "serials"
   add_foreign_key "ratings", "stations"
   add_foreign_key "ratings", "users"
-  add_foreign_key "repositories", "formats", name: "fk_repositories_format_id"
-  add_foreign_key "repositories", "users"
-  add_foreign_key "repository_format_details", "format_details", name: "fk_repository_format_details_format_detail_id"
-  add_foreign_key "repository_format_details", "repositories", name: "repository_format_details_repository_id_fkey"
-  add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
-  add_foreign_key "repository_positions", "pieces", name: "repository_positions_piece_release_id_fkey"
-  add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
-  add_foreign_key "repository_positions", "users", name: "fk_repository_position_user"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "seasons_tags", "seasons"
   add_foreign_key "seasons_tags", "tags"
