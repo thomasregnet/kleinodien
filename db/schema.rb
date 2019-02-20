@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_195755) do
+ActiveRecord::Schema.define(version: 2019_02_20_203810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -226,20 +226,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195755) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_cr_credits_on_artist_credit_id"
     t.index ["job_id"], name: "index_cr_credits_on_job_id"
-  end
-
-  create_table "cr_format_details", id: :serial, force: :cascade do |t|
-    t.integer "cr_format_id", null: false
-    t.integer "position", null: false
-    t.integer "format_detail_id"
-    t.index ["cr_format_id", "position"], name: "cr_format_details_cr_format_id_position_idx", unique: true
-  end
-
-  create_table "cr_formats", id: :serial, force: :cascade do |t|
-    t.integer "position", null: false
-    t.integer "quantity", null: false
-    t.text "note"
-    t.integer "format_id"
   end
 
   create_table "cr_labels", id: :serial, force: :cascade do |t|
@@ -769,9 +755,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195755) do
   add_foreign_key "cr_companies", "company_roles"
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "jobs"
-  add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
-  add_foreign_key "cr_format_details", "format_details", name: "fk_cr_format_details_format_detail_id"
-  add_foreign_key "cr_formats", "formats", name: "fk_cr_formats_format_id"
   add_foreign_key "cr_labels", "companies"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
