@@ -3,7 +3,6 @@
 # ArtistCredit joins Artists with join_phrases by using Participants
 class ArtistCredit < ActiveRecord::Base
   belongs_to :import_order, required: false
-  belongs_to :source, required: false
 
   has_and_belongs_to_many :tags
 
@@ -20,7 +19,7 @@ class ArtistCredit < ActiveRecord::Base
   validates :name,
             presence:   true,
             blank:      false,
-            uniqueness: { case_sensitive: false, scope: :source }
+            uniqueness: { case_sensitive: false }
 
   before_save { self.name = forced_name }
   before_validation { self.name = forced_name }

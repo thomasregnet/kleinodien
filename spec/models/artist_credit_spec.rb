@@ -87,34 +87,34 @@ RSpec.describe ArtistCredit, type: :model do
     end
   end
 
-  context 'with Source' do
-    before(:all) do
-      DatabaseCleaner.start
-      @artist_credit = FactoryBot.create(:artist_credit_with_source)
-    end
+  # context 'with Source' do
+  #   before(:all) do
+  #     DatabaseCleaner.start
+  #     @artist_credit = FactoryBot.create(:artist_credit_with_source)
+  #   end
 
-    it 'is valid' do
-      expect(@artist_credit).to be_valid
-    end
+  #   it 'is valid' do
+  #     expect(@artist_credit).to be_valid
+  #   end
 
-    it 'must have an unique name' do
-      clone = ArtistCredit.new(
-        name:   @artist_credit.name,
-        source: @artist_credit.source
-      )
-      expect(clone).not_to be_valid
-    end
+  #   it 'must have an unique name' do
+  #     clone = ArtistCredit.new(
+  #       name:   @artist_credit.name,
+  #       source: @artist_credit.source
+  #     )
+  #     expect(clone).not_to be_valid
+  #   end
 
-    it 'must not have an unique name when the Source differs' do
-      clone = ArtistCredit.new(
-        participants:  @artist_credit.participants,
-        source:        FactoryBot.create(:source)
-      )
-      expect { clone.save! }.not_to raise_error
-    end
+  #   it 'must not have an unique name when the Source differs' do
+  #     clone = ArtistCredit.new(
+  #       participants:  @artist_credit.participants,
+  #       source:        FactoryBot.create(:source)
+  #     )
+  #     expect { clone.save! }.not_to raise_error
+  #   end
 
-    after(:all) do
-      DatabaseCleaner.clean
-    end
-  end
+  #   after(:all) do
+  #     DatabaseCleaner.clean
+  #   end
+  # end
 end
