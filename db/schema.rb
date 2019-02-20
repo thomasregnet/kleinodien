@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_204924) do
+ActiveRecord::Schema.define(version: 2019_02_20_185130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.uuid "mbid", null: false
     t.text "url", null: false
     t.xml "data", null: false
-    t.integer "compilation_release_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url"], name: "brainz_releases_url_key", unique: true
@@ -111,7 +110,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.integer "artist_credit_id"
     t.integer "artist_id"
     t.integer "heap_head_id"
-    t.integer "heap_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
     t.integer "repository_id"
@@ -123,7 +121,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.index ["artist_credit_id"], name: "index_comments_on_artist_credit_id"
     t.index ["artist_id"], name: "index_comments_on_artist_id"
     t.index ["heap_head_id"], name: "index_comments_on_heap_head_id"
-    t.index ["heap_id"], name: "index_comments_on_heap_id"
     t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
     t.index ["piece_id"], name: "index_comments_on_piece_id"
     t.index ["repository_id"], name: "index_comments_on_repository_id"
@@ -148,13 +145,10 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   end
 
   create_table "compilation_copies", id: :serial, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "user_id", null: false
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["compilation_release_id"], name: "index_compilation_copies_on_compilation_release_id"
-    t.index ["id", "compilation_release_id", "user_id"], name: "index_compilation_copies", unique: true
     t.index ["user_id"], name: "index_compilation_copies_on_user_id"
   end
 
@@ -188,36 +182,12 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.index ["tag_id"], name: "index_compilation_heads_tags_on_tag_id"
   end
 
-  create_table "compilation_releases", id: :serial, force: :cascade do |t|
-    t.integer "compilation_head_id", null: false
-    t.string "type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "date"
-    t.integer "date_mask", limit: 2
-    t.citext "version"
-    t.citext "title", null: false
-    t.bigint "artist_credit_id"
-    t.uuid "brainz_code"
-    t.bigint "discogs_code"
-    t.bigint "imdb_code"
-    t.bigint "tmdb_code"
-    t.bigint "wikidata_code"
-    t.index ["artist_credit_id"], name: "index_compilation_releases_on_artist_credit_id"
-    t.index ["brainz_code"], name: "index_on_compilation_releases_brainz_code", unique: true
-    t.index ["compilation_head_id"], name: "compilation_releases_compilation_head_id_idx"
-  end
-
   create_table "compilation_releases_countries", id: false, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "country_id", null: false
-    t.index ["compilation_release_id", "country_id"], name: "index_compilation_releases_countries_no_and_ids", unique: true
   end
 
   create_table "compilation_releases_tags", id: false, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "tag_id", null: false
-    t.index ["compilation_release_id"], name: "index_compilation_releases_tags_on_compilation_release_id"
     t.index ["tag_id"], name: "index_compilation_releases_tags_on_tag_id"
   end
 
@@ -236,15 +206,12 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.string "path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "compilation_release_id"
     t.string "location"
     t.string "heading"
     t.integer "milliseconds"
     t.string "accuracy"
     t.string "side"
     t.integer "format_id"
-    t.index ["compilation_release_id"], name: "index_compilation_tracks_on_compilation_release_id"
-    t.index ["id", "compilation_release_id"], name: "compilation_tracks_id_and_compilation_release_id", unique: true
     t.index ["piece_id"], name: "index_compilation_tracks_on_piece_id"
   end
 
@@ -279,21 +246,17 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.string "catalog_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "compilation_release_id", null: false
     t.index ["company_id"], name: "index_cr_companies_on_company_id"
     t.index ["company_role_id"], name: "index_cr_companies_on_company_role_id"
-    t.index ["compilation_release_id"], name: "index_cr_companies_on_compilation_release_id"
   end
 
   create_table "cr_credits", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id", null: false
-    t.integer "compilation_release_id", null: false
     t.integer "job_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_cr_credits_on_artist_credit_id"
-    t.index ["compilation_release_id"], name: "index_cr_credits_on_compilation_release_id"
     t.index ["job_id"], name: "index_cr_credits_on_job_id"
   end
 
@@ -305,22 +268,18 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   end
 
   create_table "cr_formats", id: :serial, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "position", null: false
     t.integer "quantity", null: false
     t.text "note"
     t.integer "format_id"
-    t.index ["compilation_release_id", "position"], name: "cr_formats_compilation_release_id_position_idx", unique: true
   end
 
   create_table "cr_labels", id: :serial, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "company_id", null: false
     t.string "catalog_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_cr_labels_on_company_id"
-    t.index ["compilation_release_id"], name: "index_cr_labels_on_compilation_release_id"
   end
 
   create_table "ct_format_details", id: :serial, force: :cascade do |t|
@@ -337,7 +296,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.integer "artist_credit_id"
     t.integer "artist_id"
     t.integer "compilation_head_id"
-    t.integer "compilation_release_id"
     t.integer "country_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
@@ -349,7 +307,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.index ["artist_credit_id"], name: "index_descriptions_on_artist_credit_id"
     t.index ["artist_id"], name: "index_descriptions_on_artist_id"
     t.index ["compilation_head_id"], name: "index_descriptions_on_compilation_head_id"
-    t.index ["compilation_release_id"], name: "index_descriptions_on_compilation_release_id"
     t.index ["country_id"], name: "index_descriptions_on_country_id"
     t.index ["piece_head_id"], name: "index_descriptions_on_piece_head_id"
     t.index ["piece_id"], name: "index_descriptions_on_piece_id"
@@ -483,12 +440,10 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   end
 
   create_table "original_exemplars", id: :serial, force: :cascade do |t|
-    t.integer "compilation_release_id", null: false
     t.integer "user_id", null: false
     t.text "disambiguation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["compilation_release_id"], name: "index_original_exemplars_on_compilation_release_id"
     t.index ["user_id"], name: "index_original_exemplars_on_user_id"
   end
 
@@ -663,12 +618,9 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   create_table "product_numbers", force: :cascade do |t|
     t.text "code", null: false
     t.text "disambiguation"
-    t.integer "compilation_release_id", null: false
     t.bigint "product_number_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code", "compilation_release_id", "product_number_type_id"], name: "product_numbers_code_compilation_release_id_product_number__idx", unique: true, where: "(disambiguation IS NULL)"
-    t.index ["code", "disambiguation", "compilation_release_id", "product_number_type_id"], name: "product_numbers_code_disambiguation_compilation_release_id__idx", unique: true, where: "(disambiguation IS NOT NULL)"
   end
 
   create_table "ratings", id: :serial, force: :cascade do |t|
@@ -677,7 +629,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.integer "artist_credit_id"
     t.integer "artist_id"
     t.integer "compilation_head_id"
-    t.integer "compilation_release_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
     t.integer "season_id"
@@ -688,7 +639,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
     t.index ["artist_credit_id"], name: "index_ratings_on_artist_credit_id"
     t.index ["artist_id"], name: "index_ratings_on_artist_id"
     t.index ["compilation_head_id"], name: "index_ratings_on_compilation_head_id"
-    t.index ["compilation_release_id"], name: "index_ratings_on_compilation_release_id"
     t.index ["piece_head_id"], name: "index_ratings_on_piece_head_id"
     t.index ["piece_id"], name: "index_ratings_on_piece_id"
     t.index ["season_id"], name: "index_ratings_on_season_id"
@@ -716,7 +666,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
 
   create_table "repository_positions", id: :serial, force: :cascade do |t|
     t.integer "compilation_track_id"
-    t.integer "compilation_release_id"
     t.integer "piece_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -826,7 +775,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
-  add_foreign_key "brainz_releases", "compilation_releases", name: "brainz_releases_compilation_release_id_fkey"
   add_foreign_key "ch_companies", "companies"
   add_foreign_key "ch_companies", "company_roles"
   add_foreign_key "ch_companies", "compilation_heads"
@@ -838,7 +786,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "comments", "artist_credits"
   add_foreign_key "comments", "artists"
   add_foreign_key "comments", "compilation_heads", column: "heap_head_id"
-  add_foreign_key "comments", "compilation_releases", column: "heap_id"
   add_foreign_key "comments", "piece_heads"
   add_foreign_key "comments", "pieces"
   add_foreign_key "comments", "repositories"
@@ -846,21 +793,15 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "comments", "serials"
   add_foreign_key "comments", "stations"
   add_foreign_key "comments", "users"
-  add_foreign_key "compilation_copies", "compilation_releases"
   add_foreign_key "compilation_copies", "users"
   add_foreign_key "compilation_heads", "artist_credits"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
   add_foreign_key "compilation_heads_tags", "compilation_heads"
   add_foreign_key "compilation_heads_tags", "tags"
-  add_foreign_key "compilation_releases", "artist_credits"
-  add_foreign_key "compilation_releases", "compilation_heads"
-  add_foreign_key "compilation_releases_countries", "compilation_releases"
   add_foreign_key "compilation_releases_countries", "countries"
-  add_foreign_key "compilation_releases_tags", "compilation_releases"
   add_foreign_key "compilation_releases_tags", "tags"
   add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
-  add_foreign_key "compilation_tracks", "compilation_releases"
   add_foreign_key "compilation_tracks", "formats", name: "fk_compilation_tracks_format_id"
   add_foreign_key "compilation_tracks", "pieces"
   add_foreign_key "countries_piece_heads", "countries"
@@ -869,22 +810,17 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "countries_pieces", "pieces"
   add_foreign_key "cr_companies", "companies"
   add_foreign_key "cr_companies", "company_roles"
-  add_foreign_key "cr_companies", "compilation_releases"
   add_foreign_key "cr_credits", "artist_credits"
-  add_foreign_key "cr_credits", "compilation_releases"
   add_foreign_key "cr_credits", "jobs"
   add_foreign_key "cr_format_details", "cr_formats", name: "cr_format_details_cr_format_id_fkey"
   add_foreign_key "cr_format_details", "format_details", name: "fk_cr_format_details_format_detail_id"
-  add_foreign_key "cr_formats", "compilation_releases", name: "cr_formats_compilation_release_id_fkey"
   add_foreign_key "cr_formats", "formats", name: "fk_cr_formats_format_id"
   add_foreign_key "cr_labels", "companies"
-  add_foreign_key "cr_labels", "compilation_releases"
   add_foreign_key "ct_format_details", "compilation_tracks", name: "ct_format_details_compilation_track_id_fkey"
   add_foreign_key "ct_format_details", "format_details", name: "fk_ct_format_details_format_detail_id"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
   add_foreign_key "descriptions", "compilation_heads"
-  add_foreign_key "descriptions", "compilation_releases"
   add_foreign_key "descriptions", "countries"
   add_foreign_key "descriptions", "piece_heads"
   add_foreign_key "descriptions", "pieces"
@@ -906,7 +842,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
   add_foreign_key "import_requests", "import_orders"
-  add_foreign_key "original_exemplars", "compilation_releases"
   add_foreign_key "original_exemplars", "users"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
@@ -940,12 +875,10 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "pr_credits", "pieces"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "pieces"
-  add_foreign_key "product_numbers", "compilation_releases", name: "product_numbers_compilation_release_id_fkey"
   add_foreign_key "product_numbers", "product_number_types", name: "product_numbers_product_number_type_id_fkey"
   add_foreign_key "ratings", "artist_credits"
   add_foreign_key "ratings", "artists"
   add_foreign_key "ratings", "compilation_heads"
-  add_foreign_key "ratings", "compilation_releases"
   add_foreign_key "ratings", "piece_heads"
   add_foreign_key "ratings", "pieces"
   add_foreign_key "ratings", "seasons"
@@ -956,8 +889,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_204924) do
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_format_details", "format_details", name: "fk_repository_format_details_format_detail_id"
   add_foreign_key "repository_format_details", "repositories", name: "repository_format_details_repository_id_fkey"
-  add_foreign_key "repository_positions", "compilation_copies", name: "fk_repository_positions_compilation_copies"
-  add_foreign_key "repository_positions", "compilation_tracks", name: "repository_positions_compilation_track_id_fkey"
   add_foreign_key "repository_positions", "piece_tracks", name: "fk_repository_positions_piece_tracks"
   add_foreign_key "repository_positions", "pieces", name: "repository_positions_piece_release_id_fkey"
   add_foreign_key "repository_positions", "repositories", name: "fk_repository_position_repository"
