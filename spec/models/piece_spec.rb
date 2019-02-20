@@ -67,15 +67,15 @@ RSpec.describe Piece, type: :model do
     end
   end
 
-  context 'with tracks' do
-    before(:each) do
-      @piece = FactoryBot.create(:piece_with_tracks)
-    end
+  # context 'with tracks' do
+  #   before(:each) do
+  #     @piece = FactoryBot.create(:piece_with_tracks)
+  #   end
 
-    it 'has some tracks' do
-      expect(@piece.tracks.count).to be > 0
-    end
-  end
+  #   it 'has some tracks' do
+  #     expect(@piece.tracks.count).to be > 0
+  #   end
+  # end
 
   it_behaves_like 'a model with companies' do
     let(:candidate) { FactoryBot.create(:piece_with_companies) }

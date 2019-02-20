@@ -24,27 +24,27 @@ RSpec.describe Description, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
-  context 'with more than one content' do
-    before(:each) do
-      DatabaseCleaner.start
-      @description = FactoryBot.create(:artist_credit_description)
-    end
+  # context 'with more than one content' do
+  #   before(:each) do
+  #     DatabaseCleaner.start
+  #     @description = FactoryBot.create(:artist_credit_description)
+  #   end
 
-    factories = %i[
-      artist compilation_head compilation_release country
-      piece_head piece season serial station
-    ]
+  #   factories = %i[
+  #     artist compilation_head compilation_release country
+  #     piece_head piece season serial station
+  #   ]
 
-    factories.each do |factory|
-      it 'is not valid' do
-        setter = factory.to_s + '='
-        @description.send setter, FactoryBot.create(factory)
-        expect(@description).not_to be_valid
-        expect { @description.save! validate: false }
-          .to raise_error(/exact_one_content_on_descriptions/)
-      end
-    end
+  #   factories.each do |factory|
+  #     it 'is not valid' do
+  #       setter = factory.to_s + '='
+  #       @description.send setter, FactoryBot.create(factory)
+  #       expect(@description).not_to be_valid
+  #       expect { @description.save! validate: false }
+  #         .to raise_error(/exact_one_content_on_descriptions/)
+  #     end
+  #   end
 
-    after(:all) { DatabaseCleaner.clean }
-  end
+  #   after(:all) { DatabaseCleaner.clean }
+  # end
 end
