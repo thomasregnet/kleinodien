@@ -6,19 +6,6 @@ FactoryBot.define do
     factory :piece_with_head do
       association :head, factory: :piece_head
     end
-    factory :piece_with_tracks do
-      transient do
-        tracks_count { 2 }
-      end
-
-      after(:create) do |piece, evaluator|
-        create_list(
-          :compilation_track,
-          evaluator.tracks_count,
-          piece: piece
-        )
-      end
-    end
 
     factory :piece_with_countries do
       after(:create) do |piece|

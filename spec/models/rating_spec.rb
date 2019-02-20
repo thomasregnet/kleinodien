@@ -63,24 +63,24 @@ RSpec.describe Rating, type: :model do
     end
   end
 
-  context 'with more than one content' do
-    before(:each) do
-      @rating = FactoryBot.build(:artist_credit_rating)
-    end
+  # context 'with more than one content' do
+  #   before(:each) do
+  #     @rating = FactoryBot.build(:artist_credit_rating)
+  #   end
 
-    factories = %i[
-      artist compilation_head compilation_release
-      piece_head piece season serial station
-    ]
+  #   factories = %i[
+  #     artist compilation_head compilation_release
+  #     piece_head piece season serial station
+  #   ]
 
-    factories.each do |factory|
-      setter = factory.to_s + '='
-      it "is not valid when artist_credit and #{factory} are set" do
-        @rating.send setter, FactoryBot.create(factory)
-        expect(@rating).not_to be_valid
-        expect { @rating.save! validate: false }
-          .to raise_error(/exact_one_content_on_ratings/)
-      end
-    end
-  end
+  #   factories.each do |factory|
+  #     setter = factory.to_s + '='
+  #     it "is not valid when artist_credit and #{factory} are set" do
+  #       @rating.send setter, FactoryBot.create(factory)
+  #       expect(@rating).not_to be_valid
+  #       expect { @rating.save! validate: false }
+  #         .to raise_error(/exact_one_content_on_ratings/)
+  #     end
+  #   end
+  # end
 end
