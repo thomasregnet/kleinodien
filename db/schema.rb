@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_195527) do
+ActiveRecord::Schema.define(version: 2019_02_20_195755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -183,30 +183,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195527) do
     t.index ["tag_id"], name: "index_compilation_releases_tags_on_tag_id"
   end
 
-  create_table "compilation_track_details", id: :serial, force: :cascade do |t|
-    t.integer "track_id", null: false
-    t.integer "trf_attribute_kind_id", null: false
-    t.integer "position", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["track_id", "position"], name: "index_compilation_track_details_on_track_id_and_position", unique: true
-  end
-
-  create_table "compilation_tracks", id: :serial, force: :cascade do |t|
-    t.integer "piece_id", null: false
-    t.integer "position"
-    t.string "path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "location"
-    t.string "heading"
-    t.integer "milliseconds"
-    t.string "accuracy"
-    t.string "side"
-    t.integer "format_id"
-    t.index ["piece_id"], name: "index_compilation_tracks_on_piece_id"
-  end
-
   create_table "countries", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -272,13 +248,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_cr_labels_on_company_id"
-  end
-
-  create_table "ct_format_details", id: :serial, force: :cascade do |t|
-    t.integer "compilation_track_id", null: false
-    t.integer "position", null: false
-    t.integer "format_detail_id"
-    t.index ["compilation_track_id", "position"], name: "ct_format_details_compilation_track_id_position_idx", unique: true
   end
 
   create_table "descriptions", id: :serial, force: :cascade do |t|
@@ -792,9 +761,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195527) do
   add_foreign_key "compilation_heads_tags", "tags"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_releases_tags", "tags"
-  add_foreign_key "compilation_track_details", "compilation_tracks", column: "track_id"
-  add_foreign_key "compilation_tracks", "formats", name: "fk_compilation_tracks_format_id"
-  add_foreign_key "compilation_tracks", "pieces"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_pieces", "countries"
@@ -807,8 +773,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_195527) do
   add_foreign_key "cr_format_details", "format_details", name: "fk_cr_format_details_format_detail_id"
   add_foreign_key "cr_formats", "formats", name: "fk_cr_formats_format_id"
   add_foreign_key "cr_labels", "companies"
-  add_foreign_key "ct_format_details", "compilation_tracks", name: "ct_format_details_compilation_track_id_fkey"
-  add_foreign_key "ct_format_details", "format_details", name: "fk_ct_format_details_format_detail_id"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
   add_foreign_key "descriptions", "compilation_heads"
