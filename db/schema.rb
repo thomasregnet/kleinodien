@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_185130) do
+ActiveRecord::Schema.define(version: 2019_02_20_195527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -142,14 +142,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_185130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_company_roles_on_lower_name", unique: true
-  end
-
-  create_table "compilation_copies", id: :serial, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.text "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_compilation_copies_on_user_id"
   end
 
   create_table "compilation_heads", id: :serial, force: :cascade do |t|
@@ -793,7 +785,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_185130) do
   add_foreign_key "comments", "serials"
   add_foreign_key "comments", "stations"
   add_foreign_key "comments", "users"
-  add_foreign_key "compilation_copies", "users"
   add_foreign_key "compilation_heads", "artist_credits"
   add_foreign_key "compilation_heads_countries", "compilation_heads"
   add_foreign_key "compilation_heads_countries", "countries"
