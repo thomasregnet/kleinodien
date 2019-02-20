@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_204258) do
+ActiveRecord::Schema.define(version: 2019_02_20_204857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -225,14 +225,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_204258) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_cr_credits_on_artist_credit_id"
     t.index ["job_id"], name: "index_cr_credits_on_job_id"
-  end
-
-  create_table "cr_labels", id: :serial, force: :cascade do |t|
-    t.integer "company_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_cr_labels_on_company_id"
   end
 
   create_table "descriptions", id: :serial, force: :cascade do |t|
@@ -743,7 +735,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_204258) do
   add_foreign_key "cr_companies", "company_roles"
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "jobs"
-  add_foreign_key "cr_labels", "companies"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
   add_foreign_key "descriptions", "compilation_heads"
