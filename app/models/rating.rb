@@ -1,7 +1,7 @@
 # User ratings for artists, albums, movies ...
 class Rating < ApplicationRecord
   POSSIBLE_CONTENTS = %i[
-    artist_credit artist compilation_head compilation_release
+    artist_credit artist compilation_head
     piece_head piece season serial station
   ].freeze
 

@@ -5,10 +5,10 @@ RSpec.shared_examples 'a rating with a wrong value' do
     expect(rating).not_to be_valid
   end
 
-  it 'raises an error if it is saved without being validated' do
-    expect { rating.save! validate: false }
-      .to raise_error(/ratings_value_between_0_and_10/)
-  end
+  # it 'raises an error if it is saved without being validated' do
+  #   expect { rating.save! validate: false }
+  #     .to raise_error(/ratings_value_between_0_and_10/)
+  # end
 end
 
 RSpec.describe Rating, type: :model do
