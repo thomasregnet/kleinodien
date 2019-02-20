@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_204857) do
+ActiveRecord::Schema.define(version: 2019_02_20_205120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -205,16 +205,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_204857) do
     t.index ["country_id", "piece_id"], name: "index_cpr_on_country_id_and_piece_release_id", unique: true
     t.index ["country_id"], name: "index_countries_pieces_on_country_id"
     t.index ["piece_id"], name: "index_countries_pieces_on_piece_id"
-  end
-
-  create_table "cr_companies", id: :serial, force: :cascade do |t|
-    t.integer "company_id", null: false
-    t.integer "company_role_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_cr_companies_on_company_id"
-    t.index ["company_role_id"], name: "index_cr_companies_on_company_role_id"
   end
 
   create_table "cr_credits", id: :serial, force: :cascade do |t|
@@ -731,8 +721,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_204857) do
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_pieces", "countries"
   add_foreign_key "countries_pieces", "pieces"
-  add_foreign_key "cr_companies", "companies"
-  add_foreign_key "cr_companies", "company_roles"
   add_foreign_key "cr_credits", "artist_credits"
   add_foreign_key "cr_credits", "jobs"
   add_foreign_key "descriptions", "artist_credits"
