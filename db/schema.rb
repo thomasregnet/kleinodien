@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_203810) do
+ActiveRecord::Schema.define(version: 2019_02_20_204258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "source_id"
     t.bigint "import_order_id"
     t.index ["import_order_id"], name: "index_artist_credits_on_import_order_id"
   end
@@ -239,7 +238,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
   create_table "descriptions", id: :serial, force: :cascade do |t|
     t.text "text", null: false
     t.integer "user_id"
-    t.integer "source_id"
     t.integer "artist_credit_id"
     t.integer "artist_id"
     t.integer "compilation_head_id"
@@ -259,7 +257,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
     t.index ["piece_id"], name: "index_descriptions_on_piece_id"
     t.index ["season_id"], name: "index_descriptions_on_season_id"
     t.index ["serial_id"], name: "index_descriptions_on_serial_id"
-    t.index ["source_id"], name: "index_descriptions_on_source_id"
     t.index ["station_id"], name: "index_descriptions_on_station_id"
     t.index ["user_id"], name: "index_descriptions_on_user_id"
   end
@@ -665,14 +662,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
     t.index ["tag_id"], name: "index_serials_tags_on_tag_id"
   end
 
-  create_table "sources", id: :serial, force: :cascade do |t|
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.citext "name", null: false
-    t.index ["name"], name: "sources_name_idx", unique: true
-  end
-
   create_table "stations", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "disambiguation"
@@ -716,7 +705,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
   end
 
   add_foreign_key "artist_credits", "import_orders"
-  add_foreign_key "artist_credits", "sources", name: "fk_artist_credits_source_id"
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
   add_foreign_key "artists", "import_orders"
@@ -764,7 +752,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_203810) do
   add_foreign_key "descriptions", "pieces"
   add_foreign_key "descriptions", "seasons"
   add_foreign_key "descriptions", "serials"
-  add_foreign_key "descriptions", "sources"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
   add_foreign_key "heap_heads", "artist_credits"
