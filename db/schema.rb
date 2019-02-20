@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_205314) do
+ActiveRecord::Schema.define(version: 2019_02_20_205518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -523,22 +523,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205314) do
     t.index ["piece_id"], name: "index_pr_labels_on_piece_id"
   end
 
-  create_table "product_number_types", force: :cascade do |t|
-    t.citext "name", null: false
-    t.text "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "product_number_types_name_key", unique: true
-  end
-
-  create_table "product_numbers", force: :cascade do |t|
-    t.text "code", null: false
-    t.text "disambiguation"
-    t.bigint "product_number_type_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "ratings", id: :serial, force: :cascade do |t|
     t.integer "value", limit: 2, null: false
     t.integer "user_id", null: false
@@ -767,7 +751,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_205314) do
   add_foreign_key "pr_credits", "pieces"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "pieces"
-  add_foreign_key "product_numbers", "product_number_types", name: "product_numbers_product_number_type_id_fkey"
   add_foreign_key "ratings", "artist_credits"
   add_foreign_key "ratings", "artists"
   add_foreign_key "ratings", "compilation_heads"
