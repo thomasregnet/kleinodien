@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_210151) do
+ActiveRecord::Schema.define(version: 2019_02_21_191818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -69,46 +69,11 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.index ["url"], name: "brainz_releases_url_key", unique: true
   end
 
-  create_table "ch_companies", id: :serial, force: :cascade do |t|
-    t.integer "compilation_head_id", null: false
-    t.integer "company_id", null: false
-    t.integer "company_role_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_ch_companies_on_company_id"
-    t.index ["company_role_id"], name: "index_ch_companies_on_company_role_id"
-    t.index ["compilation_head_id"], name: "index_ch_companies_on_compilation_head_id"
-  end
-
-  create_table "ch_credits", id: :serial, force: :cascade do |t|
-    t.integer "artist_credit_id", null: false
-    t.integer "compilation_head_id", null: false
-    t.integer "job_id"
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_ch_credits_on_artist_credit_id"
-    t.index ["compilation_head_id"], name: "index_ch_credits_on_compilation_head_id"
-    t.index ["job_id"], name: "index_ch_credits_on_job_id"
-  end
-
-  create_table "ch_labels", id: :serial, force: :cascade do |t|
-    t.integer "compilation_head_id", null: false
-    t.integer "company_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_ch_labels_on_company_id"
-    t.index ["compilation_head_id"], name: "index_ch_labels_on_compilation_head_id"
-  end
-
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "text", null: false
     t.integer "user_id", null: false
     t.integer "artist_credit_id"
     t.integer "artist_id"
-    t.integer "heap_head_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
     t.integer "season_id"
@@ -118,7 +83,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_comments_on_artist_credit_id"
     t.index ["artist_id"], name: "index_comments_on_artist_id"
-    t.index ["heap_head_id"], name: "index_comments_on_heap_head_id"
     t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
     t.index ["piece_id"], name: "index_comments_on_piece_id"
     t.index ["season_id"], name: "index_comments_on_season_id"
@@ -139,36 +103,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_company_roles_on_lower_name", unique: true
-  end
-
-  create_table "compilation_heads", id: :serial, force: :cascade do |t|
-    t.integer "artist_credit_id"
-    t.string "title", null: false
-    t.string "disambiguation"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "brainz_code"
-    t.bigint "discogs_code"
-    t.bigint "wikidata_code"
-    t.bigint "imdb_code"
-    t.bigint "tmdb_code"
-    t.index ["artist_credit_id"], name: "index_compilation_heads_on_artist_credit_id"
-  end
-
-  create_table "compilation_heads_countries", id: false, force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.integer "compilation_head_id", null: false
-    t.index ["compilation_head_id"], name: "index_compilation_heads_countries_on_compilation_head_id"
-    t.index ["country_id", "compilation_head_id"], name: "index_phc_on_country_id_and_compilation_head_id", unique: true
-    t.index ["country_id"], name: "index_compilation_heads_countries_on_country_id"
-  end
-
-  create_table "compilation_heads_tags", id: false, force: :cascade do |t|
-    t.integer "compilation_head_id", null: false
-    t.integer "tag_id", null: false
-    t.index ["compilation_head_id"], name: "index_compilation_heads_tags_on_compilation_head_id"
-    t.index ["tag_id"], name: "index_compilation_heads_tags_on_tag_id"
   end
 
   create_table "compilation_releases_countries", id: false, force: :cascade do |t|
@@ -210,7 +144,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.integer "user_id"
     t.integer "artist_credit_id"
     t.integer "artist_id"
-    t.integer "compilation_head_id"
     t.integer "country_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
@@ -221,7 +154,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_descriptions_on_artist_credit_id"
     t.index ["artist_id"], name: "index_descriptions_on_artist_id"
-    t.index ["compilation_head_id"], name: "index_descriptions_on_compilation_head_id"
     t.index ["country_id"], name: "index_descriptions_on_country_id"
     t.index ["piece_head_id"], name: "index_descriptions_on_piece_head_id"
     t.index ["piece_id"], name: "index_descriptions_on_piece_id"
@@ -526,7 +458,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.integer "user_id", null: false
     t.integer "artist_credit_id"
     t.integer "artist_id"
-    t.integer "compilation_head_id"
     t.integer "piece_head_id"
     t.integer "piece_id"
     t.integer "season_id"
@@ -536,7 +467,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_ratings_on_artist_credit_id"
     t.index ["artist_id"], name: "index_ratings_on_artist_id"
-    t.index ["compilation_head_id"], name: "index_ratings_on_compilation_head_id"
     t.index ["piece_head_id"], name: "index_ratings_on_piece_head_id"
     t.index ["piece_id"], name: "index_ratings_on_piece_id"
     t.index ["season_id"], name: "index_ratings_on_season_id"
@@ -636,28 +566,14 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
   add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
-  add_foreign_key "ch_companies", "companies"
-  add_foreign_key "ch_companies", "company_roles"
-  add_foreign_key "ch_companies", "compilation_heads"
-  add_foreign_key "ch_credits", "artist_credits"
-  add_foreign_key "ch_credits", "compilation_heads"
-  add_foreign_key "ch_credits", "jobs"
-  add_foreign_key "ch_labels", "companies"
-  add_foreign_key "ch_labels", "compilation_heads"
   add_foreign_key "comments", "artist_credits"
   add_foreign_key "comments", "artists"
-  add_foreign_key "comments", "compilation_heads", column: "heap_head_id"
   add_foreign_key "comments", "piece_heads"
   add_foreign_key "comments", "pieces"
   add_foreign_key "comments", "seasons"
   add_foreign_key "comments", "serials"
   add_foreign_key "comments", "stations"
   add_foreign_key "comments", "users"
-  add_foreign_key "compilation_heads", "artist_credits"
-  add_foreign_key "compilation_heads_countries", "compilation_heads"
-  add_foreign_key "compilation_heads_countries", "countries"
-  add_foreign_key "compilation_heads_tags", "compilation_heads"
-  add_foreign_key "compilation_heads_tags", "tags"
   add_foreign_key "compilation_releases_countries", "countries"
   add_foreign_key "compilation_releases_tags", "tags"
   add_foreign_key "countries_piece_heads", "countries"
@@ -666,7 +582,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
   add_foreign_key "countries_pieces", "pieces"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
-  add_foreign_key "descriptions", "compilation_heads"
   add_foreign_key "descriptions", "countries"
   add_foreign_key "descriptions", "piece_heads"
   add_foreign_key "descriptions", "pieces"
@@ -722,7 +637,6 @@ ActiveRecord::Schema.define(version: 2019_02_20_210151) do
   add_foreign_key "pr_labels", "pieces"
   add_foreign_key "ratings", "artist_credits"
   add_foreign_key "ratings", "artists"
-  add_foreign_key "ratings", "compilation_heads"
   add_foreign_key "ratings", "piece_heads"
   add_foreign_key "ratings", "pieces"
   add_foreign_key "ratings", "seasons"
