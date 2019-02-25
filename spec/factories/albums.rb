@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :album_release do
+  factory :album do
     association :head, factory: :album_head
 
     factory :album_release_with_identifiers do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Release of a music album
-class AlbumRelease < Heap
+class Album < Heap
   belongs_to :artist_credit, required: false
 
   def self.with_discogs_id_exists?(discogs_id)
