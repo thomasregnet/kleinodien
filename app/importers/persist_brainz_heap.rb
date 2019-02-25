@@ -32,7 +32,7 @@ class PersistBrainzHeap < PersistBrainzBase
       artist_credit: artist_credit,
       head:          heap_head,
       title:         blueprint.title,
-      type:          blueprint.release_group.type
+      type:          type
     )
     persist_subsets(heap)
     heap
@@ -65,5 +65,9 @@ class PersistBrainzHeap < PersistBrainzBase
         proxy:     proxy
       )
     end
+  end
+
+  def type
+    ChooseBrainzHeapClassService.call(type: blueprint.release_group.type)
   end
 end
