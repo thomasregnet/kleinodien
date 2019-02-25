@@ -32,7 +32,7 @@ class PersistBrainzHeap < PersistBrainzBase
       artist_credit: artist_credit,
       head:          heap_head,
       title:         blueprint.title,
-      type:          Album
+      type:          blueprint.release_group.type
     )
     persist_subsets(heap)
     heap
