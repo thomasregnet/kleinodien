@@ -70,7 +70,7 @@ RSpec.describe PersistBrainzHeapHead do
         }
 
         expect(described_class.call(args))
-          .to be_instance_of(AlbumHead)
+          .to be_instance_of(SingleHead)
       end
     end
   end

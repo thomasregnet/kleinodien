@@ -1,0 +1,2 @@
+class SingleHead < HeapHead
+end

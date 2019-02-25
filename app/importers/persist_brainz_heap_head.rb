@@ -31,7 +31,7 @@ class PersistBrainzHeapHead < PersistBrainzBase
     HeapHead.create!(
       artist_credit: artist_credit,
       title:         blueprint.title,
-      type:          'AlbumHead'
+      type:          type
     )
   end
 
@@ -40,5 +40,9 @@ class PersistBrainzHeapHead < PersistBrainzBase
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
+  end
+
+  def type
+    ChooseBrainzHeapHeadClassService.call(type: blueprint.type)
   end
 end
