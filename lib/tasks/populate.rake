@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
-# require 'discogs_test_helper'
-# require 'omdb_test_helper'
-# require_relative '../../spec/imdb_test_helper'
-
 namespace :db do
   desc 'fill the database with sample data'
-  task :populate => :environment do
+  task populate: :environment do
     password = 'topSecret'
 
     user = User.create!(
-      email: 'user@example.com',
-      password: password,
+      email:                 'user@example.com',
+      password:              password,
       password_confirmation: password
     )
 
@@ -23,62 +19,14 @@ namespace :db do
     )
 
     BrainzRootImporter.call(import_order: import_order)
+
+    # TODO: use this if you need to populate users
+    # 99.times do
+    #   User.create!(
+    #     email:                 Faker::Internet.email,
+    #     password:              password,
+    #     password_confirmation: password
+    #   )
+    # end
   end
 end
-# TODO: remove when new db:populate works
-# namespace :db do
-#   desc 'fill the database with sample data'
-#   task :populate => :environment do
-
-#     password = 'topSecret'
-
-#     User.create!(
-#       email: 'user@example.com',
-#       password: password,
-#       password_confirmation: password
-#     )
-
-#     99.times do |n|
-#       User.create!(
-#         email: Faker::Internet.email,
-#         password: password,
-#         password_confirmation: password
-#       )
-#     end
-
-#     Rake::FileList.new('fixtures/music_brainz/release/*.xml').each do |file|
-#       xml = File.open(file)
-#       brz_release = KleinodienBrainz::Model::Release.xml(xml)
-#       Brainz::InsertRelease.perform(brz_release)
-#     end
-
-#     Rake::FileList.new('fixtures/discogs/releases/*.json').each do |file|
-
-#       m = /\/(\d+)\.json$/.match(file.to_s)
-#       discogs_id = m[1].to_i
-#       # Some releases must be omited because they collide with the imports
-#       # from MusicBrainz
-#       # TODO: stop omitting discogs releases
-#       next if discogs_id == 612384  # Judgment Night
-#       next if discogs_id == 940468  # Highway To Hell
-#       next if discogs_id == 1083888 # The Sky Is Falling and I Want My Mommy
-#       next if discogs_id == 4462260 # Dead Human Collection
-#       DiscogsTestHelper.import_release(discogs_id)
-#     end
-#     # imdb-movie
-#     ImdbImporter.import_movie(ImdbTestHelper.get_movie_data('tt0079470.html'))
-
-#     # omdb-movies
-#     Rake::FileList.new('fixtures/omdb/movie/*.xml').each do |file|
-#       m = /\/(\d+)\.xml$/.match(file.to_s)
-#       OmdbTestHelper.import_movie(m[1].to_i)
-#     end
-
-#     #serial
-#     html = ImdbTestHelper.get_movie_data('tt0106179.html')
-#     serial = ImdbImporter.import_tv_serial(html)
-
-#     html = ImdbTestHelper.get_season_data('tt0106179-1.html')
-#     ImdbImporter.import_tv_serial_season(serial, 1, html)
-#   end
-# end
