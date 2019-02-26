@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'heaps/index'
-  get 'heaps/show'
+  # get 'heaps/index'
+  # get 'heaps/show'
+
   # get 'import_orders/new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'import_requests/new'
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
   resources :album_releases, only: [:index, :show]
 
   resources :uri_import_orders, only: [:create, :new]
+
+  resources :heaps, only: [:index, :show]
+  resources :singles, controller: 'heaps', type: 'Single'
 
   resources :movie_heads, only: [:index, :show]
 

@@ -1,2 +1,8 @@
 <h1>Heaps#index</h1>
 <p>Find me in app/views/heaps/index.html.erb</p>
+
+<ul>
+    <% @heaps.each do |heap| %>
+        <li><%= link_to heap.title, heap %></li>
+    <% end %>
+</ul>
