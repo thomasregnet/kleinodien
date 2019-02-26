@@ -27,6 +27,11 @@ class BrainzBlueprint < Hashie::Mash
     force_array(medium_list.medium)
   end
 
+  def millseconds
+    millseconds = self['length'] || return
+    millseconds.to_i
+  end
+
   def name_credits
     return unless name_credit
 
