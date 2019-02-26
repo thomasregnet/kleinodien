@@ -6,6 +6,10 @@ class Piece < ActiveRecord::Base
               class_name: 'IncompleteDate',
               mapping:    [%w[date date], %w[date_mask mask]]
 
+  composed_of :duration,
+              class_name: 'Duration',
+              mapping:    [%w[milliseconds milliseconds], %w[accuracy accuracy]]
+
   belongs_to :head,
              class_name:  'PieceHead',
              foreign_key: :piece_head_id,
