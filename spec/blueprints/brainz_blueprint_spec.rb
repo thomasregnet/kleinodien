@@ -59,7 +59,7 @@ RSpec.describe BrainzBlueprint do
     end
 
     it 'returns the milliseconds' do
-      expect(blueprint.millseconds).to eq(208_000)
+      expect(blueprint.milliseconds).to eq(208_000)
     end
   end
 end
