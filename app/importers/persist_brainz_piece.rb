@@ -25,13 +25,12 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def persist
-    # TODO: handle model class
     Piece.create!(
       artist_credit:  persist_artist_credit,
       disambiguation: blueprint.disambiguation,
       import_order:   import_order,
       title:          blueprint.title,
-      type:           'SongRelease'
+      type:           type
     )
   end
 
@@ -40,5 +39,9 @@ class PersistBrainzPiece < PersistBrainzBase
       blueprint: blueprint.artist_credit,
       proxy:     proxy
     )
+  end
+
+  def type
+    ChooseBrainzPieceClassService.call(blueprint: blueprint)
   end
 end
