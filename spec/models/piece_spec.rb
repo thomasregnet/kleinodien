@@ -6,6 +6,7 @@ require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_countries'
+require 'shared_examples_for_models_with_duration'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
@@ -34,6 +35,8 @@ RSpec.describe Piece, type: :model do
     let(:factory) { :piece }
     after { DatabaseCleaner.clean }
   end
+
+  it_behaves_like 'a model with duration'
 
   it_behaves_like 'a rateable model' do
     before(:all) do
