@@ -33,8 +33,7 @@ class PersistBrainzPiece < PersistBrainzBase
     Piece.create!(
       artist_credit:  persist_artist_credit,
       disambiguation: blueprint.disambiguation,
-      # TODO: persist duration when the model allows it
-      # duration:       duration,
+      duration:       duration,
       import_order:   import_order,
       title:          blueprint.title,
       type:           type
