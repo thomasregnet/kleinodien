@@ -52,5 +52,15 @@ RSpec.describe BrainzBlueprint do
       end
     end
   end
+
+  describe '#milliseconds' do
+    let(:blueprint) do
+      TestData.by_name(:brainz_recording_highway_to_hell).blueprint
+    end
+
+    it 'returns the milliseconds' do
+      expect(blueprint.millseconds).to eq(208_000)
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
