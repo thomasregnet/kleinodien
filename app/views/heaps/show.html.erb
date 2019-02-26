@@ -4,7 +4,10 @@
 <ul>
     <% @heap.subsets.each do |subset| %>
         <% subset.tracks.each do |track| %>
-            <li><%= track.piece.title %></li>
+            <li>
+                <%= track.piece.title %>
+                <%= track.piece.duration.mmss %>
+            </li>
         <% end %>
     <% end %>
 </ul>
