@@ -42,6 +42,6 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def type
-    ChooseBrainzPieceClassService.call(blueprint: blueprint)
+    ChooseBrainzPieceTypeService.call(blueprint: blueprint)
   end
 end

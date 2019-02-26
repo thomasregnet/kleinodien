@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-RSpec.describe ChooseBrainzPieceClassService do
+RSpec.describe ChooseBrainzPieceTypeService do
   it_behaves_like 'a service'
 
   context 'when the recording has set video to "true"' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Choose the right class for a MusicBrainz track
-class ChooseBrainzPieceClassService
+class ChooseBrainzPieceTypeService
   def self.call(args)
     new(args).call
   end
