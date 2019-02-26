@@ -24,10 +24,17 @@ class PersistBrainzPiece < PersistBrainzBase
     proxy.get(import_request)
   end
 
+  def duration
+    milliseconds = blueprint.milliseconds || retrun
+    Duration.milliseconds(milliseconds)
+  end
+
   def persist
     Piece.create!(
       artist_credit:  persist_artist_credit,
       disambiguation: blueprint.disambiguation,
+      # TODO: persist duration when the model allows it
+      # duration:       duration,
       import_order:   import_order,
       title:          blueprint.title,
       type:           type
