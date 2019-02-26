@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'MusicBrainz imports' do
+RSpec.feature 'import a single from MusicBrainz' do
   describe 'import' do
     before { DatabaseCleaner.start }
 
