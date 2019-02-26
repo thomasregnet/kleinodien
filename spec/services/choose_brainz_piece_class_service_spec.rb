@@ -8,7 +8,7 @@ RSpec.describe ChooseBrainzPieceClassService do
 
   context 'when the recording has set video to "true"' do
     let(:blueprint) do
-      Hashie::Mash.new(recording: { video: 'true' })
+      Hashie::Mash.new(video: 'true')
     end
 
     it 'returns "Video"' do
@@ -18,7 +18,7 @@ RSpec.describe ChooseBrainzPieceClassService do
 
   context 'when the recording has set video to something else' do
     let(:blueprint) do
-      Hashie::Mash.new(recording: { video: 'some value' })
+      Hashie::Mash.new(video: 'some value')
     end
 
     it 'returns "Song"' do
@@ -28,7 +28,7 @@ RSpec.describe ChooseBrainzPieceClassService do
 
   context 'when the recording has no video at all' do
     let(:blueprint) do
-      Hashie::Mash.new(recording: {})
+      Hashie::Mash.new({})
     end
 
     it 'returns "Song"' do
