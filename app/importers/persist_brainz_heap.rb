@@ -68,6 +68,6 @@ class PersistBrainzHeap < PersistBrainzBase
   end
 
   def type
-    ChooseBrainzHeapClassService.call(type: blueprint.release_group.type)
+    ChooseBrainzHeapTypeService.call(brainz_type: blueprint.release_group.type)
   end
 end
