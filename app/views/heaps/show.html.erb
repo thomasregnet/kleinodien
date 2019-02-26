@@ -1,2 +1,10 @@
-<h1>Heaps#show</h1>
-<p>Find me in app/views/heaps/show.html.erb</p>
+<h1><%= @heap.title %></h1>
+<b><%= @heap.artist_credit.name %></b>
+
+<ul>
+    <% @heap.subsets.each do |subset| %>
+        <% subset.tracks.each do |track| %>
+            <li><%= track.piece.title %></li>
+        <% end %>
+    <% end %>
+</ul>
