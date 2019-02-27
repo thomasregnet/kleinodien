@@ -53,6 +53,38 @@ RSpec.describe BrainzBlueprint do
     end
   end
 
+  describe '#flat_track_list' do
+    context 'without any tracks' do
+      let(:blueprint) { described_class.new }
+
+      it 'returns nil' do
+        expect(blueprint.flat_track_list).to be_nil
+      end
+    end
+
+    context 'with tracks' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_release_arise_jp_cd)
+                .blueprint.media[0]
+      end
+
+      it 'returns the flat track_list' do
+        expect(blueprint.flat_track_list.length).to eq(3)
+      end
+    end
+
+    context 'with tracks and data-tracks' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_release_powerslave_enhanced_cd)
+          .blueprint.media[0]
+      end
+
+      it 'returns the flat track_list' do
+        expect(blueprint.flat_track_list.length).to eq(10)
+      end
+    end
+  end
+
   describe '#milliseconds' do
     let(:blueprint) do
       TestData.by_name(:brainz_recording_highway_to_hell).blueprint

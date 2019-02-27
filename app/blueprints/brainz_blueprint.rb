@@ -46,6 +46,12 @@ class BrainzBlueprint < Hashie::Mash
     force_array(relation_list)
   end
 
+  def flat_track_list
+    return unless self.track_list
+
+    FlattenBrainzTrackListService.call(blueprint: self)
+  end
+
   def url_relations
     return unless relation_lists
 
