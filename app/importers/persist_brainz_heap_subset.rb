@@ -17,6 +17,7 @@ class PersistBrainzHeapSubset < PersistBrainzBase
   end
 
   def persist_tracks(subset)
+    tracklist = blueprint.flat_track_list
     tracklist.each.with_index(1) do |track, no|
       # TODO: don't take import_order form proxy
       PersistBrainzHeapTrack.call(
@@ -34,9 +35,5 @@ class PersistBrainzHeapSubset < PersistBrainzBase
     return title if title
 
     "#{blueprint.format.__content__} #{blueprint.position}"
-  end
-
-  def tracklist
-    FlattenBrainzTrackListService.call(blueprint: blueprint)
   end
 end
