@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
   resources :uri_import_orders, only: [:create, :new]
 
+  # https://stackoverflow.com/questions/5246767/sti-one-controller
   resources :heaps, only: [:index, :show]
+  resources :albums, controller: 'heaps', type: 'Album'
   resources :singles, controller: 'heaps', type: 'Single'
 
   resources :movie_heads, only: [:index, :show]
