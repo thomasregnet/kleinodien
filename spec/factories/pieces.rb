@@ -75,5 +75,8 @@ FactoryBot.define do
       type { 'TvEpisodeRelease' }
       association :head, factory: :tv_episode_head
     end
+
+    factory :video, class: Video do
+    end
   end
 end
