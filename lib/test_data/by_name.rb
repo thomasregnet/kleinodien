@@ -62,6 +62,13 @@ module TestData
           kind: :release
         }
       },
+      brainz_release_powerslave_enhanced_cd: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
+          kind: :release
+        }
+      },
       brainz_release_the_sky_is_falling_gb_cd: {
         class_name: 'TestData::BrainzService',
         arguments: {
