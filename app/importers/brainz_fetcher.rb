@@ -33,6 +33,7 @@ class BrainzFetcher
       end
     end
 
+    byebug
     can_not_fetch
   end
 
@@ -57,7 +58,7 @@ class BrainzFetcher
 
   # TODO: make max_tries configurable
   def max_tries
-    3
+    5 # 3
   end
 
   def save_response_body(response)
