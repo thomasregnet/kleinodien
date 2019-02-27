@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
+require 'fake_music_brainz'
+require 'webmock'
+
+# rubocop:disable Metrics/BlockLength
 namespace :db do
+  include WebMock::API
+  WebMock.enable!
+  WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
+
   desc 'fill the database with sample data'
   task populate: :environment do
     password = 'topSecret'
@@ -27,6 +35,7 @@ namespace :db do
       user:  user
     )
 
+    WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
     import_orders.each do |import_order|
       BrainzRootImporter.call(import_order: import_order)
     end
@@ -41,3 +50,4 @@ namespace :db do
     # end
   end
 end
+# rubocop:enable Metrics/BlockLength

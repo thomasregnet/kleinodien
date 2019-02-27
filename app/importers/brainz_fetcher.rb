@@ -33,7 +33,6 @@ class BrainzFetcher
       end
     end
 
-    byebug
     can_not_fetch
   end
 
