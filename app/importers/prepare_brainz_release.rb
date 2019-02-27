@@ -34,8 +34,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
   end
 
   def prepare_recordings(medium)
-    # medium.track_list.track.each do |track|
-    tracklist(medium).each do |track|
+    medium.flat_track_list.each do |track|
       import_request = BrainzRecordingImportRequest.new(
         code: track.recording.brainz_code
       )
@@ -65,9 +64,5 @@ class PrepareBrainzRelease < PrepareBrainzBase
       model_class: Heap,
       codes_hash:  blueprint.codes_hash
     )
-  end
-
-  def tracklist(medium)
-    FlattenBrainzTrackListService.call(blueprint: medium)
   end
 end
