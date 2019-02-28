@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'import an enhanced CD from MusicBrainz' do
+RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
   describe 'import' do
     before { DatabaseCleaner.start }
 
