@@ -10,16 +10,16 @@ class FakeImportedItem
 end
 
 RSpec.describe ImportResult do
-  subject { described_class.new(result: FakeImportedItem.new) }
+  subject { described_class.new(object: FakeImportedItem.new) }
 
   it { is_expected.to respond_to('created?') }
-  it { is_expected.to respond_to(:result) }
+  it { is_expected.to respond_to(:object) }
   it { is_expected.to respond_to(:fake) }
 
   describe '#created?' do
     context 'when no parameter was given' do
       let(:import_result) do
-        described_class.new(result: FakeImportedItem.new)
+        described_class.new(object: FakeImportedItem.new)
       end
 
       it 'returns false' do
@@ -29,7 +29,7 @@ RSpec.describe ImportResult do
 
     context 'when the parameter "created" was true' do
       let(:import_result) do
-        described_class.new(result: FakeImportedItem.new, created: true)
+        described_class.new(object: FakeImportedItem.new, created: true)
       end
 
       it 'returns true' do

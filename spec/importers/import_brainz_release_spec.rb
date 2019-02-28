@@ -61,7 +61,7 @@ RSpec.describe ImportBrainzRelease do
 
     specify 'the :result contains the release' do
       # expect(described_class.call(import_order: import_order)[:result])
-      expect(described_class.call(import_order: import_order).result)
+      expect(described_class.call(import_order: import_order).object)
         .to be_instance_of Heap
     end
 
