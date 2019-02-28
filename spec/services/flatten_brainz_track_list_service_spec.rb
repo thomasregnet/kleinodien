@@ -20,6 +20,20 @@ RSpec.describe FlattenBrainzTrackListService do
     end
   end
 
+  context 'when called twice with data-tracks' do
+    describe '.call' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_release_powerslave_enhanced_cd)
+                .blueprint.media[0]
+      end
+
+      it 'returns the flat tracklist' do
+        described_class.call(blueprint: blueprint)
+        expect(described_class.call(blueprint: blueprint).length).to eq(10)
+      end
+    end
+  end
+
   context 'when the track-list does not contain data-tracks' do
     describe '.call' do
       let(:blueprint) do
