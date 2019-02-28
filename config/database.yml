@@ -87,6 +87,3 @@ production:
   database: kleinodien_production
   username: kleinodien
   password: <%= ENV['KLEINODIEN_DATABASE_PASSWORD'] %>
-
-cucumber:
-  <<: *test
