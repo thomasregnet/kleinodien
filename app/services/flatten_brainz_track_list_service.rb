@@ -13,15 +13,20 @@ class FlattenBrainzTrackListService
   attr_reader :blueprint
 
   def call
-    tracklist = blueprint.track_list.track
-    tracklist << data_track_list if data_track_list?
-    tracklist.flatten
+    [tracklist, data_track_list].flatten
+  end
+
+  # Use map to copy the tracks
+  def tracklist
+    tracks = blueprint.track_list.track
+    tracks.map { |track| track }
   end
 
   def data_track_list
-    return unless data_track_list?
+    return [] unless data_track_list?
 
-    blueprint.data_track_list.track
+    tracks = blueprint.data_track_list.track
+    tracks.map { |track| track }
   end
 
   def data_track_list?
