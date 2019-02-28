@@ -12,7 +12,7 @@ require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe Piece, type: :model do
-  it { is_expected.to belong_to(:import_order) }
+  it { is_expected.to belong_to(:import_order).without_validating_presence }
   it { is_expected.to have_many(:heap_tracks) }
 
   specify '#descriptions' do

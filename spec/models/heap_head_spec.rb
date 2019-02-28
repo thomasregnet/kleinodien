@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe HeapHead, type: :model do
-  it { is_expected.to belong_to(:artist_credit) }
-  it { is_expected.to belong_to(:import_order) }
+  it { is_expected.to belong_to(:artist_credit).without_validating_presence }
+  it { is_expected.to belong_to(:import_order).without_validating_presence }
 
   describe '#title' do
     let(:head) { FactoryBot.build(:heap_head) }
