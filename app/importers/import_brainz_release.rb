@@ -15,11 +15,11 @@ class ImportBrainzRelease
   def call
     validate_import_order
 
-    result = find_already_existing || prepare
-    return ImportResult.new(result: result) if result
+    object = find_already_existing || prepare
+    return ImportResult.new(object: object) if object
 
-    result = persist
-    ImportResult.new(created: true, result: result)
+    object = persist
+    ImportResult.new(created: true, object: object)
   end
 
   def find_already_existing

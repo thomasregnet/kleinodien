@@ -3,12 +3,12 @@
 # Simple class for import results
 class ImportResult < SimpleDelegator
   def initialize(args)
-    @result  = args[:result]
+    @object  = args[:object]
     @created = args[:created] || false
-    super(@result)
+    super(@object)
   end
 
-  attr_reader :created, :result
+  attr_reader :created, :object
 
   def created?
     created
