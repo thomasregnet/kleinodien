@@ -12,7 +12,7 @@ require 'shared_examples_for_tagable_models'
 require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe PieceHead, type: :model do
-  it { is_expected.to belong_to(:import_order) }
+  it { is_expected.to belong_to(:import_order).without_validating_presence }
 
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)

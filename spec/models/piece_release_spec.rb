@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'shared_examples_for_models_with_duration'
 
 RSpec.describe PieceRelease, type: :model do
-  it { is_expected.to belong_to(:import_order) }
+  it { is_expected.to belong_to(:import_order).without_validating_presence }
   it { is_expected.to belong_to(:piece) }
 
   context 'with valid parameters' do

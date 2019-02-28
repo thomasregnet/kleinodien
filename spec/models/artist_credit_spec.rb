@@ -6,11 +6,7 @@ require 'shared_examples_for_tagable_models'
 RSpec.describe ArtistCredit, type: :model do
   it { is_expected.to have_many(:heap_heads) }
   it { is_expected.to have_many(:heaps) }
-  it { is_expected.to belong_to(:import_order) }
-
-  specify '#descriptions' do
-    expect(subject).to respond_to(:descriptions)
-  end
+  it { is_expected.to belong_to(:import_order).without_validating_presence }
 
   it_behaves_like 'a commentable model' do
     before(:all) do
