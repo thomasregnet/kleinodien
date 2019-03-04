@@ -8,8 +8,8 @@ RUN apt-get update -qq && apt-get install -y \
 
 # install node.js
 # https://github.com/nodesource/distributions/blob/master/README.md#debinstall
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - &&\
-    apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - &&\
+    DEBIAN_FRONTEND=noninteractive apt-get install -qq -y nodejs
 
 ENV RAILS_ROOT /var/www/kleinodien
 RUN mkdir -p $RAILS_ROOT/tmp/pids
