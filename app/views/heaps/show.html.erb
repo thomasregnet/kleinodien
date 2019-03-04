@@ -1,5 +1,8 @@
-<h1><%= @heap.title %></h1>
-<b><%= @heap.artist_credit.name %></b>
+<h1>
+    <%= @heap.title %>
+    <br>
+    <small class="text-muted"><%= @heap.artist_credit.name %></small>
+</h1>
 
 <ul>
     <% @heap.subsets.each do |subset| %>
