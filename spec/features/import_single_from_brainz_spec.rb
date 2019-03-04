@@ -25,6 +25,10 @@ RSpec.feature 'import a single from MusicBrainz', type: :feature do
   before { visit(single_path(@result.id)) }
   # rubocop:enable RSpec/InstanceVariable
 
+  it 'has set the right page-title' do
+    expect(page).to have_title('Arise')
+  end
+
   it 'contains the title' do
     expect(page).to have_text('Arise')
   end

@@ -26,6 +26,10 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
   before { visit(album_path(@result.id)) }
   # rubocop:enable RSpec/InstanceVariable
 
+  it 'has set the right page-title' do
+    expect(page).to have_title('Powerslave')
+  end
+
   it 'contains the title' do
     expect(page).to have_content('Powerslave')
   end
