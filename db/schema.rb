@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_085320) do
+ActiveRecord::Schema.define(version: 2019_03_05_091751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -182,6 +182,15 @@ ActiveRecord::Schema.define(version: 2019_03_05_085320) do
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_heap_heads_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_heap_heads_on_import_order_id"
+  end
+
+  create_table "heap_media", force: :cascade do |t|
+    t.integer "position", limit: 2, null: false
+    t.integer "quantity", limit: 2, null: false
+    t.bigint "medium_format_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medium_format_id"], name: "index_heap_media_on_medium_format_id"
   end
 
   create_table "heap_subsets", force: :cascade do |t|
@@ -593,6 +602,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_085320) do
   add_foreign_key "descriptions", "users"
   add_foreign_key "heap_heads", "artist_credits"
   add_foreign_key "heap_heads", "import_orders"
+  add_foreign_key "heap_media", "medium_formats"
   add_foreign_key "heap_subsets", "heaps"
   add_foreign_key "heap_tracks", "heap_subsets"
   add_foreign_key "heap_tracks", "import_orders"
