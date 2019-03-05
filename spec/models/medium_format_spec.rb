@@ -1,5 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MediumFormat, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:explanation) }
+  it { is_expected.to respond_to(:year) }
+  it { is_expected.to respond_to(:brainz_code) }
+  it { is_expected.to respond_to(:import_order) }
+
+  it { is_expected.to validate_presence_of(:name) }
 end
