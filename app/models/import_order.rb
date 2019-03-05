@@ -9,6 +9,7 @@ class ImportOrder < ApplicationRecord
   has_many :heap_tracks
   has_many :heaps
   has_many :import_requests
+  has_many :medium_formats
   has_many :piece_heads
   has_many :pieces
 
