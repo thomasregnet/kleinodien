@@ -6,6 +6,7 @@ RSpec.describe Heap, type: :model do
   it { is_expected.to belong_to(:artist_credit).without_validating_presence }
   it { is_expected.to belong_to(:head).class_name('HeapHead') }
   it { is_expected.to belong_to(:import_order).without_validating_presence }
+  it { is_expected.to have_many(:media) }
   it { is_expected.to have_many(:subsets) }
 
   context 'with valid attributes' do
