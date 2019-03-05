@@ -35,3 +35,12 @@ end
     abbr: detail[:abbr]
   )
 end
+
+@medium_formats = MultiJson.load(
+  File.read('db/seeds/medium_formats.json'),
+  symbolize_keys: true
+)
+
+@medium_formats.each do |format_attr|
+  MediumFormat.create!(format_attr)
+end
