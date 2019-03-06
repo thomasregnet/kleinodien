@@ -16,27 +16,39 @@ class ReduceBrainzHeapMediaService
   attr_reader :blueprint, :import_order, :last_code, :result
 
   def call
+    reduce && result
+  end
+
+  def reduce
     blueprint.each do |medium|
       brainz_format_code = medium.format.brain_code
       if brainz_format_code == last_code
         result.last[:quantity] += 1
       else
-        find_or_create_medium_format(medium)
+        add(medium)
       end
-    end
 
-    result
+      @last_code = brainz_format_code
+    end
   end
 
-  def find_or_create_medium_format(medium)
-    medium_format = medium.format
-
-    # TODO: use find_or_create
-    result << MediumFormat.find_by(brainz_code: medium_format.id)
-    {
-      medium_format: medium_format,
-      name:          medium_format.__content__,
+  def add(medium)
+    result << {
+      medium_format: find_or_create_medium_format(medium),
       quantity:      1
     }
+  end
+
+  # This method smells of :reek:FeatureEnvy
+  # This method smells of :reek:TooManyStatements
+  def find_or_create_medium_format(medium)
+    given_format = medium.format
+    brainz_code  = given_format.brainz_code
+
+    MediumFormat.find_or_create_by!(brainz_code: brainz_code) do |new_format|
+      new_format.brainz_code  = brainz_code
+      new_format.import_order = import_order
+      new_format.name         = given_format.__content__
+    end
   end
 end
