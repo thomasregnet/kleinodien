@@ -25,28 +25,33 @@ class PersistBrainzHeapMedia < PersistBrainzBase
     end
   end
 
+  # This method smells of :reek:TooManyStatements
   def quantities
     last_code = ''
     result = []
 
-    blueprint.each do |medium|
+    blueprint.map do |medium|
       brainz_format_code = medium.format.id
       if brainz_format_code == last_code
         result.last[:quantity] += 1
       else
-        result << {
-          medium_format: medium_format_for(brainz_format_code),
-          name:          medium.format.__content__,
-          quantity:     1
-        }
+        result << create_medium(medium)
       end
+
+      last_code = brainz_format_code
     end
 
     result
   end
 
-  def medium_format_for(brainz_format_code)
-    # TODO: find_or_create instead of find_by
-    MediumFormat.find_by(brainz_code: brainz_format_code)
+  # This method smells of :reek:UtilityFunction
+  def create_medium(medium)
+    medium_format = medium.format
+    format = MediumFormat.find_by(brainz_code: medium_format.id)
+    {
+      medium_format: format,
+      name:          medium_format.__content__,
+      quantity:      1
+    }
   end
 end
