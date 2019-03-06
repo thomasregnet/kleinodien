@@ -25,15 +25,13 @@ class PersistBrainzHeap < PersistBrainzBase
   end
 
   def persist
-    artist_credit = persist_artist_credit
-    heap_head = persist_heap_head
-    # TODO: Persist the right type, not always 'album'
     heap = Heap.create!(
-      artist_credit: artist_credit,
-      head:          heap_head,
+      artist_credit: persist_artist_credit,
+      head:          persist_heap_head,
       title:         blueprint.title,
       type:          type
     )
+    persist_media(heap)
     persist_subsets(heap)
     heap
   end
@@ -57,6 +55,17 @@ class PersistBrainzHeap < PersistBrainzBase
     )
   end
 
+  # This method smells of :reek:FeatureEnvy
+  def persist_media(heap)
+    reduced_media.each.with_index(1) do |heap_medium, position|
+      heap.media.create!(
+        format:   heap_medium[:medium_format],
+        position: position,
+        quantity: heap_medium[:quantity]
+      )
+    end
+  end
+
   def persist_subsets(heap)
     blueprint.media.each do |medium|
       PersistBrainzHeapSubset.call(
@@ -65,6 +74,13 @@ class PersistBrainzHeap < PersistBrainzBase
         proxy:     proxy
       )
     end
+  end
+
+  def reduced_media
+    ReduceBrainzHeapMediaService.call(
+      blueprint:    blueprint.media,
+      import_order: import_order
+    )
   end
 
   def type
