@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_091751) do
+ActiveRecord::Schema.define(version: 2019_03_07_090015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -295,7 +295,9 @@ ActiveRecord::Schema.define(version: 2019_03_05_091751) do
     t.bigint "import_order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brainz_code"], name: "medium_formats_brainz_code_index", unique: true
     t.index ["import_order_id"], name: "index_medium_formats_on_import_order_id"
+    t.index ["name"], name: "medium_formats_name_index", unique: true
   end
 
   create_table "original_exemplars", id: :serial, force: :cascade do |t|

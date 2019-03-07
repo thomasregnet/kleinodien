@@ -14,4 +14,14 @@ RSpec.describe MediumFormat, type: :model do
   it { is_expected.to have_many(:heap_media) }
 
   it { is_expected.to validate_presence_of(:name) }
+
+  it { is_expected.to have_db_index(:brainz_code).unique(true) }
+  # it { should validate_uniqueness_of(:brainz_code).ignoring_case_sensitivity }
+
+  describe '#name' do
+    subject { FactoryBot.create(:medium_format) }
+
+    it { is_expected.to have_db_index(:name).unique(true) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+  end
 end
