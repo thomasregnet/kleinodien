@@ -6,5 +6,6 @@ class MediumFormat < ApplicationRecord
 
   has_many :heap_media
 
-  validates :name, presence: true
+  validates :brainz_code, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_insensitive: false }
 end
