@@ -8,3 +8,7 @@ Style/AlignHash:
 
 RSpec/ExampleLength:
   Max: 10
+
+RSpec/ImplicitExpect:
+  # We want to write "should" when using shoulda matchers
+  Enabled: false
