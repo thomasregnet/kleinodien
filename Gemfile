@@ -28,7 +28,8 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_bot_rails', '~> 4.5', require: false
+  # gem 'factory_bot_rails', '~> 4.5', require: false
+  gem 'factory_bot_rails', '~> 5.0', require: false
 end
 
 group :development do
