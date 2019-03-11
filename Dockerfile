@@ -10,7 +10,8 @@ RUN apt-get update -qq && apt-get install -y \
 # install node.js
 # https://github.com/nodesource/distributions/blob/master/README.md#debinstall
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y nodejs \
+  && apt-get -qq update \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs \
   && rm -Rf /var/lib/apt/lists/*
 
 ENV RAILS_ROOT /var/www/kleinodien
