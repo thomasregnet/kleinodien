@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 # Reduce Media to it's formats
-class ReduceBrainzHeapMediaService
-  def self.call(args)
-    new(args).call
-  end
-
+class ReduceBrainzHeapMediaService < ServiceBase
   def initialize(args)
     @blueprint    = args[:blueprint]
     @import_order = args[:import_order]

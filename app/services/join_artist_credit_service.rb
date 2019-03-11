@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 # Join names with join-phrases
-class JoinArtistCreditService
-  def self.call(args)
-    new(args).call
-  end
-
+class JoinArtistCreditService < ServiceBase
   def initialize(args)
     @candidates         = args[:candidates]
     @name_method        = args[:name_method]        || :name

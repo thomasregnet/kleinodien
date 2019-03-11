@@ -1,13 +1,12 @@
-class ExtractBrainzImportOrderParamsService
-  def self.call(uri)
-    new(uri).call
-  end
+# frozen_string_literal: true
 
-  attr_reader :uri
-
+# Extract code (id) and kind from a MusicBrainz uri
+class ExtractBrainzImportOrderParamsService < ServiceBase
   def initialize(uri)
     @uri = uri
   end
+
+  attr_reader :uri
 
   def call
     code = extract_code || return

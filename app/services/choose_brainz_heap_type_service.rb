@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 # Return the kleinodien class name for a MusicBrainz release
-class ChooseBrainzHeapTypeService
+class ChooseBrainzHeapTypeService < ServiceBase
   TYPE_FOR = {
     'Album' => 'Album',
     'Single' => 'Single'
   }.freeze
 
   DEFAULT_TYPE = 'Heap'
-
-  def self.call(args)
-    new(args).call
-  end
 
   def initialize(args)
     @brainz_type = args[:brainz_type]
