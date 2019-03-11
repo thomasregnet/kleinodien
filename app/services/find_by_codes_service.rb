@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
 # Find entieies by codes from foreign data-sources such as MusicBrainz or TMDB
-class FindByCodesService
-  include CallWithArgs
-
-  private
-
-  attr_reader :model_class, :codes_hash
-
+class FindByCodesService < ServiceBase
   def initialize(args)
     @model_class = args[:model_class]
     @codes_hash  = args[:codes_hash]
   end
 
-  def private_call
+  attr_reader :model_class, :codes_hash
+
+  def call
     return if findable_codes.empty?
 
     opts = [query, params].flatten
@@ -43,6 +39,7 @@ class FindByCodesService
       column_name.match?(/_code$/)
     end
   end
+
   def select_codes_hash
     codes_hash.select { |key, value| key.to_s.match?(/_code$/) && value }
   end

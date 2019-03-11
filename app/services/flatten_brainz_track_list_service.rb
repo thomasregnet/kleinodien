@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 # Return a flat list combined of track_list and data_track_list
-class FlattenBrainzTrackListService
-  def self.call(args)
-    new(args).call
-  end
-
+class FlattenBrainzTrackListService < ServiceBase
   def initialize(args)
     @blueprint = args[:blueprint]
   end

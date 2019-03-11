@@ -1,15 +1,11 @@
-class SuspendFetchingService
-  include CallWithArgs
-
-  private
-
-  attr_reader :response
-
+class SuspendFetchingService < ServiceBase
   def initialize(args)
     @response = args[:response]
   end
 
-  def private_call
+  attr_reader :response
+
+  def call
     # the code for the service belongs here
   end
 end

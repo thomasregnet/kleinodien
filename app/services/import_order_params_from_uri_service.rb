@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
 # Base for *ImportOrderParamsFromUriService classes
-class ImportOrderParamsFromUriService
+class ImportOrderParamsFromUriService < ServiceBase
   DEFAULT_OFFSET = 0
-
-  def self.call(uri)
-    new(uri).call
-  end
-
-  attr_reader :uri
 
   def initialize(uri)
     @uri = uri
   end
+
+  attr_reader :uri
 
   def call
     return unless path_items

@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 # Transform a BrainzImportOrder object to a BrainzImport*Request
-class TransformBrainzOrderToRequestService
+class TransformBrainzOrderToRequestService < ServiceBase
   BRAINZ_REQUEST_CLASS_FOR = {
     'release' => BrainzReleaseImportRequest
   }.freeze
   EXPECTED_ORDER_CLASS = BrainzImportOrder
-
-  def self.call(args)
-    new(args).call
-  end
 
   def initialize(args)
     @import_order = args[:import_order]
