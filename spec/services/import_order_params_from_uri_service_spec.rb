@@ -6,7 +6,7 @@ RSpec.describe ImportOrderParamsFromUriService do
 
   context 'with a valid uri' do
     let(:params) do
-      described_class.call(URI('https://test.example.com/some-kind/123'))
+      described_class.call(uri: URI('https://test.example.com/some-kind/123'))
     end
 
     it 'sets the right code' do
@@ -20,7 +20,7 @@ RSpec.describe ImportOrderParamsFromUriService do
 
   context 'with an uri with no path elements' do
     let(:params) do
-      described_class.call(URI('https://test.example.com'))
+      described_class.call(uri: URI('https://test.example.com'))
     end
 
     it 'returns nil' do
@@ -30,7 +30,7 @@ RSpec.describe ImportOrderParamsFromUriService do
 
   context 'with an uri with only one path elements' do
     let(:params) do
-      described_class.call(URI('https://test.example.com/some-kind'))
+      described_class.call(uri: URI('https://test.example.com/some-kind'))
     end
 
     it 'returns nil' do

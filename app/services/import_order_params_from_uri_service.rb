@@ -4,8 +4,8 @@
 class ImportOrderParamsFromUriService < ServiceBase
   DEFAULT_OFFSET = 0
 
-  def initialize(uri)
-    @uri = uri
+  def initialize(args)
+    @uri = args[:uri]
   end
 
   attr_reader :uri
