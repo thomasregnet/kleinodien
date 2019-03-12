@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 # Get the ImportOrder class name for a given uri
-class GetImportOrderClassNameFromUriService
+class GetImportOrderClassNameFromUriService < ServiceBase
   CLASS_NAME_FOR = {
     'discogs'     => 'DiscogsImportOrder',
     'musicbrainz' => 'BrainzImportOrder'
   }.freeze
 
-  def self.call(uri_string)
-    new(uri_string).call
-  end
+  # def self.call(uri_string)
+  #   new(uri_string).call
+  # end
 
   attr_reader :uri_string
 
-  def initialize(uri_string)
-    @uri_string = uri_string
+  def initialize(args)
+    @uri_string = args[:uri_string]
   end
 
   def call
