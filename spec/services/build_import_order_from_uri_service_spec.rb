@@ -23,7 +23,7 @@ RSpec.describe BuildImportOrderFromUriService do
   end
 
   context 'with a valid uri' do
-    let(:import_order) { described_class.call(uri_string) }
+    let(:import_order) { described_class.call(uri_string: uri_string) }
 
     it 'returns an ImportOrder object' do
       expect(import_order).to be_instance_of BrainzImportOrder
