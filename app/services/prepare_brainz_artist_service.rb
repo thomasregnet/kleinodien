@@ -1,19 +1,17 @@
-class PrepareBrainzArtistService
-  include CallWithArgs
+class PrepareBrainzArtistService < ServiceBase
   include ImportStore
-
-  private
-
-  attr_reader :importer_name, :reference
 
   def initialize(args)
     @importer_name = args[:importer_name]
     @reference     = args[:reference]
   end
 
-  def private_call
+  attr_reader :importer_name, :reference
+
+  def call
     return true if already_imported?
     return true if already_cached?
+
     false
   end
 
@@ -24,6 +22,7 @@ class PrepareBrainzArtistService
   def already_cached?
     key = "cache:#{reference.to_uri}"
     return true if import_store.get(key)
+
     false
   end
 end

@@ -1,17 +1,14 @@
-class ClearImportRequestsService
-  include CallWithArgs
+class ClearImportRequestsService < ServiceBase
   include ImportStoreCommons
   include ImportQueuesConsumption
-
-  private
-
-  attr_reader :importer_name
 
   def initialize(args)
     @importer_name = args[:importer_name]
   end
 
-  def private_call
+  attr_reader :importer_name
+
+  def call
     import_requests.clear
     import_uris.clear
   end

@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
-class <%= class_name %>Service
-  include CallWithArgs
-
-  private
-
-  # attr_reader
-
+class <%= class_name %>Service < ServiceBase
   def initialize(args)
 
   end
 
-  def private_call
+  # attr_reader
+
+
+  def call
     # the code for the service belongs here
   end
 end
