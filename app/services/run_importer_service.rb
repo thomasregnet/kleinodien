@@ -1,17 +1,14 @@
-class RunImporterService
-  include CallWithArgs
+class RunImporterService < ServiceBase
   include ImportStoreCommons
-
-  private
-
-  attr_reader :importer_name, :subscription_prohibited
 
   def initialize(args)
     @importer_name           = args[:importer_name]
     @subscription_prohibited = args[:subscription_prohibited]
   end
 
-  def private_call
+  attr_reader :importer_name, :subscription_prohibited
+
+  def call
     clear_uris unless condition_valid?
     fetch_data
     import

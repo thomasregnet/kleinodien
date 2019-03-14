@@ -1,18 +1,17 @@
-class ForceArrayOfObjectsService
-  include CallWithArgs
+# frozen_string_literal: true
 
-  private
-
-  attr_reader :klass, :value
-
+# Return an Array of Objects of a given class
+class ForceArrayOfObjectsService < ServiceBase
   def initialize(args)
     @klass = args[:klass]
     @value = args[:value]
   end
 
-  def private_call
+  attr_reader :klass, :value
+
+  def call
     return unless value
-    # byebug
+
     if value.is_a? Array
       value.map do |args|
         klass.new(args)

@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 # Choose the right class for a MusicBrainz track
-class ChooseBrainzPieceTypeService
-  def self.call(args)
-    new(args).call
-  end
-
+class ChooseBrainzPieceTypeService < ServiceBase
   def initialize(args)
     @blueprint = args[:blueprint]
   end

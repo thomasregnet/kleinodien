@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Takes an uri as parameter and returns an initialized ImportOrder object
-class BuildImportOrderFromUriService
+class BuildImportOrderFromUriService < ServiceBase
   CLASS_NAME_FOR = {
-    'discogs'     => 'DiscogsImportOrder',
+    'discogs' => 'DiscogsImportOrder',
     'musicbrainz' => 'BrainzImportOrder'
   }.freeze
 
@@ -13,12 +13,8 @@ class BuildImportOrderFromUriService
 
   attr_reader :uri_string
 
-  def self.call(uri_string)
-    new(uri_string).call
-  end
-
-  def initialize(uri_string)
-    @uri_string = uri_string
+  def initialize(args)
+    @uri_string = args[:uri_string]
   end
 
   def call
@@ -42,7 +38,7 @@ class BuildImportOrderFromUriService
   def params
     return unless host_key
 
-    PARAMS_CLASS_FOR[host_key].constantize.call(uri)
+    PARAMS_CLASS_FOR[host_key].constantize.call(uri: uri)
   end
 
   def parse_uri

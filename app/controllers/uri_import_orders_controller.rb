@@ -7,7 +7,7 @@ class UriImportOrdersController < ApplicationController
   end
 
   def create
-    @import_order = BuildImportOrderFromUriService.call(uri_string)
+    @import_order = BuildImportOrderFromUriService.call(uri_string: uri_string)
     @import_order.state = 'pending'
 
     unless @import_order
@@ -25,7 +25,8 @@ class UriImportOrdersController < ApplicationController
   private
 
   def class_name
-    @class_name ||= GetImportOrderClassNameFromUriService.call(uri_string)
+    @class_name ||= GetImportOrderClassNameFromUriService
+                    .call(uri_string: uri_string)
   end
 
   def uri_string

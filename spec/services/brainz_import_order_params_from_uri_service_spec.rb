@@ -18,7 +18,7 @@ RSpec.describe BrainzImportOrderParamsFromUriService do
     let(:params) do
       prefix = 'https://musicbrainz.org'
       uri_string = [prefix, kind, code].join('/')
-      described_class.call(URI(uri_string))
+      described_class.call(uri: URI(uri_string))
     end
 
     it 'returns the right code' do
@@ -34,7 +34,7 @@ RSpec.describe BrainzImportOrderParamsFromUriService do
     let(:params) do
       prefix = 'https://musicbrainz.org/ws/2'
       uri_string = [prefix, kind, code].join('/')
-      described_class.call(URI(uri_string))
+      described_class.call(uri: URI(uri_string))
     end
 
     it 'returns the right code' do
