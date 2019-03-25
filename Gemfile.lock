@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    amq-protocol (2.3.0)
     arel (9.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.5.0)
@@ -61,6 +62,8 @@ GEM
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
     builder (3.2.3)
+    bunny (2.14.1)
+      amq-protocol (~> 2.3, >= 2.3.0)
     byebug (11.0.1)
     capybara (3.14.0)
       addressable
@@ -377,6 +380,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 4.3.1)
+  bunny (~> 2.0)
   byebug
   capybara (~> 3.0)
   coffee-rails (~> 4.2.1)
@@ -415,4 +419,4 @@ DEPENDENCIES
   webmock (~> 3.0)
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
