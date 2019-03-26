@@ -7,11 +7,11 @@ class ImportQueuePublishBase < ImportQueueBase
   end
 
   def self.run
-    new('run').call
+    new(message: 'run').call
   end
 
-  def initialize(message)
-    @message = message
+  def initialize(args)
+    @message = args[:message]
   end
 
   attr_reader :message
