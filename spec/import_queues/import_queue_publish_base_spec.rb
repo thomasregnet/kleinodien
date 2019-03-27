@@ -40,6 +40,7 @@ class FakeImportQueuePublishBaseCall < ImportQueuePublishBase
   end
 end
 
+# Just for testing
 class FakeImportQueuePublishBaseClassMethod < ImportQueuePublishBase
   name :fake
 end
