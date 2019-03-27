@@ -40,6 +40,11 @@ class FakeImportQueuePublishBaseCall < ImportQueuePublishBase
   end
 end
 
+class FakeImportQueuePublishBaseClassMethod < ImportQueuePublishBase
+  name :fake
+end
+
+# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportQueuePublishBase do
   describe '#call' do
     let(:publisher) { FakeImportQueuePublishBase.new(message: 'my message') }
@@ -50,16 +55,45 @@ RSpec.describe ImportQueuePublishBase do
     end
   end
 
-  describe '.call' do
-    it 'publishes the message' do
-      expect(FakeImportQueuePublishBaseCall.call(message: 'my message'))
-        .to eq('called with "my message"')
-    end
-  end
+  context 'when calling class methods' do
+    before do
+      # TODO: get Bunny host name from configuration
+      connection = Bunny.new(host: 'rabbit')
+      connection.start
 
-  describe '.run' do
-    it 'publishes "run"' do
-      expect(FakeImportQueuePublishBaseCall.run).to eq('called with "run"')
+      channel = connection.create_channel
+      exchange = channel.fanout(:fake.to_s)
+      queue = channel.queue('', exclusive: true)
+
+      queue.bind(exchange)
+
+      @thread = Thread.new do
+        queue.subscribe(block: false) do |_delivery_info, _properties, body|
+          @message = body
+        end
+      end
+    end
+
+    # rubocop:disable RSpec/InstanceVariable
+    after do
+      @message = nil
+      @thread.join
+    end
+
+    describe '.call' do
+      it 'publishes the message' do
+        FakeImportQueuePublishBaseClassMethod.call(message: 'my message')
+        expect(@message).to eq('my message')
+      end
+    end
+
+    describe '.run' do
+      it 'publishes "run"' do
+        FakeImportQueuePublishBaseClassMethod.run
+        expect(@message).to eq('run')
+      end
     end
   end
 end
+# rubocop:disable RSpec/InstanceVariable
+# rubocop:enable Metrics/BlockLength
