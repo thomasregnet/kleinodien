@@ -10,11 +10,6 @@ services:
     expose:
       - "5672"
 
-  redis:
-    image: redis:5.0.3
-    ports:
-      - '6379:6379'
-
   app:
     build: .
     environment:
@@ -25,15 +20,17 @@ services:
     depends_on:
       - db
       - rabbit
-      - redis
-  brainz_importer:
-    build: .
-    depends_on:
-      - app
-      - redis
-    entrypoint: config/containers/importers/importer_cmd.sh
-    environment:
-      - IMPORTER_NAME=brainz
+      # - redis
+
+  # brainz_importer:
+  #   build: .
+  #   depends_on:
+  #     - app
+  #     - redis
+  #   entrypoint: config/containers/importers/importer_cmd.sh
+  #   environment:
+  #     - IMPORTER_NAME=brainz
+
   web:
     build:
       context: .
