@@ -12,6 +12,7 @@ namespace :importer do
       WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
     end
 
-    RunImporterService.call(importer_name: ENV['IMPORTER_NAME'])
+    # RunImporterService was deleted 2019-04-02
+    # RunImporterService.call(importer_name: ENV['IMPORTER_NAME'])
   end
 end
