@@ -14,7 +14,7 @@ class BaseImportWorker
   attr_reader :importer, :import_order_class
 
   def run
-    import_order = prepare_order
+    import_order = next_order
     if import_order
       run_import(import_order)
     else
@@ -28,22 +28,14 @@ class BaseImportWorker
     run
   end
 
-  def prepare_order
-    order = next_pending_order || return
-    order.state = :processing
-    order.save
-    order
-  end
+  # This method smells of :reek:FeatureEnvy
+  def next_order
+    import_order = import_order_class.constantize.next_pending
+    return unless import_order
 
-  def next_pending_order
-    orders = import_order_class.constantize
-                               .where(state: 'pending')
-                               .order('created_at asc')
-                               .limit(1)
-
-    return unless orders
-
-    orders.first
+    import_order.state = :processing
+    import_order.save
+    import_order
   end
 
   def subscribe
