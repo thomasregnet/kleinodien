@@ -18,6 +18,13 @@ class ImportOrder < ApplicationRecord
   validates :code, :kind, :state, :user, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
+  def self.next_pending
+    orders = where(state: 'pending').order('created_at asc').limit(1)
+    return if orders.empty?
+
+    orders.first
+  end
+
   private
 
   def set_default_state
