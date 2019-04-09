@@ -24,4 +24,38 @@ RSpec.describe ImportWorker do
       end
     end
   end
+
+  describe '#subscribe' do
+  end
+
+  describe '#unsubscribe' do
+    context 'when subscribed' do
+      let(:worker) do
+        described_class.new(import_queue_name: 'some_queue')
+      end
+
+      it 'calls #unsubscribe on the ImportQueue' do
+        import_queue = class_double('ImportQueue').as_stubbed_const
+
+        expect(import_queue).to receive(:unsubscribe)
+
+        allow(worker).to receive(:import_queue).and_return(import_queue)
+        worker.unsubscribe
+      end
+    end
+
+    context 'when not subscribed' do
+      let(:worker) do
+        described_class.new(import_queue_name: 'some_queue')
+      end
+
+      it 'calls #unsubscribe on the ImportQueue' do
+        import_queue = class_double('ImportQueue').as_stubbed_const
+        expect(import_queue).not_to receive(:unsubscribe)
+
+        worker.unsubscribe
+      end
+    end
+
+  end
 end

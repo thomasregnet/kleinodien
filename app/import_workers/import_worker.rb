@@ -24,12 +24,12 @@ class ImportWorker
 
   def subscribe
     @import_queue = ImportQueue.subscribe(name: import_queue_name)
-    byebug
   end
 
   def unsubscribe
     return unless import_queue
 
     import_queue.unsubscribe
+    @import_queue = nil
   end
 end
