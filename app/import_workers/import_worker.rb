@@ -15,9 +15,8 @@ class ImportWorker
     unsubscribe
     import_order = import_order_class.next_pending
     if import_order
-      # importer_class.call(import_order)
+      DeliverImportOrderService.call(import_order: import_order)
       # run
-      subscribe
     else
       # subscribe
     end
@@ -25,6 +24,7 @@ class ImportWorker
 
   def subscribe
     @import_queue = ImportQueue.subscribe(name: import_queue_name)
+    byebug
   end
 
   def unsubscribe
