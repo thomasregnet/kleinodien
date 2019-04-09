@@ -5,13 +5,15 @@ require 'rails_helper'
 # Just for testing
 class FakeImportOrder < ImportOrder
   def next_pending; end
+
   def self.call(_args); end
 end
 
+# rubocop:disable RSpec/MessageSpies
 RSpec.describe ImportWorker do
   describe '#run' do
-    context 'when no ImportOrder is pending' do
-      it 'foos' do
+    context 'with a pending ImportOrder' do
+      it 'calls the DeliverImportOrderService' do
         import_order = class_double('FakeImportOrder').as_stubbed_const
         deliverer    = class_double('DeliverImportOrderService')
                        .as_stubbed_const
@@ -26,14 +28,31 @@ RSpec.describe ImportWorker do
   end
 
   describe '#subscribe' do
+    let(:worker) { described_class.new(import_queue_name: 'some_queue') }
+    let(:import_queue) { class_double('ImportQueue').as_stubbed_const }
+
+    context 'when not subscribed' do
+      it 'subscribes' do
+        expect(import_queue).to receive(:subscribe)
+
+        worker.subscribe
+      end
+    end
+
+    context 'when subscribed' do
+      it 'does not subscribe' do
+        allow(worker).to receive(:import_queue).and_return(import_queue)
+        expect(import_queue).not_to receive(:subscribe)
+
+        worker.subscribe
+      end
+    end
   end
 
   describe '#unsubscribe' do
-    context 'when subscribed' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'some_queue')
-      end
+    let(:worker) { described_class.new(import_queue_name: 'some_queue') }
 
+    context 'when subscribed' do
       it 'calls #unsubscribe on the ImportQueue' do
         import_queue = class_double('ImportQueue').as_stubbed_const
 
@@ -45,10 +64,6 @@ RSpec.describe ImportWorker do
     end
 
     context 'when not subscribed' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'some_queue')
-      end
-
       it 'calls #unsubscribe on the ImportQueue' do
         import_queue = class_double('ImportQueue').as_stubbed_const
         expect(import_queue).not_to receive(:unsubscribe)
@@ -56,6 +71,6 @@ RSpec.describe ImportWorker do
         worker.unsubscribe
       end
     end
-
   end
 end
+# rubocop:enable RSpec/MessageSpies

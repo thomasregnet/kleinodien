@@ -21,6 +21,8 @@ class ImportWorker
   end
 
   def subscribe
+    return if import_queue # already subscribed
+
     @import_queue = ImportQueue.subscribe(name: import_queue_name)
   end
 
