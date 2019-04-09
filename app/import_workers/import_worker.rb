@@ -3,13 +3,11 @@
 # Call the importers
 class ImportWorker
   def initialize(args)
-    @importer_class     = args[:importer_class]
     @import_order_class = args[:import_order_class]
     @import_queue_name  = args[:import_queue_name]
   end
 
-  attr_reader :importer_class, :import_order_class
-  attr_reader :import_queue, :import_queue_name
+  attr_reader :import_order_class, :import_queue, :import_queue_name
 
   def run
     unsubscribe
