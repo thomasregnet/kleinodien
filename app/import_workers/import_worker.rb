@@ -20,6 +20,13 @@ class ImportWorker
     end
   end
 
+  def perform_order
+    loop do
+      import_order = import_order_class.next_pending || break
+      DeliverImportOrderService.call(import_order: import_order)
+    end
+  end
+
   def subscribe
     return if import_queue # already subscribed
 

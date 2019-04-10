@@ -10,6 +10,7 @@ class FakeImportOrder < ImportOrder
 end
 
 # rubocop:disable RSpec/MessageSpies
+# rubocop:disable RSpec/MultipleExpectations
 RSpec.describe ImportWorker do
   describe '#perform' do
     context 'with a pending ImportOrder' do
@@ -23,6 +24,34 @@ RSpec.describe ImportWorker do
 
         worker = described_class.new(import_order_class: FakeImportOrder)
         worker.perform
+      end
+    end
+  end
+
+  describe '#perform_orders' do
+    let(:deliverer) do
+      class_double('DeliverImportOrderService').as_stubbed_const
+    end
+
+    let(:import_order) { class_double('FakeImportOrder').as_stubbed_const }
+    let(:worker) { described_class.new(import_order_class: FakeImportOrder) }
+
+    context 'with one pending ImportOrder' do
+      it 'calls DeliverImportOrderService' do
+        expect(import_order).to receive(:next_pending).and_return(true)
+        expect(deliverer).to receive(:call)
+        expect(import_order).to receive(:next_pending)
+
+        worker.perform_order
+      end
+    end
+
+    context 'without a pending ImportOrder' do
+      it 'does not call DeliverImportOrderService' do
+        expect(import_order).to receive(:next_pending).and_return(nil)
+        expect(deliverer).not_to receive(:call)
+
+        worker.perform_order
       end
     end
   end
@@ -73,4 +102,5 @@ RSpec.describe ImportWorker do
     end
   end
 end
+# rubocop:enable RSpec/MultipleExpectations
 # rubocop:enable RSpec/MessageSpies
