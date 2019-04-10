@@ -9,7 +9,7 @@ class ImportWorker
 
   attr_reader :import_order_class, :import_queue, :import_queue_name
 
-  def run
+  def perform
     unsubscribe
     import_order = import_order_class.next_pending
     if import_order

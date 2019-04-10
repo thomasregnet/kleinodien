@@ -1,4 +1,4 @@
-# frozen_string_literal
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -11,7 +11,7 @@ end
 
 # rubocop:disable RSpec/MessageSpies
 RSpec.describe ImportWorker do
-  describe '#run' do
+  describe '#perform' do
     context 'with a pending ImportOrder' do
       it 'calls the DeliverImportOrderService' do
         import_order = class_double('FakeImportOrder').as_stubbed_const
@@ -22,7 +22,7 @@ RSpec.describe ImportWorker do
         expect(deliverer).to receive(:call)
 
         worker = described_class.new(import_order_class: FakeImportOrder)
-        worker.run
+        worker.perform
       end
     end
   end
