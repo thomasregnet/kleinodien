@@ -42,7 +42,7 @@ RSpec.describe ImportWorker do
         expect(deliverer).to receive(:call)
         expect(import_order).to receive(:next_pending)
 
-        worker.perform_order
+        worker.perform_orders
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe ImportWorker do
         expect(import_order).to receive(:next_pending).and_return(nil)
         expect(deliverer).not_to receive(:call)
 
-        worker.perform_order
+        worker.perform_orders
       end
     end
   end
