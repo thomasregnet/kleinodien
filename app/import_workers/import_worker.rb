@@ -11,14 +11,20 @@ class ImportWorker
 
   def perform
     unsubscribe
-    import_order = import_order_class.next_pending
-    if import_order
-      DeliverImportOrderService.call(import_order: import_order)
-      # run
-    else
-      # subscribe
-    end
+    perform_orders
+    subscribe
   end
+
+  # def perform
+  #   unsubscribe
+  #   import_order = import_order_class.next_pending
+  #   if import_order
+  #     DeliverImportOrderService.call(import_order: import_order)
+  #     # run
+  #   else
+  #     # subscribe
+  #   end
+  # end
 
   def perform_orders
     loop do
