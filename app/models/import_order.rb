@@ -18,11 +18,21 @@ class ImportOrder < ApplicationRecord
   validates :code, :kind, :state, :user, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
+  # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
+  def self.import_queue_name
+    "#{to_s.underscore.pluralize}_queue"
+  end
+
   def self.next_pending
     orders = where(state: 'pending').order('created_at asc').limit(1)
     return if orders.empty?
 
     orders.first
+  end
+
+  def import_queue_name
+    klass = self.class.to_s
+    "#{klass.underscore.pluralize}_queue"
   end
 
   private
