@@ -4,10 +4,9 @@
 class ImportWorker
   def initialize(args)
     @import_order_class = args[:import_order_class]
-    @import_queue_name  = args[:import_queue_name]
   end
 
-  attr_reader :import_order_class, :import_queue, :import_queue_name
+  attr_reader :import_order_class, :import_queue
 
   def perform
     unsubscribe
@@ -15,16 +14,9 @@ class ImportWorker
     subscribe
   end
 
-  # def perform
-  #   unsubscribe
-  #   import_order = import_order_class.next_pending
-  #   if import_order
-  #     DeliverImportOrderService.call(import_order: import_order)
-  #     # run
-  #   else
-  #     # subscribe
-  #   end
-  # end
+  def import_queue_name
+    import_order_class.import_queue_name
+  end
 
   def perform_orders
     loop do
@@ -36,6 +28,7 @@ class ImportWorker
   def subscribe
     return if import_queue # already subscribed
 
+    # TODO: subscribe with a code-block
     @import_queue = ImportQueue.subscribe(name: import_queue_name)
   end
 

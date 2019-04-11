@@ -42,7 +42,8 @@ RSpec.describe ImportWorker do
   end
 
   describe '#subscribe' do
-    let(:worker) { described_class.new(import_queue_name: 'some_queue') }
+    # let(:worker) { described_class.new(import_queue_name: 'some_queue') }
+    let(:worker) { described_class.new(import_order_class: FakeImportOrder) }
     let(:import_queue) { class_double('ImportQueue').as_stubbed_const }
 
     context 'when not subscribed' do
