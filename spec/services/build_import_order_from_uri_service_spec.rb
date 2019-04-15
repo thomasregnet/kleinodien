@@ -37,4 +37,13 @@ RSpec.describe BuildImportOrderFromUriService do
       expect(import_order.kind).to eq kind
     end
   end
+
+  context 'with an user' do
+    let(:user) { FactoryBot.create(:user) }
+
+    it 'returns the ImportOrder with that user set' do
+      import_order = described_class.call(uri_string: uri_string, user: user)
+      expect(import_order.user).to eq(user)
+    end
+  end
 end

@@ -11,11 +11,12 @@ class BuildImportOrderFromUriService < ServiceBase
     'musicbrainz' => 'BrainzImportOrderParamsFromUriService'
   }.freeze
 
-  attr_reader :uri_string
-
   def initialize(args)
     @uri_string = args[:uri_string]
+    @user       = args[:user]
   end
+
+  attr_reader :uri_string, :user
 
   def call
     return unless class_name
@@ -38,7 +39,10 @@ class BuildImportOrderFromUriService < ServiceBase
   def params
     return unless host_key
 
-    PARAMS_CLASS_FOR[host_key].constantize.call(uri: uri)
+    # PARAMS_CLASS_FOR[host_key] sets "code" and "kind"
+    params = PARAMS_CLASS_FOR[host_key].constantize.call(uri: uri)
+    params[:user] = user
+    params
   end
 
   def parse_uri
