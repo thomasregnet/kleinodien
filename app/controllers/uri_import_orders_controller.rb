@@ -7,14 +7,17 @@ class UriImportOrdersController < ApplicationController
   end
 
   def create
-    @import_order = BuildImportOrderFromUriService.call(uri_string: uri_string)
+    @import_order = BuildImportOrderFromUriService.call(
+      uri_string: uri_string,
+      user:       current_user
+    )
+
     @import_order.state = 'pending'
 
     unless @import_order
       flash[:error] = "can't import from #{uri_string}"
     end
 
-    @import_order.user = current_user
     if @import_order.save
       flash[:success] = 'Successfully added your import order'
     end
