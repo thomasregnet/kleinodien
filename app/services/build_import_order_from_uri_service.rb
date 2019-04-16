@@ -12,11 +12,12 @@ class BuildImportOrderFromUriService < ServiceBase
   }.freeze
 
   def initialize(args)
+    @state      = args[:state] || 'pending'
     @uri_string = args[:uri_string]
     @user       = args[:user]
   end
 
-  attr_reader :uri_string, :user
+  attr_reader :state, :uri_string, :user
 
   def call
     return unless class_name
@@ -41,6 +42,7 @@ class BuildImportOrderFromUriService < ServiceBase
 
     # PARAMS_CLASS_FOR[host_key] sets "code" and "kind"
     params = PARAMS_CLASS_FOR[host_key].constantize.call(uri: uri)
+    params[:state] = state
     params[:user] = user
     params
   end

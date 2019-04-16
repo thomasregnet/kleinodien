@@ -22,19 +22,52 @@ RSpec.describe BuildImportOrderFromUriService do
     [prefix, kind, code].join('/')
   end
 
-  context 'with a valid uri' do
-    let(:import_order) { described_class.call(uri_string: uri_string) }
+  describe 'state' do
+    context 'without a given state' do
+      let(:import_order) { described_class.call(uri_string: uri_string) }
 
-    it 'returns an ImportOrder object' do
-      expect(import_order).to be_instance_of BrainzImportOrder
+      it 'returns "pending"' do
+        expect(import_order.state).to eq('pending')
+      end
     end
 
-    it 'has the code set' do
-      expect(import_order.code).to eq code
+    context 'with a given state' do
+      let(:import_order) do
+        described_class.call(
+          uri_string: uri_string,
+          state:      'failed'
+        )
+      end
+
+      it 'sets that state' do
+        expect(import_order.state).to eq('failed')
+      end
+    end
+  end
+
+  describe 'uri_string' do
+    context 'with a valid uri' do
+      let(:import_order) { described_class.call(uri_string: uri_string) }
+
+      it 'returns an ImportOrder object' do
+        expect(import_order).to be_instance_of BrainzImportOrder
+      end
+
+      it 'has the code set' do
+        expect(import_order.code).to eq code
+      end
+
+      it 'has the kind set' do
+        expect(import_order.kind).to eq kind
+      end
     end
 
-    it 'has the kind set' do
-      expect(import_order.kind).to eq kind
+    context 'with an invalid uri' do
+      let(:import_order){ described_class.call(uri_string: 'something wrong') }
+
+      it 'returns nil' do
+        expect(import_order).to be_nil
+      end
     end
   end
 
