@@ -25,7 +25,8 @@ class UriImportOrdersController < ApplicationController
       flash[:success] = 'Successfully added your import order'
     end
 
-    render :new
+    # use "redirect_to" instead of "render" to get an new ImportOrder instance
+    redirect_to new_uri_import_order_path
   end
 
   private
