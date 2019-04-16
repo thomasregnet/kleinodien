@@ -10,6 +10,7 @@ end
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'devise'
 
 # Mock requests to external APIs
 require 'fake_music_brainz'
@@ -69,6 +70,8 @@ RSpec.configure do |config|
 
   # https://github.com/plataformatec/devise#test-helpers
   config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|

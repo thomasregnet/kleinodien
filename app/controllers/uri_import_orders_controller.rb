@@ -2,6 +2,9 @@
 
 # Takes an uri and stores an ImportOrder
 class UriImportOrdersController < ApplicationController
+  # TODO: user must also have the right to order import_orders
+  before_action :authenticate_user!
+
   def new
     @import_order = ImportOrder.new
   end
