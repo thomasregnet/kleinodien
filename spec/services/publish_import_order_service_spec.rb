@@ -21,12 +21,14 @@ RSpec.describe PublishImportOrderService do
   end
 
   describe '.call' do
+    let(:import_order) { instance_double('ImportOrder') }
     let(:queue) do
       channel.queue('', exclusive: true)
     end
 
     before do
       connection.start
+      allow(import_order).to receive(:import_queue_name).and_return('my_queue')
     end
 
     after do
@@ -36,9 +38,9 @@ RSpec.describe PublishImportOrderService do
 
     # rubocop:disable RSpec/InstanceVariable
     it 'publishes the ImportOrder' do
-      queue.bind(exchange, routing_key: :brainz)
+      queue.bind(exchange, routing_key: 'my_queue')
 
-      described_class.call(import_order_type: :brainz)
+      described_class.call(import_order: import_order)
 
       queue.subscribe do |_delivery_info, _propertise, body|
         @received = body

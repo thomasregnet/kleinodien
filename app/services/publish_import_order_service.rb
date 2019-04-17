@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+# Take an ImportOrder and publish it to the import-worker
 class PublishImportOrderService < ServiceBase
   def initialize(args)
-    @import_order_type = args[:import_order_type]
+    @import_order = args[:import_order]
   end
 
-  attr_reader :import_order_type
+  attr_reader :import_order
 
   def call
     connection.start
-    exchange.publish('run', routing_key: import_order_type)
+    exchange.publish('run', routing_key: import_order.import_queue_name)
   end
 
   private
