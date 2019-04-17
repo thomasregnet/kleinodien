@@ -63,7 +63,7 @@ RSpec.describe BuildImportOrderFromUriService do
     end
 
     context 'with an invalid uri' do
-      let(:import_order){ described_class.call(uri_string: 'something wrong') }
+      let(:import_order) { described_class.call(uri_string: 'wrong') }
 
       it 'returns nil' do
         expect(import_order).to be_nil

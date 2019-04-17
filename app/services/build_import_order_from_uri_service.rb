@@ -48,11 +48,9 @@ class BuildImportOrderFromUriService < ServiceBase
   end
 
   def parse_uri
+    return unless uri_string =~ /\A#{URI.regexp(%w[http https])}\z/
+
     URI.parse(uri_string)
-  rescue URI::BadURIError
-    nil
-  rescue URI::InvalidURIError
-    nil
   end
 
   def uri
