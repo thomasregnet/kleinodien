@@ -37,7 +37,7 @@ namespace :db do
 
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
     import_orders.each do |import_order|
-      BrainzRootImporter.call(import_order: import_order)
+      BrainzImporter.call(import_order: import_order)
     end
 
     # TODO: use this if you need to populate users

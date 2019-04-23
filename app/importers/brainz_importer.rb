@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Choose the right class for MusicBrainz imports and call it
-class BrainzRootImporter
+class BrainzImporter
   IMPORTER_FOR = {
     'release' => 'ImportBrainzRelease'
   }.freeze

@@ -16,7 +16,7 @@ RSpec.feature 'import a single from MusicBrainz', type: :feature do
       user:  FactoryBot.create(:user)
     )
 
-    @result = BrainzRootImporter.call(import_order: import_order)
+    @result = BrainzImporter.call(import_order: import_order)
   end
 
   after(:all) { DatabaseCleaner.clean }

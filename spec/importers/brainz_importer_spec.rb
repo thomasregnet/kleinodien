@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-# TODO: specs for BrainzRootImporter
-RSpec.describe BrainzRootImporter do
+# TODO: specs for BrainzImporter
+RSpec.describe BrainzImporter do
   context 'release' do
     it 'foo' do
       # TODO: make a real test of this

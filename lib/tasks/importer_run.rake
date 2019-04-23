@@ -12,11 +12,14 @@ namespace :importer do
       WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
     end
 
-    # import_order_class = ENV['IMPORT_ORDER_CLASS']
+    import_order_class = ENV['IMPORT_ORDER_CLASS'].constantize
     queue_name = ENV['IMPORT_ORDER_CLASS'].constantize.import_queue_name
 
-    puts "listening to orders on \"#{queue_name}\""
-    ImportQueue.subscribe(queue_name: queue_name)
+    # puts "listening to orders on \"#{queue_name}\""
+    # ImportQueue.subscribe(queue_name: queue_name)
+
+    worker = ImportWorker.new(import_order_class: import_order_class)
+    worker.perform
 
     loop { sleep 5 }
   end
