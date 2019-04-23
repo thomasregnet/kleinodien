@@ -22,14 +22,14 @@ services:
       - rabbit
       # - redis
 
-  # brainz_importer:
-  #   build: .
-  #   depends_on:
-  #     - app
-  #     - redis
-  #   entrypoint: config/containers/importers/importer_cmd.sh
-  #   environment:
-  #     - IMPORTER_NAME=brainz
+  brainz_importer:
+    build: .
+    depends_on:
+      - app
+      - rabbit
+    entrypoint: config/containers/importers/importer_cmd.sh
+    environment:
+      - IMPORTER_NAME=brainz
 
   web:
     build:
