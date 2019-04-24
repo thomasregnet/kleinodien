@@ -21,6 +21,7 @@ class ImportWorker
   def perform_orders
     loop do
       import_order = import_order_class.next_pending || break
+      Rails.logger.info("next pending order #{import_order.code}")
       DeliverImportOrderService.call(import_order: import_order)
     end
   end

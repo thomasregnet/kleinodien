@@ -19,7 +19,7 @@ namespace :importer do
     # ImportQueue.subscribe(queue_name: queue_name)
 
     worker = ImportWorker.new(import_order_class: import_order_class)
-    worker.perform
+    # worker.perform
 
     loop { sleep 5 }
   end
