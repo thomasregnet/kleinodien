@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_090015) do
+ActiveRecord::Schema.define(version: 2019_04_24_195203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_090015) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "requests_count"
+    t.index ["code", "kind", "type"], name: "index_unique_import_orders_pending_or_processing", unique: true, where: "((state = 'pending'::text) OR (state = 'processing'::text))"
     t.index ["user_id"], name: "index_import_orders_on_user_id"
   end
 
