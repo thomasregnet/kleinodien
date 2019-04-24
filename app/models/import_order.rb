@@ -15,8 +15,22 @@ class ImportOrder < ApplicationRecord
 
   after_initialize :set_default_state
 
+  scope :pending, -> { where(state: 'pending') }
+
   validates :code, :kind, :state, :user, presence: true
+
+  # validates(
+  #   :code,
+  #   uniqueness: { scope: [:kind, :type], constraint: -> { pending } }
+  # )
+
   validates :state, inclusion: { in: %w[pending processing done failed] }
+
+  validates_uniqueness_of(
+    :code,
+    scope:      [:kind, :type],
+    conditions: -> { where(state: %w[pending processing]) }
+  )
 
   # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
   def self.import_queue_name
