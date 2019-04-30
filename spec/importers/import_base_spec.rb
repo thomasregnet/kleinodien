@@ -19,10 +19,10 @@ RSpec.describe ImportBase do
   describe '#find_already_existing' do
     let(:base) { described_class.new({}) }
 
-    it 'raises an NotImplementedError' do
+    it 'raises an NoMethodError' do
       expect { base.find_already_existing }
         .to raise_error(
-          NotImplementedError,
+          NoMethodError,
           /Class.+does not implement `find_already_existing'\Z/
         )
     end
@@ -31,10 +31,10 @@ RSpec.describe ImportBase do
   describe '#prepare' do
     let(:base) { described_class.new({}) }
 
-    it 'raises an NotImplementedError' do
+    it 'raises an NoMethodError' do
       expect { base.prepare }
         .to raise_error(
-          NotImplementedError,
+          NoMethodError,
           /Class.+does not implement `prepare'\Z/
         )
     end
@@ -43,10 +43,10 @@ RSpec.describe ImportBase do
   describe '#persist' do
     let(:base) { described_class.new({}) }
 
-    it 'raises an NotImplementedError' do
+    it 'raises an NoMethodError' do
       expect { base.persist }
         .to raise_error(
-          NotImplementedError,
+          NoMethodError,
           /Class.+does not implement `persist'\Z/
         )
     end
