@@ -11,12 +11,6 @@ class ImportBrainzRelease < ImportBrainzBase
     Heap.find_by(brainz_code: import_request.code)
   end
 
-  def import_request
-    @import_request ||= TransformBrainzOrderToRequestService.call(
-      import_order: import_order
-    )
-  end
-
   def prepare
     PrepareBrainzRelease.call(
       blueprint: blueprint,
@@ -26,10 +20,6 @@ class ImportBrainzRelease < ImportBrainzBase
 
   def blueprint
     proxy.get(import_request)
-  end
-
-  def proxy
-    @proxy ||= BrainzProxy.new(import_order: import_order)
   end
 
   def persist
