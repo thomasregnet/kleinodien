@@ -1,25 +1,10 @@
 # frozen_string_literal: true
 
 # Import a Release from MusicBrainz
-class ImportBrainzRelease
-  def self.call(import_order)
-    new(import_order).call
-  end
-
-  def initialize(args)
-    @import_order = args[:import_order]
-  end
-
-  attr_reader :import_order
-
+class ImportBrainzRelease < ImportBase
   def call
     validate_import_order
-
-    object = find_already_existing || prepare
-    return ImportResult.new(object: object) if object
-
-    object = persist
-    ImportResult.new(created: true, object: object)
+    super
   end
 
   def find_already_existing

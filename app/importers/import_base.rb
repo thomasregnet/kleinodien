@@ -11,7 +11,7 @@ class ImportBase < ServiceBase
   def call
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
 
-    existing_one || persisted_one
+    existing_one || persisting_one
   end
 
   def find_already_existing
@@ -46,5 +46,6 @@ class ImportBase < ServiceBase
     return unless result
 
     result.define_singleton_method('created?') { created }
+    result
   end
 end
