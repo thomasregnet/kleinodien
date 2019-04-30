@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Import a Release from MusicBrainz
-class ImportBrainzRelease < ImportBase
+class ImportBrainzRelease < ImportBrainzBase
   def call
     validate_import_order
     super
