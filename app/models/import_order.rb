@@ -2,6 +2,8 @@
 
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
+  include AASM
+
   belongs_to :user
   has_many :artist_credits
   has_many :artists
@@ -31,6 +33,11 @@ class ImportOrder < ApplicationRecord
     scope:      [:kind, :type],
     conditions: -> { where(state: %w[pending processing]) }
   )
+
+  aasm column: :state do
+    state :pending, initial: true
+    state :processing, :done, :failed
+  end
 
   # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
   def self.import_queue_name
