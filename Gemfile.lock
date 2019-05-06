@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.0.3)
+      concurrent-ruby (~> 1.0)
     actioncable (5.2.3)
       actionpack (= 5.2.3)
       nio4r (~> 2.0)
@@ -237,7 +239,6 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (4.3.0)
-    redis (4.1.0)
     reek (5.3.2)
       codeclimate-engine-rb (~> 0.4.0)
       kwalify (~> 0.7.0)
@@ -378,6 +379,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 5.0)
   bootsnap
   bootstrap (~> 4.3.1)
   bunny (~> 2.0)
@@ -400,7 +402,6 @@ DEPENDENCIES
   rails (= 5.2.3)
   rails-erd
   rails_best_practices
-  redis (~> 4.0)
   reek
   rspec-rails (~> 3.0)
   rubocop

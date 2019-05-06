@@ -2,9 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.2.3'
 gem 'pg', '~> 1.0'
-# Restrict capybara to a version lower than 3.
-# With 3.0.1 there was trouble with 'Wrong number of arguments'
-# when calling simple methods like `click_link` or `fill_in`
+gem 'aasm', '~> 5.0'
 gem 'bunny', '~> 2.0'
 gem 'capybara', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
