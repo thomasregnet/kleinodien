@@ -13,17 +13,11 @@ class BrainzFetcher
   attr_reader :import_request
 
   def call
-    # change_import_request_status_to(:processing)
-    change_import_request_status_to(:process)
+    import_request.process
     response = fetch
 
-    change_import_request_status_to(:done)
+    import_request.done
     BrainzBlueprint.from_xml(response.body)
-  end
-
-  def change_import_request_status_to(status)
-    import_request.send status
-    import_request.save!
   end
 
   def fetch
@@ -39,7 +33,7 @@ class BrainzFetcher
   end
 
   def can_not_fetch
-    change_import_request_status_to(:failure)
+    import_request.failure
     raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
   end
 
