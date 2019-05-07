@@ -11,6 +11,8 @@ module ImportStateTransitions
       state :pending, initial: true
       state :processing, :done, :failed
 
+      after_all_transitions { save! }
+
       event :process do
         transitions from: :pending, to: :processing
       end

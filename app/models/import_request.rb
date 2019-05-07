@@ -2,6 +2,8 @@
 
 # Base class for ImportRequests
 class ImportRequest < ApplicationRecord
+  include ImportStateTransitions
+
   belongs_to :import_order, counter_cache: :requests_count
   has_one :body, class_name: 'ImportRequestBody'
   has_many :attempts,
@@ -11,21 +13,21 @@ class ImportRequest < ApplicationRecord
   validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
-  def processing
-    return unless state == 'pending'
+  # def processing
+  #   return unless state == 'pending'
 
-    self.state = 'processing'
-  end
+  #   self.state = 'processing'
+  # end
 
-  def done
-    return unless state == 'processing' || state == 'pending'
+  # def done
+  #   return unless state == 'processing' || state == 'pending'
 
-    self.state = 'done'
-  end
+  #   self.state = 'done'
+  # end
 
-  def failed
-    return unless state == 'pending' || state == 'processing'
+  # def failed
+  #   return unless state == 'pending' || state == 'processing'
 
-    self.state = 'failed'
-  end
+  #   self.state = 'failed'
+  # end
 end
