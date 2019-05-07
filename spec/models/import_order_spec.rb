@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'aasm/rspec'
 require 'shared_examples_for_import_orders'
 
 # just for testing
