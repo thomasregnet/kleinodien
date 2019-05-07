@@ -2,7 +2,7 @@
 
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
-  include AASM
+  include ImportStateTransitions
 
   belongs_to :user
   has_many :artist_credits
@@ -21,11 +21,6 @@ class ImportOrder < ApplicationRecord
 
   validates :code, :kind, :state, :user, presence: true
 
-  # validates(
-  #   :code,
-  #   uniqueness: { scope: [:kind, :type], constraint: -> { pending } }
-  # )
-
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
   validates_uniqueness_of(
@@ -33,23 +28,6 @@ class ImportOrder < ApplicationRecord
     scope:      [:kind, :type],
     conditions: -> { where(state: %w[pending processing]) }
   )
-
-  aasm column: :state do
-    state :pending, initial: true
-    state :processing, :done, :failed
-
-    event :process do
-      transitions from: :pending, to: :processing
-    end
-
-    event :done do
-      transitions from: :processing, to: :done
-    end
-
-    event :failure do
-      transitions from: :processing, to: :failed
-    end
-  end
 
   # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
   def self.import_queue_name
