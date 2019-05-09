@@ -5,12 +5,12 @@ require 'webmock'
 
 # rubocop:disable Metrics/BlockLength
 namespace :db do
-  include WebMock::API
-  WebMock.enable!
-  WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
-
   desc 'fill the database with sample data'
   task populate: :environment do
+    include WebMock::API
+    WebMock.enable!
+    WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
+
     password = 'topSecret'
 
     user = User.create!(
