@@ -3,6 +3,7 @@ FROM ruby:2.6.3-alpine3.9
 RUN apk --update add \
     bash \
     build-base \
+    less \
     nodejs \
     libxslt-dev \
     libxml2-dev \
