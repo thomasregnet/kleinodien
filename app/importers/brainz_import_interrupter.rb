@@ -16,13 +16,11 @@ class BrainzImportInterrupter
     # OPTIMIZE: better way to omit #perform in test environment
     return if ENV['RAILS_ENV'] == 'test'
 
-    interruption_ends = last + interruption
-    return if interruption_ends < last
+    now = Time.now
+    sleep(time_to_sleep(now))
+    @last = now
 
-    delta = interruption_ends - last
-    sleep(delta)
-
-    @last = Time.now
+    nil
   end
 
   def signal_error
@@ -48,5 +46,13 @@ class BrainzImportInterrupter
 
   def min_interruption
     1
+  end
+
+  def time_to_sleep(now)
+    CalculateBrainzImportInterruptionService.call(
+      last:                last,
+      now:                 now,
+      needed_interruption: interruption
+    )
   end
 end
