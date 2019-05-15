@@ -4,13 +4,17 @@
 # https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting
 class CalculateBrainzImportInterruptionService < ServiceBase
   def initialize(args)
-
+    @last                = args[:last]
+    @now                 = args[:now]
+    @needed_interruption = args[:needed_interruption]
   end
 
-  # attr_reader
-
+  attr_reader :last, :now, :needed_interruption
 
   def call
-    # the code for the service belongs here
+    interruption_ends = last + needed_interruption
+    return 0 if interruption_ends < now
+
+    interruption_ends - now
   end
 end
