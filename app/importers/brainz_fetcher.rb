@@ -8,9 +8,11 @@ class BrainzFetcher
 
   def initialize(args)
     @import_request = args[:import_request]
+
+    @interrupter = BrainzImportInterrupter.instance
   end
 
-  attr_reader :import_request
+  attr_reader :import_request, :interrupter
 
   def call
     import_request.process
@@ -48,6 +50,8 @@ class BrainzFetcher
       message:     response.reason_phrase,
       status_code: response.status
     )
+    response.success? ? interrupter.signal_success : interrupter.signal_error
+
     response
   end
 
@@ -62,6 +66,6 @@ class BrainzFetcher
   end
 
   def take_a_nap
-    # TODO: implement take_a_nap
+    interrupter.perform
   end
 end
