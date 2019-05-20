@@ -239,6 +239,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (4.3.0)
+    redis (4.1.1)
     reek (5.3.2)
       codeclimate-engine-rb (~> 0.4.0)
       kwalify (~> 0.7.0)
@@ -402,6 +403,7 @@ DEPENDENCIES
   rails (= 5.2.3)
   rails-erd
   rails_best_practices
+  redis (~> 4.0)
   reek
   rspec-rails (~> 3.0)
   rubocop
