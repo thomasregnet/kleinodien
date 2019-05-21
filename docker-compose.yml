@@ -36,6 +36,16 @@ services:
     environment:
       - IMPORT_ORDER_CLASS=BrainzImportOrder
 
+  brainz_import_daemon:
+    build: .
+    depends_on:
+      - app
+      - db
+      - redis
+    entrypoint: config/containers/import_daemons/entrypoint.sh
+    environment:
+      - IMPORT_ORDER_CLASS=BrainzImportOrder
+
   web:
     build:
       context: .
