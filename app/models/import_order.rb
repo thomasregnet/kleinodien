@@ -29,6 +29,14 @@ class ImportOrder < ApplicationRecord
     conditions: -> { where(state: %w[pending processing]) }
   )
 
+  def self.publication_channel_name
+    "publish_#{to_s.underscore.pluralize}"
+  end
+
+  def publication_channel_name
+    self.class.publication_channel_name
+  end
+
   # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
   def self.import_queue_name
     "#{to_s.underscore.pluralize}_queue"
