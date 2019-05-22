@@ -4,27 +4,36 @@
 class PublishImportOrderService < ServiceBase
   def initialize(args)
     @import_order = args[:import_order]
+    @message      = args[:message]
   end
 
-  attr_reader :import_order
+  attr_reader :import_order, :message
 
   def call
-    connection.start
-    exchange.publish('run', routing_key: import_order.import_queue_name)
+    puts "==== #{import_order.import_queue_name} #{message}"
+    redis.publish(import_order.import_queue_name, message)
   end
 
-  private
-
-  def exchange
-    channel.direct('import_orders')
+  def redis
+    @redis ||= Redis.new(host: 'redis')
   end
+  # def call
+  #   connection.start
+  #   exchange.publish('run', routing_key: import_order.import_queue_name)
+  # end
 
-  def channel
-    @channel ||= connection.create_channel
-  end
+  # private
 
-  def connection
-    # TODO: get RabbitMQ host name by configuration
-    @connection ||= Bunny.new(host: 'rabbit')
-  end
+  # def exchange
+  #   channel.direct('import_orders')
+  # end
+
+  # def channel
+  #   @channel ||= connection.create_channel
+  # end
+
+  # def connection
+  #   # TODO: get RabbitMQ host name by configuration
+  #   @connection ||= Bunny.new(host: 'rabbit')
+  # end
 end
