@@ -92,6 +92,37 @@ RSpec.describe ImportOrder, type: :model do
     end
   end
 
+  describe '#save' do
+    context 'when pending' do
+      let(:import_order) do
+        FactoryBot.build(:import_order, type: 'FakeImportOrder')
+      end
+
+      it 'publishes the pending ImportOrder' do
+        redis = object_double('REDIS', publish: nil).as_stubbed_const
+        import_order.save
+        expect(redis).to have_received(:publish)
+          .with('publish_fake_import_orders', 'run')
+      end
+    end
+
+    context 'when not pending' do
+      let(:import_order) do
+        FactoryBot.build(
+          :import_order,
+          type:  'FakeImportOrder',
+          state: :processing
+        )
+      end
+
+      it 'does not publish the ImportOrder' do
+        redis = object_double('REDIS', publish: nil).as_stubbed_const
+        import_order.save
+        expect(redis).not_to have_received(:publish)
+      end
+    end
+  end
+
   it 'has a counter_cache for import_requests' do
     request_args = {
       type: 'BrainzArtistImportRequest',

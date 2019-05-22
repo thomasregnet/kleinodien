@@ -29,12 +29,22 @@ class ImportOrder < ApplicationRecord
     conditions: -> { where(state: %w[pending processing]) }
   )
 
+  after_save :publish
+
+  def publish
+    return unless pending?
+
+    REDIS.publish(publication_channel_name, 'run')
+  end
+
   def self.publication_channel_name
     "publish_#{to_s.underscore.pluralize}"
   end
 
   def publication_channel_name
-    self.class.publication_channel_name
+    return self.class.publication_channel_name unless type
+
+    "publish_#{type.to_s.underscore.pluralize}"
   end
 
   # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
