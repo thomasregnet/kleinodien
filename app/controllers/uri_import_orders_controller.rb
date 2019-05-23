@@ -14,7 +14,7 @@ class UriImportOrdersController < ApplicationController
       uri_string: uri_string,
       user:       current_user
     )
-    save_import_order && publish
+    save_import_order
 
     # use "redirect_to" instead of "render" to get an new ImportOrder instance
     redirect_to new_uri_import_order_path
@@ -33,10 +33,6 @@ class UriImportOrdersController < ApplicationController
 
   def import_order_params
     params.require(:import_order).permit(:uri)
-  end
-
-  def publish
-    PublishImportOrderService.call(import_order: @import_order)
   end
 
   def save_import_order
