@@ -22,9 +22,10 @@ class ImportDaemon
   end
 
   def process_orders
-    loop do
-      import_order = import_order_class.next_pending || break
-      DeliverImportOrderService.call(import_order: import_order)
-    end
+    Rails.logger.info('processing orders')
+  #   loop do
+  #     import_order = import_order_class.next_pending || break
+  #     DeliverImportOrderService.call(import_order: import_order)
+  #   end
   end
 end

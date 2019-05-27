@@ -39,7 +39,6 @@ services:
   brainz_import_daemon:
     build: .
     depends_on:
-      - app
       - db
       - redis
     entrypoint: config/containers/import_daemons/entrypoint.sh

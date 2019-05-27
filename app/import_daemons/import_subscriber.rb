@@ -4,24 +4,30 @@
 class ImportSubscriber
   def initialize(args)
     @channel   = args[:channel]
-    @redis_url = args[:redis_url]
-    @timeout   = args[:timeout]
+    @timeout   = args.fetch(:timeout, 300)
   end
 
+  attr_reader :channel, :timeout
+
   def perform
-    redis.subscribe_with_timeout(timeout, channel) do |on|
-      on.message do |_, message|
-        unsubscribe
-        return message
+    begin
+      redis.subscribe_with_timeout(timeout, channel) do |on|
+        on.message do |_, message|
+          unsubscribe
+          return message
+        end
       end
+    rescue Redis::TimeoutError => exception
+      Rails.logger.info("#{exception.class}: #{exception}")
     end
   end
 
   def redis
-    @redis ||= Redis.new(url: redis_url)
+    REDIS
   end
 
   def unsubscribe
+    Rails.logger('unsubscribe')
     redis.unsubscribe(channel)
   end
 end
