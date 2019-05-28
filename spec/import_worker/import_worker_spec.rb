@@ -13,4 +13,19 @@ RSpec.describe ImportWorker do
       expect(worker.run).to be_nil
     end
   end
+
+  # https://www.rubydoc.info/gems/rubocop-rspec/1.6.0/RuboCop/Cop/RSpec/AnyInstance
+  describe '.run' do
+    let(:args) { {} }
+    let(:worker) { instance_double(described_class) }
+
+    before do
+      allow(described_class).to receive(:new).and_return(worker)
+      allow(worker).to receive(:run).and_return('run called')
+    end
+
+    it 'calls #run' do
+      expect(described_class.run(args)).to eq('run called')
+    end
+  end
 end
