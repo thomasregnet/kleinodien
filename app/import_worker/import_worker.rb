@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Import from external sources
-class ImportDaemon
+class ImportWorker
   def self.run(args)
     new(args).run
   end

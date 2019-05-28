@@ -21,12 +21,12 @@ services:
       - db
       - redis
 
-  brainz_import_daemon:
+  brainz_import_worker:
     build: .
     depends_on:
       - db
       - redis
-    entrypoint: config/containers/import_daemons/entrypoint.sh
+    entrypoint: config/containers/import_worker/entrypoint.sh
     environment:
       - IMPORT_ORDER_CLASS=BrainzImportOrder
 

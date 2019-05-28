@@ -14,7 +14,7 @@ subscriber = ImportSubscriber.new(
   timeout: ENV.fetch('IMPORT_SUBSCRIPTION_TIMEOUT', 300).to_i
 )
 
-ImportDaemon.run(
+ImportWorker.run(
   import_order_class: import_order_class,
   subscriber:         subscriber
 )
