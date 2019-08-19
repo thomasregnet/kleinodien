@@ -13,7 +13,7 @@ RSpec.describe Api::V01::ArtistCreditsController, type: :request do
     it 'sends a list of artist_credits' do
       api_get '/api/v01/artist-credits'
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       expect(json_data.length).to eq 2
     end

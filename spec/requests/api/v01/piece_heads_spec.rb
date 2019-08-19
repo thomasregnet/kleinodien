@@ -11,7 +11,7 @@ RSpec.describe Api::V01::PieceHeadsController, type: :request do
 
     a = api_get '/api/v01/piece-heads'
 
-    expect(response).to be_success
+    expect(response).to be_successful
 
     expect(json['data'].length).to eq 3
   end

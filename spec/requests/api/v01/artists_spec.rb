@@ -9,7 +9,7 @@ RSpec.describe Api::V01::ArtistsController, type: :request do
 
     api_get '/api/v01/artists'
 
-    expect(response).to be_success
+    expect(response).to be_successful
 
     expect(json['data'].length).to eq 2
   end
@@ -25,7 +25,7 @@ RSpec.describe Api::V01::ArtistsController, type: :request do
                }
              ]
 
-    expect(response).to be_success
+    expect(response).to be_successful
     expect(response).to have_http_status(:created)
   end
 end
