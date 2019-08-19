@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.3'
+gem 'rails', '6.0.0'
 gem 'pg', '~> 1.0'
 gem 'aasm', '~> 5.0'
 gem 'bunny', '~> 2.0'

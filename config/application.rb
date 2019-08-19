@@ -15,10 +15,5 @@ module Kleinodien
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
-    # https://www.codementor.io/mohnishjadwani/how-to-setup-rspec-factory-bot-and-spring-for-a-rails-5-engine-qjdpthfb1
-    config.generators do |generator|
-      generator.factory_bot dir: 'spec/factories'
-    end
   end
 end
