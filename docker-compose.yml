@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-    image: postgres:11.2
+    image: postgres:11.5
     volumes:
       - postgresql_data:/var/lib/postgresql/data
 
