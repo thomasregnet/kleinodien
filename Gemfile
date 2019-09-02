@@ -21,6 +21,8 @@ gem 'multi_xml', '~> 0.6'
 gem 'unicorn', '~> 5.4'
 gem 'bootstrap', '~> 4.3.1'
 gem 'redis', '~> 4.0'
+# https://nvd.nist.gov/vuln/detail/CVE-2019-5477
+gem 'nokogiri', '>= 1.10.4'
 
 group :development, :test do
   gem 'byebug'
