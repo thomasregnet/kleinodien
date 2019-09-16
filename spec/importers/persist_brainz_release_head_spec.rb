@@ -20,7 +20,7 @@ class MockPersistBrainzReleaseHeadProxy
 end
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe PersistBrainzHeapHead do
+RSpec.describe PersistBrainzReleaseHead do
   describe '.call' do
     context 'when the ReleaseHead already exists' do
       before do

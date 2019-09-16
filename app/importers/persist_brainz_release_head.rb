@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Persist a CompilationHead using data from MusicBrainz
-class PersistBrainzHeapHead < PersistBrainzBase
+class PersistBrainzReleaseHead < PersistBrainzBase
   def initialize(args)
     super(args)
     @import_request = args[:import_request]

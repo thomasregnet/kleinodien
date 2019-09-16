@@ -48,7 +48,7 @@ class PersistBrainzHeap < PersistBrainzBase
       code: blueprint.release_group.brainz_code
     )
 
-    PersistBrainzHeapHead.call(
+    PersistBrainzReleaseHead.call(
       # blueprint: proxy.get(import_request),
       import_request: import_request,
       proxy:          proxy
