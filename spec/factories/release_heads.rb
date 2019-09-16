@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :heap_head do
+  factory :release_head do
     sequence(:title) { |n| "HeapHead ##{n}" }
 
     factory :album_head, class: AlbumHead do

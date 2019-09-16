@@ -1,2 +1,2 @@
-class SingleHead < HeapHead
+class SingleHead < ReleaseHead
 end

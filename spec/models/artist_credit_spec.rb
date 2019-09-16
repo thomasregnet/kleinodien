@@ -4,7 +4,7 @@ require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe ArtistCredit, type: :model do
-  it { is_expected.to have_many(:heap_heads) }
+  it { is_expected.to have_many(:release_heads) }
   it { is_expected.to have_many(:heaps) }
   it { is_expected.to belong_to(:import_order).without_validating_presence }
 

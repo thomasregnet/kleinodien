@@ -20,7 +20,7 @@ class PersistBrainzHeapHead < PersistBrainzBase
   def find_already_existing
     FindByCodesService.call(
       codes_hash:  blueprint.codes_hash,
-      model_class: HeapHead
+      model_class: ReleaseHead
     )
   end
 
@@ -28,7 +28,7 @@ class PersistBrainzHeapHead < PersistBrainzBase
     artist_credit = persist_artist_credit
 
     # TODO: chose a type from the blueprint
-    HeapHead.create!(
+    ReleaseHead.create!(
       artist_credit: artist_credit,
       title:         blueprint.title,
       type:          type

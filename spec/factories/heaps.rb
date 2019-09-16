@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :heap do
-    association :head, factory: :heap_head
+    association :head, factory: :release_head
   end
 end

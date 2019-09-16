@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_193617) do
+ActiveRecord::Schema.define(version: 2019_09_16_072601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -168,22 +168,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
     t.index ["abbr"], name: "formats_abbr_key", unique: true
   end
 
-  create_table "heap_heads", force: :cascade do |t|
-    t.string "disambiguation"
-    t.string "title", null: false
-    t.string "type"
-    t.uuid "brainz_code"
-    t.integer "imdb_code"
-    t.integer "tmdb_code"
-    t.integer "wikidata_code"
-    t.bigint "artist_credit_id"
-    t.bigint "import_order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_heap_heads_on_artist_credit_id"
-    t.index ["import_order_id"], name: "index_heap_heads_on_import_order_id"
-  end
-
   create_table "heap_media", force: :cascade do |t|
     t.integer "position", limit: 2, null: false
     t.integer "quantity", limit: 2, null: false
@@ -233,12 +217,12 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
     t.integer "wikidata_code"
     t.bigint "artist_credit_id"
     t.bigint "import_order_id"
-    t.bigint "heap_head_id", null: false
+    t.bigint "release_head_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_heaps_on_artist_credit_id"
-    t.index ["heap_head_id"], name: "index_heaps_on_heap_head_id"
     t.index ["import_order_id"], name: "index_heaps_on_import_order_id"
+    t.index ["release_head_id"], name: "index_heaps_on_release_head_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -493,6 +477,22 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "release_heads", force: :cascade do |t|
+    t.string "disambiguation"
+    t.string "title", null: false
+    t.string "type"
+    t.uuid "brainz_code"
+    t.integer "imdb_code"
+    t.integer "tmdb_code"
+    t.integer "wikidata_code"
+    t.bigint "artist_credit_id"
+    t.bigint "import_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_credit_id"], name: "index_release_heads_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_release_heads_on_import_order_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.integer "serial_id", null: false
     t.integer "position", null: false
@@ -605,8 +605,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
-  add_foreign_key "heap_heads", "artist_credits"
-  add_foreign_key "heap_heads", "import_orders"
   add_foreign_key "heap_media", "heaps"
   add_foreign_key "heap_media", "medium_formats"
   add_foreign_key "heap_subsets", "heaps"
@@ -614,8 +612,8 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
   add_foreign_key "heap_tracks", "import_orders"
   add_foreign_key "heap_tracks", "pieces"
   add_foreign_key "heaps", "artist_credits"
-  add_foreign_key "heaps", "heap_heads"
   add_foreign_key "heaps", "import_orders"
+  add_foreign_key "heaps", "release_heads"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
@@ -662,6 +660,8 @@ ActiveRecord::Schema.define(version: 2019_08_19_193617) do
   add_foreign_key "ratings", "serials"
   add_foreign_key "ratings", "stations"
   add_foreign_key "ratings", "users"
+  add_foreign_key "release_heads", "artist_credits"
+  add_foreign_key "release_heads", "import_orders"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "seasons_tags", "seasons"
   add_foreign_key "seasons_tags", "tags"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Heading of sets
-class HeapHead < ApplicationRecord
+class ReleaseHead < ApplicationRecord
   belongs_to :artist_credit, required: false
   belongs_to :import_order, required: false
 

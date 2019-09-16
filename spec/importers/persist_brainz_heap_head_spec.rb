@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'test_data'
 
 # Fake a BrainzProxy
-class MockPersistBrainzHeapHeadProxy
+class MockPersistBrainzReleaseHeadProxy
   def initialize
     @arise     = TestData.by_name(:brainz_release_group_arise).blueprint
     @sepultura = TestData.by_name(:brainz_artist_sepultura).blueprint
@@ -22,10 +22,10 @@ end
 # rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzHeapHead do
   describe '.call' do
-    context 'when the HeapHead already exists' do
+    context 'when the ReleaseHead already exists' do
       before do
         FactoryBot.create(
-          :heap_head,
+          :release_head,
           brainz_code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933',
           title:       'Dummy Head'
         )
@@ -41,16 +41,16 @@ RSpec.describe PersistBrainzHeapHead do
         BrainzReleaseGroupImportRequest.new(code: brainz_code)
       end
 
-      it 'returns the persisted HeapHead' do
+      it 'returns the persisted ReleaseHead' do
         args = {
           import_request: import_request,
-          proxy:          MockPersistBrainzHeapHeadProxy.new
+          proxy:          MockPersistBrainzReleaseHeadProxy.new
         }
         expect(described_class.call(args).title).to eq('Dummy Head')
       end
     end
 
-    context 'when the HeapHead does not exist' do
+    context 'when the ReleaseHead does not exist' do
       let(:blueprint) do
         TestData.by_name(:brainz_release_group_arise).blueprint
       end
@@ -59,8 +59,8 @@ RSpec.describe PersistBrainzHeapHead do
         TestData.by_name(:brainz_artist_sepultura).blueprint
       end
 
-      it 'returns a HeapHead' do
-        proxy = MockPersistBrainzHeapHeadProxy.new
+      it 'returns a ReleaseHead' do
+        proxy = MockPersistBrainzReleaseHeadProxy.new
 
         args = {
           import_request: BrainzReleaseGroupImportRequest.new(

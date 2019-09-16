@@ -10,7 +10,7 @@ class ArtistCredit < ActiveRecord::Base
   has_many :comments
   has_many :descriptions
   has_many :participants, inverse_of: :artist_credit
-  has_many :heap_heads
+  has_many :release_heads
   has_many :heaps
   has_many :pieces, class_name: 'PieceHead'
   has_many :ratings
