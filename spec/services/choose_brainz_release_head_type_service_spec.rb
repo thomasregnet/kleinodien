@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-RSpec.describe ChooseBrainzHeapHeadTypeService do
+RSpec.describe ChooseBrainzReleaseHeadTypeService do
   it_behaves_like 'a service'
   context 'with type "Album"' do
 

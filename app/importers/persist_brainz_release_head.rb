@@ -43,6 +43,6 @@ class PersistBrainzReleaseHead < PersistBrainzBase
   end
 
   def type
-    ChooseBrainzHeapHeadTypeService.call(brainz_type: blueprint.type)
+    ChooseBrainzReleaseHeadTypeService.call(brainz_type: blueprint.type)
   end
 end
