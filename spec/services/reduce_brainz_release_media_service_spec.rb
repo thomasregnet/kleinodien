@@ -5,7 +5,7 @@ require 'shared_examples_for_services'
 require 'test_data'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe ReduceBrainzHeapMediaService do
+RSpec.describe ReduceBrainzReleaseMediaService do
   it_behaves_like 'a service'
 
   # TODO: do this with a double album

@@ -19,7 +19,7 @@ RSpec.describe ImportOrder, type: :model do
   it { is_expected.to have_many(:artists) }
   it { is_expected.to have_many(:release_heads) }
   it { is_expected.to have_many(:heap_tracks) }
-  it { is_expected.to have_many(:heaps) }
+  it { is_expected.to have_many(:releases) }
   it { is_expected.to have_many(:medium_formats) }
   it { is_expected.to have_many(:piece_heads) }
   it { is_expected.to have_many(:pieces) }

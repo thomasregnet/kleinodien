@@ -11,7 +11,7 @@ class ArtistCredit < ActiveRecord::Base
   has_many :descriptions
   has_many :participants, inverse_of: :artist_credit
   has_many :release_heads
-  has_many :heaps
+  has_many :releases
   has_many :pieces, class_name: 'PieceHead'
   has_many :ratings
   has_many :song_releases

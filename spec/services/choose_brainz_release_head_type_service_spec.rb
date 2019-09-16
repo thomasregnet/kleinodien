@@ -20,7 +20,7 @@ RSpec.describe ChooseBrainzReleaseHeadTypeService do
 
   context 'with another type' do
     it 'returns the default: "HeapHead"' do
-      expect(described_class.call(brainz_type: 'SomeType')).to eq('HeapHead')
+      expect(described_class.call(brainz_type: 'SomeType')).to eq('ReleaseHead')
     end
   end
 end

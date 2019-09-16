@@ -1,5 +1,5 @@
 class HeapSubset < ApplicationRecord
-  belongs_to :heap
+  belongs_to :release
 
   has_many :tracks, class_name: 'HeapTrack'
 

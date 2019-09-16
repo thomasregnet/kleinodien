@@ -8,7 +8,7 @@ class ImportBrainzRelease < ImportBrainzBase
   end
 
   def find_already_existing
-    Heap.find_by(brainz_code: import_request.code)
+    Release.find_by(brainz_code: import_request.code)
   end
 
   def prepare
@@ -27,7 +27,7 @@ class ImportBrainzRelease < ImportBrainzBase
     proxy.lock
 
     import_order.transaction do
-      PersistBrainzHeap.call(
+      PersistBrainzRelease.call(
         import_order:   import_order,
         import_request: import_request,
         proxy:          proxy

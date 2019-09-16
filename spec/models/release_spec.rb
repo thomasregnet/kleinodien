@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Heap, type: :model do
+RSpec.describe Release, type: :model do
   it { is_expected.to belong_to(:artist_credit).without_validating_presence }
   it { is_expected.to belong_to(:head).class_name('ReleaseHead') }
   it { is_expected.to belong_to(:import_order).without_validating_presence }
@@ -10,20 +10,20 @@ RSpec.describe Heap, type: :model do
   it { is_expected.to have_many(:subsets) }
 
   context 'with valid attributes' do
-    let(:heap) { FactoryBot.build(:heap) }
+    let(:release) { FactoryBot.build(:release) }
 
     it 'is valid' do
-      expect(heap).to be_valid
+      expect(release).to be_valid
     end
   end
 
   describe '#head' do
-    let(:heap) { FactoryBot.build(:heap) }
+    let(:release) { FactoryBot.build(:release) }
 
     context 'when nil' do
       it 'is not valid' do
-        heap.head = nil
-        expect(heap).not_to be_valid
+        release.head = nil
+        expect(release).not_to be_valid
       end
     end
   end

@@ -50,7 +50,7 @@ RSpec.describe ImportBrainzRelease do
   context 'when the requested import already exists' do
     before do
       DatabaseCleaner.start
-      FactoryBot.create(:heap, brainz_code: brainz_code)
+      FactoryBot.create(:release, brainz_code: brainz_code)
     end
 
     after { DatabaseCleaner.clean }
@@ -61,7 +61,7 @@ RSpec.describe ImportBrainzRelease do
 
     specify 'the :result contains the release' do
       expect(described_class.call(import_order: import_order))
-        .to be_instance_of Heap
+        .to be_instance_of Release
     end
 
     specify ':new_record is false' do

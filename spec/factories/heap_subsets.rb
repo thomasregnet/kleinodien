@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :heap_subset do
-    association :heap, factory: :heap
+    association :release, factory: :release
     sequence(:no) { |n| n }
   end
 end

@@ -5,7 +5,7 @@ require 'shared_examples_for_services'
 require 'test_data'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe PersistBrainzHeap do
+RSpec.describe PersistBrainzRelease do
   it_behaves_like 'a service'
 
   describe '.call' do
@@ -17,7 +17,7 @@ RSpec.describe PersistBrainzHeap do
       before do
         FactoryBot.create(
           # :compilation_release,
-          :heap,
+          :release,
           brainz_code: brainz_code, # '693748be-7c18-39c3-af2e-2e62092090cf',
           title:       'Test Dummy'
         )

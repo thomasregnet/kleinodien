@@ -16,7 +16,7 @@ RSpec.describe PersistBrainzHeapSubset do
     it 'persists the subset' do
       args = {
         blueprint: blueprint.media[0],
-        heap:      FactoryBot.create(:heap),
+        release:   FactoryBot.create(:release),
         proxy:     BrainzProxy.new(import_order: import_order)
       }
       allow(PersistBrainzHeapTrack).to receive(:call)

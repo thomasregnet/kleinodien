@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe HeapsController, type: :controller do
+RSpec.describe ReleasesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns http success' do
@@ -12,10 +12,10 @@ RSpec.describe HeapsController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:heap) { FactoryBot.create(:heap) }
+    let(:release) { FactoryBot.create(:release) }
 
     it 'returns http success' do
-      get :show, params: { id: heap.id }
+      get :show, params: { id: release.id }
       expect(response).to have_http_status(:success)
     end
   end

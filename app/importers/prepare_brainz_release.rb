@@ -10,8 +10,8 @@ class PrepareBrainzRelease < PrepareBrainzBase
   attr_reader :blueprint
 
   def call
-    heap = find_already_existing
-    return heap if heap
+    release = find_already_existing
+    return release if release
 
     prepare_artist_credit
     prepare_release_group
@@ -61,7 +61,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def find_already_existing
     FindByCodesService.call(
-      model_class: Heap,
+      model_class: Release,
       codes_hash:  blueprint.codes_hash
     )
   end

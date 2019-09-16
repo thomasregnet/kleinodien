@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-RSpec.describe ChooseBrainzHeapTypeService do
+RSpec.describe ChooseBrainzReleaseTypeService do
   it_behaves_like 'a service'
 
   context 'with type "Album"' do
@@ -19,8 +19,8 @@ RSpec.describe ChooseBrainzHeapTypeService do
   end
 
   context 'with another type' do
-    it 'returns the default: "Heap"' do
-      expect(described_class.call(brainz_type: 'SomeType')).to eq('Heap')
+    it 'returns the default: "Release"' do
+      expect(described_class.call(brainz_type: 'SomeType')).to eq('Release')
     end
   end
 end

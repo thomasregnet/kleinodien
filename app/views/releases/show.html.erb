@@ -1,15 +1,15 @@
 <% content_for :title do %>
-     <% @heap.title %>
+     <% @release.title %>
 <% end %>
 
 <h1>
-    <%= @heap.title %>
+    <%= @release.title %>
     <br>
-    <small class="text-muted"><%= @heap.artist_credit.name %></small>
+    <small class="text-muted"><%= @release.artist_credit.name %></small>
 </h1>
 
 <ul>
-    <% @heap.subsets.each do |subset| %>
+    <% @release.subsets.each do |subset| %>
         <% subset.tracks.each do |track| %>
             <li>
                 <%= track.piece.title %>

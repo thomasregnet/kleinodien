@@ -5,13 +5,13 @@ class PersistBrainzHeapSubset < PersistBrainzBase
   def initialize(args)
     super(args)
     @blueprint = args[:blueprint]
-    @heap      = args[:heap]
+    @release   = args[:release]
   end
 
-  attr_reader :blueprint, :heap
+  attr_reader :blueprint, :release
 
   def call
-    subset = heap.subsets.create!(no: blueprint.position, title: title)
+    subset = release.subsets.create!(no: blueprint.position, title: title)
     persist_tracks(subset)
     subset
   end

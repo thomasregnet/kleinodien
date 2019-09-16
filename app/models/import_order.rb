@@ -9,7 +9,7 @@ class ImportOrder < ApplicationRecord
   has_many :artists
   has_many :release_heads
   has_many :heap_tracks
-  has_many :heaps
+  has_many :releases
   has_many :import_requests
   has_many :medium_formats
   has_many :piece_heads

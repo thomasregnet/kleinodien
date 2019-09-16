@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_072601) do
+ActiveRecord::Schema.define(version: 2019_09_16_110105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -171,21 +171,21 @@ ActiveRecord::Schema.define(version: 2019_09_16_072601) do
   create_table "heap_media", force: :cascade do |t|
     t.integer "position", limit: 2, null: false
     t.integer "quantity", limit: 2, null: false
-    t.bigint "heap_id", null: false
+    t.bigint "release_id", null: false
     t.bigint "medium_format_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["heap_id"], name: "index_heap_media_on_heap_id"
     t.index ["medium_format_id"], name: "index_heap_media_on_medium_format_id"
+    t.index ["release_id"], name: "index_heap_media_on_release_id"
   end
 
   create_table "heap_subsets", force: :cascade do |t|
     t.integer "no", null: false
     t.string "title"
-    t.bigint "heap_id", null: false
+    t.bigint "release_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["heap_id"], name: "index_heap_subsets_on_heap_id"
+    t.index ["release_id"], name: "index_heap_subsets_on_release_id"
   end
 
   create_table "heap_tracks", force: :cascade do |t|
@@ -201,28 +201,6 @@ ActiveRecord::Schema.define(version: 2019_09_16_072601) do
     t.index ["heap_subset_id"], name: "index_heap_tracks_on_heap_subset_id"
     t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
     t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
-  end
-
-  create_table "heaps", force: :cascade do |t|
-    t.integer "barcode"
-    t.date "date"
-    t.integer "data_mask"
-    t.string "title"
-    t.string "type"
-    t.string "version"
-    t.uuid "brainz_code"
-    t.integer "discogs_code"
-    t.integer "imdb_code"
-    t.integer "tmdb_code"
-    t.integer "wikidata_code"
-    t.bigint "artist_credit_id"
-    t.bigint "import_order_id"
-    t.bigint "release_head_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_heaps_on_artist_credit_id"
-    t.index ["import_order_id"], name: "index_heaps_on_import_order_id"
-    t.index ["release_head_id"], name: "index_heaps_on_release_head_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -493,6 +471,28 @@ ActiveRecord::Schema.define(version: 2019_09_16_072601) do
     t.index ["import_order_id"], name: "index_release_heads_on_import_order_id"
   end
 
+  create_table "releases", force: :cascade do |t|
+    t.integer "barcode"
+    t.date "date"
+    t.integer "data_mask"
+    t.string "title"
+    t.string "type"
+    t.string "version"
+    t.uuid "brainz_code"
+    t.integer "discogs_code"
+    t.integer "imdb_code"
+    t.integer "tmdb_code"
+    t.integer "wikidata_code"
+    t.bigint "artist_credit_id"
+    t.bigint "import_order_id"
+    t.bigint "release_head_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_credit_id"], name: "index_releases_on_artist_credit_id"
+    t.index ["import_order_id"], name: "index_releases_on_import_order_id"
+    t.index ["release_head_id"], name: "index_releases_on_release_head_id"
+  end
+
   create_table "seasons", id: :serial, force: :cascade do |t|
     t.integer "serial_id", null: false
     t.integer "position", null: false
@@ -605,15 +605,12 @@ ActiveRecord::Schema.define(version: 2019_09_16_072601) do
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
-  add_foreign_key "heap_media", "heaps"
   add_foreign_key "heap_media", "medium_formats"
-  add_foreign_key "heap_subsets", "heaps"
+  add_foreign_key "heap_media", "releases"
+  add_foreign_key "heap_subsets", "releases"
   add_foreign_key "heap_tracks", "heap_subsets"
   add_foreign_key "heap_tracks", "import_orders"
   add_foreign_key "heap_tracks", "pieces"
-  add_foreign_key "heaps", "artist_credits"
-  add_foreign_key "heaps", "import_orders"
-  add_foreign_key "heaps", "release_heads"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
@@ -662,6 +659,9 @@ ActiveRecord::Schema.define(version: 2019_09_16_072601) do
   add_foreign_key "ratings", "users"
   add_foreign_key "release_heads", "artist_credits"
   add_foreign_key "release_heads", "import_orders"
+  add_foreign_key "releases", "artist_credits"
+  add_foreign_key "releases", "import_orders"
+  add_foreign_key "releases", "release_heads"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "seasons_tags", "seasons"
   add_foreign_key "seasons_tags", "tags"
