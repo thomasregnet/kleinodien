@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :release_head do
-    sequence(:title) { |n| "HeapHead ##{n}" }
+    sequence(:title) { |n| "ReleaseHead ##{n}" }
 
     factory :album_head, class: AlbumHead do
       association :artist_credit, factory: :artist_credit

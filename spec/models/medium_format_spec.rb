@@ -16,7 +16,7 @@ RSpec.describe MediumFormat, type: :model do
     it { should validate_uniqueness_of(:brainz_code).ignoring_case_sensitivity }
   end
 
-  describe '#heap_media' do
+  describe '#release_media' do
     # it { should have_many(:release_media) }
     it { should have_many(:media) }
   end
