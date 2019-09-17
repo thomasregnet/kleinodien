@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_110105) do
+ActiveRecord::Schema.define(version: 2019_09_17_065837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -166,17 +166,6 @@ ActiveRecord::Schema.define(version: 2019_09_16_110105) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
-  end
-
-  create_table "heap_media", force: :cascade do |t|
-    t.integer "position", limit: 2, null: false
-    t.integer "quantity", limit: 2, null: false
-    t.bigint "release_id", null: false
-    t.bigint "medium_format_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["medium_format_id"], name: "index_heap_media_on_medium_format_id"
-    t.index ["release_id"], name: "index_heap_media_on_release_id"
   end
 
   create_table "heap_subsets", force: :cascade do |t|
@@ -471,6 +460,17 @@ ActiveRecord::Schema.define(version: 2019_09_16_110105) do
     t.index ["import_order_id"], name: "index_release_heads_on_import_order_id"
   end
 
+  create_table "release_media", force: :cascade do |t|
+    t.integer "position", limit: 2, null: false
+    t.integer "quantity", limit: 2, null: false
+    t.bigint "release_id", null: false
+    t.bigint "medium_format_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medium_format_id"], name: "index_release_media_on_medium_format_id"
+    t.index ["release_id"], name: "index_release_media_on_release_id"
+  end
+
   create_table "releases", force: :cascade do |t|
     t.integer "barcode"
     t.date "date"
@@ -605,8 +605,6 @@ ActiveRecord::Schema.define(version: 2019_09_16_110105) do
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
-  add_foreign_key "heap_media", "medium_formats"
-  add_foreign_key "heap_media", "releases"
   add_foreign_key "heap_subsets", "releases"
   add_foreign_key "heap_tracks", "heap_subsets"
   add_foreign_key "heap_tracks", "import_orders"
@@ -659,6 +657,8 @@ ActiveRecord::Schema.define(version: 2019_09_16_110105) do
   add_foreign_key "ratings", "users"
   add_foreign_key "release_heads", "artist_credits"
   add_foreign_key "release_heads", "import_orders"
+  add_foreign_key "release_media", "medium_formats"
+  add_foreign_key "release_media", "releases"
   add_foreign_key "releases", "artist_credits"
   add_foreign_key "releases", "import_orders"
   add_foreign_key "releases", "release_heads"

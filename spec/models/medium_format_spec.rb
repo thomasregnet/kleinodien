@@ -17,7 +17,8 @@ RSpec.describe MediumFormat, type: :model do
   end
 
   describe '#heap_media' do
-    it { should have_many(:heap_media) }
+    # it { should have_many(:release_media) }
+    it { should have_many(:media) }
   end
 
   describe '#import_order' do
