@@ -71,7 +71,6 @@ class PersistBrainzRelease < PersistBrainzBase
       PersistBrainzReleaseSubset.call(
         blueprint: medium,
         release:   release,
-        # heap:      release,
         proxy:     proxy
       )
     end

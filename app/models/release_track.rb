@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Piece that resides on a Heap
+# Piece that resides on a Release
 class ReleaseTrack < ApplicationRecord
   belongs_to(
     :subset,

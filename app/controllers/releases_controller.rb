@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Controller for Heaps, Albums, Singles...
+# Controller for releases, albums, singles...
 class ReleasesController < ApplicationController
   def index
     @release = Release.all

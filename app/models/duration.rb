@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Duration of a Piece or a Heap, to be used with composed_of
+# Duration of a Piece or a Release, to be used with composed_of
 class Duration
   def self.milliseconds(milliseconds)
     new(milliseconds, ACCURACY_MILLISECOND)
