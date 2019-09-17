@@ -8,7 +8,7 @@ class ImportOrder < ApplicationRecord
   has_many :artist_credits
   has_many :artists
   has_many :release_heads
-  has_many :heap_tracks
+  has_many :release_tracks
   has_many :releases
   has_many :import_requests
   has_many :medium_formats

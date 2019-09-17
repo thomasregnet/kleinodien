@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_models_with_duration'
 
-RSpec.describe HeapTrack, type: :model do
+RSpec.describe ReleaseTrack, type: :model do
   # subject { FactoryBot.build(:heap_track) }
 
   it { is_expected.to belong_to(:subset) }

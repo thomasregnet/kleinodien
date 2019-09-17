@@ -25,7 +25,7 @@ RSpec.describe PersistBrainzHeapTrack do
     it 'persists the track' do
       allow(PersistBrainzPiece).to receive(:call)
         .and_return(FactoryBot.build(:piece))
-      expect(described_class.call(args)).to be_instance_of(HeapTrack)
+      expect(described_class.call(args)).to be_instance_of(ReleaseTrack)
     end
   end
 end
