@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_065837) do
+ActiveRecord::Schema.define(version: 2019_09_17_071112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -168,15 +168,6 @@ ActiveRecord::Schema.define(version: 2019_09_17_065837) do
     t.index ["abbr"], name: "formats_abbr_key", unique: true
   end
 
-  create_table "heap_subsets", force: :cascade do |t|
-    t.integer "no", null: false
-    t.string "title"
-    t.bigint "release_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["release_id"], name: "index_heap_subsets_on_release_id"
-  end
-
   create_table "heap_tracks", force: :cascade do |t|
     t.string "accuracy"
     t.integer "milliseconds"
@@ -185,11 +176,11 @@ ActiveRecord::Schema.define(version: 2019_09_17_065837) do
     t.bigint "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "heap_subset_id", null: false
+    t.bigint "release_subset_id", null: false
     t.integer "no", limit: 2, null: false
-    t.index ["heap_subset_id"], name: "index_heap_tracks_on_heap_subset_id"
     t.index ["import_order_id"], name: "index_heap_tracks_on_import_order_id"
     t.index ["piece_id"], name: "index_heap_tracks_on_piece_id"
+    t.index ["release_subset_id"], name: "index_heap_tracks_on_release_subset_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -471,6 +462,15 @@ ActiveRecord::Schema.define(version: 2019_09_17_065837) do
     t.index ["release_id"], name: "index_release_media_on_release_id"
   end
 
+  create_table "release_subsets", force: :cascade do |t|
+    t.integer "no", null: false
+    t.string "title"
+    t.bigint "release_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["release_id"], name: "index_release_subsets_on_release_id"
+  end
+
   create_table "releases", force: :cascade do |t|
     t.integer "barcode"
     t.date "date"
@@ -605,10 +605,9 @@ ActiveRecord::Schema.define(version: 2019_09_17_065837) do
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
-  add_foreign_key "heap_subsets", "releases"
-  add_foreign_key "heap_tracks", "heap_subsets"
   add_foreign_key "heap_tracks", "import_orders"
   add_foreign_key "heap_tracks", "pieces"
+  add_foreign_key "heap_tracks", "release_subsets"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"
@@ -659,6 +658,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_065837) do
   add_foreign_key "release_heads", "import_orders"
   add_foreign_key "release_media", "medium_formats"
   add_foreign_key "release_media", "releases"
+  add_foreign_key "release_subsets", "releases"
   add_foreign_key "releases", "artist_credits"
   add_foreign_key "releases", "import_orders"
   add_foreign_key "releases", "release_heads"

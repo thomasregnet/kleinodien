@@ -19,7 +19,7 @@ RSpec.describe PersistBrainzHeapTrack do
       blueprint: blueprint,
       no:        3,
       proxy:     FakePersistBrainzHeapTrackProxy.new,
-      subset:    FactoryBot.create(:heap_subset)
+      subset:    FactoryBot.create(:release_subset)
     }
 
     it 'persists the track' do

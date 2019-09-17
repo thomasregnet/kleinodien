@@ -1,4 +1,4 @@
-class HeapSubset < ApplicationRecord
+class ReleaseSubset < ApplicationRecord
   belongs_to :release
 
   has_many :tracks, class_name: 'HeapTrack'

@@ -2,7 +2,11 @@
 
 # Piece that resides on a Heap
 class HeapTrack < ApplicationRecord
-  belongs_to :subset, class_name: 'HeapSubset', foreign_key: :heap_subset_id
+  belongs_to(
+    :subset,
+    class_name:  'ReleaseSubset',
+    foreign_key: :release_subset_id
+  )
   belongs_to :import_order, required: false
   belongs_to :piece
 
