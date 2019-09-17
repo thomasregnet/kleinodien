@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Persist a MusicBrainz medium
-class PersistBrainzHeapSubset < PersistBrainzBase
+class PersistBrainzReleaseSubset < PersistBrainzBase
   def initialize(args)
     super(args)
     @blueprint = args[:blueprint]

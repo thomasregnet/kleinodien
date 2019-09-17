@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'test_data'
 
-RSpec.describe PersistBrainzHeapSubset do
+RSpec.describe PersistBrainzReleaseSubset do
   let(:blueprint) { TestData.by_name(:brainz_release_arise_jp_cd).blueprint }
 
   # TODO: test medium with a given title

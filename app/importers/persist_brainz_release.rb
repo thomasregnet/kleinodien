@@ -68,7 +68,7 @@ class PersistBrainzRelease < PersistBrainzBase
 
   def persist_subsets(release)
     blueprint.media.each do |medium|
-      PersistBrainzHeapSubset.call(
+      PersistBrainzReleaseSubset.call(
         blueprint: medium,
         release:   release,
         # heap:      release,
