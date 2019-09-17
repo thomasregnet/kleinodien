@@ -4,13 +4,13 @@ require 'rails_helper'
 require 'test_data'
 
 # Proxy for testing
-class FakePersistBrainzHeapTrackProxy
+class FakePersistBrainzReleaseTrackProxy
   def get(_)
     TestData.by_name(:brainz_recording_arise).blueprint
   end
 end
 
-RSpec.describe PersistBrainzHeapTrack do
+RSpec.describe PersistBrainzReleaseTrack do
   context 'with valid arguments' do
     blueprint = TestData.by_name(:brainz_release_arise_jp_cd)
                         .blueprint.media[0].track_list.track[0]
@@ -18,7 +18,7 @@ RSpec.describe PersistBrainzHeapTrack do
     args = {
       blueprint: blueprint,
       no:        3,
-      proxy:     FakePersistBrainzHeapTrackProxy.new,
+      proxy:     FakePersistBrainzReleaseTrackProxy.new,
       subset:    FactoryBot.create(:release_subset)
     }
 

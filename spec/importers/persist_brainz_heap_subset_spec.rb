@@ -19,7 +19,7 @@ RSpec.describe PersistBrainzHeapSubset do
         release:   FactoryBot.create(:release),
         proxy:     BrainzProxy.new(import_order: import_order)
       }
-      allow(PersistBrainzHeapTrack).to receive(:call)
+      allow(PersistBrainzReleaseTrack).to receive(:call)
       expect(described_class.call(args).new_record?).to be false
     end
   end
