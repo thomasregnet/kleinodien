@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'shared_examples_for_commentable'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
@@ -7,17 +6,6 @@ RSpec.describe ArtistCredit, type: :model do
   it { is_expected.to have_many(:release_heads) }
   it { is_expected.to have_many(:releases) }
   it { is_expected.to belong_to(:import_order).without_validating_presence }
-
-  it_behaves_like 'a commentable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @artist_credit = FactoryBot.create(:artist_credit)
-    end
-
-    let(:commentable) { @artist_credit }
-
-    after(:all) { DatabaseCleaner.clean }
-  end
 
   it_behaves_like 'a rateable model' do
     before(:all) do

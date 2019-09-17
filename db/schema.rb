@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_073058) do
+ActiveRecord::Schema.define(version: 2019_09_17_090955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -67,28 +67,6 @@ ActiveRecord::Schema.define(version: 2019_09_17_073058) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url"], name: "brainz_releases_url_key", unique: true
-  end
-
-  create_table "comments", id: :serial, force: :cascade do |t|
-    t.text "text", null: false
-    t.integer "user_id", null: false
-    t.integer "artist_credit_id"
-    t.integer "artist_id"
-    t.integer "piece_head_id"
-    t.integer "piece_id"
-    t.integer "season_id"
-    t.integer "serial_id"
-    t.integer "station_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_comments_on_artist_credit_id"
-    t.index ["artist_id"], name: "index_comments_on_artist_id"
-    t.index ["piece_head_id"], name: "index_comments_on_piece_head_id"
-    t.index ["piece_id"], name: "index_comments_on_piece_id"
-    t.index ["season_id"], name: "index_comments_on_season_id"
-    t.index ["serial_id"], name: "index_comments_on_serial_id"
-    t.index ["station_id"], name: "index_comments_on_station_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "companies", id: :serial, force: :cascade do |t|
@@ -584,14 +562,6 @@ ActiveRecord::Schema.define(version: 2019_09_17_073058) do
   add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
-  add_foreign_key "comments", "artist_credits"
-  add_foreign_key "comments", "artists"
-  add_foreign_key "comments", "piece_heads"
-  add_foreign_key "comments", "pieces"
-  add_foreign_key "comments", "seasons"
-  add_foreign_key "comments", "serials"
-  add_foreign_key "comments", "stations"
-  add_foreign_key "comments", "users"
   add_foreign_key "countries_piece_heads", "countries"
   add_foreign_key "countries_piece_heads", "piece_heads"
   add_foreign_key "countries_pieces", "countries"

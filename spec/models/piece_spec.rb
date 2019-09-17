@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'shared_examples_for_commentable'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_companies'
@@ -17,17 +16,6 @@ RSpec.describe Piece, type: :model do
 
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)
-  end
-
-  it_behaves_like 'a commentable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @commentable = FactoryBot.create(:piece)
-    end
-
-    let(:commentable) { @commentable }
-
-    after(:all) { DatabaseCleaner.clean }
   end
 
   it_behaves_like 'a code findable entity' do

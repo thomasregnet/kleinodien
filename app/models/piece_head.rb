@@ -7,7 +7,6 @@ class PieceHead < ActiveRecord::Base
   belongs_to :import_order, required: false
   has_and_belongs_to_many :countries
   has_and_belongs_to_many :tags
-  has_many :comments
   has_many :companies, class_name: 'PhCompany'
   has_many :descriptions
   has_many :credits, class_name: 'PhCredit'
