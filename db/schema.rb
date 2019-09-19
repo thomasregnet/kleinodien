@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_101007) do
+ActiveRecord::Schema.define(version: 2019_09_19_085946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -148,7 +148,6 @@ ActiveRecord::Schema.define(version: 2019_09_17_101007) do
 
   create_table "import_orders", force: :cascade do |t|
     t.text "code", null: false
-    t.text "kind", null: false
     t.text "state", null: false
     t.text "type", null: false
     t.text "uri"
@@ -156,7 +155,8 @@ ActiveRecord::Schema.define(version: 2019_09_17_101007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "requests_count"
-    t.index ["code", "kind", "type"], name: "index_unique_import_orders_pending_or_processing", unique: true, where: "((state = 'pending'::text) OR (state = 'processing'::text))"
+    t.bigint "import_queue_id"
+    t.index ["import_queue_id"], name: "index_import_orders_on_import_queue_id"
     t.index ["user_id"], name: "index_import_orders_on_user_id"
   end
 
@@ -582,6 +582,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_101007) do
   add_foreign_key "descriptions", "serials"
   add_foreign_key "descriptions", "stations"
   add_foreign_key "descriptions", "users"
+  add_foreign_key "import_orders", "import_queues"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
   add_foreign_key "import_request_bodies", "import_requests"

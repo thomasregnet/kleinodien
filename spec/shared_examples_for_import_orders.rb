@@ -18,8 +18,8 @@ RSpec.shared_examples 'for ImportOrders' do |model|
     end
   end
 
-  context 'without a kind' do
-    let(:import_order) { FactoryBot.build(model, kind: nil) }
+  context 'without an import_queue' do
+    let(:import_order) { FactoryBot.build(model, import_queue: nil) }
 
     it 'is not valid' do
       expect(import_order).not_to be_valid

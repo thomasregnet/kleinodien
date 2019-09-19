@@ -4,6 +4,7 @@
 class ImportOrder < ApplicationRecord
   include ImportStateTransitions
 
+  belongs_to :import_queue
   belongs_to :user
   has_many :artist_credits
   has_many :artists
@@ -17,13 +18,13 @@ class ImportOrder < ApplicationRecord
 
   after_initialize :set_default_state
 
-  validates :code, :kind, :state, :user, presence: true
+  validates :code, :import_queue, :state, :user, presence: true
 
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
   validates_uniqueness_of(
     :code,
-    scope:      [:kind, :type],
+    scope:      %i[import_queue_id type],
     conditions: -> { where(state: %w[pending processing]) }
   )
 
