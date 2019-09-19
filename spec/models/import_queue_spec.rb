@@ -31,9 +31,7 @@ RSpec.describe ImportQueue, type: :model do
     end
 
     context 'when blank' do
-      let(:import_queue) { FactoryBot.build(:import_queue) }
-
-      before { import_queue.name = '' }
+      let(:import_queue) { described_class.new(name: '') }
 
       it 'is not valid' do
         expect(import_queue).not_to be_valid
