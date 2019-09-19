@@ -6,6 +6,10 @@ class ImportQueue < ApplicationRecord
     :name,
     presence:   true,
     blank:      false,
-    uniqueness: true
+    uniqueness: true,
+    format:     {
+      with:    /\A[a-z0-9_]+\z/,
+      message: 'allows only lower case letters, digits and the underscore'
+    }
   )
 end

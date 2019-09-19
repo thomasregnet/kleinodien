@@ -39,6 +39,19 @@ RSpec.describe ImportQueue, type: :model do
         expect(import_queue).not_to be_valid
       end
     end
+
+    context 'with forbidden characters' do
+      let(:messages) do
+        iq = ImportQueue.new(name: 'FooBar')
+        iq.valid?
+        iq.errors.messages
+      end
+
+      it 'contains the correct error-message' do
+        expect(messages[:name].first)
+          .to eq('allows only lower case letters, digits and the underscore')
+      end
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
