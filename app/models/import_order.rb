@@ -28,6 +28,8 @@ class ImportOrder < ApplicationRecord
     conditions: -> { where(state: %w[pending processing]) }
   )
 
+  before_validation :ensure_code_and_import_queue_and_type_hava_a_value
+
   after_save :publish
 
   def publish
@@ -69,5 +71,15 @@ class ImportOrder < ApplicationRecord
     return if state
 
     self.state = 'pending'
+  end
+
+  def ensure_code_and_import_queue_and_type_hava_a_value
+    return if code || import_queue || type
+    return unless uri
+
+    analyzed_uri = ImportOrderUriAnalyzer.new(uri: uri) || return
+    self.code = analyzed_uri.code
+    self.import_queue = analyzed_uri.import_queue
+    self.type = analyzed_uri.type
   end
 end

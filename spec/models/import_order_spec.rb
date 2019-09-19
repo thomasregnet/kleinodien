@@ -147,5 +147,25 @@ RSpec.describe ImportOrder, type: :model do
     import_order.import_requests.create(request_args)
     expect(import_order.requests_count).to eq(1)
   end
+
+  describe 'uri' do
+    context 'with only an uri' do
+      let(:import_order) do
+        uri = 'https://musicbrainz.org/ws/2/release/'\
+          '88c27b7d-83e3-4568-8724-fafbee54f05a/'
+
+        ImportOrder.new(
+          # import_queue: FactoryBot.create(:import_queue),
+          uri:          uri,
+          user:         FactoryBot.create(:user)
+        )
+      end
+
+      it 'extracts code and type' do
+        expect(import_order).to be_valid
+        
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
