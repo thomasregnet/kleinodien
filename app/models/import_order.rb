@@ -77,9 +77,9 @@ class ImportOrder < ApplicationRecord
     return if code || import_queue || type
     return unless uri
 
-    analyzed_uri = ImportOrderUriAnalyzer.new(uri: uri) || return
-    self.code = analyzed_uri.code
-    self.import_queue = analyzed_uri.import_queue
-    self.type = analyzed_uri.type
+    import_values = ImportOrderUriAnalysisService.call(uri: uri) || return
+    self.code         = import_values[:code]
+    self.import_queue = import_values[:import_queue]
+    self.type         = import_values[:type]
   end
 end
