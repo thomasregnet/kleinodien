@@ -10,37 +10,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'multi_json'
-
-@formats = MultiJson.load(
-  File.read('db/seeds/formats.json'),
-  symbolize_keys: true
-)
-
-@format_details = MultiJson.load(
-  File.read('db/seeds/format_details.json'),
-  symbolize_keys: true
-)
-
-@formats.each do |format|
-  Format.create!(
-    name: format[:name],
-    abbr: format[:abbr]
-  )
+# This method smells of :reek:UtilityFunction
+def read_json(file)
+  JSON.parse(File.read("db/seeds/#{file}.json"), symbolize_names: true)
 end
 
-@format_details.each do |detail|
-  FormatDetail.create!(
-    name: detail[:name],
-    abbr: detail[:abbr]
-  )
+read_json(:formats).each do |format_attr|
+  Format.create!(format_attr)
 end
 
-@medium_formats = MultiJson.load(
-  File.read('db/seeds/medium_formats.json'),
-  symbolize_keys: true
-)
+read_json(:format_details).each do |detail_attr|
+  FormatDetail.create!(detail_attr)
+end
 
-@medium_formats.each do |format_attr|
+read_json(:medium_formats).each do |format_attr|
   MediumFormat.create!(format_attr)
+end
+
+read_json(:import_queues).each do |import_queue_attr|
+  ImportQueue.create!(import_queue_attr)
 end

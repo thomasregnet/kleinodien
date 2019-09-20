@@ -28,7 +28,8 @@ class ImportOrder < ApplicationRecord
     conditions: -> { where(state: %w[pending processing]) }
   )
 
-  before_validation :ensure_code_and_import_queue_and_type_hava_a_value
+  before_validation :ensure_code_and_type_hava_a_value
+  before_validation :ensure_import_queue_has_a_value
 
   after_save :publish
 
@@ -73,13 +74,19 @@ class ImportOrder < ApplicationRecord
     self.state = 'pending'
   end
 
-  def ensure_code_and_import_queue_and_type_hava_a_value
-    return if code || import_queue || type
+  # def ensure_code_and_import_queue_and_type_hava_a_value
+  def ensure_code_and_type_hava_a_value
+    return if code || type
     return unless uri
 
-    import_values = ImportOrderUriAnalysisService.call(uri: uri) || return
+    import_values = AnalyzeImportOrderUriService.call(uri_string: uri) || return
     self.code         = import_values[:code]
-    self.import_queue = import_values[:import_queue]
     self.type         = import_values[:type]
+  end
+
+  def ensure_import_queue_has_a_value
+    return if import_queue
+
+    self.import_queue = ImportQueue.find_by(name: import_queue_name)
   end
 end
