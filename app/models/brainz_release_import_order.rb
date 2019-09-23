@@ -1,0 +1,2 @@
+class BrainzReleaseImportOrder < BrainzImportOrder
+end

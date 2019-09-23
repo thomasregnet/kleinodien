@@ -4,7 +4,7 @@
 class ImportOrder < ApplicationRecord
   include ImportStateTransitions
 
-  belongs_to :import_queue
+  belongs_to :import_queue # , required: true
   belongs_to :user
   has_many :artist_credits
   has_many :artists
@@ -18,7 +18,9 @@ class ImportOrder < ApplicationRecord
 
   after_initialize :set_default_state
 
-  validates :code, :import_queue, :state, :user, presence: true
+  # validates :code, :import_queue, :state, :user, presence: true
+  validates :code, :state, presence: true
+  # validates :import_queue, presence: true
 
   validates :state, inclusion: { in: %w[pending processing done failed] }
 
@@ -87,6 +89,10 @@ class ImportOrder < ApplicationRecord
   def ensure_import_queue_has_a_value
     return if import_queue
 
-    self.import_queue = ImportQueue.find_by(name: import_queue_name)
+    # TODO: Don't use 'brainz' as name, ask for it
+    # OPTIMIZE: The ImportQueue is seeded. DatabaseCleaner removes it.
+    # It would be nicer if the ImportQueue is found via "find_by" instead
+    # of "find_or_create_by".
+    self.import_queue = ImportQueue.find_or_create_by(name: 'brainz')
   end
 end

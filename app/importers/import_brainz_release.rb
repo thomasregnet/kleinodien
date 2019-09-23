@@ -38,8 +38,8 @@ class ImportBrainzRelease < ImportBrainzBase
   def validate_import_order
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
 
-    kind = import_order.kind
-    raise ArgumentError, "expected kind \"release\" not #{kind}" \
-      unless kind == 'release'
+    # kind = import_order.kind
+    # raise ArgumentError, "expected kind \"release\" not #{kind}" \
+    #   unless kind == 'release'
   end
 end

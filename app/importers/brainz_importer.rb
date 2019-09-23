@@ -17,7 +17,14 @@ class BrainzImporter
   attr_reader :import_order
 
   def call
-    importer_class = IMPORTER_FOR[import_order.kind]
-    importer_class.constantize.call(import_order: import_order)
+    # importer_class = IMPORTER_FOR[import_order.kind]
+    # importer_class.constantize.call(import_order: import_order)
+    importer_class.call(import_order: import_order)
+  end
+
+  private
+
+  def importer_class
+    import_order.type.sub(/\A(.+)ImportOrder\z/, 'Import\1').constantize
   end
 end

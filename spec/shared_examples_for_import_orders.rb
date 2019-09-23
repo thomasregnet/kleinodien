@@ -18,13 +18,15 @@ RSpec.shared_examples 'for ImportOrders' do |model|
     end
   end
 
-  context 'without an import_queue' do
-    let(:import_order) { FactoryBot.build(model, import_queue: nil) }
+  # This test does not work any longer because the ImportQueue
+  # is generated automatically
+  # context 'without an import_queue' do
+  #   let(:import_order) { FactoryBot.build(model, import_queue: nil) }
 
-    it 'is not valid' do
-      expect(import_order).not_to be_valid
-    end
-  end
+  #   it 'is not valid' do
+  #     expect(import_order).not_to be_valid
+  #   end
+  # end
 
   describe '#state' do
     context 'when pending, processing, done, failed' do

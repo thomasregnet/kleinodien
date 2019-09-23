@@ -2,6 +2,8 @@
 
 # ImportQueue holds the import_orders of a specific source, e.g. Discogs
 class ImportQueue < ApplicationRecord
+  has_many :import_orders
+
   validates(
     :name,
     presence:   true,

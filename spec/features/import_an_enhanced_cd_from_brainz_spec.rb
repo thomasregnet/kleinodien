@@ -9,10 +9,8 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     DatabaseCleaner.start
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
 
-    # Create an ImportOrder for "Iron Maiden - Powerslave"
-    import_order = BrainzImportOrder.create!(
+    import_order = BrainzReleaseImportOrder.create!(
       code:  '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
-      kind:  'release',
       state: 'pending',
       user:  FactoryBot.create(:user)
     )
