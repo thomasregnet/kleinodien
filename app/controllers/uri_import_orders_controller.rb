@@ -10,11 +10,12 @@ class UriImportOrdersController < ApplicationController
   end
 
   def create
-    @import_order = BuildImportOrderFromUriService.call(
-      uri_string: uri_string,
-      user:       current_user
-    )
-    save_import_order
+    @import_order = ImportOrder.new(uri: uri_string, user: current_user)
+    if @import_order.save
+      flash[:success] = 'Successfully added your import order'
+    else
+      flash[:error] = "can't persist import from #{uri_string}"
+    end
 
     # use "redirect_to" instead of "render" to get an new ImportOrder instance
     redirect_to new_uri_import_order_path
@@ -33,21 +34,5 @@ class UriImportOrdersController < ApplicationController
 
   def import_order_params
     params.require(:import_order).permit(:uri)
-  end
-
-  def save_import_order
-    unless @import_order
-      flash[:error] = "can't import from #{uri_string}"
-      return
-    end
-
-    if @import_order.save
-      flash[:success] = 'Successfully added your import order'
-      return true
-    else
-      flash[:error] = "can't persist import from #{uri_string}"
-    end
-
-    false
   end
 end
