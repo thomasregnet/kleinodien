@@ -9,12 +9,6 @@ RSpec.feature 'import a single from MusicBrainz', type: :feature do
     DatabaseCleaner.start
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
 
-    # import_order = BrainzImportOrder.create!(
-    #   code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a', # Sepultura - Arise
-    #   kind:  'release',
-    #   state: 'pending',
-    #   user:  FactoryBot.create(:user)
-    # )
     import_order = BrainzReleaseImportOrder.create!(
       code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a', # Sepultura - Arise
       state: 'pending',

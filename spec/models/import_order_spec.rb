@@ -29,48 +29,6 @@ RSpec.describe ImportOrder, type: :model do
   it { is_expected.to have_many(:piece_heads) }
   it { is_expected.to have_many(:pieces) }
 
-  # rubocop:disable RSpec/ImplicitSubject
-  # describe 'constraints and validations on code' do
-  #   context 'when state is "pending"' do
-  #     # TODO: do not use BrainzImportOrder to test ImportOrder
-  #     # therefore the NOT NULL constraint for "type" must be deleted
-  #     subject { FactoryBot.create(:brainz_import_order, state: 'pending') }
-
-  #     it {
-  #       should validate_uniqueness_of(:code)
-  #         .scoped_to(:import_queue_id, :type)
-  #     }
-  #   end
-
-  #   context 'when state is "processing"' do
-  #     subject { FactoryBot.create(:brainz_import_order, state: 'processing') }
-
-  #     it {
-  #       should validate_uniqueness_of(:code)
-  #         .scoped_to(:import_queue_id, :type)
-  #     }
-  #   end
-
-  #   context 'when state is "done"' do
-  #     subject { FactoryBot.create(:brainz_import_order, state: 'done') }
-
-  #     it {
-  #       should_not validate_uniqueness_of(:code)
-  #         .scoped_to(:import_queue_id, :type)
-  #     }
-  #   end
-
-  #   context 'when state is "failed"' do
-  #     subject { FactoryBot.create(:brainz_import_order, state: 'failed') }
-
-  #     it {
-  #       should_not validate_uniqueness_of(:code)
-  #         .scoped_to(:import_queue_id, :type)
-  #     }
-  #   end
-  # end
-  # rubocop:enable RSpec/ImplicitSubject
-
   describe '.next_pending' do
     context 'when no ImportOrder exists' do
       it 'returns nil' do
@@ -152,7 +110,7 @@ RSpec.describe ImportOrder, type: :model do
     expect(import_order.requests_count).to eq(1)
   end
 
-  describe 'uri' do
+  describe '#uri' do
     context 'with only an uri' do
       let(:import_order) do
         uri = 'https://musicbrainz.org/ws/2/release/'\

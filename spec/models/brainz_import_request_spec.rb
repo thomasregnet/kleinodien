@@ -24,6 +24,7 @@ class TestBrainzImportRequestWithQueryString < TestBrainzImportRequestSomeKind
   attr_reader :query_string
 end
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzImportRequest, type: :model do
   it_behaves_like(
     'an import state transitions capable object',
@@ -78,3 +79,4 @@ RSpec.describe BrainzImportRequest, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

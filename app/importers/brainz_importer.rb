@@ -17,8 +17,6 @@ class BrainzImporter
   attr_reader :import_order
 
   def call
-    # importer_class = IMPORTER_FOR[import_order.kind]
-    # importer_class.constantize.call(import_order: import_order)
     importer_class.call(import_order: import_order)
   end
 
