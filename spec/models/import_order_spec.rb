@@ -112,15 +112,20 @@ RSpec.describe ImportOrder, type: :model do
 
   describe '#uri' do
     context 'with only an uri' do
-      let(:import_order) do
-        uri = 'https://musicbrainz.org/ws/2/release/'\
-          '88c27b7d-83e3-4568-8724-fafbee54f05a/'
+      def code
+        '88c27b7d-83e3-4568-8724-fafbee54f05a'
+      end
 
-        ImportOrder.new(
-          # import_queue: FactoryBot.create(:import_queue),
-          uri:          uri,
-          user:         FactoryBot.create(:user)
-        )
+      let(:import_order) do
+        uri = "https://musicbrainz.org/ws/2/release/#{code}/"
+        ImportOrder.create(uri: uri, user: FactoryBot.create(:user))
+      end
+
+      it 'sets the expected code' do
+        expect(import_order.code).to eq(code)
+      end
+      it 'sets the expected type' do
+        expect(import_order.type).to eq('BrainzReleaseImportOrder')
       end
     end
   end
