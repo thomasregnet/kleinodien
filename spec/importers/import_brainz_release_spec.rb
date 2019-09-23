@@ -71,19 +71,6 @@ RSpec.describe ImportBrainzRelease do
     end
   end
 
-  # The "kind" does no longer exist
-  # context 'when the kind is wrong' do
-  #   let(:import_order) do
-  #     # FactoryBot.build(:brainz_import_order, kind: 'artist')
-  #     FactoryBot.build(:brainz_release_import_order)
-  #   end
-
-  #   it 'raises if the kind is not "release"' do
-  #     expect { described_class.call(import_order: import_order) }
-  #       .to raise_error(ArgumentError, /expected kind "release"/)
-  #   end
-  # end
-
   describe 'when the release does not exist' do
     let(:import_order) do
       FactoryBot.build(:brainz_import_order, import_order_args)
