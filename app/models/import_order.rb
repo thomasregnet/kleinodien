@@ -8,15 +8,13 @@ class ImportOrder < ApplicationRecord
   belongs_to :user
   has_many :artist_credits
   has_many :artists
-  has_many :release_heads
-  has_many :release_tracks
-  has_many :releases
   has_many :import_requests
   has_many :medium_formats
   has_many :piece_heads
   has_many :pieces
-
-  after_initialize :set_default_state
+  has_many :release_heads
+  has_many :release_tracks
+  has_many :releases
 
   validates :code, presence: true
   validates(
@@ -34,6 +32,7 @@ class ImportOrder < ApplicationRecord
   before_validation :ensure_code_and_type_hava_a_value
   before_validation :ensure_import_queue_has_a_value
 
+  after_initialize :set_default_state
   after_save :publish
 
   def publish
@@ -52,11 +51,6 @@ class ImportOrder < ApplicationRecord
     "publish_#{type.to_s.underscore.pluralize}"
   end
 
-  # OPTIMIZE: The methods .import_queue_name and #import_queue_name are not DRY
-  def self.import_queue_name
-    "#{to_s.underscore.pluralize}_queue"
-  end
-
   def self.next_pending
     orders = where(state: 'pending').order('created_at asc').limit(1)
     return if orders.empty?
@@ -64,18 +58,7 @@ class ImportOrder < ApplicationRecord
     orders.first
   end
 
-  def import_queue_name
-    klass = self.class.to_s
-    "#{klass.underscore.pluralize}_queue"
-  end
-
   private
-
-  def set_default_state
-    return if state
-
-    self.state = 'pending'
-  end
 
   # def ensure_code_and_import_queue_and_type_hava_a_value
   def ensure_code_and_type_hava_a_value
@@ -95,5 +78,11 @@ class ImportOrder < ApplicationRecord
     # It would be nicer if the ImportQueue is found via "find_by" instead
     # of "find_or_create_by".
     self.import_queue = ImportQueue.find_or_create_by(name: 'brainz')
+  end
+
+  def set_default_state
+    return if state
+
+    self.state = 'pending'
   end
 end
