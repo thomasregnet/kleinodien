@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'for ImportRequests' do |model|
   context 'with valid parameters' do
     let(:import_request) { FactoryBot.build(model) }
@@ -26,8 +27,8 @@ RSpec.shared_examples 'for ImportRequests' do |model|
       end
     end
 
-    context 'when processing' do
-      let(:import_request) { FactoryBot.build(model, state: :processing) }
+    context 'when running' do
+      let(:import_request) { FactoryBot.build(model, state: :running) }
 
       it 'is valid' do
         expect(import_request).to be_valid
@@ -59,3 +60,4 @@ RSpec.shared_examples 'for ImportRequests' do |model|
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

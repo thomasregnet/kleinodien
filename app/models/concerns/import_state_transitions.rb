@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Transits from "pending" to "processing" and then to "done" or "failed"
+# Transits from "pending" to "running" and then to "done" or "failed"
 module ImportStateTransitions
   extend ActiveSupport::Concern
 
@@ -9,20 +9,20 @@ module ImportStateTransitions
 
     aasm column: :state do
       state :pending, initial: true
-      state :processing, :done, :failed
+      state :running, :done, :failed
 
       after_all_transitions { save! }
 
-      event :process do
-        transitions from: :pending, to: :processing
+      event :run do
+        transitions from: :pending, to: :running
       end
 
       event :done do
-        transitions from: :processing, to: :done
+        transitions from: :running, to: :done
       end
 
       event :failure do
-        transitions from: %i[pending processing], to: :failed
+        transitions from: %i[pending running], to: :failed
       end
     end
   end

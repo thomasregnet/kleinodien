@@ -7,9 +7,9 @@ RSpec.shared_examples 'an import state transitions capable object' do |factory|
   context 'when pending' do
     let(:import_order) { FactoryBot.create(factory) }
 
-    it 'transits to processing' do
+    it 'transits to running' do
       expect(import_order)
-        .to transition_from(:pending).to(:processing).on_event(:process)
+        .to transition_from(:pending).to(:running).on_event(:run)
     end
 
     it 'does not transit to done' do
@@ -23,17 +23,17 @@ RSpec.shared_examples 'an import state transitions capable object' do |factory|
     end
   end
 
-  context 'when processing' do
-    let(:import_order) { FactoryBot.create(factory, state: :processing) }
+  context 'when running' do
+    let(:import_order) { FactoryBot.create(factory, state: :running) }
 
     it 'transits to done' do
       expect(import_order)
-        .to transition_from(:processing).to(:done).on_event(:done)
+        .to transition_from(:running).to(:done).on_event(:done)
     end
 
     it 'transits to failed' do
       expect(import_order)
-        .to transition_from(:processing).to(:failed).on_event(:failure)
+        .to transition_from(:running).to(:failed).on_event(:failure)
     end
 
     it 'does not transit to pending' do
@@ -48,8 +48,8 @@ RSpec.shared_examples 'an import state transitions capable object' do |factory|
       expect(import_order).not_to allow_event(:pending)
     end
 
-    it 'does not transit to processing' do
-      expect(import_order).not_to allow_event(:processing)
+    it 'does not transit to running' do
+      expect(import_order).not_to allow_event(:running)
     end
 
     it 'does not transit to failed' do
@@ -64,8 +64,8 @@ RSpec.shared_examples 'an import state transitions capable object' do |factory|
       expect(import_order).not_to allow_event(:pending)
     end
 
-    it 'does not transit to processing' do
-      expect(import_order).not_to allow_event(:processing)
+    it 'does not transit to running' do
+      expect(import_order).not_to allow_event(:running)
     end
 
     it 'does not transit to done' do

@@ -11,7 +11,7 @@ class ImportRequest < ApplicationRecord
            inverse_of: :import_request
 
   validates :code, :state, :type, presence: true
-  validates :state, inclusion: { in: %w[pending processing done failed] }
+  validates :state, inclusion: { in: %w[pending running done failed] }
 
   # def processing
   #   return unless state == 'pending'

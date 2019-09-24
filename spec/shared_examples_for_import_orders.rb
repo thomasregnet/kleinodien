@@ -19,9 +19,9 @@ RSpec.shared_examples 'for ImportOrders' do |model|
   end
 
   describe '#state' do
-    context 'when pending, processing, done, failed' do
+    context 'when pending, running, done, failed' do
       let(:import_order) { FactoryBot.build(model) }
-      let(:valid_states) { %w[pending processing done failed] }
+      let(:valid_states) { %w[pending running done failed] }
 
       it 'is valid' do
         expect(import_order)

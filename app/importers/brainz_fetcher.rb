@@ -15,7 +15,7 @@ class BrainzFetcher
   attr_reader :import_request, :interrupter
 
   def call
-    import_request.process
+    import_request.run
     response = fetch
 
     import_request.done

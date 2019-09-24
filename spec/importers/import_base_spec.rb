@@ -15,10 +15,7 @@ class ImportFake < ImportBase
 end
 
 class FakeImportOrder < ImportOrder
-  include ImportStateTransitions
-  def valid?
-    true
-  end
+#  include ImportStateTransitions
 end
 
 class PersistFake < PersistBase
@@ -45,7 +42,7 @@ RSpec.describe ImportBase do
 
     it 'raises an error' do
       expect { ImportFake.call(import_order: import_order) }
-        .to raise_error('Test exception')
+        .to raise_error(ArgumentError, 'invalid ImportOrder')
     end
   end
 end

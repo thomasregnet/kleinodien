@@ -20,13 +20,13 @@ class ImportOrder < ApplicationRecord
   validates(
     :state,
     presence:  true,
-    inclusion: { in: %w[pending processing done failed] }
+    inclusion: { in: %w[pending running done failed] }
   )
 
   validates_uniqueness_of(
     :code,
     scope:      %i[import_queue_id type],
-    conditions: -> { where(state: %w[pending processing]) }
+    conditions: -> { where(state: %w[pending running]) }
   )
 
   before_validation :ensure_code_and_type_hava_a_value

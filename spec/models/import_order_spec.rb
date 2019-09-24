@@ -88,7 +88,7 @@ RSpec.describe ImportOrder, type: :model do
         FactoryBot.build(
           :import_order,
           type:  'FakeImportOrder',
-          state: :processing
+          state: :running
         )
       end
 
