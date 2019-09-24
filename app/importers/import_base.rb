@@ -27,7 +27,10 @@ class ImportBase < ServiceBase
 
   def persist
     proxy.lock
-    persistence_transaction
+    imported_entity = persistence_transaction
+    return if import_order.failed?
+
+    imported_entity
   end
 
   private

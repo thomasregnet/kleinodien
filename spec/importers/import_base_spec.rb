@@ -6,16 +6,26 @@ require 'shared_examples_for_services'
 class FakeProxy
   def lock; end
 end
+
 class ImportFake < ImportBase
   def find_already_existing; end
+
   def prepare; end
+
   def proxy
     @proxy ||= FakeProxy.new
   end
 end
 
 class FakeImportOrder < ImportOrder
-#  include ImportStateTransitions
+  # include ImportStateTransitions
+
+  # def running?
+  #   false
+  # end
+
+  # def failure!
+  # end
 end
 
 class PersistFake < PersistBase
@@ -37,12 +47,19 @@ RSpec.describe ImportBase do
     end
   end
 
-  describe 'when the import transaction fails' do
-    let(:import_order) { FakeImportOrder.new }
+  context 'when the import transaction fails' do
+    let(:import_order) do
+      FactoryBot.create(:import_order, type: 'FakeImportOrder')
+    end
 
-    it 'raises an error' do
-      expect { ImportFake.call(import_order: import_order) }
-        .to raise_error(ArgumentError, 'invalid ImportOrder')
+    it 'does not return a result' do
+      ImportFake.call(import_order: import_order)
+      expect(import_order.failed?).to be(true)
+    end
+
+    it 'returns nil' do
+      result = ImportFake.call(import_order: import_order)
+      expect(result).to be_nil
     end
   end
 end
