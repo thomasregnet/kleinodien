@@ -22,7 +22,7 @@ module ImportStateTransitions
       end
 
       event :failure do
-        transitions from: :processing, to: :failed
+        transitions from: %i[pending processing], to: :failed
       end
     end
   end

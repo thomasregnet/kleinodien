@@ -49,7 +49,8 @@ class ImportBase < ServiceBase
 
   def persistence_transaction
     import_order.transaction do
-      import_order.process!
+      byebug
+      import_order.processing
       persister_class.call(
         import_order:   import_order,
         import_request: import_request,
