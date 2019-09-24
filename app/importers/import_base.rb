@@ -49,7 +49,7 @@ class ImportBase < ServiceBase
 
   def persistence_transaction
     import_order.transaction do
-      import_order.process
+      import_order.process!
       persister_class.call(
         import_order:   import_order,
         import_request: import_request,
@@ -58,9 +58,9 @@ class ImportBase < ServiceBase
     end
   rescue => e
     Rails.logger.error(e)
-    import_order.failure
+    import_order.failure!
   ensure
-    import_order.done if import_order.processing?
+    import_order.done! if import_order.processing?
   end
 
   # rubocop:enable Style/RescueStandardError
