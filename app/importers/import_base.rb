@@ -27,15 +27,7 @@ class ImportBase < ServiceBase
 
   def persist
     proxy.lock
-
-    import_order.transaction do
-      # PersistBrainzRelease.call(
-      persister_class.call(
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
-      )
-    end
+    persistence_transaction
   end
 
   private
@@ -49,6 +41,31 @@ class ImportBase < ServiceBase
   def import_request_class
     import_order.type.sub(/ImportOrder/, 'ImportRequest').constantize
   end
+
+  # This method smells of :reek:TooManyStatements
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Style/RescueStandardError
+
+  def persistence_transaction
+    import_order.transaction do
+      import_order.process
+      persister_class.call(
+        import_order:   import_order,
+        import_request: import_request,
+        proxy:          proxy
+      )
+    end
+  rescue => e
+    Rails.logger.error(e)
+    import_order.failure
+  ensure
+    import_order.done if import_order.processing?
+  end
+
+  # rubocop:enable Style/RescueStandardError
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def persister_class
     import_order.type.sub(/^(.+)ImportOrder$/, 'Persist\1').constantize
