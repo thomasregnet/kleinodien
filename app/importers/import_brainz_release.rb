@@ -23,18 +23,6 @@ class ImportBrainzRelease < ImportBrainzBase
     proxy.get(import_request)
   end
 
-  def persist
-    proxy.lock
-
-    import_order.transaction do
-      PersistBrainzRelease.call(
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
-      )
-    end
-  end
-
   def validate_import_order
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
   end

@@ -21,6 +21,19 @@ class ImportBase < ServiceBase
     )
   end
 
+  def persist
+    proxy.lock
+
+    import_order.transaction do
+      # PersistBrainzRelease.call(
+      persister_class.call(
+        import_order:   import_order,
+        import_request: import_request,
+        proxy:          proxy
+      )
+    end
+  end
+
   private
 
   def existing_one
@@ -31,6 +44,10 @@ class ImportBase < ServiceBase
 
   def import_request_class
     import_order.type.sub(/ImportOrder/, 'ImportRequest').constantize
+  end
+
+  def persister_class
+    import_order.type.sub(/^(.+)ImportOrder$/, 'Persist\1').constantize
   end
 
   def persisting_one
