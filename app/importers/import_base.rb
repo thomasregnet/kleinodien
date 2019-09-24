@@ -14,27 +14,11 @@ class ImportBase < ServiceBase
     existing_one || persisting_one
   end
 
-  # TODO: remove all "NoMethodError" methods
-  def find_already_existing
-    raise NoMethodError,
-          "Class #{self.class} does not implement `find_already_existing'"
-  end
-
   def import_request
     @import_request ||= import_request_class.create(
       code:         import_order.code,
       import_order: import_order
     )
-  end
-
-  def prepare
-    raise NoMethodError,
-          "Class #{self.class} does not implement `prepare'"
-  end
-
-  def persist
-    raise NoMethodError,
-          "Class #{self.class} does not implement `persist'"
   end
 
   private
