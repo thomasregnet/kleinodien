@@ -18,11 +18,6 @@ class ImportBrainzRelease < ImportBrainzBase
     )
   end
 
-  # OPTIMIZE: move #blueprint to ImportBase?
-  def blueprint
-    proxy.get(import_request)
-  end
-
   def validate_import_order
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
   end

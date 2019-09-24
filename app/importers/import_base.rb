@@ -14,6 +14,10 @@ class ImportBase < ServiceBase
     existing_one || persisting_one
   end
 
+  def blueprint
+    proxy.get(import_request)
+  end
+
   def import_request
     @import_request ||= import_request_class.create(
       code:         import_order.code,
