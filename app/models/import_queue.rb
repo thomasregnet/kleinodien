@@ -14,4 +14,14 @@ class ImportQueue < ApplicationRecord
       message: 'allows only lower case letters, digits and the underscore'
     }
   )
+
+  def self.next_pending_for(name)
+    orders = find_or_create_by(name: name)
+             .import_orders.where(state: 'pending')
+             .order('created_at asc').limit(1)
+
+    return if orders.empty?
+
+    orders.first
+  end
 end
