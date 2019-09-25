@@ -20,17 +20,15 @@ namespace :db do
     )
 
     import_orders = []
-    import_orders << BrainzImportOrder.create!(
+    import_orders << BrainzReleaseImportOrder.create!(
       code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a', # Sepultura - Arise
-      kind:  'release',
       state: 'pending',
       user:  user
     )
 
-    import_orders << BrainzImportOrder.create!(
+    import_orders << BrainzReleaseImportOrder.create!(
       # Iron Maiden - Powerslave
       code:  '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
-      kind:  'release',
       state: 'pending',
       user:  user
     )
