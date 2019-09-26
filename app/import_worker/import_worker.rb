@@ -3,15 +3,10 @@
 # Import from external sources
 class ImportWorker
   def self.run(args)
-  # def self.run(import_order_class:, subscriber:)
     new(args).run
-    # new(import_order_class: import_order_class, subscriber: subscriber)
   end
 
-  # def initialize(args)
   def initialize(import_order_class:, subscriber:)
-    # @import_order_class = args[:import_order_class]
-    # @subscriber         = args[:subscriber]
     @import_order_class = import_order_class
     @subscriber         = subscriber
   end
