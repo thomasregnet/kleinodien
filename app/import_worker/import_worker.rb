@@ -21,6 +21,7 @@ class ImportWorker
     end
   end
 
+  # BUG: Fix hard coded ImportQueue-name
   def process_orders
     Rails.logger.info('processing orders')
     loop do
