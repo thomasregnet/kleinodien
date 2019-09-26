@@ -10,15 +10,20 @@ class ImportSubscriber
   attr_reader :channel, :timeout
 
   def perform
-    begin
-      redis.subscribe_with_timeout(timeout, channel) do |on|
-        on.message do |_, message|
-          unsubscribe
-          return message
-        end
-      end
-    rescue Redis::TimeoutError => exception
-      Rails.logger.info("#{exception.class}: #{exception}")
+    redis.subscribe_with_timeout(timeout, channel) do |message_obj|
+      handle_message(message_obj)
+    end
+  rescue Redis::TimeoutError => exception
+    Rails.logger.info("#{exception.class}: #{exception}")
+  end
+
+  private
+
+  def handle_message(message_obj)
+    message_obj.message do |_, message|
+      Rails.logger("received #{message} on channel #{channel}")
+      unsubscribe
+      message
     end
   end
 
