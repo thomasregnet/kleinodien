@@ -2,9 +2,9 @@
 
 # Subscribe to a Redis pub/sub channel and return received messages
 class ImportSubscriber
-  def initialize(args)
-    @channel   = args[:channel]
-    @timeout   = args.fetch(:timeout, 300)
+  def initialize(channel:, timeout: 300)
+    @channel   = channel
+    @timeout   = timeout
   end
 
   attr_reader :channel, :timeout
