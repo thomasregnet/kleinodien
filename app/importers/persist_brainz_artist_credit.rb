@@ -2,9 +2,9 @@
 
 # Persist an ArtistCredit from MusicBrainz
 class PersistBrainzArtistCredit < PersistBrainzBase
-  def initialize(args)
+  def initialize(blueprint:, **args)
     super(args)
-    @blueprint = args[:blueprint]
+    @blueprint = blueprint
   end
 
   attr_reader :blueprint

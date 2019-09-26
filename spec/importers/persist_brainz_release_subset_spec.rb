@@ -29,7 +29,7 @@ RSpec.describe PersistBrainzReleaseSubset do
     context 'when a title is given' do
       it 'returns that title' do
         blueprint = double(title: 'fake title')
-        subset = described_class.new(blueprint: blueprint)
+        subset = described_class.new(blueprint: blueprint, proxy: :fake_proxy)
         expect(subset.title).to eq('fake title')
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe PersistBrainzReleaseSubset do
       it 'returns a generic title' do
         format = double(__content__: 'Vinyl')
         blueprint = double(format: format, position: 3, title: nil)
-        subset = described_class.new(blueprint: blueprint)
+        subset = described_class.new(blueprint: blueprint, proxy: :fake_proxy)
         expect(subset.title).to eq('Vinyl 3')
       end
     end

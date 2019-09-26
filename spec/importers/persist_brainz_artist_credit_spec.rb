@@ -35,7 +35,7 @@ RSpec.describe PersistBrainzArtistCredit do
       end
 
       it 'returns the ArtistCredit' do
-        expect(described_class.call(blueprint: blueprint))
+        expect(described_class.call(blueprint: blueprint, proxy: :fake_proxy))
           .to eq(artist_credit)
       end
     end

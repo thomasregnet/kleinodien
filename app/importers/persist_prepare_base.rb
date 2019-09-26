@@ -6,13 +6,9 @@ class PersistPrepareBase
     new(args).call
   end
 
-  def initialize(args)
-    @proxy = args[:proxy]
+  def initialize(proxy:, **_)
+    @proxy = proxy
   end
 
   attr_reader :proxy
-
-  def call
-    raise NotImplementedError, "#{self.class} does missed to implement #call"
-  end
 end

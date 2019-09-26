@@ -3,10 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe PersistPrepareBase do
-  subject { described_class.new(proxy: spy) }
+  describe '.call' do
+    it 'responds to .call' do
+      expect(described_class).to respond_to(:call)
+    end
+  end
 
-  it { is_expected.to respond_to(:call) }
-  it { is_expected.to respond_to(:proxy) }
+  describe '#proxy' do
+    let(:pp_base) { described_class.new(proxy: :fake_proxy) }
+
+    it 'returns the proxy' do
+      expect(pp_base.proxy).to eq(:fake_proxy)
+    end
+  end
 
   describe '#call' do
     context 'when not defined otherwise' do
@@ -14,7 +23,7 @@ RSpec.describe PersistPrepareBase do
 
       it 'raises an error' do
         expect { base.call }
-          .to raise_error(NotImplementedError, %r/missed to implement .call/)
+          .to raise_error(NoMethodError, /undefined method/)
       end
     end
   end
