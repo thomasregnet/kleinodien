@@ -9,13 +9,17 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
 
   attr_reader :blueprint
 
-  def call
+  private
+
+  def prepare
     blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit.artist)
     end
 
     nil
   end
+
+  public
 
   def find_already_existing
     ArtistCredit.find_by(name: blueprint.join_name)

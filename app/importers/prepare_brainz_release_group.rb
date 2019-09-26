@@ -9,10 +9,14 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
 
   attr_reader :import_request
 
-  def call
+  private
+
+  def prepare
     prepare_artist_credit
     nil
   end
+
+  public
 
   def blueprint
     proxy.get(import_request)

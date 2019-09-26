@@ -9,7 +9,9 @@ class PrepareBrainzRecording < PrepareBrainzBase
 
   attr_reader :import_request
 
-  def call
+  private
+
+  def prepare
     piece = find_already_existing
     return piece if piece
 
@@ -18,6 +20,8 @@ class PrepareBrainzRecording < PrepareBrainzBase
 
     nil
   end
+
+  public
 
   def blueprint
     proxy.get(import_request)

@@ -9,7 +9,9 @@ class PrepareBrainzArtist < PrepareBrainzBase
 
   attr_reader :import_request
 
-  def call
+  private
+
+  def prepare
     artist = find_already_existing
     return artist if artist
 
@@ -17,6 +19,8 @@ class PrepareBrainzArtist < PrepareBrainzBase
 
     nil
   end
+
+  public
 
   def blueprint
     proxy.get(import_request)

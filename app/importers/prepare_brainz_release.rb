@@ -9,7 +9,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   attr_reader :blueprint
 
-  def call
+  private
+
+  def prepare
     release = find_already_existing
     return release if release
 
@@ -19,6 +21,8 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
     nil
   end
+
+  public
 
   def prepare_artist_credit
     PrepareBrainzArtistCredit.call(
