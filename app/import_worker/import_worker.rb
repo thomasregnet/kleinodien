@@ -27,6 +27,7 @@ class ImportWorker
     loop do
       import_order = ImportQueue.next_pending_for('brainz') || break
       importer_class = importer_class_for(import_order)
+      puts "====== ImporterClass: #{importer_class}"
       importer_class.call(import_order: import_order)
     end
   end

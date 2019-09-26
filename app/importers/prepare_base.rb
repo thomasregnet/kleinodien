@@ -4,6 +4,7 @@
 class PrepareBase < PersistPrepareBase
   # rubocop:disable Style/RescueStandardError
   def call
+    puts '================================================='
     prepare
   rescue => e
     Rails.logger.error(e)

@@ -36,9 +36,16 @@ class ImportBase < ServiceBase
   private
 
   def existing_one
-    result = find_already_existing || prepare
+    result = find_already_existing || prepare_save
 
     enhance_result(result, false)
+  end
+
+  # OPTIMIZE: Move #prepare_save to PrepareBase?
+  def prepare_save
+    prepare
+  rescue => e
+    Rails.logger.error(e)
   end
 
   def import_request_class
