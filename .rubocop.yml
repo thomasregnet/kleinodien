@@ -3,7 +3,7 @@ require: rubocop-rspec
 Capybara/FeatureMethods:
   Enabled: false
 
-Style/AlignHash:
+Layout/AlignHash:
   EnforcedColonStyle: table
 
 RSpec/ExampleLength:
