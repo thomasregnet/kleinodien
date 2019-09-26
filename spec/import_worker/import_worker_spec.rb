@@ -4,8 +4,14 @@ require 'rails_helper'
 
 RSpec.describe ImportWorker do
   describe '#run' do
+    let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
     let(:subscriber) { instance_double('ImportSubscriber') }
-    let(:worker) { described_class.new(subscriber: subscriber) }
+    let(:worker) do
+      described_class.new(
+        import_order_class: import_order_class,
+        subscriber:         subscriber
+      )
+    end
 
     it 'stops when it receives a "stop" message' do
       allow(worker).to receive(:process_orders)
@@ -16,7 +22,14 @@ RSpec.describe ImportWorker do
 
   # https://www.rubydoc.info/gems/rubocop-rspec/1.6.0/RuboCop/Cop/RSpec/AnyInstance
   describe '.run' do
-    let(:args) { {} }
+    let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
+    let(:subscriber) { instance_double('ImportSubscriber') }
+    let(:args) do
+      {
+        import_order_class: import_order_class,
+        subscriber:         subscriber
+      }
+    end
     let(:worker) { instance_double(described_class) }
 
     before do
