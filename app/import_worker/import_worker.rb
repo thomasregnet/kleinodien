@@ -23,9 +23,19 @@ class ImportWorker
 
   def process_orders
     Rails.logger.info('processing orders')
-  #   loop do
-  #     import_order = import_order_class.next_pending || break
-  #     DeliverImportOrderService.call(import_order: import_order)
-  #   end
+    loop do
+      import_order = ImportQueue.next_pending_for('brainz') || break
+      importer_class = importer_class_for(import_order)
+      importer_class.call(import_order: import_order)
+    end
+  end
+
+  private
+
+  def importer_class_for(import_order)
+    importer_class = import_order.type.sub(/\A(.+)ImportOrder\z/, 'Import\1')
+    Rails.logger.info("importer-class is #{importer_class}")
+
+    importer_class.constantize
   end
 end
