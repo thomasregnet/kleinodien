@@ -6,18 +6,15 @@ class ImportWorker
     new(args).run
   end
 
-  # TODO: remove :import_order_class
-  def initialize(import_order_class:, import_queue_name:, subscriber:)
-    @import_order_class = import_order_class
-    @import_queue_name  = import_queue_name
-    @subscriber         = subscriber
+  def initialize(import_queue_name:, subscriber:)
+    @import_queue_name = import_queue_name
+    @subscriber        = subscriber
 
     raise ArgumentError, "import_queue_name can't be blank" \
       if import_queue_name.blank?
   end
 
-  # TODO: remove :import_order_class
-  attr_reader :import_order_class, :import_queue_name, :subscriber
+  attr_reader :import_queue_name, :subscriber
 
   def run
     loop do
@@ -27,7 +24,6 @@ class ImportWorker
     end
   end
 
-  # BUG: Fix hard coded ImportQueue-name
   def process_orders
     Rails.logger.info('processing orders')
     loop do

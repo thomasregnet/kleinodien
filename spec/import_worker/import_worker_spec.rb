@@ -2,15 +2,14 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportWorker do
   describe '#run' do
-    let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
     let(:subscriber) { instance_double('ImportSubscriber') }
     let(:worker) do
       described_class.new(
-        import_order_class: import_order_class,
-        import_queue_name:  'my_queue',
-        subscriber:         subscriber
+        import_queue_name: 'my_queue',
+        subscriber:        subscriber
       )
     end
 
@@ -24,13 +23,11 @@ RSpec.describe ImportWorker do
   # https://www.rubydoc.info/gems/rubocop-rspec/1.6.0/RuboCop/Cop/RSpec/AnyInstance
   describe '.run' do
     context 'with valid parameters' do
-      let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
       let(:subscriber) { instance_double('ImportSubscriber') }
       let(:args) do
         {
-          import_order_class: import_order_class,
-          import_queue_name:  'my_queue',
-          subscriber:         subscriber
+          import_queue_name: 'my_queue',
+          subscriber:        subscriber
         }
       end
       let(:worker) { instance_double(described_class) }
@@ -46,20 +43,19 @@ RSpec.describe ImportWorker do
     end
 
     context 'with a blank import_queue_name' do
-      let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
       let(:subscriber) { instance_double('ImportSubscriber') }
       let(:args) do
         {
-          import_order_class: import_order_class,
-          import_queue_name:  '',
-          subscriber:         subscriber
+          import_queue_name: '',
+          subscriber:        subscriber
         }
       end
 
       it 'raises an ArgumentError' do
         expect { described_class.run(args) }
-        .to raise_error(ArgumentError, /can't be blank/)
+          .to raise_error(ArgumentError, /can't be blank/)
       end
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
