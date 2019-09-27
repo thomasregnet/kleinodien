@@ -46,6 +46,7 @@ class ImportBase < ServiceBase
     prepare
   rescue => e
     Rails.logger.error(e)
+    import_order.failure!
   end
 
   def import_request_class
