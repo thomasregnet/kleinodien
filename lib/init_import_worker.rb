@@ -7,6 +7,8 @@ end
 logger = Rails.logger
 
 import_order_class = ENV['IMPORT_ORDER_CLASS'].constantize
+import_queue_name  = ENV['IMPORT_QUEUE_NAME']
+
 logger.warn(import_order_class.to_s)
 
 subscriber = ImportSubscriber.new(
@@ -16,5 +18,6 @@ subscriber = ImportSubscriber.new(
 
 ImportWorker.run(
   import_order_class: import_order_class,
+  import_queue_name:  import_queue_name,
   subscriber:         subscriber
 )

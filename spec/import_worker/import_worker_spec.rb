@@ -9,6 +9,7 @@ RSpec.describe ImportWorker do
     let(:worker) do
       described_class.new(
         import_order_class: import_order_class,
+        import_queue_name:  'my_queue',
         subscriber:         subscriber
       )
     end
@@ -22,23 +23,43 @@ RSpec.describe ImportWorker do
 
   # https://www.rubydoc.info/gems/rubocop-rspec/1.6.0/RuboCop/Cop/RSpec/AnyInstance
   describe '.run' do
-    let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
-    let(:subscriber) { instance_double('ImportSubscriber') }
-    let(:args) do
-      {
-        import_order_class: import_order_class,
-        subscriber:         subscriber
-      }
-    end
-    let(:worker) { instance_double(described_class) }
+    context 'with valid parameters' do
+      let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
+      let(:subscriber) { instance_double('ImportSubscriber') }
+      let(:args) do
+        {
+          import_order_class: import_order_class,
+          import_queue_name:  'my_queue',
+          subscriber:         subscriber
+        }
+      end
+      let(:worker) { instance_double(described_class) }
 
-    before do
-      allow(described_class).to receive(:new).and_return(worker)
-      allow(worker).to receive(:run).and_return('run called')
+      before do
+        allow(described_class).to receive(:new).and_return(worker)
+        allow(worker).to receive(:run).and_return('run called')
+      end
+
+      it 'calls #run' do
+        expect(described_class.run(args)).to eq('run called')
+      end
     end
 
-    it 'calls #run' do
-      expect(described_class.run(args)).to eq('run called')
+    context 'with a blank import_queue_name' do
+      let(:import_order_class) { instance_double('BrainzReleaseImportOrder') }
+      let(:subscriber) { instance_double('ImportSubscriber') }
+      let(:args) do
+        {
+          import_order_class: import_order_class,
+          import_queue_name:  '',
+          subscriber:         subscriber
+        }
+      end
+
+      it 'raises an ArgumentError' do
+        expect { described_class.run(args) }
+        .to raise_error(ArgumentError, /can't be blank/)
+      end
     end
   end
 end

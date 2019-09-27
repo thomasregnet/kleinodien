@@ -29,6 +29,7 @@ services:
     entrypoint: config/containers/import_worker/entrypoint.sh
     environment:
       - IMPORT_ORDER_CLASS=BrainzImportOrder
+      - IMPORT_QUEUE_NAME=brainz
 
   web:
     build:
