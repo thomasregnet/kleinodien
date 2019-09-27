@@ -37,18 +37,9 @@ class ImportOrder < ApplicationRecord
 
   def publish
     return unless pending?
+    return unless import_queue
 
-    REDIS.publish(publication_channel_name, 'run')
-  end
-
-  def self.publication_channel_name
-    "publish_#{to_s.underscore.pluralize}"
-  end
-
-  def publication_channel_name
-    return self.class.publication_channel_name unless type
-
-    "publish_#{type.to_s.underscore.pluralize}"
+    REDIS.publish(import_queue.name, 'run')
   end
 
   def self.next_pending

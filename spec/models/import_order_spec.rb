@@ -72,14 +72,18 @@ RSpec.describe ImportOrder, type: :model do
   describe '#save' do
     context 'when pending' do
       let(:import_order) do
-        FactoryBot.build(:import_order, type: 'FakeImportOrder')
+        FactoryBot.build(
+          :import_order,
+          import_queue: ImportQueue.new(name: 'fake_import_queue'),
+          type:         'FakeImportOrder'
+        )
       end
 
       it 'publishes the pending ImportOrder' do
         redis = object_double('REDIS', publish: nil).as_stubbed_const
         import_order.save
         expect(redis).to have_received(:publish)
-          .with('publish_fake_import_orders', 'run')
+          .with('fake_import_queue', 'run')
       end
     end
 
