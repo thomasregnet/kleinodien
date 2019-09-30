@@ -73,8 +73,8 @@ RSpec.describe BrainzImportRequest, type: :model do
         )
       end
 
-      it 'raises NotImplementedError' do
-        expect { import_request.to_uri }.to raise_error NotImplementedError
+      it 'raises a NameError' do
+        expect { import_request.to_uri }.to raise_error NameError
       end
     end
   end

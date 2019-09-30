@@ -8,10 +8,21 @@ class ImportBase < ServiceBase
 
   attr_reader :import_order
 
+  # def call
+  #   raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
+
+  #   existing_one || persisting_one
+  # end
+
   def call
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
 
-    existing_one || persisting_one
+    result = find_existing_by_import_order || find_existing_by_blueprint
+    return enhance_result(result, false) if result
+
+    prepare
+
+    enhance_result(persist, true)
   end
 
   def blueprint

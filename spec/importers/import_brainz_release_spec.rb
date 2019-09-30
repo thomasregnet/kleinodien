@@ -3,39 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# For testing
-class TestImportClass
-end
-
-# Mock #persist and #prepare
-class MockImportBrainzReleasePersistAndPrepare < ImportBrainzRelease
-  def self.call(args)
-    me = new(args)
-    me.init_spies(args)
-    me.call
-  end
-
-  def init_spies(args)
-    @persist_spy = args[:persist_spy]
-    @prepare_spy = args[:prepare_spy]
-  end
-
-  attr_reader :persist_spy, :prepare_spy
-
-  def persist
-    return unless persist_spy
-
-    persist_spy.called
-  end
-
-  def prepare
-    return unless prepare_spy
-
-    prepare_spy.called
-  end
-end
-
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportBrainzRelease do
   it_behaves_like 'a service'
 
@@ -70,33 +37,4 @@ RSpec.describe ImportBrainzRelease do
         .to be false
     end
   end
-
-  describe 'when the release does not exist' do
-    let(:import_order) do
-      FactoryBot.build(:brainz_import_order, import_order_args)
-    end
-
-    it 'calls #persist' do
-      persist_spy = spy
-      MockImportBrainzReleasePersistAndPrepare.call(
-        expected_kind: :release,
-        import_order:  import_order,
-        persist_spy:   persist_spy
-      )
-      expect(persist_spy).to have_received(:called)
-    end
-
-    it 'calls #prepare' do
-      prepare_spy = spy
-      MockImportBrainzReleasePersistAndPrepare.call(
-        import_order:  import_order,
-        expected_kind: :release,
-        prepare_spy:   prepare_spy
-      )
-      expect(prepare_spy).to have_received(:called)
-    end
-  end
-
-  it 'persists within a transaction'
 end
-# rubocop:enable Metrics/BlockLength

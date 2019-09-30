@@ -3,10 +3,12 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
+# For testing
 class FakeProxy
   def lock; end
 end
 
+# For testing
 class ImportFake < ImportBase
   def find_already_existing; end
 
@@ -15,17 +17,14 @@ class ImportFake < ImportBase
   def proxy
     @proxy ||= FakeProxy.new
   end
+
+  def find_existing_by_blueprint; end
+
+  def find_existing_by_import_order; end
 end
 
+# For testing
 class FakeImportOrder < ImportOrder
-  # include ImportStateTransitions
-
-  # def running?
-  #   false
-  # end
-
-  # def failure!
-  # end
 end
 
 class PersistFake < PersistBase

@@ -17,9 +17,9 @@ class BrainzImportRequest < ImportRequest
     uri
   end
 
-  def kind
-    raise NotImplementedError, "#{self.class} does not implement \#kind"
-  end
+  # def kind
+  #   raise NotImplementedError, "#{self.class} does not implement \#kind"
+  # end
 
   def query_string
     BRAINZ_DEFAULT_QUERY_STRING
