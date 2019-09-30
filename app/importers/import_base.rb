@@ -14,7 +14,7 @@ class ImportBase < ServiceBase
     result = find_existing_by_import_order || find_existing_by_blueprint
     return enhance_result(result, false) if result
 
-    prepare
+    try_prepare
 
     enhance_result(persist, true)
   end
@@ -30,23 +30,32 @@ class ImportBase < ServiceBase
     )
   end
 
+  # This method smells of :reek:TooManyStatements
+  # This method smells of :reek:DuplicateMethodCall
   def persist
+    Rails.logger.info("persisting #{import_order.inspect}")
+
     proxy.lock
-    imported_entity = persistence_transaction
-    return if import_order.failed?
+
+    imported_entity = try_persistence_transaction
+    if import_order.failed?
+      Rails.logger.error("failed to persist #{import_order.inspect}")
+      return
+    end
 
     imported_entity
   end
 
   private
 
-  # OPTIMIZE: Move #prepare_save to PrepareBase?
-  def prepare_save
+  # rubocop:disable Style/RescueStandardError
+  def try_prepare
     prepare
   rescue => e
     Rails.logger.error(e)
     import_order.failure!
   end
+  # rubocop:enable Style/RescueStandardError
 
   def import_request_class
     import_order.type.sub(/ImportOrder/, 'ImportRequest').constantize
@@ -57,7 +66,7 @@ class ImportBase < ServiceBase
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Style/RescueStandardError
 
-  def persistence_transaction
+  def try_persistence_transaction
     import_order.transaction do
       import_order.run
       persister_class.call(
