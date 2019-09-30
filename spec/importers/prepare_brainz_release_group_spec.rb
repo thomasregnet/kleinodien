@@ -36,7 +36,7 @@ RSpec.describe PrepareBrainzReleaseGroup do
         prepare_artist_credit_spy: prepare_artist_credit_spy,
         proxy:                     proxy
       }
-      expect(MockPrepareBrainzReleaseGroup.call(args)).to be_nil
+      expect(MockPrepareBrainzReleaseGroup.call(args)).not_to be_nil
       expect(prepare_artist_credit_spy).to have_received(:call)
     end
     # rubocop:enable RSpec/MultipleExpectations

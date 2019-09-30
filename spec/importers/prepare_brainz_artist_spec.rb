@@ -49,7 +49,7 @@ RSpec.describe PrepareBrainzArtist do
       proxy = instance_double('Fake proxy')
       allow(proxy).to receive(:get).and_return(full_blueprint)
       expect(described_class.call(blueprint: blueprint, proxy: proxy))
-        .to be_nil
+        .not_to be_nil
     end
   end
 end

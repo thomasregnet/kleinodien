@@ -11,15 +11,16 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   private
 
+  # This method smells of :reek:TooManyStatements
   def prepare
     release = find_already_existing
     return release if release
 
-    prepare_artist_credit
-    prepare_release_group
-    prepare_media
+    prepare_artist_credit || return
+    prepare_release_group || return
+    prepare_media         || return
 
-    nil
+    true
   end
 
   public

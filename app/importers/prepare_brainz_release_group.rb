@@ -12,8 +12,8 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
   private
 
   def prepare
+    proxy.get(import_request)
     prepare_artist_credit
-    nil
   end
 
   public

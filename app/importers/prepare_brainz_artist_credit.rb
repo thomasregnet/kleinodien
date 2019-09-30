@@ -16,7 +16,7 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
       prepare_brainz_artist(name_credit.artist)
     end
 
-    nil
+    true
   end
 
   public

@@ -33,7 +33,7 @@ RSpec.describe PrepareBrainzRelease do
         TestData.by_name(:brainz_release_arise_jp_cd).blueprint
       end
 
-      it 'returns nil' do
+      it 'returns true' do
         prepare_artist_credit_spy = spy
         prepare_release_group_spy = spy
         proxy                     = spy
@@ -43,9 +43,7 @@ RSpec.describe PrepareBrainzRelease do
           prepare_release_group_spy: prepare_release_group_spy,
           proxy:                     proxy
         }
-        expect(MockPrepareBrainzRelease.call(args)).to be_nil
-        # expect(prepare_artist_credit_spy).to have_received(:call)
-        # expect(prepare_release_group_spy).to have_received(:call)
+        expect(MockPrepareBrainzRelease.call(args)).to be(true)
       end
     end
   end
@@ -60,8 +58,8 @@ RSpec.describe PrepareBrainzRelease do
         )
       end
 
-      it 'returns nil' do
-        expect(preparer.prepare_artist_credit).to be_nil
+      it 'returns a true value' do
+        expect(preparer.prepare_artist_credit).not_to be_nil
       end
     end
   end

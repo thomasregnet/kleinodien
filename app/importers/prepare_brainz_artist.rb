@@ -17,7 +17,7 @@ class PrepareBrainzArtist < PrepareBrainzBase
 
     proxy.get(import_request)
 
-    nil
+    true
   end
 
   public

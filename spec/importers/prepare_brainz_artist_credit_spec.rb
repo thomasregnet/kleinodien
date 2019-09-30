@@ -22,7 +22,7 @@ RSpec.describe PrepareBrainzArtistCredit do
       args  = { blueprint: arise, proxy: proxy }
       allow(proxy).to receive(:get).and_return(sepultura)
 
-      expect(described_class.call(args)).to be_nil
+      expect(described_class.call(args)).not_to be_nil
     end
   end
 end
