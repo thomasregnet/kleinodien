@@ -43,6 +43,7 @@ RSpec.describe PersistBrainzReleaseHead do
 
       it 'returns the persisted ReleaseHead' do
         args = {
+          import_order:   :fake,
           import_request: import_request,
           proxy:          MockPersistBrainzReleaseHeadProxy.new
         }
@@ -63,6 +64,7 @@ RSpec.describe PersistBrainzReleaseHead do
         proxy = MockPersistBrainzReleaseHeadProxy.new
 
         args = {
+          import_order:   FactoryBot.create(:brainz_import_order),
           import_request: BrainzReleaseGroupImportRequest.new(
             code: blueprint.brainz_code
           ),

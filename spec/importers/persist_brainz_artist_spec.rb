@@ -22,6 +22,7 @@ RSpec.describe PersistBrainzArtist do
         allow(proxy).to receive(:get).and_return(blueprint)
 
         artist = described_class.call(
+          import_order:   FactoryBot.create(:brainz_import_order),
           import_request: import_request,
           proxy:          proxy
         )
@@ -43,7 +44,11 @@ RSpec.describe PersistBrainzArtist do
       it 'returns that artist' do
         proxy = double
         allow(proxy).to receive(:get).and_return(blueprint)
-        args = { import_request: import_request, proxy: proxy }
+        args = {
+          import_order:   FactoryBot.create(:brainz_import_order),
+          import_request: import_request,
+          proxy:          proxy
+        }
 
         expect(described_class.call(args).name)
           .to eq('No more slaying')

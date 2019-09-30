@@ -2,13 +2,14 @@
 
 # Persist a MusicBrainz Track
 class PersistBrainzReleaseTrack < PersistBrainzBase
+  # TODO: named parameters
   def initialize(args)
     super(args)
     @blueprint    = args[:blueprint]
     @import_order = args[:import_order]
     @no           = args[:no]
     @subset       = args[:subset]
-  end
+ end
 
   attr_reader :blueprint, :import_order, :no, :subset
 
@@ -25,6 +26,7 @@ class PersistBrainzReleaseTrack < PersistBrainzBase
     import_request = BrainzRecordingImportRequest.new(code: recording_code)
 
     PersistBrainzPiece.call(
+      import_order:   import_order,
       import_request: import_request,
       proxy:          proxy
     )

@@ -2,9 +2,9 @@
 
 # Base class for persisting classes
 class PersistBase < PersistPrepareBase
-  def initialize(args)
+  def initialize(import_order:, **args)
     super(args)
-    @import_order = args[:import_order]
+    @import_order = import_order
   end
 
   attr_reader :import_order

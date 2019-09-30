@@ -52,7 +52,7 @@ class ImportBase < ServiceBase
   def try_prepare
     prepare
   rescue => e
-    Rails.logger.error(e)
+    e.backtrace.each { |msg|Rails.logger.error(msg) }
     import_order.failure!
     nil
   end
@@ -78,6 +78,7 @@ class ImportBase < ServiceBase
     end
   rescue => e
     Rails.logger.error(e)
+    e.backtrace.each { |msg| Rails.logger.error(msg) }
     import_order.failure!
   ensure
     import_order.done! if import_order.running?

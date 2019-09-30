@@ -29,14 +29,19 @@ RSpec.describe PersistBrainzArtistCredit do
         FactoryBot.create(:artist_credit, name: 'Jello Biafra With NoMeansNo')
       end
 
-      let(:blueprint) do
-        TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
-                .blueprint.artist_credit
+      let(:args) do
+        blueprint = TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
+                            .blueprint.artist_credit
+
+        {
+          blueprint:    blueprint,
+          import_order: :fake_import_order,
+          proxy:        :fake_proxy
+        }
       end
 
       it 'returns the ArtistCredit' do
-        expect(described_class.call(blueprint: blueprint, proxy: :fake_proxy))
-          .to eq(artist_credit)
+        expect(described_class.call(args)).to eq(artist_credit)
       end
     end
   end
@@ -57,9 +62,13 @@ RSpec.describe PersistBrainzArtistCredit do
       end
 
       it 'returns the ArtistCredit' do
-        proxy = MockPersistBrainzArtistCreditProxy.new
+        args = {
+          blueprint:    blueprint,
+          import_order: FactoryBot.create(:brainz_import_order),
+          proxy:        MockPersistBrainzArtistCreditProxy.new
+        }
 
-        expect(described_class.call(blueprint: blueprint, proxy: proxy))
+        expect(described_class.call(args))
           .to be_instance_of(ArtistCredit)
       end
     end

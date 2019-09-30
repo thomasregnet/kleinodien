@@ -43,7 +43,12 @@ RSpec.describe PersistBrainzPiece do
       it 'returns the Piece' do
         proxy = spy
         allow(proxy).to receive(:get).and_return(blueprint)
-        args = { import_request: import_request, proxy: proxy }
+        args = {
+          import_order:   :fake,
+          import_request: import_request,
+          proxy:          proxy
+        }
+
         expect(described_class.call(args).title).to eq('Test Dummy')
       end
     end
@@ -61,7 +66,12 @@ RSpec.describe PersistBrainzPiece do
         # proxy = spy
         # allow(proxy).to receive(:get).and_return(blueprint)
         proxy = MockPersistBrainzPieceProxy.new
-        args = { import_request: import_request, proxy: proxy }
+        args = {
+          import_order:   FactoryBot.create(:brainz_import_order),
+          import_request: import_request,
+          proxy:          proxy
+        }
+
         expect(described_class.call(args).title).to eq('Highway to Hell')
       end
     end

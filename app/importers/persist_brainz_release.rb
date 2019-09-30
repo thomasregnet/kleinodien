@@ -39,6 +39,7 @@ class PersistBrainzRelease < PersistBrainzBase
   def persist_artist_credit
     PersistBrainzArtistCredit.call(
       blueprint: blueprint.artist_credit,
+      import_order: import_order,
       proxy:     proxy
     )
   end
@@ -49,8 +50,8 @@ class PersistBrainzRelease < PersistBrainzBase
     )
 
     PersistBrainzReleaseHead.call(
-      # blueprint: proxy.get(import_request),
       import_request: import_request,
+      import_order:   import_order,
       proxy:          proxy
     )
   end
@@ -69,9 +70,10 @@ class PersistBrainzRelease < PersistBrainzBase
   def persist_subsets(release)
     blueprint.media.each do |medium|
       PersistBrainzReleaseSubset.call(
-        blueprint: medium,
-        release:   release,
-        proxy:     proxy
+        blueprint:    medium,
+        import_order: import_order,
+        release:      release,
+        proxy:        proxy
       )
     end
   end
@@ -84,6 +86,8 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   def type
-    ChooseBrainzReleaseTypeService.call(brainz_type: blueprint.release_group.type)
+    ChooseBrainzReleaseTypeService.call(
+      brainz_type: blueprint.release_group.type
+    )
   end
 end

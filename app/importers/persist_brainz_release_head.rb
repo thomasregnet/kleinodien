@@ -2,9 +2,9 @@
 
 # Persist a CompilationHead using data from MusicBrainz
 class PersistBrainzReleaseHead < PersistBrainzBase
-  def initialize(args)
+  def initialize(import_request:, **args)
     super(args)
-    @import_request = args[:import_request]
+    @import_request = import_request
   end
 
   attr_reader :import_request
@@ -37,8 +37,9 @@ class PersistBrainzReleaseHead < PersistBrainzBase
 
   def persist_artist_credit
     PersistBrainzArtistCredit.call(
-      blueprint: blueprint.artist_credit,
-      proxy:     proxy
+      blueprint:    blueprint.artist_credit,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 

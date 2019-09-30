@@ -42,8 +42,9 @@ class PersistBrainzPiece < PersistBrainzBase
 
   def persist_artist_credit
     PersistBrainzArtistCredit.call(
-      blueprint: blueprint.artist_credit,
-      proxy:     proxy
+      blueprint:    blueprint.artist_credit,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 
