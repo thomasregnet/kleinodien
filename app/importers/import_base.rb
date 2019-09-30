@@ -13,6 +13,7 @@ class ImportBase < ServiceBase
 
     result = find_existing_by_import_order || find_existing_by_blueprint
     return enhance_result(result, false) if result
+
     try_prepare
 
     enhance_result(persist, true)
