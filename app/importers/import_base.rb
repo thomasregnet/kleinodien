@@ -2,8 +2,8 @@
 
 # Base-Class for import classes
 class ImportBase < ServiceBase
-  def initialize(args)
-    @import_order = args[:import_order]
+  def initialize(import_order:)
+    @import_order = import_order
   end
 
   attr_reader :import_order
