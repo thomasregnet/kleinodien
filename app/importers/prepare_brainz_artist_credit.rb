@@ -2,9 +2,9 @@
 
 # Prepare a MusicBrainz Artist for import
 class PrepareBrainzArtistCredit < PrepareBrainzBase
-  def initialize(args)
+  def initialize(blueprint:, **args)
     super(args)
-    @blueprint = args[:blueprint]
+    @blueprint = blueprint
   end
 
   attr_reader :blueprint

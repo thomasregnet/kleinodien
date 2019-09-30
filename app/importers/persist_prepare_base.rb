@@ -6,7 +6,10 @@ class PersistPrepareBase
     new(args).call
   end
 
-  def initialize(proxy:, **_)
+  # def initialize(proxy:, **_)
+  #   @proxy = proxy
+  # end
+  def initialize(proxy:, **args)
     @proxy = proxy
   end
 

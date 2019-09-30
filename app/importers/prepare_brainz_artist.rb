@@ -2,9 +2,9 @@
 
 # Prepare a MusicBrainz artist for import
 class PrepareBrainzArtist < PrepareBrainzBase
-  def initialize(args)
+  def initialize(import_request:, **args)
     super(args)
-    @import_request = args[:import_request]
+    @import_request = import_request
   end
 
   attr_reader :import_request

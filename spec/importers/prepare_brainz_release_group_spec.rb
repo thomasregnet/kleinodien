@@ -33,6 +33,7 @@ RSpec.describe PrepareBrainzReleaseGroup do
 
       args = {
         blueprint:                 blueprint,
+        import_request:            :fake,
         prepare_artist_credit_spy: prepare_artist_credit_spy,
         proxy:                     proxy
       }

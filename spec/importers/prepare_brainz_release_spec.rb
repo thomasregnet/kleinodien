@@ -6,9 +6,9 @@ require 'test_data'
 
 # Mock calls to other classes
 class MockPrepareBrainzRelease < PrepareBrainzRelease
-  def initialize(args)
-    @prepare_artist_credit_spy = args[:prepare_artist_credit_spy]
-    @prepare_release_group_spy = args[:prepare_release_group_spy]
+  def initialize(prepare_artist_credit_spy:, prepare_release_group_spy:, **args)
+    @prepare_artist_credit_spy = prepare_artist_credit_spy
+    @prepare_release_group_spy = prepare_release_group_spy
     super(args)
   end
 
