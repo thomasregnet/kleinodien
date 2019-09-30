@@ -8,12 +8,6 @@ class ImportBase < ServiceBase
 
   attr_reader :import_order
 
-  # def call
-  #   raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
-
-  #   existing_one || persisting_one
-  # end
-
   def call
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
 
@@ -45,12 +39,6 @@ class ImportBase < ServiceBase
   end
 
   private
-
-  def existing_one
-    result = find_already_existing || prepare_save
-
-    enhance_result(result, false)
-  end
 
   # OPTIMIZE: Move #prepare_save to PrepareBase?
   def prepare_save
@@ -91,10 +79,6 @@ class ImportBase < ServiceBase
 
   def persister_class
     import_order.type.sub(/^(.+)ImportOrder$/, 'Persist\1').constantize
-  end
-
-  def persisting_one
-    enhance_result(persist, true)
   end
 
   # This method smells of :reek:UtilityFunction
