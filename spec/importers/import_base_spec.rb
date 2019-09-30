@@ -54,35 +54,35 @@ RSpec.describe ImportBase do
     end
   end
 
-  # context 'when prepare fails' do
-  #   let(:import_order) do
-  #     FactoryBot.create(:import_order, type: 'FakeImportOrder')
-  #   end
+  context 'when prepare fails' do
+    let(:import_base) do
+      import_order = FactoryBot.create(:import_order, type: 'FakeImportOrder')
+      BadImportFake.new(import_order: import_order)
+    end
 
-  #   it 'sets the ImportOrder#state to "failed"' do
-  #     BadImportFake.call(import_order: import_order)
-  #     expect(import_order.failed?).to be(true)
-  #   end
+    it 'returns nil' do
+      expect(import_base.send(:try_prepare)).to be_nil
+    end
 
-  #   # it 'returns nil' do
-  #   #   result = BadImportFake.call(import_order: import_order)
-  #   #   expect(result).to be_nil
-  #   # end
-  # end
+    it 'sets the ImportOrder#state to "failed"' do
+      import_base.send(:try_prepare)
+      expect(import_base.import_order.failed?).to be(true)
+    end
+  end
 
-  # context 'when the import transaction fails' do
-  #   let(:import_order) do
-  #     FactoryBot.create(:import_order, type: 'FakeImportOrder')
-  #   end
+  context 'when the import transaction fails' do
+    let(:import_base) do
+      import_order = FactoryBot.create(:import_order, type: 'FakeImportOrder')
+      ImportFake.new(import_order: import_order)
+    end
 
-  #   it 'sets the ImportOrder#state to "failed' do
-  #     ImportFake.call(import_order: import_order)
-  #     expect(import_order.failed?).to be(true)
-  #   end
+    it 'returns nil' do
+      expect(import_base.send(:persist)).to be_nil
+    end
 
-  #   it 'returns nil' do
-  #     result = ImportFake.call(import_order: import_order)
-  #     expect(result).to be_nil
-  #   end
-  # end
+    it 'sets the ImportOrder#state to "failed' do
+      import_base.send(:persist)
+      expect(import_base.import_order.failed?).to be(true)
+    end
+  end
 end
