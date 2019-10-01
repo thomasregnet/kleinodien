@@ -25,22 +25,29 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   def persist
-    release = Release.create!(
-      artist_credit: persist_artist_credit,
-      head:          persist_release_head,
-      title:         blueprint.title,
-      type:          type
-    )
+    release = persist_release
+
     persist_media(release)
     persist_subsets(release)
+
     release
   end
 
   def persist_artist_credit
     PersistBrainzArtistCredit.call(
-      blueprint: blueprint.artist_credit,
+      blueprint:    blueprint.artist_credit,
       import_order: import_order,
-      proxy:     proxy
+      proxy:        proxy
+    )
+  end
+
+  def persist_release
+    Release.create!(
+      artist_credit: persist_artist_credit,
+      head:          persist_release_head,
+      import_order:  import_order,
+      title:         blueprint.title,
+      type:          type
     )
   end
 
