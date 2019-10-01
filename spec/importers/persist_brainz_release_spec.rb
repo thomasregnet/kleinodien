@@ -12,7 +12,7 @@ RSpec.describe PersistBrainzRelease do
     '693748be-7c18-39c3-af2e-2e62092090cf'
   end
 
-  let(:blueprint) do
+  def blueprint
     TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd).blueprint
   end
 
@@ -34,9 +34,9 @@ RSpec.describe PersistBrainzRelease do
         proxy = spy
         allow(proxy).to receive(:get).and_return(blueprint)
         args = {
-          import_order:   :fake,
-          import_request: import_request,
-          proxy:          proxy
+          blueprint:    blueprint,
+          import_order: :fake,
+          proxy:        proxy
         }
         expect(described_class.call(args).title).to eq('Test Dummy')
       end

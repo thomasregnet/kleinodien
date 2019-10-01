@@ -2,20 +2,22 @@
 
 # Persist a CompilationRelease using data retrieved from MusicBrainz
 class PersistBrainzRelease < PersistBrainzBase
-  def initialize(args)
+  def initialize(blueprint:, **args)
     super(args)
-    @import_request = args[:import_request]
+    # @import_request = args[:import_request]
+    @blueprint = blueprint
   end
 
-  attr_reader :import_request
+  # attr_reader :import_request
+  attr_reader :blueprint
 
   def call
     find_already_existing || persist
   end
 
-  def blueprint
-    proxy.get(import_request)
-  end
+  # def blueprint
+  #   proxy.get(import_request)
+  # end
 
   def find_already_existing
     FindByCodesService.call(

@@ -71,9 +71,9 @@ class ImportBase < ServiceBase
     import_order.transaction do
       import_order.run
       persister_class.call(
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
+        blueprint:    blueprint,
+        import_order: import_order,
+        proxy:        proxy
       )
     end
   rescue => e
