@@ -49,7 +49,6 @@ RSpec.describe PrepareBrainzArtist do
       proxy = instance_double('Fake proxy')
       allow(proxy).to receive(:get).and_return(full_blueprint)
       args = {
-        blueprint:      blueprint,
         import_request: :fake,
         proxy:          proxy
       }

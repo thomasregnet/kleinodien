@@ -50,10 +50,9 @@ RSpec.describe PersistBrainzRelease do
 
     let(:release) do
       persister = described_class.new(
-        blueprint:      blueprint,
-        import_order:   FactoryBot.create(:brainz_import_order),
-        import_request: import_request,
-        proxy:          :fake
+        blueprint:    blueprint,
+        import_order: FactoryBot.create(:brainz_import_order),
+        proxy:        :fake
       )
 
       allow(persister).to receive(:persist_artist_credit)

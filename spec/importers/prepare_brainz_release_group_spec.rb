@@ -6,8 +6,8 @@ require 'shared_examples_for_services'
 
 # Mock prepare_* calls
 class MockPrepareBrainzReleaseGroup < PrepareBrainzReleaseGroup
-  def initialize(args)
-    @prepare_artist_credit_spy = args[:prepare_artist_credit_spy]
+  def initialize(prepare_artist_credit_spy:, **args)
+    @prepare_artist_credit_spy = prepare_artist_credit_spy
     super(args)
   end
 
@@ -22,17 +22,12 @@ RSpec.describe PrepareBrainzReleaseGroup do
   it_behaves_like 'a service'
 
   context 'with a valid blueprint' do
-    let(:blueprint) do
-      TestData.by_name(:brainz_release_group_arise).blueprint
-    end
-
     # rubocop:disable RSpec/MultipleExpectations
     it 'prepares the artist-credit' do
       prepare_artist_credit_spy = spy
       proxy                     = spy
 
       args = {
-        blueprint:                 blueprint,
         import_request:            :fake,
         prepare_artist_credit_spy: prepare_artist_credit_spy,
         proxy:                     proxy
