@@ -42,14 +42,14 @@ RSpec.describe CalculateNapMultiplier do
     context 'without an error' do
       it 'raises an ArgumentError' do
         expect { described_class.call({}) }
-          .to raise_error(ArgumentError, /missing last_multiplier/)
+          .to raise_error(ArgumentError, /missing keyword: last_multiplier/)
       end
     end
 
     context 'with an error' do
       it 'raises an ArgumentError' do
         expect { described_class.call(error: true) }
-          .to raise_error(ArgumentError, /missing last_multiplier/)
+          .to raise_error(ArgumentError, /missing keyword: last_multiplier/)
       end
     end
   end

@@ -8,9 +8,9 @@ class CalculateNapMultiplier
     new(args).call
   end
 
-  def initialize(args)
-    @error           = args[:error]
-    @last_multiplier = args[:last_multiplier]
+  def initialize(error: nil, last_multiplier:)
+    @error           = error
+    @last_multiplier = last_multiplier
   end
 
   attr_reader :error, :last_multiplier
