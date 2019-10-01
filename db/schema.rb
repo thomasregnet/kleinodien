@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_091351) do
+ActiveRecord::Schema.define(version: 2019_10_01_065506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_091351) do
   create_table "import_orders", force: :cascade do |t|
     t.text "code", null: false
     t.text "state", null: false
-    t.text "type", null: false
+    t.text "type"
     t.text "uri"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
