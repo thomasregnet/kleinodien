@@ -5,8 +5,8 @@ class BrainzProxy
   class << self; attr_reader :last_request end
   @last_request = 0
 
-  def initialize(args)
-    @import_order = args[:import_order]
+  def initialize(import_order:)
+    @import_order = import_order
     @locked       = false
     @cache        = {}
   end
