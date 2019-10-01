@@ -32,7 +32,12 @@ RSpec.describe PersistBrainzReleaseSubset do
       let(:args) do
         blueprint = double(title: 'fake title')
 
-        { blueprint: blueprint, import_order: :fake, proxy: :fake_proxy }
+        {
+          blueprint:    blueprint,
+          import_order: :fake,
+          proxy:        :fake_proxy,
+          release:      FactoryBot.create(:release)
+        }
       end
 
       it 'returns that title' do
@@ -45,8 +50,12 @@ RSpec.describe PersistBrainzReleaseSubset do
       let(:args) do
         format = double(__content__: 'Vinyl')
         blueprint = double(format: format, position: 3, title: nil)
-
-        { blueprint: blueprint, import_order: :fake, proxy: :fake_proxy }
+        {
+          blueprint:    blueprint,
+          import_order: :fake,
+          proxy:        :fake_proxy,
+          release:      FactoryBot.create(:release)
+        }
       end
 
       it 'returns a generic title' do

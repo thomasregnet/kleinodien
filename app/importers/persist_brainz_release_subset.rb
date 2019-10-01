@@ -2,10 +2,10 @@
 
 # Persist a MusicBrainz medium
 class PersistBrainzReleaseSubset < PersistBrainzBase
-  def initialize(args)
+  def initialize(blueprint:, release:, **args)
     super(args)
-    @blueprint = args[:blueprint]
-    @release   = args[:release]
+    @blueprint = blueprint
+    @release   = release
   end
 
   attr_reader :blueprint, :release
