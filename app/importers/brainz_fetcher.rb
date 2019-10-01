@@ -6,8 +6,8 @@ class BrainzFetcher
     new(args).call
   end
 
-  def initialize(args)
-    @import_request = args[:import_request]
+  def initialize(import_request:)
+    @import_request = import_request
 
     @interrupter = BrainzImportInterrupter.instance
   end
