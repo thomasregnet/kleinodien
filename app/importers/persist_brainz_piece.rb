@@ -2,9 +2,9 @@
 
 # Persist a MusicBrainz recording
 class PersistBrainzPiece < PersistBrainzBase
-  def initialize(args)
+  def initialize(import_request:, **args)
     super(args)
-    @import_request = args[:import_request]
+    @import_request = import_request
   end
 
   attr_reader :import_request
