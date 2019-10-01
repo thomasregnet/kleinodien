@@ -48,30 +48,30 @@ RSpec.describe PersistBrainzRelease do
       BrainzReleaseImportRequest.new(code: brainz_code)
     end
 
-    let(:persister) do
-      described_class.new(
+    let(:release) do
+      persister = described_class.new(
         blueprint:      blueprint,
         import_order:   FactoryBot.create(:brainz_import_order),
         import_request: import_request,
         proxy:          :fake
       )
-    end
 
-    before do
       allow(persister).to receive(:persist_artist_credit)
         .and_return(FactoryBot.create(:artist_credit))
       allow(persister).to receive(:blueprint)
         .and_return(blueprint)
       allow(persister).to receive(:persist_release_head)
         .and_return(FactoryBot.create(:release_head))
+
+      persister.persist_release
     end
 
     it 'persists the release' do
-      expect(persister.persist_release).not_to be_new_record
+      expect(release).not_to be_new_record
     end
 
     it 'sets the ImportOrder' do
-      expect(persister.persist_release.import_order).to be_kind_of(ImportOrder)
+      expect(release.import_order).not_to be_nil
     end
   end
 end
