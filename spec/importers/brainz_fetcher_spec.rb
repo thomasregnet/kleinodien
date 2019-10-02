@@ -34,6 +34,11 @@ RSpec.describe BrainzFetcher do
       described_class.call(import_request: import_request)
       expect(import_request.body.content).not_to be_blank
     end
+
+    it 'sets the ImportRequest#state to "done"' do
+      described_class.call(import_request: import_request)
+      expect(import_request.state).to eq('done')
+    end
   end
 
   context "when data can't be requested" do
@@ -49,6 +54,10 @@ RSpec.describe BrainzFetcher do
       expect { described_class.call(import_request: import_request) }
         .to raise_error(ImportError::CanNotFetch, /#{brainz_code}/)
     end
+  end
+
+  describe '#fetch' do
+
   end
 end
 # rubocop:enable Metrics/BlockLength

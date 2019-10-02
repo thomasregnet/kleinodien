@@ -18,24 +18,29 @@ class BrainzFetcher
     import_request.run
     response = fetch
 
-    import_request.done
+    # import_request.done
     BrainzBlueprint.from_xml(response.body)
   end
 
   def fetch
     max_tries.times do
       response = fetch_attempt
+      # it seems that #times does not quit with "next", so I've
+      # decided to use "return".
+      # rubocop:disable Style/Next
       if response.success?
         save_response_body(response)
+        import_request.done!
         return response
       end
+      # rubocop:enable Style/Next
     end
 
     can_not_fetch
   end
 
   def can_not_fetch
-    import_request.failure
+    import_request.failure!
     raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
   end
 
