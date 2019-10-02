@@ -12,7 +12,7 @@ class BrainzFetcher
     @interrupter = BrainzImportInterrupter.instance
   end
 
-  attr_reader :import_request, :interrupter
+  attr_reader :import_request, :interrupter, :response
 
   def call
     import_request.run
@@ -24,40 +24,18 @@ class BrainzFetcher
 
   def fetch
     max_tries.times do
-      response = fetch_attempt
-      # it seems that #times does not quit with "next", so I've
-      # decided to use "return".
-      # rubocop:disable Style/Next
-      if response.success?
-        save_response_body(response)
-        import_request.done!
-        return response
-      end
-      # rubocop:enable Style/Next
+      fetch_attempt
+      return success if response.success?
     end
 
-    can_not_fetch
-  end
-
-  def can_not_fetch
-    import_request.failure!
-    raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
-  end
-
-  def uri
-    import_request.to_uri
+    fetch_failed
   end
 
   def fetch_attempt
     take_a_nap
-    response = Faraday.get(uri)
-    import_request.attempts.create!(
-      message:     response.reason_phrase,
-      status_code: response.status
-    )
+    @response = Faraday.get(uri)
+    create_attempt
     response.success? ? interrupter.signal_success : interrupter.signal_error
-
-    response
   end
 
   # TODO: make max_tries configurable
@@ -65,12 +43,37 @@ class BrainzFetcher
     5 # 3
   end
 
-  def save_response_body(response)
+  private
+
+  def create_attempt
+    import_request.attempts.create!(
+      message:     response.reason_phrase,
+      status_code: response.status
+    )
+  end
+
+  def fetch_failed
+    import_request.failure!
+    raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
+  end
+
+  def save_response_body
     # TODO: Make saving a ImportRequest#body optional per configuration
     import_request.create_body!(content: response.body)
   end
 
+  def success
+    save_response_body
+    import_request.done!
+
+    response
+  end
+
   def take_a_nap
     interrupter.perform
+  end
+
+  def uri
+    import_request.to_uri
   end
 end
