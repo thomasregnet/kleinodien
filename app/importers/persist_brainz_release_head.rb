@@ -25,11 +25,9 @@ class PersistBrainzReleaseHead < PersistBrainzBase
   end
 
   def persist
-    artist_credit = persist_artist_credit
-
-    # TODO: chose a type from the blueprint
     ReleaseHead.create!(
-      artist_credit: artist_credit,
+      artist_credit: persist_artist_credit,
+      import_order:  import_order,
       title:         blueprint.title,
       type:          type
     )

@@ -56,23 +56,26 @@ RSpec.describe PersistBrainzReleaseHead do
         TestData.by_name(:brainz_release_group_arise).blueprint
       end
 
-      let(:sepultura) do
-        TestData.by_name(:brainz_artist_sepultura).blueprint
+      let(:release_head) do
+        persister = described_class.new(
+          import_order:   FactoryBot.create(:brainz_import_order),
+          import_request: :fake_import_request,
+          proxy:          :fake_proxy
+        )
+
+        allow(persister).to receive(:persist_artist_credit)
+          .and_return(FactoryBot.create(:artist_credit))
+        allow(persister).to receive(:blueprint)
+          .and_return(blueprint)
+        persister.persist
       end
 
-      it 'returns a ReleaseHead' do
-        proxy = MockPersistBrainzReleaseHeadProxy.new
+      it 'returns a SingleHead' do
+        expect(release_head).to be_instance_of(SingleHead)
+      end
 
-        args = {
-          import_order:   FactoryBot.create(:brainz_import_order),
-          import_request: BrainzReleaseGroupImportRequest.new(
-            code: blueprint.brainz_code
-          ),
-          proxy:          proxy
-        }
-
-        expect(described_class.call(args))
-          .to be_instance_of(SingleHead)
+      it 'sets the ImportOrder' do
+        expect(release_head.import_order).to be_kind_of(ImportOrder)
       end
     end
   end
