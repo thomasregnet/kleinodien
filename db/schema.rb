@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_065506) do
+ActiveRecord::Schema.define(version: 2019_10_02_080254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_065506) do
     t.index "piece_head_id, lower((version)::text)", name: "index_piece_releases_on_piece_head_id_and_lower_version", unique: true
     t.index ["artist_credit_id"], name: "index_pieces_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_pieces_on_import_order_id"
+    t.index ["piece_head_id"], name: "index_on_pieces_piece_head_id"
     t.index ["station_id"], name: "index_pieces_on_station_id"
   end
 
