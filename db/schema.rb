@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_102821) do
+ActiveRecord::Schema.define(version: 2019_10_04_113420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -58,15 +58,6 @@ ActiveRecord::Schema.define(version: 2019_10_04_102821) do
     t.integer "tag_id", null: false
     t.index ["artist_id"], name: "index_artists_tags_on_artist_id"
     t.index ["tag_id"], name: "index_artists_tags_on_tag_id"
-  end
-
-  create_table "brainz_releases", force: :cascade do |t|
-    t.uuid "mbid", null: false
-    t.text "url", null: false
-    t.xml "data", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["url"], name: "brainz_releases_url_key", unique: true
   end
 
   create_table "companies", id: :serial, force: :cascade do |t|
