@@ -384,7 +384,7 @@ DEPENDENCIES
   capybara (~> 3.0)
   coffee-rails (~> 5.0)
   database_cleaner
-  devise (~> 4.3)
+  devise (~> 4.7)
   factory_bot_rails (~> 5.0)
   faker (~> 1.5)
   faraday

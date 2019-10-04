@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootsnap'
 gem 'faker',  '~> 1.5'
-gem 'devise', '~> 4.3'
+gem 'devise', '~> 4.7'
 gem 'faraday'
 gem 'hashie', '~> 3.5'
 gem 'jsonapi-resources'
