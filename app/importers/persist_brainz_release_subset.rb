@@ -19,10 +19,10 @@ class PersistBrainzReleaseSubset < PersistBrainzBase
   def persist_tracks(subset)
     tracklist = blueprint.flat_track_list
     tracklist.each.with_index(1) do |track, no|
-      # TODO: don't take import_order form proxy
       PersistBrainzReleaseTrack.call(
         blueprint:    track,
-        import_order: proxy.import_order,
+        # import_order: proxy.import_order,
+        import_order: import_order,
         no:           no,
         proxy:        proxy,
         subset:       subset
