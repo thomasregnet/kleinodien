@@ -13,6 +13,7 @@ require 'shared_examples_for_tagable_models'
 RSpec.describe Piece, type: :model do
   it { is_expected.to belong_to(:import_order).without_validating_presence }
   it { is_expected.to have_many(:release_tracks) }
+  it { is_expected.to have_many(:piece_tracks) }
 
   specify '#descriptions' do
     expect(subject).to respond_to(:descriptions)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_080254) do
+ActiveRecord::Schema.define(version: 2019_10_04_102821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -306,13 +306,13 @@ ActiveRecord::Schema.define(version: 2019_10_02_080254) do
   end
 
   create_table "piece_tracks", id: :serial, force: :cascade do |t|
-    t.integer "piece_release_id", null: false
+    t.integer "piece_id", null: false
     t.integer "tr_format_kind_id"
     t.integer "milliseconds"
     t.text "accuracy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["piece_release_id"], name: "index_piece_tracks_on_piece_release_id"
+    t.index ["piece_id"], name: "index_piece_tracks_on_piece_id"
     t.index ["tr_format_kind_id"], name: "index_piece_tracks_on_tr_format_kind_id"
   end
 
@@ -607,7 +607,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_080254) do
   add_foreign_key "piece_heads_tags", "tags"
   add_foreign_key "piece_releases", "import_orders"
   add_foreign_key "piece_releases", "pieces"
-  add_foreign_key "piece_tracks", "pieces", column: "piece_release_id"
+  add_foreign_key "piece_tracks", "pieces"
   add_foreign_key "pieces", "artist_credits"
   add_foreign_key "pieces", "import_orders"
   add_foreign_key "pieces", "piece_heads", name: "pieces_fk_piece_heads"

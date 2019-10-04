@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A release of a song, movie ...
 class Piece < ActiveRecord::Base
   include CodeFindable
@@ -23,8 +25,7 @@ class Piece < ActiveRecord::Base
   has_many :release_tracks
   has_many :labels, class_name: 'PrLabel'
   has_many :ratings
-  # TODO: must be PieceTrack when table piece_tracks exists
-  has_many :tracks, class_name: 'CompilationTrack'
+  has_many :piece_tracks
 
   has_and_belongs_to_many :countries
 end
