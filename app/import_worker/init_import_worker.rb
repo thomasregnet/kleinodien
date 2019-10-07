@@ -14,10 +14,12 @@ class InitImportWorker
 
   def initialize
     @import_queue_name = ENV['IMPORT_QUEUE_NAME']
-    @timeout           = ENV.fetch('IMPORT_SUBSCRIPTION_TIMEOUT', 300).to_i
-
     raise ArgumentError, 'Environment variable IMPORT_QUEUE_NAME not set' \
       unless import_queue_name
+
+    @timeout = ENV.fetch('IMPORT_SUBSCRIPTION_TIMEOUT', 300).to_i
+
+    Rails.logger.info("starting ImportWorker for queue #{import_queue_name}")
   end
 
   def call
