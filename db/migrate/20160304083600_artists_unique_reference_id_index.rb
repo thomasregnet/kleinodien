@@ -1,6 +1,6 @@
 class ArtistsUniqueReferenceIdIndex < ActiveRecord::Migration[4.2]
   def change
-      reversible do |idx|
+    reversible do |idx|
       idx.up do
         execute <<-DDL.gsub /^\s+/, ''
           CREATE UNIQUE INDEX artists_reference_id
@@ -14,6 +14,6 @@ class ArtistsUniqueReferenceIdIndex < ActiveRecord::Migration[4.2]
           name: :artists_reference_id
         )
       end
-    end  
+    end
   end
 end
