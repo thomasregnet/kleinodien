@@ -23,11 +23,6 @@ class UriImportOrdersController < ApplicationController
 
   private
 
-  def class_name
-    @class_name ||= GetImportOrderClassNameFromUriService
-                    .call(uri_string: uri_string)
-  end
-
   def uri_string
     import_order_params[:uri]
   end
