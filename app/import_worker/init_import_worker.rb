@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+Signal.trap(:INT) do
+  exit
+end
+
 # Start up the ImportWorker
 class InitImportWorker
   def self.call
