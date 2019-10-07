@@ -23,8 +23,6 @@ Rails.application.routes.draw do
 
   resources :movie_heads, only: [:index, :show]
 
-  resources :original_exemplars
-
   resources :import_requests, only: [:create, :new]
 
   get 'pages/index'
