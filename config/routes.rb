@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   # get 'heaps/index'
   # get 'heaps/show'
@@ -10,14 +13,14 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :album_heads, only: [:index, :show]
+  resources :album_heads, only: %i[index show]
 
-  resources :album_releases, only: [:index, :show]
+  resources :album_releases, only: %i[index show]
 
-  resources :uri_import_orders, only: [:create, :new]
+  resources :uri_import_orders, only: %i[create new]
 
   # https://stackoverflow.com/questions/5246767/sti-one-controller
-  resources :releases, only: [:index, :show]
+  resources :releases, only: %i[index show]
   resources(
     :albums,
     controller: 'releases',
@@ -31,7 +34,7 @@ Rails.application.routes.draw do
     only:       %i[index show]
   )
 
-  resources :movie_heads, only: [:index, :show]
+  resources :movie_heads, only: %i[index show]
 
   get 'pages/index'
 
@@ -54,3 +57,4 @@ Rails.application.routes.draw do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
