@@ -4,7 +4,6 @@ require 'shared_examples_for_code_findable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_tagable_models'
-require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe Artist, type: :model do
   it { is_expected.to belong_to(:import_order).without_validating_presence }
@@ -108,10 +107,6 @@ RSpec.describe Artist, type: :model do
     let(:tagable) { @tagable }
 
     after(:all) { DatabaseCleaner.clean }
-  end
-
-  it_behaves_like 'a model with BrainzConstructors' do
-    let(:klass) { Artist }
   end
 
   context 'usual artist' do

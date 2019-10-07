@@ -8,7 +8,6 @@ require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
-require 'shared_examples_for_models_with_brainz_constructors'
 
 RSpec.describe PieceHead, type: :model do
   it { is_expected.to belong_to(:import_order).without_validating_presence }

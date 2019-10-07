@@ -2,7 +2,6 @@
 
 # The artist releated to an ArtistCredit
 class Artist < ActiveRecord::Base
-  include BrainzConstructors
   include CodeFindable
 
   belongs_to :import_order, required: false
