@@ -27,8 +27,6 @@ Rails.application.routes.draw do
 
   resources :original_exemplars
 
-  resources :repositories
-
   resources :import_requests, only: [:create, :new]
 
   get 'pages/index'
