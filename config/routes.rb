@@ -18,8 +18,18 @@ Rails.application.routes.draw do
 
   # https://stackoverflow.com/questions/5246767/sti-one-controller
   resources :releases, only: [:index, :show]
-  resources :albums, controller: 'releases', type: 'Album'
-  resources :singles, controller: 'releases', type: 'Single'
+  resources(
+    :albums,
+    controller: 'releases',
+    type:       'Album',
+    only:       %i[index show]
+  )
+  resources(
+    :singles,
+    controller: 'releases',
+    type:       'Single',
+    only:       %i[index show]
+  )
 
   resources :movie_heads, only: [:index, :show]
 
