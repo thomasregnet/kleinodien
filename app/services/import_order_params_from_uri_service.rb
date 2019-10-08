@@ -5,11 +5,10 @@ class ImportOrderParamsFromUriService < ServiceBase
   DEFAULT_OFFSET = 0
 
   def initialize(args)
-    @uri  = args[:uri]
-    @user = args[:user]
+    @uri = args[:uri]
   end
 
-  attr_reader :uri, :user
+  attr_reader :uri
 
   def call
     return unless path_items
