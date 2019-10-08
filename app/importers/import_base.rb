@@ -92,7 +92,6 @@ class ImportBase < ServiceBase
     import_order.type.sub(/^(.+)ImportOrder$/, 'Persist\1').constantize
   end
 
-  # This method smells of :reek:UtilityFunction
   def enhance_result(result, created)
     return unless result
 
