@@ -32,7 +32,7 @@ class ImportSubscriber
   end
 
   def unsubscribe
-    Rails.logger('unsubscribe')
+    Rails.logger.info("unsubscribing from #{channel}")
     redis.unsubscribe(channel)
   end
 end
