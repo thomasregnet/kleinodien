@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Base class for Pundit policies
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -34,6 +37,7 @@ class ApplicationPolicy
     false
   end
 
+  # https://github.com/varvet/pundit#scopes
   class Scope
     attr_reader :user, :scope
 
