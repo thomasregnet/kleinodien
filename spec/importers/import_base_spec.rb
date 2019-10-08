@@ -85,4 +85,25 @@ RSpec.describe ImportBase do
       expect(import_base.import_order.failed?).to be(true)
     end
   end
+
+  describe '#enhance_result' do
+    let(:base) { described_class.new(import_order: :fake) }
+    let(:object) { Object.new }
+
+    context 'with "true" as second parameter' do
+      before { base.send(:enhance_result, object, true) }
+
+      it 'creates an "created?" mehthod that returns true' do
+        expect(object).to be_created
+      end
+    end
+
+    context 'with "false" as second parameter' do
+      before { base.send(:enhance_result, object, false) }
+
+      it 'creates an "created?" mehthod that returns true' do
+        expect(object).not_to be_created
+      end
+    end
+  end
 end
