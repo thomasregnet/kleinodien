@@ -2,7 +2,6 @@
 
 # Takes an uri and stores an ImportOrder
 class UriImportOrdersController < ApplicationController
-  # TODO: user must also have the right to order import_orders
   before_action :authenticate_user!
 
   def new
@@ -11,6 +10,7 @@ class UriImportOrdersController < ApplicationController
 
   def create
     @import_order = ImportOrder.new(uri: uri_string, user: current_user)
+    authorize @import_order
     if @import_order.save
       flash[:success] = 'Successfully added your import order'
     else
