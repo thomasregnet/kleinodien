@@ -1,4 +1,8 @@
 class ImportOrderPolicy < ApplicationPolicy
+  def create?
+    user.importer?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
