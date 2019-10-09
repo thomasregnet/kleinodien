@@ -65,16 +65,19 @@ RSpec.describe ImportWorker do
       described_class.new(import_queue_name: 'test', subscriber: 'test')
     end
 
-    context 'with a valid ImportOrder' do
-      let(:import_order) { double }
+    context 'with a valid import_order_type' do
+      before { stub_const('ImportSomethingElse', nil) }
 
       it 'returns the expected importer-class' do
-        stub_const('ImportSomethingElse', nil)
-        allow(import_order).to receive(:type)
-          .and_return('SomethingElseImportOrder')
-
-        expect(worker.send(:importer_class_for, import_order))
+        expect(worker.send(:importer_class_for, 'SomethingElseImportOrder'))
           .to eq(ImportSomethingElse)
+      end
+    end
+
+    context 'with a invalid import_order_type' do
+      it 'raises an error' do
+        expect { worker.send(:importer_class_for, 'BadEvil') }
+          .to raise_error(NameError, /uninitialized constant BadEvil/)
       end
     end
   end
