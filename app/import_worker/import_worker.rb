@@ -27,13 +27,21 @@ class ImportWorker
   def process_orders
     Rails.logger.info('processing orders')
     loop do
-      import_order = ImportQueue.next_pending_for(import_queue_name) || break
-      importer_class = importer_class_for(import_order.type)
+      importer_class, import_order \
+        = process_orders_import_class_and_order || return
+
       importer_class.call(import_order: import_order)
     end
   end
 
   private
+
+  def process_orders_import_class_and_order
+    import_order = ImportQueue.next_pending_for(import_queue_name) || return
+    importer_class = importer_class_for(import_order.type)         || return
+
+    [importer_class, import_order]
+  end
 
   def importer_class_for(import_order_type)
     importer_class = import_order_type.sub(/\A(.+)ImportOrder\z/, 'Import\1')
