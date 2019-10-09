@@ -51,9 +51,42 @@ RSpec.describe ImportWorker do
         }
       end
 
+      # the regex ("can.t be blank")uses an dot instead of an
+      # apostrophe because the apostrophe confuses emacs
       it 'raises an ArgumentError' do
         expect { described_class.run(args) }
-          .to raise_error(ArgumentError, /can't be blank/)
+          .to raise_error(ArgumentError, /can.t be blank/)
+      end
+    end
+  end
+
+  describe '#importer_class_for' do
+    let(:worker) do
+      described_class.new(import_queue_name: 'test', subscriber: 'test')
+    end
+
+    context 'with a valid ImportOrder' do
+      let(:import_order) { double }
+
+      it 'returns the expected importer-class' do
+        stub_const('ImportSomethingElse', nil)
+        allow(import_order).to receive(:type)
+          .and_return('SomethingElseImportOrder')
+
+        expect(worker.send(:importer_class_for, import_order))
+          .to eq(ImportSomethingElse)
+      end
+    end
+  end
+
+  describe '#process_orders' do
+    context 'when there are no pending import_orders' do
+      let(:worker) do
+        described_class.new(import_queue_name: 'test', subscriber: 'test')
+      end
+
+      it 'loops' do
+        expect(worker.process_orders).to be nil
       end
     end
   end
