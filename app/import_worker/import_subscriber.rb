@@ -21,7 +21,7 @@ class ImportSubscriber
 
   def handle_message(message_obj)
     message_obj.message do |_, message|
-      Rails.logger("received #{message} on channel #{channel}")
+      Rails.logger.info("received #{message} on channel #{channel}")
       unsubscribe
       message
     end
