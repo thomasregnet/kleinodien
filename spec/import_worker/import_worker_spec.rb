@@ -83,6 +83,28 @@ RSpec.describe ImportWorker do
   end
 
   describe '#process_orders' do
+    context 'when there are pending import_orders' do
+      let(:worker) do
+        described_class.new(import_queue_name: 'test', subscriber: 'test')
+      end
+      let(:import_order) { double }
+      let(:subscriber) { instance_double('ImportSubscriber') }
+
+      before do
+        stub_const('ImportSomethingElse', double)
+        allow(ImportSomethingElse).to receive(:call)
+        allow(import_order).to receive(:type).and_return('ImportSomethingElse')
+        allow(ImportQueue).to receive(:next_pending_for)
+          .and_return(import_order)
+        allow(worker).to receive(:importer_class_for)
+          .and_return(ImportSomethingElse)
+      end
+
+      it 'loops' do
+        expect(worker.process_orders).to be nil
+      end
+    end
+
     context 'when there are no pending import_orders' do
       let(:worker) do
         described_class.new(import_queue_name: 'test', subscriber: 'test')
