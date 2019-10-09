@@ -3,6 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe ImportSubscriber do
+  describe '#redis' do
+    let(:subscriber) { described_class.new(channel: 'test') }
+
+    it 'retuns an redis connection' do
+      expect(subscriber.send(:redis)).to be_instance_of(Redis)
+    end
+  end
+
   describe '#unsubscribe' do
     let(:redis) { instance_double('Redis', unsubscribe: true) }
     let(:subscriber) do
