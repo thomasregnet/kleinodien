@@ -6,9 +6,10 @@ class PersistPrepareBase
     new(args).call
   end
 
-  def initialize(proxy:)
-    @proxy = proxy
+  def initialize(import_order:, proxy:)
+    @import_order = import_order
+    @proxy        = proxy
   end
 
-  attr_reader :proxy
+  attr_reader :import_order, :proxy
 end

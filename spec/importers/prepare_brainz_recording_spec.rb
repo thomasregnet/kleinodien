@@ -27,8 +27,12 @@ RSpec.describe PrepareBrainzRecording do
       proxy = double
       allow(proxy).to receive(:get).and_return(blueprint)
 
-      expect(described_class.call(import_request: import_request, proxy: proxy))
-        .to be_instance_of(Piece)
+      args = {
+        import_order:   :fake_import_order,
+        import_request: import_request,
+        proxy:          proxy
+      }
+      expect(described_class.call(args)).to be_instance_of(Piece)
     end
   end
 
@@ -49,8 +53,13 @@ RSpec.describe PrepareBrainzRecording do
 
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
-      expect(described_class.call(import_request: import_request, proxy: proxy))
-        .to be_nil
+      args = {
+        import_order:   :fake_import_order,
+        import_request: import_request,
+        proxy:          proxy
+      }
+
+      expect(described_class.call(args)).to be_nil
     end
   end
 end

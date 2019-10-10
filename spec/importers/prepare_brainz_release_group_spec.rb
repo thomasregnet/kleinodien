@@ -28,7 +28,8 @@ RSpec.describe PrepareBrainzReleaseGroup do
       proxy                     = spy
 
       args = {
-        import_request:            :fake,
+        import_order:              :fake_import_order,
+        import_request:            :fake_import_request,
         prepare_artist_credit_spy: prepare_artist_credit_spy,
         proxy:                     proxy
       }

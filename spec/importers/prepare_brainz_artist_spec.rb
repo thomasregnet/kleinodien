@@ -31,8 +31,12 @@ RSpec.describe PrepareBrainzArtist do
       proxy = double
       allow(proxy).to receive(:get).and_return(blueprint)
 
-      expect(described_class.call(import_request: import_request, proxy: proxy))
-        .to be_instance_of(Artist)
+      args = {
+        import_order:   :fake_import_order,
+        import_request: import_request,
+        proxy:          proxy
+      }
+      expect(described_class.call(args)).to be_instance_of(Artist)
     end
   end
 
@@ -49,11 +53,11 @@ RSpec.describe PrepareBrainzArtist do
       proxy = instance_double('Fake proxy')
       allow(proxy).to receive(:get).and_return(full_blueprint)
       args = {
+        import_order:   :fake_import_order,
         import_request: :fake,
         proxy:          proxy
       }
-      expect(described_class.call(args))
-        .not_to be_nil
+      expect(described_class.call(args)).not_to be_nil
     end
   end
 end

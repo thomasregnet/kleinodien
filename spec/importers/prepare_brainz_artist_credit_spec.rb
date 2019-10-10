@@ -19,7 +19,11 @@ RSpec.describe PrepareBrainzArtistCredit do
 
     it 'requests the artist' do
       proxy = double # spy
-      args  = { blueprint: arise, proxy: proxy }
+      args  = {
+        blueprint:    arise,
+        import_order: :fake_import_order,
+        proxy:        proxy
+      }
       allow(proxy).to receive(:get).and_return(sepultura)
 
       expect(described_class.call(args)).not_to be_nil

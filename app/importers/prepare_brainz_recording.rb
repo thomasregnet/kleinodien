@@ -34,8 +34,9 @@ class PrepareBrainzRecording < PrepareBrainzBase
 
   def prepare_artist_credit
     PrepareBrainzArtistCredit.call(
-      blueprint: blueprint.artist_credit,
-      proxy:     proxy
+      blueprint:    blueprint.artist_credit,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 end

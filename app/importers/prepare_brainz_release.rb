@@ -27,8 +27,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_artist_credit
     PrepareBrainzArtistCredit.call(
-      blueprint: blueprint.artist_credit,
-      proxy:     proxy
+      blueprint:    blueprint.artist_credit,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 
@@ -45,6 +46,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
       )
 
       PrepareBrainzRecording.call(
+        import_order:   import_order,
         import_request: import_request,
         proxy:          proxy
       )
@@ -53,6 +55,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_release_group
     PrepareBrainzReleaseGroup.call(
+      import_order:   import_order,
       import_request: release_group_import_request,
       proxy:          proxy
     )

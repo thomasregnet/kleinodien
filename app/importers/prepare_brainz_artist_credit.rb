@@ -32,6 +32,7 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
 
     PrepareBrainzArtist.call(
       import_request: artist_import_request,
+      import_order:   import_order,
       proxy:          proxy
     )
   end

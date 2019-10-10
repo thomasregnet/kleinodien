@@ -39,6 +39,7 @@ RSpec.describe PrepareBrainzRelease do
         proxy                     = spy
         args = {
           blueprint:                 blueprint,
+          import_order:              :fake_import_order,
           prepare_artist_credit_spy: prepare_artist_credit_spy,
           prepare_release_group_spy: prepare_release_group_spy,
           proxy:                     proxy
@@ -53,8 +54,9 @@ RSpec.describe PrepareBrainzRelease do
       let(:preparer) do
         xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
         described_class.new(
-          blueprint: BrainzBlueprint.from_xml(xml_string),
-          proxy:     spy
+          blueprint:    BrainzBlueprint.from_xml(xml_string),
+          import_order: :fake_import_order,
+          proxy:        spy
         )
       end
 

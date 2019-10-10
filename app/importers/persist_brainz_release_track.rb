@@ -4,12 +4,13 @@
 class PersistBrainzReleaseTrack < PersistBrainzBase
   def initialize(blueprint:, no:, subset:, **args)
     super(args)
-    @blueprint    = blueprint
-    @no           = no
-    @subset       = subset
+    @blueprint = blueprint
+    @no        = no
+    @subset    = subset
   end
 
-  attr_reader :blueprint, :import_order, :no, :subset
+  # attr_reader :blueprint, :import_order, :no, :subset
+  attr_reader :blueprint, :no, :subset
 
   def call
     subset.tracks.create!(
@@ -22,7 +23,6 @@ class PersistBrainzReleaseTrack < PersistBrainzBase
   def piece
     recording_code = blueprint.recording.brainz_code
     import_request = BrainzRecordingImportRequest.new(code: recording_code)
-
     PersistBrainzPiece.call(
       import_order:   import_order,
       import_request: import_request,
