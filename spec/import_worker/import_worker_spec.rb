@@ -101,7 +101,7 @@ RSpec.describe ImportWorker do
       end
 
       it 'loops' do
-        # expect(worker.process_orders).to be nil
+        expect(worker.send(:process_orders)).to be nil
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe ImportWorker do
       end
 
       it 'loops' do
-        expect(worker.process_orders).to be nil
+        expect(worker.send(:process_orders)).to be nil
       end
     end
   end
@@ -124,8 +124,6 @@ RSpec.describe ImportWorker do
     let(:importer_class) { stub_const('ImportSomethingElse', spy) }
 
     before do
-      # allow(worker).to receive(:process_orders_import_class_and_order)
-      #   .and_return([importer_class, import_order])
       allow(import_order).to receive(:type)
       allow(worker).to receive(:next_pending_order).and_return(import_order)
       allow(worker).to receive(:importer_class_for).and_return(importer_class)
@@ -134,42 +132,6 @@ RSpec.describe ImportWorker do
     it 'calls .call at the importer-class' do
       worker.send(:call_importer)
       expect(importer_class).to have_received(:call)
-    end
-  end
-
-  describe '#process_orders_import_class_and_order' do
-    context 'with pending orders' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'test', subscriber: 'test')
-      end
-      let(:import_order) { double }
-
-      before do
-        allow(ImportQueue).to receive(:next_pending_for)
-          .and_return(import_order)
-        allow(import_order).to receive(:type)
-        allow(worker).to receive(:importer_class_for).and_return(:fake_class)
-      end
-
-      it 'returns the expected parameters' do
-        expect(worker.send(:process_orders_import_class_and_order))
-          .to eq([:fake_class, import_order])
-      end
-    end
-
-    context 'without pending orders' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'test', subscriber: 'test')
-      end
-
-      before do
-        allow(ImportQueue).to receive(:next_pending_for)
-          .and_return(nil)
-      end
-
-      it 'returns nil' do
-        expect(worker.send(:process_orders_import_class_and_order)).to be_nil
-      end
     end
   end
 end

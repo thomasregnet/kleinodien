@@ -24,35 +24,13 @@ class ImportWorker
     end
   end
 
-  def process_orders
-    Rails.logger.info('processing orders')
-    loop { call_importer || return }
-  end
-
   private
 
-  # def call_importer
-  #   importer_class, import_order \
-  #     = process_orders_import_class_and_order || return
-
-  #   importer_class.call(import_order: import_order)
-  # end
   def call_importer
-    import_order   = next_pending_order                    || return
+    import_order = next_pending_order || return
     importer_class = importer_class_for(import_order.type) || return
 
     importer_class.call(import_order: import_order)
-  end
-
-  def next_pending_order
-    ImportQueue.next_pending_for(import_queue_name)
-  end
-
-  def process_orders_import_class_and_order
-    import_order = ImportQueue.next_pending_for(import_queue_name) || return
-    importer_class = importer_class_for(import_order.type)         || return
-
-    [importer_class, import_order]
   end
 
   def importer_class_for(import_order_type)
@@ -60,5 +38,14 @@ class ImportWorker
     Rails.logger.info("importer-class is #{importer_class}")
 
     importer_class.constantize
+  end
+
+  def next_pending_order
+    ImportQueue.next_pending_for(import_queue_name)
+  end
+
+  def process_orders
+    Rails.logger.info('processing orders')
+    loop { call_importer || return }
   end
 end
