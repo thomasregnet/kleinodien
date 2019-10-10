@@ -27,20 +27,4 @@ class Artist < ActiveRecord::Base
   validates :name, uniqueness: { scope: :disambiguation, case_sensitive: false }
 
   delegate :name, to: :source, prefix: :source
-
-  def self.brainz_parameters(brainz_artist)
-    Hash[
-      name:           brainz_artist.name,
-      sort_name:      brainz_artist.sort_name,
-      disambiguation: brainz_artist.disambiguation
-    ]
-  end
-
-  def self.brainz(brainz_artist)
-    new(
-      name:           brainz_artist.name,
-      sort_name:      brainz_artist.sort_name,
-      disambiguation: brainz_artist.disambiguation
-    )
-  end
 end
