@@ -51,24 +51,31 @@ class ImportOrder < ApplicationRecord
 
   private
 
-  # def ensure_code_and_import_queue_and_type_hava_a_value
+  def default_import_queue_name; end
+
   def ensure_code_and_type_hava_a_value
     return if code || type
     return unless uri
 
     import_values = AnalyzeImportOrderUriService.call(uri_string: uri) || return
-    self.code         = import_values[:code]
-    self.type         = import_values[:type]
+    self.code     = import_values[:code]
+    self.type     = import_values[:type]
   end
 
   def ensure_import_queue_has_a_value
     return if import_queue
 
-    # TODO: Don't use 'brainz' as name, ask for it
+    ensure_code_and_type_hava_a_value unless type
+    return unless type
+
     # OPTIMIZE: The ImportQueue is seeded. DatabaseCleaner removes it.
     # It would be nicer if the ImportQueue is found via "find_by" instead
     # of "find_or_create_by".
-    self.import_queue = ImportQueue.find_or_create_by(name: 'brainz')
+    # self.import_queue = ImportQueue.find_or_create_by(name: 'brainz')
+    self.import_queue = ImportQueue.find_or_create_by!(
+      # name: default_import_queue_name
+      name: type.constantize.default_import_queue_name
+    )
   end
 
   def set_default_state

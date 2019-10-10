@@ -6,7 +6,7 @@ class BrainzImportOrder < ImportOrder
 
   include CodeUuidValidation
 
-  def default_import_queue_name
+  def self.default_import_queue_name
     BRAINZ_IMPORT_QUEUE_NAME
   end
 end

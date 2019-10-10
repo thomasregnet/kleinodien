@@ -52,7 +52,9 @@ RSpec.describe BrainzProxy do
   context 'when locked' do
     describe '#locked?' do
       let(:proxy) do
-        described_class.new(import_order: FactoryBot.create(:import_order))
+        described_class.new(
+          import_order: FactoryBot.create(:brainz_import_order)
+        )
       end
 
       it 'return true' do
