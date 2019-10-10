@@ -124,8 +124,11 @@ RSpec.describe ImportWorker do
     let(:importer_class) { stub_const('ImportSomethingElse', spy) }
 
     before do
-      allow(worker).to receive(:process_orders_import_class_and_order)
-        .and_return([importer_class, import_order])
+      # allow(worker).to receive(:process_orders_import_class_and_order)
+      #   .and_return([importer_class, import_order])
+      allow(import_order).to receive(:type)
+      allow(worker).to receive(:next_pending_order).and_return(import_order)
+      allow(worker).to receive(:importer_class_for).and_return(importer_class)
     end
 
     it 'calls .call at the importer-class' do

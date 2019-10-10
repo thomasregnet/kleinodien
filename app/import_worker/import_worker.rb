@@ -31,11 +31,21 @@ class ImportWorker
 
   private
 
+  # def call_importer
+  #   importer_class, import_order \
+  #     = process_orders_import_class_and_order || return
+
+  #   importer_class.call(import_order: import_order)
+  # end
   def call_importer
-    importer_class, import_order \
-      = process_orders_import_class_and_order || return
+    import_order   = next_pending_order                    || return
+    importer_class = importer_class_for(import_order.type) || return
 
     importer_class.call(import_order: import_order)
+  end
+
+  def next_pending_order
+    ImportQueue.next_pending_for(import_queue_name)
   end
 
   def process_orders_import_class_and_order
