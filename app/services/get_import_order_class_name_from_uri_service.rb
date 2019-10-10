@@ -37,9 +37,7 @@ class GetImportOrderClassNameFromUriService < ServiceBase
   # https://stackoverflow.com/questions/5331014/check-if-given-string-is-an-url
   def parse_uri
     @uri = URI.parse(uri_string)
-  rescue URI::BadURIError
-    nil
-  rescue URI::InvalidURIError
+  rescue URI::Error
     nil
   end
 end
