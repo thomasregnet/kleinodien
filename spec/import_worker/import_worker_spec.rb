@@ -116,6 +116,24 @@ RSpec.describe ImportWorker do
     end
   end
 
+  describe '#call_importer' do
+    let(:worker) do
+      described_class.new(import_queue_name: 'test', subscriber: 'test')
+    end
+    let(:import_order) { double }
+    let(:importer_class) { stub_const('ImportSomethingElse', spy) }
+
+    before do
+      allow(worker).to receive(:process_orders_import_class_and_order)
+        .and_return([importer_class, import_order])
+    end
+
+    it 'calls .call at the importer-class' do
+      worker.send(:call_importer)
+      expect(importer_class).to have_received(:call)
+    end
+  end
+
   describe '#process_orders_import_class_and_order' do
     context 'with pending orders' do
       let(:worker) do
