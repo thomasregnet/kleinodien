@@ -53,10 +53,9 @@ class BrainzImportInterrupter
   end
 
   def time_to_sleep(now)
-    CalculateBrainzImportInterruptionService.call(
-      last:                last,
-      now:                 now,
-      needed_interruption: interruption
-    )
+    interruption_ends = last + interruption
+    return 0 if interruption_ends < now
+
+    interruption_ends - now
   end
 end

@@ -88,5 +88,68 @@ RSpec.describe BrainzImportInterrupter do
       expect(interrupter.errors_count).to eq(0)
     end
   end
+
+  describe '#time_to_sleep' do
+    context 'without errors and a "last" far in the past' do
+      let(:interrupter) { described_class.instance }
+      let(:last) { Time.new(1970) }
+      let(:now) { Time.new(2019) }
+
+      before do
+        interrupter.signal_success
+        allow(interrupter).to receive(:last).and_return(last)
+      end
+
+      it 'returns 0' do
+        expect(interrupter.time_to_sleep(now)).to eq(0)
+      end
+    end
+
+    context 'without errors and  "last" == "now"' do
+      let(:interrupter) { described_class.instance }
+      let(:time) { Time.now }
+
+      before do
+        3.times { interrupter.signal_error }
+        allow(interrupter).to receive(:last).and_return(time)
+      end
+
+      after { interrupter.signal_success }
+
+      it 'returns the correct interruption time' do
+        expect(interrupter.time_to_sleep(time)).to eq(4)
+      end
+    end
+
+    context 'without errors and "last" == "now"' do
+      let(:interrupter) { described_class.instance }
+      let(:time) { Time.now }
+
+      before do
+        interrupter.signal_success
+        allow(interrupter).to receive(:last).and_return(time)
+      end
+
+      it 'returns 0' do
+        expect(interrupter.time_to_sleep(time)).to eq(1)
+      end
+    end
+
+    context 'with errors and "last" == "now"' do
+      let(:interrupter) { described_class.instance }
+      let(:time) { Time.now }
+
+      before do
+        3.times { interrupter.signal_error }
+        allow(interrupter).to receive(:last).and_return(time)
+      end
+
+      after { interrupter.signal_success }
+
+      it 'returns the correct interruption time' do
+        expect(interrupter.time_to_sleep(time)).to eq(4)
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
