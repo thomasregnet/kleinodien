@@ -2,6 +2,6 @@
 
 module Kleinodien
   class Application
-    VERSION = '0.0.130'
+    VERSION = '0.0.131'
   end
 end
