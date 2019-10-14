@@ -98,10 +98,11 @@ RSpec.describe BrainzImportInterrupter do
       before do
         interrupter.signal_success
         allow(interrupter).to receive(:last).and_return(last)
+        allow(interrupter).to receive(:now).and_return(now)
       end
 
       it 'returns 0' do
-        expect(interrupter.time_to_sleep(now)).to eq(0)
+        expect(interrupter.time_to_sleep).to eq(0)
       end
     end
 
@@ -112,12 +113,13 @@ RSpec.describe BrainzImportInterrupter do
       before do
         3.times { interrupter.signal_error }
         allow(interrupter).to receive(:last).and_return(time)
+        allow(interrupter).to receive(:now).and_return(time)
       end
 
       after { interrupter.signal_success }
 
       it 'returns the correct interruption time' do
-        expect(interrupter.time_to_sleep(time)).to eq(4)
+        expect(interrupter.time_to_sleep).to eq(4)
       end
     end
 
@@ -128,10 +130,11 @@ RSpec.describe BrainzImportInterrupter do
       before do
         interrupter.signal_success
         allow(interrupter).to receive(:last).and_return(time)
+        allow(interrupter).to receive(:now).and_return(time)
       end
 
       it 'returns 0' do
-        expect(interrupter.time_to_sleep(time)).to eq(1)
+        expect(interrupter.time_to_sleep).to eq(1)
       end
     end
 
@@ -142,12 +145,13 @@ RSpec.describe BrainzImportInterrupter do
       before do
         3.times { interrupter.signal_error }
         allow(interrupter).to receive(:last).and_return(time)
+        allow(interrupter).to receive(:now).and_return(time)
       end
 
       after { interrupter.signal_success }
 
       it 'returns the correct interruption time' do
-        expect(interrupter.time_to_sleep(time)).to eq(4)
+        expect(interrupter.time_to_sleep).to eq(4)
       end
     end
   end

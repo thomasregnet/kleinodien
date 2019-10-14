@@ -13,8 +13,8 @@ class BrainzImportInterrupter
   attr_reader :errors_count, :last, :now
 
   def perform
-    now = Time.now
-    sleep_now(now)
+    @now = Time.now
+    sleep_now
     @last = now
 
     nil
@@ -45,14 +45,13 @@ class BrainzImportInterrupter
     1
   end
 
-  def sleep_now(now)
-    # OPTIMIZE: better way to omit #perform in test environment
+  def sleep_now
     return if ENV['RAILS_ENV'] == 'test'
 
-    sleep(time_to_sleep(now))
+    sleep(time_to_sleep)
   end
 
-  def time_to_sleep(now)
+  def time_to_sleep
     interruption_ends = last + interruption
     return 0 if interruption_ends < now
 
