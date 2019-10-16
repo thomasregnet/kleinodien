@@ -2,7 +2,7 @@
 
 # ISO-3166 1 Country codes and their Area
 class Iso3166Part1Country < ApplicationRecord
-  include Iso3661
+  include Iso3166
 
   belongs_to :area
 

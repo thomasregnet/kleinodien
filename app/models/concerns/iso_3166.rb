@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-
-module Iso3661
+# Common stuff for all ISO3166Part?Country models
+module Iso3166
   extend ActiveSupport::Concern
   include ActiveModel::Validations
 
