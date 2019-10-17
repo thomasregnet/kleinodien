@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'shared_examples_for_incomplete_dates'
+
 # rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'an area' do
   subject { described_class.new(name: 'test area', sort_name: 'sort area') }
@@ -35,6 +37,20 @@ RSpec.shared_examples 'an area' do
         expect(area).not_to be_valid
       end
     end
+  end
+
+  describe '#begin_date' do
+    it_behaves_like 'a model with an IncompleteDate' do
+      let(:candidate)     { FactoryBot.build(:area) }
+      let(:date_naming) { 'begin_date' }
+    end
+  end
+
+  describe '#end_date' do
+   it_behaves_like 'a model with an IncompleteDate' do
+      let(:candidate)     { FactoryBot.build(:area) }
+      let(:date_naming) { 'end_date' }
+   end
   end
 
   describe '#sort_name' do
