@@ -6,6 +6,9 @@ require 'shared_examples_for_incomplete_dates'
 RSpec.shared_examples 'an area' do
   subject { described_class.new(name: 'test area', sort_name: 'sort area') }
 
+  it { should respond_to(:brainz_code) }
+  it { should respond_to(:gone) }
+
   it { should have_many(:iso3166_part1_countries) }
   it { should have_many(:iso3166_part2_countries) }
   it { should have_many(:iso3166_part3_countries) }
