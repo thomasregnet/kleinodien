@@ -6,6 +6,7 @@ class ImportOrder < ApplicationRecord
 
   belongs_to :import_queue
   belongs_to :user
+  has_many :areas
   has_many :artist_credits
   has_many :artists
   has_many :import_requests
