@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_180927) do
+ActiveRecord::Schema.define(version: 2019_10_17_184827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -26,8 +26,12 @@ ActiveRecord::Schema.define(version: 2019_10_17_180927) do
     t.integer "begin_date_mask", limit: 2
     t.date "end_date"
     t.integer "end_date_mask", limit: 2
+    t.uuid "brainz_code"
+    t.boolean "gone"
+    t.bigint "import_order_id"
     t.index "lower((name)::text)", name: "index_areas_on_lower_name", unique: true
     t.index "lower((sort_name)::text)", name: "index_areas_on_lower_sort_name", unique: true
+    t.index ["import_order_id"], name: "index_areas_on_import_order_id"
   end
 
   create_table "artist_credits", id: :serial, force: :cascade do |t|
@@ -595,6 +599,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_180927) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "areas", "import_orders"
   add_foreign_key "artist_credits", "import_orders"
   add_foreign_key "artist_credits_tags", "artist_credits"
   add_foreign_key "artist_credits_tags", "tags"
