@@ -2,6 +2,10 @@
 
 # An area or a country
 class Area < ApplicationRecord
+  has_many :iso3166_part1_countries
+  has_many :iso3166_part2_countries
+  has_many :iso3166_part3_countries
+
   before_validation :ensure_sort_name_has_a_value
 
   validates(

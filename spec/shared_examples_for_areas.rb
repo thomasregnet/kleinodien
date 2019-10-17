@@ -4,6 +4,10 @@
 RSpec.shared_examples 'an area' do
   subject { described_class.new(name: 'test area', sort_name: 'sort area') }
 
+  it { should have_many(:iso3166_part1_countries) }
+  it { should have_many(:iso3166_part2_countries) }
+  it { should have_many(:iso3166_part3_countries) }
+
   it { should validate_uniqueness_of(:name).case_insensitive }
   it { should validate_uniqueness_of(:sort_name).case_insensitive }
 
