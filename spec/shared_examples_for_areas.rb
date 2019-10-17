@@ -9,6 +9,8 @@ RSpec.shared_examples 'an area' do
   it { should respond_to(:brainz_code) }
   it { should respond_to(:gone) }
 
+  it { should belong_to(:import_order).required(false) }
+
   it { should have_many(:iso3166_part1_countries) }
   it { should have_many(:iso3166_part2_countries) }
   it { should have_many(:iso3166_part3_countries) }
