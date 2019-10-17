@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_200949) do
+ActiveRecord::Schema.define(version: 2019_10_17_180927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -19,15 +19,13 @@ ActiveRecord::Schema.define(version: 2019_10_16_200949) do
   create_table "areas", force: :cascade do |t|
     t.string "name", null: false
     t.string "sort_name", null: false
-    t.integer "begin_date_year"
-    t.integer "begin_date_month"
-    t.integer "begin_date_day"
-    t.integer "end_date_year"
-    t.integer "end_date_month"
-    t.integer "end_date_day"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "begin_date"
+    t.integer "begin_date_mask", limit: 2
+    t.date "end_date"
+    t.integer "end_date_mask", limit: 2
     t.index "lower((name)::text)", name: "index_areas_on_lower_name", unique: true
     t.index "lower((sort_name)::text)", name: "index_areas_on_lower_sort_name", unique: true
   end
