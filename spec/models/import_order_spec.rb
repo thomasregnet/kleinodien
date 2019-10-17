@@ -27,14 +27,14 @@ RSpec.describe ImportOrder, type: :model do
   # it { is_expected.to belong_to(:user) }
 
   it { should have_many(:areas) }
-  it { is_expected.to have_many(:artist_credits) }
-  it { is_expected.to have_many(:artists) }
-  it { is_expected.to have_many(:release_heads) }
-  it { is_expected.to have_many(:release_tracks) }
-  it { is_expected.to have_many(:releases) }
-  it { is_expected.to have_many(:medium_formats) }
-  it { is_expected.to have_many(:piece_heads) }
-  it { is_expected.to have_many(:pieces) }
+  it { should have_many(:artist_credits) }
+  it { should have_many(:artists) }
+  it { should have_many(:release_heads) }
+  it { should have_many(:release_tracks) }
+  it { should have_many(:releases) }
+  it { should have_many(:medium_formats) }
+  it { should have_many(:piece_heads) }
+  it { should have_many(:pieces) }
 
   describe '.next_pending' do
     context 'when no ImportOrder exists' do
