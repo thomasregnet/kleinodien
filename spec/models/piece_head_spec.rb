@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_companies'
-require 'shared_examples_for_models_with_countries'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
@@ -82,10 +81,6 @@ RSpec.describe PieceHead, type: :model do
 
   it_behaves_like 'a model with companies' do
     let(:candidate) { FactoryBot.create(:piece_head_with_companies) }
-  end
-
-  it_behaves_like 'a model with countries' do
-    let(:candidate) { FactoryBot.create(:piece_head_with_countries) }
   end
 
   it_behaves_like 'a model with credits' do

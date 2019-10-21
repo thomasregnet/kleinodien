@@ -26,6 +26,4 @@ class Piece < ActiveRecord::Base
   has_many :labels, class_name: 'PrLabel'
   has_many :ratings
   has_many :piece_tracks
-
-  has_and_belongs_to_many :countries
 end
