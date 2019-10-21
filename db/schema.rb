@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_190507) do
+ActiveRecord::Schema.define(version: 2019_10_21_192201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -106,24 +106,6 @@ ActiveRecord::Schema.define(version: 2019_10_21_190507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_company_roles_on_lower_name", unique: true
-  end
-
-  create_table "countries_piece_heads", id: :serial, force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.integer "piece_head_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["country_id", "piece_head_id"], name: "index_countries_piece_heads_on_country_id_and_piece_head_id", unique: true
-    t.index ["country_id"], name: "index_countries_piece_heads_on_country_id"
-    t.index ["piece_head_id"], name: "index_countries_piece_heads_on_piece_head_id"
-  end
-
-  create_table "countries_pieces", id: false, force: :cascade do |t|
-    t.integer "country_id", null: false
-    t.integer "piece_id", null: false
-    t.index ["country_id", "piece_id"], name: "index_cpr_on_country_id_and_piece_release_id", unique: true
-    t.index ["country_id"], name: "index_countries_pieces_on_country_id"
-    t.index ["piece_id"], name: "index_countries_pieces_on_piece_id"
   end
 
   create_table "descriptions", id: :serial, force: :cascade do |t|
@@ -616,8 +598,6 @@ ActiveRecord::Schema.define(version: 2019_10_21_190507) do
   add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
-  add_foreign_key "countries_piece_heads", "piece_heads"
-  add_foreign_key "countries_pieces", "pieces"
   add_foreign_key "descriptions", "artist_credits"
   add_foreign_key "descriptions", "artists"
   add_foreign_key "descriptions", "piece_heads"
