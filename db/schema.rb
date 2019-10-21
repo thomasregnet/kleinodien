@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_184827) do
+ActiveRecord::Schema.define(version: 2019_10_21_175425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "area_aliases", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "sort_name", null: false
+    t.date "begin_date"
+    t.integer "begin_date_mask", limit: 2
+    t.date "end_date"
+    t.integer "end_date_mask", limit: 2
+    t.boolean "gone"
+    t.string "locale"
+    t.string "type"
+    t.bigint "area_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_area_aliases_on_area_id"
+  end
 
   create_table "areas", force: :cascade do |t|
     t.string "name", null: false
@@ -599,6 +615,7 @@ ActiveRecord::Schema.define(version: 2019_10_17_184827) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "area_aliases", "areas"
   add_foreign_key "areas", "import_orders"
   add_foreign_key "artist_credits", "import_orders"
   add_foreign_key "artist_credits_tags", "artist_credits"
