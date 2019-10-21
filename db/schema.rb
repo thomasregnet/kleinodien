@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_192201) do
+ActiveRecord::Schema.define(version: 2019_10_21_202716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -106,30 +106,6 @@ ActiveRecord::Schema.define(version: 2019_10_21_192201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_company_roles_on_lower_name", unique: true
-  end
-
-  create_table "descriptions", id: :serial, force: :cascade do |t|
-    t.text "text", null: false
-    t.integer "user_id"
-    t.integer "artist_credit_id"
-    t.integer "artist_id"
-    t.integer "country_id"
-    t.integer "piece_head_id"
-    t.integer "piece_id"
-    t.integer "season_id"
-    t.integer "serial_id"
-    t.integer "station_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_descriptions_on_artist_credit_id"
-    t.index ["artist_id"], name: "index_descriptions_on_artist_id"
-    t.index ["country_id"], name: "index_descriptions_on_country_id"
-    t.index ["piece_head_id"], name: "index_descriptions_on_piece_head_id"
-    t.index ["piece_id"], name: "index_descriptions_on_piece_id"
-    t.index ["season_id"], name: "index_descriptions_on_season_id"
-    t.index ["serial_id"], name: "index_descriptions_on_serial_id"
-    t.index ["station_id"], name: "index_descriptions_on_station_id"
-    t.index ["user_id"], name: "index_descriptions_on_user_id"
   end
 
   create_table "format_details", id: :serial, force: :cascade do |t|
@@ -598,14 +574,6 @@ ActiveRecord::Schema.define(version: 2019_10_21_192201) do
   add_foreign_key "artists", "import_orders"
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
-  add_foreign_key "descriptions", "artist_credits"
-  add_foreign_key "descriptions", "artists"
-  add_foreign_key "descriptions", "piece_heads"
-  add_foreign_key "descriptions", "pieces"
-  add_foreign_key "descriptions", "seasons"
-  add_foreign_key "descriptions", "serials"
-  add_foreign_key "descriptions", "stations"
-  add_foreign_key "descriptions", "users"
   add_foreign_key "import_orders", "import_queues"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
