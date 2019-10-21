@@ -1,13 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe Station, type: :model do
-  specify '#descriptions' do
-    expect(subject).to respond_to(:descriptions)
-  end
-
   it_behaves_like 'a rateable model' do
     before(:all) do
       DatabaseCleaner.start

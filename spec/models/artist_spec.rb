@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_code_findable'
@@ -65,9 +67,6 @@ RSpec.describe Artist, type: :model do
   end
 
   # TODO: spec Artist has_many: identifiers
-  specify '#descriptions' do
-    expect(subject).to respond_to(:descriptions)
-  end
 
   specify '#sort_name' do
     expect(subject).to respond_to :sort_name

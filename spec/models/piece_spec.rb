@@ -14,10 +14,6 @@ RSpec.describe Piece, type: :model do
   it { is_expected.to have_many(:release_tracks) }
   it { is_expected.to have_many(:piece_tracks) }
 
-  specify '#descriptions' do
-    expect(subject).to respond_to(:descriptions)
-  end
-
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
     let(:factory) { :piece }

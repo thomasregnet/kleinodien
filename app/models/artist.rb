@@ -14,8 +14,6 @@ class Artist < ActiveRecord::Base
               mapping:    [%w[end_date date], %w[end_date_mask mask]]
 
   has_and_belongs_to_many :tags
-  has_many :descriptions
-  # has_many :identifiers, class_name: 'ArtistIdentifier'
   has_many :participants, inverse_of: :artist
   has_many :ratings
 

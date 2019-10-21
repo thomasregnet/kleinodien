@@ -21,7 +21,6 @@ class Piece < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :companies, class_name: 'PrCompany'
   has_many :credits, class_name: 'PrCredit'
-  has_many :descriptions
   has_many :release_tracks
   has_many :labels, class_name: 'PrLabel'
   has_many :ratings

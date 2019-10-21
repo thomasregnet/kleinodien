@@ -7,7 +7,6 @@ class ArtistCredit < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
   has_many :artists, through: :participants
-  has_many :descriptions
   has_many :participants, inverse_of: :artist_credit
   has_many :release_heads
   has_many :releases

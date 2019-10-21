@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_companies'
@@ -10,10 +12,6 @@ require 'shared_examples_for_tagable_models'
 
 RSpec.describe PieceHead, type: :model do
   it { is_expected.to belong_to(:import_order).without_validating_presence }
-
-  specify '#descriptions' do
-    expect(subject).to respond_to(:descriptions)
-  end
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
