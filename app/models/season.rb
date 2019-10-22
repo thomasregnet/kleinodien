@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Season of a serial, has many episodes
 class Season < ActiveRecord::Base
   include CodeFindable

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An artist participating in an ArtistCredit
 class Participant < ActiveRecord::Base
   belongs_to :artist, inverse_of: :participants

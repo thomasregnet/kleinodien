@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Formats may be for files or Media
 class Format < ApplicationRecord
   validates :abbr, presence: true

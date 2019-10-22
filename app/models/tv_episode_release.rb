@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An episode-release of an tv-serial-episode
 class TvEpisodeRelease < EpisodeRelease
   belongs_to :head,

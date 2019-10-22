@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # More precise information for formats
 class FormatDetail < ApplicationRecord
   validates :abbr, presence: true

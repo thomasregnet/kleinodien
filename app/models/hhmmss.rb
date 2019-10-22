@@ -1,4 +1,4 @@
-# forzen_string_literal: true
+# frozen_string_literal: true
 
 # validates a time in hh:mm:ss format and returns milliseconds
 class Hhmmss < Mmss

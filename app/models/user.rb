@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A Kleinodien User
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:

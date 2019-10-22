@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # User ratings for artists, albums, movies ...
 class Rating < ApplicationRecord
   POSSIBLE_CONTENTS = %i[
