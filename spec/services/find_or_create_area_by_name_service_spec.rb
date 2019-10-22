@@ -26,4 +26,22 @@ RSpec.describe FindOrCreateAreaByNameService do
       expect(described_class.call(name: name)).to be_instance_of(Area)
     end
   end
+
+  context 'when the area does not exist and an ImportOrder is given' do
+    let(:import_order) do
+      FactoryBot.create(
+        :import_order,
+        import_queue: FactoryBot.create(:import_queue)
+      )
+    end
+
+    let(:args) do
+      { import_order: import_order, name: 'Lost Kingdom' }
+    end
+
+    it 'creates the area with the ImportOrder' do
+      expect(described_class.call(args).import_order)
+        .to be_instance_of(ImportOrder)
+    end
+  end
 end

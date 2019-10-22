@@ -2,11 +2,12 @@
 
 # Find an Area by name either on areas or an iso3166_?-code or create it
 class FindOrCreateAreaByNameService < ServiceBase
-  def initialize(name:)
-    @name = name
+  def initialize(name:, import_order: nil)
+    @import_order = import_order
+    @name         = name
   end
 
-  attr_reader :name
+  attr_reader :import_order, :name
 
   def call
     find || create
@@ -19,6 +20,6 @@ class FindOrCreateAreaByNameService < ServiceBase
   end
 
   def create
-    Area.create(name: name)
+    Area.create(name: name, import_order: import_order)
   end
 end

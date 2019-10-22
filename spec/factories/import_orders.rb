@@ -10,6 +10,7 @@ FactoryBot.define do
       code { SecureRandom.uuid.to_s }
 
       factory :brainz_release_import_order, class: 'BrainzReleaseImportOrder' do
+        type { 'BrainzReleaseImportOrder' }
       end
     end
   end
