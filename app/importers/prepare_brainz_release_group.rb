@@ -2,6 +2,10 @@
 
 # Prepare a MusicBrainz release-group for import
 class PrepareBrainzReleaseGroup < PrepareBrainzBase
+  # In order to prepare also the ArtistCredit of the ReleaseGroup
+  # this class needs to be called with an ImportRequest.
+  # The blueprint of a release/release-group does not contain
+  # the ArtistCredit.
   def initialize(import_request:, **args)
     super(args)
     @import_request = import_request
@@ -9,17 +13,16 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
 
   attr_reader :import_request
 
-  private
-
   def prepare
-    proxy.get(import_request)
-    prepare_artist_credit
+    find_already_existing || prepare_artist_credit
   end
-
-  public
 
   def blueprint
     proxy.get(import_request)
+  end
+
+  def find_already_existing
+    ReleaseHead.find_by(brainz_code: import_request.code)
   end
 
   def prepare_artist_credit

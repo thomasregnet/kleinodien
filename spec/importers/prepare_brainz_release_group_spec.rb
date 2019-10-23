@@ -4,38 +4,38 @@ require 'rails_helper'
 require 'test_data'
 require 'shared_examples_for_services'
 
-# Mock prepare_* calls
-class MockPrepareBrainzReleaseGroup < PrepareBrainzReleaseGroup
-  def initialize(prepare_artist_credit_spy:, **args)
-    @prepare_artist_credit_spy = prepare_artist_credit_spy
-    super(args)
-  end
-
-  attr_reader :prepare_artist_credit_spy
-
-  def prepare_artist_credit
-    prepare_artist_credit_spy.call
-  end
-end
-
+# rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzReleaseGroup do
   it_behaves_like 'a service'
 
-  context 'with a valid blueprint' do
-    # rubocop:disable RSpec/MultipleExpectations
-    it 'prepares the artist-credit' do
-      prepare_artist_credit_spy = spy
-      proxy                     = spy
-
-      args = {
-        import_order:              :fake_import_order,
-        import_request:            :fake_import_request,
-        prepare_artist_credit_spy: prepare_artist_credit_spy,
-        proxy:                     proxy
-      }
-      expect(MockPrepareBrainzReleaseGroup.call(args)).not_to be_nil
-      expect(prepare_artist_credit_spy).to have_received(:call)
+  context 'when the ReleaseHead does not exist' do
+    let(:import_request) do
+      FactoryBot.create(:brainz_release_group_import_request)
     end
-    # rubocop:enable RSpec/MultipleExpectations
+    let(:blueprint) do
+      TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
+              .blueprint
+              .release_group
+    end
+    let(:proxy) { instance_double('BrainzProxy') }
+    let(:preparer) do
+      described_class.new(
+        import_order:   :fake_import_order,
+        import_request: import_request,
+        proxy:          proxy
+      )
+    end
+
+    before do
+      allow(proxy).to receive(:get)
+        .with(import_request)
+        .and_return(blueprint)
+    end
+
+    it 'calls #prepare_artist_credit' do
+      expect(preparer).to receive(:prepare_artist_credit)
+      preparer.prepare
+    end
   end
 end
+# rubocop:enable Metrics/BlockLength
