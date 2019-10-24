@@ -12,26 +12,23 @@ RSpec.describe PrepareBrainzArea do
       blueprint = Object.new
       uuid = '59436488-f5d1-11e9-bb5e-7b417b542be2'
 
-      blueprint.define_singleton_method(:code) { uuid }
+      blueprint.define_singleton_method(:brainz_code) { uuid }
       blueprint.define_singleton_method(:name) { 'Lost Island' }
 
       blueprint
     end
     let(:proxy) { instance_double('BrainzProxy') }
 
-    # before do
-    #   allow(proxy).to receive(:get).with(blueprint)
-    # end
-
     it 'foos' do
       preparer = described_class.new(
-        blueprint: blueprint,
-        import_order: :fake_import_order,
-        proxy:     proxy
+        blueprint:    blueprint,
+        import_order: FactoryBot.create(:brainz_release_import_order),
+        proxy:        proxy
       )
-      # expect(preparer.prepare).to be_nil
-      expect(proxy).to receive(:get)
+      allow(proxy).to receive(:get)
       preparer.prepare
+      expect(proxy).to have_received(:get)
+        .with(instance_of(BrainzAreaImportRequest))
     end
   end
 end
