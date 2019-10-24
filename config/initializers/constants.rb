@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+BRAINZ_AREA_QUERY_STRING = 'inc=aliases'
 BRAINZ_ARTIST_QUERY_STRING = 'inc=artist-rels+url-rels'
 BRAINZ_RECORDING_QUERY_STRING = 'inc=artist-rels+artists+label-rels+url-rels'
 BRAINZ_RELEASE_GROUP_QUERY_STRING = \
@@ -7,6 +8,7 @@ BRAINZ_RELEASE_GROUP_QUERY_STRING = \
 BRAINZ_RELEASE_QUERY_STRING = 'inc=artists+labels+recordings+release-groups'
 
 BRAINZ_INC_FOR = {
+  area:          BRAINZ_AREA_QUERY_STRING,
   artist:        BRAINZ_ARTIST_QUERY_STRING,
   recording:     BRAINZ_RECORDING_QUERY_STRING,
   release:       BRAINZ_RELEASE_QUERY_STRING,

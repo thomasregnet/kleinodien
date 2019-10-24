@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 FactoryBot.define do
   factory :import_request do
     sequence(:code) { |n| }
@@ -7,6 +8,12 @@ FactoryBot.define do
     factory :brainz_import_request, class: 'BrainzImportRequest' do
       sequence(:code) { SecureRandom.uuid.to_s }
       association :import_order, factory: :brainz_import_order
+
+      factory(
+        :brainz_area_import_request,
+        class: 'BrainzAreaImportRequest'
+      ) do
+      end
 
       factory(
         :brainz_artist_import_request,
@@ -28,3 +35,4 @@ FactoryBot.define do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
