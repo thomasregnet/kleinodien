@@ -18,11 +18,13 @@ class PersistBrainzArea < PersistBrainzBase
       || Area.find_by(name: blueprint.name)
   end
 
+  # TODO: Safer mechanism to determinate the "type"
   def persist
     area = Area.create!(
       name:        brainz_area.name,
       sort_name:   brainz_area.sort_name,
-      brainz_code: brainz_area.brainz_code
+      brainz_code: brainz_area.brainz_code,
+      type:        brainz_area.type
     )
 
     persit_iso(area)
