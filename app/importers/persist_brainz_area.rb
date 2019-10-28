@@ -19,6 +19,7 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   # TODO: Safer mechanism to determinate the "type"
+  # TODO: also persist ImportOrder
   def persist
     area = Area.create!(
       name:        brainz_area.name,
@@ -35,8 +36,19 @@ class PersistBrainzArea < PersistBrainzBase
     # TODO: implement persist_iso
   end
 
+  # This method smells of :reek:FeatureEvy
   def persist_aliases(area)
-    # TODO: implement persit_aliases
+    aliases = brainz_area.aliases || return
+    aliases.each do |area_alias|
+      PersistBrainzAreaAlias.call(area: area, blueprint: area_alias)
+    #   AreaAlias.create!(
+    #     area:      area,
+    #     name:      area_alias.__content__,
+    #     sort_name: area_alias.sort_name,
+    #     locale:    area_alias.locale,
+    #     type:      alias_type_for(area_alias)
+    #   )
+    end
   end
 
   def brainz_area
@@ -47,5 +59,14 @@ class PersistBrainzArea < PersistBrainzBase
     @import_request ||= BrainzAreaImportRequest.create(
       code: blueprint.brainz_code
     )
+  end
+
+  private
+
+  def alias_type_for(area_alias)
+    given_type = area_alias.type || return
+    return 'AreaSearchHint' if given_type == 'Search hint'
+
+    
   end
 end

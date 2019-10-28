@@ -21,6 +21,12 @@ class BrainzBlueprint < Hashie::Mash
     JoinBrainzArtistCreditService.call(name_credits: credits)
   end
 
+  def aliases
+    return unless alias_list
+
+    force_array(alias_list.alias)
+  end
+
   def media
     return unless medium_list
 
