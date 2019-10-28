@@ -24,5 +24,9 @@ RSpec.describe PersistBrainzArea do
     it 'has persisted the area' do
       expect(Area.find_by(name: 'Germany').name).to eq('Germany')
     end
+
+    it 'returns the right instance-type' do
+      expect(Area.find_by(name: 'Germany')).to be_instance_of(Country)
+    end
   end
 end
