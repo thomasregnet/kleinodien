@@ -33,7 +33,6 @@ RSpec.describe BrainzBlueprint do
       end
       let(:blueprint) do
         described_class.from_xml(xml)
-        # TestData.by_name(:brainz_fake_begin_and_end_date).blueprint
       end
 
       it '#incomplete_begin_date returns an IncompleteDate' do
@@ -47,8 +46,27 @@ RSpec.describe BrainzBlueprint do
       end
     end
 
-    context 'when it does not contain an begin_date' do
-      it 'returns nil'
+    context 'when it does not contain a begin_date and no end_date' do
+      let(:xml) do
+        <<~END_XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <metadata xmlns="http://musicbrainz.org/ns/mmd-2.0#">
+            <fake><mock></mock></fake>
+          </metadata>
+        END_XML
+      end
+      let(:blueprint) do
+        bp = described_class.from_xml(xml)
+        bp
+      end
+
+      it '#incomplete_begin_date returns nil' do
+        expect(blueprint.incomplete_begin_date).to be_nil
+      end
+
+      it '#incomplete_end_date returns nil' do
+        expect(blueprint.incomplete_end_date).to be_nil
+      end
     end
   end
 
