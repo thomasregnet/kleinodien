@@ -27,6 +27,14 @@ class BrainzBlueprint < Hashie::Mash
     force_array(alias_list.alias)
   end
 
+  def incomplete_begin_date
+    begin_date && IncompleteDate.from_string(begin_date)
+  end
+
+  def incomplete_end_date
+    end_date && IncompleteDate.from_string(end_date)
+  end
+
   def media
     return unless medium_list
 
