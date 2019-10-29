@@ -8,8 +8,10 @@ class PersistBrainzAreaAlias < PersistPrepareBase
     'Search hint' => 'AreaSearchHint'
   }.freeze
 
+  # Note that #initialize does not call super.
+  # Super is not called because we do not need either an ImportOrder
+  # nor a proxy
   def initialize(area:, blueprint:)
-    # super(args)
     @area      = area
     @blueprint = blueprint
   end
@@ -30,11 +32,19 @@ class PersistBrainzAreaAlias < PersistPrepareBase
 
   private
 
+  # This method smells of :reek:ToManyStatements
   def alias_type
-    type = BRAINZ_AREA_ALIAS_TYPE_FOR[blueprint.type]
+    blueprint_type = blueprint.type
+
+    unless blueprint_type
+      Rails.logger.warn('blueprint has no type')
+      return
+    end
+
+    type = BRAINZ_AREA_ALIAS_TYPE_FOR[blueprint_type]
     return type if type
 
-    Rails.logger.warn("unknown AreaAlias-type: #{type}")
+    Rails.logger.warn("unknown AreaAlias-type: #{blueprint_type}")
 
     nil
   end
