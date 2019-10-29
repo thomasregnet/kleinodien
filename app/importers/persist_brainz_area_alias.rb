@@ -32,14 +32,8 @@ class PersistBrainzAreaAlias < PersistPrepareBase
 
   private
 
-  # This method smells of :reek:ToManyStatements
   def alias_type
-    blueprint_type = blueprint.type
-
-    unless blueprint_type
-      Rails.logger.warn('blueprint has no type')
-      return
-    end
+    blueprint_type = blueprint.type || return
 
     type = BRAINZ_AREA_ALIAS_TYPE_FOR[blueprint_type]
     return type if type
