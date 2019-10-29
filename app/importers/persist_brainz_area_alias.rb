@@ -17,18 +17,15 @@ class PersistBrainzAreaAlias < PersistPrepareBase
   attr_reader :area, :blueprint
 
   def call
-    area_alias = AreaAlias.new(
-      area:      area,
-      name:      blueprint.__content__,
-      sort_name: blueprint.sort_name,
-      locale:    blueprint.locale,
-      type:      alias_type
+    AreaAlias.create!(
+      area:       area,
+      name:       blueprint.__content__,
+      begin_date: blueprint.incomplete_begin_date,
+      end_date:   blueprint.incomplete_end_date,
+      sort_name:  blueprint.sort_name,
+      locale:     blueprint.locale,
+      type:       alias_type
     )
-
-    area_alias.begin_date = begin_date if begin_date?
-    area_alias.end_date = end_date if end_date?
-
-    area_alias.save!
   end
 
   private
@@ -40,25 +37,5 @@ class PersistBrainzAreaAlias < PersistPrepareBase
     Rails.logger.warn("unknown AreaAlias-type: #{type}")
 
     nil
-  end
-
-  def begin_date
-    return unless begin_date?
-
-    IncompleteDate.from_string(blueprint.begin_date)
-  end
-
-  def begin_date?
-    true if blueprint.begin_date
-  end
-
-  def end_date
-    return unless end_date?
-
-    IncompleteDate.from_string(blueprint.end_date)
-  end
-
-  def end_date?
-    true if blueprint.end_date
   end
 end
