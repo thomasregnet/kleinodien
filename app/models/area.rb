@@ -7,6 +7,7 @@ class Area < ApplicationRecord
   has_many :iso3166_part1_countries
   has_many :iso3166_part2_countries
   has_many :iso3166_part3_countries
+  has_many :release_events
 
   composed_of(
     :begin_date,
