@@ -9,7 +9,7 @@ RSpec.describe PersistBrainzArea do
 
   describe 'persists the area' do
     let(:brainz_area) { TestData.by_name(:brainz_area_germany).blueprint }
-    let(:import_order) { spy }
+    let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
     let(:proxy) { spy }
 
     before do
@@ -23,6 +23,11 @@ RSpec.describe PersistBrainzArea do
 
     it 'has persisted the area' do
       expect(Area.find_by(name: 'Germany').name).to eq('Germany')
+    end
+
+    it 'has persisted the ImportOrder' do
+      expect(Area.find_by(name: 'Germany').import_order)
+        .to be_instance_of(BrainzReleaseImportOrder)
     end
 
     it 'returns the right instance-type' do

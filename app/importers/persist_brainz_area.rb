@@ -21,23 +21,28 @@ class PersistBrainzArea < PersistBrainzBase
   # TODO: Safer mechanism to determinate the "type"
   # TODO: also persist ImportOrder
   def persist
-    area = Area.create!(
-      name:        brainz_area.name,
-      sort_name:   brainz_area.sort_name,
-      brainz_code: brainz_area.brainz_code,
-      type:        brainz_area.type
-    )
+    persit_iso
+    persist_aliases
 
-    persit_iso(area)
-    persist_aliases(area)
+    area
   end
 
-  def persit_iso(area)
-    # TODO: implement persist_iso
+  def persit_iso
+    [1, 2, 3].each do |iso_num|
+      codes = blueprint.send("iso_3166_#{iso_num}_codes") || next
+      persist_iso_codes(codes, iso_num)
+    end
   end
 
-  # This method smells of :reek:FeatureEvy
-  def persist_aliases(area)
+  def persist_iso_codes(codes, iso_num)
+    iso_class = "Iso3166Part#{iso_num}Country".constantize
+
+    codes.each do |code|
+      iso_class.create!(area: area, code: code)
+    end
+  end
+
+  def persist_aliases
     aliases = brainz_area.aliases || return
     aliases.each do |area_alias|
       PersistBrainzAreaAlias.call(area: area, blueprint: area_alias)
@@ -51,6 +56,18 @@ class PersistBrainzArea < PersistBrainzBase
   def import_request
     @import_request ||= BrainzAreaImportRequest.create(
       code: blueprint.brainz_code
+    )
+  end
+
+  private
+
+  def area
+    @area ||= Area.create!(
+      import_order: import_order,
+      name:         brainz_area.name,
+      sort_name:    brainz_area.sort_name,
+      brainz_code:  brainz_area.brainz_code,
+      type:         brainz_area.type
     )
   end
 end
