@@ -34,4 +34,23 @@ RSpec.describe PersistBrainzArea do
       expect(Area.find_by(name: 'Germany')).to be_instance_of(Country)
     end
   end
+
+  describe 'iso codes' do
+    let(:brainz_area) { TestData.by_name(:brainz_area_germany).blueprint }
+    let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
+    let(:proxy) { spy }
+
+    let(:area) do
+      allow(proxy).to receive(:get).and_return(brainz_area)
+      described_class.call(
+        blueprint:    brainz_area,
+        import_order: import_order,
+        proxy:        proxy
+      )
+    end
+
+    it 'has persisted the iso=3166-1-code' do
+      expect(area.iso3166_part1_countries.first.code).to eq('DE')
+    end
+  end
 end
