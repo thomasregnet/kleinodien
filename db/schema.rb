@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_202716) do
+ActiveRecord::Schema.define(version: 2019_10_30_200743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -407,6 +407,17 @@ ActiveRecord::Schema.define(version: 2019_10_21_202716) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "release_events", force: :cascade do |t|
+    t.bigint "release_id", null: false
+    t.bigint "area_id", null: false
+    t.date "date"
+    t.integer "date_mask", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_release_events_on_area_id"
+    t.index ["release_id"], name: "index_release_events_on_release_id"
+  end
+
   create_table "release_heads", force: :cascade do |t|
     t.string "disambiguation"
     t.string "title", null: false
@@ -624,6 +635,8 @@ ActiveRecord::Schema.define(version: 2019_10_21_202716) do
   add_foreign_key "ratings", "serials"
   add_foreign_key "ratings", "stations"
   add_foreign_key "ratings", "users"
+  add_foreign_key "release_events", "areas"
+  add_foreign_key "release_events", "releases"
   add_foreign_key "release_heads", "artist_credits"
   add_foreign_key "release_heads", "import_orders"
   add_foreign_key "release_media", "medium_formats"
