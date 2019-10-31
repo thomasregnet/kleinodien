@@ -78,6 +78,12 @@ class BrainzBlueprint < Hashie::Mash
     force_array(relation_list)
   end
 
+  def release_events
+    return unless release_event_list
+
+    force_array(release_event_list.release_event)
+  end
+
   def flat_track_list
     return unless self.track_list
 
