@@ -16,9 +16,10 @@ class PrepareBrainzRelease < PrepareBrainzBase
     release = find_already_existing
     return release if release
 
-    prepare_artist_credit || return
-    prepare_release_group || return
-    prepare_media         || return
+    prepare_artist_credit  || return
+    prepare_release_group  || return
+    prepare_release_events || return
+    prepare_media          || return
 
     true
   end
@@ -49,6 +50,16 @@ class PrepareBrainzRelease < PrepareBrainzBase
         import_order:   import_order,
         import_request: import_request,
         proxy:          proxy
+      )
+    end
+  end
+
+  def prepare_release_events
+    blueprint.release_events.each do |release_event_blueprint|
+      PrepareBrainzReleaseEvent.call(
+        blueprint:    release_event_blueprint,
+        import_order: import_order,
+        proxy:        proxy
       )
     end
   end

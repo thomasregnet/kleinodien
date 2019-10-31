@@ -32,6 +32,7 @@ RSpec.describe PrepareBrainzRelease do
       let(:blueprint) do
         TestData.by_name(:brainz_release_arise_jp_cd).blueprint
       end
+      let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
 
       it 'returns true' do
         prepare_artist_credit_spy = spy
@@ -39,7 +40,7 @@ RSpec.describe PrepareBrainzRelease do
         proxy                     = spy
         args = {
           blueprint:                 blueprint,
-          import_order:              :fake_import_order,
+          import_order:              import_order,
           prepare_artist_credit_spy: prepare_artist_credit_spy,
           prepare_release_group_spy: prepare_release_group_spy,
           proxy:                     proxy
