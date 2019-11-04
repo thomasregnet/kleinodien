@@ -4,7 +4,6 @@
 class PersistBrainzRelease < PersistBrainzBase
   def initialize(blueprint:, **args)
     super(args)
-    # @import_request = args[:import_request]
     @blueprint = blueprint
   end
 
@@ -14,10 +13,6 @@ class PersistBrainzRelease < PersistBrainzBase
   def call
     find_already_existing || persist
   end
-
-  # def blueprint
-  #   proxy.get(import_request)
-  # end
 
   def find_already_existing
     FindByCodesService.call(
@@ -42,7 +37,6 @@ class PersistBrainzRelease < PersistBrainzBase
     )
   end
 
-  # def persist_release
   def release
     @release ||= Release.create!(
       artist_credit: persist_artist_credit,
@@ -76,7 +70,6 @@ class PersistBrainzRelease < PersistBrainzBase
     )
   end
 
-  # This method smells of :reek:FeatureEnvy
   def persist_media
     reduced_media.each.with_index(1) do |release_medium, position|
       release.media.create!(
