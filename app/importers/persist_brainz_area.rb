@@ -50,7 +50,7 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   def brainz_area
-    @brainz_area = proxy.get(import_request)
+    @brainz_area ||= proxy.get(import_request)
   end
 
   def import_request
