@@ -27,11 +27,9 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   def persist
-    release = persist_release
-
-    persist_media(release)
-    persist_subsets(release)
-    persist_release_events(release)
+    persist_media
+    persist_subsets
+    persist_release_events
 
     release
   end
@@ -44,8 +42,9 @@ class PersistBrainzRelease < PersistBrainzBase
     )
   end
 
-  def persist_release
-    Release.create!(
+  # def persist_release
+  def release
+    @release ||= Release.create!(
       artist_credit: persist_artist_credit,
       head:          persist_release_head,
       import_order:  import_order,
@@ -54,7 +53,7 @@ class PersistBrainzRelease < PersistBrainzBase
     )
   end
 
-  def persist_release_events(release)
+  def persist_release_events
     blueprint.release_events.each do |release_event|
       PersistBrainzReleaseEvent.call(
         blueprint:    release_event,
@@ -78,7 +77,7 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   # This method smells of :reek:FeatureEnvy
-  def persist_media(release)
+  def persist_media
     reduced_media.each.with_index(1) do |release_medium, position|
       release.media.create!(
         format:   release_medium[:medium_format],
@@ -88,7 +87,7 @@ class PersistBrainzRelease < PersistBrainzBase
     end
   end
 
-  def persist_subsets(release)
+  def persist_subsets
     blueprint.media.each do |medium|
       PersistBrainzReleaseSubset.call(
         blueprint:    medium,

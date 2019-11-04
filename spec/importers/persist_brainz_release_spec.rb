@@ -45,7 +45,7 @@ RSpec.describe PersistBrainzRelease do
     end
   end
 
-  describe '#persist_release' do
+  describe '#release' do
     let(:import_request) do
       BrainzReleaseImportRequest.new(code: brainz_code)
     end
@@ -64,7 +64,7 @@ RSpec.describe PersistBrainzRelease do
       allow(persister).to receive(:persist_release_head)
         .and_return(FactoryBot.create(:release_head))
 
-      persister.persist_release
+      persister.release
     end
 
     it 'persists the release' do
