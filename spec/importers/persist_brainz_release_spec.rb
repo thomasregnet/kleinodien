@@ -8,12 +8,14 @@ require 'test_data'
 RSpec.describe PersistBrainzRelease do
   it_behaves_like 'a service'
 
-  def brainz_code
-    '693748be-7c18-39c3-af2e-2e62092090cf'
+  def blueprint
+    @blueprint ||= TestData.by_name(
+      :brainz_release_the_sky_is_falling_gb_cd
+    ).blueprint
   end
 
-  def blueprint
-    TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd).blueprint
+  def brainz_code
+    @brainz_code ||= blueprint.brainz_code
   end
 
   describe '.call' do
