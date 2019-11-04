@@ -31,6 +31,7 @@ class PersistBrainzRelease < PersistBrainzBase
 
     persist_media(release)
     persist_subsets(release)
+    persist_release_events(release)
 
     release
   end
@@ -51,6 +52,17 @@ class PersistBrainzRelease < PersistBrainzBase
       title:         blueprint.title,
       type:          type
     )
+  end
+
+  def persist_release_events(release)
+    blueprint.release_events.each do |release_event|
+      PersistBrainzReleaseEvent.call(
+        blueprint:    release_event,
+        import_order: import_order,
+        proxy:        proxy,
+        release:      release
+      )
+    end
   end
 
   def persist_release_head
