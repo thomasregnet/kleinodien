@@ -15,9 +15,6 @@ RSpec.shared_examples 'an area alias' do
   it { should respond_to(:gone) }
   it { should respond_to(:locale) }
 
-  it { should validate_uniqueness_of(:name).case_insensitive }
-  it { should validate_uniqueness_of(:sort_name).case_insensitive }
-
   context 'with valid parameters' do
     # let(:area) { described_class.new(name: 'test area') }
     let(:area_alias) do

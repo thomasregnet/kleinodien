@@ -21,15 +21,13 @@ class AreaAlias < ApplicationRecord
 
   validates(
     :name,
-    blank:      false,
-    presence:   true,
-    uniqueness: { case_sensitive: false }
+    blank:    false,
+    presence: true
   )
   validates(
     :sort_name,
-    blank:      false,
-    presence:   true,
-    uniqueness: { case_sensitive: false }
+    blank:    false,
+    presence: true
   )
 
   private
