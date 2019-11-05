@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Release, type: :model do
+  it { should belong_to(:area).without_validating_presence }
   it { is_expected.to belong_to(:artist_credit).without_validating_presence }
   it { is_expected.to belong_to(:head).class_name('ReleaseHead') }
   it { is_expected.to belong_to(:import_order).without_validating_presence }
