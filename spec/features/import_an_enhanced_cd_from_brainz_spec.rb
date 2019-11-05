@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
   # rubocop:disable RSpec/BeforeAfterAll
   # rubocop:disable RSpec/InstanceVariable
@@ -15,13 +16,13 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
       user:  FactoryBot.create(:user)
     )
 
-    @result = BrainzImporter.call(import_order: import_order)
+    @id = BrainzImporter.call(import_order: import_order).id
   end
 
   after(:all) { DatabaseCleaner.clean }
   # rubocop:enable RSpec/BeforeAfterAll
 
-  before { visit(album_path(@result.id)) }
+  before { visit(album_path(@id)) }
   # rubocop:enable RSpec/InstanceVariable
 
   it 'has set the right page-title' do
@@ -36,6 +37,16 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     expect(page).to have_content('Iron Maiden')
   end
 
+  describe 'release events' do
+    it 'contains the first release event' do
+      expect(page).to have_content('United Kingdom')
+    end
+
+    it 'contains the second release event' do
+      expect(page).to have_content('Europe')
+    end
+  end
+
   describe 'pieces' do
     it 'contains "Aces High"' do
       expect(page).to have_content('Aces High')
@@ -46,3 +57,4 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
