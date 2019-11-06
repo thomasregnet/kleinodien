@@ -36,6 +36,10 @@ class Area < ApplicationRecord
     uniqueness: { case_sensitive: false }
   )
 
+  def iso3166_part1_codes
+    iso3166_part1_countries.map(&:code)
+  end
+
   private
 
   def ensure_sort_name_has_a_value

@@ -41,6 +41,11 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
   it 'contains the area' do
     expect(page).to have_content('United Kingdom')
   end
+
+  it 'contains the ISO 3166-1 code of the release-area' do
+    expect(page).to have_content('GB')
+  end
+
   describe 'release events' do
     it 'contains the first release event' do
       expect(page).to have_content('United Kingdom')

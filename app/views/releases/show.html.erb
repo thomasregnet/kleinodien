@@ -13,6 +13,11 @@
     <dl class="row">
         <dt class="col-sm-1">Area</dt>
         <dd class="col-sm-11"><%= @release.area.name %></dd>
+
+        <% if @release.area && @release.area.iso3166_part1_countries %>
+            <dt class="col-sm-1">Iso-Codes</dt>
+            <dd class="col-sm-11"><%= @release.area.iso3166_part1_codes.join(', ')%></dd>
+        <% end %>
     </dl>
 </div>
 <div class="container-fluid">

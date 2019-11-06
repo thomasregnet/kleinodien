@@ -78,5 +78,42 @@ RSpec.shared_examples 'an area' do
       end
     end
   end
+
+  describe '#iso3166_part1_codes' do
+    context 'without ISO 3166-1 codes' do
+      let(:area) { FactoryBot.build(:area) }
+
+      it 'returns nil' do
+        expect(area.iso3166_part1_codes).to be_empty
+      end
+    end
+
+    context 'with an ISO 3166-1 code' do
+      let(:area) { FactoryBot.create(:area) }
+      let(:iso_country) { FactoryBot.create(:iso3166_part1_country) }
+
+      before { area.iso3166_part1_countries << iso_country }
+
+      it 'returns that code' do
+        expect(area.iso3166_part1_codes.first).to eq(iso_country.code)
+      end
+    end
+
+    context 'with many ISO 3166-1 codes' do
+      let(:area) { FactoryBot.create(:area) }
+
+      before do
+        2.times do
+          area.iso3166_part1_countries << FactoryBot.create(
+            :iso3166_part1_country
+          )
+        end
+      end
+
+      it 'returns that codes' do
+        expect(area.iso3166_part1_codes.length).to eq(2)
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength

@@ -7,6 +7,7 @@ end
 FactoryBot.define do
   factory :iso3166_part1_country do
     association :area, factory: :area
-    sequence(:code) { iso_3166_1_code_factory.shift }
+    # sequence(:code) { iso_3166_1_code_factory.shift }
+    sequence(:code, 'A') { |n| "A#{n}" }
   end
 end
