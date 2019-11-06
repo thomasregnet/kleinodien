@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-def iso_3166_3_code_factory
-  @iso_3166_3_code_factory ||= ('AA'..'ZZ').to_a
-end
-
 FactoryBot.define do
   factory :iso3166_part3_country do
     association :area, factory: :area
-    sequence(:code) { "AA#{iso3166_3_code_factory.shift}" }
+    sequence(:code, 'AA') { |n| "AA#{n}" }
   end
 end
