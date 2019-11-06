@@ -16,7 +16,8 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
       user:  FactoryBot.create(:user)
     )
 
-    @id = BrainzImporter.call(import_order: import_order).id
+    release = BrainzImporter.call(import_order: import_order)
+    @id = release.id
   end
 
   after(:all) { DatabaseCleaner.clean }
@@ -37,6 +38,9 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     expect(page).to have_content('Iron Maiden')
   end
 
+  it 'contains the area' do
+    expect(page).to have_content('United Kingdom')
+  end
   describe 'release events' do
     it 'contains the first release event' do
       expect(page).to have_content('United Kingdom')

@@ -9,6 +9,13 @@
 </h1>
 
 <div class="container-fluid">
+    <h2>Info</h2>
+    <dl class="row">
+        <dt class="col-sm-1">Area</dt>
+        <dd class="col-sm-11"><%= @release.area.name %></dd>
+    </dl>
+</div>
+<div class="container-fluid">
     <h2>Release events</h2>
     <dl class="row">
         <% @release.release_events.each do |release_event| %>

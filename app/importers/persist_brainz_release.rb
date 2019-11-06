@@ -25,8 +25,23 @@ class PersistBrainzRelease < PersistBrainzBase
     persist_media
     persist_subsets
     persist_release_events
+    # add_area must be called after persist_release_events
+    add_area
 
     release
+  end
+
+  # #add_area must be called after the release events are persisted.
+  # The release_events set their areas. #add_area "hopes" that the
+  # required Area is beneath the release_event-areas.
+  def add_area
+    iso_3166_1_code = blueprint.country || return
+    area = Area.joins(:iso3166_part1_countries)
+               .where(iso3166_part1_countries: { code: iso_3166_1_code })
+               .limit(1).first
+
+    release.area = area
+    release.save!
   end
 
   def persist_artist_credit
