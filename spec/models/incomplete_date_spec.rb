@@ -17,46 +17,78 @@ RSpec.describe IncompleteDate, type: :model do
     end
   end
 
-  describe '.from_string' do
+  # describe '.from_string' do
+  #   context 'with a complete date' do
+  #     let(:incomplete_date) do
+  #       IncompleteDate.from_string('2015-12-13')
+  #     end
+
+  #     specify '#mask' do
+  #       expect(incomplete_date.mask).to eq 7
+  #     end
+
+  #     specify '#to_s' do
+  #       expect(incomplete_date.to_s).to eq '2015-12-13'
+  #     end
+  #   end
+
+  #   context 'with year and month (2015-12)' do
+  #     let(:incomplete_date) do
+  #       IncompleteDate.from_string('2015-12')
+  #     end
+
+  #     specify '#mask' do
+  #       expect(incomplete_date.mask).to eq 6
+  #     end
+
+  #     specify '#to_s' do
+  #       expect(incomplete_date.to_s).to eq '2015-12-01'
+  #     end
+  #   end
+
+  #   context 'with year only (2015-12)' do
+  #     let(:incomplete_date) do
+  #       IncompleteDate.from_string('2015')
+  #     end
+
+  #     specify '#mask' do
+  #       expect(incomplete_date.mask).to eq 4
+  #     end
+
+  #     specify '#to_s' do
+  #       expect(incomplete_date.to_s).to eq '2015-01-01'
+  #     end
+  #   end
+  # end
+
+  describe '#to_s' do
     context 'with a complete date' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015-12-13')
+        IncompleteDate.new(Date.new(2019, 3, 2), 7)
       end
 
-      specify '#mask' do
-        expect(incomplete_date.mask).to eq 7
-      end
-
-      specify '#to_s' do
-        expect(incomplete_date.to_s).to eq '2015-12-13'
+      it 'returns the right date-string' do
+        expect(incomplete_date.to_s).to eq('2019-03-02')
       end
     end
 
-    context 'with year and month (2015-12)' do
+    context 'with year and month' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015-12')
+        IncompleteDate.new(Date.new(2019, 3, 2), 6)
       end
 
-      specify '#mask' do
-        expect(incomplete_date.mask).to eq 6
-      end
-
-      specify '#to_s' do
-        expect(incomplete_date.to_s).to eq '2015-12-01'
+      it 'returns the right date-string' do
+        expect(incomplete_date.to_s).to eq('2019-03')
       end
     end
 
-    context 'with year only (2015-12)' do
+    context 'with year only' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015')
+        IncompleteDate.new(Date.new(2019, 3, 2), 4)
       end
 
-      specify '#mask' do
-        expect(incomplete_date.mask).to eq 4
-      end
-
-      specify '#to_s' do
-        expect(incomplete_date.to_s).to eq '2015-01-01'
+      it 'returns the right date-string' do
+        expect(incomplete_date.to_s).to eq('2019')
       end
     end
   end

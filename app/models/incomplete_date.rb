@@ -19,6 +19,19 @@ class IncompleteDate < Delegator
     @mask = mask
   end
 
+  def to_s
+    case mask
+    when 4
+      year.to_s
+    when 6
+      strftime('%Y-%m')
+    when 7
+      strftime('%F')
+    else
+      raise "invalid mask: #{mask}"
+    end
+  end
+
   def __getobj__
     date
   end
