@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '6.0.0'
+gem 'rails', '6.0.1'
 gem 'pg', '~> 1.0'
 gem 'aasm', '~> 5.0'
 gem 'capybara', '~> 3.0'
