@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe IncompleteDate, type: :model do
   describe '.new' do
     let(:incomplete_date) do
@@ -17,49 +18,73 @@ RSpec.describe IncompleteDate, type: :model do
     end
   end
 
-  # describe '.from_string' do
-  #   context 'with a complete date' do
-  #     let(:incomplete_date) do
-  #       IncompleteDate.from_string('2015-12-13')
-  #     end
+  describe '.from_string' do
+    context 'with a complete date' do
+      let(:incomplete_date) do
+        IncompleteDate.from_string('2015-12-13')
+      end
 
-  #     specify '#mask' do
-  #       expect(incomplete_date.mask).to eq 7
-  #     end
+      it 'returns 7 when it receives #mask' do
+        expect(incomplete_date.mask).to eq 7
+      end
 
-  #     specify '#to_s' do
-  #       expect(incomplete_date.to_s).to eq '2015-12-13'
-  #     end
-  #   end
+      it 'returns the year' do
+        expect(incomplete_date.year).to eq(2015)
+      end
 
-  #   context 'with year and month (2015-12)' do
-  #     let(:incomplete_date) do
-  #       IncompleteDate.from_string('2015-12')
-  #     end
+      it 'returns the month' do
+        expect(incomplete_date.month).to eq(12)
+      end
 
-  #     specify '#mask' do
-  #       expect(incomplete_date.mask).to eq 6
-  #     end
+      it 'returns the dey' do
+        expect(incomplete_date.day).to eq(13)
+      end
+    end
 
-  #     specify '#to_s' do
-  #       expect(incomplete_date.to_s).to eq '2015-12-01'
-  #     end
-  #   end
+    context 'with year and month' do
+      let(:incomplete_date) do
+        IncompleteDate.from_string('2015-12')
+      end
 
-  #   context 'with year only (2015-12)' do
-  #     let(:incomplete_date) do
-  #       IncompleteDate.from_string('2015')
-  #     end
+      it 'returns 7 when it receives #mask' do
+        expect(incomplete_date.mask).to eq 6
+      end
 
-  #     specify '#mask' do
-  #       expect(incomplete_date.mask).to eq 4
-  #     end
+      it 'returns the year' do
+        expect(incomplete_date.year).to eq(2015)
+      end
 
-  #     specify '#to_s' do
-  #       expect(incomplete_date.to_s).to eq '2015-01-01'
-  #     end
-  #   end
-  # end
+      it 'returns the month' do
+        expect(incomplete_date.month).to eq(12)
+      end
+
+      it 'returns 1 for the dey' do
+        expect(incomplete_date.day).to eq(1)
+      end
+    end
+
+    context 'with year only' do
+      let(:incomplete_date) do
+        IncompleteDate.from_string('2015')
+      end
+
+      it 'returns 7 when it receives #mask' do
+        expect(incomplete_date.mask).to eq 4
+      end
+
+      it 'returns the year' do
+        expect(incomplete_date.year).to eq(2015)
+      end
+
+      it 'returns 1 for the month' do
+        expect(incomplete_date.month).to eq(1)
+      end
+
+      it 'returns 1 for the dey' do
+        expect(incomplete_date.day).to eq(1)
+      end
+    end
+  end
 
   describe '#to_s' do
     context 'with a complete date' do
@@ -93,3 +118,4 @@ RSpec.describe IncompleteDate, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
