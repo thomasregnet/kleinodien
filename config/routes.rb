@@ -13,10 +13,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :album_heads, only: %i[index show]
-
-  resources :album_releases, only: %i[index show]
-
   resources :uri_import_orders, only: %i[create new]
 
   # https://stackoverflow.com/questions/5246767/sti-one-controller
