@@ -19,8 +19,9 @@
     <% end %>
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>
-    <% if signed_in? %>
-      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+    <% if user_signed_in? %>
+        <%= destroy_user_session_path %>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
     <% end %>
   </body>
 </html>
