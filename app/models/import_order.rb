@@ -37,7 +37,7 @@ class ImportOrder < ApplicationRecord
   after_initialize :set_default_state
   after_save :publish
 
-  aasm column: :state do
+  aasm column: :state, whiny_persistence: true do
     state :pending, initial: true
     state :preparing, :persisting, :done, :failed
 
