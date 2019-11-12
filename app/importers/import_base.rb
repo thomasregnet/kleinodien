@@ -50,6 +50,7 @@ class ImportBase < ServiceBase
 
   # rubocop:disable Style/RescueStandardError
   def try_prepare
+    import_order.prepare!
     prepare
   rescue => e
     e.backtrace.each { |msg|Rails.logger.error(msg) }
@@ -69,7 +70,8 @@ class ImportBase < ServiceBase
 
   def try_persistence_transaction
     import_order.transaction do
-      import_order.run
+      # import_order.run
+      import_order.persist
       persister_class.call(
         blueprint:    blueprint,
         import_order: import_order,
@@ -81,7 +83,7 @@ class ImportBase < ServiceBase
     e.backtrace.each { |msg| Rails.logger.error(msg) }
     import_order.failure!
   ensure
-    import_order.done! if import_order.running?
+    import_order.done! if import_order.persisting?
   end
 
   # rubocop:enable Style/RescueStandardError
