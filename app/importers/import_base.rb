@@ -70,8 +70,7 @@ class ImportBase < ServiceBase
 
   def try_persistence_transaction
     import_order.transaction do
-      # import_order.run
-      import_order.persist
+      import_order.persist!
       persister_class.call(
         blueprint:    blueprint,
         import_order: import_order,
