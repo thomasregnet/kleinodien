@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'aasm/rspec'
+
 # rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'for ImportOrders' do |model|
   context 'with valid parameters' do
@@ -19,9 +21,9 @@ RSpec.shared_examples 'for ImportOrders' do |model|
   end
 
   describe '#state' do
-    context 'when pending, running, done, failed' do
+    context 'when pending, preparing, persisting, done, failed' do
       let(:import_order) { FactoryBot.build(model) }
-      let(:valid_states) { %w[pending running done failed] }
+      let(:valid_states) { %w[pending preparing persisting done failed] }
 
       it 'is valid' do
         expect(import_order)
@@ -42,6 +44,39 @@ RSpec.shared_examples 'for ImportOrders' do |model|
 
       it 'is not valid' do
         expect(import_order).not_to be_valid
+      end
+    end
+  end
+
+  describe 'state transitions' do
+    let(:import_order) { FactoryBot.create(model) }
+
+    context 'when pending' do
+      it 'transits to :preparing' do
+        expect(import_order)
+          .to transition_from(:pending).to(:preparing).on_event(:prepare)
+      end
+    end
+
+    context 'when preparing' do
+      let(:import_order) do
+        FactoryBot.create(model, state: :preparing)
+      end
+
+      it 'transits to persisting' do
+        expect(import_order)
+          .to transition_from(:preparing).to(:persisting).on_event(:persist)
+      end
+    end
+
+    context 'when persisting' do
+      let(:import_order) do
+        FactoryBot.create(model, state: :preparing)
+      end
+
+      it 'transits to done' do
+        expect(import_order)
+          .to transition_from(:persisting).to(:done).on_event(:done)
       end
     end
   end

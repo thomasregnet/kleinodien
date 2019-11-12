@@ -2,7 +2,8 @@
 
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
-  include ImportStateTransitions
+  # include ImportStateTransitions
+  include AASM
 
   belongs_to :import_queue
   belongs_to :user
@@ -21,13 +22,13 @@ class ImportOrder < ApplicationRecord
   validates(
     :state,
     presence:  true,
-    inclusion: { in: %w[pending running done failed] }
+    inclusion: { in: %w[pending preparing persisting done failed] }
   )
 
   validates_uniqueness_of(
     :code,
     scope:      %i[import_queue_id type],
-    conditions: -> { where(state: %w[pending running]) }
+    conditions: -> { where(state: %w[pending preparing persisting]) }
   )
 
   before_validation :ensure_code_and_type_hava_a_value
@@ -36,6 +37,27 @@ class ImportOrder < ApplicationRecord
   after_initialize :set_default_state
   after_save :publish
 
+  aasm column: :state do
+    state :pending, initial: true
+    state :preparing, :persisting, :done, :failed
+
+    after_all_transitions { save! }
+
+    event :prepare do
+      transitions from: :pending, to: :preparing
+    end
+
+    event :persist do
+      transitions from: :preparing, to: :persisting
+    end
+    event :done do
+      transitions from: :persisting, to: :done
+    end
+
+    event :failure do
+      transitions from: %i[pending preparing persisting], to: :failed
+    end
+  end
   def publish
     return unless pending?
     return unless import_queue

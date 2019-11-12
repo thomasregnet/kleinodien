@@ -26,6 +26,8 @@ RSpec.describe ImportOrder, type: :model do
 
   # it { is_expected.to belong_to(:user) }
 
+  it_behaves_like 'for ImportOrders', :import_order
+
   it { should have_many(:areas) }
   it { should have_many(:artist_credits) }
   it { should have_many(:artists) }
