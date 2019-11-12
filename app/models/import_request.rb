@@ -2,7 +2,7 @@
 
 # Base class for ImportRequests
 class ImportRequest < ApplicationRecord
-  include ImportStateTransitions
+  include AASM
 
   belongs_to :import_order, counter_cache: :requests_count
   has_one :body, class_name: 'ImportRequestBody'
@@ -13,21 +13,22 @@ class ImportRequest < ApplicationRecord
   validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending running done failed] }
 
-  # def processing
-  #   return unless state == 'pending'
+  aasm column: :state do
+    state :pending, initial: true
+    state :running, :done, :failed
 
-  #   self.state = 'processing'
-  # end
+    after_all_transitions { save! }
 
-  # def done
-  #   return unless state == 'processing' || state == 'pending'
+    event :run do
+      transitions from: :pending, to: :running
+    end
 
-  #   self.state = 'done'
-  # end
+    event :done do
+      transitions from: :running, to: :done
+    end
 
-  # def failed
-  #   return unless state == 'pending' || state == 'processing'
-
-  #   self.state = 'failed'
-  # end
+    event :failure do
+      transitions from: %i[pending running], to: :failed
+    end
+  end
 end

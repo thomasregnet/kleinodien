@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'shared_examples_for_import_state_transitions'
 
 # Provide a "kind" for testing
 class TestBrainzImportRequestSomeKind < BrainzImportRequest
@@ -26,11 +25,6 @@ end
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzImportRequest, type: :model do
-  it_behaves_like(
-    'an import state transitions capable object',
-    :brainz_import_request
-  )
-
   def uuid
     @uuid ||= SecureRandom.uuid.to_s
   end
