@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared_examples_for_active_import_orders'
 require 'shared_examples_for_import_orders'
 
 RSpec.describe BrainzReleaseImportOrder, type: :model do
+  it_behaves_like 'an active ImportOrder', :brainz_release_import_order
+
   it_behaves_like 'for ImportOrders', :brainz_release_import_order
 
   context 'with valid attributes' do
