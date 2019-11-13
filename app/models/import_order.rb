@@ -27,8 +27,10 @@ class ImportOrder < ApplicationRecord
 
   validates_uniqueness_of(
     :code,
-    scope:      %i[import_queue_id type],
-    conditions: -> { where(state: %w[pending preparing persisting]) }
+    scope: :type,
+    if:    proc do |order|
+      %w[pending preparing persisting].include?(order.state)
+    end
   )
 
   before_validation :ensure_code_and_type_hava_a_value
@@ -58,6 +60,7 @@ class ImportOrder < ApplicationRecord
       transitions from: %i[pending preparing persisting], to: :failed
     end
   end
+
   def publish
     return unless pending?
     return unless import_queue
