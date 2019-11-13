@@ -19,14 +19,7 @@ end
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe ImportOrder, type: :model do
-  # include_examples 'for ImportOrders', :import_order
-
-  # The ImportQueue is set automatically, so we need "required(false)"
-  # it { is_expected.to belong_to(:import_queue).required(false) }
-
-  # it { is_expected.to belong_to(:user) }
-
-  it_behaves_like 'for ImportOrders', :import_order
+  include_examples 'for ImportOrders', :import_order
 
   it { should have_many(:areas) }
   it { should have_many(:artist_credits) }
