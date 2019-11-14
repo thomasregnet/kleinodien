@@ -117,5 +117,24 @@ RSpec.describe IncompleteDate, type: :model do
       end
     end
   end
+
+  context 'with an invalid mask' do
+    describe '#to_s' do
+      let(:incomplete_date) { IncompleteDate.new(Date.new(2019, 3, 2), 7) }
+
+      it 'raises a RuntimeError' do
+        allow(incomplete_date).to receive(:mask).and_return(:wtf)
+        expect { incomplete_date.to_s }
+          .to raise_error(RuntimeError, /invalid mask/)
+      end
+    end
+
+    describe '.new' do
+      it 'raises an ArgumentError' do
+        expect { described_class.new(Date.new(2019, 3, 2), :wrong) }
+          .to raise_error(ArgumentError, /invalid mask/)
+      end
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength

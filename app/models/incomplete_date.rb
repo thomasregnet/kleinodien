@@ -5,6 +5,8 @@ require 'date'
 # Representation of a date which must not consist of all
 # parameters year, month and day.
 class IncompleteDate < Delegator
+  VALID_MASKS = [4, 6, 7].freeze
+
   attr_reader :date, :mask
 
   def self.from_string(date_string)
@@ -15,6 +17,9 @@ class IncompleteDate < Delegator
   end
 
   def initialize(date, mask)
+    raise(ArgumentError, "invalid mask: #{mask}") \
+      unless VALID_MASKS.include?(mask)
+
     @date = date
     @mask = mask
   end
