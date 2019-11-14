@@ -2,8 +2,9 @@
 
 # Queue users orders of metadata imports
 class ImportOrder < ApplicationRecord
-  # include ImportStateTransitions
   include AASM
+
+  ACTIVE_STATES = %w[pending preparing persisting].freeze
 
   belongs_to :import_queue
   belongs_to :user
@@ -28,9 +29,7 @@ class ImportOrder < ApplicationRecord
   validates_uniqueness_of(
     :code,
     scope: :type,
-    if:    proc do |order|
-      %w[pending preparing persisting].include?(order.state)
-    end
+    if:    proc { |order| order.active? }
   )
 
   before_validation :ensure_code_and_type_hava_a_value
@@ -59,6 +58,10 @@ class ImportOrder < ApplicationRecord
     event :failure do
       transitions from: %i[pending preparing persisting], to: :failed
     end
+  end
+
+  def active?
+    ACTIVE_STATES.include?(state)
   end
 
   def publish

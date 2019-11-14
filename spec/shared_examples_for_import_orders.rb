@@ -4,6 +4,48 @@ require 'aasm/rspec'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'for ImportOrders' do |model|
+  describe '#active?' do
+    context 'when in pending state' do
+      let(:import_order) { FactoryBot.build(model, state: :pending) }
+
+      it 'is active' do
+        expect(import_order).to be_active
+      end
+    end
+
+    context 'when in preparing state' do
+      let(:import_order) { FactoryBot.build(model, state: :preparing) }
+
+      it 'is active' do
+        expect(import_order).to be_active
+      end
+    end
+
+    context 'when in persisting state' do
+      let(:import_order) { FactoryBot.build(model, state: :persisting) }
+
+      it 'is active' do
+        expect(import_order).to be_active
+      end
+    end
+
+    context 'when in done state' do
+      let(:import_order) { FactoryBot.build(model, state: :done) }
+
+      it 'is active' do
+        expect(import_order).not_to be_active
+      end
+    end
+
+    context 'when in failed state' do
+      let(:import_order) { FactoryBot.build(model, state: :failed) }
+
+      it 'is active' do
+        expect(import_order).not_to be_active
+      end
+    end
+  end
+
   context 'with valid parameters' do
     let(:import_order) { FactoryBot.build(model) }
 
