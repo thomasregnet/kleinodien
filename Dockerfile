@@ -15,6 +15,13 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs \
   && rm -Rf /var/lib/apt/lists/*
 
+# install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > \
+     /etc/apt/sources.list.d/yarn.list \
+  && apt update \
+  && apt install yarn
+
 ENV RAILS_ROOT /var/www/kleinodien
 RUN mkdir -p $RAILS_ROOT/tmp/pids
 WORKDIR $RAILS_ROOT
