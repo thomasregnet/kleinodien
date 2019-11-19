@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_194003) do
+ActiveRecord::Schema.define(version: 2019_11_19_202021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -202,6 +202,16 @@ ActiveRecord::Schema.define(version: 2019_11_13_194003) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_jobs_on_lower_name", unique: true
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "iso_code_1"
+    t.string "iso_code_2b"
+    t.string "iso_code_2t"
+    t.string "iso_code_3"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "medium_formats", force: :cascade do |t|
