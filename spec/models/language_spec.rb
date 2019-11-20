@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Language, type: :model do
   it { should validate_length_of(:iso_code_1).is_equal_to(2) }
   it { should validate_length_of(:iso_code_2b).is_equal_to(3) }
@@ -31,7 +32,6 @@ RSpec.describe Language, type: :model do
       let(:lang) { FactoryBot.build(:language, iso_code_1: 'AZ') }
 
       it 'is not valid' do
-        # expect(lang).not_to be_valid
         lang.valid?
         expect(lang.errors[:iso_code_1])
           .to include('must consist of two lowercase letters')
@@ -52,7 +52,6 @@ RSpec.describe Language, type: :model do
       let(:lang) { FactoryBot.build(:language, iso_code_2b: 'ABC') }
 
       it 'is not valid' do
-        # expect(lang).not_to be_valid
         lang.valid?
         expect(lang.errors[:iso_code_2b])
           .to include('must consist of three lowercase letters')
@@ -73,7 +72,6 @@ RSpec.describe Language, type: :model do
       let(:lang) { FactoryBot.build(:language, iso_code_2t: 'ABC') }
 
       it 'is not valid' do
-        # expect(lang).not_to be_valid
         lang.valid?
         expect(lang.errors[:iso_code_2t])
           .to include('must consist of three lowercase letters')
@@ -94,7 +92,6 @@ RSpec.describe Language, type: :model do
       let(:lang) { FactoryBot.build(:language, iso_code_3: 'ABC') }
 
       it 'is not valid' do
-        # expect(lang).not_to be_valid
         lang.valid?
         expect(lang.errors[:iso_code_3])
           .to include('must consist of three lowercase letters')
@@ -102,3 +99,4 @@ RSpec.describe Language, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
