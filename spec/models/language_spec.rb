@@ -4,6 +4,8 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe Language, type: :model do
+  it { should have_many(:releases) }
+
   it { should validate_length_of(:iso_code_1).is_equal_to(2) }
   it { should validate_length_of(:iso_code_2b).is_equal_to(3) }
   it { should validate_length_of(:iso_code_2t).is_equal_to(3) }

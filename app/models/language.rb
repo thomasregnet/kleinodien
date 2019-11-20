@@ -2,6 +2,8 @@
 
 # Languages and their ISO-639 codes
 class Language < ApplicationRecord
+  has_many :releases
+
   validates(
     :iso_code_1,
     length:    { is: 2 },

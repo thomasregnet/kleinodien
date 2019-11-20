@@ -57,9 +57,19 @@ class PersistBrainzRelease < PersistBrainzBase
       artist_credit: persist_artist_credit,
       head:          persist_release_head,
       import_order:  import_order,
+      language:      language,
       title:         blueprint.title,
       type:          type
     )
+  end
+
+  # This method smells of :reek:FeatureEnvy
+  def language
+    iso_code_3 = blueprint.text_representation.language
+    Language.find_or_create_by(iso_code_3: iso_code_3) do |language|
+      language.name       = iso_code_3
+      language.iso_code_3 = iso_code_3
+    end
   end
 
   def persist_release_events

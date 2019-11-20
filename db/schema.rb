@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_202021) do
+ActiveRecord::Schema.define(version: 2019_11_20_201601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -498,9 +498,11 @@ ActiveRecord::Schema.define(version: 2019_11_19_202021) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "area_id"
+    t.bigint "language_id"
     t.index ["area_id"], name: "index_releases_on_area_id"
     t.index ["artist_credit_id"], name: "index_releases_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_releases_on_import_order_id"
+    t.index ["language_id"], name: "index_releases_on_language_id"
     t.index ["release_head_id"], name: "index_releases_on_release_head_id"
   end
 
@@ -661,6 +663,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_202021) do
   add_foreign_key "releases", "areas"
   add_foreign_key "releases", "artist_credits"
   add_foreign_key "releases", "import_orders"
+  add_foreign_key "releases", "languages"
   add_foreign_key "releases", "release_heads"
   add_foreign_key "seasons", "serials", name: "seasons_fk_seasons"
   add_foreign_key "seasons_tags", "seasons"

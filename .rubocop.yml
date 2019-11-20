@@ -6,6 +6,9 @@ Capybara/FeatureMethods:
 Layout/AlignHash:
   EnforcedColonStyle: table
 
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
 RSpec/ExampleLength:
   Max: 10
 
