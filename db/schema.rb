@@ -509,7 +509,7 @@ ActiveRecord::Schema.define(version: 2019_11_21_185249) do
   create_table "scripts", force: :cascade do |t|
     t.string "name", null: false
     t.string "iso_code", null: false
-    t.integer "iso_number", limit: 2
+    t.string "iso_number", limit: 3
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

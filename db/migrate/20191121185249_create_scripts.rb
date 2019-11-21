@@ -3,7 +3,7 @@ class CreateScripts < ActiveRecord::Migration[6.0]
     create_table :scripts do |t|
       t.string :name, null: false
       t.string :iso_code, null: false
-      t.column :iso_number, 'smallint'
+      t.column :iso_number, 'char(3)'
 
       t.timestamps
     end
