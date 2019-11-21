@@ -2,6 +2,8 @@
 
 # ISO 15924 script
 class Script < ApplicationRecord
+  has_many :releases
+
   validates(
     :iso_code,
     length:   { is: 4 },
@@ -22,5 +24,6 @@ class Script < ApplicationRecord
       message: 'must consist of three digits'
     }
   )
+
   validates :name, presence: true
 end
