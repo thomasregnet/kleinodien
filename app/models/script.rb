@@ -12,5 +12,15 @@ class Script < ApplicationRecord
        + ' followed by three lowercase letters'
     }
   )
+
+  validates(
+    :iso_number,
+    allow_nil: true,
+    length:    { is: 3 },
+    format:    {
+      with:    /\A\d\d\d\z/,
+      message: 'must consist of three digits'
+    }
+  )
   validates :name, presence: true
 end

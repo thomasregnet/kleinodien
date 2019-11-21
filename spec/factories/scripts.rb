@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :script do
     sequence(:iso_code, 'a') { |n| "Xyz#{n}" }
-    sequence(:name) { |n| "language_#{n}" }
+    sequence(:name) { |n| "script_#{n}" }
   end
 end
