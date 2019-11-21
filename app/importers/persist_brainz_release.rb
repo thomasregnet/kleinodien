@@ -58,6 +58,8 @@ class PersistBrainzRelease < PersistBrainzBase
       head:          persist_release_head,
       import_order:  import_order,
       language:      language,
+      # TODO: import script of a release
+      # script:        script,
       title:         blueprint.title,
       type:          type
     )
