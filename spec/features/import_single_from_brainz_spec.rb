@@ -39,6 +39,11 @@ RSpec.feature 'import a single from MusicBrainz', type: :feature do
   it 'contains the language' do
     expect(page).to have_text('eng')
   end
+
+  it 'contains the script' do
+    expect(page).to have_content('Latn')
+  end
+
   it 'contains "Troops of Doom (live)"' do
     expect(page).to have_content('Troops of Doom (live)')
   end
