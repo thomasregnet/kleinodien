@@ -58,8 +58,7 @@ class PersistBrainzRelease < PersistBrainzBase
       head:          persist_release_head,
       import_order:  import_order,
       language:      language,
-      # TODO: import script of a release
-      # script:        script,
+      script:        script,
       title:         blueprint.title,
       type:          type
     )
@@ -123,6 +122,15 @@ class PersistBrainzRelease < PersistBrainzBase
       blueprint:    blueprint.media,
       import_order: import_order
     )
+  end
+
+  # This method smells of :reek:FeatureEnvy
+  def script
+    iso_code = blueprint.text_representation.script
+    Script.find_or_create_by(iso_code: iso_code) do |script|
+      script.iso_code = iso_code
+      script.name     = iso_code
+    end
   end
 
   def type
