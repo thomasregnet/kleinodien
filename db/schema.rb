@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_201601) do
+ActiveRecord::Schema.define(version: 2019_11_21_185249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -504,6 +504,14 @@ ActiveRecord::Schema.define(version: 2019_11_20_201601) do
     t.index ["import_order_id"], name: "index_releases_on_import_order_id"
     t.index ["language_id"], name: "index_releases_on_language_id"
     t.index ["release_head_id"], name: "index_releases_on_release_head_id"
+  end
+
+  create_table "scripts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "iso_code", null: false
+    t.integer "iso_number", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "seasons", id: :serial, force: :cascade do |t|
