@@ -74,6 +74,10 @@ RSpec.describe PersistBrainzRelease do
     it 'sets the ImportOrder' do
       expect(release.import_order).not_to be_nil
     end
+
+    it 'sets the brainz_code' do
+      expect(release.brainz_code).not_to be_nil
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength

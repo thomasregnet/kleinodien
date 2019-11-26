@@ -53,7 +53,12 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   def release
-    @release ||= Release.create!(
+    @release ||= Release.create!(release_arguments)
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  def release_arguments
+    arguments = {
       artist_credit: persist_artist_credit,
       head:          persist_release_head,
       import_order:  import_order,
@@ -61,8 +66,15 @@ class PersistBrainzRelease < PersistBrainzBase
       script:        script,
       title:         blueprint.title,
       type:          type
+    }
+
+    CodesForModelService.call(
+      model_class: Release,
+      codes_hash:  blueprint.codes_hash,
+      given:       arguments
     )
   end
+  # rubocop:enable Metrics/MethodLength
 
   # This method smells of :reek:FeatureEnvy
   def language
