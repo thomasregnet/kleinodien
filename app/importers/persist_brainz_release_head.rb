@@ -24,14 +24,24 @@ class PersistBrainzReleaseHead < PersistBrainzBase
     )
   end
 
+  # rubocop:disable Metrics/MethodLength
   def persist
-    ReleaseHead.create!(
+    arguments = {
       artist_credit: persist_artist_credit,
       import_order:  import_order,
       title:         blueprint.title,
       type:          type
+    }
+
+    ReleaseHead.create!(
+      CodesForModelService.call(
+        codes_hash:  blueprint.codes_hash,
+        given:       arguments,
+        model_class: ReleaseHead
+      )
     )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def persist_artist_credit
     PersistBrainzArtistCredit.call(

@@ -58,6 +58,11 @@ RSpec.describe PersistBrainzReleaseHead do
     it 'sets the ImportOrder' do
       expect(release_head.import_order).to be_kind_of(ImportOrder)
     end
+
+    it 'sets the brainz_code' do
+      expect(release_head.brainz_code)
+        .to eq('5fc9ba9d-bc39-38fc-a479-eadbf0f3a933')
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
