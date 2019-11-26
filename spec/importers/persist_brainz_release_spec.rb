@@ -76,7 +76,7 @@ RSpec.describe PersistBrainzRelease do
     end
 
     it 'sets the brainz_code' do
-      expect(release.brainz_code).not_to be_nil
+      expect(release.brainz_code).to eq('693748be-7c18-39c3-af2e-2e62092090cf')
     end
   end
 end
