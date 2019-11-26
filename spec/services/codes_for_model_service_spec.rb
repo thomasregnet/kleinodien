@@ -21,6 +21,11 @@ RSpec.describe CodesForModelService do
         )
       end
 
+      it 'returns a HashWithIndifferentAccess' do
+        expect(codes_hash)
+          .to be_instance_of(ActiveSupport::HashWithIndifferentAccess)
+      end
+
       it 'has the exepcted lenth' do
         expect(codes_hash.length).to eq(1)
       end
@@ -41,6 +46,11 @@ RSpec.describe CodesForModelService do
           given:       { given_parameter: 'given' },
           model_class: model_class
         )
+      end
+
+      it 'returns a HashWithIndifferentAccess' do
+        expect(codes_hash)
+          .to be_instance_of(ActiveSupport::HashWithIndifferentAccess)
       end
 
       it 'has the exepcted lenth' do

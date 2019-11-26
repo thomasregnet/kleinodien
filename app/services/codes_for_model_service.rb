@@ -13,7 +13,7 @@ class CodesForModelService < ServiceBase
 
   def call
     codes = codes_hash.select { |key, _| common_codes.include?(key) }
-    codes.merge(given)
+    ActiveSupport::HashWithIndifferentAccess.new(codes.merge(given))
   end
 
   private
