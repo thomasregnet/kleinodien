@@ -4,7 +4,7 @@
 # Optional merge the codes with a given hash
 class CodesForModelService < ServiceBase
   def initialize(codes_hash:, model_class:, given: {})
-    @codes_hash  = codes_hash
+    @codes_hash  = codes_hash.with_indifferent_access
     @given       = given
     @model_class = model_class
   end
@@ -12,22 +12,26 @@ class CodesForModelService < ServiceBase
   attr_reader :codes_hash, :given, :model_class
 
   def call
-    codes = codes_hash.select { |key, _| common_codes.include?(key) }
-    ActiveSupport::HashWithIndifferentAccess.new(codes.merge(given))
+    codes = {}
+    common_codes.each do |code_key|
+      codes[code_key] = codes_hash[code_key]
+    end
+    codes.merge(given).with_indifferent_access
   end
 
   private
 
   def common_codes
-    filtered_codes.keys & model_codes
+    model_codes.select { |code| filtered_codes.include?(code) }
   end
 
   # This method smells of :reek:NilCheck
   def filtered_codes
-    codes_hash.reject { |_, value| value.nil? }
+    @filtered_codes ||= codes_hash.reject { |_, value| value.nil? }
+                                  .with_indifferent_access
   end
 
   def model_codes
-    model_class.column_names.grep(/.+code$/)
+    model_class.column_names.grep(/.+_code$/)
   end
 end

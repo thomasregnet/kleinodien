@@ -21,6 +21,8 @@ class MockPrepareBrainzRelease < PrepareBrainzRelease
   def prepare_release_group
     prepare_release_group_spy.call
   end
+
+  def prepare_recordings; end
 end
 
 # rubocop:disable Metrics/BlockLength
@@ -52,17 +54,20 @@ RSpec.describe PrepareBrainzRelease do
 
   describe '#prepare_artist_credit' do
     context 'when the artist_credist does not exist' do
+      let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
       let(:preparer) do
         xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
         described_class.new(
           blueprint:    BrainzBlueprint.from_xml(xml_string),
-          import_order: :fake_import_order,
-          proxy:        spy
+          import_order: import_order,
+          proxy:        BrainzProxy.new(import_order: import_order)
+          # proxy:        spy
         )
       end
 
       it 'returns a true value' do
-        expect(preparer.prepare_artist_credit).not_to be_nil
+        # expect(preparer.prepare_artist_credit).not_to be_nil
+        expect(preparer.prepare_artist_credit).to be_truthy
       end
     end
   end

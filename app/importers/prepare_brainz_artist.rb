@@ -29,5 +29,7 @@ class PrepareBrainzArtist < PrepareBrainzBase
   def find_already_existing
     codes_hash = blueprint.codes_hash
     FindByCodesService.call(model_class: Artist, codes_hash: codes_hash)
+  rescue StandardError => e
+    raise e
   end
 end
