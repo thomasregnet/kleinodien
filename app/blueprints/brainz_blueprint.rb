@@ -3,6 +3,8 @@
 # Blueprint for MusicBrainz-imports
 class BrainzBlueprint < Hashie::Mash
   # disable_warnings
+  include Hashie::Extensions::IndifferentAccess
+
   CODE_NAMES = %w[brainz_code discogs_code wikidata_code].freeze
 
   def self.from_xml(xml_string)
@@ -58,7 +60,7 @@ class BrainzBlueprint < Hashie::Mash
   end
 
   def milliseconds
-    millseconds = self['length'] || return
+    millseconds = self[:length] || return
     millseconds.to_i
   end
 
