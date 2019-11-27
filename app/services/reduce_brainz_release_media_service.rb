@@ -17,7 +17,7 @@ class ReduceBrainzReleaseMediaService < ServiceBase
 
   def reduce
     blueprint.each do |medium|
-      brainz_format_code = medium.format.brain_code
+      brainz_format_code = medium.format.brainz_code
       if brainz_format_code == last_code
         result.last[:quantity] += 1
       else
