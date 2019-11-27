@@ -12,6 +12,9 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
   private
 
   def prepare
+    a_credit = find_already_existing
+    return a_credit if a_credit
+
     blueprint.name_credits.each do |name_credit|
       prepare_brainz_artist(name_credit.artist)
     end
