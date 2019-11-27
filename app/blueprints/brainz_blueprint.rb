@@ -2,10 +2,8 @@
 
 # Blueprint for MusicBrainz-imports
 class BrainzBlueprint < Hashie::Mash
-  disable_warnings
+  # disable_warnings
   CODE_NAMES = %w[brainz_code discogs_code wikidata_code].freeze
-
-  include Hashie::Extensions::MergeInitializer
 
   def self.from_xml(xml_string)
     intermidiate = new(MultiXml.parse(xml_string)).metadata
