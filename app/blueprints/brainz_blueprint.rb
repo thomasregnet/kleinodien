@@ -8,8 +8,11 @@ class BrainzBlueprint < Hashie::Mash
   CODE_NAMES = %w[brainz_code discogs_code wikidata_code].freeze
 
   def self.from_xml(xml_string)
-    intermidiate = new(MultiXml.parse(xml_string)).metadata
-    intermidiate[intermidiate.keys.first]
+    data = MultiXml.parse(xml_string)['metadata']
+    prepared_data = PrepareBrainzDataService.call(
+      brainz_data: data[data.keys.first]
+    )
+    new(prepared_data)
   end
 
   # artist-credit related
@@ -57,11 +60,6 @@ class BrainzBlueprint < Hashie::Mash
     return unless medium_list
 
     force_array(medium_list.medium)
-  end
-
-  def milliseconds
-    millseconds = self[:length] || return
-    millseconds.to_i
   end
 
   def name_credits
