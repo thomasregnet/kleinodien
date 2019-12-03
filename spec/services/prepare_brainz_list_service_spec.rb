@@ -59,6 +59,10 @@ RSpec.describe PrepareBrainzListService do
       described_class.call(key: 'iso_3166_1_code_list', value: code_list)
     end
 
+    it 'has only one key' do
+      expect(result.length).to eq(1)
+    end
+
     it 'has an "iso_3166_1_codes" key' do
       expect(result).to have_key('iso_3166_1_codes')
     end
