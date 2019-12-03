@@ -19,10 +19,10 @@ class PrepareBrainzListService < ServiceBase
   private
 
   def add_attributes
-    value.each do |key, value|
-      next if key == item_name
+    value.each do |given_key, value|
+      next if given_key == item_name
 
-      result[prefixed_attribute_for(key)] = value
+      result[prefixed_attribute_for(given_key)] = value
     end
   end
 
@@ -61,7 +61,7 @@ class PrepareBrainzListService < ServiceBase
     end
   end
 
-  def prefixed_attribute_for(xxx)
-    "#{attribute_prefix}_#{xxx}"
+  def prefixed_attribute_for(given_key)
+    "#{attribute_prefix}_#{given_key}"
   end
 end
