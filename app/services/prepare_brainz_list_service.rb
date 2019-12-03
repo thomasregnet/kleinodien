@@ -5,12 +5,15 @@ class PrepareBrainzListService < ServiceBase
   def initialize(key:, value:)
     @key   = key
     @value = value
+    @result = {}
   end
 
-  attr_reader :key, :value
+  attr_reader :key, :value, :result
 
   def call
-    [return_key, return_value]
+    # [return_key, return_value]
+    result[return_key] = return_value
+    result
   end
 
   private

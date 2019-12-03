@@ -21,25 +21,23 @@ RSpec.describe PrepareBrainzListService do
       described_class.call(key: 'track_list', value: track_list)
     end
 
-    describe 'key' do
-      it 'has the expected name' do
-        expect(result[0]).to eq('tracks')
-      end
+    it 'has a "tracks" key' do
+      expect(result).to have_key('tracks')
     end
 
-    describe 'value' do
-      let(:value) { result[1] }
+    describe 'listed items' do
+      let(:list) { result['tracks']}
 
       it 'returns an array for the value' do
-        expect(value).to be_instance_of(Array)
+        expect(list).to be_instance_of(Array)
       end
 
       it 'has the expected length' do
-        expect(value.length).to eq(3)
+        expect(list.length).to eq(3)
       end
 
       it 'contains hashes' do
-        expect(value.reject { |item| item.class == Hash }.length)
+        expect(list.reject { |item| item.class == Hash }.length)
           .to be(0)
       end
     end
@@ -53,23 +51,19 @@ RSpec.describe PrepareBrainzListService do
       described_class.call(key: 'iso_3166_1_code_list', value: code_list)
     end
 
-    describe 'key' do
-      let(:key) { result[0] }
-
-      it 'has the expected name' do
-        expect(result[0]).to eq('iso_3166_1_codes')
-      end
+    it 'has an "iso_3166_1_codes" key' do
+      expect(result).to have_key('iso_3166_1_codes')
     end
 
-    describe 'value' do
-      let(:value) { result[1] }
+    describe 'listed items' do
+      let(:list) { result['iso_3166_1_codes'] }
 
-      it 'returns the expected value' do
-        expect(value[0]).to eq('JP')
+      it 'returns the expected value for the first list-item' do
+        expect(list.first).to eq('JP')
       end
 
       it 'has a length of 1' do
-        expect(result[1].length).to eq(1)
+        expect(list.length).to eq(1)
       end
     end
   end
