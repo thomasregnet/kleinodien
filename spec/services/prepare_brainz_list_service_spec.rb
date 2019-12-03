@@ -25,8 +25,16 @@ RSpec.describe PrepareBrainzListService do
       expect(result).to have_key('tracks')
     end
 
+    it 'has set the track_offset' do
+      expect(result['track_offset']).to eq('0')
+    end
+
+    it 'has set the track_count' do
+      expect(result['track_count']).to eq('3')
+    end
+
     describe 'listed items' do
-      let(:list) { result['tracks']}
+      let(:list) { result['tracks'] }
 
       it 'returns an array for the value' do
         expect(list).to be_instance_of(Array)

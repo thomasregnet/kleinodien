@@ -12,11 +12,21 @@ class PrepareBrainzListService < ServiceBase
 
   def call
     # [return_key, return_value]
+    value.each do |key, value|
+      next if key == item_name
+
+      result[extra_key_for(key)] = value
+    end
     result[return_key] = return_value
     result
   end
 
   private
+
+  def extra_key_for(xxx)
+    prefix = key.to_s.sub(/_list$/, '')
+    "#{prefix}_#{xxx}"
+  end
 
   def return_key
     item_name.pluralize
