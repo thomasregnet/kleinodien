@@ -35,7 +35,7 @@ class PrepareBrainzListService < ServiceBase
   end
 
   def enumeration_key
-    @enumeration_key ||= item_name.pluralize
+    @enumeration_key ||= key.sub(/_list\z/, '').pluralize
   end
 
   def enumeration
@@ -45,7 +45,11 @@ class PrepareBrainzListService < ServiceBase
   end
 
   def item_name
-    @item_name ||= key.to_s.sub(/_list$/, '')
+    # The "data_track_list" is a list of "track"-elements.
+    # Not a list of "data_track"-elements.
+    return 'track' if stringified_key == 'data_track_list'
+
+    stringified_key.sub(/_list$/, '')
   end
 
   def itemize(item)
@@ -63,5 +67,9 @@ class PrepareBrainzListService < ServiceBase
 
   def prefixed_attribute_for(given_key)
     "#{attribute_prefix}_#{given_key}"
+  end
+
+  def stringified_key
+    @stringified_key ||= key.to_s
   end
 end

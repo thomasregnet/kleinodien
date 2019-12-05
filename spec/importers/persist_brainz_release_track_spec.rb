@@ -14,7 +14,7 @@ RSpec.describe PersistBrainzReleaseTrack do
   context 'with valid arguments' do
     let(:args) do
       blueprint = TestData.by_name(:brainz_release_arise_jp_cd)
-                          .blueprint.media[0].track_list.track[0]
+                          .blueprint.media[0].tracks[0]
 
       {
         blueprint:    blueprint,
