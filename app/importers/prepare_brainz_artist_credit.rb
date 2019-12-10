@@ -32,7 +32,6 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
     artist_import_request = BrainzArtistImportRequest.new(
       code: artist_blueprint.brainz_code
     )
-
     PrepareBrainzArtist.call(
       import_request: artist_import_request,
       import_order:   import_order,

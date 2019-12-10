@@ -33,13 +33,6 @@ class FindByCodesService < ServiceBase
       codes_hash: codes_hash, model_class: model_class
     )
   end
-  # def findable_codes
-  #   x = select_codes_hash.select do |key, _|
-  #     model_codes.include? key.to_s
-  #   end
-  #   byebug
-  #   x
-  # end
 
   def model_codes
     model_class.column_names.select do |column_name|

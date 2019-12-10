@@ -13,8 +13,6 @@ RSpec.describe PersistBrainzAreaAlias do
       let(:area) { FactoryBot.create(:area) }
       let(:blueprint) do
         TestData.by_name(:brainz_area_germany).blueprint.aliases[2]
-        # x = TestData.by_name(:brainz_area_germany).blueprint
-        # byebug
       end
 
       it 'retuns an AreaNameAlias' do

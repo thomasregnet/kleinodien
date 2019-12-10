@@ -28,11 +28,8 @@ class FlattenBrainzTrackListService < ServiceBase
   end
 
   def data_track_list?
-    # data_tl = blueprint.data_track_list
     data_tl = blueprint.data_tracks
     return false unless data_tl
-    # byebug
-    # return false unless data_tl.track
 
     true
   end

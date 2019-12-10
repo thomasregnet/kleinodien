@@ -39,9 +39,15 @@ class PrepareBrainzDataService < ServiceBase
 
   def prepare_relation_list_key(value)
     target = {}
-    value.each do |relation_list|
+    if value.is_a? Array
+      value.each do |relation_list|
+        target.merge!(
+          PrepareBrainzRelationListService.call(relation_list: relation_list)
+        )
+      end
+    else
       target.merge!(
-        PrepareBrainzRelationListService.call(relation_list: relation_list)
+        PrepareBrainzRelationListService.call(relation_list: value)
       )
     end
 

@@ -62,6 +62,13 @@ module TestData
           kind: :recording
         }
       },
+      brainz_recording_the_duellists: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+          code: '863de526-6857-4255-9e7e-7dfff4fd707e',
+          kind: :recording
+        }
+      },
       brainz_release_arise_jp_cd: {
         class_name: 'TestData::BrainzService',
         arguments: {
