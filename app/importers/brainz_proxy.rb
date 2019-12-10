@@ -7,7 +7,6 @@ class BrainzProxy
 
   def initialize(import_order:)
     @import_order = import_order
-    @locked       = false
     @cache        = {}
   end
 
@@ -45,11 +44,11 @@ class BrainzProxy
   end
 
   def lock
-    @locked = true
+    cache.freeze
   end
 
   def locked?
-    @locked
+    cache.frozen?
   end
 
   def validate_import_request(import_request)
