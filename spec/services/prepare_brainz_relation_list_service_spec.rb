@@ -8,14 +8,14 @@ RSpec.describe PrepareBrainzRelationListService do
   it_behaves_like 'a service'
 
   context 'with a relation-key containing a single hash' do
-    let(:relation_list) do
-      {
-        'relation' => {},
-        'target_type' => 'gizmo'
-      }
+    let(:prepared) do
+      described_class.call(
+        relation_list: {
+          'relation' => {},
+          'target_type' => 'gizmo'
+        }
+      )
     end
-
-    let(:prepared) { described_class.call(relation_list: relation_list) }
 
     it 'returns a hash with one key' do
       expect(prepared.length).to eq(1)
@@ -35,14 +35,14 @@ RSpec.describe PrepareBrainzRelationListService do
   end
 
   context 'with a relation-key containing an array of hashes' do
-    let(:relation_list) do
-      {
-        'relation' => [{}, {}],
-        'target_type' => 'gizmo'
-      }
+    let(:prepared) do
+      described_class.call(
+        relation_list: {
+          'relation' => [{}, {}],
+          'target_type' => 'gizmo'
+        }
+      )
     end
-
-    let(:prepared) { described_class.call(relation_list: relation_list) }
 
     it 'returns a hash with one key' do
       expect(prepared.length).to eq(1)
