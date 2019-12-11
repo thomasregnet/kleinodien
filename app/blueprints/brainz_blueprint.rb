@@ -62,14 +62,4 @@ class BrainzBlueprint < Hashie::Mash
     CODE_NAMES.each { |code_name| codes[code_name] = send code_name }
     codes
   end
-
-  # make sure we return a Hashie::Array even when there is only
-  # one value
-  # This method smells of :reek:UtilityFunction
-  def force_array(gizmo)
-    return unless gizmo
-    return gizmo if gizmo.is_a? Array
-
-    Hashie::Array.new([gizmo])
-  end
 end
