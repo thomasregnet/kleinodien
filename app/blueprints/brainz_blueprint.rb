@@ -32,18 +32,6 @@ class BrainzBlueprint < Hashie::Mash
     end_date && IncompleteDate.from_string(end_date)
   end
 
-  def iso_3166_2_codes
-    return unless iso_3166_2_code_list
-
-    force_array(iso_3166_2_code_list.iso_3166_2_code)
-  end
-
-  def iso_3166_3_codes
-    return unless iso_3166_3_code_list
-
-    force_array(iso_3166_3_code_list.iso_3166_3_code)
-  end
-
   def name_credits
     return unless name_credit
 
