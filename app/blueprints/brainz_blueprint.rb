@@ -24,12 +24,6 @@ class BrainzBlueprint < Hashie::Mash
     JoinBrainzArtistCreditService.call(name_credits: credits)
   end
 
-  # def aliases
-  #   return unless alias_list
-
-  #   force_array(alias_list.alias)
-  # end
-
   def incomplete_begin_date
     begin_date && IncompleteDate.from_string(begin_date)
   end
@@ -37,12 +31,6 @@ class BrainzBlueprint < Hashie::Mash
   def incomplete_end_date
     end_date && IncompleteDate.from_string(end_date)
   end
-
-  # def iso_3166_1_codes
-  #   return unless iso_3166_1_code_list
-
-  #   force_array(iso_3166_1_code_list.iso_3166_1_code)
-  # end
 
   def iso_3166_2_codes
     return unless iso_3166_2_code_list
@@ -55,12 +43,6 @@ class BrainzBlueprint < Hashie::Mash
 
     force_array(iso_3166_3_code_list.iso_3166_3_code)
   end
-
-  # def media
-  #   return unless medium_list
-
-  #   force_array(medium_list.medium)
-  # end
 
   def name_credits
     return unless name_credit
@@ -76,29 +58,11 @@ class BrainzBlueprint < Hashie::Mash
     force_array(relation_list)
   end
 
-  # def release_events
-  #   return unless release_event_list
-
-  #   force_array(release_event_list.release_event)
-  # end
-
   def flat_track_list
-    # return unless self.track_list
-
-    # FlattenBrainzTrackListService.call(blueprint: self)
     return unless self.tracks
 
     FlattenBrainzTrackListService.call(blueprint: self)
   end
-
-  # def url_relations
-  #   return unless relation_lists
-
-  #   url_rels = relation_lists.find { |rel| rel.target_type == 'url' }
-  #   return unless url_rels
-
-  #   url_rels.relation
-  # end
 
   # codes
 
