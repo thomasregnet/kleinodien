@@ -2,6 +2,8 @@
 
 # Convert MusicBrainz-Data to a more consumable data-structure
 class PrepareBrainzDataService < ServiceBase
+  using RefineObjectForceArray
+
   def initialize(brainz_data:)
     @brainz_data = brainz_data
     @result      = {}
@@ -39,15 +41,9 @@ class PrepareBrainzDataService < ServiceBase
 
   def prepare_relation_list_key(value)
     target = {}
-    if value.is_a? Array
-      value.each do |relation_list|
-        target.merge!(
-          PrepareBrainzRelationListService.call(relation_list: relation_list)
-        )
-      end
-    else
+    value.force_array.each do |relation_list|
       target.merge!(
-        PrepareBrainzRelationListService.call(relation_list: value)
+        PrepareBrainzRelationListService.call(relation_list: relation_list)
       )
     end
 
