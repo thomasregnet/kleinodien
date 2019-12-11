@@ -38,14 +38,6 @@ class BrainzBlueprint < Hashie::Mash
     force_array(name_credit)
   end
 
-  # relations
-
-  def relation_lists
-    return unless relation_list
-
-    force_array(relation_list)
-  end
-
   def flat_track_list
     return unless self.tracks
 
