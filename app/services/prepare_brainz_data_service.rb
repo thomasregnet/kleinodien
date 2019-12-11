@@ -39,6 +39,10 @@ class PrepareBrainzDataService < ServiceBase
     { milliseconds: value.to_i }
   end
 
+  def prepare_name_credit_key(value)
+    { 'name_credits' => value.force_array }
+  end
+
   def prepare_relation_list_key(value)
     target = {}
     value.force_array.each do |relation_list|

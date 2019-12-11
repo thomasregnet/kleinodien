@@ -32,12 +32,6 @@ class BrainzBlueprint < Hashie::Mash
     end_date && IncompleteDate.from_string(end_date)
   end
 
-  def name_credits
-    return unless name_credit
-
-    force_array(name_credit)
-  end
-
   def flat_track_list
     return unless self.tracks
 
