@@ -33,7 +33,7 @@ class BrainzBlueprint < Hashie::Mash
   end
 
   def flat_track_list
-    return unless self.tracks
+    return unless tracks
 
     FlattenBrainzTrackListService.call(blueprint: self)
   end
