@@ -2,8 +2,8 @@
 
 # Blueprint for MusicBrainz-imports
 class BrainzBlueprint < Hashie::Mash
-  # disable_warnings
-  include Hashie::Extensions::IndifferentAccess
+  include Hashie::Extensions::Coercion
+  include Hashie::Extensions::MergeInitializer
 
   CODE_NAMES = %w[brainz_code discogs_code wikidata_code].freeze
 
@@ -15,14 +15,7 @@ class BrainzBlueprint < Hashie::Mash
     new(prepared_data)
   end
 
-  # artist-credit related
-
-  def join_name
-    credits = name_credits
-    return unless credits
-
-    JoinBrainzArtistCreditService.call(name_credits: credits)
-  end
+  coerce_key :artist_credit, BrainzArtistCreditBlueprint
 
   def incomplete_begin_date
     begin_date && IncompleteDate.from_string(begin_date)
