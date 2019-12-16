@@ -2,6 +2,7 @@
 
 # Blueprint for MusicBrainz-imports
 class BrainzBlueprint < Hashie::Mash
+  include BrainzCodeBlueprint
   include Hashie::Extensions::Coercion
   include Hashie::Extensions::MergeInitializer
 
@@ -32,10 +33,6 @@ class BrainzBlueprint < Hashie::Mash
   end
 
   # codes
-
-  def brainz_code
-    id
-  end
 
   def discogs_uri
     return unless url_relations
