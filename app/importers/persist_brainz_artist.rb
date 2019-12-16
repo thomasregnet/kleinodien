@@ -24,11 +24,13 @@ class PersistBrainzArtist < PersistBrainzBase
       import_order:   import_order
     }
 
-    args[:begin_date] = begin_date if begin_date?
-    args[:end_date]   = end_date   if end_date?
+    args[:begin_date] = begin_date if begin_date
+    args[:end_date]   = end_date if end_date
 
     Artist.create!(args)
   end
+
+  private
 
   def blueprint
     proxy.get(import_request)
@@ -42,26 +44,10 @@ class PersistBrainzArtist < PersistBrainzBase
   end
 
   def begin_date
-    return unless begin_date?
-
-    IncompleteDate.from_string(blueprint.life_span.begin)
-  end
-
-  def begin_date?
-    return true if blueprint.dig(:life_span, :begin)
-
-    false
+    blueprint.incomplete_begin_date
   end
 
   def end_date
-    return unless end_date?
-
-    IncompleteDate.from_string(blueprint.life_span.end)
-  end
-
-  def end_date?
-    return true if blueprint.dig(:life_span, :end)
-
-    false
+    blueprint.incomplete_end_date
   end
 end
