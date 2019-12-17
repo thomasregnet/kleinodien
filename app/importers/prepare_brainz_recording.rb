@@ -12,13 +12,7 @@ class PrepareBrainzRecording < PrepareBrainzBase
   private
 
   def prepare
-    piece = find_already_existing
-    return piece if piece
-
-    blueprint
-    prepare_artist_credit
-
-    nil
+    find_already_existing || prepare_artist_credit
   end
 
   public

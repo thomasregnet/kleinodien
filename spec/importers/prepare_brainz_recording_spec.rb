@@ -22,18 +22,6 @@ RSpec.describe PrepareBrainzRecording do
     let(:blueprint) do
       TestData.by_name(:brainz_recording_highway_to_hell).blueprint
     end
-
-    it 'returns the artist' do
-      proxy = double
-      allow(proxy).to receive(:get).and_return(blueprint)
-
-      args = {
-        import_order:   :fake_import_order,
-        import_request: import_request,
-        proxy:          proxy
-      }
-      expect(described_class.call(args)).to be_instance_of(Piece)
-    end
   end
 
   context 'when the recording does not exist in the database' do
