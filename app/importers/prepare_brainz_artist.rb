@@ -12,12 +12,7 @@ class PrepareBrainzArtist < PrepareBrainzBase
   private
 
   def prepare
-    artist = find_already_existing
-    return artist if artist
-
-    proxy.get(import_request)
-
-    true
+    find_already_existing || true
   end
 
   public
