@@ -48,16 +48,14 @@ class ImportBase < ServiceBase
 
   private
 
-  # rubocop:disable Style/RescueStandardError
   def try_prepare
     import_order.prepare!
     prepare
-  rescue => e
+  rescue StandardError => e
     e.backtrace.each { |msg|Rails.logger.error(msg) }
     import_order.failure!
     nil
   end
-  # rubocop:enable Style/RescueStandardError
 
   def import_request_class
     import_order.type.sub(/ImportOrder/, 'ImportRequest').constantize
@@ -66,8 +64,6 @@ class ImportBase < ServiceBase
   # This method smells of :reek:TooManyStatements
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Style/RescueStandardError
-
   def try_persistence_transaction
     import_order.transaction do
       import_order.persist!
@@ -77,15 +73,13 @@ class ImportBase < ServiceBase
         proxy:        proxy
       )
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error(e)
     e.backtrace.each { |msg| Rails.logger.error(msg) }
     import_order.failure!
   ensure
     import_order.done! if import_order.persisting?
   end
-
-  # rubocop:enable Style/RescueStandardError
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
