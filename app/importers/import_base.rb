@@ -11,12 +11,7 @@ class ImportBase < ServiceBase
   def call
     raise ArgumentError, 'invalid ImportOrder' unless import_order.valid?
 
-    result = find_existing_by_import_order || find_existing_by_blueprint
-    return enhance_result(result, false) if result
-
-    try_prepare
-
-    enhance_result(persist, true)
+    find_existing || try_prepare && persist
   end
 
   def blueprint
@@ -43,16 +38,24 @@ class ImportBase < ServiceBase
       return
     end
 
-    imported_entity
+    enhance_result(imported_entity, true)
   end
 
   private
 
+  def find_existing
+    result = find_existing_by_import_order || find_existing_by_blueprint \
+      || return
+
+    enhance_result(result, false)
+  end
+
   def try_prepare
     import_order.prepare!
     prepare
+    true
   rescue StandardError => e
-    e.backtrace.each { |msg|Rails.logger.error(msg) }
+    e.backtrace.each { |msg| Rails.logger.error(msg) }
     import_order.failure!
     nil
   end
