@@ -28,16 +28,8 @@ class ImportWorker
 
   def call_importer
     import_order = next_pending_order || return
-    importer_class = importer_class_for(import_order.type) || return
 
-    importer_class.call(import_order: import_order)
-  end
-
-  def importer_class_for(import_order_type)
-    importer_class = import_order_type.sub(/\A(.+)ImportOrder\z/, 'Import\1')
-    Rails.logger.info("importer-class is #{importer_class}")
-
-    importer_class.constantize
+    ImporterChooser.call(import_order: import_order)
   end
 
   def next_pending_order

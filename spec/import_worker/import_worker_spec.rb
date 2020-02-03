@@ -60,78 +60,47 @@ RSpec.describe ImportWorker do
     end
   end
 
-  describe '#importer_class_for' do
+  describe '#call_importer' do
+    let(:import_order) { double }
     let(:worker) do
       described_class.new(import_queue_name: 'test', subscriber: 'test')
     end
 
-    context 'with a valid import_order_type' do
-      before { stub_const('ImportSomethingElse', nil) }
+    it 'calls the ImportChooser' do
+      chooser = class_double('ImporterChooser')
+        .as_stubbed_const(transfer_nested_constants: true)
 
-      it 'returns the expected importer-class' do
-        expect(worker.send(:importer_class_for, 'SomethingElseImportOrder'))
-          .to eq(ImportSomethingElse)
-      end
+      expect(worker).to receive(:next_pending_order).and_return(import_order)
+      expect(chooser).to receive(:call)# .with(import_order)
+
+      worker.send(:call_importer)
+    end
+  end
+
+  describe '#next_pending_order' do
+    let(:worker) do
+      described_class.new(import_queue_name: 'test', subscriber: 'test')
     end
 
-    context 'with a invalid import_order_type' do
-      it 'raises an error' do
-        expect { worker.send(:importer_class_for, 'BadEvil') }
-          .to raise_error(NameError, /uninitialized constant BadEvil/)
-      end
+    it 'gets the next pending ImportOrder form the ImportQueue' do
+      queue = class_double('ImportQueue')
+        .as_stubbed_const(transfer_nested_constants: true)
+
+      expect(queue).to receive(:next_pending_for)
+
+      worker.send(:next_pending_order)
     end
   end
 
   describe '#process_orders' do
-    context 'when there are pending import_orders' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'test', subscriber: 'test')
-      end
-      let(:import_order) { double }
-      let(:subscriber) { instance_double('ImportSubscriber') }
-
-      before do
-        stub_const('ImportSomethingElse', double)
-        allow(ImportSomethingElse).to receive(:call)
-        allow(import_order).to receive(:type).and_return('ImportSomethingElse')
-        allow(ImportQueue).to receive(:next_pending_for)
-          .and_return(import_order)
-        allow(worker).to receive(:importer_class_for)
-          .and_return(ImportSomethingElse)
-      end
-
-      it 'loops' do
-        expect(worker.send(:process_orders)).to be nil
-      end
-    end
-
-    context 'when there are no pending import_orders' do
-      let(:worker) do
-        described_class.new(import_queue_name: 'test', subscriber: 'test')
-      end
-
-      it 'loops' do
-        expect(worker.send(:process_orders)).to be nil
-      end
-    end
-  end
-
-  describe '#call_importer' do
     let(:worker) do
       described_class.new(import_queue_name: 'test', subscriber: 'test')
     end
-    let(:import_order) { double }
-    let(:importer_class) { stub_const('ImportSomethingElse', spy) }
 
-    before do
-      allow(import_order).to receive(:type)
-      allow(worker).to receive(:next_pending_order).and_return(import_order)
-      allow(worker).to receive(:importer_class_for).and_return(importer_class)
-    end
+    it 'calls #call_importer' do
+      expect(worker).to receive(:call_importer).and_return(nil)
 
-    it 'calls .call at the importer-class' do
-      worker.send(:call_importer)
-      expect(importer_class).to have_received(:call)
+      worker.send(:process_orders)
     end
   end
 end
