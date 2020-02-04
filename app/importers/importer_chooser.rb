@@ -15,7 +15,7 @@ class ImporterChooser < ServiceBase
   private
 
   def importer_class
-    class_name = import_order.sub(/\A(.+)ImportOrder\z/, 'Import\1')
+    class_name = import_order.type.sub(/\A(.+)ImportOrder\z/, 'Import\1')
     Rails.logger.info("importer-class is #{class_name}")
 
     class_name.constantize
