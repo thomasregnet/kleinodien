@@ -29,7 +29,7 @@ class ImportWorker
   def call_importer
     import_order = next_pending_order || return
 
-    ImporterChooser.call(import_order: import_order)
+    ChooseImporter.call(import_order: import_order)
   end
 
   def next_pending_order

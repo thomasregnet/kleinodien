@@ -66,12 +66,12 @@ RSpec.describe ImportWorker do
       described_class.new(import_queue_name: 'test', subscriber: 'test')
     end
 
-    it 'calls the ImportChooser' do
-      chooser = class_double('ImporterChooser')
+    it 'calls ChooseImporter.call' do
+      chooser = class_double('ChooseImporter')
         .as_stubbed_const(transfer_nested_constants: true)
 
       expect(worker).to receive(:next_pending_order).and_return(import_order)
-      expect(chooser).to receive(:call)# .with(import_order)
+      expect(chooser).to receive(:call)
 
       worker.send(:call_importer)
     end

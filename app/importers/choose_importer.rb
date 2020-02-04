@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Choose the right Importer
-class ImporterChooser < ServiceBase
+class ChooseImporter < ServiceBase
   def initialize(import_order:)
     @import_order = import_order
   end
