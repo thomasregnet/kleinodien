@@ -14,7 +14,6 @@ RSpec.describe ImportWorker do
     end
 
     it 'stops when it receives a "stop" message' do
-      allow(worker).to receive(:process_orders)
       allow(subscriber).to receive(:perform).and_return('run', 'stop')
       expect(worker.run).to be_nil
     end
@@ -57,56 +56,6 @@ RSpec.describe ImportWorker do
         expect { described_class.run(args) }
           .to raise_error(ArgumentError, /can.t be blank/)
       end
-    end
-  end
-
-  describe '#call_importer' do
-    let(:import_order) { double }
-    let(:worker) do
-      described_class.new(import_queue_name: 'test', subscriber: 'test')
-    end
-
-    it 'calls ChooseImporter.call' do
-      chooser = class_double('ChooseImporter')
-                .as_stubbed_const(transfer_nested_constants: true)
-
-      allow(worker).to receive(:next_pending_order).and_return(import_order)
-      allow(chooser).to receive(:call)
-
-      worker.send(:call_importer)
-
-      expect(chooser).to have_received(:call)
-    end
-  end
-
-  describe '#next_pending_order' do
-    let(:worker) do
-      described_class.new(import_queue_name: 'test', subscriber: 'test')
-    end
-
-    it 'gets the next pending ImportOrder form the ImportQueue' do
-      queue = class_double('ImportQueue')
-              .as_stubbed_const(transfer_nested_constants: true)
-
-      allow(queue).to receive(:next_pending_for)
-
-      worker.send(:next_pending_order)
-
-      expect(queue).to have_received(:next_pending_for)
-    end
-  end
-
-  describe '#process_orders' do
-    let(:worker) do
-      described_class.new(import_queue_name: 'test', subscriber: 'test')
-    end
-
-    it 'calls #call_importer' do
-      allow(worker).to receive(:call_importer).and_return(nil)
-
-      worker.send(:process_orders)
-
-      expect(worker).to have_received(:call_importer)
     end
   end
 end
