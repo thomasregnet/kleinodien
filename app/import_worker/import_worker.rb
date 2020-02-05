@@ -6,15 +6,15 @@ class ImportWorker
     new(args).run
   end
 
-  def initialize(import_queue_name:, subscriber:)
-    @import_queue_name = import_queue_name
-    @subscriber        = subscriber
+  def initialize(import_queue_name:, subscription_timeout:)
+    @import_queue_name    = import_queue_name
+    @subscription_timeout = subscription_timeout
 
     raise ArgumentError, "import_queue_name can't be blank" \
       if import_queue_name.blank?
   end
 
-  attr_reader :import_queue_name, :subscriber
+  attr_reader :import_queue_name, :subscription_timeout
 
   def run
     loop do
@@ -22,5 +22,14 @@ class ImportWorker
       message = subscriber.perform
       break if message == 'stop'
     end
+  end
+
+  private
+
+  def subscriber
+    @subscriber ||= ImportSubscriber.new(
+      channel: import_queue_name,
+      timeout: subscription_timeout
+    )
   end
 end

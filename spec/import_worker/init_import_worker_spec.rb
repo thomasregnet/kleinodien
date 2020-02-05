@@ -10,8 +10,8 @@ RSpec.describe InitImportWorker do
     it 'calls .run on ImportWorker' do
       allow(ImportWorker).to receive(:run).with(
         hash_including(
-          import_queue_name: 'test_import_queue',
-          subscriber:        an_instance_of(ImportSubscriber)
+          import_queue_name:    'test_import_queue',
+          subscription_timeout: 300
         )
       ).and_return(:success)
       expect(described_class.call).to eq(:success)
@@ -53,17 +53,6 @@ RSpec.describe InitImportWorker do
         expect { described_class.new }
           .to raise_error ArgumentError, /IMPORT_QUEUE_NAME not set/
       end
-    end
-  end
-
-  describe '#subscriber' do
-    let(:initializer) do
-      ENV['IMPORT_QUEUE_NAME'] = 'test_import_queue'
-      described_class.new
-    end
-
-    it 'returns a subscriber' do
-      expect(initializer.subscriber).to be_instance_of(ImportSubscriber)
     end
   end
 end

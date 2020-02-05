@@ -24,15 +24,8 @@ class InitImportWorker
     Rails.logger.info(%(starting ImportWorker for queue "#{import_queue_name}"))
 
     ImportWorker.run(
-      import_queue_name: import_queue_name,
-      subscriber:        subscriber
-    )
-  end
-
-  def subscriber
-    ImportSubscriber.new(
-      channel: import_queue_name,
-      timeout: timeout
+      import_queue_name:    import_queue_name,
+      subscription_timeout: timeout
     )
   end
 end

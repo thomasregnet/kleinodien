@@ -8,25 +8,26 @@ RSpec.describe ImportWorker do
     let(:subscriber) { instance_double('ImportSubscriber') }
     let(:worker) do
       described_class.new(
-        import_queue_name: 'my_queue',
-        subscriber:        subscriber
+        import_queue_name:    'my_queue',
+        subscription_timeout: 300
       )
     end
 
     it 'stops when it receives a "stop" message' do
+      allow(worker).to receive(:subscriber).and_return(subscriber)
       allow(subscriber).to receive(:perform).and_return('run', 'stop')
+
       expect(worker.run).to be_nil
     end
   end
 
-  # https://www.rubydoc.info/gems/rubocop-rspec/1.6.0/RuboCop/Cop/RSpec/AnyInstance
   describe '.run' do
     context 'with valid parameters' do
       let(:subscriber) { instance_double('ImportSubscriber') }
       let(:args) do
         {
-          import_queue_name: 'my_queue',
-          subscriber:        subscriber
+          import_queue_name:    'my_queue',
+          subscription_timeout: 300
         }
       end
       let(:worker) { instance_double(described_class) }
@@ -45,8 +46,8 @@ RSpec.describe ImportWorker do
       let(:subscriber) { instance_double('ImportSubscriber') }
       let(:args) do
         {
-          import_queue_name: '',
-          subscriber:        subscriber
+          import_queue_name:    '',
+          subscription_timeout: 300
         }
       end
 
