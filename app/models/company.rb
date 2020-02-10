@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Company, for example a label
 class Company < ActiveRecord::Base
   validates :name,

@@ -13,8 +13,8 @@ class ImportSubscriber
     redis.subscribe_with_timeout(timeout, channel) do |message_obj|
       handle_message(message_obj)
     end
-  rescue Redis::TimeoutError => exception
-    Rails.logger.info("#{exception.class}: #{exception}")
+  rescue Redis::TimeoutError => e
+    Rails.logger.info("#{e.class}: #{e}")
   end
 
   private

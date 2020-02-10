@@ -3,7 +3,7 @@
 # Get the ImportOrder class name for a given uri
 class GetImportOrderClassNameFromUriService < ServiceBase
   CLASS_NAME_FOR = {
-    'discogs'     => 'DiscogsImportOrder',
+    'discogs' => 'DiscogsImportOrder',
     'musicbrainz' => 'BrainzImportOrder'
   }.freeze
 

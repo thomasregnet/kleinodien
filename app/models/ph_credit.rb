@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # PieceHead Credit
 class PhCredit < ActiveRecord::Base
   belongs_to :artist_credit

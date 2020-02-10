@@ -8,7 +8,7 @@ module CodeUuidValidation
   included do
     validates :code,
               format: {
-                with: /
+                with:    /
                   \A
                   [a-z0-9]{8}
                   -

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BrainzReleaseGroupImportRequest < BrainzImportRequest
   QUERY_KIND = 'release-group'
 

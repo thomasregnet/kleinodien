@@ -30,6 +30,7 @@ class ReferenceBase
 
   def to_code
     return code if code
+
     source = key || uri
     match = %r{/([^?/]+)(\?.+)?$}.match(source)
     match[1]
@@ -42,6 +43,7 @@ class ReferenceBase
   def ==(other)
     return false unless self.class == other.class
     return false unless to_uri == other.to_uri
+
     true
   end
 

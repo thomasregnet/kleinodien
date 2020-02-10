@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controller for /movie_heads
 class MovieHeadsController < ApplicationController
   def index

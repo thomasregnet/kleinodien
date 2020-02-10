@@ -5,11 +5,11 @@ class AnalyzeImportOrderUriServiceBase < ServiceBase
   DEFAULT_OFFSET = 0
 
   def initialize(uri_obj:)
-    @uri_obj  = uri_obj
+    @uri_obj = uri_obj
     # @user = args[:user]
   end
 
-  attr_reader :uri_obj #, :user
+  attr_reader :uri_obj # , :user
 
   def call
     return unless path_items

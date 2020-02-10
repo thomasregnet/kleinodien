@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V01
     # Api-Representation of an artist

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReleaseSubset < ApplicationRecord
   belongs_to :release
 

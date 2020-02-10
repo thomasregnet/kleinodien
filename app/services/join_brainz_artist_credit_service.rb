@@ -2,7 +2,6 @@
 
 # Takes MusicBrainz blueprint returns the joined artist-credit name
 class JoinBrainzArtistCreditService < JoinArtistCreditService
-
   # Used as parameter for JoinArtistCreditService
   class BrainzArtistNameCredit
     def initialize(args)

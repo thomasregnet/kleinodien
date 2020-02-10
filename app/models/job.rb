@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # What an Artist contributed
 class Job < ActiveRecord::Base
   validates :name,

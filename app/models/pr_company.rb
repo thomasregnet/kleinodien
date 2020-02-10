@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # PieceRelease Company
 class PrCompany < ActiveRecord::Base
   belongs_to :piece
