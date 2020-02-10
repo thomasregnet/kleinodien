@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :original_exemplar do
     association :compilation_release, factory: :album_release

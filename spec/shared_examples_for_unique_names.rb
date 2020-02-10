@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'an entity with an unique name' do
   it 'is valid with valid attributes' do
     expect(candidate).to be_valid

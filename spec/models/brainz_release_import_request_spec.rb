@@ -4,8 +4,6 @@ require 'rails_helper'
 
 require 'shared_examples_for_code_uuid_validations'
 require 'shared_examples_for_import_requests'
-
-# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzReleaseImportRequest, type: :model do
   include_examples 'for ImportRequests', :brainz_release_import_request
   include_examples(
@@ -36,4 +34,3 @@ RSpec.describe BrainzReleaseImportRequest, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

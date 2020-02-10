@@ -8,6 +8,7 @@ require 'shared_examples_for_tagable_models'
 RSpec.describe Season, type: :model do
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
+
     let(:factory) { :season }
     after { DatabaseCleaner.clean }
   end
@@ -35,7 +36,7 @@ RSpec.describe Season, type: :model do
   end
 
   context 'without episodes' do
-    before(:each) do
+    before do
       @season = FactoryBot.build(:season)
     end
 
@@ -55,7 +56,7 @@ RSpec.describe Season, type: :model do
   end
 
   context 'with episodes of a tv-serial' do
-    before(:each) do
+    before do
       @season = FactoryBot.create(
         :season_with_tv_episode_heads,
         episodes_count: 7

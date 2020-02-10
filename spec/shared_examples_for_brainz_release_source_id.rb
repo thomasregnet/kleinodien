@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a brainz release source id' do
   def prefix_regex
     %r{^https://musicbrainz.org/ws/2/release/}

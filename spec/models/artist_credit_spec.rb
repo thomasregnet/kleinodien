@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
@@ -31,7 +33,7 @@ RSpec.describe ArtistCredit, type: :model do
 
   context 'without a Source' do
     context 'not saved to the database' do
-      before(:each) do
+      before do
         @artist_credit = FactoryBot.build(:artist_credit)
       end
 
@@ -60,13 +62,13 @@ RSpec.describe ArtistCredit, type: :model do
       #     .to raise_error(/null value in column "artist_credit_id"/)
       # end
 
-      it 'must have a unique name' do
-        clone = ArtistCredit.new(name: @artist_credit.name)
-        expect(clone).not_to be_valid
-      end
-
       after(:all) do
         DatabaseCleaner.clean
+      end
+
+      it 'must have a unique name' do
+        clone = described_class.new(name: @artist_credit.name)
+        expect(clone).not_to be_valid
       end
     end
   end

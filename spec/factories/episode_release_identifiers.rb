@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :episode_release_identifier do
     sequence(:value) { |n| "episode-release-identifier-#{n}" }

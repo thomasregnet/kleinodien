@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_pieces'
 
 RSpec.describe PodcastEpisodeRelease, type: :model do
-  before(:each) do
+  before do
     @pe_release = FactoryBot.create(:podcast_episode_release)
   end
 

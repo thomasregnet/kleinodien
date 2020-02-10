@@ -11,10 +11,15 @@ require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe PieceHead, type: :model do
+  before do
+    @ph = FactoryBot.build(:piece_head)
+  end
+
   it { is_expected.to belong_to(:import_order).without_validating_presence }
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
+
     let(:factory) { :piece_head }
     after { DatabaseCleaner.clean }
   end
@@ -22,10 +27,6 @@ RSpec.describe PieceHead, type: :model do
   # it_behaves_like 'a model with BrainzConstructors' do
   #   let(:klass) { AlbumHead }
   # end
-
-  before(:each) do
-    @ph = FactoryBot.build(:piece_head)
-  end
 
   it 'is valid with valid attributes' do
     expect(@ph).to be_valid
@@ -57,7 +58,7 @@ RSpec.describe PieceHead, type: :model do
     @s_head = FactoryBot.build(
       :song_head,
       title:          @ph.title,
-      disambiguation: @ph.disambiguation,
+      disambiguation: @ph.disambiguation
       # source_ident:   nil
     )
     expect(@s_head).to be_valid

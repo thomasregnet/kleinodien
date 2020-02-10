@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :song_head_identifier do
     sequence(:value) { |n| "compilation-head-identifier-#{n}" }

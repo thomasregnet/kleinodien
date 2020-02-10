@@ -126,7 +126,7 @@ RSpec.describe ImportOrder, type: :model do
 
       let(:import_order) do
         uri = "https://musicbrainz.org/ws/2/release/#{code}/"
-        ImportOrder.create(uri: uri, user: FactoryBot.create(:user))
+        described_class.create(uri: uri, user: FactoryBot.create(:user))
       end
 
       it 'sets the expected code' do

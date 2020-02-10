@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :import_request_body do
     sequence(:content) { |n| "body #{n}" }

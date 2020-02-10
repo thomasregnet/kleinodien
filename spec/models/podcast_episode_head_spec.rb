@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe PodcastEpisodeHead, type: :model do
-  before(:each) do
+  before do
     @pe_head = FactoryBot.create(:podcast_episode_head)
   end
 

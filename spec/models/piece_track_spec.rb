@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PieceTrack, type: :model do
-  before(:each) do
+  before do
     @track = FactoryBot.build(:piece_track)
   end
 
@@ -18,7 +20,7 @@ RSpec.describe PieceTrack, type: :model do
   # TODO: shared_exampes_for_duration
   # this spec was cut and pasted from compilation_tracks
   context 'with duration' do
-    before(:each) do
+    before do
       @track = FactoryBot.build(:piece_track)
       @track.duration = Duration.new(311_000, 'second')
     end

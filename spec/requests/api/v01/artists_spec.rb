@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'api_helper'
 
@@ -18,7 +20,7 @@ RSpec.describe Api::V01::ArtistsController, type: :request do
     api_post '/api/v01/artists',
              Hash[
                data: {
-                 type: 'artists',
+                 type:       'artists',
                  attributes: {
                    name: 'ACDC'
                  }

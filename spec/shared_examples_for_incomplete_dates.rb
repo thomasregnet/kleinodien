@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a model with an IncompleteDate' do
   let(:date_getter) { date_naming }
   let(:date_setter) { date_naming + '=' }

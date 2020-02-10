@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe EpisodeHead, type: :model do
-  before(:each) do
+  before do
     @episode_head = FactoryBot.create(:episode_head)
   end
 

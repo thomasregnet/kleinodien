@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a company' do
   it 'is valid with valid attributes' do
     expect(company).to be_valid

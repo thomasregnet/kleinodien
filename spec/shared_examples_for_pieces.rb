@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a piece' do
   it 'is valid when it comes' do
     expect(piece).to be_valid

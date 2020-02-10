@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -8,7 +10,7 @@ SimpleCov.start 'rails' do
 end
 
 require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'devise'
 
@@ -43,7 +45,7 @@ RSpec.configure do |config|
     # DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each) do
+  config.before do
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

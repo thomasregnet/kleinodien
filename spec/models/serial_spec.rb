@@ -9,6 +9,7 @@ require 'shared_examples_for_tagable_models'
 RSpec.describe Serial, type: :model do
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
+
     let(:factory) { :serial }
     after { DatabaseCleaner.clean }
   end
@@ -36,7 +37,7 @@ RSpec.describe Serial, type: :model do
   end
 
   context 'without seasons' do
-    before(:each) do
+    before do
       @serial = FactoryBot.build(:serial)
     end
 
@@ -52,7 +53,7 @@ RSpec.describe Serial, type: :model do
   end
 
   context 'with seasons and episodes' do
-    before(:each) do
+    before do
       @season = FactoryBot.create(:season_with_tv_episode_heads)
       @serial = @season.serial
     end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe TvSerial, type: :model do
   context 'without seasons' do
-    before(:each) do
+    before do
       @tv_serial = FactoryBot.create(:tv_serial)
     end
 
@@ -19,7 +21,7 @@ RSpec.describe TvSerial, type: :model do
   end
 
   context 'with seassons' do
-    before(:each) do
+    before do
       @tv_serial = FactoryBot.create(
         :tv_serial_with_seasons, seasons_count: 3
       )

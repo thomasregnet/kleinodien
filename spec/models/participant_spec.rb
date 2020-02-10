@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Participant, type: :model do
-  before(:each) do
-    @participant = Participant.new(
+  before do
+    @participant = described_class.new(
       artist:        FactoryBot.create(:artist),
       artist_credit: FactoryBot.create(:artist_credit),
       position:      0

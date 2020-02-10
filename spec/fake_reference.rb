@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # Fake a Reference class for testing
 class FakeReference
-  CACHE_KEY = 'fake/cache?key'.freeze
+  CACHE_KEY = 'fake/cache?key'
   attr_reader :code
 
   def self.from_code(code)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a label' do
   it 'is valid with valid attributes ' do
     expect(label).to be_valid

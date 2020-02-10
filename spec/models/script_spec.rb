@@ -55,6 +55,7 @@ RSpec.describe Script, type: :model do
       it 'is not valid' do
         expect(script).not_to be_valid
       end
+
       it 'sets the expected error' do
         script.valid?
         expect(script.errors[:iso_number])

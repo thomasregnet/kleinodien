@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'an object with a source' do
   it 'is valid' do
     expect(candidate).to be_valid

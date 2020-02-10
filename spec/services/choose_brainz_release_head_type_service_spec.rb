@@ -6,7 +6,6 @@ require 'shared_examples_for_services'
 RSpec.describe ChooseBrainzReleaseHeadTypeService do
   it_behaves_like 'a service'
   context 'with type "Album"' do
-
     it 'returns "AlbumHead"' do
       expect(described_class.call(brainz_type: 'Album')).to eq('AlbumHead')
     end

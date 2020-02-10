@@ -47,7 +47,7 @@ end
 RSpec.describe Duration, type: :model do
   describe '.new' do
     context 'without accuracy' do
-      duration = Duration.new(300_123)
+      duration = described_class.new(300_123)
 
       it 'has the milliseconds set' do
         expect(duration.milliseconds).to eq(300_123)
@@ -59,7 +59,7 @@ RSpec.describe Duration, type: :model do
     end
 
     context 'with accuracy' do
-      duration = Duration.new(123_456, 'second')
+      duration = described_class.new(123_456, 'second')
 
       it 'uses the given accuracy' do
         expect(duration.accuracy).to eq('second')
@@ -131,7 +131,7 @@ RSpec.describe Duration, type: :model do
   end
 
   describe '#minutes_left' do
-    duration = Duration.milliseconds(4_200_000)
+    duration = described_class.milliseconds(4_200_000)
 
     it 'returns the left minutes' do
       expect(duration.minutes_left).to eq(10)
@@ -140,7 +140,7 @@ RSpec.describe Duration, type: :model do
 
   describe '#minutes_left_rounded' do\
     context 'when it must round up' do
-      duration = Duration.milliseconds(90_000)
+      duration = described_class.milliseconds(90_000)
 
       it 'returns the rounded left minutes' do
         expect(duration.minutes_left_rounded).to eq(2)
@@ -148,7 +148,7 @@ RSpec.describe Duration, type: :model do
     end
 
     context 'when it must round down' do
-      duration = Duration.milliseconds(89_999)
+      duration = described_class.milliseconds(89_999)
 
       it 'returns the rounded left minutes' do
         expect(duration.minutes_left_rounded).to eq(1)
@@ -158,7 +158,7 @@ RSpec.describe Duration, type: :model do
 
   describe '#seconds_left_rounded' do
     context 'when it must round up' do
-      duration = Duration.milliseconds(60_500)
+      duration = described_class.milliseconds(60_500)
 
       it 'returns the rounded left seconds' do
         expect(duration.seconds_left_rounded).to eq(1)
@@ -166,7 +166,7 @@ RSpec.describe Duration, type: :model do
     end
 
     context 'when it must round down' do
-      duration = Duration.milliseconds(60_499)
+      duration = described_class.milliseconds(60_499)
 
       it 'returns the rounded left seconds' do
         expect(duration.seconds_left_rounded).to eq(0)

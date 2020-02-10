@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe MovieHead, type: :model do
-  before(:each) do
+  before do
     @movie_head = FactoryBot.create(:movie_head)
   end
 

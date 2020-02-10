@@ -57,7 +57,6 @@ RSpec.describe BrainzFetcher do
   end
 
   describe '#fetch' do
-
   end
 end
 # rubocop:enable Metrics/BlockLength

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :ct_format_detail do
     association :compilation_track, factory: :compilation_track

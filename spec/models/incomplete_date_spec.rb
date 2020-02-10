@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe IncompleteDate, type: :model do
   describe '.new' do
     let(:incomplete_date) do
-      IncompleteDate.new(Date.new(2015, 12, 13), 7)
+      described_class.new(Date.new(2015, 12, 13), 7)
     end
 
     specify '#date' do
@@ -21,7 +21,7 @@ RSpec.describe IncompleteDate, type: :model do
   describe '.from_string' do
     context 'with a complete date' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015-12-13')
+        described_class.from_string('2015-12-13')
       end
 
       it 'returns 7 when it receives #mask' do
@@ -43,7 +43,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year and month' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015-12')
+        described_class.from_string('2015-12')
       end
 
       it 'returns 7 when it receives #mask' do
@@ -65,7 +65,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year only' do
       let(:incomplete_date) do
-        IncompleteDate.from_string('2015')
+        described_class.from_string('2015')
       end
 
       it 'returns 7 when it receives #mask' do
@@ -89,7 +89,7 @@ RSpec.describe IncompleteDate, type: :model do
   describe '#to_s' do
     context 'with a complete date' do
       let(:incomplete_date) do
-        IncompleteDate.new(Date.new(2019, 3, 2), 7)
+        described_class.new(Date.new(2019, 3, 2), 7)
       end
 
       it 'returns the right date-string' do
@@ -99,7 +99,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year and month' do
       let(:incomplete_date) do
-        IncompleteDate.new(Date.new(2019, 3, 2), 6)
+        described_class.new(Date.new(2019, 3, 2), 6)
       end
 
       it 'returns the right date-string' do
@@ -109,7 +109,7 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'with year only' do
       let(:incomplete_date) do
-        IncompleteDate.new(Date.new(2019, 3, 2), 4)
+        described_class.new(Date.new(2019, 3, 2), 4)
       end
 
       it 'returns the right date-string' do
@@ -120,7 +120,7 @@ RSpec.describe IncompleteDate, type: :model do
 
   context 'with an invalid mask' do
     describe '#to_s' do
-      let(:incomplete_date) { IncompleteDate.new(Date.new(2019, 3, 2), 7) }
+      let(:incomplete_date) { described_class.new(Date.new(2019, 3, 2), 7) }
 
       it 'raises a RuntimeError' do
         allow(incomplete_date).to receive(:mask).and_return(:wtf)

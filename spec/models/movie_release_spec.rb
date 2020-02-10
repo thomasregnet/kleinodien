@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'shared_examples_for_pieces'
 
 RSpec.describe MovieRelease, type: :model do
-  before(:each) do
+  before do
     @movie_release = FactoryBot.create(:movie_release)
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'an entity with format_details' do
   it 'is valid' do
     expect(entity).to be_valid

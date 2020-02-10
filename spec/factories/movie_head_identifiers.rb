@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :movie_head_identifier do
     sequence(:value) { |n| "compilation-head-identifier-#{n}" }

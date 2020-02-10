@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :movie_release do
     sequence(:title) { |n| "song release #{n}" }

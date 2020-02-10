@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'an AlbumRelease imported from discogs' do
   it 'has imported the album' do
     expect(album_release).to be_valid

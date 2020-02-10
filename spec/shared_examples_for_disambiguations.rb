@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 RSpec.shared_examples 'a model with disambiguations' do
   let(:get_name) { naming }

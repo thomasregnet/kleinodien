@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :serial do
     sequence(:title) { |n| "serial ##{n}" }
     type { 'Serial' }
 
-    factory :tv_serial, class: TvSerial do
+    factory :tv_serial, class: 'TvSerial' do
       type { 'TvSerial' }
 
-      factory :tv_serial_with_seasons, class: TvSerial do
+      factory :tv_serial_with_seasons, class: 'TvSerial' do
         transient do
           seasons_count { 3 }
         end
@@ -17,7 +19,7 @@ FactoryBot.define do
       end
     end
 
-    factory :podcast_serial, class: PodcastSerial do
+    factory :podcast_serial, class: 'PodcastSerial' do
       type { 'PodcastSerial' }
     end
   end

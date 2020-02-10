@@ -16,6 +16,7 @@ RSpec.describe Piece, type: :model do
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
+
     let(:factory) { :piece }
     after { DatabaseCleaner.clean }
   end
@@ -45,7 +46,7 @@ RSpec.describe Piece, type: :model do
   end
 
   context 'without tracks' do
-    before(:each) do
+    before do
       @piece = FactoryBot.build(:piece_with_head)
     end
 

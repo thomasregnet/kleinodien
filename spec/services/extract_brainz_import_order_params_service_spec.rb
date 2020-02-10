@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'shared_examples_for_import_params_services'

@@ -40,6 +40,7 @@ RSpec.describe PrepareBrainzDataService do
       it 'has the right "track_count"' do
         expect(with_tracks['track_count']).to eq('3')
       end
+
       it 'has the right "track_offset"' do
         expect(with_tracks['track_offset']).to eq('0')
       end

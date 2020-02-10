@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a new reference' do
   describe 'constructors' do
     subject { described_class }
@@ -54,7 +56,7 @@ RSpec.shared_examples 'a reference with a category' do
   end
 end
 
-RSpec.shared_examples  'a reference initialized from_code' do
+RSpec.shared_examples 'a reference initialized from_code' do
   let(:reference) { described_class.from_code(code) }
 
   describe '#code' do

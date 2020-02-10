@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'shared_examples_for_references'
 
 RSpec.shared_examples 'a MusicBrainz reference' do

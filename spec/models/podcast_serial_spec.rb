@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe PodcastSerial, type: :model do
   context 'without season' do
-    before(:each) do
+    before do
       @podcast_serial = FactoryBot.create(:podcast_serial)
     end
 

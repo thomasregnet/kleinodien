@@ -28,7 +28,7 @@ RSpec.describe Station, type: :model do
     after(:all) { DatabaseCleaner.clean }
   end
 
-  before(:each) do
+  before do
     @station = FactoryBot.build(:station)
   end
 

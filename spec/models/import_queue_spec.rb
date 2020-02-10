@@ -40,7 +40,7 @@ RSpec.describe ImportQueue, type: :model do
 
     context 'with forbidden characters' do
       let(:messages) do
-        iq = ImportQueue.new(name: 'FooBar')
+        iq = described_class.new(name: 'FooBar')
         iq.valid?
         iq.errors.messages
       end

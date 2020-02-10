@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a tagable model' do
   describe '#tags' do
     it 'accepts a new tag' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrainzTestHelper
   def self.get_release(mbid)
     file_name = File.join('fixtures', 'music_brainz', 'release', mbid + '.xml')

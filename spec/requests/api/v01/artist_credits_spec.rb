@@ -1,10 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'api_helper'
 
 include ApiHelper
 
 RSpec.describe Api::V01::ArtistCreditsController, type: :request do
-  context '#get' do
+  after(:all) do
+    DatabaseCleaner.clean
+  end
+
+  describe '#get' do
     before(:all) do
       DatabaseCleaner.start
       @credits = FactoryBot.create_list(:artist_credit, 2)
@@ -26,9 +32,5 @@ RSpec.describe Api::V01::ArtistCreditsController, type: :request do
     #   byebug
     #   expect(json_included[0]['type']).to eq 'participants'
     # end
-  end
-
-  after(:all) do
-    DatabaseCleaner.clean
   end
 end

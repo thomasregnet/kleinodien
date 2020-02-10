@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe SongHead, type: :model do
-  before(:each) do
+  before do
     @song_head = FactoryBot.create(:song_head)
   end
 

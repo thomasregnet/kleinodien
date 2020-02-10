@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a brainz artist source id' do
   def query_string_regex
     /\?inc=url-rels$/

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_disambiguations'
 
 RSpec.describe AlbumHead, type: :model do
-  before(:each) do
+  before do
     @album_head = FactoryBot.create(:album_head)
   end
 

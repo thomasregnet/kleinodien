@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a credit' do
   it 'is valid with the mininum of attributes' do
     expect(credit).to be_valid

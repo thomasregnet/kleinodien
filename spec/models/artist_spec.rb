@@ -12,6 +12,7 @@ RSpec.describe Artist, type: :model do
 
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
+
     let(:factory) { :artist }
     after { DatabaseCleaner.clean }
   end
@@ -109,7 +110,7 @@ RSpec.describe Artist, type: :model do
   end
 
   context 'usual artist' do
-    before(:each) do
+    before do
       @artist = FactoryBot.build(:artist)
     end
 

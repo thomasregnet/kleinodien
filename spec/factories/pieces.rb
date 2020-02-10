@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :piece do
     sequence(:title) { |n| "title #{n}" }
@@ -66,17 +68,17 @@ FactoryBot.define do
     #   association :head, factory: :movie_head
     # end
 
-    factory :podcast_episode_release, class: PodcastEpisodeRelease do
+    factory :podcast_episode_release, class: 'PodcastEpisodeRelease' do
       type { 'PodcastEpisodeRelease' }
       association :head, factory: :podcast_episode_head
     end
 
-    factory :tv_episode_release, class: TvEpisodeRelease do
+    factory :tv_episode_release, class: 'TvEpisodeRelease' do
       type { 'TvEpisodeRelease' }
       association :head, factory: :tv_episode_head
     end
 
-    factory :video, class: Video do
+    factory :video, class: 'Video' do
     end
   end
 end

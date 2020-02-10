@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :song_release_identifier do
     sequence(:value) { |n| "song-release-identifier-#{n}" }

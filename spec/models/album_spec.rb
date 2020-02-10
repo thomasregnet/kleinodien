@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Album, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe Album, type: :model do
     album.artist_credit = FactoryBot.create(:artist_credit)
     expect { album.save! }.not_to raise_error
 
-    association = Album.reflect_on_association(:artist_credit)
+    association = described_class.reflect_on_association(:artist_credit)
     expect(association.macro).to eq(:belongs_to)
   end
 end

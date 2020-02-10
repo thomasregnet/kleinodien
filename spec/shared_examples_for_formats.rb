@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'a format' do
   it 'is valid with valid parameters' do
     expect(format).to be_valid

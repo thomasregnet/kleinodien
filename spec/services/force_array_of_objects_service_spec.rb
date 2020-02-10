@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'shared_examples_for_services'
 
@@ -36,5 +38,4 @@ RSpec.describe ForceArrayOfObjectsService do
       expect(described_class.call(args)).to be_instance_of(Array)
     end
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :brainz_release, class: 'BrainzRelease' do
     mbid { SecureRandom.uuid.to_s }

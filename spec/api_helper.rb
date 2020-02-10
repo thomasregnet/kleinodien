@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApiHelper
   def api_get(url)
     get url, headers: { 'Accept' => 'application/vnd.api+json' }
@@ -5,7 +7,7 @@ module ApiHelper
 
   def api_post(url, params)
     headers = {
-      'Accept'       => 'application/vnd.api+json',
+      'Accept' => 'application/vnd.api+json',
       'Content-Type' => 'application/vnd.api+json'
     }
     post url, params: params.to_json, headers: headers

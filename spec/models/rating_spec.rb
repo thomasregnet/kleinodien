@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.shared_examples 'a rating with a wrong value' do
@@ -19,6 +21,8 @@ RSpec.describe Rating, type: :model do
       @lower_rating  = FactoryBot.build(:artist_credit_rating, value: 11)
     end
 
+    after(:all) { DatabaseCleaner.clean }
+
     context 'with a value bigger than 10' do
       it_behaves_like 'a rating with a wrong value' do
         let(:rating) { @bigger_rating }
@@ -30,8 +34,6 @@ RSpec.describe Rating, type: :model do
         let(:rating) { @lower_rating }
       end
     end
-
-    after(:all) { DatabaseCleaner.clean }
   end
 
   context 'valid values' do
@@ -44,7 +46,7 @@ RSpec.describe Rating, type: :model do
   end
 
   context 'with or without a content' do
-    before(:each) do
+    before do
       @rating = FactoryBot.build(:artist_credit_rating)
     end
 

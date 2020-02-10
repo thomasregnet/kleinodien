@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'an import params service' do
   context 'with a valid uri' do
     let(:result) { described_class.call(uri) }

@@ -126,7 +126,7 @@ RSpec.describe BrainzBlueprint do
     context 'with tracks and data-tracks' do
       let(:blueprint) do
         TestData.by_name(:brainz_release_powerslave_enhanced_cd)
-          .blueprint.media[0]
+                .blueprint.media[0]
       end
 
       it 'returns the flat track_list' do

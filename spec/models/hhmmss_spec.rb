@@ -5,10 +5,9 @@ require 'rails_helper'
 RSpec.describe Hhmmss do
   describe '.milliseconds' do
     context 'with a valid hh:mm:ss string' do
-
       it 'returns the milliseconds' do
         expect(described_class.milliseconds('9:10:59'))
-          .to eq(33059000)
+          .to eq(33_059_000)
         expect(described_class.milliseconds('0:00:00')).to eq(0)
       end
     end
