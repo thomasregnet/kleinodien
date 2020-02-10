@@ -6,93 +6,93 @@ module TestData
   # Get test-data by name
   class ByName
     CLASS_AND_ARTUMENTS_FOR = {
-      brainz_area_germany: {
+      brainz_area_germany:                     {
         class_name: 'TestData::BrainzService',
         arguments:  {
           code: '85752fda-13c4-31a3-bee5-0e5cb1f51dad',
           kind: :area
         }
       },
-      brainz_artist_ac_dc: {
+      brainz_artist_ac_dc:                     {
         class_name: 'TestData::BrainzService',
         arguments:  {
           code: '66c662b6-6e2f-4930-8610-912e24c63ed1',
           kind: :artist
         }
       },
-      brainz_artist_jello_biafra: {
+      brainz_artist_jello_biafra:              {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '2280ca0e-6968-4349-8c36-cb0cbd6ee95f',
           kind: :artist
         }
       },
-      brainz_artist_nomeansno: {
+      brainz_artist_nomeansno:                 {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '37e9d7b2-7779-41b2-b2eb-3685351caad3',
           kind: :artist
         }
       },
-      brainz_artist_sepultura: {
+      brainz_artist_sepultura:                 {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '1d93c839-22e7-4f76-ad84-d27039efc048',
           kind: :artist
         }
       },
-      brainz_artist_slayer: {
+      brainz_artist_slayer:                    {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec',
           kind: :artist
         }
       },
-      brainz_recording_arise: {
+      brainz_recording_arise:                  {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '31b0bbce-1d50-4e2f-a38f-4c49405e62d6',
           kind: :recording
         }
       },
-      brainz_recording_highway_to_hell: {
+      brainz_recording_highway_to_hell:        {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '5935ec91-8124-42ff-937f-f31a20ffe58f',
           kind: :recording
         }
       },
-      brainz_recording_the_duellists: {
+      brainz_recording_the_duellists:          {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '863de526-6857-4255-9e7e-7dfff4fd707e',
           kind: :recording
         }
       },
-      brainz_release_arise_jp_cd: {
+      brainz_release_arise_jp_cd:              {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a',
           kind: :release
         }
       },
-      brainz_release_powerslave_enhanced_cd: {
+      brainz_release_powerslave_enhanced_cd:   {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
           kind: :release
         }
       },
       brainz_release_the_sky_is_falling_gb_cd: {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '693748be-7c18-39c3-af2e-2e62092090cf',
           kind: :release
         }
       },
-      brainz_release_group_arise: {
+      brainz_release_group_arise:              {
         class_name: 'TestData::BrainzService',
-        arguments: {
+        arguments:  {
           code: '5fc9ba9d-bc39-38fc-a479-eadbf0f3a933',
           kind: :release_group
         }

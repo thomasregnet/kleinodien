@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TestData
   class ResultBase
     def initialize(raw)

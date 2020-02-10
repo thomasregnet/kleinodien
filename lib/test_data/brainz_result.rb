@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_data/result_base'
 
 module TestData
