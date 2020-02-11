@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistPrepareBase do
   describe '.call' do
     it 'responds to .call' do
@@ -52,4 +51,3 @@ RSpec.describe PersistPrepareBase do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

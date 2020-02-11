@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Script, type: :model do
   it { should have_many(:releases) }
 
@@ -64,4 +63,3 @@ RSpec.describe Script, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'test_data'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzBlueprint do
   it '#relation_lists'
   it '#url_relations'
@@ -145,4 +144,3 @@ RSpec.describe BrainzBlueprint do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

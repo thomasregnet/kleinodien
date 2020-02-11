@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe CodesForModelService do
   it_behaves_like 'a service'
@@ -64,4 +63,3 @@ RSpec.describe CodesForModelService do
   end
 end
 # rubocop:enable RSpec/VerifiedDoubles
-# rubocop:enable Metrics/BlockLength

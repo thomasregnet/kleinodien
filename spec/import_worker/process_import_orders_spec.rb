@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ProcessImportOrders do
   it_behaves_like 'a service'
 
@@ -48,4 +47,3 @@ RSpec.describe ProcessImportOrders do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

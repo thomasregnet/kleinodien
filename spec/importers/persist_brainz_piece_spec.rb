@@ -14,7 +14,6 @@ class MockPersistBrainzPieceProxy
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzPiece do
   it_behaves_like 'a service'
 
@@ -77,4 +76,3 @@ RSpec.describe PersistBrainzPiece do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

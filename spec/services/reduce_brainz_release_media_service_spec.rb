@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ReduceBrainzReleaseMediaService do
   it_behaves_like 'a service'
 
@@ -112,4 +111,3 @@ RSpec.describe ReduceBrainzReleaseMediaService do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

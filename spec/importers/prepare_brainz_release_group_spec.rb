@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'test_data'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzReleaseGroup do
   it_behaves_like 'a service'
 
@@ -38,4 +37,3 @@ RSpec.describe PrepareBrainzReleaseGroup do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

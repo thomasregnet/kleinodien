@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportSubscriber do
   # OPTIMIZE: The tests of ImportSubscriber depend on the redis-connection.
   # OPTIMIZE: Maybe do better mocking of the redis-connection.
@@ -54,4 +53,3 @@ RSpec.describe ImportSubscriber do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe AnalyzeBrainzImportOrderUriService do
   it_behaves_like 'a service'
 
@@ -55,4 +54,3 @@ RSpec.describe AnalyzeBrainzImportOrderUriService do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

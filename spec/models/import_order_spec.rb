@@ -17,7 +17,6 @@ class OtherFakeImportOrder < ImportOrder
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportOrder, type: :model do
   include_examples 'for ImportOrders', :import_order
 
@@ -139,4 +138,3 @@ RSpec.describe ImportOrder, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

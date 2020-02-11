@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
   # rubocop:disable RSpec/BeforeAfterAll
   # rubocop:disable RSpec/InstanceVariable
@@ -66,4 +65,3 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportQueue, type: :model do
   it { should respond_to(:about) }
   it { should respond_to(:name) }
@@ -91,4 +90,3 @@ RSpec.describe ImportQueue, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

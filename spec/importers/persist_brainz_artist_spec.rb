@@ -3,7 +3,6 @@
 require 'test_data'
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzArtist do
   let(:blueprint) do
     TestData.by_name(:brainz_artist_slayer).blueprint
@@ -56,4 +55,3 @@ RSpec.describe PersistBrainzArtist do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

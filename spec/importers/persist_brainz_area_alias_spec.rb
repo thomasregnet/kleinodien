@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzAreaAlias do
   it_behaves_like 'a service'
 
@@ -102,4 +101,3 @@ RSpec.describe PersistBrainzAreaAlias do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

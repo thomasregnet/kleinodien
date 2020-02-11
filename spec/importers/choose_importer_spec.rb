@@ -11,7 +11,6 @@ class ImportStuffForTesting
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ChooseImporter do
   it_behaves_like 'a service'
 
@@ -71,4 +70,3 @@ RSpec.describe ChooseImporter do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

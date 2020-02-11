@@ -25,7 +25,6 @@ class MockPrepareBrainzRelease < PrepareBrainzRelease
   def prepare_recordings; end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzRelease do
   it_behaves_like 'a service'
 
@@ -72,4 +71,3 @@ RSpec.describe PrepareBrainzRelease do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe GetImportOrderClassNameFromUriService do
   it_behaves_like 'a service'
 
@@ -49,4 +48,3 @@ RSpec.describe GetImportOrderClassNameFromUriService do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

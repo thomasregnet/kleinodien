@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'shared_examples_for_services'
 
 # OPTIMIZE: mock specs
-# rubocop:disable Metrics/BlockLength
 RSpec.describe AnalyzeImportOrderUriService do
   it_behaves_like 'a service'
 
@@ -45,4 +44,3 @@ RSpec.describe AnalyzeImportOrderUriService do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'test_data'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzReleaseHead do
   describe '#find_already_existing' do
     context 'when the ReleaseHead already exists' do
@@ -65,4 +64,3 @@ RSpec.describe PersistBrainzReleaseHead do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

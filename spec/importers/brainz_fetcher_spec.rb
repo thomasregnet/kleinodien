@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_services'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzFetcher do
   it_behaves_like 'a service'
 
@@ -59,4 +58,3 @@ RSpec.describe BrainzFetcher do
   describe '#fetch' do
   end
 end
-# rubocop:enable Metrics/BlockLength

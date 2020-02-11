@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'test_data/brainz_service'
 require 'test_data'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PrepareBrainzArtist do
   context 'when the artist already exists in the database' do
     before do
@@ -61,4 +60,3 @@ RSpec.describe PrepareBrainzArtist do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

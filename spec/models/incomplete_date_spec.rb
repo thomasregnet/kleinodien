@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe IncompleteDate, type: :model do
   describe '.new' do
     let(:incomplete_date) do
@@ -137,4 +136,3 @@ RSpec.describe IncompleteDate, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

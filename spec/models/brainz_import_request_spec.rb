@@ -23,7 +23,6 @@ class TestBrainzImportRequestWithQueryString < TestBrainzImportRequestSomeKind
   attr_reader :query_string
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe BrainzImportRequest, type: :model do
   def uuid
     @uuid ||= SecureRandom.uuid.to_s
@@ -73,4 +72,3 @@ RSpec.describe BrainzImportRequest, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

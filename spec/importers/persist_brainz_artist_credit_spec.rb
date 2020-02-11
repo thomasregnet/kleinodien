@@ -19,7 +19,6 @@ class MockPersistBrainzArtistCreditProxy
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe PersistBrainzArtistCredit do
   it_behaves_like 'a service'
 
@@ -74,4 +73,3 @@ RSpec.describe PersistBrainzArtistCredit do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

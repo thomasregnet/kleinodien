@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ImportWorker do
   describe '#run' do
     let(:subscriber) { instance_double('ImportSubscriber') }
@@ -60,4 +59,3 @@ RSpec.describe ImportWorker do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

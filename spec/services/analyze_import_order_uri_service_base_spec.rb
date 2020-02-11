@@ -10,7 +10,6 @@ class AnalyzeImportOrderUriServiceBase
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe AnalyzeImportOrderUriServiceBase do
   it_behaves_like 'a service'
 
@@ -54,4 +53,3 @@ RSpec.describe AnalyzeImportOrderUriServiceBase do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
