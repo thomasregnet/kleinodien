@@ -1,5 +1,13 @@
 require: rubocop-rspec
 
+AllCops:
+  Exclude:
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/{rails,rake}'
+
 Capybara/FeatureMethods:
   Enabled: false
 
