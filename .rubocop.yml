@@ -9,6 +9,10 @@ AllCops:
     - 'bin/{rails,rake}'
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**'
+
 Capybara/FeatureMethods:
   Enabled: false
 
