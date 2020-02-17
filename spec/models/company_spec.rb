@@ -10,12 +10,14 @@ RSpec.describe Company, type: :model do
 
   subject { described_class.new(name: 'some company') }
 
-  it { should belong_to(:area).optional }
-
   it { should respond_to(:sort_name) }
   it { should respond_to(:brainz_code) }
   it { should respond_to(:discogs_code) }
   it { should respond_to(:label_code) }
   it { should respond_to(:tmdb_code) }
   it { should respond_to(:wikidata_code) }
+
+  it { should belong_to(:area).optional }
+
+  it { should have_many(:release_companies) }
 end
