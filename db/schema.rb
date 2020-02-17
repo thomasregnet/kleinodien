@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_193926) do
+ActiveRecord::Schema.define(version: 2020_02_17_203244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -426,6 +426,14 @@ ActiveRecord::Schema.define(version: 2020_02_17_193926) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "release_catalog_numbers", force: :cascade do |t|
+    t.text "code"
+    t.bigint "release_company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["release_company_id"], name: "index_release_catalog_numbers_on_release_company_id"
+  end
+
   create_table "release_companies", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "company_role_id"
@@ -680,6 +688,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_193926) do
   add_foreign_key "ratings", "serials"
   add_foreign_key "ratings", "stations"
   add_foreign_key "ratings", "users"
+  add_foreign_key "release_catalog_numbers", "release_companies"
   add_foreign_key "release_companies", "companies"
   add_foreign_key "release_companies", "company_roles"
   add_foreign_key "release_companies", "releases"
