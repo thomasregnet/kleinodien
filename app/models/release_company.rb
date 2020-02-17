@@ -1,5 +1,13 @@
+# frozen_string_literal: true
+
+# Company related to a Release
 class ReleaseCompany < ApplicationRecord
   belongs_to :company
-  belongs_to :company_role
+  belongs_to(
+    :role,
+    class_name:  'CompanyRole',
+    foreign_key: :company_role_id,
+    required:    false
+  )
   belongs_to :release
 end
