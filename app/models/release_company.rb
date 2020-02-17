@@ -10,4 +10,6 @@ class ReleaseCompany < ApplicationRecord
     required:    false
   )
   belongs_to :release
+
+  has_many :catalog_numbers, class_name: 'ReleaseCatalogNumber'
 end
