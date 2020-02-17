@@ -11,6 +11,7 @@ RSpec.describe Release, type: :model do
   it { should belong_to(:script).without_validating_presence }
 
   it { should have_many(:media) }
+  it { should have_many(:release_companies) }
   it { should have_many(:release_events) }
   it { should have_many(:subsets) }
 

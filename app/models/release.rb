@@ -10,6 +10,7 @@ class Release < ApplicationRecord
   belongs_to :script, required: false
 
   has_many :media, class_name: 'ReleaseMedium'
+  has_many :release_companies
   has_many :release_events
   has_many :subsets, class_name: 'ReleaseSubset'
 end
