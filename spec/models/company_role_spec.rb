@@ -7,4 +7,8 @@ RSpec.describe CompanyRole, type: :model do
   it_behaves_like 'an entity with an unique name' do
     let(:candidate) { FactoryBot.build(:company_role) }
   end
+
+  subject { FactoryBot.build(:company_role) }
+
+  it { should have_many(:release_companies) }
 end

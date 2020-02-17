@@ -2,6 +2,8 @@
 
 # A CompanyRole may be for example a copyright or a distibution
 class CompanyRole < ActiveRecord::Base
+  has_many :release_companies
+
   validates :name,
             presence:   true,
             blank:      false,
