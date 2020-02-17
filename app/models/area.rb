@@ -4,6 +4,7 @@
 class Area < ApplicationRecord
   belongs_to :import_order, required: false
 
+  has_many :companies
   has_many :iso3166_part1_countries
   has_many :iso3166_part2_countries
   has_many :iso3166_part3_countries
