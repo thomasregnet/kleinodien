@@ -22,6 +22,12 @@ FactoryBot.define do
       end
 
       factory(
+        :brainz_label_import_request,
+        class: 'BrainzLabelImportRequest'
+      ) do
+      end
+
+      factory(
         :brainz_release_group_import_request,
         class: 'BrainzReleaseGroupImportRequest'
       ) do
