@@ -11,6 +11,7 @@ class ImportOrder < ApplicationRecord
   has_many :areas
   has_many :artist_credits
   has_many :artists
+  has_many :companies
   has_many :import_requests
   has_many :medium_formats
   has_many :piece_heads

@@ -23,6 +23,7 @@ RSpec.describe ImportOrder, type: :model do
   it { should have_many(:areas) }
   it { should have_many(:artist_credits) }
   it { should have_many(:artists) }
+  it { should have_many(:companies) }
   it { should have_many(:release_heads) }
   it { should have_many(:release_tracks) }
   it { should have_many(:releases) }
