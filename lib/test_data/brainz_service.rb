@@ -19,7 +19,8 @@ module TestData
 
     def call
       # BRAINZ_INC_FOR is defined in config/initializers/constants.rb
-      path = "musicbrainz.org/#{kind_to_s}/#{code}?#{BRAINZ_INC_FOR[kind]}"
+      path = "musicbrainz.org/#{kind_to_s}/#{code}"
+      path += "?#{BRAINZ_INC_FOR[kind]}" if BRAINZ_INC_FOR[kind]
       raw = TestData::PathService.call(path: path)
       TestData::BrainzResult.new(raw)
     end

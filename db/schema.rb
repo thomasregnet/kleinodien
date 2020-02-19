@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_203244) do
+ActiveRecord::Schema.define(version: 2020_02_19_195924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -105,8 +105,10 @@ ActiveRecord::Schema.define(version: 2020_02_17_203244) do
     t.integer "label_code"
     t.integer "tmdb_code"
     t.integer "wikidata_code"
+    t.bigint "import_order_id"
     t.index "lower((name)::text)", name: "index_companies_on_lower_name", unique: true
     t.index ["area_id"], name: "index_companies_on_area_id"
+    t.index ["import_order_id"], name: "index_companies_on_import_order_id"
   end
 
   create_table "company_roles", id: :serial, force: :cascade do |t|
@@ -638,6 +640,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_203244) do
   add_foreign_key "artists_tags", "artists"
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "companies", "areas"
+  add_foreign_key "companies", "import_orders"
   add_foreign_key "import_orders", "import_queues"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"

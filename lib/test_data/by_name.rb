@@ -48,6 +48,13 @@ module TestData
           kind: :artist
         }
       },
+      brainz_label_alternative_tentacles:      {
+        class_name: 'TestData::BrainzService',
+        arguments:  {
+          code: 'f1273178-651b-4d02-8f21-4ab1ec5a689a',
+          kind: :label
+        }
+      },
       brainz_recording_arise:                  {
         class_name: 'TestData::BrainzService',
         arguments:  {

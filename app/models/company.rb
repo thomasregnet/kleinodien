@@ -3,6 +3,7 @@
 # Company, for example a label
 class Company < ActiveRecord::Base
   belongs_to :area, required: false
+  belongs_to :import_order, required: false
 
   has_many :release_companies
 
