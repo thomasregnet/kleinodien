@@ -10,23 +10,20 @@ module TestData
       new(args).call
     end
 
-    def initialize(args)
-      @code = args[:code]
-      @kind = args[:kind]
+    def initialize(code:, kind:)
+      @code = code
+      @inc  = BRAINZ_INC_FOR[kind]
+      @kind = kind.to_s.tr('_', '-')
     end
 
-    attr_reader :code, :kind
+    attr_reader :code, :inc, :kind
 
     def call
       # BRAINZ_INC_FOR is defined in config/initializers/constants.rb
-      path = "musicbrainz.org/#{kind_to_s}/#{code}"
-      path += "?#{BRAINZ_INC_FOR[kind]}" if BRAINZ_INC_FOR[kind]
+      path = "musicbrainz.org/#{kind}/#{code}"
+      path += "?#{inc}" if inc
       raw = TestData::PathService.call(path: path)
       TestData::BrainzResult.new(raw)
-    end
-
-    def kind_to_s
-      kind.to_s.tr('_', '-')
     end
   end
 end
