@@ -13,8 +13,8 @@ RSpec.describe PrepareBrainzCompany do
     blueprint = Object.new
     code      = brainz_code
 
+    blueprint.define_singleton_method(:area) {}
     blueprint.define_singleton_method(:brainz_code) { code }
-    blueprint.define_singleton_method(:name) { 'Alternative Tentacles' }
 
     blueprint
   end
@@ -42,13 +42,22 @@ RSpec.describe PrepareBrainzCompany do
 
   context 'when the Company does not exist in the database' do
     let(:proxy) { spy }
-
-    it 'does not call #get on the proxy' do
-      described_class.call(
+    let(:args) do
+      {
         blueprint:    blueprint,
         import_order: :fake_import_order,
         proxy:        proxy
-      )
+      }
+    end
+
+    it 'does not call #get on the proxy' do
+      area_preparer = class_double('PrepareBrainzArea')
+                      .as_stubbed_const(transfer_nested_constants: true)
+
+      allow(area_preparer).to receive(:call)
+        .with(args.merge(blueprint: nil))
+
+      described_class.call(args)
 
       expect(proxy).to have_received(:get)
     end

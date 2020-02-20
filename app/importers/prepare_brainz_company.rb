@@ -12,11 +12,23 @@ class PrepareBrainzCompany < PrepareBrainzBase
   attr_reader :blueprint
 
   def prepare
-    find_in_database || trigger_proxy
+    # find_in_database || trigger_proxy
+    find_in_database && return
+
+    prepare_area
+    trigger_proxy
   end
 
   def find_in_database
     Company.find_by(brainz_code: blueprint.brainz_code)
+  end
+
+  def prepare_area
+    PrepareBrainzArea.call(
+      blueprint:    blueprint.area,
+      import_order: import_order,
+      proxy:        proxy
+    )
   end
 
   def trigger_proxy
