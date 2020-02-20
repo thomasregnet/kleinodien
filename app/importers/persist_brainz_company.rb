@@ -23,10 +23,29 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def persist
-    Company.create!(
+    persist_area
+    company.area = persist_area
+    company.save!
+    company
+  end
+
+  def company
+    @company ||= Company.create!(
       import_order: import_order,
       name:         blueprint.name,
       sort_name:    blueprint.sort_name
+    )
+  end
+
+  def persist_area
+    area_code = blueprint.area.brainz_code
+    import_request = BrainzAreaImportRequest.new(
+      code: area_code
+    )
+    PersistBrainzArea.call(
+      blueprint:    proxy.get(import_request),
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 end
