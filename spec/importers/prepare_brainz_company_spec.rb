@@ -55,7 +55,6 @@ RSpec.describe PrepareBrainzCompany do
                       .as_stubbed_const(transfer_nested_constants: true)
 
       allow(area_preparer).to receive(:call)
-        .with(args.merge(blueprint: nil))
 
       described_class.call(args)
 

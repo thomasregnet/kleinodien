@@ -22,6 +22,10 @@ class MockPrepareBrainzRelease < PrepareBrainzRelease
     prepare_release_group_spy.call
   end
 
+  def prepare_companies
+    true
+  end
+
   def prepare_recordings; end
 end
 

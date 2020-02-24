@@ -4,23 +4,24 @@
 class PrepareBrainzCompany < PrepareBrainzBase
   def initialize(blueprint:, **args)
     super(args)
-    @blueprint = blueprint
+    # @blueprint = blueprint
+    @brainz_code = blueprint.brainz_code
   end
 
   private
 
-  attr_reader :blueprint
+  attr_reader :blueprint, :brainz_code
 
   def prepare
     # find_in_database || trigger_proxy
     find_in_database && return
 
-    prepare_area
     trigger_proxy
+    prepare_area
   end
 
   def find_in_database
-    Company.find_by(brainz_code: blueprint.brainz_code)
+    Company.find_by(brainz_code: brainz_code)
   end
 
   def prepare_area
@@ -32,7 +33,7 @@ class PrepareBrainzCompany < PrepareBrainzBase
   end
 
   def trigger_proxy
-    import_request = BrainzCompanyImportRequest.new(code: blueprint.brainz_code)
-    proxy.get(import_request)
+    import_request = BrainzCompanyImportRequest.new(code: brainz_code)
+    @blueprint = proxy.get(import_request)
   end
 end

@@ -17,6 +17,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
     return release if release
 
     prepare_artist_credit  || return
+    prepare_companies      || return
     prepare_release_group  || return
     prepare_release_events || return
     prepare_media          || return
@@ -32,6 +33,16 @@ class PrepareBrainzRelease < PrepareBrainzBase
       import_order: import_order,
       proxy:        proxy
     )
+  end
+
+  def prepare_companies
+    blueprint.label_infos.each do |label_info|
+      PrepareBrainzCompany.call(
+        blueprint:    label_info.label,
+        import_order: import_order,
+        proxy:        proxy
+      )
+    end
   end
 
   def prepare_media
