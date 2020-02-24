@@ -11,4 +11,6 @@ RSpec.describe CompanyRole, type: :model do
   subject { FactoryBot.build(:company_role) }
 
   it { should have_many(:release_companies) }
+  it { should validate_uniqueness_of(:name).case_insensitive }
+  it { should validate_presence_of(:name) }
 end
