@@ -25,6 +25,7 @@ class PersistBrainzRelease < PersistBrainzBase
     persist_media
     persist_subsets
     persist_release_events
+    persist_release_companies
     # add_area must be called after persist_release_events
     add_area
 
@@ -82,6 +83,17 @@ class PersistBrainzRelease < PersistBrainzBase
     Language.find_or_create_by(iso_code_3: iso_code_3) do |language|
       language.name       = iso_code_3
       language.iso_code_3 = iso_code_3
+    end
+  end
+
+  def persist_release_companies
+    blueprint.label_infos.each do |label_info|
+      PersistBrainzReleaseCompany.call(
+        blueprint:    label_info,
+        import_order: import_order,
+        proxy:        proxy,
+        release:      release
+      )
     end
   end
 
