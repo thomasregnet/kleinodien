@@ -30,20 +30,6 @@ FactoryBot.define do
       end
     end
 
-    factory :piece_with_companies do
-      transient do
-        companies_count { 2 }
-      end
-
-      after(:create) do |piece, evaluator|
-        create_list(
-          :pr_company,
-          evaluator.companies_count,
-          piece: piece
-        )
-      end
-    end
-
     factory :piece_with_labels do
       transient do
         labels_count { 2 }
@@ -57,16 +43,6 @@ FactoryBot.define do
         )
       end
     end
-
-    # factory :song_release, class: SongRelease do
-    #   type 'Song'
-    #   association :head, factory: :song_head
-    # end
-
-    # factory :movie_release, class: MovieRelease do
-    #   type 'Movie'
-    #   association :head, factory: :movie_head
-    # end
 
     factory :podcast_episode_release, class: 'PodcastEpisodeRelease' do
       type { 'PodcastEpisodeRelease' }

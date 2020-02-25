@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_183741) do
+ActiveRecord::Schema.define(version: 2020_02_25_192334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -256,18 +256,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_183741) do
     t.index ["position", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true
   end
 
-  create_table "ph_companies", id: :serial, force: :cascade do |t|
-    t.integer "piece_head_id", null: false
-    t.integer "company_id", null: false
-    t.integer "company_role_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_ph_companies_on_company_id"
-    t.index ["company_role_id"], name: "index_ph_companies_on_company_role_id"
-    t.index ["piece_head_id"], name: "index_ph_companies_on_piece_head_id"
-  end
-
   create_table "ph_credits", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id", null: false
     t.integer "piece_head_id", null: false
@@ -370,18 +358,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_183741) do
     t.integer "tag_id", null: false
     t.index ["piece_id"], name: "index_pieces_tags_on_piece_id"
     t.index ["tag_id"], name: "index_pieces_tags_on_tag_id"
-  end
-
-  create_table "pr_companies", id: :serial, force: :cascade do |t|
-    t.integer "piece_id", null: false
-    t.integer "company_id", null: false
-    t.integer "company_role_id", null: false
-    t.string "catalog_no"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_pr_companies_on_company_id"
-    t.index ["company_role_id"], name: "index_pr_companies_on_company_role_id"
-    t.index ["piece_id"], name: "index_pr_companies_on_piece_id"
   end
 
   create_table "pr_credits", id: :serial, force: :cascade do |t|
@@ -654,9 +630,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_183741) do
   add_foreign_key "original_exemplars", "users"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
-  add_foreign_key "ph_companies", "companies"
-  add_foreign_key "ph_companies", "company_roles"
-  add_foreign_key "ph_companies", "piece_heads"
   add_foreign_key "ph_credits", "artist_credits"
   add_foreign_key "ph_credits", "jobs"
   add_foreign_key "ph_credits", "piece_heads"
@@ -676,9 +649,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_183741) do
   add_foreign_key "pieces", "stations", name: "pieces_fk_stations"
   add_foreign_key "pieces_tags", "pieces"
   add_foreign_key "pieces_tags", "tags"
-  add_foreign_key "pr_companies", "companies"
-  add_foreign_key "pr_companies", "company_roles"
-  add_foreign_key "pr_companies", "pieces"
   add_foreign_key "pr_credits", "artist_credits"
   add_foreign_key "pr_credits", "jobs"
   add_foreign_key "pr_credits", "pieces"

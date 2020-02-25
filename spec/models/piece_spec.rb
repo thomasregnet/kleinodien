@@ -3,7 +3,6 @@
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_credits'
-require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_duration'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
@@ -53,20 +52,6 @@ RSpec.describe Piece, type: :model do
     it 'is valid with valid attributes' do
       expect(@piece).to be_valid
     end
-  end
-
-  # context 'with tracks' do
-  #   before(:each) do
-  #     @piece = FactoryBot.create(:piece_with_tracks)
-  #   end
-
-  #   it 'has some tracks' do
-  #     expect(@piece.tracks.count).to be > 0
-  #   end
-  # end
-
-  it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryBot.create(:piece_with_companies) }
   end
 
   it_behaves_like 'a model with credits' do

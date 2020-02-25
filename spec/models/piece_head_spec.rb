@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
-require 'shared_examples_for_models_with_companies'
 require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
@@ -76,10 +75,6 @@ RSpec.describe PieceHead, type: :model do
   it 'is not valid without a type' do
     @ph.type = nil
     expect(@ph).not_to be_valid
-  end
-
-  it_behaves_like 'a model with companies' do
-    let(:candidate) { FactoryBot.create(:piece_head_with_companies) }
   end
 
   it_behaves_like 'a model with credits' do
