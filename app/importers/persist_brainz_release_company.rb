@@ -9,10 +9,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   end
 
   def call
-    # TODO: reactivate when PrepareBrainzReleaseCompany is implemented
-    # release_catalog_number
-
-    # company
+    company
   end
 
   private

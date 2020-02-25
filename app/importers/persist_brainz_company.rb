@@ -31,6 +31,7 @@ class PersistBrainzCompany < PersistBrainzBase
 
   def company
     @company ||= Company.create!(
+      brainz_code:  blueprint.brainz_code,
       import_order: import_order,
       name:         blueprint.name,
       sort_name:    blueprint.sort_name
