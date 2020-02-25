@@ -9,7 +9,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   end
 
   def call
-    company
+    release_company
   end
 
   private
@@ -43,6 +43,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   def release_company
     @release_company ||= ReleaseCompany.create!(
       company: company,
+      release: release,
       role:    company_role
     )
   end
