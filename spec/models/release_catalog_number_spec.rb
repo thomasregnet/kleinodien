@@ -13,11 +13,13 @@ RSpec.describe ReleaseCatalogNumber, type: :model do
       )
     end
 
+    # rubocop:disable RSpec/ImplicitSubject
     it do
-      should validate_uniqueness_of(:code)
-        .scoped_to(:release_company_id)
-        .case_insensitive
-    end
+     should validate_uniqueness_of(:code)
+       .scoped_to(:release_company_id)
+       .case_insensitive
+   end
+   # rubocop:disable RSpec/ImplicitSubject
   end
 
   it { should belong_to(:release_company) }
