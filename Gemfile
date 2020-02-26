@@ -22,7 +22,7 @@ gem 'unicorn', '~> 5.4'
 gem 'bootstrap', '~> 4.3.1'
 gem 'redis', '~> 4.0'
 # https://nvd.nist.gov/vuln/detail/CVE-2019-5477
-gem 'nokogiri', '>= 1.10.4'
+gem 'nokogiri', '>= 1.10.8'
 gem 'webpacker'
 
 group :development, :test do
