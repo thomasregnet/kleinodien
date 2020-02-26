@@ -33,9 +33,8 @@
                     <%= release_company.role.name %>
                 <% end %>
                 <% if release_company.catalog_numbers %>
-                    <% release_company.catalog_numbers.each do |number| %>
-                        <%= number.code %>
-                    <% end %>
+                    Catalog Numbers:
+                    <%= release_company.catalog_numbers.map(&:code).join(', ') %>
                 <% end %>
             </dd>
         <% end %>
