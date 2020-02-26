@@ -12,4 +12,9 @@ class ReleaseCompany < ApplicationRecord
   belongs_to :release
 
   has_many :catalog_numbers, class_name: 'ReleaseCatalogNumber'
+
+  validates_uniqueness_of(
+    :company_id,
+    scope: %i[release_id company_role_id]
+  )
 end
