@@ -25,6 +25,21 @@
             <dd class="col-sm-11"><%= @release.area.iso3166_part1_codes.join(', ')%></dd>
         <% end %>
     </dl>
+    <dl class="row">
+        <% @release.release_companies.each do |release_company| %>
+            <dt class="col-sm-1"><%=  release_company.company.name %></dt>
+            <dd class="col-sm-11">
+                <% if release_company.role %>
+                    <%= release_company.role.name %>
+                <% end %>
+                <% if release_company.catalog_numbers %>
+                    <% release_company.catalog_numbers.each do |number| %>
+                        <%= number.code %>
+                    <% end %>
+                <% end %>
+            </dd>
+        <% end %>
+    </dl>
 </div>
 <div class="container-fluid">
     <h2>Release events</h2>
