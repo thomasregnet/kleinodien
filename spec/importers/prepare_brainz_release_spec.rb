@@ -26,7 +26,8 @@ class MockPrepareBrainzRelease < PrepareBrainzRelease
     true
   end
 
-  def prepare_recordings; end
+  # This method smells of :reek:UnusedParameters
+  def prepare_recordings(*args); end
 end
 
 RSpec.describe PrepareBrainzRelease do

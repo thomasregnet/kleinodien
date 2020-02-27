@@ -7,5 +7,6 @@ class PrepareBase < PersistPrepareBase
   rescue StandardError => e
     Rails.logger.error(e)
     import_order.failure!
+    raise
   end
 end
