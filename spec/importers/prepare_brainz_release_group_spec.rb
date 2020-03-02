@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data'
 require 'shared_examples_for_services'
@@ -9,14 +10,19 @@ RSpec.describe PrepareBrainzReleaseGroup do
 
   context 'when the ReleaseHead does not exist' do
     let(:import_request) do
-      FactoryBot.create(:brainz_release_group_import_request)
+      FactoryBot.create(
+        :brainz_release_group_import_request,
+        code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
+      )
     end
+
     let(:blueprint) do
       TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
               .blueprint
               .release_group
     end
-    let(:proxy) { instance_double('BrainzProxy') }
+
+    let(:proxy) { FakeProxy.new }
     let(:preparer) do
       described_class.new(
         import_order:   :fake_import_order,
@@ -25,15 +31,22 @@ RSpec.describe PrepareBrainzReleaseGroup do
       )
     end
 
-    before do
-      allow(proxy).to receive(:get)
-        .with(import_request)
-        .and_return(blueprint)
-    end
+    before { preparer.prepare }
 
     it 'calls #prepare_artist_credit' do
-      expect(preparer).to receive(:prepare_artist_credit)
-      preparer.prepare
+      expect(proxy.get_calls).to eq(3)
+    end
+
+    it 'fills the proxy with three items' do
+      expect(proxy.cache_size).to eq(3)
+    end
+
+    it 'adds two artists to the proxy cache' do
+      expect(proxy.match(%r{/artist/})).to eq(2)
+    end
+
+    it 'adds one release-group to the proxy cache' do
+      expect(proxy.match(%r{/release-group/})).to eq(1)
     end
   end
 end
