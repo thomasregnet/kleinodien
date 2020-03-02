@@ -42,5 +42,9 @@ class FakeProxy
   def match(regexp)
     cache.keys.count { |key| key.match(regexp) }
   end
+
+  def has_received_get?
+    return true if get_calls > 0
+  end
 end
 

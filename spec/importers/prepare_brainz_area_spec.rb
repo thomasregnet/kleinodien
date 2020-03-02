@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -40,7 +41,8 @@ RSpec.describe PrepareBrainzArea do
   end
 
   context 'when an Area with the same brainz_code exists' do
-    let(:proxy) { spy }
+    # let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     before { FactoryBot.create(:area, brainz_code: brainz_code) }
 
@@ -50,15 +52,14 @@ RSpec.describe PrepareBrainzArea do
         import_order: FactoryBot.create(:brainz_release_import_order),
         proxy:        proxy
       )
-      # allow(proxy).to receive(:get)
       preparer.prepare
-      expect(proxy).not_to have_received(:get)
+      expect(proxy).not_to have_received_get
     end
   end
 
   context 'when an Area with the same name exists' do
     let(:name) { "Helm's Deep" }
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     before { FactoryBot.create(:area, name: name) }
 
@@ -69,7 +70,7 @@ RSpec.describe PrepareBrainzArea do
         proxy:        proxy
       )
       preparer.prepare
-      expect(proxy).not_to have_received(:get)
+      expect(proxy).not_to have_received_get
     end
   end
 end
