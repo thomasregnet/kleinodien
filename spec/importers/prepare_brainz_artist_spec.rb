@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data/brainz_service'
 require 'test_data'
@@ -26,37 +27,55 @@ RSpec.describe PrepareBrainzArtist do
       )
     end
 
-    it 'returns the artist' do
-      proxy = double
-      allow(proxy).to receive(:get).and_return(blueprint)
+    let(:proxy) { FakeProxy.new }
 
-      args = {
-        import_order:   :fake_import_order,
+    let(:args) do
+      import_order = instance_double(
+        'ImportRequest',
+        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
+      )
+
+      {
+        import_order:   import_order, # :fake_import_order,
         import_request: import_request,
         proxy:          proxy
       }
+    end
+
+    it 'returns the artist' do
       expect(described_class.call(args)).to be_instance_of(Artist)
+    end
+
+    it 'has not called get on the proxy' do
+      described_class.call(args)
+      expect(proxy).not_to have_received_get
     end
   end
 
   context 'when the artist does not exists in the database' do
-    let(:blueprint) do
-      TestData.by_name(:brainz_release_arise_jp_cd).blueprint
+    let(:import_order) do
+      instance_double(
+        'ImportRequest',
+        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
+      )
     end
 
-    let(:full_blueprint) do
-      TestData.by_name(:brainz_artist_sepultura).blueprint
+    let(:import_request) do
+      FactoryBot.create(
+        :brainz_artist_import_request,
+        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
+      )
     end
+
+    let(:proxy) { FakeProxy.new }
 
     it 'returns the artist' do
-      proxy = instance_double('Fake proxy')
-      allow(proxy).to receive(:get).and_return(full_blueprint)
-      args = {
-        import_order:   :fake_import_order,
-        import_request: :fake,
+      described_class.call(
+        import_order:   import_order,
+        import_request: import_request,
         proxy:          proxy
-      }
-      expect(described_class.call(args)).not_to be_nil
+      )
+      expect(proxy.matches(%r{/artist/})).to eq(1)
     end
   end
 end

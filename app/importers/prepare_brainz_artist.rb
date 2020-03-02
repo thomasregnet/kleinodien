@@ -12,19 +12,12 @@ class PrepareBrainzArtist < PrepareBrainzBase
   private
 
   def prepare
-    find_already_existing || true
+    find_already_existing || proxy.get(import_request)
   end
 
   public
 
-  def blueprint
-    proxy.get(import_request)
-  end
-
   def find_already_existing
-    codes_hash = blueprint.codes_hash
-    FindByCodesService.call(model_class: Artist, codes_hash: codes_hash)
-  rescue StandardError => e
-    raise e
+    Artist.find_by(brainz_code: import_request.code)
   end
 end
