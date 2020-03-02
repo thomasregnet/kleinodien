@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -17,16 +18,22 @@ RSpec.describe PrepareBrainzArtistCredit do
       TestData.by_name(:brainz_artist_sepultura).blueprint
     end
 
-    it 'requests the artist' do
-      proxy = double # spy
-      args  = {
+    let(:proxy) { FakeProxy.new }
+
+    before do
+      described_class.call(
         blueprint:    arise,
         import_order: :fake_import_order,
         proxy:        proxy
-      }
-      allow(proxy).to receive(:get).and_return(sepultura)
+      )
+    end
 
-      expect(described_class.call(args)).not_to be_nil
+    it 'requests the artist' do
+      expect(proxy.matches(%r{/artist/})).to eq(1)
+    end
+
+    it 'requests only the artist' do
+      expect(proxy.cache_size).to eq(1)
     end
   end
 end

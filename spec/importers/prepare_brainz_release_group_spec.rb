@@ -42,11 +42,11 @@ RSpec.describe PrepareBrainzReleaseGroup do
     end
 
     it 'adds two artists to the proxy cache' do
-      expect(proxy.match(%r{/artist/})).to eq(2)
+      expect(proxy.matches(%r{/artist/})).to eq(2)
     end
 
     it 'adds one release-group to the proxy cache' do
-      expect(proxy.match(%r{/release-group/})).to eq(1)
+      expect(proxy.matches(%r{/release-group/})).to eq(1)
     end
   end
 end
