@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -14,21 +15,19 @@ RSpec.describe PrepareBrainzReleaseEvent do
                 .blueprint.release_events.first
       end
 
+      let(:proxy) { FakeProxy.new }
       let(:args) do
         {
           blueprint:    blueprint,
           import_order: FactoryBot.create(:brainz_release_import_order),
-          proxy:        spy
+          proxy:        proxy
+          # proxy:        FakeProxy.new
         }
       end
 
-      it 'prepares' do
-        area_preparer = class_double('PrepareBrainzArea').as_stubbed_const
-        allow(area_preparer).to receive(:call)
-
+      it 'fetches the needed area' do
         described_class.call(args)
-
-        expect(area_preparer).to have_received(:call)
+        expect(proxy.matches(%r{/area/})).to eq(1)
       end
     end
   end
