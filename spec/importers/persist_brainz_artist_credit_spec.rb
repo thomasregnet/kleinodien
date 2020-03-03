@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -20,8 +21,8 @@ RSpec.describe PersistBrainzArtistCredit do
 
         {
           blueprint:    blueprint,
-          import_order: :fake_import_order,
-          proxy:        :fake_proxy
+          import_order: MockImportOrder.new,
+          proxy:        double
         }
       end
 

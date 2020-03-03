@@ -36,7 +36,7 @@ RSpec.describe PrepareBrainzArtist do
       )
 
       {
-        import_order:   import_order, # :fake_import_order,
+        import_order:   import_order,
         import_request: import_request,
         proxy:          proxy
       }

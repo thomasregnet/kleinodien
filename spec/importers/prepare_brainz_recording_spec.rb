@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'test_data'
 require 'test_data/brainz_service'
@@ -21,7 +22,7 @@ RSpec.describe PrepareBrainzRecording do
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
       args = {
-        import_order:   :fake_import_order,
+        import_order:   MockImportOrder.new,
         import_request: import_request,
         proxy:          FakeProxy.new
       }
@@ -48,7 +49,7 @@ RSpec.describe PrepareBrainzRecording do
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
       described_class.call(
-        import_order:   :fake_import_order,
+        import_order:   MockImportOrder.new,
         import_request: import_request,
         proxy:          proxy
       )

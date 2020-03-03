@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'test_data'
 require 'shared_examples_for_services'
@@ -25,7 +26,7 @@ RSpec.describe PrepareBrainzReleaseGroup do
     let(:proxy) { FakeProxy.new }
     let(:preparer) do
       described_class.new(
-        import_order:   :fake_import_order,
+        import_order:   MockImportOrder.new,
         import_request: import_request,
         proxy:          proxy
       )

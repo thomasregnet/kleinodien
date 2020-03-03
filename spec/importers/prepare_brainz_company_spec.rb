@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 
 RSpec.describe PrepareBrainzCompany do
@@ -33,7 +34,7 @@ RSpec.describe PrepareBrainzCompany do
     it 'does not call #get on the proxy' do
       described_class.call(
         blueprint:    blueprint,
-        import_order: :fake_import_order,
+        import_order: MockImportOrder.new,
         proxy:        proxy
       )
 
@@ -46,7 +47,7 @@ RSpec.describe PrepareBrainzCompany do
     let(:args) do
       {
         blueprint:    blueprint,
-        import_order: :fake_import_order,
+        import_order: MockImportOrder.new,
         proxy:        proxy
       }
     end

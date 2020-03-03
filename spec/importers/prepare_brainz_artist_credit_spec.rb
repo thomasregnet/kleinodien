@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -23,7 +24,7 @@ RSpec.describe PrepareBrainzArtistCredit do
     before do
       described_class.call(
         blueprint:    arise,
-        import_order: :fake_import_order,
+        import_order: MockImportOrder.new,
         proxy:        proxy
       )
     end
