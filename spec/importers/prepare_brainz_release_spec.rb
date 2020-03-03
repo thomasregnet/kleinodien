@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -43,7 +44,7 @@ RSpec.describe PrepareBrainzRelease do
       it 'returns true' do
         prepare_artist_credit_spy = spy
         prepare_release_group_spy = spy
-        proxy                     = spy
+        proxy                     = FakeProxy.new
         args = {
           blueprint:                 blueprint,
           import_order:              import_order,
@@ -64,13 +65,11 @@ RSpec.describe PrepareBrainzRelease do
         described_class.new(
           blueprint:    BrainzBlueprint.from_xml(xml_string),
           import_order: import_order,
-          proxy:        BrainzProxy.new(import_order: import_order)
-          # proxy:        spy
+          proxy:        FakeProxy.new
         )
       end
 
       it 'returns a true value' do
-        # expect(preparer.prepare_artist_credit).not_to be_nil
         expect(preparer.prepare_artist_credit).to be_truthy
       end
     end
