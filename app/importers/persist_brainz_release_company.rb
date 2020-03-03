@@ -10,6 +10,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
 
   def call
     release_catalog_number
+    company
   end
 
   private
