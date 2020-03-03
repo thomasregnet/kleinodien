@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data'
 
@@ -11,7 +12,7 @@ RSpec.describe PersistBrainzReleaseHead do
         persister = described_class.new(
           import_order:   FactoryBot.create(:brainz_import_order),
           import_request: :fake_import_request,
-          proxy:          :fake_proxy
+          proxy:          FakeProxy.new
         )
 
         blueprint_dbl = instance_double('BrainzBlueprint')
@@ -40,7 +41,7 @@ RSpec.describe PersistBrainzReleaseHead do
       persister = described_class.new(
         import_order:   FactoryBot.create(:brainz_import_order),
         import_request: :fake_import_request,
-        proxy:          :fake_proxy
+        proxy:          FakeProxy.new
       )
 
       allow(persister).to receive(:persist_artist_credit)
