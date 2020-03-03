@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data'
-
-# Proxy for testing
-class FakePersistBrainzReleaseTrackProxy
-  def get(_)
-    TestData.by_name(:brainz_recording_arise).blueprint
-  end
-end
 
 RSpec.describe PersistBrainzReleaseTrack do
   context 'with valid arguments' do
@@ -20,7 +14,7 @@ RSpec.describe PersistBrainzReleaseTrack do
         blueprint:    blueprint,
         import_order: FactoryBot.create(:brainz_import_order),
         no:           3,
-        proxy:        FakePersistBrainzReleaseTrackProxy.new,
+        proxy:        FakeProxy.new,
         subset:       FactoryBot.create(:release_subset)
       }
     end
