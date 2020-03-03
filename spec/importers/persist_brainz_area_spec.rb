@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -10,10 +11,9 @@ RSpec.describe PersistBrainzArea do
   describe 'persists the area' do
     let(:brainz_area) { TestData.by_name(:brainz_area_germany).blueprint }
     let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     before do
-      allow(proxy).to receive(:get).and_return(brainz_area)
       described_class.call(
         blueprint:    brainz_area,
         import_order: import_order,
@@ -38,10 +38,9 @@ RSpec.describe PersistBrainzArea do
   describe 'iso codes' do
     let(:brainz_area) { TestData.by_name(:brainz_area_germany).blueprint }
     let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     let(:area) do
-      allow(proxy).to receive(:get).and_return(brainz_area)
       described_class.call(
         blueprint:    brainz_area,
         import_order: import_order,
