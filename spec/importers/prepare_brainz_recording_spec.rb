@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data'
 require 'test_data/brainz_service'
@@ -17,15 +18,12 @@ RSpec.describe PrepareBrainzRecording do
     end
 
     it 'prepares the artist' do
-      proxy = double
-      allow(proxy).to receive(:get).and_return(blueprint)
-
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
       args = {
         import_order:   :fake_import_order,
         import_request: import_request,
-        proxy:          proxy
+        proxy:          FakeProxy.new
       }
 
       expect(described_class.call(args)).to be_nil
@@ -33,29 +31,29 @@ RSpec.describe PrepareBrainzRecording do
   end
 
   context 'with "The Duellists"' do
+    let(:blueprint) do
+      TestData.by_name(:brainz_recording_the_duellists).blueprint
+    end
+
     let(:import_request) do
       BrainzRecordingImportRequest.new(
         code: '5935ec91-8124-42ff-937f-f31a20ffe58f'
       )
     end
 
-    let(:blueprint) do
-      TestData.by_name(:brainz_recording_the_duellists).blueprint
-    end
+    let(:proxy) { FakeProxy.new }
 
     it 'prepares the artist' do
-      proxy = double
-      allow(proxy).to receive(:get).and_return(blueprint)
-
+      proxy = FakeProxy.new
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
-      args = {
+      described_class.call(
         import_order:   :fake_import_order,
         import_request: import_request,
         proxy:          proxy
-      }
+      )
 
-      expect(described_class.call(args)).to be_nil
+      expect(proxy.matches(%r{/recording/})).to eq(1)
     end
   end
 end
