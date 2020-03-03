@@ -1,18 +1,9 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
-
-# Fake a BrainzProxy
-class MockPersistBrainzPieceProxy
-  def get(import_request)
-    return TestData.by_name(:brainz_recording_highway_to_hell).blueprint \
-      if import_request.code =~ /5935ec91-8124-42ff-937f-f31a20ffe58f/
-
-    TestData.by_name(:brainz_artist_ac_dc).blueprint
-  end
-end
 
 RSpec.describe PersistBrainzPiece do
   it_behaves_like 'a service'
@@ -40,12 +31,10 @@ RSpec.describe PersistBrainzPiece do
       end
 
       it 'returns the Piece' do
-        proxy = spy
-        allow(proxy).to receive(:get).and_return(blueprint)
         args = {
           import_order:   :fake,
           import_request: import_request,
-          proxy:          proxy
+          proxy:          FakeProxy.new # proxy
         }
 
         expect(described_class.call(args).title).to eq('Test Dummy')
@@ -62,13 +51,10 @@ RSpec.describe PersistBrainzPiece do
       end
 
       it 'returns the Piece' do
-        # proxy = spy
-        # allow(proxy).to receive(:get).and_return(blueprint)
-        proxy = MockPersistBrainzPieceProxy.new
         args = {
           import_order:   FactoryBot.create(:brainz_import_order),
           import_request: import_request,
-          proxy:          proxy
+          proxy:          FakeProxy.new
         }
 
         expect(described_class.call(args).title).to eq('Highway to Hell')
