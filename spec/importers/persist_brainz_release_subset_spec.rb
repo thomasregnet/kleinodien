@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'test_data'
 
@@ -18,7 +19,7 @@ RSpec.describe PersistBrainzReleaseSubset do
         blueprint:    blueprint.media[0],
         import_order: :fake,
         release:      FactoryBot.create(:release),
-        proxy:        BrainzProxy.new(import_order: import_order)
+        proxy:        FakeProxy.new
       }
       allow(PersistBrainzReleaseTrack).to receive(:call)
       expect(described_class.call(args).new_record?).to be false
@@ -34,7 +35,7 @@ RSpec.describe PersistBrainzReleaseSubset do
         {
           blueprint:    blueprint,
           import_order: :fake,
-          proxy:        :fake_proxy,
+          proxy:        double,
           release:      FactoryBot.create(:release)
         }
       end
@@ -52,7 +53,7 @@ RSpec.describe PersistBrainzReleaseSubset do
         {
           blueprint:    blueprint,
           import_order: :fake,
-          proxy:        :fake_proxy,
+          proxy:        double,
           release:      FactoryBot.create(:release)
         }
       end
