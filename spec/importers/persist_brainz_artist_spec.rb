@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'test_data'
 require 'rails_helper'
 
@@ -17,8 +18,7 @@ RSpec.describe PersistBrainzArtist do
   context 'when the Artist does not exist' do
     describe '.call' do
       it 'persists the Artist' do
-        proxy = double
-        allow(proxy).to receive(:get).and_return(blueprint)
+        proxy = FakeProxy.new
 
         artist = described_class.call(
           import_order:   FactoryBot.create(:brainz_import_order),
@@ -41,12 +41,10 @@ RSpec.describe PersistBrainzArtist do
       end
 
       it 'returns that artist' do
-        proxy = double
-        allow(proxy).to receive(:get).and_return(blueprint)
         args = {
           import_order:   FactoryBot.create(:brainz_import_order),
           import_request: import_request,
-          proxy:          proxy
+          proxy:          FakeProxy.new
         }
 
         expect(described_class.call(args).name)
