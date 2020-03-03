@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -17,12 +18,9 @@ RSpec.describe PersistBrainzCompany do
     end
 
     let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     before do
-      allow(proxy).to receive(:get).and_return(brainz_company)
-      allow(proxy).to receive(:get).and_return(brainz_area)
-
       described_class.call(
         blueprint:    brainz_company,
         import_order: import_order,
@@ -36,7 +34,7 @@ RSpec.describe PersistBrainzCompany do
     end
 
     it 'has persisted the area of the company' do
-      expect(Area.find_by(name: 'Germany')).not_to be_nil
+      expect(Area.find_by(name: 'San Francisco')).not_to be_nil
     end
   end
 end
