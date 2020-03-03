@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 
 RSpec.describe PrepareBrainzCompany do
@@ -27,7 +28,7 @@ RSpec.describe PrepareBrainzCompany do
 
     after { DatabaseCleaner.clean }
 
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
 
     it 'does not call #get on the proxy' do
       described_class.call(
@@ -36,12 +37,12 @@ RSpec.describe PrepareBrainzCompany do
         proxy:        proxy
       )
 
-      expect(proxy).not_to have_received(:get)
+      expect(proxy).not_to have_received_get
     end
   end
 
   context 'when the Company does not exist in the database' do
-    let(:proxy) { spy }
+    let(:proxy) { FakeProxy.new }
     let(:args) do
       {
         blueprint:    blueprint,
@@ -50,7 +51,7 @@ RSpec.describe PrepareBrainzCompany do
       }
     end
 
-    it 'does not call #get on the proxy' do
+    it 'does call #get on the proxy' do
       area_preparer = class_double('PrepareBrainzArea')
                       .as_stubbed_const(transfer_nested_constants: true)
 
@@ -58,7 +59,7 @@ RSpec.describe PrepareBrainzCompany do
 
       described_class.call(args)
 
-      expect(proxy).to have_received(:get)
+      expect(proxy).to have_received_get
     end
   end
 end
