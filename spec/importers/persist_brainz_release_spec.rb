@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -32,12 +33,10 @@ RSpec.describe PersistBrainzRelease do
       end
 
       it 'returns the CompilationRelease' do
-        proxy = spy
-        allow(proxy).to receive(:get).and_return(blueprint)
         args = {
           blueprint:    blueprint,
           import_order: :fake,
-          proxy:        proxy
+          proxy:        FakeProxy.new
         }
         expect(described_class.call(args).title).to eq('Test Dummy')
       end
@@ -53,7 +52,7 @@ RSpec.describe PersistBrainzRelease do
       persister = described_class.new(
         blueprint:    blueprint,
         import_order: FactoryBot.create(:brainz_import_order),
-        proxy:        :fake
+        proxy:        FakeProxy.new
       )
 
       allow(persister).to receive(:persist_artist_credit)
