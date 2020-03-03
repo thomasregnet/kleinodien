@@ -23,7 +23,7 @@ class FakeMusicBrainz < Sinatra::Base
   private
 
   def relative_path
-    "musicbrainz.org/#{params[:type]}/#{params[:id]}#{build_inc}"
+    "musicbrainz.org/ws/2/#{params[:type]}/#{params[:id]}#{build_inc}"
   end
 
   def call_path_service

@@ -10,7 +10,8 @@ RSpec.describe TestData::PathService do
 
   describe '.call' do
     context 'with a valid path' do
-      path = 'musicbrainz.org/artist/bdacc37b-8633-4bf8-9dd5-4662ee651aec?' \
+      path = 'musicbrainz.org/ws/2/artist/' \
+        'bdacc37b-8633-4bf8-9dd5-4662ee651aec?' \
         'inc=artist-rels+url-rels.xml'
       it 'returns the file content' do
         expect(described_class.call(path: path)).to match(/\A<\?xml/)
