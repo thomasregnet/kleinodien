@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -14,13 +15,7 @@ RSpec.describe PersistBrainzReleaseEvent do
 
     let(:release_event) { release.release_events.first }
     let(:area) { release_event.area }
-    # let(:proxy) { instance_double('BrainzProxy') }
-    let(:proxy) do
-      area = release_event.area
-      proxy = Object.new
-      proxy.define_singleton_method(:get) { |_| area }
-      proxy
-    end
+    let(:proxy) { FakeProxy.new }
 
     let(:args) do
       {
@@ -32,7 +27,6 @@ RSpec.describe PersistBrainzReleaseEvent do
     end
 
     it 'persists the ReleaseEvent' do
-      # allow(proxy).to receive(:get).and_return(area)
       expect(described_class.call(args)).to be_instance_of(ReleaseEvent)
     end
   end
