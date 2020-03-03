@@ -1,23 +1,9 @@
 # frozen_string_literal: true
 
+require 'fake_proxy'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
-
-# Fake a BrainzProxy
-class MockPersistBrainzArtistCreditProxy
-  def initialize
-    @jello_biafra = TestData.by_name(:brainz_artist_jello_biafra).blueprint
-    @nomeansno    = TestData.by_name(:brainz_artist_nomeansno).blueprint
-  end
-
-  attr_reader :jello_biafra, :nomeansno
-  def get(import_request)
-    return jello_biafra if import_request.to_uri =~ /2280ca0e/
-
-    nomeansno
-  end
-end
 
 RSpec.describe PersistBrainzArtistCredit do
   it_behaves_like 'a service'
@@ -64,7 +50,7 @@ RSpec.describe PersistBrainzArtistCredit do
         args = {
           blueprint:    blueprint,
           import_order: FactoryBot.create(:brainz_import_order),
-          proxy:        MockPersistBrainzArtistCreditProxy.new
+          proxy:        FakeProxy.new
         }
 
         expect(described_class.call(args))
