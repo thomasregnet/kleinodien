@@ -12,6 +12,23 @@ class FakeProxy
 
   attr_reader :cache, :fetch_requests, :get_calls
 
+  def new_get(what, code)
+    @get_calls += 1
+
+    request_class = "Brainz#{what.to_s.camelize}ImportRequest".constantize
+    uri = request_class.to_uri(code: code)
+
+    blueprint = cache[uri]
+    return blueprint if blueprint
+
+    path = uri.sub(%r{\A.+\/\/}, '')
+    xml = TestData::PathService.call(path: path)
+    blueprint = BrainzBlueprint.from_xml(xml)
+    cache[uri] = blueprint
+
+    blueprint
+  end
+
   def get(key)
     @get_calls += 1
 

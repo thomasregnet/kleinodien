@@ -33,7 +33,8 @@ class PrepareBrainzCompany < PrepareBrainzBase
   end
 
   def trigger_proxy
-    import_request = BrainzCompanyImportRequest.new(code: brainz_code)
-    @blueprint = proxy.get(import_request)
+    # import_request = BrainzCompanyImportRequest.new(code: brainz_code)
+    # @blueprint = proxy.get(import_request)
+    @blueprint = proxy.new_get(:company, brainz_code)
   end
 end

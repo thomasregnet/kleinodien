@@ -25,18 +25,19 @@ RSpec.describe PrepareBrainzArea do
   end
 
   context 'when the area does not exist' do
+    let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
     let(:proxy) { instance_double('BrainzProxy') }
 
     it 'triggers the proxy' do
       preparer = described_class.new(
         blueprint:    blueprint,
-        import_order: FactoryBot.create(:brainz_release_import_order),
+        import_order: import_order,
         proxy:        proxy
       )
-      allow(proxy).to receive(:get)
+      allow(proxy).to receive(:new_get)
       preparer.prepare
-      expect(proxy).to have_received(:get)
-        .with(instance_of(BrainzAreaImportRequest))
+      expect(proxy).to have_received(:new_get)
+        .with(:area, instance_of(String))
     end
   end
 
