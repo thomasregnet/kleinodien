@@ -10,13 +10,6 @@ RSpec.describe PrepareBrainzReleaseGroup do
   it_behaves_like 'a service'
 
   context 'when the ReleaseHead does not exist' do
-    let(:import_request) do
-      FactoryBot.create(
-        :brainz_release_group_import_request,
-        code: '7d31891f-b9da-36de-ab08-98b1fdbbb023'
-      )
-    end
-
     let(:blueprint) do
       TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
               .blueprint
@@ -26,9 +19,9 @@ RSpec.describe PrepareBrainzReleaseGroup do
     let(:proxy) { FakeProxy.new }
     let(:preparer) do
       described_class.new(
-        import_order:   MockImportOrder.new,
-        import_request: import_request,
-        proxy:          proxy
+        blueprint:    blueprint,
+        import_order: MockImportOrder.new,
+        proxy:        proxy
       )
     end
 

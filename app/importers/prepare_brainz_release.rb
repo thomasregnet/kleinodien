@@ -73,15 +73,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_release_group
     PrepareBrainzReleaseGroup.call(
-      import_order:   import_order,
-      import_request: release_group_import_request,
-      proxy:          proxy
-    )
-  end
-
-  def release_group_import_request
-    BrainzReleaseGroupImportRequest.new(
-      code: blueprint.release_group.brainz_code
+      blueprint:    blueprint.release_group,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 
