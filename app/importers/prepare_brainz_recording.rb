@@ -2,24 +2,24 @@
 
 # Prepares a MusicBrainz Recording for import.
 class PrepareBrainzRecording < PrepareBrainzBase
-  def initialize(import_request:, **args)
+  def initialize(blueprint:, **args)
     super(args)
-    @import_request = import_request
+    @brainz_code = blueprint.brainz_code
   end
 
-  attr_reader :import_request
+  attr_reader :brainz_code
 
   private
+
+  def blueprint
+    @blueprint = proxy.new_get(:recording, brainz_code)
+  end
 
   def prepare
     find_already_existing || prepare_artist_credit
   end
 
   public
-
-  def blueprint
-    proxy.get(import_request)
-  end
 
   def find_already_existing
     codes_hash = blueprint.codes_hash

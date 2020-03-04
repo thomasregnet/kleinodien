@@ -53,14 +53,10 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_recordings(medium)
     medium.flat_track_list.each do |track|
-      import_request = BrainzRecordingImportRequest.new(
-        code: track.recording.brainz_code
-      )
-
       PrepareBrainzRecording.call(
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
+        blueprint:    track.recording,
+        import_order: import_order,
+        proxy:        proxy
       )
     end
   end
