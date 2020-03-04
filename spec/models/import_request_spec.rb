@@ -25,4 +25,36 @@ RSpec.describe ImportRequest, type: :model do
     import_request.attempts.create!(status_code: 200)
     expect(import_request.attempts_count).to eq(1)
   end
+
+  describe '.to_uri' do
+    context 'when called on the base class' do
+      let(:args) { FactoryBot.attributes_for(:import_order) }
+
+      it 'throws an error' do
+        expect { described_class.to_uri(args) }.to raise_error(
+          NoMethodError, /to_uri/
+        )
+      end
+    end
+
+    context 'when called on an inheriting class that implements #to_uri' do
+      # For testing
+      class FakeImportRequestToUri < ImportRequest
+        def initialize(args)
+          @args = args
+        end
+
+        attr_reader :args
+
+        def to_uri
+          "https://fake/#{args[:code]}"
+        end
+      end
+
+      it 'returns the uri' do
+        expect(FakeImportRequestToUri.to_uri(code: 'abc123'))
+          .to eq('https://fake/abc123')
+      end
+    end
+  end
 end

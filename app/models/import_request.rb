@@ -13,6 +13,10 @@ class ImportRequest < ApplicationRecord
   validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending running done failed] }
 
+  def self.to_uri(args)
+    new(args).to_uri
+  end
+
   aasm column: :state do
     state :pending, initial: true
     state :running, :done, :failed
