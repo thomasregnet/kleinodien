@@ -5,15 +5,7 @@ require 'test_data'
 require 'rails_helper'
 
 RSpec.describe PersistBrainzArtist do
-  let(:blueprint) do
-    TestData.by_name(:brainz_artist_slayer).blueprint
-  end
-
-  let(:import_request) do
-    BrainzArtistImportRequest.new(
-      code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-    )
-  end
+  let(:code) { 'bdacc37b-8633-4bf8-9dd5-4662ee651aec' } # Slayer
 
   context 'when the Artist does not exist' do
     describe '.call' do
@@ -21,9 +13,9 @@ RSpec.describe PersistBrainzArtist do
         proxy = FakeProxy.new
 
         artist = described_class.call(
-          import_order:   FactoryBot.create(:brainz_import_order),
-          import_request: import_request,
-          proxy:          proxy
+          code:         code,
+          import_order: FactoryBot.create(:brainz_import_order),
+          proxy:        proxy
         )
         expect(artist).not_to be_new_record
       end
@@ -42,9 +34,9 @@ RSpec.describe PersistBrainzArtist do
 
       it 'returns that artist' do
         args = {
-          import_order:   FactoryBot.create(:brainz_import_order),
-          import_request: import_request,
-          proxy:          FakeProxy.new
+          code:         code,
+          import_order: FactoryBot.create(:brainz_import_order),
+          proxy:        FakeProxy.new
         }
 
         expect(described_class.call(args).name)

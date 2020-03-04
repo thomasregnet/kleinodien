@@ -51,11 +51,10 @@ class PersistBrainzArtistCredit < PersistBrainzBase
   end
 
   def persist_artist(brainz_code)
-    import_request = BrainzArtistImportRequest.new(code: brainz_code)
     PersistBrainzArtist.call(
-      import_order:   import_order,
-      import_request: import_request,
-      proxy:          proxy
+      code:         brainz_code,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 end
