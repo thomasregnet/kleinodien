@@ -26,11 +26,6 @@ class PrepareBrainzArea < PrepareBrainzBase
   end
 
   def trigger_proxy
-    # import_request = BrainzAreaImportRequest.create!(
-    #   code:         blueprint.brainz_code,
-    #   import_order: import_order
-    # )
-    # proxy.get(import_request)
     proxy.new_get(:area, blueprint.brainz_code)
   end
 end
