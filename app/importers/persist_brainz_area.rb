@@ -50,13 +50,7 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   def brainz_area
-    @brainz_area ||= proxy.get(import_request)
-  end
-
-  def import_request
-    @import_request ||= BrainzAreaImportRequest.create(
-      code: blueprint.brainz_code
-    )
+    @brainz_area ||= proxy.new_get(:area, blueprint.brainz_code)
   end
 
   private
