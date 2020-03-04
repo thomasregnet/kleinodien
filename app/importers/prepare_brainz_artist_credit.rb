@@ -29,13 +29,14 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
   end
 
   def prepare_brainz_artist(artist_blueprint)
-    artist_import_request = BrainzArtistImportRequest.new(
-      code: artist_blueprint.brainz_code
-    )
+    # artist_import_request = BrainzArtistImportRequest.new(
+    #   code: artist_blueprint.brainz_code
+    # )
     PrepareBrainzArtist.call(
-      import_request: artist_import_request,
-      import_order:   import_order,
-      proxy:          proxy
+      # import_request: artist_import_request,
+      blueprint:    artist_blueprint,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 end

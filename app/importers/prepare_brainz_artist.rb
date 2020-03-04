@@ -2,22 +2,22 @@
 
 # Prepare a MusicBrainz artist for import
 class PrepareBrainzArtist < PrepareBrainzBase
-  def initialize(import_request:, **args)
+  def initialize(blueprint:, **args)
     super(args)
-    @import_request = import_request
+    @blueprint = blueprint
   end
 
-  attr_reader :import_request
+  attr_reader :blueprint
 
   private
 
   def prepare
-    find_already_existing || proxy.get(import_request)
+    find_already_existing || proxy.new_get(:artist, blueprint.brainz_code)
   end
 
   public
 
   def find_already_existing
-    Artist.find_by(brainz_code: import_request.code)
+    Artist.find_by(brainz_code: blueprint.brainz_code)
   end
 end

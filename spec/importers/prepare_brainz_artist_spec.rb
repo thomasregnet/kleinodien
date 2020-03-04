@@ -21,12 +21,6 @@ RSpec.describe PrepareBrainzArtist do
       TestData.by_name(:brainz_artist_slayer).blueprint
     end
 
-    let(:import_request) do
-      BrainzArtistImportRequest.new(
-        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-      )
-    end
-
     let(:proxy) { FakeProxy.new }
 
     let(:args) do
@@ -36,9 +30,9 @@ RSpec.describe PrepareBrainzArtist do
       )
 
       {
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
+        blueprint:    blueprint,
+        import_order: import_order,
+        proxy:        proxy
       }
     end
 
@@ -53,16 +47,13 @@ RSpec.describe PrepareBrainzArtist do
   end
 
   context 'when the artist does not exists in the database' do
+    let(:blueprint) do
+      TestData.by_name(:brainz_artist_slayer).blueprint
+    end
+
     let(:import_order) do
       instance_double(
         'ImportRequest',
-        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-      )
-    end
-
-    let(:import_request) do
-      FactoryBot.create(
-        :brainz_artist_import_request,
         code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
       )
     end
@@ -71,9 +62,9 @@ RSpec.describe PrepareBrainzArtist do
 
     it 'returns the artist' do
       described_class.call(
-        import_order:   import_order,
-        import_request: import_request,
-        proxy:          proxy
+        blueprint:    blueprint,
+        import_order: import_order,
+        proxy:        proxy
       )
       expect(proxy.matches(%r{/artist/})).to eq(1)
     end
