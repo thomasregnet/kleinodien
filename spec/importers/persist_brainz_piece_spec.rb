@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
@@ -26,15 +27,11 @@ RSpec.describe PersistBrainzPiece do
         TestData.by_name(:brainz_recording_highway_to_hell).blueprint
       end
 
-      let(:import_request) do
-        BrainzRecordingImportRequest.new(code: brainz_code)
-      end
-
       it 'returns the Piece' do
         args = {
-          import_order:   :fake,
-          import_request: import_request,
-          proxy:          FakeProxy.new # proxy
+          code:         brainz_code,
+          import_order: MockImportOrder.new,
+          proxy:        FakeProxy.new
         }
 
         expect(described_class.call(args).title).to eq('Test Dummy')
@@ -46,15 +43,11 @@ RSpec.describe PersistBrainzPiece do
         TestData.by_name(:brainz_recording_highway_to_hell).blueprint
       end
 
-      let(:import_request) do
-        BrainzRecordingImportRequest.new(code: brainz_code)
-      end
-
       it 'returns the Piece' do
         args = {
-          import_order:   FactoryBot.create(:brainz_import_order),
-          import_request: import_request,
-          proxy:          FakeProxy.new
+          code:         brainz_code,
+          import_order: FactoryBot.create(:brainz_import_order),
+          proxy:        FakeProxy.new
         }
 
         expect(described_class.call(args).title).to eq('Highway to Hell')

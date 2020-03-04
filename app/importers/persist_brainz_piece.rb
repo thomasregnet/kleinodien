@@ -2,12 +2,12 @@
 
 # Persist a MusicBrainz recording
 class PersistBrainzPiece < PersistBrainzBase
-  def initialize(import_request:, **args)
+  def initialize(code:, **args)
     super(args)
-    @import_request = import_request
+    @code = code
   end
 
-  attr_reader :import_request
+  attr_reader :code
 
   def call
     find_already_existing || persist
@@ -21,7 +21,7 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def blueprint
-    proxy.get(import_request)
+    proxy.new_get(:recording, code)
   end
 
   def duration

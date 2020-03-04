@@ -22,11 +22,10 @@ class PersistBrainzReleaseTrack < PersistBrainzBase
 
   def piece
     recording_code = blueprint.recording.brainz_code
-    import_request = BrainzRecordingImportRequest.new(code: recording_code)
     PersistBrainzPiece.call(
-      import_order:   import_order,
-      import_request: import_request,
-      proxy:          proxy
+      code:         recording_code,
+      import_order: import_order,
+      proxy:        proxy
     )
   end
 end
