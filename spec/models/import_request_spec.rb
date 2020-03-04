@@ -38,7 +38,7 @@ RSpec.describe ImportRequest, type: :model do
     end
 
     context 'when called on an inheriting class that implements #to_uri' do
-      # For testing
+      # rubocop:disable RSpec/LeakyConstantDeclaration
       class FakeImportRequestToUri < ImportRequest
         def initialize(args)
           @args = args
@@ -50,6 +50,7 @@ RSpec.describe ImportRequest, type: :model do
           "https://fake/#{args[:code]}"
         end
       end
+      # rubocop:enable RSpec/LeakyConstantDeclaration
 
       it 'returns the uri' do
         expect(FakeImportRequestToUri.to_uri(code: 'abc123'))
