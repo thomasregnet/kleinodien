@@ -14,7 +14,17 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
   attr_reader :code
 
   def prepare
-    find_already_existing || prepare_artist_credit
+    return if proxy.cached?(:release_group, code)
+    return if ReleaseHead.find_by(brainz_code: code)
+    return if FindByCodesService.call(
+      model_class: ReleaseHead, codes_hash: blueprint.codes_hash
+    )
+
+    prepare_siblings
+  end
+
+  def prepare_siblings
+    prepare_artist_credit
   end
 
   def blueprint
