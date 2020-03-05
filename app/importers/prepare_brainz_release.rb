@@ -12,17 +12,36 @@ class PrepareBrainzRelease < PrepareBrainzBase
   private
 
   # This method smells of :reek:TooManyStatements
-  def prepare
-    release = find_already_existing
-    return release if release
+  # def prepare
+  #   release = find_already_existing
+  #   return release if release
 
+  #   prepare_artist_credit  || return
+  #   prepare_companies      || return
+  #   prepare_release_group  || return
+  #   prepare_release_events || return
+  #   prepare_media          || return
+
+  #   true
+  # end
+
+  def prepare
+    # return if proxy.cached?(:release, blueprint.brainz_code)
+    return if Release.find_by(brainz_code: blueprint.brainz_code)
+    return if FindByCodesService.call(
+      model_class: Release,
+      codes_hash:  blueprint.codes_hash
+    )
+
+    prepare_siblings
+  end
+
+  def prepare_siblings
     prepare_artist_credit  || return
     prepare_companies      || return
     prepare_release_group  || return
     prepare_release_events || return
     prepare_media          || return
-
-    true
   end
 
   public

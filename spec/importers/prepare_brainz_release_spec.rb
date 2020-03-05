@@ -41,7 +41,7 @@ RSpec.describe PrepareBrainzRelease do
       end
       let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
 
-      it 'returns true' do
+      it 'does not throw an exception' do
         prepare_artist_credit_spy = spy
         prepare_release_group_spy = spy
         proxy                     = FakeProxy.new
@@ -52,7 +52,7 @@ RSpec.describe PrepareBrainzRelease do
           prepare_release_group_spy: prepare_release_group_spy,
           proxy:                     proxy
         }
-        expect(MockPrepareBrainzRelease.call(args)).to be(true)
+        expect { MockPrepareBrainzRelease.call(args) }.not_to raise_error
       end
     end
   end
