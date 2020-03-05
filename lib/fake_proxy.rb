@@ -32,20 +32,6 @@ class FakeProxy
     blueprint
   end
 
-  # This method smells of :reek:ToManyStatements
-  def from_test_data(key)
-    @fetch_requests += 1
-
-    uri = key.to_uri
-    path = uri.sub(%r{\A.+\/\/}, '')
-    raw = TestData::PathService.call(path: path)
-    blueprint = BrainzBlueprint.from_xml(raw)
-
-    cache[uri] = blueprint
-
-    blueprint
-  end
-
   def cache_size
     cache.length
   end
