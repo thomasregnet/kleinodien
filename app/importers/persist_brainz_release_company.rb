@@ -5,6 +5,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   def initialize(blueprint:, release:, **args)
     super(args)
     @blueprint = blueprint
+    @code      = blueprint.label.brainz_code
     @release   = release
   end
 
@@ -15,7 +16,11 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
 
   private
 
-  attr_reader :blueprint, :release
+  attr_reader :code, :release
+
+  def blueprint
+    @blueprint ||= proxy.new_get(:company, code)
+  end
 
   def company
     @company ||= PersistBrainzCompany.call(
@@ -23,11 +28,6 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
       import_order: import_order,
       proxy:        proxy
     )
-  end
-
-  def company_blueprint
-    import_request = BrainzCompanyImportRequest.new(code: blueprint.label.id)
-    proxy.get(import_request)
   end
 
   def company_role
