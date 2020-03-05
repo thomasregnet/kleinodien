@@ -15,6 +15,24 @@ RSpec.describe BrainzProxy do
 
   let(:proxy) { described_class.new(import_order: import_order) }
 
+  describe '#cached?' do
+    context 'when cached' do
+      it 'retruns true' do
+        allow(proxy).to receive(:cache).and_return('test' => 'data')
+        allow(proxy).to receive(:uri_for).and_return('test')
+
+        expect(proxy).to be_cached(:something, 'test')
+      end
+    end
+
+    context 'when not cached' do
+      it 'returns false' do
+        expect(proxy)
+          .not_to be_cached(:artist, '50c636c5-c1cc-461f-88ec-1df95fddb9da')
+      end
+    end
+  end
+
   describe '.last_request' do
     it 'is initial set to 0' do
       expect(described_class.last_request).to be(0)

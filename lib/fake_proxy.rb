@@ -12,11 +12,14 @@ class FakeProxy
 
   attr_reader :cache, :fetch_requests, :get_calls
 
+  def cached?(what, code)
+    cache.key?(uri_for(what, code))
+  end
+
   def get(what, code)
     @get_calls += 1
 
-    request_class = "Brainz#{what.to_s.camelize}ImportRequest".constantize
-    uri = request_class.to_uri(code: code)
+    uri = uri_for(what, code)
 
     blueprint = cache[uri]
     return blueprint if blueprint
@@ -56,5 +59,23 @@ class FakeProxy
     return true if get_calls.positive?
   end
   # rubocop:enable Naming/PredicateName
+
+  private
+
+  def import_request_for(what, code)
+    request_class = request_class_for(what)
+    request_class.create!(
+      code:         code,
+      import_order: import_order
+    )
+  end
+
+  def request_class_for(what)
+    "Brainz#{what.to_s.camelize}ImportRequest".constantize
+  end
+
+  def uri_for(what, code)
+    request_class_for(what).to_uri(code: code)
+  end
 end
 

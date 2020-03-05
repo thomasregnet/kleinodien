@@ -16,17 +16,17 @@ class BrainzProxy
     cache[import_request.to_uri] = blueprint
   end
 
+  def cached?(what, code)
+    cache.key?(uri_for(what, code))
+  end
+
   def get(what, code)
-    request_class = "Brainz#{what.to_s.camelize}ImportRequest".constantize
-    uri = request_class.to_uri(code: code)
+    uri = uri_for(what, code)
 
     blueprint = cache[uri]
     return blueprint if blueprint
 
-    import_request = request_class.create!(
-      code:         code,
-      import_order: import_order
-    )
+    import_request = import_request_for(what, code)
 
     fetch(import_request)
   end
@@ -60,5 +60,23 @@ class BrainzProxy
     return if pre_existing_import_order == import_order
 
     raise ArgumentError, 'ImportOrder missmatch'
+  end
+
+  private
+
+  def import_request_for(what, code)
+    request_class = request_class_for(what)
+    request_class.create!(
+      code:         code,
+      import_order: import_order
+    )
+  end
+
+  def request_class_for(what)
+    "Brainz#{what.to_s.camelize}ImportRequest".constantize
+  end
+
+  def uri_for(what, code)
+    request_class_for(what).to_uri(code: code)
   end
 end
