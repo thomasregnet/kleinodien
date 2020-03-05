@@ -43,12 +43,8 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def persist_area
-    area_code = blueprint.area.brainz_code
-    import_request = BrainzAreaImportRequest.new(
-      code: area_code
-    )
     PersistBrainzArea.call(
-      blueprint:    proxy.get(import_request),
+      blueprint:    blueprint.area,
       import_order: import_order,
       proxy:        proxy
     )

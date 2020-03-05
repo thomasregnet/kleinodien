@@ -4,10 +4,10 @@
 class PersistBrainzArea < PersistBrainzBase
   def initialize(blueprint:, **args)
     super(args)
-    @blueprint = blueprint
+    @code = blueprint.brainz_code
   end
 
-  attr_reader :blueprint
+  attr_reader :code
 
   def call
     find_already_existing || persist
@@ -16,6 +16,10 @@ class PersistBrainzArea < PersistBrainzBase
   def find_already_existing
     Area.find_by(brainz_code: blueprint.brainz_code) \
       || Area.find_by(name: blueprint.name)
+  end
+
+  def blueprint
+    @blueprint ||= proxy.new_get(:area, code)
   end
 
   # TODO: Safer mechanism to determinate the "type"
