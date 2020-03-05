@@ -14,17 +14,6 @@ class ImportBase < ServiceBase
     find_existing || try_prepare && persist
   end
 
-  def blueprint
-    proxy.get(import_request)
-  end
-
-  def import_request
-    @import_request ||= import_request_class.create(
-      code:         import_order.code,
-      import_order: import_order
-    )
-  end
-
   # This method smells of :reek:TooManyStatements
   # This method smells of :reek:DuplicateMethodCall
   def persist
@@ -58,10 +47,6 @@ class ImportBase < ServiceBase
     e.backtrace.each { |msg| Rails.logger.error(msg) }
     import_order.failure!
     nil
-  end
-
-  def import_request_class
-    import_order.type.sub(/ImportOrder/, 'ImportRequest').constantize
   end
 
   # This method smells of :reek:TooManyStatements

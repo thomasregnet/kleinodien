@@ -19,4 +19,8 @@ class ImportBrainzRelease < ImportBrainzBase
   def find_existing_by_import_order
     Release.find_by(brainz_code: import_order.code)
   end
+
+  def blueprint
+    @blueprint ||= proxy.new_get(:release, import_order.code)
+  end
 end
