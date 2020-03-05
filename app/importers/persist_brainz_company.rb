@@ -4,16 +4,20 @@
 class PersistBrainzCompany < PersistBrainzBase
   def initialize(blueprint:, **args)
     super(args)
-    @blueprint = blueprint
+    @code = blueprint.brainz_code
   end
 
-  attr_reader :blueprint
+  attr_reader :code
 
   def call
     find_in_database || persist
   end
 
   private
+
+  def blueprint
+    @blueprint ||= proxy.new_get(:company, code)
+  end
 
   def find_in_database
     FindByCodesService.call(

@@ -19,7 +19,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
 
   def company
     @company ||= PersistBrainzCompany.call(
-      blueprint:    company_blueprint,
+      blueprint:    blueprint.label,
       import_order: import_order,
       proxy:        proxy
     )
