@@ -9,17 +9,21 @@ class PrepareBrainzCompany < PrepareBrainzBase
 
   private
 
-  attr_reader :blueprint, :brainz_code
+  attr_reader :brainz_code
 
   def prepare
-    find_in_database && return
+    return if proxy.cached?(:company, brainz_code)
+    return if Company.find_by(brainz_code: brainz_code)
+    return if FindByCodesService.call(
+      model_class: Company,
+      codes_hash:  blueprint.codes_hash
+    )
 
-    trigger_proxy
-    prepare_area
+    prepare_siblings
   end
 
-  def find_in_database
-    Company.find_by(brainz_code: brainz_code)
+  def prepare_siblings
+    prepare_area
   end
 
   def prepare_area
@@ -30,7 +34,7 @@ class PrepareBrainzCompany < PrepareBrainzBase
     )
   end
 
-  def trigger_proxy
-    @blueprint = proxy.get(:company, brainz_code)
+  def blueprint
+    @blueprint ||= proxy.get(:company, brainz_code)
   end
 end
