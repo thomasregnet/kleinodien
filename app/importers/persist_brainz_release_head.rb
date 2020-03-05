@@ -2,19 +2,21 @@
 
 # Persist a CompilationHead using data from MusicBrainz
 class PersistBrainzReleaseHead < PersistBrainzBase
-  def initialize(import_request:, **args)
+  def initialize(blueprint:, **args)
     super(args)
-    @import_request = import_request
+    # @import_request = import_request
+    @code = blueprint.brainz_code
   end
 
-  attr_reader :import_request
+  # attr_reader :import_request
+  attr_reader :code
 
   def call
     find_already_existing || persist
   end
 
   def blueprint
-    @blueprint ||= proxy.get(import_request)
+    @blueprint ||= proxy.new_get(:release_group, code)
   end
 
   def find_already_existing

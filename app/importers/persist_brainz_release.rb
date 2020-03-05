@@ -109,12 +109,13 @@ class PersistBrainzRelease < PersistBrainzBase
   end
 
   def persist_release_head
-    import_request = BrainzReleaseGroupImportRequest.new(
-      code: blueprint.release_group.brainz_code
-    )
+    # import_request = BrainzReleaseGroupImportRequest.new(
+    #   code: blueprint.release_group.brainz_code
+    # )
 
     PersistBrainzReleaseHead.call(
-      import_request: import_request,
+      blueprint:    blueprint.release_group,
+      # import_request: import_request,
       import_order:   import_order,
       proxy:          proxy
     )
