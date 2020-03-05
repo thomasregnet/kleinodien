@@ -21,7 +21,7 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def blueprint
-    proxy.new_get(:recording, code)
+    proxy.get(:recording, code)
   end
 
   def duration

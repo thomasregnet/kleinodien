@@ -21,6 +21,6 @@ class ImportBrainzRelease < ImportBrainzBase
   end
 
   def blueprint
-    @blueprint ||= proxy.new_get(:release, import_order.code)
+    @blueprint ||= proxy.get(:release, import_order.code)
   end
 end

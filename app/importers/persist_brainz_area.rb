@@ -19,7 +19,7 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   def blueprint
-    @blueprint ||= proxy.new_get(:area, code)
+    @blueprint ||= proxy.get(:area, code)
   end
 
   # TODO: Safer mechanism to determinate the "type"
@@ -54,7 +54,7 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   def brainz_area
-    @brainz_area ||= proxy.new_get(:area, blueprint.brainz_code)
+    @brainz_area ||= proxy.get(:area, blueprint.brainz_code)
   end
 
   private

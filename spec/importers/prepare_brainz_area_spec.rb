@@ -34,9 +34,9 @@ RSpec.describe PrepareBrainzArea do
         import_order: import_order,
         proxy:        proxy
       )
-      allow(proxy).to receive(:new_get)
+      allow(proxy).to receive(:get)
       preparer.prepare
-      expect(proxy).to have_received(:new_get)
+      expect(proxy).to have_received(:get)
         .with(:area, instance_of(String))
     end
   end

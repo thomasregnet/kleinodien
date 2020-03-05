@@ -16,7 +16,7 @@ class BrainzProxy
     cache[import_request.to_uri] = blueprint
   end
 
-  def new_get(what, code)
+  def get(what, code)
     request_class = "Brainz#{what.to_s.camelize}ImportRequest".constantize
     uri = request_class.to_uri(code: code)
 
@@ -27,17 +27,6 @@ class BrainzProxy
       code:         code,
       import_order: import_order
     )
-
-    fetch(import_request)
-  end
-
-  def get(import_request)
-    validate_import_request(import_request)
-
-    uri = import_request.to_uri
-
-    blueprint = cache[uri]
-    return blueprint if blueprint
 
     fetch(import_request)
   end

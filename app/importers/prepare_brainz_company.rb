@@ -31,6 +31,6 @@ class PrepareBrainzCompany < PrepareBrainzBase
   end
 
   def trigger_proxy
-    @blueprint = proxy.new_get(:company, brainz_code)
+    @blueprint = proxy.get(:company, brainz_code)
   end
 end

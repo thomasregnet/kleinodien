@@ -12,7 +12,7 @@ class FakeProxy
 
   attr_reader :cache, :fetch_requests, :get_calls
 
-  def new_get(what, code)
+  def get(what, code)
     @get_calls += 1
 
     request_class = "Brainz#{what.to_s.camelize}ImportRequest".constantize
@@ -27,15 +27,6 @@ class FakeProxy
     cache[uri] = blueprint
 
     blueprint
-  end
-
-  def get(key)
-    @get_calls += 1
-
-    cache[key] || from_test_data(key)
-    path = key.to_uri.sub(%r{\A.+\/\/}, '')
-    raw = TestData::PathService.call(path: path)
-    BrainzBlueprint.from_xml(raw)
   end
 
   # This method smells of :reek:ToManyStatements

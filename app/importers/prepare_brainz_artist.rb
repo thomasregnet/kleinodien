@@ -12,7 +12,7 @@ class PrepareBrainzArtist < PrepareBrainzBase
   private
 
   def prepare
-    find_already_existing || proxy.new_get(:artist, blueprint.brainz_code)
+    find_already_existing || proxy.get(:artist, blueprint.brainz_code)
   end
 
   public

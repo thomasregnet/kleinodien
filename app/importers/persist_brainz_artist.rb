@@ -33,7 +33,7 @@ class PersistBrainzArtist < PersistBrainzBase
   private
 
   def blueprint
-    proxy.new_get(:artist, code)
+    proxy.get(:artist, code)
   end
 
   def find_already_existing

@@ -12,7 +12,7 @@ class PrepareBrainzRecording < PrepareBrainzBase
   private
 
   def blueprint
-    @blueprint = proxy.new_get(:recording, brainz_code)
+    @blueprint = proxy.get(:recording, brainz_code)
   end
 
   def prepare

@@ -19,7 +19,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   attr_reader :code, :release
 
   def blueprint
-    @blueprint ||= proxy.new_get(:company, code)
+    @blueprint ||= proxy.get(:company, code)
   end
 
   def company

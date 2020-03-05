@@ -18,7 +18,7 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
   end
 
   def blueprint
-    @blueprint ||= proxy.new_get(:release_group, code)
+    @blueprint ||= proxy.get(:release_group, code)
   end
 
   def find_already_existing

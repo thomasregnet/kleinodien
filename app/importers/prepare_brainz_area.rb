@@ -26,6 +26,6 @@ class PrepareBrainzArea < PrepareBrainzBase
   end
 
   def trigger_proxy
-    proxy.new_get(:area, blueprint.brainz_code)
+    proxy.get(:area, blueprint.brainz_code)
   end
 end
