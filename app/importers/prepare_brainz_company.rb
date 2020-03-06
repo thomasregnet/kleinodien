@@ -2,18 +2,19 @@
 
 # Find a Company in the database or get it from MusicBrainz
 class PrepareBrainzCompany < PrepareBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(stub:, **args)
     super(args)
-    @brainz_code = blueprint.brainz_code
+    @code = stub.brainz_code
+    @stub = stub
   end
 
   private
 
-  attr_reader :brainz_code
+  attr_reader :code, :stub
 
   def prepare
-    return if proxy.cached?(:company, brainz_code)
-    return if Company.find_by(brainz_code: brainz_code)
+    return if proxy.cached?(:company, code)
+    return if Company.find_by(brainz_code: code)
     return if FindByCodesService.call(
       model_class: Company,
       codes_hash:  blueprint.codes_hash
@@ -35,6 +36,6 @@ class PrepareBrainzCompany < PrepareBrainzBase
   end
 
   def blueprint
-    @blueprint ||= proxy.get(:company, brainz_code)
+    @blueprint ||= proxy.get(:company, code)
   end
 end

@@ -57,9 +57,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
   def prepare_companies
     blueprint.label_infos.each do |label_info|
       PrepareBrainzCompany.call(
-        blueprint:    label_info.label,
         import_order: import_order,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         label_info.label
       )
     end
   end

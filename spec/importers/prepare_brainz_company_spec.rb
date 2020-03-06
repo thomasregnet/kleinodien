@@ -11,14 +11,14 @@ RSpec.describe PrepareBrainzCompany do
 
   # This method smells of :reek:TooManyStatements
   # This method smells of :reek:FeatureEnvy
-  def blueprint
-    blueprint = Object.new
-    code      = brainz_code
+  def stub
+    stub = Object.new
+    code = brainz_code
 
-    blueprint.define_singleton_method(:area) {}
-    blueprint.define_singleton_method(:brainz_code) { code }
+    stub.define_singleton_method(:area) {}
+    stub.define_singleton_method(:brainz_code) { code }
 
-    blueprint
+    stub
   end
 
   context 'when the Company exists in the database' do
@@ -33,12 +33,12 @@ RSpec.describe PrepareBrainzCompany do
 
     it 'does not call #get on the proxy' do
       described_class.call(
-        blueprint:    blueprint,
         import_order: MockImportOrder.new,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         stub
       )
 
-      expect(proxy).not_to have_received_get
+      expect(proxy).not_to be_requested
     end
   end
 
@@ -46,9 +46,9 @@ RSpec.describe PrepareBrainzCompany do
     let(:proxy) { FakeProxy.new }
     let(:args) do
       {
-        blueprint:    blueprint,
         import_order: MockImportOrder.new,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         stub
       }
     end
 
@@ -60,7 +60,7 @@ RSpec.describe PrepareBrainzCompany do
 
       described_class.call(args)
 
-      expect(proxy).to have_received_get
+      expect(proxy).to be_requested
     end
   end
 end
