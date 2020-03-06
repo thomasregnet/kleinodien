@@ -2,22 +2,20 @@
 
 # Prepare a MusicBrainz artist for import
 class PrepareBrainzArtist < PrepareBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(stub:, **args)
     super(args)
-    @blueprint = blueprint
+    @code = stub.brainz_code
+    @stub = stub
   end
 
-  attr_reader :blueprint
+  attr_reader :code, :stub
 
   private
 
   def prepare
-    find_already_existing || proxy.get(:artist, blueprint.brainz_code)
-  end
+    return if proxy.cached?(:artist, code)
+    return if Artist.find_by(brainz_code: code)
 
-  public
-
-  def find_already_existing
-    Artist.find_by(brainz_code: blueprint.brainz_code)
+    proxy.get(:artist, code)
   end
 end
