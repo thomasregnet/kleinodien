@@ -10,7 +10,7 @@ RSpec.describe PrepareBrainzReleaseGroup do
   it_behaves_like 'a service'
 
   context 'when the ReleaseHead does not exist' do
-    let(:blueprint) do
+    let(:stub) do
       TestData.by_name(:brainz_release_the_sky_is_falling_gb_cd)
               .blueprint
               .release_group
@@ -19,9 +19,9 @@ RSpec.describe PrepareBrainzReleaseGroup do
     let(:proxy) { FakeProxy.new }
     let(:preparer) do
       described_class.new(
-        blueprint:    blueprint,
         import_order: MockImportOrder.new,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         stub
       )
     end
 

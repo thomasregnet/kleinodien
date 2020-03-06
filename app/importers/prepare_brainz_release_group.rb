@@ -2,37 +2,27 @@
 
 # Prepare a MusicBrainz release-group for import
 class PrepareBrainzReleaseGroup < PrepareBrainzBase
-  # In order to prepare also the ArtistCredit of the ReleaseGroup
-  # this class needs to be called with an ImportRequest.
-  # The blueprint of a release/release-group does not contain
-  # the ArtistCredit.
-  def initialize(blueprint:, **args)
+  def initialize(stub:, **args)
     super(args)
-    @code = blueprint.brainz_code
+    @code = stub.brainz_code
+    @stub = stub
   end
 
-  attr_reader :code
+  attr_reader :code, :stub
 
   def prepare
     return if proxy.cached?(:release_group, code)
     return if ReleaseHead.find_by(brainz_code: code)
     return if FindByCodesService.call(
-      model_class: ReleaseHead, codes_hash: blueprint.codes_hash
+      model_class: ReleaseHead,
+      codes_hash:  blueprint.codes_hash
     )
 
-    prepare_siblings
-  end
-
-  def prepare_siblings
     prepare_artist_credit
   end
 
   def blueprint
     @blueprint ||= proxy.get(:release_group, code)
-  end
-
-  def find_already_existing
-    ReleaseHead.find_by(brainz_code: code)
   end
 
   def prepare_artist_credit

@@ -81,9 +81,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
   end
 
   def prepare_release_events
-    blueprint.release_events.each do |release_event_blueprint|
+    blueprint.release_events.each do |release_event|
       PrepareBrainzReleaseEvent.call(
-        blueprint:    release_event_blueprint,
+        blueprint:    release_event,
         import_order: import_order,
         proxy:        proxy
       )
@@ -92,9 +92,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_release_group
     PrepareBrainzReleaseGroup.call(
-      blueprint:    blueprint.release_group,
       import_order: import_order,
-      proxy:        proxy
+      proxy:        proxy,
+      stub:         blueprint.release_group
     )
   end
 
