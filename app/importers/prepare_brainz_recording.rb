@@ -2,28 +2,29 @@
 
 # Prepares a MusicBrainz Recording for import.
 class PrepareBrainzRecording < PrepareBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(stub:, **args)
     super(args)
-    @brainz_code = blueprint.brainz_code
+    @code = stub.brainz_code
+    @stub = stub
   end
 
-  attr_reader :brainz_code
+  attr_reader :code, :stub
 
   private
 
   def blueprint
-    @blueprint = proxy.get(:recording, brainz_code)
+    @blueprint = proxy.get(:recording, code)
   end
 
   def prepare
-    find_already_existing || prepare_artist_credit
-  end
+    return if proxy.cached?(:recording, code)
+    return if Artist.find_by(brainz_code: code)
+    return if FindByCodesService.call(
+      model_class: Piece,
+      codes_hash:  blueprint.codes_hash
+    )
 
-  public
-
-  def find_already_existing
-    codes_hash = blueprint.codes_hash
-    FindByCodesService.call(model_class: Piece, codes_hash: codes_hash)
+    prepare_artist_credit
   end
 
   def prepare_artist_credit

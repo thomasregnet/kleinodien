@@ -73,9 +73,9 @@ class PrepareBrainzRelease < PrepareBrainzBase
   def prepare_recordings(medium)
     medium.flat_track_list.each do |track|
       PrepareBrainzRecording.call(
-        blueprint:    track.recording,
         import_order: import_order,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         track.recording
       )
     end
   end

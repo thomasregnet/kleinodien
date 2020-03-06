@@ -8,7 +8,7 @@ require 'test_data/brainz_service'
 
 RSpec.describe PrepareBrainzRecording do
   context 'when the recording does not exist in the database' do
-    let(:blueprint) do
+    let(:stub) do
       TestData.by_name(:brainz_recording_highway_to_hell).blueprint
     end
 
@@ -16,9 +16,9 @@ RSpec.describe PrepareBrainzRecording do
 
     before do
       described_class.call(
-        blueprint:    blueprint,
         import_order: MockImportOrder.new,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         stub
       )
     end
 
@@ -32,7 +32,7 @@ RSpec.describe PrepareBrainzRecording do
   end
 
   context 'with "The Duellists"' do
-    let(:blueprint) do
+    let(:stub) do
       TestData.by_name(:brainz_recording_the_duellists).blueprint
     end
 
@@ -42,9 +42,9 @@ RSpec.describe PrepareBrainzRecording do
       allow(PrepareBrainzArtistCredit).to receive(:call)
 
       described_class.call(
-        blueprint:    blueprint,
         import_order: MockImportOrder.new,
-        proxy:        proxy
+        proxy:        proxy,
+        stub:         stub
       )
 
       expect(proxy.matches(%r{/recording/})).to eq(1)
