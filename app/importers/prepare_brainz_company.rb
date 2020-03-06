@@ -28,9 +28,9 @@ class PrepareBrainzCompany < PrepareBrainzBase
 
   def prepare_area
     PrepareBrainzArea.call(
-      blueprint:    blueprint.area,
       import_order: import_order,
-      proxy:        proxy
+      proxy:        proxy,
+      stub:         blueprint.area
     )
   end
 

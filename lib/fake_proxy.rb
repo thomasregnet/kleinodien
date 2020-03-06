@@ -44,7 +44,11 @@ class FakeProxy
   def has_received_get?
     return true if get_calls.positive?
   end
+
   # rubocop:enable Naming/PredicateName
+  def requested?
+    return true if get_calls.positive?
+  end
 
   private
 
