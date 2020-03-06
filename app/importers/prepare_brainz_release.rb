@@ -2,38 +2,29 @@
 
 # Prepare a MusicBrainz release for import
 class PrepareBrainzRelease < PrepareBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(stub:, **args)
     super(args)
-    @blueprint = blueprint
+    @code = stub.brainz_code
+    @stub = stub
   end
 
-  attr_reader :blueprint
+  attr_reader :code, :stub
 
   private
 
-  # This method smells of :reek:TooManyStatements
-  # def prepare
-  #   release = find_already_existing
-  #   return release if release
-
-  #   prepare_artist_credit  || return
-  #   prepare_companies      || return
-  #   prepare_release_group  || return
-  #   prepare_release_events || return
-  #   prepare_media          || return
-
-  #   true
-  # end
-
   def prepare
     # return if proxy.cached?(:release, blueprint.brainz_code)
-    return if Release.find_by(brainz_code: blueprint.brainz_code)
+    return if Release.find_by(brainz_code: code)
     return if FindByCodesService.call(
       model_class: Release,
       codes_hash:  blueprint.codes_hash
     )
 
     prepare_siblings
+  end
+
+  def blueprint
+    @blueprint ||= proxy.get(:release, code)
   end
 
   def prepare_siblings

@@ -5,9 +5,9 @@ class ImportBrainzRelease < ImportBrainzBase
   # OPTIMIZE: move #prepare to ImportBase?
   def prepare
     PrepareBrainzRelease.call(
-      blueprint:    blueprint,
       import_order: import_order,
-      proxy:        proxy
+      proxy:        proxy,
+      stub:         blueprint
     )
   end
 

@@ -36,7 +36,7 @@ RSpec.describe PrepareBrainzRelease do
 
   describe '.call' do
     context 'when the release is not already persisted' do
-      let(:blueprint) do
+      let(:stub) do
         TestData.by_name(:brainz_release_arise_jp_cd).blueprint
       end
       let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
@@ -46,11 +46,11 @@ RSpec.describe PrepareBrainzRelease do
         prepare_release_group_spy = spy
         proxy                     = FakeProxy.new
         args = {
-          blueprint:                 blueprint,
           import_order:              import_order,
           prepare_artist_credit_spy: prepare_artist_credit_spy,
           prepare_release_group_spy: prepare_release_group_spy,
-          proxy:                     proxy
+          proxy:                     proxy,
+          stub:                      stub
         }
         expect { MockPrepareBrainzRelease.call(args) }.not_to raise_error
       end
@@ -63,9 +63,9 @@ RSpec.describe PrepareBrainzRelease do
       let(:preparer) do
         xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
         described_class.new(
-          blueprint:    BrainzBlueprint.from_xml(xml_string),
           import_order: import_order,
-          proxy:        FakeProxy.new
+          proxy:        FakeProxy.new,
+          stub:         BrainzBlueprint.from_xml(xml_string),
         )
       end
 
