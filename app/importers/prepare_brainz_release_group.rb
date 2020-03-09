@@ -18,18 +18,10 @@ class PrepareBrainzReleaseGroup < PrepareBrainzBase
       codes_hash:  blueprint.codes_hash
     )
 
-    prepare_artist_credit
+    prepare_artist_credit(blueprint: blueprint.artist_credit)
   end
 
   def blueprint
     @blueprint ||= proxy.get(:release_group, code)
-  end
-
-  def prepare_artist_credit
-    PrepareBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
-    )
   end
 end
