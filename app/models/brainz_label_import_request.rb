@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ImportRequest for MusicBrainz companys
-class BrainzCompanyImportRequest < BrainzImportRequest
+class BrainzLabelImportRequest < BrainzImportRequest
   QUERY_KIND = 'label'
 
   def kind

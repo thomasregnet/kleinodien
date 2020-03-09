@@ -22,8 +22,8 @@ FactoryBot.define do
       end
 
       factory(
-        :brainz_company_import_request,
-        class: 'BrainzCompanyImportRequest'
+        :brainz_label_import_request,
+        class: 'BrainzLabelImportRequest'
       ) do
       end
 

@@ -9,7 +9,7 @@ RSpec.describe PersistBrainzCompany do
   it_behaves_like 'a service'
 
   describe 'persist the company' do
-    let(:brainz_company) do
+    let(:brainz_label) do
       TestData.by_name(:brainz_label_alternative_tentacles).blueprint
     end
 
@@ -22,7 +22,7 @@ RSpec.describe PersistBrainzCompany do
 
     before do
       described_class.call(
-        blueprint:    brainz_company,
+        blueprint:    brainz_label,
         import_order: import_order,
         proxy:        proxy
       )

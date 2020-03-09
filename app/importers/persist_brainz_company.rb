@@ -16,7 +16,7 @@ class PersistBrainzCompany < PersistBrainzBase
   private
 
   def blueprint
-    @blueprint ||= proxy.get(:company, code)
+    @blueprint ||= proxy.get(:label, code)
   end
 
   def find_in_database

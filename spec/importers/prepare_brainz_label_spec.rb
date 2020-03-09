@@ -4,7 +4,7 @@ require 'fake_proxy'
 require 'mock_import_order'
 require 'rails_helper'
 
-RSpec.describe PrepareBrainzCompany do
+RSpec.describe PrepareBrainzLabel do
   def brainz_code
     'f1273178-651b-4d02-8f21-4ab1ec5a689a'
   end

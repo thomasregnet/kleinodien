@@ -38,7 +38,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_companies
     blueprint.label_infos.each do |label_info|
-      prepare_company(stub: label_info.label)
+      prepare_label(stub: label_info.label)
     end
   end
 

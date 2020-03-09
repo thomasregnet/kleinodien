@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Find a Company in the database or get it from MusicBrainz
-class PrepareBrainzCompany < PrepareBrainzBase
+class PrepareBrainzLabel < PrepareBrainzBase
   def initialize(stub:, **args)
     super(args)
     @code = stub.brainz_code
@@ -13,7 +13,7 @@ class PrepareBrainzCompany < PrepareBrainzBase
   attr_reader :code, :stub
 
   def prepare
-    return if proxy.cached?(:company, code)
+    return if proxy.cached?(:label, code)
     return if Company.find_by(brainz_code: code)
     return if FindByCodesService.call(
       model_class: Company,
@@ -24,6 +24,6 @@ class PrepareBrainzCompany < PrepareBrainzBase
   end
 
   def blueprint
-    @blueprint ||= proxy.get(:company, code)
+    @blueprint ||= proxy.get(:label, code)
   end
 end
