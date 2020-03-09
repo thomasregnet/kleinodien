@@ -40,12 +40,6 @@ class FakeProxy
     cache.keys.count { |key| key.match(regexp) }
   end
 
-  # rubocop:disable Naming/PredicateName
-  def has_received_get?
-    return true if get_calls.positive?
-  end
-  # rubocop:enable Naming/PredicateName
-
   def called_get?
     return true if get_calls.positive?
   end
