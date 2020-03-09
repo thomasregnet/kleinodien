@@ -20,19 +20,7 @@ class PrepareBrainzCompany < PrepareBrainzBase
       codes_hash:  blueprint.codes_hash
     )
 
-    prepare_siblings
-  end
-
-  def prepare_siblings
-    prepare_area
-  end
-
-  def prepare_area
-    PrepareBrainzArea.call(
-      import_order: import_order,
-      proxy:        proxy,
-      stub:         blueprint.area
-    )
+    prepare_area(stub: blueprint.area)
   end
 
   def blueprint
