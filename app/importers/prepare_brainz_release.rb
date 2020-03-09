@@ -28,30 +28,18 @@ class PrepareBrainzRelease < PrepareBrainzBase
   end
 
   def prepare_siblings
-    prepare_artist_credit  || return
-    prepare_companies      || return
-    prepare_release_group  || return
-    prepare_release_events || return
-    prepare_media          || return
+    prepare_artist_credit(blueprint: blueprint.artist_credit)
+    prepare_companies
+    prepare_release_group(stub: blueprint.release_group)
+    prepare_release_events
+    prepare_media
   end
 
   public
 
-  def prepare_artist_credit
-    PrepareBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
-    )
-  end
-
   def prepare_companies
     blueprint.label_infos.each do |label_info|
-      PrepareBrainzCompany.call(
-        import_order: import_order,
-        proxy:        proxy,
-        stub:         label_info.label
-      )
+      prepare_company(stub: label_info.label)
     end
   end
 
@@ -63,30 +51,14 @@ class PrepareBrainzRelease < PrepareBrainzBase
 
   def prepare_recordings(medium)
     medium.flat_track_list.each do |track|
-      PrepareBrainzRecording.call(
-        import_order: import_order,
-        proxy:        proxy,
-        stub:         track.recording
-      )
+      prepare_recording(stub: track.recording)
     end
   end
 
   def prepare_release_events
     blueprint.release_events.each do |release_event|
-      PrepareBrainzReleaseEvent.call(
-        blueprint:    release_event,
-        import_order: import_order,
-        proxy:        proxy
-      )
+      prepare_release_event(blueprint: release_event)
     end
-  end
-
-  def prepare_release_group
-    PrepareBrainzReleaseGroup.call(
-      import_order: import_order,
-      proxy:        proxy,
-      stub:         blueprint.release_group
-    )
   end
 
   def find_already_existing

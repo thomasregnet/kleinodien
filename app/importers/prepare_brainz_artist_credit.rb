@@ -29,12 +29,4 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
   def find_already_existing
     ArtistCredit.find_by(name: blueprint.join_name)
   end
-
-  # def prepare_brainz_artist(stub)
-  #   PrepareBrainzArtist.call(
-  #     import_order: import_order,
-  #     proxy:        proxy,
-  #     stub:         stub
-  #   )
-  # end
 end

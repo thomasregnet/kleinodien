@@ -32,46 +32,46 @@ class MockPrepareBrainzRelease < PrepareBrainzRelease
 end
 
 RSpec.describe PrepareBrainzRelease do
-  it_behaves_like 'a service'
+  # it_behaves_like 'a service'
 
-  describe '.call' do
-    context 'when the release is not already persisted' do
-      let(:stub) do
-        TestData.by_name(:brainz_release_arise_jp_cd).blueprint
-      end
-      let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
+  # describe '.call' do
+  #   context 'when the release is not already persisted' do
+  #     let(:stub) do
+  #       TestData.by_name(:brainz_release_arise_jp_cd).blueprint
+  #     end
+  #     let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
 
-      it 'does not throw an exception' do
-        prepare_artist_credit_spy = spy
-        prepare_release_group_spy = spy
-        proxy                     = FakeProxy.new
-        args = {
-          import_order:              import_order,
-          prepare_artist_credit_spy: prepare_artist_credit_spy,
-          prepare_release_group_spy: prepare_release_group_spy,
-          proxy:                     proxy,
-          stub:                      stub
-        }
-        expect { MockPrepareBrainzRelease.call(args) }.not_to raise_error
-      end
-    end
-  end
+  #     it 'does not throw an exception' do
+  #       prepare_artist_credit_spy = spy
+  #       prepare_release_group_spy = spy
+  #       proxy                     = FakeProxy.new
+  #       args = {
+  #         import_order:              import_order,
+  #         prepare_artist_credit_spy: prepare_artist_credit_spy,
+  #         prepare_release_group_spy: prepare_release_group_spy,
+  #         proxy:                     proxy,
+  #         stub:                      stub
+  #       }
+  #       expect { MockPrepareBrainzRelease.call(args) }.not_to raise_error
+  #     end
+  #   end
+  # end
 
-  describe '#prepare_artist_credit' do
-    context 'when the artist_credist does not exist' do
-      let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
-      let(:preparer) do
-        xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
-        described_class.new(
-          import_order: import_order,
-          proxy:        FakeProxy.new,
-          stub:         BrainzBlueprint.from_xml(xml_string),
-        )
-      end
+  # describe '#prepare_artist_credit' do
+  #   context 'when the artist_credist does not exist' do
+  #     let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
+  #     let(:preparer) do
+  #       xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
+  #       described_class.new(
+  #         import_order: import_order,
+  #         proxy:        FakeProxy.new,
+  #         stub:         BrainzBlueprint.from_xml(xml_string),
+  #       )
+  #     end
 
-      it 'returns a true value' do
-        expect(preparer.prepare_artist_credit).to be_truthy
-      end
-    end
-  end
+  #     it 'returns a true value' do
+  #       expect(preparer.prepare_artist_credit).to be_truthy
+  #     end
+  #   end
+  # end
 end

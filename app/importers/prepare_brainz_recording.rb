@@ -24,14 +24,6 @@ class PrepareBrainzRecording < PrepareBrainzBase
       codes_hash:  blueprint.codes_hash
     )
 
-    prepare_artist_credit
-  end
-
-  def prepare_artist_credit
-    PrepareBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
-    )
+    prepare_artist_credit(blueprint: blueprint.artist_credit)
   end
 end

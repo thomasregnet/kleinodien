@@ -10,10 +10,6 @@ class PrepareBrainzReleaseEvent < PrepareBrainzBase
   attr_reader :blueprint
 
   def prepare
-    PrepareBrainzArea.call(
-      import_order: import_order,
-      proxy:        proxy,
-      stub:         blueprint.area
-    )
+    prepare_area(stub: blueprint.area)
   end
 end
