@@ -50,6 +50,15 @@ class FakeProxy
     return true if get_calls.positive?
   end
 
+  # This method smells of :reek:FeatureEnvy
+  def requested_for?(regexp, expected_count = nil)
+    count = cache.keys.count { |key| key.match(regexp) }
+
+    return true if count.positive? && !expected_count
+
+    count == expected_count
+  end
+
   private
 
   def import_request_for(what, code)

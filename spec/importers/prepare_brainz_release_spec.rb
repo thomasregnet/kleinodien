@@ -1,77 +1,75 @@
 # frozen_string_literal: true
 
 require 'fake_proxy'
+require 'mock_import_order'
 require 'rails_helper'
 require 'shared_examples_for_services'
 require 'test_data'
 
-# Mock calls to other classes
-class MockPrepareBrainzRelease < PrepareBrainzRelease
-  def initialize(prepare_artist_credit_spy:, prepare_release_group_spy:, **args)
-    @prepare_artist_credit_spy = prepare_artist_credit_spy
-    @prepare_release_group_spy = prepare_release_group_spy
-    super(args)
-  end
-
-  attr_reader :prepare_artist_credit_spy, :prepare_release_group_spy
-
-  def prepare_artist_credit
-    prepare_artist_credit_spy.call
-  end
-
-  def prepare_release_group
-    prepare_release_group_spy.call
-  end
-
-  def prepare_companies
-    true
-  end
-
-  # This method smells of :reek:UnusedParameters
-  def prepare_recordings(*args); end
-end
-
 RSpec.describe PrepareBrainzRelease do
-  # it_behaves_like 'a service'
+  it_behaves_like 'a service'
 
-  # describe '.call' do
-  #   context 'when the release is not already persisted' do
-  #     let(:stub) do
-  #       TestData.by_name(:brainz_release_arise_jp_cd).blueprint
-  #     end
-  #     let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
+  describe '.call' do
+    context 'when the release is not already persisted' do
+      let(:stub) do
+        TestData.by_name(:brainz_release_arise_jp_cd).blueprint
+      end
 
-  #     it 'does not throw an exception' do
-  #       prepare_artist_credit_spy = spy
-  #       prepare_release_group_spy = spy
-  #       proxy                     = FakeProxy.new
-  #       args = {
-  #         import_order:              import_order,
-  #         prepare_artist_credit_spy: prepare_artist_credit_spy,
-  #         prepare_release_group_spy: prepare_release_group_spy,
-  #         proxy:                     proxy,
-  #         stub:                      stub
-  #       }
-  #       expect { MockPrepareBrainzRelease.call(args) }.not_to raise_error
-  #     end
-  #   end
-  # end
+      # rubocop:disable RSpec/InstanceVariable
+      before do
+        @proxy = FakeProxy.new
+        described_class.call(
+          import_order: MockImportOrder.new,
+          proxy:        @proxy,
+          stub:         stub
+        )
+      end
 
-  # describe '#prepare_artist_credit' do
-  #   context 'when the artist_credist does not exist' do
-  #     let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
-  #     let(:preparer) do
-  #       xml_string = TestData.by_name(:brainz_release_arise_jp_cd).raw
-  #       described_class.new(
-  #         import_order: import_order,
-  #         proxy:        FakeProxy.new,
-  #         stub:         BrainzBlueprint.from_xml(xml_string),
-  #       )
-  #     end
+      it 'has requested the area' do
+        expect(@proxy).to be_requested_for(%r{/area/}, 2)
+      end
 
-  #     it 'returns a true value' do
-  #       expect(preparer.prepare_artist_credit).to be_truthy
-  #     end
-  #   end
-  # end
+      it 'has requested the artist' do
+        expect(@proxy).to be_requested_for(%r{/artist/}, 1)
+      end
+
+      it 'has requested the label' do
+        expect(@proxy).to be_requested_for(%r{/label/}, 1)
+      end
+
+      it 'has requested the recording' do
+        expect(@proxy).to be_requested_for(%r{/recording/}, 3)
+      end
+
+      it 'has requested the release-group' do
+        expect(@proxy).to be_requested_for(%r{/release-group/}, 1)
+      end
+
+      it 'has requested the release' do
+        expect(@proxy).to be_requested_for(%r{/release/}, 1)
+      end
+      # rubocop:enable RSpec/InstanceVariable
+    end
+
+    context 'when the release is already persisted' do
+      let(:proxy) { FakeProxy.new }
+      let(:stub) do
+        TestData.by_name(:brainz_release_arise_jp_cd).blueprint
+      end
+
+      before do
+        FactoryBot.create(:release, brainz_code: stub.brainz_code)
+
+        described_class.call(
+          import_order: MockImportOrder.new,
+          proxy:        proxy,
+          stub:         stub
+        )
+      end
+
+      it 'does not requested anything on the proxy' do
+        expect(proxy).not_to be_requested
+      end
+    end
+  end
 end

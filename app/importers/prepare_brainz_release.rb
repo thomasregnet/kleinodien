@@ -13,7 +13,6 @@ class PrepareBrainzRelease < PrepareBrainzBase
   private
 
   def prepare
-    # return if proxy.cached?(:release, blueprint.brainz_code)
     return if Release.find_by(brainz_code: code)
     return if FindByCodesService.call(
       model_class: Release,
