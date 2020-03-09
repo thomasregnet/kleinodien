@@ -38,7 +38,7 @@ RSpec.describe PrepareBrainzLabel do
         stub:         stub
       )
 
-      expect(proxy).not_to be_requested
+      expect(proxy).not_to be_called_get
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe PrepareBrainzLabel do
 
       described_class.call(args)
 
-      expect(proxy).to be_requested
+      expect(proxy).to be_called_get
     end
   end
 end

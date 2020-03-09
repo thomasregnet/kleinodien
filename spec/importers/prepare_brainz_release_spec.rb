@@ -67,8 +67,8 @@ RSpec.describe PrepareBrainzRelease do
         )
       end
 
-      it 'does not requested anything on the proxy' do
-        expect(proxy).not_to be_requested
+      it 'does not call get on the proxy' do
+        expect(proxy).not_to be_called_get
       end
     end
   end

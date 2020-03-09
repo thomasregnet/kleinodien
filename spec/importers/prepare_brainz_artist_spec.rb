@@ -30,7 +30,7 @@ RSpec.describe PrepareBrainzArtist do
         proxy:        proxy,
         stub:         stub
       )
-      expect(proxy).not_to be_requested
+      expect(proxy).not_to be_called_get
     end
   end
 

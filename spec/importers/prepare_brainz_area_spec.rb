@@ -56,7 +56,7 @@ RSpec.describe PrepareBrainzArea do
           stub:         stub
         )
         preparer.prepare
-        expect(proxy).not_to be_requested
+        expect(proxy).not_to be_called_get
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe PrepareBrainzArea do
           stub:         stub
         )
         preparer.prepare
-        expect(proxy).not_to be_requested
+        expect(proxy).not_to be_called_get
       end
     end
   end
