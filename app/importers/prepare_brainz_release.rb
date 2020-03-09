@@ -59,11 +59,4 @@ class PrepareBrainzRelease < PrepareBrainzBase
       prepare_release_event(blueprint: release_event)
     end
   end
-
-  def find_already_existing
-    FindByCodesService.call(
-      model_class: Release,
-      codes_hash:  blueprint.codes_hash
-    )
-  end
 end
