@@ -19,7 +19,8 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
 
   def prepare_siblings
     blueprint.name_credits.each do |name_credit|
-      prepare_brainz_artist(name_credit.artist)
+      # prepare_brainz_artist(stub: name_credit.artist)
+      prepare_artist(stub: name_credit.artist)
     end
   end
 
@@ -29,11 +30,11 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
     ArtistCredit.find_by(name: blueprint.join_name)
   end
 
-  def prepare_brainz_artist(stub)
-    PrepareBrainzArtist.call(
-      import_order: import_order,
-      proxy:        proxy,
-      stub:         stub
-    )
-  end
+  # def prepare_brainz_artist(stub)
+  #   PrepareBrainzArtist.call(
+  #     import_order: import_order,
+  #     proxy:        proxy,
+  #     stub:         stub
+  #   )
+  # end
 end
