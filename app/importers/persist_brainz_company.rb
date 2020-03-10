@@ -27,8 +27,7 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def persist
-    persist_area
-    company.area = persist_area
+    company.area = persist_area(blueprint: blueprint.area)
     company.save!
     company
   end
@@ -39,14 +38,6 @@ class PersistBrainzCompany < PersistBrainzBase
       import_order: import_order,
       name:         blueprint.name,
       sort_name:    blueprint.sort_name
-    )
-  end
-
-  def persist_area
-    PersistBrainzArea.call(
-      blueprint:    blueprint.area,
-      import_order: import_order,
-      proxy:        proxy
     )
   end
 end
