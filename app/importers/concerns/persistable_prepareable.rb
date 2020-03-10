@@ -4,8 +4,11 @@
 module PersistablePrepareable
   extend ActiveSupport::Concern
 
-  def prepare_infix
-    raise NoMethodError, "missed to implement #{self.class}#prepare_infix"
+  def persist_prepare_infix
+    raise(
+      NoMethodError,
+      "missed to implement #{self.class}#persist_prepare_infix"
+    )
   end
 
   def method_missing(method_name, *args)
@@ -48,6 +51,7 @@ module PersistablePrepareable
     return unless match_data
     return unless %w[persist prepare].include?(match_data[1])
 
-    "prepare_#{prepare_infix}_#{match_data[2]}".camelize
+    name = "#{match_data[1]}_#{persist_prepare_infix}_#{match_data[2]}".camelize
+    name
   end
 end

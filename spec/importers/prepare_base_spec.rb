@@ -46,7 +46,7 @@ RSpec.describe PrepareBase do
     context 'when able to respond' do
       before do
         stub_const('PrepareTestGizmo', 1)
-        base.define_singleton_method(:prepare_infix) { :test }
+        base.define_singleton_method(:persist_prepare_infix) { :test }
       end
 
       it 'returns true' do
@@ -55,7 +55,7 @@ RSpec.describe PrepareBase do
     end
 
     context 'when unable to respond' do
-      before { base.define_singleton_method(:prepare_infix) { :test } }
+      before { base.define_singleton_method(:persist_prepare_infix) { :test } }
 
       it 'returns false' do
         expect(base.send(:respond_to_missing?, :prepare_gizmo)).to be_falsey
@@ -69,7 +69,7 @@ RSpec.describe PrepareBase do
         import_order: :fake_import_order,
         proxy:        :fake_proxy
       )
-      preparer.define_singleton_method(:prepare_infix) { :some_stuff }
+      preparer.define_singleton_method(:persist_prepare_infix) { :some_stuff }
 
       preparer
     end
@@ -80,14 +80,14 @@ RSpec.describe PrepareBase do
     end
   end
 
-  describe '#prepare_infix' do
+  describe '#persist_prepare_infix' do
     it 'raises a NoMethodError' do
       preparer = described_class.new(
         import_order: :fake_import_order,
         proxy:        :fake_proxy
       )
-      expect { preparer.prepare_infix }
-        .to raise_error(NoMethodError, /PrepareBase#prepare_infix\z/)
+      expect { preparer.persist_prepare_infix }
+        .to raise_error(NoMethodError, /PrepareBase#persist_prepare_infix\z/)
     end
   end
 end

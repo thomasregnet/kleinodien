@@ -2,7 +2,7 @@
 
 # Base class for PrepareBrainz classes
 class PrepareBrainzBase < PrepareBase
-  def prepare_infix
+  def persist_prepare_infix
     :brainz
   end
 end

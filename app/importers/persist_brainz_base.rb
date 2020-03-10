@@ -2,7 +2,7 @@
 
 # Base class to persist MusicBrainz content
 class PersistBrainzBase < PersistBase
-  def persist_infix
+  def persist_prepare_infix
     :brainz
   end
 end
