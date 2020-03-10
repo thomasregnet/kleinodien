@@ -29,7 +29,7 @@ class PersistBrainzReleaseHead < PersistBrainzBase
   # rubocop:disable Metrics/MethodLength
   def persist
     arguments = {
-      artist_credit: persist_artist_credit,
+      artist_credit: artist_credit,
       import_order:  import_order,
       title:         blueprint.title,
       type:          type
@@ -45,12 +45,8 @@ class PersistBrainzReleaseHead < PersistBrainzBase
   end
   # rubocop:enable Metrics/MethodLength
 
-  def persist_artist_credit
-    PersistBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
-    )
+  def artist_credit
+    persist_artist_credit(blueprint: blueprint.artist_credit)
   end
 
   def type
