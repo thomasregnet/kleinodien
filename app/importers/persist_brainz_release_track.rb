@@ -21,11 +21,6 @@ class PersistBrainzReleaseTrack < PersistBrainzBase
   end
 
   def piece
-    recording_code = blueprint.recording.brainz_code
-    PersistBrainzPiece.call(
-      code:         recording_code,
-      import_order: import_order,
-      proxy:        proxy
-    )
+    persist_piece(code: blueprint.recording.brainz_code)
   end
 end
