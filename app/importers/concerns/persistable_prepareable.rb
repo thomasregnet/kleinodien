@@ -14,11 +14,9 @@ module PersistablePrepareable
   def method_missing(method_name, *args)
     klass = class_for(method_name)
 
-    if klass
-      klass.call(merge_arguments(args[0]))
-    else
-      super
-    end
+    return klass.call(merge_arguments(args[0])) if klass
+
+    super
   end
 
   # This method smells of :reek:BooleanParameter
@@ -45,13 +43,13 @@ module PersistablePrepareable
     end
   end
 
-  # This method smells of :reek:FeatureEnvy
   def class_name_for(method_name)
     match_data = method_name.match(/\A(p[a-z]+)_(.+)\z/)
     return unless match_data
-    return unless %w[persist prepare].include?(match_data[1])
 
-    name = "#{match_data[1]}_#{persist_prepare_infix}_#{match_data[2]}".camelize
-    name
+    action, suffix = match_data[1, 2]
+    return unless %w[persist prepare].include?(action)
+
+    "#{action}_#{persist_prepare_infix}_#{suffix}".camelize
   end
 end
