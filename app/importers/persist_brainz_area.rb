@@ -49,7 +49,6 @@ class PersistBrainzArea < PersistBrainzBase
   def persist_aliases
     aliases = brainz_area.aliases || return
     aliases.each do |area_alias|
-      # PersistBrainzAreaAlias.call(area: area, blueprint: area_alias)
       persist_area_alias(area: area, blueprint: area_alias)
     end
   end
