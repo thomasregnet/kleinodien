@@ -55,13 +55,6 @@ class BrainzProxy
     cache.frozen?
   end
 
-  def validate_import_request(import_request)
-    pre_existing_import_order = import_request.import_order ||= import_order
-    return if pre_existing_import_order == import_order
-
-    raise ArgumentError, 'ImportOrder missmatch'
-  end
-
   private
 
   def import_request_for(what, code)
