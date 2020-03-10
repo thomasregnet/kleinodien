@@ -8,10 +8,8 @@ class PersistBrainzAreaAlias < PersistPrepareBase
     'Search hint' => 'AreaSearchHint'
   }.freeze
 
-  # Note that #initialize does not call super.
-  # Super is not called because we do not need either an ImportOrder
-  # nor a proxy
-  def initialize(area:, blueprint:)
+  def initialize(area:, blueprint:, **args)
+    super(args)
     @area      = area
     @blueprint = blueprint
   end
