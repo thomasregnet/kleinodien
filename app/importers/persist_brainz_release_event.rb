@@ -21,11 +21,7 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
   private
 
   def area
-    PersistBrainzArea.call(
-      blueprint:    blueprint.area,
-      import_order: import_order,
-      proxy:        proxy
-    )
+    persist_area(blueprint: blueprint.area)
   end
 
   def date
