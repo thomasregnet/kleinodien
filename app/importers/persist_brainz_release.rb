@@ -45,23 +45,16 @@ class PersistBrainzRelease < PersistBrainzBase
     release.save!
   end
 
-  def persist_artist_credit
-    PersistBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
-    )
-  end
-
   def release
     @release ||= Release.create!(release_arguments)
   end
 
   # rubocop:disable Metrics/MethodLength
   def release_arguments
+    artist_credit = persist_artist_credit(blueprint: blueprint.artist_credit)
     arguments = {
-      artist_credit: persist_artist_credit,
-      head:          persist_release_head,
+      artist_credit: artist_credit,
+      head:          persist_release_head(blueprint: blueprint.release_group),
       import_order:  import_order,
       language:      language,
       script:        script,
@@ -88,37 +81,14 @@ class PersistBrainzRelease < PersistBrainzBase
 
   def persist_release_companies
     blueprint.label_infos.each do |label_info|
-      PersistBrainzReleaseCompany.call(
-        blueprint:    label_info,
-        import_order: import_order,
-        proxy:        proxy,
-        release:      release
-      )
+      persist_release_company(blueprint: label_info, release: release)
     end
   end
 
   def persist_release_events
     blueprint.release_events.each do |release_event|
-      PersistBrainzReleaseEvent.call(
-        blueprint:    release_event,
-        import_order: import_order,
-        proxy:        proxy,
-        release:      release
-      )
+      persist_release_event(blueprint: release_event, release: release)
     end
-  end
-
-  def persist_release_head
-    # import_request = BrainzReleaseGroupImportRequest.new(
-    #   code: blueprint.release_group.brainz_code
-    # )
-
-    PersistBrainzReleaseHead.call(
-      blueprint:    blueprint.release_group,
-      # import_request: import_request,
-      import_order:   import_order,
-      proxy:          proxy
-    )
   end
 
   def persist_media
@@ -133,12 +103,7 @@ class PersistBrainzRelease < PersistBrainzBase
 
   def persist_subsets
     blueprint.media.each do |medium|
-      PersistBrainzReleaseSubset.call(
-        blueprint:    medium,
-        import_order: import_order,
-        release:      release,
-        proxy:        proxy
-      )
+      persist_release_subset(blueprint: medium, release: release)
     end
   end
 
