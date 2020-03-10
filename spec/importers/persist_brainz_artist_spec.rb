@@ -3,6 +3,7 @@
 require 'fake_proxy'
 require 'test_data'
 require 'rails_helper'
+require 'shared_examples_for_persister_and_preparer_base_classes'
 
 RSpec.describe PersistBrainzArtist do
   let(:code) { 'bdacc37b-8633-4bf8-9dd5-4662ee651aec' } # Slayer
