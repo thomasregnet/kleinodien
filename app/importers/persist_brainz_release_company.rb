@@ -23,11 +23,7 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   end
 
   def company
-    @company ||= PersistBrainzCompany.call(
-      blueprint:    blueprint.label,
-      import_order: import_order,
-      proxy:        proxy
-    )
+    @company ||= persist_company(blueprint: blueprint.label)
   end
 
   def company_role
