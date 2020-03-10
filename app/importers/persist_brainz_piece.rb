@@ -31,7 +31,7 @@ class PersistBrainzPiece < PersistBrainzBase
 
   def persist
     Piece.create!(
-      artist_credit:  persist_artist_credit,
+      artist_credit:  artist_credit,
       disambiguation: blueprint.disambiguation,
       duration:       duration,
       import_order:   import_order,
@@ -40,11 +40,9 @@ class PersistBrainzPiece < PersistBrainzBase
     )
   end
 
-  def persist_artist_credit
-    PersistBrainzArtistCredit.call(
-      blueprint:    blueprint.artist_credit,
-      import_order: import_order,
-      proxy:        proxy
+  def artist_credit
+    @artist_credit ||= persist_artist_credit(
+      blueprint: blueprint.artist_credit
     )
   end
 
