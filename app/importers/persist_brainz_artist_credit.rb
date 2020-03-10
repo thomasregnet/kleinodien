@@ -46,15 +46,7 @@ class PersistBrainzArtistCredit < PersistBrainzBase
 
   def artists
     @artists ||= blueprint.name_credits.map do |name_credit|
-      persist_artist(name_credit.artist.brainz_code)
+      persist_artist(code: name_credit.artist.brainz_code)
     end
-  end
-
-  def persist_artist(brainz_code)
-    PersistBrainzArtist.call(
-      code:         brainz_code,
-      import_order: import_order,
-      proxy:        proxy
-    )
   end
 end
