@@ -16,14 +16,10 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
 
   private
 
-  attr_reader :code, :release
-
-  def blueprint
-    @blueprint ||= proxy.get(:company, code)
-  end
+  attr_reader :blueprint, :code, :release
 
   def company
-    @company ||= persist_company(blueprint: blueprint.label)
+    @company ||= persist_company(code: code)
   end
 
   def company_role

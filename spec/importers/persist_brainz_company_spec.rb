@@ -22,7 +22,7 @@ RSpec.describe PersistBrainzCompany do
 
     before do
       described_class.call(
-        blueprint:    brainz_label,
+        code:         brainz_label.brainz_code,
         import_order: import_order,
         proxy:        proxy
       )

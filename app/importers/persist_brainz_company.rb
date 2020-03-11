@@ -2,9 +2,9 @@
 
 # Persist a Company from MusicBrainz
 class PersistBrainzCompany < PersistBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(code:, **args)
     super(args)
-    @code = blueprint.brainz_code
+    @code = code
   end
 
   attr_reader :code
