@@ -12,7 +12,7 @@ RSpec.describe PersistBrainzReleaseHead do
 
     let(:release_head) do
       persister = described_class.new(
-        blueprint:    blueprint,
+        code:         blueprint.brainz_code,
         import_order: FactoryBot.create(:brainz_import_order),
         proxy:        FakeProxy.new
       )

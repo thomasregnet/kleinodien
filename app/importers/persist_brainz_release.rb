@@ -54,7 +54,7 @@ class PersistBrainzRelease < PersistBrainzBase
     artist_credit = persist_artist_credit(blueprint: blueprint.artist_credit)
     arguments = {
       artist_credit: artist_credit,
-      head:          persist_release_head(blueprint: blueprint.release_group),
+      head:          release_head,
       import_order:  import_order,
       language:      language,
       script:        script,
@@ -70,6 +70,11 @@ class PersistBrainzRelease < PersistBrainzBase
   end
   # rubocop:enable Metrics/MethodLength
 
+  def release_head
+    @release_head ||= persist_release_head(
+      code: blueprint.release_group.brainz_code
+    )
+  end
   # This method smells of :reek:FeatureEnvy
   def language
     iso_code_3 = blueprint.text_representation.language

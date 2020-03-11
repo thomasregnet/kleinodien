@@ -2,13 +2,11 @@
 
 # Persist a CompilationHead using data from MusicBrainz
 class PersistBrainzReleaseHead < PersistBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(code:, **args)
     super(args)
-    # @import_request = import_request
-    @code = blueprint.brainz_code
+    @code = code
   end
 
-  # attr_reader :import_request
   attr_reader :code
 
   def call
