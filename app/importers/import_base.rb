@@ -52,17 +52,13 @@ class ImportBase < ServiceBase
     nil
   end
 
+  # This method smells of :reek:DuplicateMethodCall
   # This method smells of :reek:TooManyStatements
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def try_persistence_transaction
     import_order.transaction do
       import_order.persist!
-      persister_class.call(
-        blueprint:    blueprint,
-        import_order: import_order,
-        proxy:        proxy
-      )
+      persister_class_call
     end
   rescue StandardError => e
     Rails.logger.error(e)
@@ -71,11 +67,21 @@ class ImportBase < ServiceBase
   ensure
     import_order.done! if import_order.persisting?
   end
-  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   def persister_class
-    import_order.type.sub(/^(.+)ImportOrder$/, 'Persist\1').constantize
+    import_order
+      .type
+      .sub(/^(.+)ImportOrder$/, 'Persist\1')
+      .constantize
+  end
+
+  def persister_class_call
+    persister_class.call(
+      blueprint:    blueprint,
+      import_order: import_order,
+      proxy:        proxy
+    )
   end
 
   def enhance_result(result, created)
