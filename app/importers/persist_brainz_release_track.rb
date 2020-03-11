@@ -9,7 +9,6 @@ class PersistBrainzReleaseTrack < PersistBrainzBase
     @subset    = subset
   end
 
-  # attr_reader :blueprint, :import_order, :no, :subset
   attr_reader :blueprint, :no, :subset
 
   def call

@@ -4,7 +4,6 @@
 class PersistBrainzArea < PersistBrainzBase
   def initialize(code:, **args)
     super(args)
-    # @code = blueprint.brainz_code
     @code = code
   end
 

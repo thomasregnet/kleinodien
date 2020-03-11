@@ -59,7 +59,6 @@ RSpec.describe PersistBrainzReleaseSubset do
       end
 
       it 'returns a generic title' do
-        # blueprint = double(format: format, position: 3, title: nil)
         subset = described_class.new(args)
         expect(subset.title).to eq('Vinyl 3')
       end

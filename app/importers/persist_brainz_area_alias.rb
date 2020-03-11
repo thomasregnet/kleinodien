@@ -3,7 +3,7 @@
 # Persist an AreaAlias retrieved from brainz
 class PersistBrainzAreaAlias < PersistPrepareBase
   BRAINZ_AREA_ALIAS_TYPE_FOR = {
-    'Area name' => 'AreaNameAlias',
+    'Area name'   => 'AreaNameAlias',
     'Formal name' => 'AreaFormalNameAlias',
     'Search hint' => 'AreaSearchHint'
   }.freeze
