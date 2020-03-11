@@ -2,6 +2,8 @@
 
 # Base-Class for import classes
 class ImportBase < ServiceBase
+  include PersistablePrepareable
+
   def initialize(import_order:)
     @import_order = import_order
   end
@@ -33,7 +35,8 @@ class ImportBase < ServiceBase
   private
 
   def find_existing
-    result = find_existing_by_import_order || find_existing_by_blueprint \
+    result = find_existing_by_import_order \
+      || find_existing_by_blueprint \
       || return
 
     enhance_result(result, false)

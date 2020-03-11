@@ -4,11 +4,7 @@
 class ImportBrainzRelease < ImportBrainzBase
   # OPTIMIZE: move #prepare to ImportBase?
   def prepare
-    PrepareBrainzRelease.call(
-      import_order: import_order,
-      proxy:        proxy,
-      stub:         blueprint
-    )
+    prepare_release(stub: blueprint)
   end
 
   def find_existing_by_blueprint
