@@ -21,7 +21,7 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
   private
 
   def area
-    persist_area(blueprint: blueprint.area)
+    persist_area(code: blueprint.area.brainz_code)
   end
 
   def date

@@ -2,9 +2,10 @@
 
 # Persist an Area retrieved from MusicBrainz
 class PersistBrainzArea < PersistBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(code:, **args)
     super(args)
-    @code = blueprint.brainz_code
+    # @code = blueprint.brainz_code
+    @code = code
   end
 
   attr_reader :code

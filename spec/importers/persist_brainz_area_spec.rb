@@ -15,7 +15,7 @@ RSpec.describe PersistBrainzArea do
 
     before do
       described_class.call(
-        blueprint:    brainz_area,
+        code:         brainz_area.brainz_code,
         import_order: import_order,
         proxy:        proxy
       )
@@ -42,7 +42,7 @@ RSpec.describe PersistBrainzArea do
 
     let(:area) do
       described_class.call(
-        blueprint:    brainz_area,
+        code:         brainz_area.brainz_code,
         import_order: import_order,
         proxy:        proxy
       )

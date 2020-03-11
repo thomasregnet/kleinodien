@@ -27,7 +27,7 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def persist
-    company.area = persist_area(blueprint: blueprint.area)
+    company.area = persist_area(code: blueprint.area.brainz_code)
     company.save!
     company
   end
