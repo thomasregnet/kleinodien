@@ -19,6 +19,17 @@ class MockImportOrder
     failure
   end
 
+  def persisting?
+  end
+
+  def failed?
+    @failure
+  end
+
+  def type
+    self.class.to_s
+  end
+
   # rubocop:disable Naming/PredicateName
   def has_received_failure
     failure

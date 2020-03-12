@@ -44,6 +44,14 @@ class FakeProxy
     return true if get_calls.positive?
   end
 
+  def lock
+    @locked = true
+  end
+
+  def locked?
+    @locked
+  end
+
   # This method smells of :reek:FeatureEnvy
   def requested_for?(regexp, expected_count = nil)
     count = cache.keys.count { |key| key.match(regexp) }
