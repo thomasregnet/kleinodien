@@ -15,25 +15,36 @@ class PersistImportService < ServiceBase
 
     proxy.lock
 
-    imported_entity = persist
-    if import_order.failed?
-      Rails.logger.error("failed to persist #{import_order.inspect}")
-      return
-    end
+    persisted_entity = persist
+    return if import_order.failed?
 
-    enhance_result(imported_entity, true)
+    persisted_entity
   end
 
   private
 
-  # This method smells of :reek:TooManyStatements
+  def call_persister_class
+    persister_class.call(
+      blueprint:    blueprint,
+      import_order: import_order,
+      proxy:        proxy
+    )
+  end
+
+  # This method smells of :reek:DuplicateMethodCall
+  def handle_error(exception)
+    Rails.logger.error("failed to persist #{import_order.inspect}")
+    Rails.logger.error(exception)
+    exception.backtrace.each { |msg| Rails.logger.error(msg) }
+    import_order.failure!
+  end
+
   def persist
     import_order.transaction do
       import_order.persist!
-      persister_class_call
+      call_persister_class
     end
   rescue StandardError => e
-    Rails.logger.error('Failed to persist')
     handle_error(e)
   ensure
     import_order.done! if import_order.persisting?
@@ -44,27 +55,5 @@ class PersistImportService < ServiceBase
       .type
       .sub(/^(.+)ImportOrder$/, 'Persist\1')
       .constantize
-  end
-
-  def persister_class_call
-    persister_class.call(
-      blueprint:    blueprint,
-      import_order: import_order,
-      proxy:        proxy
-    )
-  end
-
-  def enhance_result(result, created)
-    return unless result
-
-    result.define_singleton_method('created?') { created }
-    result
-  end
-
-  # This method smells of :reek:DuplicateMethodCall
-  def handle_error(exception)
-    Rails.logger.error(exception)
-    exception.backtrace.each { |msg| Rails.logger.error(msg) }
-    import_order.failure!
   end
 end
