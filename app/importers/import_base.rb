@@ -45,29 +45,23 @@ class ImportBase < ServiceBase
   def try_prepare
     import_order.prepare!
     prepare
-    true
   rescue StandardError => e
-    e.backtrace.each { |msg| Rails.logger.error(msg) }
-    import_order.failure!
-    nil
+    Rails.logger.error('Failed to prepare')
+    handle_error(e)
   end
 
-  # This method smells of :reek:DuplicateMethodCall
   # This method smells of :reek:TooManyStatements
-  # rubocop:disable Metrics/AbcSize
   def try_persistence_transaction
     import_order.transaction do
       import_order.persist!
       persister_class_call
     end
   rescue StandardError => e
-    Rails.logger.error(e)
-    e.backtrace.each { |msg| Rails.logger.error(msg) }
-    import_order.failure!
+    Rails.logger.error('Failed to persist')
+    handle_error(e)
   ensure
     import_order.done! if import_order.persisting?
   end
-  # rubocop:enable Metrics/AbcSize
 
   def persister_class
     import_order
@@ -89,5 +83,12 @@ class ImportBase < ServiceBase
 
     result.define_singleton_method('created?') { created }
     result
+  end
+
+  # This method smells of :reek:DuplicateMethodCall
+  def handle_error(exception)
+    Rails.logger.error(exception)
+    exception.backtrace.each { |msg| Rails.logger.error(msg) }
+    import_order.failure!
   end
 end

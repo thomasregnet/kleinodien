@@ -60,10 +60,6 @@ RSpec.describe ImportBase do
       BadImportFake.new(import_order: import_order)
     end
 
-    it 'returns nil' do
-      expect(import_base.send(:try_prepare)).to be_nil
-    end
-
     it 'sets the ImportOrder#state to "failed"' do
       import_base.send(:try_prepare)
       expect(import_base.import_order.failed?).to be(true)
