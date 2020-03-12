@@ -19,17 +19,22 @@ class ImportBase < ServiceBase
   # This method smells of :reek:TooManyStatements
   # This method smells of :reek:DuplicateMethodCall
   def persist
-    Rails.logger.info("persisting #{import_order.inspect}")
+    PersistImportService.call(
+      blueprint:    blueprint,
+      import_order: import_order,
+      proxy:        proxy
+    )
+    # Rails.logger.info("persisting #{import_order.inspect}")
 
-    proxy.lock
+    # proxy.lock
 
-    imported_entity = try_persistence_transaction
-    if import_order.failed?
-      Rails.logger.error("failed to persist #{import_order.inspect}")
-      return
-    end
+    # imported_entity = try_persistence_transaction
+    # if import_order.failed?
+    #   Rails.logger.error("failed to persist #{import_order.inspect}")
+    #   return
+    # end
 
-    enhance_result(imported_entity, true)
+    # enhance_result(imported_entity, true)
   end
 
   private
