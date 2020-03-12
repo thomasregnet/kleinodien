@@ -8,9 +8,10 @@ class FakeProxy
     @cache          = {}
     @fetch_requests = 0
     @get_calls      = 0
+    @locked         = false
   end
 
-  attr_reader :cache, :fetch_requests, :get_calls
+  attr_reader :cache, :fetch_requests, :get_calls, :locked
 
   def cached?(what, code)
     cache.key?(uri_for(what, code))
@@ -49,7 +50,7 @@ class FakeProxy
   end
 
   def locked?
-    @locked
+    locked
   end
 
   # This method smells of :reek:FeatureEnvy

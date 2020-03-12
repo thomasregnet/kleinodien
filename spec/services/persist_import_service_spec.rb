@@ -27,6 +27,10 @@ RSpec.describe PersistImportService do
       )
     end
 
+    it 'locks the proxy' do
+      expect(proxy).to be_locked
+    end
+
     it 'sets the ImportOrder state to "failed"' do
       expect(import_order).to be_failed
     end
