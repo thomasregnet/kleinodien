@@ -64,14 +64,6 @@ class FakeProxy
 
   private
 
-  def import_request_for(what, code)
-    request_class = request_class_for(what)
-    request_class.create!(
-      code:         code,
-      import_order: import_order
-    )
-  end
-
   def request_class_for(what)
     "Brainz#{what.to_s.camelize}ImportRequest".constantize
   end
