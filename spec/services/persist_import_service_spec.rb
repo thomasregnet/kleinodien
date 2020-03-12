@@ -2,37 +2,71 @@
 
 require 'fake_proxy'
 require 'mock_import_order'
+require 'persist_mock'
 require 'rails_helper'
 require 'shared_examples_for_services'
-
-# for testing
-class PersistMock
-  def self.call(_)
-    raise 'Failed!'
-  end
-end
 
 RSpec.describe PersistImportService do
   it_behaves_like 'a service'
 
-  context 'when .call to the persisting class fails' do
+  describe '.call' do
     let(:import_order) { MockImportOrder.new }
     let(:proxy) { FakeProxy.new }
 
-    before do
-      described_class.call(
+    let(:persister) do
+      described_class.new(
         blueprint:    :fake_blueprint,
         import_order: import_order,
         proxy:        proxy
       )
     end
 
-    it 'locks the proxy' do
-      expect(proxy).to be_locked
+    context 'when success' do
+      let(:mock_persister) do
+        class_double('PersistMock')
+          .as_stubbed_const(transfer_nested_constants: true)
+      end
+
+      before do
+        allow(mock_persister).to receive(:call).and_return(:success)
+      end
+
+      it 'returns the persisted entity' do
+        expect(persister.call).to eq(:success)
+      end
+
+      it 'locks the proxy' do
+        persister.call
+        expect(proxy).to be_locked
+      end
+
+      it 'sets the ImportOrder state to done' do
+        persister.call
+        expect(import_order).to be_done
+      end
     end
 
-    it 'sets the ImportOrder state to "failed"' do
-      expect(import_order).to be_failed
+    context 'when .call to the persisting class fails' do
+      before do
+        mock_persister = class_double('PersistMock')
+                         .as_stubbed_const(transfer_nested_constants: true)
+
+        allow(mock_persister).to receive(:call).and_raise('such a shame')
+      end
+
+      it 'returns nil' do
+        expect(persister.call).to be_nil
+      end
+
+      it 'locks the proxy' do
+        persister.call
+        expect(proxy).to be_locked
+      end
+
+      it 'sets the ImportOrder state to "failed"' do
+        persister.call
+        expect(import_order).to be_failed
+      end
     end
   end
 

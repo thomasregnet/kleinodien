@@ -11,6 +11,14 @@ class MockImportOrder
 
   attr_reader :code
 
+  def done!
+    @done = true
+  end
+
+  def done?
+    @done
+  end
+
   def failed?
     @failure
   end
@@ -19,8 +27,17 @@ class MockImportOrder
     @failure = true
   end
 
+  def persist!
+    @persisting = true
+  end
+
   def persisting?
-    false
+    @persisting
+  end
+
+  # This method smells of :reek:UtilityFunction
+  def transaction(&block)
+    block.call
   end
 
   def type
