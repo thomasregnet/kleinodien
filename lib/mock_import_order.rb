@@ -11,28 +11,19 @@ class MockImportOrder
 
   attr_reader :code
 
+  def failed?
+    @failure
+  end
+
   def failure!
     @failure = true
   end
 
-  def failure?
-    failure
-  end
-
   def persisting?
-  end
-
-  def failed?
-    @failure
+    false
   end
 
   def type
     self.class.to_s
   end
-
-  # rubocop:disable Naming/PredicateName
-  def has_received_failure
-    failure
-  end
-  # rubocop:enable Naming/PredicateName
 end
