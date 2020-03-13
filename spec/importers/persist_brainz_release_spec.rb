@@ -34,7 +34,7 @@ RSpec.describe PersistBrainzRelease do
 
       it 'returns the CompilationRelease' do
         args = {
-          blueprint:    blueprint,
+          code:         brainz_code,
           import_order: :fake,
           proxy:        FakeProxy.new
         }
@@ -50,7 +50,7 @@ RSpec.describe PersistBrainzRelease do
 
     let(:release) do
       persister = described_class.new(
-        blueprint:    blueprint,
+        code:         brainz_code,
         import_order: FactoryBot.create(:brainz_import_order),
         proxy:        FakeProxy.new
       )

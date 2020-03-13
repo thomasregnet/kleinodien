@@ -15,7 +15,7 @@ RSpec.describe PersistImportService do
 
     let(:persister) do
       described_class.new(
-        blueprint:    :fake_blueprint,
+        code:         :fake_code,
         import_order: import_order,
         proxy:        proxy
       )
@@ -73,7 +73,7 @@ RSpec.describe PersistImportService do
   describe '#persister_class' do
     it 'returns the persister-class' do
       service = described_class.new(
-        blueprint:    :fake_blueprint,
+        code:         :fake_code,
         import_order: MockImportOrder.new,
         proxy:        :fake_proxy
       )

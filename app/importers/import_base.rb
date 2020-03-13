@@ -20,7 +20,8 @@ class ImportBase < ServiceBase
 
   def persist
     persisted_entity = PersistImportService.call(
-      blueprint:    blueprint,
+      # blueprint:    blueprint,
+      code:         import_order.code,
       import_order: import_order,
       proxy:        proxy
     )

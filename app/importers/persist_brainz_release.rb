@@ -2,16 +2,21 @@
 
 # Persist a CompilationRelease using data retrieved from MusicBrainz
 class PersistBrainzRelease < PersistBrainzBase
-  def initialize(blueprint:, **args)
+  def initialize(code:, **args)
     super(args)
-    @blueprint = blueprint
+    # @blueprint = blueprint
+    @code = code
   end
 
   # attr_reader :import_request
-  attr_reader :blueprint
+  attr_reader :code
 
   def call
     find_already_existing || persist
+  end
+
+  def blueprint
+    @blueprint ||= proxy.get(:release, code)
   end
 
   def find_already_existing
@@ -21,6 +26,7 @@ class PersistBrainzRelease < PersistBrainzBase
     )
   end
 
+  # This method smells of :reek:TooManySatements
   def persist
     persist_media
     persist_subsets

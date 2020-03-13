@@ -2,13 +2,13 @@
 
 # Persist the data of an import
 class PersistImportService < ServiceBase
-  def initialize(blueprint:, import_order:, proxy:)
-    @blueprint    = blueprint
+  def initialize(code:, import_order:, proxy:)
+    @code         = code
     @import_order = import_order
     @proxy        = proxy
   end
 
-  attr_reader :blueprint, :import_order, :proxy
+  attr_reader :code, :import_order, :proxy
 
   def call
     Rails.logger.info("persisting #{import_order.inspect}")
@@ -25,7 +25,7 @@ class PersistImportService < ServiceBase
 
   def call_persister_class
     persister_class.call(
-      blueprint:    blueprint,
+      code:         code,
       import_order: import_order,
       proxy:        proxy
     )
