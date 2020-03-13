@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Call the right preparer to fill the proxy for imports
 class PrepareImportService < ServiceBase
   def initialize(import_order:, proxy:, stub:)
     @import_order = import_order
@@ -11,6 +12,8 @@ class PrepareImportService < ServiceBase
 
   def call
     prepare
+
+    import_order.failed? ? false : true
   end
 
   private

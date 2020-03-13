@@ -35,6 +35,13 @@ class MockImportOrder
     @persisting
   end
 
+  def prepare!
+    @preparing = true
+  end
+
+  def preparing?
+    @preparing
+  end
   # This method smells of :reek:UtilityFunction
   def transaction(&block)
     block.call
