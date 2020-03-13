@@ -47,4 +47,16 @@ RSpec.describe PrepareImportService do
       end
     end
   end
+
+  describe '#preparer_class' do
+    it 'returns the preparer-class' do
+      service = described_class.new(
+        import_order: MockImportOrder.new,
+        proxy:        :fake_proxy,
+        stub:         :fake_stub
+      )
+
+      expect(service.send(:preparer_class)).to eq(PrepareMock)
+    end
+  end
 end
