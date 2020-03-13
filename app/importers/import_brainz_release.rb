@@ -2,11 +2,6 @@
 
 # Import a Release from MusicBrainz
 class ImportBrainzRelease < ImportBrainzBase
-  # OPTIMIZE: move #prepare to ImportBase?
-  def prepare
-    prepare_release(stub: blueprint)
-  end
-
   def find_existing_by_blueprint
     codes_hash = blueprint.codes_hash
     FindByCodesService.call(model_class: Release, codes_hash: codes_hash)

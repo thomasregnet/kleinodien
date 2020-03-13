@@ -20,13 +20,6 @@ class ImportFake < ImportBase
 end
 
 # For testing
-class BadImportFake < ImportFake
-  def prepare
-    raise 'Bad Prepare'
-  end
-end
-
-# For testing
 class FakeImportOrder < ImportOrder
 end
 
@@ -48,34 +41,6 @@ RSpec.describe ImportBase do
       expect { described_class.call(import_order: import_order) }
         .to raise_error(ArgumentError)
     end
-  end
-
-  context 'when prepare fails' do
-    let(:import_base) do
-      import_order = FactoryBot.create(:import_order, type: 'FakeImportOrder')
-      BadImportFake.new(import_order: import_order)
-    end
-
-    it 'sets the ImportOrder#state to "failed"' do
-      import_base.send(:try_prepare)
-      expect(import_base.import_order.failed?).to be(true)
-    end
-  end
-
-  context 'when the import transaction fails' do
-    let(:import_base) do
-      import_order = FactoryBot.create(:import_order, type: 'FakeImportOrder')
-      ImportFake.new(import_order: import_order)
-    end
-
-    # it 'returns nil' do
-    #   expect(import_base.send(:persist)).to be_nil
-    # end
-
-    # it 'sets the ImportOrder#state to "failed' do
-    #   import_base.send(:persist)
-    #   expect(import_base.import_order.failed?).to be(true)
-    # end
   end
 
   describe '#enhance_result' do
