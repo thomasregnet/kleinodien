@@ -50,4 +50,8 @@ class MockImportOrder
   def type
     self.class.to_s
   end
+
+  def valid?
+    true
+  end
 end
