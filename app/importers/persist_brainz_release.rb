@@ -81,6 +81,7 @@ class PersistBrainzRelease < PersistBrainzBase
       code: blueprint.release_group.brainz_code
     )
   end
+
   # This method smells of :reek:FeatureEnvy
   def language
     iso_code_3 = blueprint.text_representation.language

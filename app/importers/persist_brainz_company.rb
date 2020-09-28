@@ -1,4 +1,4 @@
-# frozen_string_literal: treue
+# frozen_string_literal: true
 
 # Persist a Company from MusicBrainz
 class PersistBrainzCompany < PersistBrainzBase

@@ -7,38 +7,20 @@ require 'shared_examples_for_tagable_models'
 
 RSpec.describe Station, type: :model do
   it_behaves_like 'a rateable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @station = FactoryBot.create(:station)
-    end
-
-    let(:rateable) { @station }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:rateable) { FactoryBot.build(:station) }
   end
 
   it_behaves_like 'a tagable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @tagable = FactoryBot.create(:station)
-    end
-
-    let(:tagable) { @tagable }
-
-    after(:all) { DatabaseCleaner.clean }
-  end
-
-  before do
-    @station = FactoryBot.build(:station)
+    let(:tagable) { FactoryBot.build(:station) }
   end
 
   it 'is valid with valid parameters' do
-    expect(@station).to be_valid
+    expect(FactoryBot.build(:station)).to be_valid
   end
 
   it_behaves_like 'a model with disambiguations' do
     let(:factory) { :station }
-    let(:object) { @station }
+    let(:object) { FactoryBot.build(:station) }
     let(:naming) { 'name' }
   end
 end

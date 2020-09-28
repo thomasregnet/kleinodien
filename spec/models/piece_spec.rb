@@ -23,34 +23,18 @@ RSpec.describe Piece, type: :model do
   it_behaves_like 'a model with duration'
 
   it_behaves_like 'a rateable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @piece = FactoryBot.create(:piece)
-    end
-
-    let(:rateable) { @piece }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:rateable) { FactoryBot.build(:piece) }
   end
 
   it_behaves_like 'a tagable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @tagable = FactoryBot.create(:piece)
-    end
-
-    let(:tagable) { @tagable }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:tagable) { FactoryBot.build(:piece) }
   end
 
   context 'without tracks' do
-    before do
-      @piece = FactoryBot.build(:piece_with_head)
-    end
+    let(:piece) { FactoryBot.build(:piece_with_head) }
 
     it 'is valid with valid attributes' do
-      expect(@piece).to be_valid
+      expect(piece).to be_valid
     end
   end
 

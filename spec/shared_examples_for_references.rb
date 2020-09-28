@@ -177,7 +177,7 @@ RSpec.shared_examples 'a reference initialized from_uri' do
 end
 
 RSpec.shared_examples 'a hash key' do
-  context 'initialized with a code' do
+  context 'when initialized with a code' do
     let(:reference) { described_class.from_code(code) }
 
     describe 'compared with an object initialized from_key' do
@@ -199,7 +199,7 @@ RSpec.shared_examples 'a hash key' do
     end
   end
 
-  context 'initialized with a key' do
+  context 'when initialized with a key' do
     let(:reference) { described_class.from_key(key) }
 
     describe 'compared with an object initialized from_uri' do
@@ -215,7 +215,7 @@ RSpec.shared_examples 'a hash key' do
     end
   end
 
-  context 'initialized with an uri' do
+  context 'when initialized with an uri' do
     let(:reference) { described_class.from_uri(uri) }
 
     describe '#hash' do

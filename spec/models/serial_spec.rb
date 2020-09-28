@@ -7,6 +7,10 @@ require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe Serial, type: :model do
+  it 'is valid with valid parameters' do
+    expect(FactoryBot.build(:serial)).to be_valid
+  end
+
   it_behaves_like 'a code findable entity' do
     before { DatabaseCleaner.start }
 
@@ -15,56 +19,18 @@ RSpec.describe Serial, type: :model do
   end
 
   it_behaves_like 'a rateable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @serial = FactoryBot.create(:serial)
-    end
-
-    let(:rateable) { @serial }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:rateable) { FactoryBot.build(:serial) }
   end
 
   it_behaves_like 'a tagable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @tagable = FactoryBot.create(:serial)
-    end
-
-    let(:tagable) { @tagable }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:tagable) { FactoryBot.build(:serial) }
   end
 
   context 'without seasons' do
-    before do
-      @serial = FactoryBot.build(:serial)
-    end
-
-    it 'is valid with valid attributes' do
-      expect(@serial).to be_valid
-    end
-
     it_behaves_like 'a model with disambiguations' do
       let(:factory) { :serial }
-      let(:object) { @serial }
+      let(:object) { FactoryBot.build(:serial) }
       let(:naming) { 'title' }
-    end
-  end
-
-  context 'with seasons and episodes' do
-    before do
-      @season = FactoryBot.create(:season_with_tv_episode_heads)
-      @serial = @season.serial
-    end
-
-    it 'has seasons' do
-      expect(@serial.seasons.count).to eq(1)
-    end
-
-    it 'has episodes' do
-      season = @serial.seasons[0]
-      expect(season.episodes.count).to eq(5)
     end
   end
 end

@@ -8,33 +8,34 @@ RSpec.describe PieceTrack, type: :model do
   end
 
   it 'is valid with valid attributes' do
-    expect(@track).to be_valid
+    expect(FactoryBot.build(:piece_track)).to be_valid
   end
 
   it 'is not valid without a Piece' do
-    # @track.release = nil
-    @track.piece = nil
-    expect(@track).not_to be_valid
+    # track.piece = nil
+    track = FactoryBot.build(:piece_track, piece: nil)
+    expect(track).not_to be_valid
   end
 
   # TODO: shared_exampes_for_duration
   # this spec was cut and pasted from compilation_tracks
   context 'with duration' do
-    before do
-      @track = FactoryBot.build(:piece_track)
-      @track.duration = Duration.new(311_000, 'second')
+    let(:track) do
+      track = FactoryBot.build(:piece_track)
+      track.duration = Duration.new(311_000, 'second')
+      track
     end
 
     it 'is valid' do
-      expect(@track).to be_valid
+      expect(track).to be_valid
     end
 
     it 'can be saved' do
-      expect { @track.save! }.not_to raise_error
+      expect { track.save! }.not_to raise_error
     end
 
     it 'returns the duration in mm:ss format' do
-      expect(@track.duration.mmss).to eq('5:11')
+      expect(track.duration.mmss).to eq('5:11')
     end
   end
 end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_string_literal
-
 # Name giving group of one or many EpisodeReleases
 class EpisodeHead < PieceHead
   # Podcast episodes do not require a season

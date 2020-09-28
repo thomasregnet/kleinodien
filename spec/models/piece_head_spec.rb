@@ -10,9 +10,7 @@ require 'shared_examples_for_sources'
 require 'shared_examples_for_tagable_models'
 
 RSpec.describe PieceHead, type: :model do
-  before do
-    @ph = FactoryBot.build(:piece_head)
-  end
+  let(:piece_head) { FactoryBot.build(:piece_head) }
 
   it { is_expected.to belong_to(:import_order).without_validating_presence }
 
@@ -23,58 +21,22 @@ RSpec.describe PieceHead, type: :model do
     after { DatabaseCleaner.clean }
   end
 
-  # it_behaves_like 'a model with BrainzConstructors' do
-  #   let(:klass) { AlbumHead }
-  # end
-
   it 'is valid with valid attributes' do
-    expect(@ph).to be_valid
+    expect(piece_head).to be_valid
   end
 
   it_behaves_like 'a rateable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @piece_head = FactoryBot.create(:piece_head)
-    end
-
-    let(:rateable) { @piece_head }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:rateable) { FactoryBot.create(:piece_head) }
   end
 
   it_behaves_like 'a tagable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @tagable = FactoryBot.create(:piece_head)
-    end
-
-    let(:tagable) { @tagable }
-
-    after(:all) { DatabaseCleaner.clean }
-  end
-
-  it "is allowed to use same 'name' and 'disambiguation' if type 'differs'" do
-    @s_head = FactoryBot.build(
-      :song_head,
-      title:          @ph.title,
-      disambiguation: @ph.disambiguation
-      # source_ident:   nil
-    )
-    expect(@s_head).to be_valid
-    expect { @s_head.save! }.not_to raise_error
-
-    disambiguation = 'disambiguate this!'
-    @s_head.disambiguation = disambiguation
-    @ph.disambiguation = disambiguation
-    expect(@s_head).to be_valid
-    expect(@ph).to be_valid
-    expect { @s_head.save! }.not_to raise_error
-    expect { @ph.save! }.not_to raise_error
+    let(:tagable) { piece_head }
   end
 
   it 'is not valid without a type' do
-    @ph.type = nil
-    expect(@ph).not_to be_valid
+    piece_head = FactoryBot.build(:piece_head)
+    piece_head.type = nil
+    expect(piece_head).not_to be_valid
   end
 
   it_behaves_like 'a model with credits' do
@@ -87,7 +49,7 @@ RSpec.describe PieceHead, type: :model do
 
   it_behaves_like 'a model with disambiguations' do
     let(:factory) { :piece_head }
-    let(:object) { @ph }
+    let(:object) { FactoryBot.build(:piece_head) }
     let(:naming) { 'title' }
   end
 
