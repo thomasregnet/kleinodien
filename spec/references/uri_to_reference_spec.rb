@@ -8,7 +8,7 @@ RSpec.describe UriToReference do
   end
 
   describe '.perform MusicBrainz uri' do
-    context 'of an artist' do
+    context 'with artist' do
       let(:uri) { uri_for(:artist) }
 
       it 'returns a BrainzArtistReference' do
@@ -17,7 +17,7 @@ RSpec.describe UriToReference do
       end
     end
 
-    context 'of a release-group' do
+    context 'with release-group' do
       let(:uri) { uri_for('release-group') }
 
       it 'returns a BrainzArtistReference' do
@@ -26,7 +26,7 @@ RSpec.describe UriToReference do
       end
     end
 
-    context 'of a release-group' do
+    context 'with release-group' do
       let(:uri) { uri_for(:release) }
 
       it 'returns a BrainzArtistReference' do
@@ -35,7 +35,7 @@ RSpec.describe UriToReference do
       end
     end
 
-    context 'of a unknown type' do
+    context 'with unknown type' do
       it 'raises an error' do
         expect { described_class.perform(uri_for(:bad_type)) }
           .to raise_error(/bad_type/)
