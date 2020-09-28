@@ -26,6 +26,8 @@ ENV RAILS_ROOT /var/www/kleinodien
 RUN mkdir -p $RAILS_ROOT/tmp/pids
 WORKDIR $RAILS_ROOT
 
+RUN gem install bundler
+
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 
