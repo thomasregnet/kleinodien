@@ -84,7 +84,7 @@ class Duration
       .join(':')
   end
 
-  def padding(number)
-    format('%02d', number)
+  def padding(digit)
+    format('%<digit>.2d', digit: digit)
   end
 end
