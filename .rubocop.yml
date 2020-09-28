@@ -6,7 +6,7 @@ AllCops:
     - 'db/schema.rb'
     - 'config/**/*'
     - 'script/**/*'
-    - 'bin/{rails,rake}'
+    - 'bin/*'
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
 
 Metrics/BlockLength:
