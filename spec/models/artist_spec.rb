@@ -9,12 +9,14 @@ require 'shared_examples_for_tagable_models'
 
 RSpec.describe Artist, type: :model do
   it { is_expected.to belong_to(:import_order).without_validating_presence }
+  it { is_expected.to respond_to(:sort_name) }
+
+  it 'is valid with valid attributes' do
+    expect(FactoryBot.build(:artist)).to be_valid
+  end
 
   it_behaves_like 'a code findable entity' do
-    before { DatabaseCleaner.start }
-
     let(:factory) { :artist }
-    after { DatabaseCleaner.clean }
   end
 
   context 'with brainz_code' do
@@ -69,19 +71,8 @@ RSpec.describe Artist, type: :model do
 
   # TODO: spec Artist has_many: identifiers
 
-  specify '#sort_name' do
-    expect(subject).to respond_to :sort_name
-  end
-
   it_behaves_like 'a rateable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @artist = FactoryBot.create(:artist)
-    end
-
-    let(:rateable) { @artist }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:rateable) { FactoryBot.build(:artist) }
   end
 
   context 'with a begin date' do
@@ -99,29 +90,12 @@ RSpec.describe Artist, type: :model do
   end
 
   it_behaves_like 'a tagable model' do
-    before(:all) do
-      DatabaseCleaner.start
-      @tagable = FactoryBot.create(:artist)
-    end
-
-    let(:tagable) { @tagable }
-
-    after(:all) { DatabaseCleaner.clean }
+    let(:tagable) { FactoryBot.build(:artist) }
   end
 
-  context 'usual artist' do
-    before do
-      @artist = FactoryBot.build(:artist)
-    end
-
-    it 'is valid with with valid attributes' do
-      expect(@artist).to be_valid
-    end
-
-    it_behaves_like 'a model with disambiguations' do
-      let(:factory) { :artist }
-      let(:object) { @artist }
-      let(:naming) { 'name' }
-    end
+  it_behaves_like 'a model with disambiguations' do
+    let(:factory) { :artist }
+    let(:object) { FactoryBot.build(:artist) }
+    let(:naming) { 'name' }
   end
 end
