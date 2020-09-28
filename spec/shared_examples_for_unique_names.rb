@@ -8,8 +8,6 @@ RSpec.shared_examples 'an entity with an unique name' do
   it 'is not valid without a name' do
     candidate.name = nil
     expect(candidate).not_to be_valid
-    expect { candidate.save! validate: false }
-      .to raise_error(/null value in column "name" violates not-null/)
   end
 
   it 'is not valid with a blank name' do
@@ -17,26 +15,7 @@ RSpec.shared_examples 'an entity with an unique name' do
     expect(candidate).not_to be_valid
   end
 
-  it 'is not valid whith the a duplicate name' do
-    clone = candidate.dup
-    clone.name = candidate.name
-
-    uc_clone = candidate.dup
-    uc_clone.name = candidate.name.upcase
-
-    candidate.save
-
-    expect(clone).not_to be_valid
-    expect(uc_clone).not_to be_valid
-
-    expect { clone.save! validate: false }
-      .to raise_error(
-        /duplicate key value violates unique constraint/
-      )
-
-    expect { uc_clone.save! validate: false }
-      .to raise_error(
-        /duplicate key value violates unique constraint/
-      )
+  it 'is not valid with a duplicate name' do
+    expect(candidate).to validate_uniqueness_of(:name).case_insensitive
   end
 end
