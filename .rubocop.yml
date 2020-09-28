@@ -2,12 +2,13 @@ require: rubocop-rspec
 
 AllCops:
   Exclude:
+    - 'bin/*'
+    - 'config/**/*'
     - 'db/migrate/*'
     - 'db/schema.rb'
-    - 'config/**/*'
+    - 'node_modules/node-sass/src/**/*'
     - 'script/**/*'
-    - 'bin/*'
-    - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
+    - 'tmp/*'
 
 Metrics/BlockLength:
   Exclude:
