@@ -4,24 +4,13 @@ require 'rails_helper'
 require 'shared_examples_for_pieces'
 
 RSpec.describe Song, type: :model do
-  before do
-    @song = FactoryBot.create(:song)
-  end
+  it { is_expected.to belong_to(:artist_credit).required(false) }
 
   it 'is valid with valid attributes' do
-    expect(@song).to be_valid
+    expect(FactoryBot.build(:song)).to be_valid
   end
 
   it_behaves_like 'a piece' do
-    let(:piece) { @song }
-  end
-
-  it 'belongs_to :artist_credit' do
-    song = FactoryBot.create(:song)
-    song.artist_credit = FactoryBot.create(:artist_credit)
-    expect { song.save! }.not_to raise_error
-
-    association = described_class.reflect_on_association(:artist_credit)
-    expect(association.macro).to eq(:belongs_to)
+    let(:piece) { FactoryBot.build(:song) }
   end
 end
