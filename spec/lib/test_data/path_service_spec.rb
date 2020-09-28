@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# frozen_string_literal: treu
 
 require 'rails_helper'
 require 'shared_examples_for_services'
