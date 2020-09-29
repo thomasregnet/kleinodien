@@ -8,22 +8,26 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">Kleinodien</a>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" arial-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
-      </nav>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+      </div>
+    </nav>
+
     <% flash.each do |type, message| %>
       <%= message %>
     <% end %>
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>
     <% if user_signed_in? %>
-        <%= destroy_user_session_path %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <%= destroy_user_session_path %>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
     <% end %>
   </body>
 </html>
