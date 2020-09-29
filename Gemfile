@@ -6,7 +6,7 @@ gem 'rails', '6.0.3.3'
 
 gem 'aasm', '~> 5.0'
 gem 'bootsnap'
-gem 'bootstrap', '~> 4.5.0'
+gem 'bulma-rails', '~> 0.9'
 gem 'capybara', '~> 3.0'
 gem 'coffee-rails', '~> 5.0'
 gem 'devise', '~> 4.7'
