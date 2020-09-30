@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class ImportOrdersController < ApplicationController
-  before_action :set_import_order, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_import_order, only: %i[show edit update destroy]
 
   # GET /import_orders
   # GET /import_orders.json
@@ -9,8 +12,7 @@ class ImportOrdersController < ApplicationController
 
   # GET /import_orders/1
   # GET /import_orders/1.json
-  def show
-  end
+  def show; end
 
   # GET /import_orders/new
   def new
@@ -18,8 +20,7 @@ class ImportOrdersController < ApplicationController
   end
 
   # GET /import_orders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /import_orders
   # POST /import_orders.json
@@ -62,13 +63,18 @@ class ImportOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_import_order
-      @import_order = ImportOrder.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def import_order_params
-      params.require(:import_order).permit(:code, :state, :type, :uri, :user_id, :requests_count, :import_queue_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_import_order
+    @import_order = ImportOrder.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def import_order_params
+    params.require(:import_order)
+          .permit(
+            :code, :state, :type, :uri, :user_id,
+            :requests_count, :import_queue_id
+          )
+  end
 end
