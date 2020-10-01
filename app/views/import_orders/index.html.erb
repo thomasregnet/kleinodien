@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Import Orders</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>State</th>
+      <th>Type</th>
+      <th>Uri</th>
+      <th>User</th>
+      <th>Requests count</th>
+      <th>Import queue</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @import_orders.each do |import_order| %>
+      <tr>
+        <td><%= import_order.code %></td>
+        <td><%= import_order.state %></td>
+        <td><%= import_order.type %></td>
+        <td><%= import_order.uri %></td>
+        <td><%= import_order.user_id %></td>
+        <td><%= import_order.requests_count %></td>
+        <td><%= import_order.import_queue_id %></td>
+        <td><%= link_to 'Show', import_order %></td>
+        <td><%= link_to 'Edit', edit_import_order_path(import_order) %></td>
+        <td><%= link_to 'Destroy', import_order, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Import Order', new_import_order_path %>

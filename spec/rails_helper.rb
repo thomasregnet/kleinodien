@@ -72,9 +72,9 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   # https://github.com/plataformatec/devise#test-helpers
-  config.include Devise::Test::IntegrationHelpers, type: :feature
-
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|

@@ -9,6 +9,7 @@ AllCops:
     - 'node_modules/node-sass/src/**/*'
     - 'script/**/*'
     - 'tmp/*'
+  NewCops: enable
 
 Metrics/BlockLength:
   Exclude:

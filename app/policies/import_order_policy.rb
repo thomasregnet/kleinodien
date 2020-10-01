@@ -5,6 +5,10 @@ class ImportOrderPolicy < ApplicationPolicy
     user.importer?
   end
 
+  def edit?
+    user.importer?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
