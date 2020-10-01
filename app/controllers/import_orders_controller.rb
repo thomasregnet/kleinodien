@@ -20,12 +20,15 @@ class ImportOrdersController < ApplicationController
   end
 
   # GET /import_orders/1/edit
-  def edit; end
+  def edit
+    authorize @import_order
+  end
 
   # POST /import_orders
   # POST /import_orders.json
   def create
     @import_order = ImportOrder.new(import_order_params)
+    authorize @import_order
 
     respond_to do |format|
       if @import_order.save
@@ -46,7 +49,8 @@ class ImportOrdersController < ApplicationController
         format.html { redirect_to @import_order, notice: 'Import order was successfully updated.' }
         format.json { render :show, status: :ok, location: @import_order }
       else
-        format.html { render :edit }
+        # format.html { render :edit }
+        format.html { redirect_to edit_import_order_url(@import_order) }
         format.json { render json: @import_order.errors, status: :unprocessable_entity }
       end
     end
