@@ -24,6 +24,7 @@ RSpec.describe '/import_orders with authorized user', type: :request do
       import_queue: FactoryBot.create(:import_queue)
     )
   end
+  let(:import_order) { FactoryBot.create(:import_order, user: user) }
 
   before { sign_in user }
 
@@ -37,7 +38,6 @@ RSpec.describe '/import_orders with authorized user', type: :request do
 
     describe 'GET /show' do
       it 'renders a successful response' do
-        import_order = FactoryBot.create(:import_order, user: user)
         get import_order_url(import_order)
         expect(response).to be_successful
       end
@@ -52,7 +52,6 @@ RSpec.describe '/import_orders with authorized user', type: :request do
 
     describe 'GET /edit' do
       it 'render a successful response' do
-        import_order = FactoryBot.create(:import_order)
         get edit_import_order_url(import_order)
         expect(response).to be_successful
       end
@@ -103,7 +102,6 @@ RSpec.describe '/import_orders with authorized user', type: :request do
 
         it 'updates the requested import_order' do
           # import_order = ImportOrder.create! valid_attributes
-          import_order = FactoryBot.create(:import_order, user: user)
           patch import_order_url(import_order), params: { import_order: new_attributes }
           import_order.reload
           # We assume 302 to be OK. Is it?
@@ -111,7 +109,6 @@ RSpec.describe '/import_orders with authorized user', type: :request do
         end
 
         it 'redirects to the import_order' do
-          import_order = FactoryBot.create(:import_order, user: user)
           patch import_order_url(import_order), params: { import_order: new_attributes }
           import_order.reload
           expect(response).to redirect_to(import_order_url(import_order))
@@ -120,7 +117,6 @@ RSpec.describe '/import_orders with authorized user', type: :request do
 
       context 'with invalid parameters' do
         it 'redirects to the new_import_order_url' do
-          import_order = FactoryBot.create(:import_order, user: user)
           patch import_order_url(import_order), params: { import_order: invalid_attributes }
           expect(response).to redirect_to(edit_import_order_url(import_order))
         end
@@ -129,7 +125,7 @@ RSpec.describe '/import_orders with authorized user', type: :request do
 
     describe 'DELETE /destroy' do
       it 'destroys the requested import_order' do
-        import_order = FactoryBot.create(:import_order)
+        import_order = FactoryBot.create(:import_order, user: user)
         expect do
           delete import_order_url(import_order)
         end.to change(ImportOrder, :count).by(-1)
