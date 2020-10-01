@@ -17,20 +17,19 @@ require 'rails_helper'
 RSpec.describe '/import_orders', type: :request do
   # ImportOrder. As you add validations to ImportOrder, be sure to
   # adjust the attributes here as well.
+  let(:invalid_attributes) { { state: 'evil' } }
+  let(:user) { FactoryBot.create(:user, importer: true) }
   let(:valid_attributes) do
     FactoryBot.attributes_for(:import_order).merge(
       import_queue: FactoryBot.create(:import_queue)
     )
   end
 
-  let(:invalid_attributes) { { state: 'evil' } }
+  before { sign_in user }
 
   context 'with an user with the right to import' do
     describe 'GET /index' do
       it 'renders a successful response' do
-        user = FactoryBot.create(:user, importer: true)
-        sign_in user
-        # FactoryBot.create(:import_order, user: user)
         get import_orders_url
         expect(response).to be_successful
       end
@@ -38,8 +37,6 @@ RSpec.describe '/import_orders', type: :request do
 
     describe 'GET /show' do
       it 'renders a successful response' do
-        user = FactoryBot.create(:user, importer: true)
-        sign_in user
         import_order = FactoryBot.create(:import_order, user: user)
         get import_order_url(import_order)
         expect(response).to be_successful
@@ -47,10 +44,6 @@ RSpec.describe '/import_orders', type: :request do
     end
 
     describe 'GET /new' do
-      let(:user) { FactoryBot.create(:user) }
-
-      before { sign_in user }
-
       it 'renders a successful response' do
         get new_import_order_url
         expect(response).to be_successful
@@ -58,10 +51,6 @@ RSpec.describe '/import_orders', type: :request do
     end
 
     describe 'GET /edit' do
-      let(:user) { FactoryBot.create(:user, importer: true) }
-
-      before { sign_in user }
-
       it 'render a successful response' do
         import_order = FactoryBot.create(:import_order)
         get edit_import_order_url(import_order)
@@ -70,15 +59,7 @@ RSpec.describe '/import_orders', type: :request do
     end
 
     describe 'POST /create' do
-      let(:user) { FactoryBot.create(:user) }
-
-      before { sign_in user }
-
       context 'with valid parameters' do
-        let(:user) { FactoryBot.create(:user, importer: true) }
-
-        before { sign_in user }
-
         it 'creates a new ImportOrder' do
           expect do
             attr = FactoryBot.attributes_for(:import_order).merge(
@@ -100,10 +81,6 @@ RSpec.describe '/import_orders', type: :request do
       end
 
       context 'with invalid parameters' do
-        let(:user) { FactoryBot.create(:user, importer: true) }
-
-        before { sign_in user }
-
         it 'does not create a new ImportOrder' do
           expect do
             post import_orders_url, params: { import_order: invalid_attributes }
@@ -118,10 +95,6 @@ RSpec.describe '/import_orders', type: :request do
     end
 
     describe 'PATCH /update' do
-      let(:user) { FactoryBot.create(:user, importer: true) }
-
-      before { sign_in user }
-
       context 'with valid parameters' do
         let(:new_attributes) do
           # skip('Add a hash of attributes valid for your model')
@@ -155,12 +128,7 @@ RSpec.describe '/import_orders', type: :request do
     end
 
     describe 'DELETE /destroy' do
-      let(:user) { FactoryBot.create(:user, importer: true) }
-
-      before { sign_in user }
-
       it 'destroys the requested import_order' do
-        # import_order = ImportOrder.create! valid_attributes
         import_order = FactoryBot.create(:import_order)
         expect do
           delete import_order_url(import_order)
