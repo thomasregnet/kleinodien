@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe '/import_orders with authorized user', type: :request do
+RSpec.describe '/import_orders without an user', type: :request do
   let(:import_order) { FactoryBot.create(:import_order, user: user) }
   let(:user) { FactoryBot.create(:user) } # User has no "importer" rights
   let(:valid_attributes) do
@@ -33,7 +33,7 @@ RSpec.describe '/import_orders with authorized user', type: :request do
   end
 
   describe 'GET /edit' do
-    it 'rendirects to the sign_in page' do
+    it 'redirects to the sign_in page' do
       get edit_import_order_url(import_order)
       expect(response).to redirect_to(new_user_session_url)
     end
@@ -51,16 +51,14 @@ RSpec.describe '/import_orders with authorized user', type: :request do
   end
 
   describe 'PATCH /update' do
-    context 'with valid parameters' do
-      let(:new_attributes) do
-        { code: 'yet another code', user: user }
-      end
+    let(:new_attributes) do
+      { code: 'yet another code', user: user }
+    end
 
-      it 'redirects to the sign_in page' do
-        patch import_order_url(import_order), params: { import_order: new_attributes }
-        import_order.reload
-        expect(response).to redirect_to(new_user_session_url)
-      end
+    it 'redirects to the sign_in page' do
+      patch import_order_url(import_order), params: { import_order: new_attributes }
+      import_order.reload
+      expect(response).to redirect_to(new_user_session_url)
     end
   end
 

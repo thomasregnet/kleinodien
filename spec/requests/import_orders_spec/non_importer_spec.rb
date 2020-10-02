@@ -2,17 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe '/import_orders with authorized user', type: :request do
-  let(:invalid_attributes) { { state: 'evil' } }
-
+RSpec.describe '/import_orders with non-importer user', type: :request do
+  let(:import_order) { FactoryBot.create(:import_order, user: user) }
   let(:user) { FactoryBot.create(:user) } # User has no "importer" rights
-
   let(:valid_attributes) do
     FactoryBot.attributes_for(:import_order).merge(
       import_queue: FactoryBot.create(:import_queue)
     )
   end
-  let(:import_order) { FactoryBot.create(:import_order, user: user) }
 
   before { sign_in user }
 
@@ -38,7 +35,7 @@ RSpec.describe '/import_orders with authorized user', type: :request do
   end
 
   describe 'GET /edit' do
-    it 'render a successful response' do
+    it 'redirects to the root_url' do
       get edit_import_order_url(import_order)
       expect(response).to redirect_to(root_url)
     end
@@ -56,16 +53,14 @@ RSpec.describe '/import_orders with authorized user', type: :request do
   end
 
   describe 'PATCH /update' do
-    context 'with valid parameters' do
-      let(:new_attributes) do
-        { code: 'yet another code', user: user }
-      end
+    let(:new_attributes) do
+      { code: 'yet another code', user: user }
+    end
 
-      it 'redirects to the root_url' do
-        patch import_order_url(import_order), params: { import_order: new_attributes }
-        import_order.reload
-        expect(response).to redirect_to(root_url)
-      end
+    it 'redirects to the root_url' do
+      patch import_order_url(import_order), params: { import_order: new_attributes }
+      import_order.reload
+      expect(response).to redirect_to(root_url)
     end
   end
 
