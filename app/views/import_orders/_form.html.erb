@@ -12,41 +12,41 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :code %>
-    <%= form.text_area :code %>
+    <%= form.label :code, class: "label" %>
+    <%= form.text_field :code, class: "input", placeholder: "Code", type: "text" %>
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.text_area :state %>
+    <%= form.label :state, class: "label" %>
+    <%= form.text_field :state, class: "input", type: "text" %>
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_area :type %>
+    <%= form.label :type, class: "label" %>
+    <%= form.text_field :type, class: "input", type: "text" %>
   </div>
 
   <div class="field">
-    <%= form.label :uri %>
-    <%= form.text_area :uri %>
+    <%= form.label :uri, class: "label" %>
+    <%= form.text_field :uri, class: "input", placeholder: "Uri", type: "text" %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label :user_id, class: "label" %>
+    <%= form.text_field :user_id, class: "input", type: "text" %>
   </div>
 
   <div class="field">
-    <%= form.label :requests_count %>
-    <%= form.number_field :requests_count %>
+    <%= form.label :requests_count, class: "label" %>
+    <%= form.number_field :requests_count, class: "input" %>
   </div>
 
   <div class="field">
-    <%= form.label :import_queue_id %>
-    <%= form.text_field :import_queue_id %>
+    <%= form.label :import_queue_id, class: "label" %>
+    <%= form.text_field :import_queue_id, class: "input", type: "text" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="control">
+    <%= form.submit class: "button is-link" %>
   </div>
 <% end %>
