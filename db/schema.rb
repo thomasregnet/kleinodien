@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_192334) do
+ActiveRecord::Schema.define(version: 2020_10_02_063215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -207,13 +207,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_192334) do
     t.index ["area_id"], name: "index_iso3166_part3_countries_on_area_id"
   end
 
-  create_table "jobs", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "lower((name)::text)", name: "index_jobs_on_lower_name", unique: true
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "name", null: false
     t.string "iso_code_1"
@@ -259,12 +252,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_192334) do
   create_table "ph_credits", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id", null: false
     t.integer "piece_head_id", null: false
-    t.integer "job_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_ph_credits_on_artist_credit_id"
-    t.index ["job_id"], name: "index_ph_credits_on_job_id"
     t.index ["piece_head_id"], name: "index_ph_credits_on_piece_head_id"
   end
 
@@ -363,12 +354,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_192334) do
   create_table "pr_credits", id: :serial, force: :cascade do |t|
     t.integer "artist_credit_id", null: false
     t.integer "piece_id", null: false
-    t.integer "job_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_credit_id"], name: "index_pr_credits_on_artist_credit_id"
-    t.index ["job_id"], name: "index_pr_credits_on_job_id"
     t.index ["piece_id"], name: "index_pr_credits_on_piece_id"
   end
 
@@ -631,7 +620,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_192334) do
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
   add_foreign_key "ph_credits", "artist_credits"
-  add_foreign_key "ph_credits", "jobs"
   add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
@@ -650,7 +638,6 @@ ActiveRecord::Schema.define(version: 2020_02_25_192334) do
   add_foreign_key "pieces_tags", "pieces"
   add_foreign_key "pieces_tags", "tags"
   add_foreign_key "pr_credits", "artist_credits"
-  add_foreign_key "pr_credits", "jobs"
   add_foreign_key "pr_credits", "pieces"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "pieces"
