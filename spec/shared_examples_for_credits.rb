@@ -9,10 +9,6 @@ RSpec.shared_examples 'a credit' do
     expect(credit_with_role).to be_valid
   end
 
-  it 'is valid with a job' do
-    expect(credit_with_job).to be_valid
-  end
-
   it 'is not valid without an owner' do
     credit.send(owner_setter, nil)
     expect(credit).not_to be_valid
