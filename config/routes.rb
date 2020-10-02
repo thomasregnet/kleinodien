@@ -36,22 +36,5 @@ Rails.application.routes.draw do
   get 'pages/index'
 
   root to: 'pages#index'
-  namespace :api do
-    namespace :import do
-      resources :brainz_releases, only: [:create]
-    end
-    namespace :v01 do
-      resources :brainz_releases, only: [:create]
-      jsonapi_resources :artist_credits
-      jsonapi_resources :artists
-      jsonapi_resources :compilation_heads
-      jsonapi_resources :episode_heads
-      jsonapi_resources :movie_heads
-      jsonapi_resources :participants
-      jsonapi_resources :piece_heads
-      jsonapi_resources :song_heads
-      jsonapi_resources :sources
-    end
-  end
 end
 # rubocop:enable Metrics/BlockLength
