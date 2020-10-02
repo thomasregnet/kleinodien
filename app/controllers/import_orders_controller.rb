@@ -8,15 +8,19 @@ class ImportOrdersController < ApplicationController
   # GET /import_orders.json
   def index
     @import_orders = ImportOrder.all
+    authorize @import_orders
   end
 
   # GET /import_orders/1
   # GET /import_orders/1.json
-  def show; end
+  def show
+    authorize @import_order
+  end
 
   # GET /import_orders/new
   def new
     @import_order = ImportOrder.new
+    authorize(@import_order)
   end
 
   # GET /import_orders/1/edit
@@ -44,6 +48,7 @@ class ImportOrdersController < ApplicationController
   # PATCH/PUT /import_orders/1
   # PATCH/PUT /import_orders/1.json
   def update
+    authorize @import_order
     respond_to do |format|
       if @import_order.update(import_order_params)
         format.html { redirect_to @import_order, notice: 'Import order was successfully updated.' }
@@ -59,6 +64,7 @@ class ImportOrdersController < ApplicationController
   # DELETE /import_orders/1
   # DELETE /import_orders/1.json
   def destroy
+    authorize @import_order
     @import_order.destroy
     respond_to do |format|
       format.html { redirect_to import_orders_url, notice: 'Import order was successfully destroyed.' }

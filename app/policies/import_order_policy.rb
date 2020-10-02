@@ -5,7 +5,23 @@ class ImportOrderPolicy < ApplicationPolicy
     user.importer?
   end
 
+  def destroy?
+    user.importer?
+  end
+
   def edit?
+    user.importer?
+  end
+
+  def index?
+    user.importer?
+  end
+
+  def show?
+    user.importer?
+  end
+
+  def update?
     user.importer?
   end
 
