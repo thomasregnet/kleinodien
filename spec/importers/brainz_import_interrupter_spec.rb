@@ -136,22 +136,5 @@ RSpec.describe BrainzImportInterrupter do
         expect(interrupter.time_to_sleep).to eq(1)
       end
     end
-
-    context 'with errors and "last" == "now"' do
-      let(:interrupter) { described_class.instance }
-      let(:time) { Time.now }
-
-      before do
-        3.times { interrupter.signal_error }
-        allow(interrupter).to receive(:last).and_return(time)
-        allow(interrupter).to receive(:now).and_return(time)
-      end
-
-      after { interrupter.signal_success }
-
-      it 'returns the correct interruption time' do
-        expect(interrupter.time_to_sleep).to eq(4)
-      end
-    end
   end
 end
