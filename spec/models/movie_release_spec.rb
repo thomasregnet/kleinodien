@@ -4,15 +4,13 @@ require 'rails_helper'
 require 'shared_examples_for_pieces'
 
 RSpec.describe MovieRelease, type: :model do
-  before do
-    @movie_release = FactoryBot.create(:movie_release)
-  end
+  let(:movie_release) { FactoryBot.create(:movie_release) }
 
   it 'is valid with valid attributes' do
-    expect(@movie_release).to be_valid
+    expect(movie_release).to be_valid
   end
 
   it_behaves_like 'a piece' do
-    let(:piece) { @movie_release }
+    let(:piece) { movie_release }
   end
 end
