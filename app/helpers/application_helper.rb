@@ -2,6 +2,6 @@
 
 module ApplicationHelper
   def title
-    content_for(:title) || 'Foo'
+    content_for(:title) || 'Kleinodien'
   end
 end

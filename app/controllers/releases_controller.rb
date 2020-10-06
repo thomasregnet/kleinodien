@@ -3,7 +3,7 @@
 # Controller for releases, albums, singles...
 class ReleasesController < ApplicationController
   def index
-    @release = Release.all
+    @releases = Release.all
   end
 
   def show

@@ -12,9 +12,7 @@ RSpec.describe BrainzFetcher do
     end
 
     let(:uri) do
-      'https://musicbrainz.org/ws/2/artist/' \
-        + brainz_code \
-        + '?inc=url-rels'
+      "https://musicbrainz.org/ws/2/artist/#{brainz_code}?inc=url-rels"
     end
 
     let(:import_request) do
@@ -53,8 +51,5 @@ RSpec.describe BrainzFetcher do
       expect { described_class.call(import_request: import_request) }
         .to raise_error(ImportError::CanNotFetch, /#{brainz_code}/)
     end
-  end
-
-  describe '#fetch' do
   end
 end
