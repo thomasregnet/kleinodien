@@ -31,7 +31,7 @@ class ImportOrdersController < ApplicationController
   # POST /import_orders
   # POST /import_orders.json
   def create
-    @import_order = ImportOrder.new(import_order_params)
+    @import_order = ImportOrder.new(import_order_params.merge(user: current_user))
     authorize @import_order
 
     respond_to do |format|

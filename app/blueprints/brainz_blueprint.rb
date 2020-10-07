@@ -38,6 +38,8 @@ class BrainzBlueprint < Hashie::Mash
     return unless url_relations
 
     relation = url_relations.find { |rel| rel.type == 'discogs' }
+    return unless relation
+
     URI(relation.target.__content__)
   end
 

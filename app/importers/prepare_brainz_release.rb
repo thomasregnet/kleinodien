@@ -19,6 +19,7 @@ class PrepareBrainzRelease < PrepareBrainzBase
       codes_hash:  blueprint.codes_hash
     )
 
+    Rails.logger.info("Preparing Brainz Release #{code}")
     prepare_siblings
   end
 

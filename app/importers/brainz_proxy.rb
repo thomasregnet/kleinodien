@@ -48,6 +48,7 @@ class BrainzProxy
   end
 
   def lock
+    Rails.logger.info("locking #{self.class}")
     cache.freeze
   end
 

@@ -84,7 +84,7 @@ class ImportOrder < ApplicationRecord
   def default_import_queue_name; end
 
   def ensure_code_and_type_hava_a_value
-    return if code || type
+    return if !code.blank? || !type.blank?
     return unless uri
 
     import_values = AnalyzeImportOrderUriService.call(uri_string: uri) || return
