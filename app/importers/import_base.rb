@@ -19,6 +19,7 @@ class ImportBase < ServiceBase
   private
 
   def persist
+    Rails.logger.info("Persisting ImprtOrder #{import_order}")
     persisted_entity = PersistImportService.call(
       code:         import_order.code,
       import_order: import_order,
@@ -39,6 +40,7 @@ class ImportBase < ServiceBase
   end
 
   def prepare
+    Rails.logger.info("Preparing ImportOrder #{import_order}")
     PrepareImportService.call(
       stub:         blueprint,
       import_order: import_order,

@@ -10,6 +10,7 @@ class FindByCodesService < ServiceBase
   attr_reader :model_class, :codes_hash
 
   def call
+    Rails.logger.info("try to find #{model_class} by codes")
     return if findable_codes.empty?
 
     opts = [query, params].flatten

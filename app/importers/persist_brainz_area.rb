@@ -14,7 +14,8 @@ class PersistBrainzArea < PersistBrainzBase
   end
 
   def find_already_existing
-    Area.find_by(brainz_code: blueprint.brainz_code) \
+    Rails.logger.info("Try to find area with brainz_code #{blueprint.brainz_code}")
+    FindByCodesService.call(model_class: Area, codes_hash: { brainz_code: blueprint.brainz_code }) \
       || Area.find_by(name: blueprint.name)
   end
 

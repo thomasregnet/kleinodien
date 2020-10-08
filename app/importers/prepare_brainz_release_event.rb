@@ -10,6 +10,8 @@ class PrepareBrainzReleaseEvent < PrepareBrainzBase
   attr_reader :blueprint
 
   def prepare
+    return unless blueprint.area
+
     prepare_area(stub: blueprint.area)
   end
 end
