@@ -2,21 +2,21 @@
 
 # Persist an Area retrieved from MusicBrainz
 class PersistBrainzArea < PersistBrainzBase
-  def initialize(code:, **args)
+  def initialize(code:, name: nil, **args)
     super(args)
     @code = code
+    @name = name
   end
 
-  attr_reader :code
+  attr_reader :code, :name
 
   def call
     find_already_existing || persist
   end
 
   def find_already_existing
-    Rails.logger.info("Try to find area with brainz_code #{blueprint.brainz_code}")
-    FindByCodesService.call(model_class: Area, codes_hash: { brainz_code: blueprint.brainz_code }) \
-      || Area.find_by(name: blueprint.name)
+    FindByCodesService.call(model_class: Area, codes_hash: { brainz_code: code }) \
+      || Area.find_by(name: name)
   end
 
   def blueprint
