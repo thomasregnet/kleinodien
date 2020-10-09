@@ -2,7 +2,6 @@
 
 require 'aasm/rspec'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'for ImportOrders' do |model|
   describe '#active?' do
     context 'when in pending state' do
@@ -131,4 +130,3 @@ RSpec.shared_examples 'for ImportOrders' do |model|
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
