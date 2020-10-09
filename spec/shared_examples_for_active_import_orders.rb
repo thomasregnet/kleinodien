@@ -47,4 +47,50 @@ RSpec.shared_examples 'an active ImportOrder' do |factory|
       end
     end
   end
+
+  describe 'active import_orders do not care about inactive ones' do
+    let(:attributes) { FactoryBot.attributes_for(factory) }
+    let(:user) { FactoryBot.create(:user) }
+
+    before do
+      described_class.create(attributes.merge(state: 'done', user: user))
+      described_class.create(attributes.merge(state: 'failed', user: user))
+    end
+
+    context 'when pending' do
+      let(:import_order) { described_class.new(attributes.merge(state: 'pending', user: user)) }
+
+      it 'is not valid' do
+        expect(import_order).to be_valid
+      end
+
+      it 'must be unique' do
+        expect { import_order.save!(validate: false) }.not_to raise_error
+      end
+    end
+
+    context 'when preparing' do
+      let(:import_order) { described_class.new(attributes.merge(state: 'preparing', user: user)) }
+
+      it 'is not valid' do
+        expect(import_order).to be_valid
+      end
+
+      it 'must be unique' do
+        expect { import_order.save!(validate: false) }.not_to raise_error
+      end
+    end
+
+    context 'when persisting' do
+      let(:import_order) { described_class.new(attributes.merge(state: 'persisting', user: user)) }
+
+      it 'is not valid' do
+        expect(import_order).to be_valid
+      end
+
+      it 'must be unique' do
+        expect { import_order.save!(validate: false) }.not_to raise_error
+      end
+    end
+  end
 end

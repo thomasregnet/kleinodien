@@ -29,8 +29,10 @@ class ImportOrder < ApplicationRecord
 
   validates_uniqueness_of(
     :code,
-    scope: :type,
-    if:    proc { |order| order.active? }
+    scope:      :type,
+    if:         proc { |order| order.active? },
+    conditions: -> { where.not(state: %w[done failed]) },
+    message:    'Active ImportOrder can not be placed more than one time'
   )
 
   before_validation :ensure_code_and_type_hava_a_value
@@ -52,6 +54,7 @@ class ImportOrder < ApplicationRecord
     event :persist do
       transitions from: :preparing, to: :persisting
     end
+
     event :done do
       transitions from: :persisting, to: :done
     end
@@ -84,7 +87,7 @@ class ImportOrder < ApplicationRecord
   def default_import_queue_name; end
 
   def ensure_code_and_type_hava_a_value
-    return if code || type
+    return if !code.blank? || !type.blank?
     return unless uri
 
     import_values = AnalyzeImportOrderUriService.call(uri_string: uri) || return

@@ -2,12 +2,13 @@
 
 # Persist a Company from MusicBrainz
 class PersistBrainzCompany < PersistBrainzBase
-  def initialize(code:, **args)
+  def initialize(code:, name: nil, **args)
     super(args)
     @code = code
+    @name = name
   end
 
-  attr_reader :code
+  attr_reader :code, :name
 
   def call
     find_in_database || persist
@@ -20,14 +21,11 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def find_in_database
-    FindByCodesService.call(
-      model_class: Company,
-      codes_hash:  blueprint.codes_hash
-    )
+    Company.find_by(brainz_code: code) || Company.find_by(name: name)
   end
 
   def persist
-    company.area = persist_area(code: blueprint.area.brainz_code)
+    company.area = persist_area(code: blueprint.area.brainz_code, name: blueprint.area.name)
     company.save!
     company
   end

@@ -9,6 +9,9 @@ RSpec.feature 'import an enhanced CD from MusicBrainz', type: :feature do
     DatabaseCleaner.start
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
 
+    # FactoryBot.create(:company, brainz_code: 'c029628b-6633-439e-bcee-ed02e8a338f7', name: 'EMI')
+    # FactoryBot.create(:area, brainz_code: '8a754a16-0027-3a29-b6d7-2b40ea0481ed')
+
     import_order = BrainzReleaseImportOrder.create!(
       code:  '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
       state: 'pending',

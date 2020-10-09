@@ -48,6 +48,8 @@ class BrainzProxy
   end
 
   def lock
+    Rails.logger.info("locking #{self.class}")
+    cache.keys.sort.each { |uri| Rails.logger.info("#{uri} is cached") }
     cache.freeze
   end
 

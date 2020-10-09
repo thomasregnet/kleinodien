@@ -11,6 +11,7 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
   attr_reader :blueprint, :release
 
   def call
+    Rails.logger.info('persisting Brainz Release Event')
     ReleaseEvent.create!(
       area:    area,
       date:    date,
@@ -21,7 +22,8 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
   private
 
   def area
-    persist_area(code: blueprint.area.brainz_code)
+    Rails.logger.info("persisting Brainz area #{blueprint.area.brainz_code}")
+    persist_area(code: blueprint.area.brainz_code, name: blueprint.area.name)
   end
 
   def date

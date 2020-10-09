@@ -33,6 +33,7 @@ class BrainzFetcher
 
   def fetch_attempt
     take_a_nap
+    Rails.logger.info("Trying to get #{uri}")
     @response = Faraday.get(uri)
     create_attempt
     response.success? ? interrupter.signal_success : interrupter.signal_error
@@ -53,6 +54,7 @@ class BrainzFetcher
   end
 
   def fetch_failed
+    Rails.logger.error("Failed to get #{uri}")
     import_request.failure!
     raise ImportError::CanNotFetch, "can not fetch data from #{uri}"
   end
