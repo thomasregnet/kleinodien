@@ -23,7 +23,7 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
 
   def area
     Rails.logger.info("persisting Brainz area #{blueprint.area.brainz_code}")
-    persist_area(code: blueprint.area.brainz_code)
+    persist_area(code: blueprint.area.brainz_code, name: blueprint.area.name)
   end
 
   def date
