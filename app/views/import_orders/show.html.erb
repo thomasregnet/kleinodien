@@ -3,23 +3,23 @@
 <section>
   <div class="container">
     <div class="columns is-gapless is-multiline">
-      <div class="column is-1"><strong>Code:</strong></div>
-      <div class="column is-11"><%= @import_order.code %></div>
+      <div class="column is-2"><strong>Code:</strong></div>
+      <div class="column is-10"><%= @import_order.code %></div>
     
-      <div class="column is-1"><strong>State:</strong></div>
-      <div class="column is-11"><span class="<%= import_order_state_class_for(@import_order.state) %>"><%= @import_order.state %></span></div>
+      <div class="column is-2"><strong>State:</strong></div>
+      <div class="column is-10"><span class="<%= import_order_state_class_for(@import_order.state) %>"><%= @import_order.state %></span></div>
     
-      <div class="column is-1"><strong>Uri:</strong></div>
-      <div class="column is-11"><%= link_to @import_order.uri, @import_order.uri %></div>
+      <div class="column is-2"><strong>Uri:</strong></div>
+      <div class="column is-10"><%= link_to @import_order.uri, @import_order.uri %></div>
     
-      <div class="column is-1"><strong>User:</strong></div>
-      <div class="column is-11"><%= @import_order.user_id %></div>
+      <div class="column is-2"><strong>User:</strong></div>
+      <div class="column is-10"><%= @import_order.user.email %></div>
     
-      <div class="column is-1"><strong>Requests:</strong></div>
-      <div class="column is-11"><%= @import_order.requests_count%></div>
+      <div class="column is-2"><strong>Import requests:</strong></div>
+      <div class="column is-10"><%= @import_order.requests_count%></div>
     
-      <div class="column is-1"><strong>Import queue:</strong></div>
-      <div class="column is-11"><%= @import_order.import_queue_id %></div>
+      <div class="column is-2"><strong>Import queue:</strong></div>
+      <div class="column is-10"><%= @import_order.import_queue.name %></div>
     </div>
   </div>
 </section>
