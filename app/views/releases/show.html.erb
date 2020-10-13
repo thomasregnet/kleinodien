@@ -2,69 +2,81 @@
      <% @release.title %>
 <% end %>
 
-<h1 class="title"><%= @release.title %></h1>
-<h2 class="subtitle"><%= @release.artist_credit.name %></h2>
+<section class="hero is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+    <h1 class="title"><%= @release.title %></h1>
+    <h2 class="subtitle"><%= @release.artist_credit.name %></h2>
+    </div>
+  </div>
+</section>
 
-<p>
-<h3 class="subtitle">Info</h3>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>Language:</td>
-      <td><%= @release.language.name %></td>
-    </tr>
-    <tr>
-      <td>Script:</td>
-      <td><%= @release.script.name %></td>
-    </tr>
-    <tr>
-      <td>Area:</td>
-      <td><%= @release.area.name %></td>
-    </tr>
-    <% if @release.area && @release.area.iso3166_part1_countries %>
-      <tr>
-        <td>Iso-Codes:</td>
-        <td><%= @release.area.iso3166_part1_codes.join(', ')%></td>
-      </tr>
-    <% end %>
+<section class="section">
+  <div class="container">
+    <h3 class="subtitle">Info:</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Language:</td>
+            <td><%= @release.language.name %></td>
+          </tr>
+          <tr>
+            <td>Script:</td>
+            <td><%= @release.script.name %></td>
+          </tr>
+          <tr>
+            <td>Area:</td>
+            <td><%= @release.area.name %></td>
+          </tr>
+          <% if @release.area && @release.area.iso3166_part1_countries %>
+            <tr>
+              <td>Iso-Codes:</td>
+              <td><%= @release.area.iso3166_part1_codes.join(', ')%></td>
+            </tr>
+          <% end %>
+    
+          <tr><td colspan="2">Companies:</td></tr>
+          <% @release.release_companies.each do |release_company| %>
+            <td><%= release_company.company.name %></td>
+            <td>
+              <% if release_company.role %>
+                <%= release_company.role.name %>
+              <% end %>
+              <% if release_company.catalog_numbers %>
+                Catalog Numbers:
+                <%= release_company.catalog_numbers.map(&:code).join(', ') %>
+              <% end %>
+            </td>
+          <% end %>
+    
+          <tr><td colspan="2">Release Events:</td></tr>
+          <% @release.release_events.each do |release_event| %>
+            <tr>
+              <td><%= release_event.date %></td>
+              <td><%= release_event.area.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</section>
 
-    <tr><td colspan="2">Companies:</td></tr>
-    <% @release.release_companies.each do |release_company| %>
-      <td><%= release_company.company.name %></td>
-      <td>
-        <% if release_company.role %>
-          <%= release_company.role.name %>
-        <% end %>
-        <% if release_company.catalog_numbers %>
-          Catalog Numbers:
-          <%= release_company.catalog_numbers.map(&:code).join(', ') %>
-        <% end %>
-      </td>
-    <% end %>
-
-    <tr><td colspan="2">Release Events:</td></tr>
-    <% @release.release_events.each do |release_event| %>
-      <tr>
-        <td><%= release_event.date %></td>
-        <td><%= release_event.area.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</p>
-
-<p>
-<h3 class="subtitle">Tracks</h3>
-<table class="table">
-  <tbody>
-   <% @release.subsets.each do |subset| %>
-     <% subset.tracks.each do |track| %>
-       <tr>
-         <td><%= track.piece.title %></td>
-         <td><%= track.piece.duration.mmss %></td>
-       </tr>
-     <% end %>
-   <% end %>
-  </tbody>
-</table>
-</p>
+<section>
+  <div class="container">
+    <p>
+    <h3 class="subtitle">Tracks:</h3>
+    <table class="table">
+      <tbody>
+       <% @release.subsets.each do |subset| %>
+         <% subset.tracks.each do |track| %>
+           <tr>
+             <td><%= track.piece.title %></td>
+             <td><%= track.piece.duration.mmss %></td>
+           </tr>
+         <% end %>
+       <% end %>
+      </tbody>
+    </table>
+    </p>
+  </div>
+</section>
