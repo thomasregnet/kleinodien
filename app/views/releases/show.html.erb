@@ -61,6 +61,30 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+    <p>
+    <h3 class="subtitle">Tracks:</h3>
+      <% @release.subsets.each do |subset| %>
+        <% subset.tracks.each do |track| %>
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <%= track.piece.title %>
+              </div>
+            </div>
+            <div class="media-right">
+              <div class="conteng">
+                <%= track.piece.duration.mmss %>
+              </div>
+            </div>
+          </article> 
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</section>
+
 <section>
   <div class="container">
     <p>
