@@ -7,6 +7,7 @@ class ReleasesController < ApplicationController
   end
 
   def show
-    @release = Release.find(params[:id])
+    # @release = Release.find(params[:id])
+    @release = Release.includes(subsets: [tracks: :piece]).find(params[:id])
   end
 end
