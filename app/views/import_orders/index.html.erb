@@ -26,10 +26,9 @@
         <td><%= import_order.user.email %></td>
         <td><%= import_order.requests_count %></td>
         <td><%= import_order.import_queue.name %></td>
-        <td><%= link_to 'edit', edit_import_order_path(import_order), class: 'button is-link'%></td>
-        <td><%= link_to 'Back', import_orders_path, class: 'button is-link' %></td>
-        <td><%= link_to 'New', new_import_order_path, class: 'button is-link' %></td>
-
+        <td><%= link_to 'Show', import_order, class: 'button is-link'%></td>
+        <td><%= link_to 'Edit', edit_import_order_path(import_order), class: 'button is-link' %></td>
+        <td><%= link_to 'Destroy', import_order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-link' %></td>
       </tr>
     <% end %>
   </tbody>
