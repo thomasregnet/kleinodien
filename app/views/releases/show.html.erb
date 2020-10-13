@@ -68,6 +68,11 @@
       <% @release.subsets.each do |subset| %>
         <% subset.tracks.each do |track| %>
           <article class="media">
+            <div class="media-left">
+              <div class="content">
+                <%= track.no %>
+              </div>
+            </div>
             <div class="media-content">
               <div class="content">
                 <%= track.piece.title %>
