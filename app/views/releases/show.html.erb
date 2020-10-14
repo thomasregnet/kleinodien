@@ -6,7 +6,9 @@
   <div class="hero-body">
     <div class="container has-text-centered">
     <h1 class="title"><%= @release.title %></h1>
-    <h2 class="subtitle"><%= @release.artist_credit.name %></h2>
+    <% if @release.artist_credit %>
+      <h2 class="subtitle"><%= @release.artist_credit.name %></h2>
+    <% end %>
     </div>
   </div>
 </section>
@@ -18,15 +20,15 @@
         <tbody>
           <tr>
             <td>Language:</td>
-            <td><%= @release.language.name %></td>
+            <td><%= @release.language&.name || '&nbsp;' %></td>
           </tr>
           <tr>
             <td>Script:</td>
-            <td><%= @release.script.name %></td>
+            <td><%= @release.script&.name || '&nbsp;' %></td>
           </tr>
           <tr>
             <td>Area:</td>
-            <td><%= @release.area.name %></td>
+            <td><%= @release.area&.name || '&nbsp;'%></td>
           </tr>
           <% if @release.area && @release.area.iso3166_part1_countries %>
             <tr>
@@ -55,6 +57,12 @@
               <td><%= release_event.date %></td>
               <td><%= release_event.area.name %></td>
             </tr>
+          <% end %>
+          <% if @release.import_order && ImportOrderPolicy.new(current_user, @release.import_order).show? %>
+          <tr>
+            <td>Import order</td>
+            <td><%= link_to @release.import_order.id, @release.import_order %></td>
+          </tr> 
           <% end %>
         </tbody>
       </table>
