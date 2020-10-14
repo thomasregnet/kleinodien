@@ -3,28 +3,43 @@
 require 'rails_helper'
 
 RSpec.describe 'releases/show', type: :view do
+  let(:release) { FactoryBot.create(:album, import_order: FactoryBot.create(:import_order)) }
+
   before do
-    assign(:release, FactoryBot.create(:album))
+    assign(:release, release)
   end
 
   context 'without an user' do
-    it 'does not shot the Import order' do
+    it 'does not show the Import order' do
+      allow(controller).to receive(:current_user)
       render
       expect(rendered).not_to match(/Import order/)
     end
   end
 
   context 'without an authorized user' do
-    it 'does not shot the Import order' do
-      assign(:user, FactoryBot.create(:user))
+    it 'does not show the Import order' do
+      user = FactoryBot.create(:user)
+      allow(controller).to receive(:current_user).and_return(user)
       render
       expect(rendered).not_to match(/Import order/)
     end
   end
 
   context 'with an authorized user' do
-    it 'does not shot the Import order' do
-      assign(:user, FactoryBot.create(:user, importer: true))
+    it 'shows the Import order' do
+      user = FactoryBot.create(:user, importer: true)
+      allow(controller).to receive(:current_user).and_return(user)
+      render
+      expect(rendered).to match(/Import order/)
+    end
+  end
+
+  context 'with an authorized user but without an ImportOrder' do
+    it 'shows the Import order' do
+      release.import_order = nil
+      user = FactoryBot.create(:user, importer: true)
+      allow(controller).to receive(:current_user).and_return(user)
       render
       expect(rendered).not_to match(/Import order/)
     end
