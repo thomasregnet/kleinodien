@@ -39,6 +39,7 @@
     
           <tr><td colspan="2">Companies:</td></tr>
           <% @release.release_companies.each do |release_company| %>
+          <tr>
             <td><%= release_company.company.name %></td>
             <td>
               <% if release_company.role %>
@@ -49,6 +50,7 @@
                 <%= release_company.catalog_numbers.map(&:code).join(', ') %>
               <% end %>
             </td>
+          </tr>
           <% end %>
           <tr><td colspan="2">Release Events:</td></tr>
           <% @release.release_events.each do |release_event| %>
@@ -68,20 +70,19 @@
   </div>
 </section>
 
-<section class="section">
+<section>
   <div class="container">
     <% @release.subsets.each do |subset| %>
+    <% if subset.title %>
+      <div class="columns is-12">
+        <div class="column"><p class="bd-notification is-primary has-text-centered"><%= subset.title %></p></div>
+      </div>
+    <% end %>
     <% subset.tracks.each do |track| %>
     <div class="columns">
-      <div class="column is-1">
-        <%= track.no %>
-      </div> 
-      <div class="column is-10">
-        <%= track.piece.title %>
-      </div> 
-      <div class="column is-1">
-        <%= track.piece.duration.mmss %>
-      </div>
+      <div class="column is-1"><p class="has-text-right"><%= track.no %></p></div>
+      <div class="column is-10"><p class="is-danger"><%= track.piece.title %></p></div>
+      <div class="column is-1"><p class="has-text-right"><%= track.piece.duration.mmss %></p></div>
     </div>
     <% end %>
     <% end %>
@@ -90,7 +91,6 @@
 
 <section class="section">
   <div class="container">
-    <p>
     <h3 class="subtitle">Tracks:</h3>
       <% @release.subsets.each do |subset| %>
         <% subset.tracks.each do |track| %>
@@ -113,13 +113,11 @@
           </article> 
         <% end %>
       <% end %>
-    </p>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <p>
     <h3 class="subtitle">Tracks:</h3>
     <table class="table">
       <tbody>
@@ -133,6 +131,5 @@
        <% end %>
       </tbody>
     </table>
-    </p>
   </div>
 </section>
