@@ -2,69 +2,134 @@
      <% @release.title %>
 <% end %>
 
-<h1 class="title"><%= @release.title %></h1>
-<h2 class="subtitle"><%= @release.artist_credit.name %></h2>
-
-<p>
-<h3 class="subtitle">Info</h3>
-<table class="table">
-  <tbody>
-    <tr>
-      <td>Language:</td>
-      <td><%= @release.language.name %></td>
-    </tr>
-    <tr>
-      <td>Script:</td>
-      <td><%= @release.script.name %></td>
-    </tr>
-    <tr>
-      <td>Area:</td>
-      <td><%= @release.area.name %></td>
-    </tr>
-    <% if @release.area && @release.area.iso3166_part1_countries %>
-      <tr>
-        <td>Iso-Codes:</td>
-        <td><%= @release.area.iso3166_part1_codes.join(', ')%></td>
-      </tr>
+<section class="hero is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+    <h1 class="title"><%= @release.title %></h1>
+    <% if @release.artist_credit %>
+      <h2 class="subtitle"><%= @release.artist_credit.name %></h2>
     <% end %>
+    </div>
+  </div>
+</section>
 
-    <tr><td colspan="2">Companies:</td></tr>
-    <% @release.release_companies.each do |release_company| %>
-      <td><%= release_company.company.name %></td>
-      <td>
-        <% if release_company.role %>
-          <%= release_company.role.name %>
+<section class="section">
+  <div class="container">
+    <h3 class="subtitle">Info:</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Language:</td>
+            <td><%= @release.language&.name || '&nbsp;' %></td>
+          </tr>
+          <tr>
+            <td>Script:</td>
+            <td><%= @release.script&.name || '&nbsp;' %></td>
+          </tr>
+          <tr>
+            <td>Area:</td>
+            <td><%= @release.area&.name || '&nbsp;'%></td>
+          </tr>
+          <% if @release.area && @release.area.iso3166_part1_countries %>
+            <tr>
+              <td>Iso-Codes:</td>
+              <td><%= @release.area.iso3166_part1_codes.join(', ')%></td>
+            </tr>
+          <% end %>
+    
+          <tr><td colspan="2">Companies:</td></tr>
+          <% @release.release_companies.each do |release_company| %>
+          <tr>
+            <td><%= release_company.company.name %></td>
+            <td>
+              <% if release_company.role %>
+                <%= release_company.role.name %>
+              <% end %>
+              <% if release_company.catalog_numbers %>
+                Catalog Numbers:
+                <%= release_company.catalog_numbers.map(&:code).join(', ') %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+          <tr><td colspan="2">Release Events:</td></tr>
+          <% @release.release_events.each do |release_event| %>
+            <tr>
+              <td><%= release_event.date %></td>
+              <td><%= release_event.area.name %></td>
+            </tr>
+          <% end %>
+          <% if @release.import_order && ImportOrderPolicy.new(current_user, @release.import_order).show? %>
+          <tr>
+            <td>Import order</td>
+            <td><%= link_to @release.import_order.id, @release.import_order %></td>
+          </tr> 
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <% @release.subsets.each do |subset| %>
+    <% if subset.title %>
+      <div class="columns is-12">
+        <div class="column"><p class="has-background-grey-lighter has-text-centered"><%= subset.title %></p></div>
+      </div>
+    <% end %>
+    <% subset.tracks.each do |track| %>
+    <div class="columns">
+      <div class="column is-1"><p class="has-text-right"><%= track.no %></p></div>
+      <div class="column is-10"><p class="is-danger"><%= track.piece.title %></p></div>
+      <div class="column is-1"><p class="has-text-right"><%= track.piece.duration.mmss %></p></div>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h3 class="subtitle">Tracks:</h3>
+      <% @release.subsets.each do |subset| %>
+        <% subset.tracks.each do |track| %>
+          <article class="media">
+            <div class="media-left">
+              <div class="content">
+                <%= track.no %>
+              </div>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <%= track.piece.title %>
+              </div>
+            </div>
+            <div class="media-right">
+              <div class="content">
+                <%= track.piece.duration.mmss %>
+              </div>
+            </div>
+          </article> 
         <% end %>
-        <% if release_company.catalog_numbers %>
-          Catalog Numbers:
-          <%= release_company.catalog_numbers.map(&:code).join(', ') %>
-        <% end %>
-      </td>
-    <% end %>
+      <% end %>
+  </div>
+</section>
 
-    <tr><td colspan="2">Release Events:</td></tr>
-    <% @release.release_events.each do |release_event| %>
-      <tr>
-        <td><%= release_event.date %></td>
-        <td><%= release_event.area.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</p>
-
-<p>
-<h3 class="subtitle">Tracks</h3>
-<table class="table">
-  <tbody>
-   <% @release.subsets.each do |subset| %>
-     <% subset.tracks.each do |track| %>
-       <tr>
-         <td><%= track.piece.title %></td>
-         <td><%= track.piece.duration.mmss %></td>
-       </tr>
-     <% end %>
-   <% end %>
-  </tbody>
-</table>
-</p>
+<section>
+  <div class="container">
+    <h3 class="subtitle">Tracks:</h3>
+    <table class="table">
+      <tbody>
+       <% @release.subsets.each do |subset| %>
+         <% subset.tracks.each do |track| %>
+           <tr>
+             <td><%= track.piece.title %></td>
+             <td><%= track.piece.duration.mmss %></td>
+           </tr>
+         <% end %>
+       <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

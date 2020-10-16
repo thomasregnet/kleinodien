@@ -18,6 +18,8 @@ class ImportOrderPolicy < ApplicationPolicy
   end
 
   def show?
+    return false unless user
+
     user.importer?
   end
 
