@@ -1,0 +1,102 @@
+<%= form_with(model: release, local: true) do |form| %>
+  <% if release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(release.errors.count, "error") %> prohibited this release from being saved:</h2>
+
+      <ul>
+        <% release.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_area :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :barcode %>
+    <%= form.number_field :barcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_mask %>
+    <%= form.number_field :data_mask %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_area :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :version %>
+    <%= form.text_area :version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brainz_code %>
+    <%= form.text_field :brainz_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discogs_code %>
+    <%= form.number_field :discogs_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :imdb_code %>
+    <%= form.number_field :imdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tmdb_code %>
+    <%= form.number_field :tmdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wikidata_code %>
+    <%= form.number_field :wikidata_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :area_id %>
+    <%= form.text_field :area_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artist_credit_id %>
+    <%= form.text_field :artist_credit_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :import_order_id %>
+    <%= form.text_field :import_order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :language_id %>
+    <%= form.text_field :language_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_head_id %>
+    <%= form.text_field :release_head_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :script_id %>
+    <%= form.text_field :script_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
