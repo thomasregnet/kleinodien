@@ -55,3 +55,4 @@ doc/
 yarn-debug.log*
 .yarn-integrity
 .yarn-integrity
+.vscode/*

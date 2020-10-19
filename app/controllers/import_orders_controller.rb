@@ -7,7 +7,8 @@ class ImportOrdersController < ApplicationController
   # GET /import_orders
   # GET /import_orders.json
   def index
-    @import_orders = ImportOrder.includes(:import_queue, :user).all
+    # @import_orders = ImportOrder.includes(:import_queue, :user).all
+    @import_orders = ImportOrder.includes(:import_queue, :user).page params[:page]
     authorize @import_orders
   end
 
