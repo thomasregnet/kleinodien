@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'releases/show', type: :view do
-
   describe 'Import order' do
     let(:release) { FactoryBot.create(:album, import_order: FactoryBot.create(:import_order)) }
 
@@ -18,7 +17,7 @@ RSpec.describe 'releases/show', type: :view do
         expect(rendered).not_to match(/Import order/)
       end
     end
-  
+
     context 'without an authorized user' do
       it 'does not show the Import order' do
         user = FactoryBot.create(:user)
@@ -27,7 +26,7 @@ RSpec.describe 'releases/show', type: :view do
         expect(rendered).not_to match(/Import order/)
       end
     end
-  
+
     context 'with an authorized user' do
       it 'shows the Import order' do
         user = FactoryBot.create(:user, importer: true)
@@ -36,7 +35,7 @@ RSpec.describe 'releases/show', type: :view do
         expect(rendered).to match(/Import order/)
       end
     end
-  
+
     context 'with an authorized user but without an ImportOrder' do
       it 'shows the Import order' do
         release.import_order = nil
