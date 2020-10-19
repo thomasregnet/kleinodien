@@ -4,7 +4,8 @@ class ReleasesController < ApplicationController
   # GET /releases
   # GET /releases.json
   def index
-    @releases = Release.all
+    # @releases = Release.all
+    @releases = Release.includes(:artist_credit).page
   end
 
   # GET /releases/1
