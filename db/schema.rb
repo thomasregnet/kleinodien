@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_02_063215) do
+ActiveRecord::Schema.define(version: 2020_10_20_172310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -478,7 +478,7 @@ ActiveRecord::Schema.define(version: 2020_10_02_063215) do
   create_table "releases", force: :cascade do |t|
     t.integer "barcode"
     t.date "date"
-    t.integer "data_mask"
+    t.integer "date_mask"
     t.string "title"
     t.string "type"
     t.string "version"

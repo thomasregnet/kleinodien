@@ -1,8 +1,31 @@
-<h1>Releases#index</h1>
-<p>Find me in app/views/releases/index.html.erb</p>
+<p id="notice"><%= notice %></p>
 
-<ul>
-    <% @releases.each do |release| %>
-        <li><%= link_to release.title, release %></li>
-    <% end %>
-</ul>
+<section class="hero">
+  <div class="container">
+    <div class="hero-body">
+      <h1 class="title">Releases</h1>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <% @releases.each do |release| %>
+  <div class="columns">
+  <div class="column is-11">
+    <p>
+      <%= release.type%> <strong><%= link_to release.title, release %></strong>
+    </p>
+    <% if release.artist_credit %>
+    <p>
+      <small>by <%= release.artist_credit.name %></small><% end%>
+    </p>
+  </div>
+  <div class="column is-1">
+    <%= link_to 'Edit', edit_release_path(release), class: 'button is-link' %>
+  </div>
+  </div>
+  <% end %>
+  <p><%= paginate @releases %></p>
+</div>
+
+<%= link_to 'New Release', new_release_path %>
