@@ -25,10 +25,6 @@ RSpec.describe PieceHead, type: :model do
     expect(piece_head).to be_valid
   end
 
-  it_behaves_like 'a rateable model' do
-    let(:rateable) { FactoryBot.create(:piece_head) }
-  end
-
   it_behaves_like 'a tagable model' do
     let(:tagable) { piece_head }
   end
@@ -37,10 +33,6 @@ RSpec.describe PieceHead, type: :model do
     piece_head = FactoryBot.build(:piece_head)
     piece_head.type = nil
     expect(piece_head).not_to be_valid
-  end
-
-  it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryBot.create(:piece_head_with_credits) }
   end
 
   it_behaves_like 'a model with labels' do

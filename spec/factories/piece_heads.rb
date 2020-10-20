@@ -12,20 +12,6 @@ FactoryBot.define do
       end
     end
 
-    factory :piece_head_with_credits do
-      transient do
-        credits_count { 2 }
-      end
-
-      after(:create) do |piece_head, evaluator|
-        create_list(
-          :ph_credit,
-          evaluator.credits_count,
-          piece_head: piece_head
-        )
-      end
-    end
-
     factory :piece_head_with_labels do
       transient do
         labels_count { 2 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_172310) do
+ActiveRecord::Schema.define(version: 2020_10_20_190156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -247,16 +247,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_172310) do
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_participants_on_artist_id"
     t.index ["position", "artist_credit_id"], name: "index_participants_on_artist_credit_id_and_no", unique: true
-  end
-
-  create_table "ph_credits", id: :serial, force: :cascade do |t|
-    t.integer "artist_credit_id", null: false
-    t.integer "piece_head_id", null: false
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_ph_credits_on_artist_credit_id"
-    t.index ["piece_head_id"], name: "index_ph_credits_on_piece_head_id"
   end
 
   create_table "ph_labels", id: :serial, force: :cascade do |t|
@@ -619,8 +609,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_172310) do
   add_foreign_key "original_exemplars", "users"
   add_foreign_key "participants", "artist_credits", name: "participants_fk_artist_credits"
   add_foreign_key "participants", "artists", name: "participants_fk_artists"
-  add_foreign_key "ph_credits", "artist_credits"
-  add_foreign_key "ph_credits", "piece_heads"
   add_foreign_key "ph_labels", "companies"
   add_foreign_key "ph_labels", "piece_heads"
   add_foreign_key "piece_heads", "artist_credits", name: "piece_heads_fk_artist_credits"
