@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
-require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_duration'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
@@ -36,10 +35,6 @@ RSpec.describe Piece, type: :model do
     it 'is valid with valid attributes' do
       expect(piece).to be_valid
     end
-  end
-
-  it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryBot.create(:piece_with_credits) }
   end
 
   it_behaves_like 'a model with an IncompleteDate' do
