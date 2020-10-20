@@ -18,12 +18,12 @@ RSpec.describe 'releases/show', type: :view do
 
     it 'shows the first format (2 x CD)' do
       render
-      expect(rendered).to match(%r{2\s+&times\s+CD})
+      expect(rendered).to match(/2\s+&times\s+CD/)
     end
 
     it 'shows the second format (3 x LP)' do
       render
-      expect(rendered).to match(%r{3\s+&times\s+LP})
+      expect(rendered).to match(/3\s+&times\s+LP/)
     end
   end
 
