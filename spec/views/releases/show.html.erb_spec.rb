@@ -4,20 +4,26 @@ require 'rails_helper'
 
 RSpec.describe 'releases/show', type: :view do
   describe 'Format' do
-    let(:release) { FactoryBot.create(:album) }
+    let(:release) { FactoryBot.build(:album) }
 
     before do
-      cd_format = FactoryBot.create(:medium_format, name: 'CD')
-      # lp_format = FactoryBot.create(:medium_format, name: 'LP')
+      cd_format = FactoryBot.build(:medium_format, name: 'CD')
+      lp_format = FactoryBot.build(:medium_format, name: 'LP')
 
-      release.media.build(position: 1, format: cd_format, quantity: 2) 
+      release.media.build(position: 1, format: cd_format, quantity: 2)
+      release.media.build(position: 2, format: lp_format, quantity: 3)
 
       assign(:release, release)
     end
 
-    it 'shows the first format' do
+    it 'shows the first format (2 x CD)' do
       render
-      expect(rendered).to match(%r{<li>2\s+&times\s+CD</li>})
+      expect(rendered).to match(%r{2\s+&times\s+CD})
+    end
+
+    it 'shows the second format (3 x LP)' do
+      render
+      expect(rendered).to match(%r{3\s+&times\s+LP})
     end
   end
 
