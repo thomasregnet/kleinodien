@@ -5,7 +5,7 @@ RSpec.describe 'releases/new', type: :view do
     assign(:release, Release.new(
                        title:         'MyText',
                        barcode:       1,
-                       data_mask:     1,
+                       date_mask:     1,
                        version:       'MyText',
                        brainz_code:   '',
                        discogs_code:  1,
@@ -27,7 +27,7 @@ RSpec.describe 'releases/new', type: :view do
     assert_select 'form[action=?][method=?]', releases_path, 'post' do
       assert_select 'textarea[name=?]', 'release[title]'
       assert_select 'input[name=?]', 'release[barcode]'
-      assert_select 'input[name=?]', 'release[data_mask]'
+      assert_select 'input[name=?]', 'release[date_mask]'
       assert_select 'textarea[name=?]', 'release[version]'
       assert_select 'input[name=?]', 'release[brainz_code]'
       assert_select 'input[name=?]', 'release[discogs_code]'

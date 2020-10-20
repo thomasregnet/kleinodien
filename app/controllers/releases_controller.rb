@@ -70,6 +70,6 @@ class ReleasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def release_params
-      params.require(:release).permit(:title, :barcode, :date, :data_mask, :type, :version, :brainz_code, :discogs_code, :imdb_code, :tmdb_code, :wikidata_code, :area_id, :artist_credit_id, :import_order_id, :language_id, :release_head_id, :script_id)
+      params.require(:release).permit(:title, :barcode, :date, :date_mask, :type, :version, :brainz_code, :discogs_code, :imdb_code, :tmdb_code, :wikidata_code, :area_id, :artist_credit_id, :import_order_id, :language_id, :release_head_id, :script_id)
     end
 end
