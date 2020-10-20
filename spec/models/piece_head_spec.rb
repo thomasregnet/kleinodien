@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
-require 'shared_examples_for_models_with_credits'
 require 'shared_examples_for_models_with_labels'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_rateable_models'
