@@ -3,6 +3,24 @@
 require 'rails_helper'
 
 RSpec.describe 'releases/show', type: :view do
+  describe 'Format' do
+    let(:release) { FactoryBot.create(:album) }
+
+    before do
+      cd_format = FactoryBot.create(:medium_format, name: 'CD')
+      # lp_format = FactoryBot.create(:medium_format, name: 'LP')
+
+      release.media.build(position: 1, format: cd_format, quantity: 2) 
+
+      assign(:release, release)
+    end
+
+    it 'shows the first format' do
+      render
+      expect(rendered).to match(%r{<li>2\s+&times\s+CD</li>})
+    end
+  end
+
   describe 'Import order' do
     let(:release) { FactoryBot.create(:album, import_order: FactoryBot.create(:import_order)) }
 

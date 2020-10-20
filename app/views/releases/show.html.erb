@@ -18,6 +18,18 @@
     <h3 class="subtitle">Info:</h3>
       <table class="table">
         <tbody>
+          <% if @release.media %>
+          <tr>
+            <td>Format:</td>
+              <td>
+              <ul>
+              <% @release.media.each do |medium| %> 
+                <li><%= medium.quantity %> &times <%= medium.format.name %></li>  
+              <% end %>
+              </ul> 
+            <td>
+          </tr>
+          <% end %>
           <tr>
             <td>Language:</td>
             <td><%= @release.language&.name || '&nbsp;' %></td>
