@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_190156) do
+ActiveRecord::Schema.define(version: 2020_10_20_191834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -341,16 +341,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_190156) do
     t.index ["tag_id"], name: "index_pieces_tags_on_tag_id"
   end
 
-  create_table "pr_credits", id: :serial, force: :cascade do |t|
-    t.integer "artist_credit_id", null: false
-    t.integer "piece_id", null: false
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artist_credit_id"], name: "index_pr_credits_on_artist_credit_id"
-    t.index ["piece_id"], name: "index_pr_credits_on_piece_id"
-  end
-
   create_table "pr_labels", id: :serial, force: :cascade do |t|
     t.integer "piece_id", null: false
     t.integer "company_id", null: false
@@ -625,8 +615,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_190156) do
   add_foreign_key "pieces", "stations", name: "pieces_fk_stations"
   add_foreign_key "pieces_tags", "pieces"
   add_foreign_key "pieces_tags", "tags"
-  add_foreign_key "pr_credits", "artist_credits"
-  add_foreign_key "pr_credits", "pieces"
   add_foreign_key "pr_labels", "companies"
   add_foreign_key "pr_labels", "pieces"
   add_foreign_key "ratings", "artist_credits"

@@ -38,10 +38,6 @@ RSpec.describe Piece, type: :model do
     end
   end
 
-  it_behaves_like 'a model with credits' do
-    let(:candidate) { FactoryBot.create(:piece_with_credits) }
-  end
-
   it_behaves_like 'a model with an IncompleteDate' do
     let(:candidate) { FactoryBot.create(:piece) }
     let(:date_naming) { 'date' }
