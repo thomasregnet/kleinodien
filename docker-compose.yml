@@ -1,7 +1,9 @@
 version: '2'
 services:
   db:
-    image: postgres:12.1
+    image: "postgres:13.0"
+    environment:
+      - POSTGRES_PASSWORD=$POSTGRESQL_PASSWORD
     volumes:
       - postgresql_data:/var/lib/postgresql/data
 
@@ -13,7 +15,8 @@ services:
   app:
     build: .
     environment:
-      RAILS_ENV: $RAILS_ENV
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - RAILS_ENV=$RAILS_ENV
 
     expose:
       - "3000"
@@ -29,6 +32,7 @@ services:
     entrypoint: config/containers/import_worker/entrypoint.sh
     environment:
       - IMPORT_QUEUE_NAME=brainz
+      - POSTGRESQL_PASSWORD=$POSTGRESQL_PASSWORD
 
   web:
     build:
