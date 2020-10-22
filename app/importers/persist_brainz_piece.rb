@@ -25,7 +25,7 @@ class PersistBrainzPiece < PersistBrainzBase
   end
 
   def duration
-    milliseconds = blueprint.milliseconds || retrun
+    milliseconds = blueprint.milliseconds || return
     Duration.milliseconds(milliseconds)
   end
 
