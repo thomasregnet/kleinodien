@@ -23,7 +23,7 @@ RSpec.describe Mmss do
     end
 
     context 'with an uncomputeable string (1:60)' do
-      it 'retruns nil' do
+      it 'returns nil' do
         expect(described_class.milliseconds('1:60')).to be nil
       end
     end

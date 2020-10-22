@@ -17,7 +17,7 @@ RSpec.describe BrainzProxy do
 
   describe '#cached?' do
     context 'when cached' do
-      it 'retruns true' do
+      it 'returns true' do
         allow(proxy).to receive(:cache).and_return('test' => 'data')
         allow(proxy).to receive(:uri_for).and_return('test')
 
