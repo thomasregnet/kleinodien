@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Release Copies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Release head</th>
+      <th>Release</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @release_copies.each do |release_copy| %>
+      <tr>
+        <td><%= release_copy.type %></td>
+        <td><%= release_copy.release_head_id %></td>
+        <td><%= release_copy.release_id %></td>
+        <td><%= release_copy.user_id %></td>
+        <td><%= link_to 'Show', release_copy %></td>
+        <td><%= link_to 'Edit', edit_release_copy_path(release_copy) %></td>
+        <td><%= link_to 'Destroy', release_copy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Release Copy', new_release_copy_path %>

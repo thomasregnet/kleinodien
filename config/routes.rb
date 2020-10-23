@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  resources :release_copies
   resources :releases
   resources :import_orders
   # get 'heaps/index'

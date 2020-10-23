@@ -1,0 +1,37 @@
+<%= form_with(model: release_copy, local: true) do |form| %>
+  <% if release_copy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(release_copy.errors.count, "error") %> prohibited this release_copy from being saved:</h2>
+
+      <ul>
+        <% release_copy.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_area :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_head_id %>
+    <%= form.text_field :release_head_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_id %>
+    <%= form.text_field :release_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
