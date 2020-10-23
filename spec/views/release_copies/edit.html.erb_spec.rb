@@ -9,7 +9,7 @@ RSpec.describe "release_copies/edit", type: :view do
     render
 
     assert_select 'form[action=?][method=?]', release_copy_path(release_copy), 'post' do
-      assert_select 'textarea[name=?]', 'release_copy[type]'
+      assert_select 'select[name=?]', 'release_copy[type]'
       assert_select 'input[name=?]', 'release_copy[release_head_id]'
       assert_select 'input[name=?]', 'release_copy[release_id]'
       assert_select 'input[name=?]', 'release_copy[user_id]'

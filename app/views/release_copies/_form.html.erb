@@ -12,10 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_area :type %>
+    <%= form.label :type, class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= select('release_copy', 'type', [%w|original OriginalRelease|, %w|clone ClonedRelease|, %w|replica ReplicatedRelease|]) %>
+      </div>
+    </div>
   </div>
 
+  
   <div class="field">
     <%= form.label :release_head_id %>
     <%= form.text_field :release_head_id %>
