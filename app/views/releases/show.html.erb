@@ -83,6 +83,12 @@
 </section>
 
 <section>
+  <div class="container has-text-centered">
+    <%= link_to 'Add to my collection', release_copies_path(release_id: @release), class: 'button is-link is-success' %>
+  </div>
+</section>
+
+<section>
   <div class="container">
     <% @release.subsets.each do |subset| %>
     <% if subset.title %>
