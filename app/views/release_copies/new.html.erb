@@ -10,9 +10,16 @@
 
 <section>
   <div class="container">
-    <h2 class="is-title-2">
-      <%= release_copy_title_for(@release, nil) %> <%= release_copy_artist_credit_for(@release, nil) %>
-    </h2>
+    <% if @release || @release_head %>
+    <div class="tags has-addons">
+      <span class="tag is-dark">
+        <%= @release ? 'Release id:' : 'ReleaseHead id: ' %>
+      </span>
+      <span class="tag">
+        <%= @release ? @release.id : @release_head.id %>
+      </span>
+    </div>
+    <% end %>
     <%= render 'form', release_copy: @release_copy %>
 
     <%= link_to 'Back', release_copies_path, class: 'button is-link' %>
