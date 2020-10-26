@@ -7,7 +7,6 @@ module ReleaseCopiesHelper
   end
 
   def release_copy_artist_credit_for(release, release_head)
-    # name = release ? release.artist_credit&.name : release_head.artist_credit&.name
     name = release&.artist_credit&.name || release_head&.artist_credit&.name
     return unless name
 
