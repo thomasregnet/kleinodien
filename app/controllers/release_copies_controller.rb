@@ -15,6 +15,9 @@ class ReleaseCopiesController < ApplicationController
   # GET /release_copies/new
   def new
     @release_copy = ReleaseCopy.new
+    # @release_head = ReleaseHead.find(params[:release_head_id])
+    @release_head = params[:release_head_id] ? ReleaseHead.find(params[:release_head_id]) : nil
+    @release = params[:release_id] ? Release.find(params[:release_id]) : nil
   end
 
   # GET /release_copies/1/edit
