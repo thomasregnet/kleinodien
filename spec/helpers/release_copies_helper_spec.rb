@@ -19,25 +19,28 @@ RSpec.describe ReleaseCopiesHelper, type: :helper do
 
     context 'with release and release_head' do
       it 'returns the release title' do
-        expect(helper.release_copy_title_for(release, release_head)).to eq('release')
+        allow(Release).to receive(:find).and_return(release)
+        expect(helper.release_copy_title_for({ release_id: 1, release_head_id: 2 })).to eq('release')
       end
     end
 
     context 'with release and no release_head' do
       it 'returns the release title' do
-        expect(helper.release_copy_title_for(release, nil)).to eq('release')
+        allow(Release).to receive(:find).and_return(release)
+        expect(helper.release_copy_title_for({ release_id: 5 })).to eq('release')
       end
     end
 
     context 'with no release and a release_head' do
       it 'returns the release title' do
-        expect(helper.release_copy_title_for(nil, release_head)).to eq('release head')
+        allow(ReleaseHead).to receive(:find).and_return(release_head)
+        expect(helper.release_copy_title_for({ release_head_id: 2 })).to eq('release head')
       end
     end
 
     context 'without release and without release_head' do
       it 'returns the release title' do
-        expect(helper.release_copy_title_for(nil, nil)).to be_nil
+        expect(helper.release_copy_title_for({})).to be_nil
       end
     end
   end
@@ -48,7 +51,9 @@ RSpec.describe ReleaseCopiesHelper, type: :helper do
 
     context 'without any artist_credit' do
       it 'returns nil' do
-        expect(helper.release_copy_artist_credit_for(release, release_head)).to be_nil
+        allow(Release).to receive(:find).and_return(release)
+        allow(ReleaseHead).to receive(:find).and_return(release_head)
+        expect(helper.release_copy_artist_credit_for({ release_id: 1, release_head_id: 2 })).to be_nil
       end
     end
 
@@ -56,8 +61,9 @@ RSpec.describe ReleaseCopiesHelper, type: :helper do
       let(:artist_credit) { FactoryBot.build(:artist_credit, name: 'Release artist') }
 
       it 'returns that artist_credit name' do
+        allow(Release).to receive(:find).and_return(release)
         allow(release).to receive(:artist_credit).and_return(artist_credit)
-        expect(helper.release_copy_artist_credit_for(release, release_head)).to eq('by Release artist')
+        expect(helper.release_copy_artist_credit_for({ release_id: 1 })).to eq('Release artist')
       end
     end
 
@@ -65,14 +71,16 @@ RSpec.describe ReleaseCopiesHelper, type: :helper do
       let(:artist_credit) { FactoryBot.build(:artist_credit, name: 'ReleaseHead artist') }
 
       it 'returns that artist_credit name' do
+        allow(Release).to receive(:find)
+        allow(ReleaseHead).to receive(:find).and_return(release_head)
         allow(release_head).to receive(:artist_credit).and_return(artist_credit)
-        expect(helper.release_copy_artist_credit_for(release, release_head)).to eq('by ReleaseHead artist')
+        expect(helper.release_copy_artist_credit_for({ release_head_id: 5 })).to eq('ReleaseHead artist')
       end
     end
 
     context 'without a release and without a ReleaseHead' do
       it 'returns nil' do
-        expect(helper.release_copy_artist_credit_for(nil, nil)).to be_nil
+        expect(helper.release_copy_artist_credit_for({})).to be_nil
       end
     end
   end

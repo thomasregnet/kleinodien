@@ -2,15 +2,15 @@
   <div class="container">
     <div class="hero-body">
       Create a new copy of
-      <h1 class="title"><%= release_copy_title_for(@release, @release_head) %></h1>
-      <h2 class="subtitle"><%= release_copy_artist_credit_for(@release, @release_head) %></h2>
+      <h1 class="title"><%= release_copy_title_for(params) %></h1>
+      <h2 class="subtitle"><%= release_copy_artist_credit_for(params) %></h2>
     </div>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <% if @release || @release_head %>
+    <% if params[:release_id] || params[:release_id] %>
     <div class="tags has-addons">
       <span class="tag is-dark">
         <%= @release ? 'Release id:' : 'ReleaseHead id: ' %>
