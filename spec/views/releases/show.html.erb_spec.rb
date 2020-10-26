@@ -3,6 +3,34 @@
 require 'rails_helper'
 
 RSpec.describe 'releases/show', type: :view do
+  describe '"Add to my collection" link' do
+    let(:release) { FactoryBot.build(:album) }
+
+    before { assign(:release, release)}
+
+    context 'with an authenticated user' do
+      let(:user) { FactoryBot.create(:user) }
+
+      before do
+        sign_in(user)
+        allow(view).to receive(:user_signed_in?).and_return(true)
+        render
+      end
+
+      it 'contains the link' do
+        expect(rendered).to match(/Add to my collection/)
+      end
+    end
+
+    context 'without an authenticated user' do
+      it 'does not contain the link' do
+        allow(view).to receive(:user_signed_in?).and_return(false)
+        render
+        expect(rendered).not_to match(/Add to my collection/)
+      end
+    end
+  end
+
   describe 'Format' do
     let(:release) { FactoryBot.build(:album) }
 
@@ -12,6 +40,7 @@ RSpec.describe 'releases/show', type: :view do
 
       release.media.build(position: 1, format: cd_format, quantity: 2)
       release.media.build(position: 2, format: lp_format, quantity: 3)
+      allow(view).to receive(:user_signed_in?).and_return(false)
 
       assign(:release, release)
     end
@@ -36,6 +65,7 @@ RSpec.describe 'releases/show', type: :view do
 
     context 'without an user' do
       it 'does not show the Import order' do
+        allow(view).to receive(:user_signed_in?).and_return(false)
         allow(controller).to receive(:current_user)
         render
         expect(rendered).not_to match(/Import order/)
@@ -45,6 +75,8 @@ RSpec.describe 'releases/show', type: :view do
     context 'without an authorized user' do
       it 'does not show the Import order' do
         user = FactoryBot.create(:user)
+
+        allow(view).to receive(:user_signed_in?).and_return(true)
         allow(controller).to receive(:current_user).and_return(user)
         render
         expect(rendered).not_to match(/Import order/)
@@ -64,7 +96,9 @@ RSpec.describe 'releases/show', type: :view do
       it 'shows the Import order' do
         release.import_order = nil
         user = FactoryBot.create(:user, importer: true)
-        allow(controller).to receive(:current_user).and_return(user)
+
+        allow(view).to receive(:user_signed_in?).and_return(true)
+        allow(view).to receive(:current_user).and_return(user)
         render
         expect(rendered).not_to match(/Import order/)
       end
@@ -75,6 +109,7 @@ RSpec.describe 'releases/show', type: :view do
     before do
       release = FactoryBot.create(:album)
       release.subsets << ReleaseSubset.new(title: 'My subset title')
+      allow(view).to receive(:user_signed_in?).and_return(true)
       assign(:release, release)
     end
 

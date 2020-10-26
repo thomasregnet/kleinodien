@@ -82,11 +82,13 @@
   </div>
 </section>
 
+<% if user_signed_in? %>
 <section>
   <div class="container has-text-centered">
-    <%= link_to 'Add to my collection', release_copies_path(release_id: @release), class: 'button is-link is-success' %>
+    <%= link_to 'Add to my collection', new_release_copy_path(release_id: @release), class: 'button is-link is-success' %>
   </div>
 </section>
+<% end %>
 
 <section>
   <div class="container">
