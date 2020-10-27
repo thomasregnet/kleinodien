@@ -1,4 +1,5 @@
 class ReleaseCopiesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_release_copy, only: [:show, :edit, :update, :destroy]
 
   # GET /release_copies
@@ -15,6 +16,7 @@ class ReleaseCopiesController < ApplicationController
   # GET /release_copies/new
   def new
     @release_copy = ReleaseCopy.new
+    authorize @release_copy
   end
 
   # GET /release_copies/1/edit
@@ -24,7 +26,8 @@ class ReleaseCopiesController < ApplicationController
   # POST /release_copies
   # POST /release_copies.json
   def create
-    @release_copy = ReleaseCopy.new(release_copy_params)
+    @release_copy = ReleaseCopy.new(release_copy_params.merge(user: current_user))
+    authorize @release_copy
 
     respond_to do |format|
       if @release_copy.save

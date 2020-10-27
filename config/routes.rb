@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   resources :release_copies
+  resources :original_releases, controller: 'release_copies', type: 'OriginalRelease'
   resources :releases
   resources :import_orders
   # get 'heaps/index'

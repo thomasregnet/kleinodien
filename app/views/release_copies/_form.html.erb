@@ -20,6 +20,12 @@
     </div>
   </div>
 
+  <% if params[:release_id] %>
+    <%= form.hidden_field(:release_id, value: params[:release_id]) %>
+  <% elsif params[:release_head_id] %>
+     <%= form.hidden_field(:release_head_id, value: params[:release_head_id]) %>
+  <% end %>
+
   <div class="controll">
     <%= form.submit class: 'button is-primary'%>
   </div>

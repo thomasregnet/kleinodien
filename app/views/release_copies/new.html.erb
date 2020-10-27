@@ -10,13 +10,13 @@
 
 <section>
   <div class="container">
-    <% if params[:release_id] || params[:release_id] %>
+    <% if params[:release_id] || params[:release_head_id] %>
     <div class="tags has-addons">
       <span class="tag is-dark">
-        <%= @release ? 'Release id:' : 'ReleaseHead id: ' %>
+        <%=  params[:release_id] ? 'Release id:' : 'ReleaseHead id: ' %>
       </span>
       <span class="tag">
-        <%= @release ? @release.id : @release_head.id %>
+        <%= params[:release_id] || params[:rlease_head_id] %>
       </span>
     </div>
     <% end %>

@@ -15,6 +15,8 @@
 RSpec.describe "/release_copies", type: :request do
   # ReleaseCopy. As you add validations to ReleaseCopy, be sure to
   # adjust the attributes here as well.
+  let(:user) { FactoryBot.create(:user) }
+
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
   }
@@ -22,6 +24,8 @@ RSpec.describe "/release_copies", type: :request do
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
   }
+
+  before { sign_in user }
 
   describe "GET /index" do
     it "renders a successful response" do
