@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_191834) do
+ActiveRecord::Schema.define(version: 2020_10_23_073548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -393,6 +393,18 @@ ActiveRecord::Schema.define(version: 2020_10_20_191834) do
     t.index ["release_id"], name: "index_release_companies_on_release_id"
   end
 
+  create_table "release_copies", force: :cascade do |t|
+    t.text "type"
+    t.bigint "release_head_id"
+    t.bigint "release_id"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["release_head_id"], name: "index_release_copies_on_release_head_id"
+    t.index ["release_id"], name: "index_release_copies_on_release_id"
+    t.index ["user_id"], name: "index_release_copies_on_user_id"
+  end
+
   create_table "release_events", force: :cascade do |t|
     t.bigint "release_id", null: false
     t.bigint "area_id", null: false
@@ -629,6 +641,9 @@ ActiveRecord::Schema.define(version: 2020_10_20_191834) do
   add_foreign_key "release_companies", "companies"
   add_foreign_key "release_companies", "company_roles"
   add_foreign_key "release_companies", "releases"
+  add_foreign_key "release_copies", "release_heads"
+  add_foreign_key "release_copies", "releases"
+  add_foreign_key "release_copies", "users"
   add_foreign_key "release_events", "areas"
   add_foreign_key "release_events", "releases"
   add_foreign_key "release_heads", "artist_credits"

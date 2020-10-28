@@ -1,0 +1,32 @@
+<%= form_with(model: release_copy, local: true) do |form| %>
+  <% if release_copy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(release_copy.errors.count, "error") %> prohibited this release_copy from being saved:</h2>
+
+      <ul>
+        <% release_copy.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :type, class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= select('release_copy', 'type', [%w|original OriginalRelease|, %w|clone ClonedRelease|, %w|replica ReplicatedRelease|]) %>
+      </div>
+    </div>
+  </div>
+
+  <% if params[:release_id] %>
+    <%= form.hidden_field(:release_id, value: params[:release_id]) %>
+  <% elsif params[:release_head_id] %>
+     <%= form.hidden_field(:release_head_id, value: params[:release_head_id]) %>
+  <% end %>
+
+  <div class="controll">
+    <%= form.submit class: 'button is-primary'%>
+  </div>
+<% end %>

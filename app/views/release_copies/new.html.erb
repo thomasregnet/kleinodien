@@ -1,0 +1,27 @@
+<section class="hero is-medium">
+  <div class="container">
+    <div class="hero-body">
+      Create a new copy of
+      <h1 class="title"><%= release_copy_title_for(params) %></h1>
+      <h2 class="subtitle"><%= release_copy_artist_credit_for(params) %></h2>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <% if params[:release_id] || params[:release_head_id] %>
+    <div class="tags has-addons">
+      <span class="tag is-dark">
+        <%=  params[:release_id] ? 'Release id:' : 'ReleaseHead id: ' %>
+      </span>
+      <span class="tag">
+        <%= params[:release_id] || params[:rlease_head_id] %>
+      </span>
+    </div>
+    <% end %>
+    <%= render 'form', release_copy: @release_copy %>
+
+    <%= link_to 'Back', release_copies_path, class: 'button is-link' %>
+  </div>
+</section>
