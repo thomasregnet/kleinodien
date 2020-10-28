@@ -3,12 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe '/import_orders without an user', type: :request do
-  let(:import_order) { FactoryBot.create(:import_order) } #, user: user) }
-  let(:valid_attributes) do
-    FactoryBot.attributes_for(:import_order).merge(
-      import_queue: FactoryBot.create(:import_queue)
-    )
-  end
+  let(:import_order) { FactoryBot.create(:import_order) }
 
   describe 'GET /index' do
     it 'redirects to the sign_in page' do
@@ -33,26 +28,21 @@ RSpec.describe '/import_orders without an user', type: :request do
 
   describe 'GET /edit' do
     it 'redirects to the sign_in page' do
-      get edit_import_order_url(import_order)
+      get edit_import_order_url(1)
       expect(response).to redirect_to(new_user_session_url)
     end
   end
 
   describe 'POST /create' do
     it 'redirects to the sign_in page' do
-      attr = FactoryBot.attributes_for(:import_order).merge(import_queue_id: FactoryBot.create(:import_queue).id)
-      post import_orders_url, params: { import_order: attr }
+      post import_orders_url, params: {}
       expect(response).to redirect_to(new_user_session_url)
     end
   end
 
   describe 'PATCH /update' do
-    let(:new_attributes) do
-      { code: 'yet another code' }
-    end
-
     it 'redirects to the sign_in page' do
-      patch import_order_url(import_order), params: { import_order: new_attributes }
+      patch import_order_url(1), params: {}
       import_order.reload
       expect(response).to redirect_to(new_user_session_url)
     end
