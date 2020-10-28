@@ -5,7 +5,9 @@ class ReleaseCopiesController < ApplicationController
   # GET /release_copies
   # GET /release_copies.json
   def index
-    @release_copies = ReleaseCopy.all
+    # @release_copies = ReleaseCopy.all
+    @relase_copies = ReleaseCopy.all
+    authorize @relase_copies
   end
 
   # GET /release_copies/1
