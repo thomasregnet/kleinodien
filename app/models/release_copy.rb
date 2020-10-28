@@ -15,6 +15,11 @@ class ReleaseCopy < ApplicationRecord
     release_head ? true : false
   end
 
+  def title
+    return release.title if release
+    return release_head.title if release_head
+  end
+
   private
 
   def release_xor_release_head

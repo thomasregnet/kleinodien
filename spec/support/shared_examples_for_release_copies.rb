@@ -16,25 +16,41 @@ RSpec.shared_examples 'a ReleaseCopy' do
   end
 
   context 'with a Release' do
-    it 'is valid' do
-      subject.release_head = nil
-      subject.release = FactoryBot.build(:release)
+    before do
+        subject.release_head = nil
+        subject.release = FactoryBot.build(:release, title: 'release title')
+    end
 
+    it 'is valid' do
       expect(subject).to be_valid
+    end
+
+    describe '#title' do
+      it 'returns the title of the release' do
+        expect(subject.title).to eq('release title')
+      end
     end
   end
 
   context 'with a ReleaseHead' do
-    it 'is valid' do
+    before do
       subject.release = nil
+      subject.release_head = FactoryBot.build(:release_head, title: 'release_head title')
+    end
 
-      subject.release_head = FactoryBot.build(:release_head)
+    it 'is valid' do
       expect(subject).to be_valid
+    end
+
+    describe '#title' do
+      it 'returns the title of the ReleaseHead' do
+        expect(subject.title).to eq('release_head title')
+      end
     end
   end
 
   context 'with a Release and ReleaseHead' do
-    it 'is valid' do
+    it 'is not valid' do
       subject.release      = FactoryBot.build(:release)
       subject.release_head = FactoryBot.build(:release_head)
       subject.valid?
@@ -45,7 +61,7 @@ RSpec.shared_examples 'a ReleaseCopy' do
   end
 
   context 'with neigther a Release nor ReleaseHead' do
-    it 'is valid' do
+    it 'is not valid' do
       subject.release      = nil
       subject.release_head = nil
       subject.valid?
@@ -54,5 +70,4 @@ RSpec.shared_examples 'a ReleaseCopy' do
         .to contain_exactly([:base, ['there must be eigther a Release or a ReleaseHead']])
     end
   end
-
 end
