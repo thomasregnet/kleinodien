@@ -17,9 +17,9 @@
     <% @release_copies.each do |release_copy| %>
       <tr>
         <td><%= release_copy.type %></td>
+        <td><%= release_copy.title %></td>
         <td><%= release_copy.release_head_id %></td>
         <td><%= release_copy.release_id %></td>
-        <td><%= release_copy.user_id %></td>
         <td><%= link_to 'Show', release_copy %></td>
         <td><%= link_to 'Edit', edit_release_copy_path(release_copy) %></td>
         <td><%= link_to 'Destroy', release_copy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -29,5 +29,7 @@
 </table>
 
 <br>
+
+<p><%= paginate @release_copies %></p>
 
 <%= link_to 'New Release Copy', new_release_copy_path %>

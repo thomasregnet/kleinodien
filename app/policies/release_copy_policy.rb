@@ -5,6 +5,10 @@ class ReleaseCopyPolicy < ApplicationPolicy
     user ? true : false
   end
 
+  def index?
+    user ? true: false
+  end
+
   class Scope < Scope
   end
 end
