@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe '/import_orders without an user', type: :request do
-  let(:import_order) { FactoryBot.create(:import_order, user: user) }
-  let(:user) { FactoryBot.create(:user) } # User has no "importer" rights
+  let(:import_order) { FactoryBot.create(:import_order) } #, user: user) }
   let(:valid_attributes) do
     FactoryBot.attributes_for(:import_order).merge(
       import_queue: FactoryBot.create(:import_queue)
@@ -41,10 +40,7 @@ RSpec.describe '/import_orders without an user', type: :request do
 
   describe 'POST /create' do
     it 'redirects to the sign_in page' do
-      attr = FactoryBot.attributes_for(:import_order).merge(
-        import_queue_id: FactoryBot.create(:import_queue).id,
-        user_id:         user.id
-      )
+      attr = FactoryBot.attributes_for(:import_order).merge(import_queue_id: FactoryBot.create(:import_queue).id)
       post import_orders_url, params: { import_order: attr }
       expect(response).to redirect_to(new_user_session_url)
     end
@@ -52,7 +48,7 @@ RSpec.describe '/import_orders without an user', type: :request do
 
   describe 'PATCH /update' do
     let(:new_attributes) do
-      { code: 'yet another code', user: user }
+      { code: 'yet another code' }
     end
 
     it 'redirects to the sign_in page' do
@@ -64,7 +60,7 @@ RSpec.describe '/import_orders without an user', type: :request do
 
   describe 'DELETE /destroy' do
     it 'does not destroy the requested import_order' do
-      import_order = FactoryBot.create(:import_order, user: user)
+      import_order = FactoryBot.create(:import_order)
       expect do
         delete import_order_url(import_order)
       end.not_to change(ImportOrder, :count)
