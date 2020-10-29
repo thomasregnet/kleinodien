@@ -5,6 +5,8 @@ class ReleaseCopy < ApplicationRecord
   belongs_to :release, required: false
   belongs_to :user
 
+  validates :designation, presence: true, blank: false, uniqueness: { scope: :user_id }
+
   validate :release_xor_release_head
 
   def with_release?

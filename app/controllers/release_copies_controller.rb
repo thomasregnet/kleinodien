@@ -74,6 +74,6 @@ class ReleaseCopiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def release_copy_params
-      params.require(:release_copy).permit(:type, :release_head_id, :release_id, :user_id)
+      params.require(:release_copy).permit(:designation, :type, :release_head_id, :release_id, :user_id)
     end
 end
