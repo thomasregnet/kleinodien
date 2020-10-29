@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_073548) do
+ActiveRecord::Schema.define(version: 2020_10_29_191303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -400,6 +400,8 @@ ActiveRecord::Schema.define(version: 2020_10_23_073548) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "designation", null: false
+    t.index ["designation", "user_id"], name: "index_release_copies_on_designation_and_user_id", unique: true
     t.index ["release_head_id"], name: "index_release_copies_on_release_head_id"
     t.index ["release_id"], name: "index_release_copies_on_release_id"
     t.index ["user_id"], name: "index_release_copies_on_user_id"

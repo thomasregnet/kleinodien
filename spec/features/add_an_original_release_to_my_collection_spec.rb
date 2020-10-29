@@ -13,6 +13,7 @@ RSpec.feature 'add an OriginalRelease to my collection', type: :feature do
   scenario 'user adds a OriginalRelease to his collection' do
     visit release_path(release)
     click_link('Add to my collection')
+    fill_in('release_copy[designation]', with: 'my designation')
     click_button('Create Release copy')
 
     expect(page).to have_content('Release copy was successfully created.')
