@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'a ReleaseCopy' do
+  it { should validate_presence_of(:designation) }
+  it { should validate_uniqueness_of(:designation).scoped_to(:user_id) }
   context 'with valid parameters' do
     it 'is valid' do
       expect(subject).to be_valid
