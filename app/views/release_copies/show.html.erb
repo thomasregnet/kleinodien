@@ -30,7 +30,7 @@
 <% if @release_copy.type == 'OriginalRelease' %>
   <section>
     <div class="container">
-      <%= render partial: 'releases/subset', collection: @release_copy.release.subsets %>
+      <%= render partial: 'shared/release_subset', collection: @release_copy.release.subsets %>
     </div>
   </section>
 <% end %>
