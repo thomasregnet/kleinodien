@@ -1,0 +1,8 @@
+<% if subset.title %>
+  <div class="columns is-12">
+    <div class="column"><p class="has-background-grey-lighter has-text-centered"><%= subset.title %></p></div>
+  </div>
+<% end %>
+<% if subset.tracks.any? %>
+  <%= render partial: 'subset_track', collection: subset.tracks %>
+<% end %>
