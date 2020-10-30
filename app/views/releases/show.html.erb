@@ -92,64 +92,7 @@
 
 <section>
   <div class="container">
-    <% @release.subsets.each do |subset| %>
-    <% if subset.title %>
-      <div class="columns is-12">
-        <div class="column"><p class="has-background-grey-lighter has-text-centered"><%= subset.title %></p></div>
-      </div>
-    <% end %>
-    <% subset.tracks.each do |track| %>
-    <div class="columns">
-      <div class="column is-1"><p class="has-text-right"><%= track.no %></p></div>
-      <div class="column is-10"><p class="is-danger"><%= track.piece.title %></p></div>
-      <div class="column is-1"><p class="has-text-right"><%= track.piece.duration.mmss %></p></div>
-    </div>
-    <% end %>
-    <% end %>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
     <h3 class="subtitle">Tracks:</h3>
-      <% @release.subsets.each do |subset| %>
-        <% subset.tracks.each do |track| %>
-          <article class="media">
-            <div class="media-left">
-              <div class="content">
-                <%= track.no %>
-              </div>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <%= track.piece.title %>
-              </div>
-            </div>
-            <div class="media-right">
-              <div class="content">
-                <%= track.piece.duration.mmss %>
-              </div>
-            </div>
-          </article> 
-        <% end %>
-      <% end %>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h3 class="subtitle">Tracks:</h3>
-    <table class="table">
-      <tbody>
-       <% @release.subsets.each do |subset| %>
-         <% subset.tracks.each do |track| %>
-           <tr>
-             <td><%= track.piece.title %></td>
-             <td><%= track.piece.duration.mmss %></td>
-           </tr>
-         <% end %>
-       <% end %>
-      </tbody>
-    </table>
+    <%= render partial: 'shared/release_subset', collection: @release.subsets %>
   </div>
 </section>

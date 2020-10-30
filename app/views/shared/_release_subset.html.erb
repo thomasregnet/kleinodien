@@ -1,0 +1,8 @@
+<% if release_subset.title %>
+  <div class="columns is-12">
+    <div class="column"><p class="has-background-grey-lighter has-text-centered"><%= release_subset.title %></p></div>
+  </div>
+<% end %>
+<% if release_subset.tracks.any? %>
+  <%= render partial: 'shared/release_subset_track', collection: release_subset.tracks %>
+<% end %>
