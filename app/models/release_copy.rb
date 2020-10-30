@@ -9,17 +9,22 @@ class ReleaseCopy < ApplicationRecord
 
   validate :release_xor_release_head
 
+  def artist_credit
+    return release.artist_credit if release
+    return release_head.artist_credit if release_head
+  end
+
+  def title
+    return release.title if release
+    return release_head.title if release_head
+  end
+
   def with_release?
     release ? true : false
   end
 
   def with_release_head?
     release_head ? true : false
-  end
-
-  def title
-    return release.title if release
-    return release_head.title if release_head
   end
 
   private

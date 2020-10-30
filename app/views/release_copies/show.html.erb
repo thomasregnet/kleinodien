@@ -1,24 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @release_copy.type %>
-</p>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title"><%= @release_copy.designation %></h1>
+      <h2 class="subtitle">
+        <%= @release_copy.title %>
+        <% if @release_copy.artist_credit %>
+        <span class="has-text-weight-light">
+          by <%= @release_copy.artist_credit.name %><% end %>
+        </span>
+        </h2>
+        <div class="columns">
+          <div class="column">
+            <%= @release_copy.type %>
+          </div> 
+          <div class="column">
+            <% if @release_copy.with_release? %>
+              <%= link_to @release_copy.title, @release_copy.release %>
+            <% else %>
+              <%= link_to @release_copy.title, @release_copy.release_head %>
+            <% end %>
+          </div>
+        </div>
+    </div> 
+  </div>
+</section>
 
-<p>
-  <strong>Release head:</strong>
-  <%= @release_copy.release_head_id %>
-</p>
-
-<p>
-  <strong>Release:</strong>
-  <%= @release_copy.release_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @release_copy.user_id %>
-</p>
+<!-- Make the following section a partial -->
+<% if @release_copy.type == 'OriginalRelease' %>
+<section>
+  <div class="container">
+    <% @release_copy.release.subsets.each do |subset| %>
+    <% if subset.title %>
+      <div class="columns is-12">
+        <div class="column"><p class="has-background-grey-lighter has-text-centered"><%= subset.title %></p></div>
+      </div>
+    <% end %>
+    <% subset.tracks.each do |track| %>
+    <div class="columns">
+      <div class="column is-1"><p class="has-text-right"><%= track.no %></p></div>
+      <div class="column is-10"><p class="is-danger"><%= track.piece.title %></p></div>
+      <div class="column is-1"><p class="has-text-right"><%= track.piece.duration.mmss %></p></div>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</section>
+<% end %>
 
 <%= link_to 'Edit', edit_release_copy_path(@release_copy) %> |
 <%= link_to 'Back', release_copies_path %>
