@@ -27,6 +27,12 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+     <%= render partial: 'shared/release_info', locals: { release: @release_copy.release } %>
+  </div>
+</section>
+
 <% if @release_copy.type == 'OriginalRelease' %>
   <section>
     <div class="container">
