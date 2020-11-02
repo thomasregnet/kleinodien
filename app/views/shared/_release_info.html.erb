@@ -1,0 +1,64 @@
+<h3 class="subtitle">Info:</h3>
+<table class="table">
+  <tbody>
+    <% if release.media %>
+    <tr>
+      <td>Format:</td>
+        <td>
+        <ul>
+        <% release.media.each do |medium| %> 
+          <li><%= medium.quantity %> &times <%= medium.format.name %></li>  
+        <% end %>
+        </ul> 
+      <td>
+    </tr>
+    <% end %>
+    <tr>
+      <td>Language:</td>
+      <td><%= release.language&.name || '&nbsp;' %></td>
+    </tr>
+    <tr>
+      <td>Script:</td>
+      <td><%= release.script&.name || '&nbsp;' %></td>
+    </tr>
+    <tr>
+      <td>Area:</td>
+      <td><%= release.area&.name || '&nbsp;'%></td>
+    </tr>
+    <% if release.area && release.area.iso3166_part1_countries %>
+      <tr>
+        <td>Iso-Codes:</td>
+        <td><%= release.area.iso3166_part1_codes.join(', ')%></td>
+      </tr>
+    <% end %>
+    
+    <tr><td colspan="2">Companies:</td></tr>
+    <% release.release_companies.each do |release_company| %>
+    <tr>
+      <td><%= release_company.company.name %></td>
+      <td>
+        <% if release_company.role %>
+          <%= release_company.role.name %>
+        <% end %>
+        <% if release_company.catalog_numbers %>
+          Catalog Numbers:
+          <%= release_company.catalog_numbers.map(&:code).join(', ') %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    <tr><td colspan="2">Release Events:</td></tr>
+    <% release.release_events.each do |release_event| %>
+      <tr>
+        <td><%= release_event.date %></td>
+        <td><%= release_event.area.name %></td>
+      </tr>
+    <% end %>
+    <% if release.import_order && ImportOrderPolicy.new(current_user, release.import_order).show? %>
+    <tr>
+      <td>Import order</td>
+      <td><%= link_to release.import_order.id, release.import_order %></td>
+    </tr> 
+    <% end %>
+  </tbody>
+</table>
