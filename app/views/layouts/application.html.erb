@@ -13,10 +13,26 @@
         <a class="navbar-item" href="#">Kleinodien</a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu" id="navbarMenu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>, class: 'button is-primary'
+              <% else %>
+                <%= link_to 'Log in', new_user_session_path, class: 'button is-primary' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -25,9 +41,5 @@
     <% end %>
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>
-    <% if user_signed_in? %>
-      <%= destroy_user_session_path %>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-    <% end %>
   </body>
 </html>
