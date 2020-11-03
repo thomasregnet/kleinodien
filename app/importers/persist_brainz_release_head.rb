@@ -18,10 +18,10 @@ class PersistBrainzReleaseHead < PersistBrainzBase
   end
 
   def find_already_existing
-    FindByCodesService.call(
-      codes_hash:  blueprint.codes_hash,
-      model_class: ReleaseHead
-    )
+    by_code = FindByCodesService.call(codes_hash: { brainz_code: code }, model_class: ReleaseHead)
+    return by_code if by_code
+
+    FindByCodesService.call(codes_hash: blueprint.codes_hash, model_class: ReleaseHead)
   end
 
   # rubocop:disable Metrics/MethodLength
