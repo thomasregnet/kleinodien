@@ -5,6 +5,10 @@ class BrainzReleaseImportOrder < BrainzImportOrder
   def item
     return unless done?
 
-    Release.find_by(brainz_code: code)
+    @item ||= Release.find_by(brainz_code: code)
+  end
+
+  def item_designation
+    item&.title
   end
 end
