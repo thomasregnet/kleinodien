@@ -27,4 +27,36 @@ RSpec.describe BrainzReleaseImportOrder, type: :model do
       expect(import_order.import_queue.name).to eq('brainz')
     end
   end
+
+  describe '#item' do
+    %i[pending preparing persisting failed].each do |state|
+      import_order = described_class.new(state: state)
+
+      context "when #{state}" do
+        it 'returns nil' do
+          expect(import_order.item).to be_nil
+        end
+
+        it 'does not try to find a Release' do
+          allow(Release).to receive(:find_by)
+          import_order.item
+          expect(Release).not_to have_received(:find_by)
+        end
+      end
+    end
+
+    context 'when done' do
+      let(:brainz_code) { '50cdde32-1ed4-11eb-be0c-08606e75dc17' }
+      let(:import_order) { described_class.new(code: :brainz_code, state: :done) }
+
+      before do
+        import_order.code = brainz_code
+        FactoryBot.create(:release, brainz_code: brainz_code)
+      end
+
+      it 'returns a release' do
+        expect(import_order.item).to be_instance_of(Release)
+      end
+    end
+  end
 end
