@@ -22,6 +22,8 @@ RSpec.describe '/import_orders with authorized user', type: :request do
   end
 
   describe 'GET /show' do
+    let(:import_order) { FactoryBot.create(:brainz_release_import_order, user: user)}
+
     it 'renders a successful response' do
       get import_order_url(import_order)
       expect(response).to be_successful
