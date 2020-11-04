@@ -9,6 +9,11 @@
       <div class="column is-2"><strong>State:</strong></div>
       <div class="column is-10"><span class="<%= import_order_state_class_for(@import_order.state) %>"><%= @import_order.state %></span></div>
     
+      <% if @import_order.item %>
+      <div class="column is-2"><strong>Item:</strong></div>
+      <div class="column is-10"><%= link_to @import_order.item_designation, @import_order.item %></div>
+      <% end %>
+
       <div class="column is-2"><strong>Uri:</strong></div>
       <div class="column is-10"><%= link_to @import_order.uri, @import_order.uri %></div>
     

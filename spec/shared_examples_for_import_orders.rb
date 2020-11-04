@@ -31,7 +31,7 @@ RSpec.shared_examples 'for ImportOrders' do |model|
     context 'when in done state' do
       let(:import_order) { FactoryBot.build(model, state: :done) }
 
-      it 'is active' do
+      it 'is not active' do
         expect(import_order).not_to be_active
       end
     end
@@ -39,7 +39,7 @@ RSpec.shared_examples 'for ImportOrders' do |model|
     context 'when in failed state' do
       let(:import_order) { FactoryBot.build(model, state: :failed) }
 
-      it 'is active' do
+      it 'is not active' do
         expect(import_order).not_to be_active
       end
     end
