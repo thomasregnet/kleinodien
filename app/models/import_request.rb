@@ -13,6 +13,8 @@ class ImportRequest < ApplicationRecord
   validates :code, :state, :type, presence: true
   validates :state, inclusion: { in: %w[pending running done failed] }
 
+  before_save :ensure_uri_has_a_value
+
   def self.to_uri(args)
     new(args).to_uri
   end
@@ -34,5 +36,11 @@ class ImportRequest < ApplicationRecord
     event :failure do
       transitions from: %i[pending running], to: :failed
     end
+  end
+
+  private
+
+  def ensure_uri_has_a_value
+    self.uri ||= to_uri
   end
 end
