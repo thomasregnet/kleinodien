@@ -3,6 +3,20 @@
 require 'rails_helper'
 require 'shared_examples_for_import_requests'
 
+class FakeImportRequestToUri < ImportRequest
+  def initialize(args)
+    @args = args
+
+    super(args)
+  end
+
+  attr_reader :args
+
+  def to_uri
+    "https://fake/#{args[:code]}"
+  end
+end
+
 RSpec.describe ImportRequest, type: :model do
   # include_examples 'for ImportRequests', :import_request
 
@@ -38,20 +52,6 @@ RSpec.describe ImportRequest, type: :model do
     end
 
     context 'when called on an inheriting class that implements #to_uri' do
-      # rubocop:disable RSpec/LeakyConstantDeclaration
-      class FakeImportRequestToUri < ImportRequest
-        def initialize(args)
-          @args = args
-        end
-
-        attr_reader :args
-
-        def to_uri
-          "https://fake/#{args[:code]}"
-        end
-      end
-      # rubocop:enable RSpec/LeakyConstantDeclaration
-
       it 'returns the uri' do
         expect(FakeImportRequestToUri.to_uri(code: 'abc123'))
           .to eq('https://fake/abc123')
