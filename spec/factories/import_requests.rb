@@ -38,6 +38,13 @@ FactoryBot.define do
         class: 'BrainzReleaseImportRequest'
       ) do
       end
+
+      factory :cover_art_import_request, class: 'CoverArtImportRequest' do
+        sequence(:code) { SecureRandom.uuid.to_s }
+        association :import_order, factory: :cover_art_import_order
+
+        factory :cover_art_release_import_request, class: 'CoverArtReleaseImportRequest'
+      end
     end
   end
 end
