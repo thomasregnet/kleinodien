@@ -6,4 +6,6 @@ class ReleaseHead < ApplicationRecord
   belongs_to :import_order, required: false
 
   validates :title, presence: true, blank: false
+
+  has_one_attached :front_cover
 end
