@@ -15,6 +15,7 @@ require 'rspec/rails'
 require 'devise'
 
 # Mock requests to external APIs
+require 'fake_coverart'
 require 'fake_music_brainz'
 require 'webmock/rspec'
 
@@ -46,6 +47,7 @@ RSpec.configure do |config|
   end
 
   config.before do
+    WebMock.stub_request(:any, /coverartarchive.org/).to_rack(FakeCoverart)
     WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
