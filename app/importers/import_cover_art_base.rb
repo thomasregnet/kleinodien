@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Import covers from coverartarchive.org
-class ImportCoverArt < ImportBase
+class ImportCoverArtBase < ImportBase
   def find_existing
   end
 
