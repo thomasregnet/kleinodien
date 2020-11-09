@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ImportRequest for release cover art
-class CoverArtReleaseImportRequest < CoverArtImportRequest
+class CoverArtReleaseManifestImportRequest < CoverArtImportRequest
   QUERY_KIND = 'release'
 
   def kind

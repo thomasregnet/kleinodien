@@ -43,7 +43,7 @@ FactoryBot.define do
         sequence(:code) { SecureRandom.uuid.to_s }
         association :import_order, factory: :cover_art_import_order
 
-        factory :cover_art_release_import_request, class: 'CoverArtReleaseImportRequest'
+        factory :cover_art_release_manifest_import_request, class: 'CoverArtReleaseManifestImportRequest'
       end
     end
   end
