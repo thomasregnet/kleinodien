@@ -17,6 +17,12 @@ class FakeCoverart < Sinatra::Base
     nil
   end
 
+  get '/:type/:id/:num' do
+    content_type :jpg
+    status 200
+    TestData::PathService.call(path: 'empty.jpg')
+  end
+
   private
 
   def path

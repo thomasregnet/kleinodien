@@ -2,7 +2,13 @@
 
 class ImportCoverArtRelease < ImportCoverArtBase
   def call
-    manifest
+    front_params = manifest[:images].select { |img| img[:types].include? 'Front' }.first
+    img = fetch_image(front_params[:image])
+
+    io = StringIO.new(img)
+
+    release.front_cover.attach(io: io, filename: 'foobar')
+    release.save!
   end
 
   private
@@ -42,7 +48,25 @@ class ImportCoverArtRelease < ImportCoverArtBase
     end
   end
 
-  def fetch_image(image_params)
+  def fetch_image(image_uri)
+    take_a_nap
+    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: image_uri)
+
+    max_fetch_tries.times do
+      take_a_nap
+      response = Faraday.get(image_uri)
+      import_request.attempts.create!(
+        message:     response.reason_phrase,
+        status_code: response.status
+      )
+      if response.success?
+        import_request.run!
+        import_request.done!
+        return response.body
+      end
+    end
+
+    import_request.failure!
   end
 
   def max_fetch_tries
