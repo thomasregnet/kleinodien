@@ -7,8 +7,4 @@ class CoverArtReleaseManifestImportRequest < CoverArtImportRequest
   def kind
     QUERY_KIND
   end
-
-  def query_string
-    CoverArt_RELEASE_QUERY_STRING
-  end
 end
