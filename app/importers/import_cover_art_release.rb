@@ -31,42 +31,39 @@ class ImportCoverArtRelease < ImportCoverArtBase
       import_order: import_order
     )
 
-    max_fetch_tries.times do
-      take_a_nap
-      response = Faraday.get(import_request.to_uri)
-      import_request.attempts.create!(
-        message:     response.reason_phrase,
-        status_code: response.status
-      )
-      if response.success?
-        import_request.run!
-        import_request.done!
-        return JSON.parse(response.body, symbolize_names: true)
-      end
+    body = fetch(import_request)
+    return unless body
 
-      import_request.failed!
-    end
+    JSON.parse(body, symbolize_names: true)
   end
 
-  def fetch_image(image_uri)
-    take_a_nap
-    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: image_uri)
+  def fetch_image(uri)
+    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
 
+    fetch(import_request)
+  end
+
+  def fetch(import_request)
     max_fetch_tries.times do
       take_a_nap
-      response = Faraday.get(image_uri)
-      import_request.attempts.create!(
-        message:     response.reason_phrase,
-        status_code: response.status
-      )
+      response = Faraday.get(import_request.uri)
+      attemp(import_request, response)
       if response.success?
         import_request.run!
         import_request.done!
         return response.body
       end
-    end
 
-    import_request.failure!
+      import_request.failure!
+      nil
+    end
+  end
+
+  def attemp(import_requeet, response)
+    import_request.attempts.create!(
+      message:     response.reason_phrase,
+      status_code: response.status
+    )
   end
 
   def max_fetch_tries
@@ -74,5 +71,6 @@ class ImportCoverArtRelease < ImportCoverArtBase
   end
 
   def take_a_nap
+    sleep 0
   end
 end
