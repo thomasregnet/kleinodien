@@ -15,16 +15,17 @@ class CoverArtFetcher
   def call
     import_request.run
 
-    response = fetch
-
-    response.body
+    fetch
   end
 
   def fetch
     max_tries.times do |nap_time|
       sleep(nap_time)
       response = attempt
-      return response if response.success?
+      if response.success?
+        on_success
+        return response
+      end
     end
 
     fetch_failed
@@ -33,12 +34,16 @@ class CoverArtFetcher
   def attempt
     Rails.logger.info("Trying to get #{uri}")
     response = Faraday.get(uri)
-    import_request.attempts.create(message: response.reason_phrase, status_code: response.status)
-    # response.success?
+    import_request.attempts.create!(message: response.reason_phrase, status_code: response.status)
     response
   end
 
   private
+
+  def on_success
+    Rails.logger.info("Succesful fetched #{uri}")
+    import_request.done!
+  end
 
   def uri
     import_request.uri
@@ -46,6 +51,8 @@ class CoverArtFetcher
 
   def fetch_failed
     Rails.logger.error("Failed to get #{uri}")
+    import_request.failure!
+    Raise ImportError::CanNotFetch, "can't fetch data from #{uri}"
   end
 
   def max_tries

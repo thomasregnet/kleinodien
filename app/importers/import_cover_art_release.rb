@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+# Import cover art from coverartarchive.org
 class ImportCoverArtRelease < ImportCoverArtBase
   def call
     front_params = manifest[:images].select { |img| img[:types].include? 'Front' }.first
-    img = fetch_image(front_params[:image])
+    response = fetch_image(front_params[:image])
 
-    io = StringIO.new(img)
+    io = StringIO.new(response.body)
 
     release.front_cover.attach(io: io, filename: 'foobar')
     release.save!
@@ -13,16 +14,9 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   private
 
-  def release
-    @release ||= Release.find_by(brainz_code: import_order.code)
-  end
-
-  def manifest
-    @manifest ||= fetch_manifest
-  end
-
-  def manifest_import_request
-    @manifest_import_request ||= CoverArtReleaseManifestImportRequest.create(code: import_order.code)
+  def fetch_image(uri)
+    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
+    CoverArtFetcher.call(import_request: import_request)
   end
 
   def fetch_manifest
@@ -31,46 +25,18 @@ class ImportCoverArtRelease < ImportCoverArtBase
       import_order: import_order
     )
 
-    body = fetch(import_request)
-    return unless body
+    response = CoverArtFetcher.call(import_request: import_request)
+    return unless response
 
-    JSON.parse(body, symbolize_names: true)
+    import_request.create_body!(content: response.body)
+    JSON.parse(response.body, symbolize_names: true)
   end
 
-  def fetch_image(uri)
-    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-    CoverArtFetcher.call(import_request: import_request)
-    # fetch(import_request)
+  def manifest
+    @manifest ||= fetch_manifest
   end
 
-  def fetch(import_request)
-    max_fetch_tries.times do
-      take_a_nap
-      response = Faraday.get(import_request.uri)
-      attemp(import_request, response)
-      if response.success?
-        import_request.run!
-        import_request.done!
-        return response.body
-      end
-
-      import_request.failure!
-      nil
-    end
-  end
-
-  def attemp(import_request, response)
-    import_request.attempts.create!(
-      message:     response.reason_phrase,
-      status_code: response.status
-    )
-  end
-
-  def max_fetch_tries
-    5
-  end
-
-  def take_a_nap
-    sleep 0
+  def release
+    @release ||= Release.find_by(brainz_code: import_order.code)
   end
 end
