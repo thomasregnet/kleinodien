@@ -2,6 +2,8 @@
 
 # Fetch data from coverartarchive.org
 class CoverArtFetcher
+  DEFAULT_MAX_TRIES = 5
+
   def self.call(*args)
     new(*args).call
   end
@@ -18,6 +20,15 @@ class CoverArtFetcher
     fetch
   end
 
+  private
+
+  def attempt
+    Rails.logger.info("Trying to get #{uri}")
+    response = Faraday.get(uri)
+    import_request.attempts.create!(message: response.reason_phrase, status_code: response.status)
+    response
+  end
+
   def fetch
     max_tries.times do |nap_time|
       sleep(nap_time)
@@ -28,17 +39,18 @@ class CoverArtFetcher
       end
     end
 
-    fetch_failed
+    on_error
   end
 
-  def attempt
-    Rails.logger.info("Trying to get #{uri}")
-    response = Faraday.get(uri)
-    import_request.attempts.create!(message: response.reason_phrase, status_code: response.status)
-    response
+  def max_tries
+    DEFAULT_MAX_TRIES
   end
 
-  private
+  def on_error
+    Rails.logger.error("Failed to get #{uri}")
+    import_request.failure!
+    raise ImportError::CanNotFetch, "can't fetch data from #{uri}"
+  end
 
   def on_success
     Rails.logger.info("Succesful fetched #{uri}")
@@ -47,15 +59,5 @@ class CoverArtFetcher
 
   def uri
     import_request.uri
-  end
-
-  def fetch_failed
-    Rails.logger.error("Failed to get #{uri}")
-    import_request.failure!
-    Raise ImportError::CanNotFetch, "can't fetch data from #{uri}"
-  end
-
-  def max_tries
-    5
   end
 end
