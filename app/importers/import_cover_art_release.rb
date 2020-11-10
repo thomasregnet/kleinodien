@@ -39,8 +39,8 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def fetch_image(uri)
     import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-
-    fetch(import_request)
+    CoverArtFetcher.call(import_request: import_request)
+    # fetch(import_request)
   end
 
   def fetch(import_request)
@@ -59,7 +59,7 @@ class ImportCoverArtRelease < ImportCoverArtBase
     end
   end
 
-  def attemp(import_requeet, response)
+  def attemp(import_request, response)
     import_request.attempts.create!(
       message:     response.reason_phrase,
       status_code: response.status
