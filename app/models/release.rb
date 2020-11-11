@@ -9,6 +9,7 @@ class Release < ApplicationRecord
   belongs_to :language, required: false
   belongs_to :script, required: false
 
+  has_many :images, class_name: 'ReleaseImage'
   has_many :media, class_name: 'ReleaseMedium'
   has_many :release_companies
   has_many :release_events
