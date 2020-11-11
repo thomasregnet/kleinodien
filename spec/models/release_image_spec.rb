@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
+require 'shared_examples_for_images'
 
 RSpec.describe ReleaseImage, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_behaves_like 'an image'
 end
