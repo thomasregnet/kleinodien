@@ -14,5 +14,11 @@ FactoryBot.define do
         type { 'BrainzReleaseImportOrder' }
       end
     end
+
+    factory :cover_art_import_order, class: 'CoverArtImportOrder' do
+      code { SecureRandom.uuid.to_s }
+
+      factory :cover_art_release_import_order, class: 'CoverArtReleaseImportOrder'
+    end
   end
 end
