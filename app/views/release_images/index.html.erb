@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Release Images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Front</th>
+      <th>Back</th>
+      <th>Note</th>
+      <th>Release</th>
+      <th>Archive org code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @release_images.each do |release_image| %>
+      <tr>
+        <td><%= release_image.front %></td>
+        <td><%= release_image.back %></td>
+        <td><%= release_image.note %></td>
+        <td><%= release_image.release_id %></td>
+        <td><%= release_image.archive_org_code %></td>
+        <td><%= link_to 'Show', release_image %></td>
+        <td><%= link_to 'Edit', edit_release_image_path(release_image) %></td>
+        <td><%= link_to 'Destroy', release_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Release Image', new_release_image_path %>

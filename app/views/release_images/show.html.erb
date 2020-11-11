@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Front:</strong>
+  <%= @release_image.front %>
+</p>
+
+<p>
+  <strong>Back:</strong>
+  <%= @release_image.back %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @release_image.note %>
+</p>
+
+<p>
+  <strong>Release:</strong>
+  <%= @release_image.release_id %>
+</p>
+
+<p>
+  <strong>Archive org code:</strong>
+  <%= @release_image.archive_org_code %>
+</p>
+
+<%= link_to 'Edit', edit_release_image_path(@release_image) %> |
+<%= link_to 'Back', release_images_path %>

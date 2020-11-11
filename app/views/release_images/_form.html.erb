@@ -1,0 +1,42 @@
+<%= form_with(model: release_image, local: true) do |form| %>
+  <% if release_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(release_image.errors.count, "error") %> prohibited this release_image from being saved:</h2>
+
+      <ul>
+        <% release_image.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :front %>
+    <%= form.check_box :front %>
+  </div>
+
+  <div class="field">
+    <%= form.label :back %>
+    <%= form.check_box :back %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_field :note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :release_id %>
+    <%= form.text_field :release_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :archive_org_code %>
+    <%= form.number_field :archive_org_code %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
