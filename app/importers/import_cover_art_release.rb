@@ -3,18 +3,11 @@
 # Import cover art from coverartarchive.org
 class ImportCoverArtRelease < ImportCoverArtBase
   def call
-    manifest[:images].each do |img_data|
-      response = fetch_image(img_data[:image])
+    manifest[:images].each do |img_metadata|
+      release_image = release_image_for(img_metadata)
 
-      release_image = release.images.create!(
-        back:             img_data[:back],
-        front:            img_data[:front],
-        archive_org_code: img_data[:id],
-        note:             img_data[:comment]
-      )
-
-      io = StringIO.new(response.body)
-      release_image.file.attach(io: io, filename: img_data[:id])
+      io = fetch_image(img_metadata[:image])
+      release_image.file.attach(io: io, filename: img_metadata[:id])
       release_image.save!
     end
   end
@@ -23,7 +16,9 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def fetch_image(uri)
     import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-    CoverArtFetcher.call(import_request: import_request)
+    response = CoverArtFetcher.call(import_request: import_request)
+
+    StringIO.new(response.body)
   end
 
   def fetch_manifest
@@ -45,5 +40,14 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def release
     @release ||= Release.find_by(brainz_code: import_order.code)
+  end
+
+  def release_image_for(img_metadata)
+    release.images.create!(
+      back:             img_metadata[:back],
+      front:            img_metadata[:front],
+      archive_org_code: img_metadata[:id],
+      note:             img_metadata[:comment]
+    )
   end
 end
