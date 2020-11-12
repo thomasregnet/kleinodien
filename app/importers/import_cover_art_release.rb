@@ -9,7 +9,7 @@ class ImportCoverArtRelease < ImportCoverArtBase
       release_image = release.images.create!(
         back:             img_data[:back],
         front:            img_data[:front],
-        # archive_org_code: img_data[:id],
+        archive_org_code: img_data[:id],
         note:             img_data[:comment]
       )
 
