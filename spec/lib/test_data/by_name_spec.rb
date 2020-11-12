@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# forzen_string_literal: true
-
 require 'rails_helper'
 require 'test_data/by_name'
 

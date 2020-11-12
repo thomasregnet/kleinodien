@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# froze_string_literal: true
-
 RSpec.shared_examples 'a cache' do
   subject(:cache) { described_class.new }
 
