@@ -17,7 +17,7 @@ RSpec.describe ImportCoverArtRelease do
 
     it 'attaches the front-cover to the release' do
       release = Release.find_by(brainz_code: brainz_code)
-      expect(release.front_cover).to be_attached
+      expect(release.images.length).to be > 0
     end
   end
 end
