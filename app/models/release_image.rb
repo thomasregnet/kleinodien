@@ -2,7 +2,7 @@
 
 # An image of a Release
 class ReleaseImage < ApplicationRecord
-  include FileAttachable
+  include ImageAttachable
 
   belongs_to :release
 end

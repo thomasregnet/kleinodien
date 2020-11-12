@@ -30,7 +30,6 @@ RSpec.shared_examples 'an image' do
       it 'is valid' do
         expect(subject).to be_valid
       end
-
     end
 
     context 'when front is not true and back is true' do
@@ -42,7 +41,6 @@ RSpec.shared_examples 'an image' do
       it 'is valid' do
         expect(subject).to be_valid
       end
-
     end
 
     context 'when front and back is true' do
