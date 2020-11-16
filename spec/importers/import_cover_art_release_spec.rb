@@ -15,7 +15,7 @@ RSpec.describe ImportCoverArtRelease do
       described_class.call(import_order: import_order)
     end
 
-    it 'attaches the front-cover to the release' do
+    it 'attaches cover images to the release' do
       release = Release.find_by(brainz_code: brainz_code)
       expect(release.images.length).to be > 0
     end
