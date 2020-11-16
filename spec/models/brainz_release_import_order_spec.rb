@@ -60,5 +60,22 @@ RSpec.describe BrainzReleaseImportOrder, type: :model do
         expect(import_order.item).to be_instance_of(Release)
       end
     end
+
+    describe '#cover_art_import_order' do
+      let(:import_order) { FactoryBot.create(:brainz_release_import_order) }
+
+      before do
+        import_order.cover_art_release_import_order = FactoryBot.create(:cover_art_release_import_order)
+        import_order.save!
+      end
+
+      it 'adds an CoverArtImportOrder' do
+        expect(import_order.cover_art_release_import_order.id).not_to be_nil
+      end
+
+      it 'does not set the import_order_id' do
+        expect(import_order.import_order_id).to be_nil
+      end
+    end
   end
 end
