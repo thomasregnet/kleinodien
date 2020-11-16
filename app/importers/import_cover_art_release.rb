@@ -44,9 +44,10 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def release_image_for(img_metadata)
     release.images.create!(
+      archive_org_code: img_metadata[:id],
       back:             img_metadata[:back],
       front:            img_metadata[:front],
-      archive_org_code: img_metadata[:id],
+      import_order:     import_order,
       note:             img_metadata[:comment]
     )
   end
