@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.shared_examples 'an image' do
+  it { should belong_to(:import_order).optional }
+
   it { should respond_to(:archive_org_code) }
   it { should respond_to(:back) }
   it { should respond_to(:file) }
