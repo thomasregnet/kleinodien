@@ -24,6 +24,16 @@ services:
       - db
       - redis
 
+  cover_art_import_worker:
+    build: .
+    depends_on:
+      - db
+      - redis
+    entrypoint: config/containers/import_worker/entrypoint.sh
+    environment:
+      - IMPORT_QUEUE_NAME=coverart
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+
   brainz_import_worker:
     build: .
     depends_on:
