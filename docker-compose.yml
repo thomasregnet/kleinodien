@@ -31,7 +31,7 @@ services:
       - redis
     entrypoint: config/containers/import_worker/entrypoint.sh
     environment:
-      - IMPORT_QUEUE_NAME=coverart
+      - IMPORT_QUEUE_NAME=cover_art
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 
   brainz_import_worker:

@@ -3,6 +3,9 @@
 # Import cover art from coverartarchive.org
 class ImportCoverArtRelease < ImportCoverArtBase
   def call
+    import_order.prepare!
+    import_order.persist!
+
     manifest[:images].each do |img_metadata|
       release_image = release_image_for(img_metadata)
 
@@ -10,6 +13,8 @@ class ImportCoverArtRelease < ImportCoverArtBase
       release_image.file.attach(io: io, filename: img_metadata[:id])
       release_image.save!
     end
+
+    import_order.done!
   end
 
   private
