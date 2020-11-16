@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_080031) do
+ActiveRecord::Schema.define(version: 2020_11_16_095405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -156,7 +156,9 @@ ActiveRecord::Schema.define(version: 2020_11_16_080031) do
     t.datetime "updated_at", null: false
     t.integer "requests_count"
     t.bigint "import_queue_id"
+    t.bigint "import_order_id"
     t.index ["code", "type"], name: "index_unique_active_import_orders", unique: true, where: "(state = ANY (ARRAY['pending'::text, 'preparing'::text, 'persisting'::text]))"
+    t.index ["import_order_id"], name: "index_import_orders_on_import_order_id"
     t.index ["import_queue_id"], name: "index_import_orders_on_import_queue_id"
     t.index ["user_id"], name: "index_import_orders_on_user_id"
   end
@@ -630,6 +632,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_080031) do
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "companies", "areas"
   add_foreign_key "companies", "import_orders"
+  add_foreign_key "import_orders", "import_orders"
   add_foreign_key "import_orders", "import_queues"
   add_foreign_key "import_orders", "users"
   add_foreign_key "import_request_attempts", "import_requests"
