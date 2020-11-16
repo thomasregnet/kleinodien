@@ -2,6 +2,13 @@
 
 # ImportOrder for a MusicBrainz release
 class BrainzReleaseImportOrder < BrainzImportOrder
+  has_one(
+    :cover_art_release_import_order,
+    class_name:  'CoverArtReleaseImportOrder',
+    foreign_key: :import_order_id,
+    required:    false
+  )
+
   def item
     return unless done?
 

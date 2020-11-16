@@ -3,20 +3,22 @@
 # Import cover art from coverartarchive.org
 class ImportCoverArtRelease < ImportCoverArtBase
   def call
-    front_params = manifest[:images].select { |img| img[:types].include? 'Front' }.first
-    response = fetch_image(front_params[:image])
+    manifest[:images].each do |img_metadata|
+      release_image = release_image_for(img_metadata)
 
-    io = StringIO.new(response.body)
-
-    release.front_cover.attach(io: io, filename: 'foobar')
-    release.save!
+      io = fetch_image(img_metadata[:image])
+      release_image.file.attach(io: io, filename: img_metadata[:id])
+      release_image.save!
+    end
   end
 
   private
 
   def fetch_image(uri)
     import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-    CoverArtFetcher.call(import_request: import_request)
+    response = CoverArtFetcher.call(import_request: import_request)
+
+    StringIO.new(response.body)
   end
 
   def fetch_manifest
@@ -38,5 +40,15 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def release
     @release ||= Release.find_by(brainz_code: import_order.code)
+  end
+
+  def release_image_for(img_metadata)
+    release.images.create!(
+      archive_org_code: img_metadata[:id],
+      back:             img_metadata[:back],
+      front:            img_metadata[:front],
+      import_order:     import_order,
+      note:             img_metadata[:comment]
+    )
   end
 end

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'shared_examples_for_models_having_many_images'
 
 RSpec.describe Release, type: :model do
+  it_behaves_like 'a model having many images'
+
   it { should belong_to(:area).without_validating_presence }
   it { should belong_to(:artist_credit).without_validating_presence }
   it { should belong_to(:head).class_name('ReleaseHead') }
