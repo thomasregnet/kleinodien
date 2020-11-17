@@ -8,6 +8,7 @@ RSpec.describe CoverArtFetcher do
 
   describe '.call' do
     let(:attempt) { ImportRequestAttempt }
+    let(:faraday_connection) { instance_double('Faraday::Connection')}
     let(:fetcher) { described_class.new(import_request: import_request) }
     let(:import_request) { FactoryBot.create(:cover_art_release_manifest_import_request) }
     let(:response) { instance_double 'Faraday::Response' }
@@ -18,7 +19,8 @@ RSpec.describe CoverArtFetcher do
 
     context 'when there is someting to fetch' do
       before do
-        allow(Faraday).to receive(:get).and_return(response)
+        allow(fetcher).to receive(:faraday_connection).and_return(faraday_connection)
+        allow(faraday_connection).to receive(:get).and_return(response)
         allow(import_request).to receive(:attempts).and_return(attempt)
         allow(attempt).to receive(:create!)
         allow(response).to receive(:reason_phrase)
@@ -34,7 +36,8 @@ RSpec.describe CoverArtFetcher do
     context 'when there is nothing to fetch' do
       before do
         allow(fetcher).to receive(:max_tries).and_return(1)
-        allow(Faraday).to receive(:get).and_return(response)
+        allow(fetcher).to receive(:faraday_connection).and_return(faraday_connection)
+        allow(faraday_connection).to receive(:get).and_return(response)
         allow(import_request).to receive(:attempts).and_return(attempt)
         allow(attempt).to receive(:create!)
         allow(response).to receive(:reason_phrase)

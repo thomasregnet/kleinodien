@@ -35,6 +35,8 @@ class PersistBrainzRelease < PersistBrainzBase
     # add_area must be called after persist_release_events
     add_area
 
+    import_order.create_cover_art_release_import_order!(code: code, user: import_order.user)
+
     release
   end
 

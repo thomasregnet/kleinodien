@@ -24,9 +24,16 @@ class CoverArtFetcher
 
   def attempt
     Rails.logger.info("Trying to get #{uri}")
-    response = Faraday.get(uri)
+    response = faraday_connection.get(uri)
     import_request.attempts.create!(message: response.reason_phrase, status_code: response.status)
     response
+  end
+
+  def faraday_connection
+    Faraday.new do |connection|
+      connection.use FaradayMiddleware::FollowRedirects, limint: 5
+      connection.adapter Faraday.default_adapter
+    end
   end
 
   def fetch
