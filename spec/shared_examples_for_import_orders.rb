@@ -3,6 +3,16 @@
 require 'aasm/rspec'
 
 RSpec.shared_examples 'for ImportOrders' do |model|
+  describe '.model_name' do
+    it 'returns an instance of ActiveModel::Name' do
+      expect(described_class.model_name).to be_instance_of(ActiveModel::Name)
+    end
+
+    it 'returns an instance wich #name id "ImportOrder"' do
+      expect(described_class.model_name.name).to eq('ImportOrder')
+    end
+  end
+
   describe '#active?' do
     context 'when in pending state' do
       let(:import_order) { FactoryBot.build(model, state: :pending) }
