@@ -5,6 +5,8 @@ class CoverArtImageImportRequest < CoverArtImportRequest
 
   before_validation :ensure_code_has_a_value
 
+  alias_attribute :to_uri, :uri
+
   private
 
   def ensure_code_has_a_value
