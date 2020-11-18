@@ -15,56 +15,18 @@ class CoverArtFetcher
   attr_reader :import_request
 
   def call
-    import_request.run
-
-    fetch
-  end
-
-  private
-
-  def attempt
-    Rails.logger.info("Trying to get #{uri}")
-    response = faraday_connection.get(uri)
-    import_request.attempts.create!(message: response.reason_phrase, status_code: response.status)
-    response
-  end
-
-  def faraday_connection
-    Faraday.new do |connection|
-      connection.use FaradayMiddleware::FollowRedirects, limint: 5
-      connection.adapter Faraday.default_adapter
-    end
-  end
-
-  def fetch
     max_tries.times do |nap_time|
       sleep(nap_time)
-      response = attempt
-      if response.success?
-        on_success
-        return response
-      end
+      response = CoverArtFetchAttempt.call(import_request: import_request)
+      status = response.status
+      return response if status == 200
+      return nil if status == 404
     end
 
-    on_error
+    raise ImportError::CanNotFetch
   end
 
   def max_tries
     DEFAULT_MAX_TRIES
-  end
-
-  def on_error
-    Rails.logger.error("Failed to get #{uri}")
-    import_request.failure!
-    raise ImportError::CanNotFetch, "can't fetch data from #{uri}"
-  end
-
-  def on_success
-    Rails.logger.info("Succesful fetched #{uri}")
-    import_request.done!
-  end
-
-  def uri
-    import_request.uri
   end
 end
