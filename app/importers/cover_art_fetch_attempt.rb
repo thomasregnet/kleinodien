@@ -31,19 +31,27 @@ class CoverArtFetchAttempt < ServiceBase
   private
 
   def on_error
-    message = case status
-              when 400
-                "400 #{url} contains no valid UUID"
-              when 503
-                "503 #{url} User has exeted rate limit"
-              else
-                "can't fetch #{url} status #{status}"
-              end
+    raise ImportError::CanNotFetch, error_message if fatal?
 
-    raise ImportError::CanNotFetch, message if fatal?
-
-    Rails.logger.warn(message)
+    Rails.logger.warn(error_message)
   end
+
+  # rubocop:disable Metrics/MethodLength
+  def error_message
+    case status
+    when 400
+      "400 #{url} contains no valid UUID"
+    when 405
+      "405 #{url} request is not one of GET or HEAD"
+    when 406
+      "406 #{url} server is unable to generate a response suitable to the Accept header"
+    when 503
+      "503 #{url} User has exeted rate limit"
+    else
+      "can't fetch #{url} status #{status}"
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
 
   def faraday_connection
     Faraday.new do |connection|
