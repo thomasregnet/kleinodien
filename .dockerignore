@@ -1,2 +1,6 @@
 .git
 .dockerignore
+tmp
+storage
+log
+
