@@ -35,9 +35,4 @@ COPY . .
 
 RUN bundle install
 
-# config/database.yml is ignored by .dockerignore.
-# Otherwise it can't be copied.
-RUN cp config/database_docker.yml config/database.yml
-
-#CMD [ "/bin/bash" ]
 CMD [ "config/containers/app_cmd.sh" ]
