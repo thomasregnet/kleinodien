@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    ports: 
+      - 55432:5432
+  app:
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/var/www/kleinodien
+
+  cover_art_import_worker:
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/var/www/kleinodien
+
+  brainz_import_worker:
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/var/www/kleinodien
