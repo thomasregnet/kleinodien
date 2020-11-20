@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'test_data/get_empty_image'
+require 'test_data/get_empty_image_service'
 
 RSpec.describe 'releases/show', type: :view do
   describe '"Add to my collection" link' do
@@ -62,7 +62,7 @@ RSpec.describe 'releases/show', type: :view do
     let(:release_image) { release.images.create! }
 
     before do
-      release_image.file.attach(io: TestData::GetEmptyImage.as_io, filename: 'an_image')
+      release_image.file.attach(io: TestData::GetEmptyImageService.as_io, filename: 'an_image')
 
       assign(:release, release)
       allow(controller).to receive(:user_signed_in?).and_return(false)
