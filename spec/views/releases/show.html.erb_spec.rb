@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'test_data/get_empty_image_service'
 
 RSpec.describe 'releases/show', type: :view do
   describe '"Add to my collection" link' do
@@ -53,6 +54,37 @@ RSpec.describe 'releases/show', type: :view do
     it 'shows the second format (3 x LP)' do
       render
       expect(rendered).to match(/3\s+&times\s+LP/)
+    end
+  end
+
+  describe 'font cover' do
+    let(:release) { FactoryBot.create(:release) }
+    let(:release_image) { release.images.create! }
+
+    before do
+      release_image.file.attach(io: TestData::GetEmptyImageService.as_io, filename: 'an_image')
+
+      assign(:release, release)
+      allow(controller).to receive(:user_signed_in?).and_return(false)
+    end
+
+    context 'with a front cover' do
+      before do
+        release_image.front = true
+        release_image.save!
+      end
+
+      it 'shows the image' do
+        render
+        expect(rendered).to match(/<img src="http/)
+      end
+    end
+
+    context 'without a front cover' do
+      it 'shows the image' do
+        render
+        expect(rendered).not_to match(/<img src="http/)
+      end
     end
   end
 

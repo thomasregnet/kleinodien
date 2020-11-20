@@ -2,7 +2,7 @@
 
 module TestData
   # Get an empty image
-  class GetEmptyImage
+  class GetEmptyImageService
     def self.call
       PathService.call(path: 'empty.jpg')
     end
