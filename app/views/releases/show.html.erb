@@ -13,11 +13,23 @@
   </div>
 </section>
 
+<% front = @release.images.where(front: true).limit(1).first %>
+<% if front %>
 <section class="section">
   <div class="container">
-     <%= render partial: 'shared/release_info', locals: { release: @release } %>
+    <div class="columns">
+      <div class="column is-half">
+         <%= image_tag front.file %>
+      </div> 
+      <div class="column is-half">
+         <%= render partial: 'shared/release_info', locals: { release: @release } %>
+      </div>
+    </div>
   </div>
 </section>
+<% else %>
+  <%= render partial: 'shared/release_info', locals: { release: @release } %>
+<% end %>
 
 <% if user_signed_in? %>
 <section>
