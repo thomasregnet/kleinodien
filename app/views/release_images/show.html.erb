@@ -21,8 +21,12 @@
 </p>
 
 <p>
-  <strong>Archive org code:</strong>
+  <strong>archive.org code:</strong>
   <%= @release_image.archive_org_code %>
+</p>
+
+<p>
+  <%= image_tag @release_image.file %>
 </p>
 
 <%= link_to 'Edit', edit_release_image_path(@release_image) %> |
