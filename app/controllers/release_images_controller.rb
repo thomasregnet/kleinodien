@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 class ReleaseImagesController < ApplicationController
-  before_action :set_release_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_release_image, only: %i[show edit update destroy]
 
   # GET /release_images
   # GET /release_images.json
   def index
-    @release_images = ReleaseImage.all
+    @release_images = ReleaseImage.all.page params[:page]
   end
 
   # GET /release_images/1
   # GET /release_images/1.json
-  def show
-  end
+  def show; end
 
   # GET /release_images/new
   def new
@@ -18,8 +19,7 @@ class ReleaseImagesController < ApplicationController
   end
 
   # GET /release_images/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /release_images
   # POST /release_images.json
@@ -62,13 +62,14 @@ class ReleaseImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_release_image
-      @release_image = ReleaseImage.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def release_image_params
-      params.require(:release_image).permit(:front, :back, :note, :release_id, :archive_org_code)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_release_image
+    @release_image = ReleaseImage.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def release_image_params
+    params.require(:release_image).permit(:front, :back, :note, :release_id, :archive_org_code)
+  end
 end
