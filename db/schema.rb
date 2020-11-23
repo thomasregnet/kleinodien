@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_095405) do
+ActiveRecord::Schema.define(version: 2020_11_23_122242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -144,6 +144,12 @@ ActiveRecord::Schema.define(version: 2020_11_16_095405) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.bigint "coverartarchive_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "import_orders", force: :cascade do |t|
