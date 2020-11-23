@@ -7,6 +7,7 @@ module ImageAttachable
   include FileAttachable
 
   included do
+    delegate_missing_to :image
     validate :either_front_or_back
   end
 

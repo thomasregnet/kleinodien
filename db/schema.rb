@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_122242) do
+ActiveRecord::Schema.define(version: 2020_11_23_130740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -462,10 +462,11 @@ ActiveRecord::Schema.define(version: 2020_11_23_122242) do
     t.boolean "back", default: false, null: false
     t.string "note"
     t.bigint "release_id", null: false
-    t.bigint "archive_org_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "import_order_id"
+    t.bigint "image_id", null: false
+    t.index ["image_id"], name: "index_release_images_on_image_id"
     t.index ["import_order_id"], name: "index_release_images_on_import_order_id"
     t.index ["release_id"], name: "index_release_images_on_release_id"
   end
@@ -688,6 +689,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_122242) do
   add_foreign_key "release_events", "releases"
   add_foreign_key "release_heads", "artist_credits"
   add_foreign_key "release_heads", "import_orders"
+  add_foreign_key "release_images", "images"
   add_foreign_key "release_images", "import_orders"
   add_foreign_key "release_images", "releases"
   add_foreign_key "release_media", "medium_formats"

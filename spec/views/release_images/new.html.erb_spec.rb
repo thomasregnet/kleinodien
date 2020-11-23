@@ -7,7 +7,6 @@ RSpec.describe "release_images/new", type: :view do
       back: false,
       note: "MyString",
       release: nil,
-      archive_org_code: 1
     ))
   end
 
@@ -23,8 +22,6 @@ RSpec.describe "release_images/new", type: :view do
       assert_select "input[name=?]", "release_image[note]"
 
       assert_select "input[name=?]", "release_image[release_id]"
-
-      assert_select "input[name=?]", "release_image[archive_org_code]"
     end
   end
 end

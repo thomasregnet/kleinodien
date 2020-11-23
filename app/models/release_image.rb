@@ -4,6 +4,7 @@
 class ReleaseImage < ApplicationRecord
   include ImageAttachable
 
+  belongs_to :image
   belongs_to :import_order, required: false
   belongs_to :release
 end
