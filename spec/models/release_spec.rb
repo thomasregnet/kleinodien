@@ -18,8 +18,6 @@ RSpec.describe Release, type: :model do
   it { should have_many(:release_events) }
   it { should have_many(:subsets) }
 
-  it { should respond_to(:front_cover) }
-
   context 'with valid attributes' do
     let(:release) { FactoryBot.build(:release) }
 

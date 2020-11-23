@@ -14,6 +14,4 @@ class Release < ApplicationRecord
   has_many :release_companies
   has_many :release_events
   has_many :subsets, class_name: 'ReleaseSubset'
-
-  has_one_attached :front_cover
 end
