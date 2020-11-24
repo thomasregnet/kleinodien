@@ -7,7 +7,7 @@ RSpec.describe 'releases/show', type: :view do
   describe '"Add to my collection" link' do
     let(:release) { FactoryBot.build(:album) }
 
-    before { assign(:release, release)}
+    before { assign(:release, release) }
 
     context 'with an authenticated user' do
       let(:user) { FactoryBot.create(:user) }
@@ -58,8 +58,9 @@ RSpec.describe 'releases/show', type: :view do
   end
 
   describe 'font cover' do
+    let(:image) { Image.create! }
     let(:release) { FactoryBot.create(:release) }
-    let(:release_image) { release.images.create! }
+    let(:release_image) { release.images.create!(image: image) }
 
     before do
       release_image.file.attach(io: TestData::GetEmptyImageService.as_io, filename: 'an_image')
@@ -70,7 +71,7 @@ RSpec.describe 'releases/show', type: :view do
 
     context 'with a front cover' do
       before do
-        release_image.front = true
+        release_image.front_cover = true
         release_image.save!
       end
 

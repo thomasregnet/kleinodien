@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_095405) do
+ActiveRecord::Schema.define(version: 2020_11_24_185016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -144,6 +144,12 @@ ActiveRecord::Schema.define(version: 2020_11_16_095405) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.bigint "coverartarchive_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -452,14 +458,15 @@ ActiveRecord::Schema.define(version: 2020_11_16_095405) do
   end
 
   create_table "release_images", force: :cascade do |t|
-    t.boolean "front", default: false, null: false
-    t.boolean "back", default: false, null: false
+    t.boolean "front_cover", default: false, null: false
+    t.boolean "back_cover", default: false, null: false
     t.string "note"
     t.bigint "release_id", null: false
-    t.bigint "archive_org_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "import_order_id"
+    t.bigint "image_id", null: false
+    t.index ["image_id"], name: "index_release_images_on_image_id"
     t.index ["import_order_id"], name: "index_release_images_on_import_order_id"
     t.index ["release_id"], name: "index_release_images_on_release_id"
   end
@@ -682,6 +689,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_095405) do
   add_foreign_key "release_events", "releases"
   add_foreign_key "release_heads", "artist_credits"
   add_foreign_key "release_heads", "import_orders"
+  add_foreign_key "release_images", "images"
   add_foreign_key "release_images", "import_orders"
   add_foreign_key "release_images", "releases"
   add_foreign_key "release_media", "medium_formats"

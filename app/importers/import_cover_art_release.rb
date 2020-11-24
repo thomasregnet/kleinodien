@@ -6,12 +6,10 @@ class ImportCoverArtRelease < ImportCoverArtBase
     import_order.prepare!
     import_order.persist!
 
-    manifest[:images].each do |img_metadata|
-      release_image = release_image_for(img_metadata)
-
-      io = fetch_image(img_metadata[:image])
-      release_image.file.attach(io: io, filename: img_metadata[:id])
-      release_image.save!
+    if manifest
+      manifest[:images].each { |metadata| import_image(metadata) }
+    else
+      Rails.logger.info("no images for #{import_order.code}")
     end
 
     import_order.done!
@@ -39,6 +37,15 @@ class ImportCoverArtRelease < ImportCoverArtBase
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def import_image(metadata)
+    image = Image.create!(coverartarchive_code: metadata[:id])
+    release_image = release_image_for(image, metadata)
+
+    io = fetch_image(metadata[:image])
+    release_image.file.attach(io: io, filename: metadata[:id])
+    release_image.save!
+  end
+
   def manifest
     @manifest ||= fetch_manifest
   end
@@ -47,13 +54,13 @@ class ImportCoverArtRelease < ImportCoverArtBase
     @release ||= Release.find_by(brainz_code: import_order.code)
   end
 
-  def release_image_for(img_metadata)
+  def release_image_for(image, metadata)
     release.images.create!(
-      archive_org_code: img_metadata[:id],
-      back:             img_metadata[:back],
-      front:            img_metadata[:front],
-      import_order:     import_order,
-      note:             img_metadata[:comment]
+      back_cover:   metadata[:back],
+      front_cover:  metadata[:front],
+      image:        image,
+      import_order: import_order,
+      note:         metadata[:comment]
     )
   end
 end

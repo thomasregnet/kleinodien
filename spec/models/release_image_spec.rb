@@ -8,5 +8,6 @@ RSpec.describe ReleaseImage, type: :model do
 
   it_behaves_like 'an image'
 
+  it { should belong_to(:image) }
   it { should belong_to(:release) }
 end
