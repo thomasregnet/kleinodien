@@ -11,7 +11,7 @@ RSpec.shared_examples 'an image' do
   it { should respond_to(:front_cover) }
   it { should respond_to(:note) }
 
-  describe 'eigther front or back' do
+  describe 'either front or back' do
     context 'when front and back are not true' do
       before do
         subject.front_cover = false
