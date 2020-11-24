@@ -17,6 +17,10 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   private
 
+  def create_image(coverartarchive_code)
+    Image.create!(coverartarchive_code: coverartarchive_code, import_order: import_order)
+  end
+
   def fetch_image(uri)
     import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
     response = CoverArtFetcher.call(import_request: import_request)
@@ -37,8 +41,14 @@ class ImportCoverArtRelease < ImportCoverArtBase
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def find_image(coverartarchive_code)
+    Image.find_by(coverartarchive_code: coverartarchive_code)
+  end
+
   def import_image(metadata)
-    image = Image.create!(coverartarchive_code: metadata[:id], import_order: import_order)
+    coverartarchive_code = metadata[:id]
+    image = find_image(coverartarchive_code) || create_image(coverartarchive_code)
+
     release_image = release_image_for(image, metadata)
 
     io = fetch_image(metadata[:image])
