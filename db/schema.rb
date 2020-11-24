@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_185016) do
+ActiveRecord::Schema.define(version: 2020_11_24_193819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -150,6 +150,8 @@ ActiveRecord::Schema.define(version: 2020_11_24_185016) do
     t.bigint "coverartarchive_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "import_order_id"
+    t.index ["import_order_id"], name: "index_images_on_import_order_id"
   end
 
   create_table "import_orders", force: :cascade do |t|
@@ -639,6 +641,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_185016) do
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "companies", "areas"
   add_foreign_key "companies", "import_orders"
+  add_foreign_key "images", "import_orders"
   add_foreign_key "import_orders", "import_orders"
   add_foreign_key "import_orders", "import_queues"
   add_foreign_key "import_orders", "users"
