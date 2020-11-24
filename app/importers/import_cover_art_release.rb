@@ -6,7 +6,11 @@ class ImportCoverArtRelease < ImportCoverArtBase
     import_order.prepare!
     import_order.persist!
 
-    manifest[:images].each { |metadata| import_image(metadata) }
+    if manifest
+      manifest[:images].each { |metadata| import_image(metadata) }
+    else
+      Rails.logger.info("no images for #{import_order.code}")
+    end
 
     import_order.done!
   end
