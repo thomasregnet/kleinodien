@@ -33,9 +33,9 @@ class ReleaseCopy < ApplicationRecord
     return if with_release? ^ with_release_head?
 
     if with_release?
-      errors.add(:base, 'there can be eigther a Release or a ReleaseHead')
+      errors.add(:base, 'there can be either a Release or a ReleaseHead')
     else
-      errors.add(:base, 'there must be eigther a Release or a ReleaseHead')
+      errors.add(:base, 'there must be either a Release or a ReleaseHead')
     end
   end
 end

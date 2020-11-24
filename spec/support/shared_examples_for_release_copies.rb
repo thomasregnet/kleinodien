@@ -79,18 +79,18 @@ RSpec.shared_examples 'a ReleaseCopy' do
       subject.valid?
 
       expect(subject.errors.messages)
-        .to contain_exactly([:base, ['there can be eigther a Release or a ReleaseHead']])
+        .to contain_exactly([:base, ['there can be either a Release or a ReleaseHead']])
     end
   end
 
-  context 'with neigther a Release nor ReleaseHead' do
+  context 'with neither a Release nor ReleaseHead' do
     it 'is not valid' do
       subject.release      = nil
       subject.release_head = nil
       subject.valid?
 
       expect(subject.errors.messages)
-        .to contain_exactly([:base, ['there must be eigther a Release or a ReleaseHead']])
+        .to contain_exactly([:base, ['there must be either a Release or a ReleaseHead']])
     end
   end
 end
