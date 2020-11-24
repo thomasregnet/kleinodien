@@ -7,12 +7,12 @@ RSpec.describe ImportCoverArtRelease do
   it_behaves_like 'a service'
 
   context 'when a front-cover is available' do
-    let(:brainz_code) { '58e6a3d6-bbbd-4864-983b-e468a5a1a71c' }
+    let(:brainz_code) { 'b4bdc9c6-a3c0-4e50-a6f5-fe6ec5e66609' }
     let(:import_order) { FactoryBot.create(:cover_art_release_import_order, code: brainz_code) }
     let(:release) { Release.find_by(brainz_code: brainz_code) }
 
     before do
-      FactoryBot.create(:release, brainz_code: '58e6a3d6-bbbd-4864-983b-e468a5a1a71c')
+      FactoryBot.create(:release, brainz_code: 'b4bdc9c6-a3c0-4e50-a6f5-fe6ec5e66609')
       described_class.call(import_order: import_order)
     end
 
@@ -28,13 +28,13 @@ RSpec.describe ImportCoverArtRelease do
   end
 
   context 'when a front-cover already exists' do
-    let(:brainz_code) { '58e6a3d6-bbbd-4864-983b-e468a5a1a71c' }
+    let(:brainz_code) { 'b4bdc9c6-a3c0-4e50-a6f5-fe6ec5e66609' }
     let(:import_order) { FactoryBot.create(:cover_art_release_import_order, code: brainz_code) }
     let(:release) { Release.find_by(brainz_code: brainz_code) }
 
     before do
       allow(Image).to receive(:find_by).and_return(Image.new)
-      FactoryBot.create(:release, brainz_code: '58e6a3d6-bbbd-4864-983b-e468a5a1a71c')
+      FactoryBot.create(:release, brainz_code: 'b4bdc9c6-a3c0-4e50-a6f5-fe6ec5e66609')
       described_class.call(import_order: import_order)
     end
 
