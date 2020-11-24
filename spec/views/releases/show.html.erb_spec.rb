@@ -71,7 +71,7 @@ RSpec.describe 'releases/show', type: :view do
 
     context 'with a front cover' do
       before do
-        release_image.front = true
+        release_image.front_cover = true
         release_image.save!
       end
 

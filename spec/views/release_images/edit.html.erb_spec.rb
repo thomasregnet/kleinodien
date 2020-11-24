@@ -11,8 +11,8 @@ RSpec.describe 'release_images/edit', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', release_image_path(release_image), 'post' do
-      assert_select 'input[name=?]', 'release_image[front]'
-      assert_select 'input[name=?]', 'release_image[back]'
+      assert_select 'input[name=?]', 'release_image[front_cover]'
+      assert_select 'input[name=?]', 'release_image[back_cover]'
       assert_select 'input[name=?]', 'release_image[note]'
       assert_select 'input[name=?]', 'release_image[release_id]'
     end

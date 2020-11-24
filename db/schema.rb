@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_130740) do
+ActiveRecord::Schema.define(version: 2020_11_24_185016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -458,8 +458,8 @@ ActiveRecord::Schema.define(version: 2020_11_23_130740) do
   end
 
   create_table "release_images", force: :cascade do |t|
-    t.boolean "front", default: false, null: false
-    t.boolean "back", default: false, null: false
+    t.boolean "front_cover", default: false, null: false
+    t.boolean "back_cover", default: false, null: false
     t.string "note"
     t.bigint "release_id", null: false
     t.datetime "created_at", precision: 6, null: false

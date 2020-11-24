@@ -14,8 +14,8 @@ module ImageAttachable
   private
 
   def either_front_or_back
-    return unless front && back
+    return unless front_cover && back_cover
 
-    errors.add(:base, 'can be either front or back, not both')
+    errors.add(:base, 'can be either front_back or back_cover, not both')
   end
 end

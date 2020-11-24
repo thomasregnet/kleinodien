@@ -18,11 +18,11 @@
             <%= release_image.note %> 
           </p>
         <% end %>
-        <% if release_image.front? %>
-          <span class="tag is-primary">front</span>
+        <% if release_image.front_cover? %>
+          <span class="tag is-primary">front cover</span>
         <% end %>
-        <% if release_image.back? %>
-          <span class="tag is-primary">back</span>
+        <% if release_image.back_cover? %>
+          <span class="tag is-primary">back cover</span>
         <% end %>
         <% if release_image.coverartarchive_code %>
           <div class="control">

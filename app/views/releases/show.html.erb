@@ -13,7 +13,7 @@
   </div>
 </section>
 
-<% front = @release.images.where(front: true).limit(1).first %>
+<% front = @release.images.where(front_cover: true).limit(1).first %>
 <% if front %>
 <section class="section">
   <div class="container">

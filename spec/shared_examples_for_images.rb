@@ -6,16 +6,16 @@ RSpec.shared_examples 'an image' do
   it { should belong_to(:import_order).optional }
 
   it { should respond_to(:coverartarchive_code) }
-  it { should respond_to(:back) }
+  it { should respond_to(:back_cover) }
   it { should respond_to(:file) }
-  it { should respond_to(:front) }
+  it { should respond_to(:front_cover) }
   it { should respond_to(:note) }
 
   describe 'eigther front or back' do
     context 'when front and back are not true' do
       before do
-        subject.front = false
-        subject.back = false
+        subject.front_cover = false
+        subject.back_cover = false
       end
 
       it 'is valid' do
@@ -25,8 +25,8 @@ RSpec.shared_examples 'an image' do
 
     context 'when front is true and back is not true' do
       before do
-        subject.front = true
-        subject.back = false
+        subject.front_cover = true
+        subject.back_cover = false
       end
 
       it 'is valid' do
@@ -36,8 +36,8 @@ RSpec.shared_examples 'an image' do
 
     context 'when front is not true and back is true' do
       before do
-        subject.front = false
-        subject.back = true
+        subject.front_cover = false
+        subject.back_cover = true
       end
 
       it 'is valid' do
@@ -47,8 +47,8 @@ RSpec.shared_examples 'an image' do
 
     context 'when front and back is true' do
       before do
-        subject.front = true
-        subject.back = true
+        subject.front_cover = true
+        subject.back_cover = true
       end
 
       it 'is not valid' do

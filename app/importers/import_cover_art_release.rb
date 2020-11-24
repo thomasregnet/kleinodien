@@ -56,8 +56,8 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def release_image_for(image, metadata)
     release.images.create!(
-      back:         metadata[:back],
-      front:        metadata[:front],
+      back_cover:   metadata[:back],
+      front_cover:  metadata[:front],
       image:        image,
       import_order: import_order,
       note:         metadata[:comment]
