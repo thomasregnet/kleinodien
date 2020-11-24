@@ -38,7 +38,7 @@ class ImportCoverArtRelease < ImportCoverArtBase
   end
 
   def import_image(metadata)
-    image = Image.create!(coverartarchive_code: metadata[:id])
+    image = Image.create!(coverartarchive_code: metadata[:id], import_order: import_order)
     release_image = release_image_for(image, metadata)
 
     io = fetch_image(metadata[:image])
