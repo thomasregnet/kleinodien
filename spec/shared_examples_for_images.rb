@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.shared_examples 'an image' do
   it { should belong_to(:import_order).optional }
   
-  it { should have_and_belong_to_many(:image_tags) }
+  it { should have_and_belong_to_many(:tags) }
   it { should respond_to(:coverartarchive_code) }
   it { should respond_to(:back_cover) }
   it { should respond_to(:file) }
