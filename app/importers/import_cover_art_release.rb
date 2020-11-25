@@ -17,8 +17,8 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   private
 
-  def create_image(coverartarchive_code)
-    Image.create!(coverartarchive_code: coverartarchive_code, import_order: import_order)
+  def create_image(metadata)
+    Image.create!(coverartarchive_code: metadata[:id], import_order: import_order)
   end
 
   def fetch_image(uri)
@@ -47,7 +47,7 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def import_image(metadata)
     coverartarchive_code = metadata[:id]
-    image = find_image(coverartarchive_code) || create_image(coverartarchive_code)
+    image = find_image(coverartarchive_code) || create_image(metadata)
 
     release_image = release_image_for(image, metadata)
 
@@ -65,12 +65,20 @@ class ImportCoverArtRelease < ImportCoverArtBase
   end
 
   def release_image_for(image, metadata)
-    release.images.create!(
+    release_image = release.images.create!(
       back_cover:   metadata[:back],
       front_cover:  metadata[:front],
       image:        image,
       import_order: import_order,
       note:         metadata[:comment]
     )
+
+    return release_image unless metadata[:types]
+
+    metadata[:types].each do |type|
+      release_image.tags.find_or_create_by(name: type)
+    end
+
+    release_image
   end
 end

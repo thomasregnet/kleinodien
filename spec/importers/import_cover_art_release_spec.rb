@@ -26,6 +26,16 @@ RSpec.describe ImportCoverArtRelease do
           expect(release_image.import_order).to be_instance_of(CoverArtReleaseImportOrder)
         end
       end
+
+      it 'saves the coverartarchive types as tags' do
+        image = release.images.first
+        expect(image.tags.length).to eq(1)
+      end
+
+      it 'saves the expected tags' do
+        image = release.images.first
+        expect(image.tags.first.name).to eq('Front')
+      end
     end
 
     context 'with an image that exists in the database' do
