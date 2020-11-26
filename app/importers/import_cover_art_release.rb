@@ -17,17 +17,6 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   private
 
-  def create_image(metadata)
-    Image.create!(coverartarchive_code: metadata[:id], import_order: import_order)
-  end
-
-  def fetch_image(uri)
-    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-    response = CoverArtFetcher.call(import_request: import_request)
-
-    StringIO.new(response.body)
-  end
-
   def fetch_manifest
     import_request = CoverArtReleaseManifestImportRequest.create!(
       code:         import_order.code,
@@ -41,19 +30,9 @@ class ImportCoverArtRelease < ImportCoverArtBase
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def find_image(coverartarchive_code)
-    Image.find_by(coverartarchive_code: coverartarchive_code)
-  end
-
   def import_image(metadata)
-    coverartarchive_code = metadata[:id]
-    image = find_image(coverartarchive_code) || create_image(metadata)
-
-    release_image = release_image_for(image, metadata)
-
-    io = fetch_image(metadata[:image])
-    release_image.file.attach(io: io, filename: metadata[:id])
-    release_image.save!
+    release_image = release.images.build
+    ImportCoverArtImage.call(import_order: import_order, metadata: metadata, target_object: release_image)
   end
 
   def manifest
@@ -62,23 +41,5 @@ class ImportCoverArtRelease < ImportCoverArtBase
 
   def release
     @release ||= Release.find_by(brainz_code: import_order.code)
-  end
-
-  def release_image_for(image, metadata)
-    release_image = release.images.create!(
-      back_cover:   metadata[:back],
-      front_cover:  metadata[:front],
-      image:        image,
-      import_order: import_order,
-      note:         metadata[:comment]
-    )
-
-    return release_image unless metadata[:types]
-
-    metadata[:types].each do |type|
-      release_image.tags.find_or_create_by(name: type)
-    end
-
-    release_image
   end
 end
