@@ -1,0 +1,10 @@
+// "Code Spell Checker" settings
+// https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+{
+    "version": "0.1",
+    "words": [
+        "brainz",
+        "persistable",
+        "prepareable"
+    ]
+}
