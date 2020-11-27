@@ -6,11 +6,7 @@ class ImportCoverArtRelease < ImportCoverArtBase
     import_order.prepare!
     import_order.persist!
 
-    if manifest
-      manifest[:images].each { |metadata| import_image(metadata) }
-    else
-      Rails.logger.info("no images for #{import_order.code}")
-    end
+    super
 
     import_order.done!
   end
@@ -25,11 +21,21 @@ class ImportCoverArtRelease < ImportCoverArtBase
                 .any?
   end
 
-  def prepare
+  def persist
+    if manifest
+      manifest[:images].each { |metadata| import_image(metadata) }
+    else
+      Rails.logger.info("no images for #{import_order.code}")
+    end
+  end
 
+  def prepare
+    @manifest = fetch_manifest
   end
 
   private
+
+  attr_reader :manifest
 
   def brainz_code
     import_order.code
@@ -51,10 +57,6 @@ class ImportCoverArtRelease < ImportCoverArtBase
   def import_image(metadata)
     release_image = release.images.build
     ImportCoverArtImage.call(import_order: import_order, metadata: metadata, target_object: release_image)
-  end
-
-  def manifest
-    @manifest ||= fetch_manifest
   end
 
   def release
