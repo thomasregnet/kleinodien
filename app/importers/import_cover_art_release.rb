@@ -15,7 +15,25 @@ class ImportCoverArtRelease < ImportCoverArtBase
     import_order.done!
   end
 
+  # Find at least one front_cover image of the release that was imported
+  # form coverartarchive.org
+  def find_existing
+    ReleaseImage.joins(:image, :release)
+                .where(releases: { brainz_code: brainz_code })
+                .where(release_images: { front_cover: [true] })
+                .where.not(images: { coverartarchive_code: [nil] })
+                .any?
+  end
+
+  def prepare
+
+  end
+
   private
+
+  def brainz_code
+    import_order.code
+  end
 
   def fetch_manifest
     import_request = CoverArtReleaseManifestImportRequest.create!(
