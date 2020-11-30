@@ -24,7 +24,6 @@ class ImportCoverArtImage < ImportCoverArtBase
 
     target_object.save!
 
-    # tags.each { |tag| target_object.tags.find_or_create_by(name: tag) }
     add_tags
 
     target_object.save!
@@ -40,9 +39,11 @@ class ImportCoverArtImage < ImportCoverArtBase
   private
 
   def add_tags
+    # note that kleinodien uses the coverartarchive.org "types" as "tags"
+    tags = metadata[:types] || return
+
     tags.each do |tag_name|
-      tag = ImageTag.where('LOWER(name) = ?', tag_name.downcase).first || ImageTag.create(name: tag_name)
-      target_object.tags << tag
+      target_object.tags << ImageTag.find_or_create_by_name(tag_name)
     end
   end
 
@@ -70,10 +71,5 @@ class ImportCoverArtImage < ImportCoverArtBase
 
   def import_request
     CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-  end
-
-  # note that kleinodien uses the coverartarchive.org "types" as "tags"
-  def tags
-    metadata[:types] || []
   end
 end
