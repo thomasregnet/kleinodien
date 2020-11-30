@@ -6,26 +6,39 @@ class ImportCoverArtRelease < ImportCoverArtBase
     import_order.prepare!
     import_order.persist!
 
+    super
+
+    import_order.done!
+  end
+
+  # Find at least one front_cover image of the release that was imported
+  # form coverartarchive.org
+  def find_existing
+    ReleaseImage.joins(:image, :release)
+                .where(releases: { brainz_code: brainz_code })
+                .where(release_images: { front_cover: [true] })
+                .where.not(images: { coverartarchive_code: [nil] })
+                .any?
+  end
+
+  def persist
     if manifest
       manifest[:images].each { |metadata| import_image(metadata) }
     else
       Rails.logger.info("no images for #{import_order.code}")
     end
+  end
 
-    import_order.done!
+  def prepare
+    @manifest = fetch_manifest
   end
 
   private
 
-  def create_image(coverartarchive_code)
-    Image.create!(coverartarchive_code: coverartarchive_code, import_order: import_order)
-  end
+  attr_reader :manifest
 
-  def fetch_image(uri)
-    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
-    response = CoverArtFetcher.call(import_request: import_request)
-
-    StringIO.new(response.body)
+  def brainz_code
+    import_order.code
   end
 
   def fetch_manifest
@@ -41,36 +54,12 @@ class ImportCoverArtRelease < ImportCoverArtBase
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def find_image(coverartarchive_code)
-    Image.find_by(coverartarchive_code: coverartarchive_code)
-  end
-
   def import_image(metadata)
-    coverartarchive_code = metadata[:id]
-    image = find_image(coverartarchive_code) || create_image(coverartarchive_code)
-
-    release_image = release_image_for(image, metadata)
-
-    io = fetch_image(metadata[:image])
-    release_image.file.attach(io: io, filename: metadata[:id])
-    release_image.save!
-  end
-
-  def manifest
-    @manifest ||= fetch_manifest
+    release_image = release.images.build
+    ImportCoverArtImage.call(import_order: import_order, metadata: metadata, target_object: release_image)
   end
 
   def release
     @release ||= Release.find_by(brainz_code: import_order.code)
-  end
-
-  def release_image_for(image, metadata)
-    release.images.create!(
-      back_cover:   metadata[:back],
-      front_cover:  metadata[:front],
-      image:        image,
-      import_order: import_order,
-      note:         metadata[:comment]
-    )
   end
 end

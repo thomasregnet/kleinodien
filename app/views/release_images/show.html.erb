@@ -26,8 +26,14 @@
 </p>
 
 <p>
-  <%= image_tag @release_image.file %>
+  <%= image_tag @release_image.image.file %>
 </p>
+
+<% if @release_image.tags.any? %>
+<p>
+  <%= @release_image.tag_names.join(', ')%>
+</p>
+<% end %>
 
 <%= link_to 'Edit', edit_release_image_path(@release_image) %> |
 <%= link_to 'Back', release_images_path %>

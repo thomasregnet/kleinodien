@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_193819) do
+ActiveRecord::Schema.define(version: 2020_11_25_192432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -144,6 +144,19 @@ ActiveRecord::Schema.define(version: 2020_11_24_193819) do
     t.text "abbr"
     t.index "lower(name)", name: "formats_lower_idx", unique: true
     t.index ["abbr"], name: "formats_abbr_key", unique: true
+  end
+
+  create_table "image_tags", force: :cascade do |t|
+    t.text "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "image_tags_release_images", id: false, force: :cascade do |t|
+    t.bigint "image_tag_id", null: false
+    t.bigint "release_image_id", null: false
+    t.index ["image_tag_id"], name: "index_image_tags_release_images_on_image_tag_id"
+    t.index ["release_image_id"], name: "index_image_tags_release_images_on_release_image_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -641,6 +654,8 @@ ActiveRecord::Schema.define(version: 2020_11_24_193819) do
   add_foreign_key "artists_tags", "tags"
   add_foreign_key "companies", "areas"
   add_foreign_key "companies", "import_orders"
+  add_foreign_key "image_tags_release_images", "image_tags"
+  add_foreign_key "image_tags_release_images", "release_images"
   add_foreign_key "images", "import_orders"
   add_foreign_key "import_orders", "import_orders"
   add_foreign_key "import_orders", "import_queues"
