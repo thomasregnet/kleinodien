@@ -17,6 +17,7 @@ class CoverArtFetcher
   def call
     max_tries.times do |nap_time|
       sleep(nap_time)
+      Rails.logger.info("trying to fetch image form #{import_request.uri}")
       response = CoverArtFetchAttempt.call(import_request: import_request)
       status = response.status
       return response if status == 200

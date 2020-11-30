@@ -63,7 +63,7 @@ RSpec.describe 'releases/show', type: :view do
     let(:release_image) { release.images.create!(image: image) }
 
     before do
-      release_image.file.attach(io: TestData::GetEmptyImageService.as_io, filename: 'an_image')
+      image.file.attach(io: TestData::GetEmptyImageService.as_io, filename: 'an_image')
 
       assign(:release, release)
       allow(controller).to receive(:user_signed_in?).and_return(false)

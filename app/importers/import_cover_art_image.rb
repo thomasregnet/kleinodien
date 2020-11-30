@@ -24,7 +24,10 @@ class ImportCoverArtImage < ImportCoverArtBase
 
     target_object.save!
 
-    tags.each { |tag| target_object.tags.find_or_create_by(name: tag) }
+    # tags.each { |tag| target_object.tags.find_or_create_by(name: tag) }
+    add_tags
+
+    target_object.save!
 
     target_object
   end
@@ -36,9 +39,18 @@ class ImportCoverArtImage < ImportCoverArtBase
 
   private
 
+  def add_tags
+    tags.each do |tag_name|
+      tag = ImageTag.where('LOWER(name) = ?', tag_name.downcase).first || ImageTag.create(name: tag_name)
+      target_object.tags << tag
+    end
+  end
+
   def create_image
     image = Image.create!(coverartarchive_code: metadata[:id], import_order: import_order)
     image.file.attach(io: image_io, filename: "coverartarchiveorg_#{metadata[:id]}")
+
+    image.save!
 
     image
   end

@@ -6,6 +6,37 @@ require 'shared_examples_for_services'
 RSpec.describe ImportCoverArtImage do
   it_behaves_like 'a service'
 
+  context 'with tags' do
+    let(:import_order) { FactoryBot.create(:import_order, code: '58bf252a-30b2-11eb-985d-08606e75dc17') }
+    let(:importer) do
+      described_class.new(
+        import_order:  import_order,
+        metadata:      metadata,
+        target_object: target_object
+      )
+    end
+    let(:metadata) do
+      {
+        back:  false,
+        front: false,
+        id:    123,
+        image: 'https://coverartarchive.org/release/58bf252a-30b2-11eb-985d-08606e75dc17/123',
+        types: tags
+      }
+    end
+    let(:tags) { %w[existing_tag another_tag] }
+    let(:target_object) { FactoryBot.build(:release_image) }
+
+    before do
+      ImageTag.create!(name: 'Existing_Tag')
+      importer.call
+    end
+
+    it 'sets the tags' do
+      expect(target_object.tags.map { |tag| tag.name }).to eq(%w[Existing_Tag another_tag])
+    end
+  end
+
   describe '#find_existing' do
     let(:id) { 123 }
     let(:importer) do
