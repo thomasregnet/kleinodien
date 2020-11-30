@@ -101,15 +101,28 @@ RSpec.describe ImportCoverArtImage do
       )
     end
 
-    before do
-      response = instance_double('Faraday::Response')
-      allow(CoverArtImageImportRequest).to receive(:create!)
-      allow(CoverArtFetcher).to receive(:call).and_return(response)
-      allow(response).to receive(:body).and_return('fake image')
+    context 'when the image can be fetched' do
+      before do
+        response = instance_double('Faraday::Response')
+        allow(CoverArtImageImportRequest).to receive(:create!)
+        allow(CoverArtFetcher).to receive(:call).and_return(response)
+        allow(response).to receive(:body).and_return('fake image')
+      end
+
+      it 'returns an StringIO object' do
+        expect(importer.prepare).to be_instance_of(StringIO)
+      end
     end
 
-    it 'returns an StringIO object' do
-      expect(importer.prepare).to be_instance_of(StringIO)
+    context 'when an ImportError::CanNotFetch is thrown by the fetcher' do
+      before do
+        allow(CoverArtImageImportRequest).to receive(:create!)
+        allow(CoverArtFetcher).to receive(:call).and_raise(ImportError::CanNotFetch)
+      end
+
+      it 'returns nil' do
+        expect(importer.prepare).to be(nil)
+      end
     end
   end
 end

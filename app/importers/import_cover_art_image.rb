@@ -33,10 +33,14 @@ class ImportCoverArtImage < ImportCoverArtBase
   # rubocop:enable Metrics/AbcSize
 
   def prepare
-    image_io
+    body = fetch_image || return
+
+    @image_io = StringIO.new(body)
   end
 
   private
+
+  attr_reader :image_io
 
   def add_tags
     # note that kleinodien uses the coverartarchive.org "types" as "tags"
@@ -57,19 +61,17 @@ class ImportCoverArtImage < ImportCoverArtBase
   end
 
   def fetch_image
-    import_request = CoverArtImageImportRequest.create!(import_order: import_order, uri: metadata[:image])
     CoverArtFetcher.call(import_request: import_request).body
+  rescue ImportError::CanNotFetch => e
+    Rails.logger.error(e)
+    nil
   end
 
   def image
     @image ||= create_image
   end
 
-  def image_io
-    @image_io ||= StringIO.new(fetch_image)
-  end
-
   def import_request
-    CoverArtImageImportRequest.create!(import_order: import_order, uri: uri)
+    CoverArtImageImportRequest.create!(import_order: import_order, uri: metadata[:image])
   end
 end
