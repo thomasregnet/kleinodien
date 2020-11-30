@@ -3,40 +3,30 @@
 require 'fake_music_brainz'
 require 'webmock'
 
-# rubocop:disable Metrics/BlockLength
 namespace :db do
   desc 'fill the database with sample data'
   task populate: :environment do
-    include WebMock::API
-    WebMock.enable!
-    WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
-
     password = 'topSecret'
 
     user = User.create!(
       email:                 'user@example.com',
+      importer:              true,
       password:              password,
       password_confirmation: password
     )
 
-    import_orders = []
-    import_orders << BrainzReleaseImportOrder.create!(
+    BrainzReleaseImportOrder.create!(
       code:  '7452f8c9-f9bc-3ca7-859e-3220e57e4e4a', # Sepultura - Arise
       state: 'pending',
       user:  user
     )
 
-    import_orders << BrainzReleaseImportOrder.create!(
+    BrainzReleaseImportOrder.create!(
       # Iron Maiden - Powerslave
       code:  '58e6a3d6-bbbd-4864-983b-e468a5a1a71c',
       state: 'pending',
       user:  user
     )
-
-    WebMock.stub_request(:any, /musicbrainz.org/).to_rack(FakeMusicBrainz)
-    import_orders.each do |import_order|
-      BrainzImporter.call(import_order: import_order)
-    end
 
     # TODO: use this if you need to populate users
     # 99.times do
@@ -48,4 +38,3 @@ namespace :db do
     # end
   end
 end
-# rubocop:enable Metrics/BlockLength
