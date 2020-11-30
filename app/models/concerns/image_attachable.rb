@@ -11,6 +11,11 @@ module ImageAttachable
     validate :either_front_or_back
   end
 
+  # delegate_missing_to seems not to work proper wit file so we implement it "by hand"
+  def file
+    image&.file
+  end
+
   private
 
   def either_front_or_back

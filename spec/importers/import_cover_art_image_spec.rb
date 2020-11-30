@@ -33,7 +33,7 @@ RSpec.describe ImportCoverArtImage do
     end
 
     it 'sets the tags' do
-      expect(target_object.tags.map { |tag| tag.name }).to eq(%w[Existing_Tag another_tag])
+      expect(target_object.tags.map(&:name)).to eq(%w[Existing_Tag another_tag])
     end
   end
 

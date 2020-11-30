@@ -9,4 +9,10 @@ class ReleaseImage < ApplicationRecord
   belongs_to :release
 
   has_and_belongs_to_many :tags, class_name: 'ImageTag'
+
+  def tag_names
+    return unless tags.any?
+
+    tags.map(&:name)
+  end
 end
