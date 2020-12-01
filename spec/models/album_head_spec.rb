@@ -9,7 +9,6 @@ RSpec.describe AlbumHead, type: :model do
   end
 
   it 'is not valid without an artist_credit' do
-    # @album_head.artist_credit = nil
     album_head = FactoryBot.build(:album_head, artist_credit: nil)
     expect(album_head).not_to be_valid
   end
