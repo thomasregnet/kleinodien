@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @release_head.title %>
+</p>
+
+<p>
+  <strong>Disambiguation:</strong>
+  <%= @release_head.disambiguation %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @release_head.type %>
+</p>
+
+<p>
+  <strong>Brainz code:</strong>
+  <%= @release_head.brainz_code %>
+</p>
+
+<p>
+  <strong>Imdb code:</strong>
+  <%= @release_head.imdb_code %>
+</p>
+
+<p>
+  <strong>Tmdb code:</strong>
+  <%= @release_head.tmdb_code %>
+</p>
+
+<p>
+  <strong>Wikidata code:</strong>
+  <%= @release_head.wikidata_code %>
+</p>
+
+<p>
+  <strong>Artist credit:</strong>
+  <%= @release_head.artist_credit_id %>
+</p>
+
+<p>
+  <strong>Import order:</strong>
+  <%= @release_head.import_order_id %>
+</p>
+
+<%= link_to 'Edit', edit_release_head_path(@release_head) %> |
+<%= link_to 'Back', release_heads_path %>

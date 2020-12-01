@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  resources :release_heads
   resources :images
   resources :release_images
   resources :release_copies

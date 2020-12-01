@@ -1,0 +1,62 @@
+<%= form_with(model: release_head, local: true) do |form| %>
+  <% if release_head.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(release_head.errors.count, "error") %> prohibited this release_head from being saved:</h2>
+
+      <ul>
+        <% release_head.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_area :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disambiguation %>
+    <%= form.text_area :disambiguation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_area :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brainz_code %>
+    <%= form.text_field :brainz_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :imdb_code %>
+    <%= form.number_field :imdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tmdb_code %>
+    <%= form.number_field :tmdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wikidata_code %>
+    <%= form.number_field :wikidata_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artist_credit_id %>
+    <%= form.text_field :artist_credit_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :import_order_id %>
+    <%= form.text_field :import_order_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
