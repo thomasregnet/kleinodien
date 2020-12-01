@@ -7,6 +7,7 @@ RSpec.describe ReleaseHead, type: :model do
 
   it { should belong_to(:artist_credit).without_validating_presence }
   it { should belong_to(:import_order).without_validating_presence }
+  it { should have_many(:releases) }
 
   describe '#title' do
     let(:head) { FactoryBot.build(:release_head) }
