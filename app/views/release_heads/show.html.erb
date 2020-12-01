@@ -58,9 +58,19 @@
         </p>  
       </figure>
       <div class="media-content">
-        <p>
-          <%= link_to release.title, release %></li>
-        </p>
+        <div class="content">
+          <p>
+            <%= link_to release.title, release %>
+            <% if release.area %>
+              <%= release.area.name %>
+            <% end %>
+            <% if release.media %>
+              <% release.media.each do |medium| %>
+                <%= medium.quantity %> &times <%= medium.format.name %>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
       </div>
     </artice>
   <% end %>
