@@ -45,5 +45,25 @@
   <%= @release_head.import_order_id %>
 </p>
 
+<section>
+  releases:
+  <% @release_head.releases.each do |release| %>
+    <artice class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <% front = release.images.where(front_cover: true).limit(1).first %>
+          <% if front%>
+            <%= image_tag front.image.file %>
+          <% end %>
+        </p>  
+      </figure>
+      <div class="media-content">
+        <p>
+          <%= link_to release.title, release %></li>
+        </p>
+      </div>
+    </artice>
+  <% end %>
+</section>
 <%= link_to 'Edit', edit_release_head_path(@release_head) %> |
 <%= link_to 'Back', release_heads_path %>
