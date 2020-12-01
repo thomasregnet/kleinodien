@@ -37,6 +37,19 @@ Rails.application.routes.draw do
     only:       %i[index show]
   )
 
+  resources(
+    :album_heads,
+    controller: 'release_heads',
+    type:       'AlbumHead',
+    only:       %i[index show]
+  )
+  resources(
+    :single_heads,
+    controller: 'release_heads',
+    type:       'SingleHead',
+    only:       %i[index show]
+  )
+
   resources :movie_heads, only: %i[index show]
 
   get 'pages/index'
