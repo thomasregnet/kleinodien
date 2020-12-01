@@ -26,4 +26,21 @@ RSpec.describe 'release_heads/show', type: :view do
     expect(rendered).to match(/333/)
     expect(rendered).to match(/444/)
   end
+
+  context 'with two releases' do
+    before do
+      release_head = FactoryBot.create(:release_head)
+      release_head.releases.create!(title: 'first release')
+      release_head.releases.create!(title: 'second release')
+
+      assign(:release_head, release_head)
+    end
+
+    it 'shows the two releases' do
+      render
+
+      expect(rendered).to match(/first release/)
+      expect(rendered).to match(/second release/)
+    end
+  end
 end
