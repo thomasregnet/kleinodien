@@ -8,7 +8,11 @@ class PrepareBase < PersistPrepareBase
     prepare
   rescue StandardError => e
     Rails.logger.error(e)
-    import_order.failure!
+    import_order.failure! unless import_order.failed?
     raise
+  end
+
+  def prepare
+    raise NoMethodError
   end
 end
