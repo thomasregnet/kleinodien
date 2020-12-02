@@ -2,6 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  resources :release_heads
   resources :images
   resources :release_images
   resources :release_copies
@@ -33,6 +34,19 @@ Rails.application.routes.draw do
     :singles,
     controller: 'releases',
     type:       'Single',
+    only:       %i[index show]
+  )
+
+  resources(
+    :album_heads,
+    controller: 'release_heads',
+    type:       'AlbumHead',
+    only:       %i[index show]
+  )
+  resources(
+    :single_heads,
+    controller: 'release_heads',
+    type:       'SingleHead',
     only:       %i[index show]
   )
 

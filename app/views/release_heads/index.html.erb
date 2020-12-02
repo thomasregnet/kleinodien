@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Release Heads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Disambiguation</th>
+      <th>Type</th>
+      <th>Brainz code</th>
+      <th>Imdb code</th>
+      <th>Tmdb code</th>
+      <th>Wikidata code</th>
+      <th>Artist credit</th>
+      <th>Import order</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @release_heads.each do |release_head| %>
+      <tr>
+        <td><%= release_head.title %></td>
+        <td><%= release_head.disambiguation %></td>
+        <td><%= release_head.type %></td>
+        <td><%= release_head.brainz_code %></td>
+        <td><%= release_head.imdb_code %></td>
+        <td><%= release_head.tmdb_code %></td>
+        <td><%= release_head.wikidata_code %></td>
+        <td><%= release_head.artist_credit_id %></td>
+        <td><%= release_head.import_order_id %></td>
+        <td><%= link_to 'Show', release_head %></td>
+        <td><%= link_to 'Edit', edit_release_head_path(release_head) %></td>
+        <td><%= link_to 'Destroy', release_head, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Release Head', new_release_head_path %>
