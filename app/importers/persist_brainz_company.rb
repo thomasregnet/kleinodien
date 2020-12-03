@@ -16,6 +16,12 @@ class PersistBrainzCompany < PersistBrainzBase
 
   private
 
+  def area
+    return unless blueprint.area
+
+    @area ||= persist_area(code: blueprint.area.brainz_code, name: blueprint.area.name)
+  end
+
   def blueprint
     @blueprint ||= proxy.get(:label, code)
   end
@@ -25,13 +31,8 @@ class PersistBrainzCompany < PersistBrainzBase
   end
 
   def persist
-    company.area = persist_area(code: blueprint.area.brainz_code, name: blueprint.area.name)
-    company.save!
-    company
-  end
-
-  def company
-    @company ||= Company.create!(
+    Company.create!(
+      area:         area,
       brainz_code:  blueprint.brainz_code,
       import_order: import_order,
       name:         blueprint.name,

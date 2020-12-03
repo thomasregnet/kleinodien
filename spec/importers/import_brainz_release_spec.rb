@@ -37,4 +37,14 @@ RSpec.describe ImportBrainzRelease do
         .to be false
     end
   end
+
+  context 'when importing "Walls of Jericho"' do
+    let(:import_order) do
+      FactoryBot.create(:brainz_release_import_order, code: 'a97ff185-7acc-3382-bbe1-0155ab3caab0')
+    end
+
+    it 'returns the imported release' do
+      expect(described_class.call(import_order: import_order)).to be_instance_of(Album)
+    end
+  end
 end

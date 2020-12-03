@@ -19,7 +19,7 @@ class ImportBase < ServiceBase
   private
 
   def persist
-    Rails.logger.info("Persisting ImprtOrder #{import_order}")
+    Rails.logger.info("Persisting ImportOrder #{import_order}")
     persisted_entity = PersistImportService.call(
       code:         import_order.code,
       import_order: import_order,

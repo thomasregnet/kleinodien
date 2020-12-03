@@ -20,7 +20,9 @@ class PrepareBrainzLabel < PrepareBrainzBase
       codes_hash:  blueprint.codes_hash
     )
 
-    prepare_area(stub: blueprint.area)
+    area_blueprint = blueprint.area || return
+
+    prepare_area(stub: area_blueprint)
   end
 
   def blueprint
