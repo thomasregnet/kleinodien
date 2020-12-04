@@ -38,6 +38,16 @@ RSpec.describe ImportBrainzRelease do
     end
   end
 
+  context 'when importing "Eaten Back to Life"' do
+    let(:import_order) do
+      FactoryBot.create(:brainz_release_import_order, code: 'ebcfbbf1-0625-4a29-8c06-320755277e6d')
+    end
+
+    it 'returns the imported release' do
+      expect(described_class.call(import_order: import_order)).to be_instance_of(Album)
+    end
+  end
+
   context 'when importing "Walls of Jericho"' do
     let(:import_order) do
       FactoryBot.create(:brainz_release_import_order, code: 'a97ff185-7acc-3382-bbe1-0155ab3caab0')

@@ -27,8 +27,10 @@ class PersistBrainzReleaseCompany < PersistBrainzBase
   end
 
   def release_catalog_number
-    ReleaseCatalogNumber.create!(
-      code:            blueprint.catalog_number,
+    catalog_number = blueprint.catalog_number || return
+
+    ReleaseCatalogNumber.new(
+      code:            catalog_number,
       release_company: release_company
     )
   end
