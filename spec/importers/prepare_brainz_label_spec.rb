@@ -3,6 +3,7 @@
 require 'fake_proxy'
 require 'mock_import_order'
 require 'rails_helper'
+require 'test_data'
 
 RSpec.describe PrepareBrainzLabel do
   def brainz_code
@@ -61,6 +62,23 @@ RSpec.describe PrepareBrainzLabel do
       described_class.call(args)
 
       expect(proxy).to be_called_get
+    end
+  end
+
+  context 'when the company has no area' do
+    let(:preparer) do
+      described_class.new(
+        import_order: MockImportOrder.new,
+        proxy:        FakeProxy.new,
+        stub:         TestData.by_name(:brainz_label_noise).blueprint
+      )
+    end
+
+    it 'does not call PrepareBrainzArea' do
+      prepare_brainz_area = class_spy(PrepareBrainzArea)
+      stub_const('PrepareBrainzArea', prepare_brainz_area)
+      preparer.call
+      expect(prepare_brainz_area).not_to have_received(:call)
     end
   end
 end

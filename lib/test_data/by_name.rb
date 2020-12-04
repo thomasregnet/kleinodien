@@ -55,6 +55,13 @@ module TestData
           kind: :label
         }
       },
+      brainz_label_noise: {
+        class_name: 'TestData::BrainzService',
+        arguments: {
+           code: 'f83683d7-15d7-4f87-9b1d-d3870d64ec16',
+           kind: :label
+        }
+      },
       brainz_recording_arise:                  {
         class_name: 'TestData::BrainzService',
         arguments:  {
