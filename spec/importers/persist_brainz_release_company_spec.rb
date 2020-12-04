@@ -40,5 +40,47 @@ RSpec.describe PersistBrainzReleaseCompany do
       expect(@company.area.name).to eq('San Francisco')
     end
     # rubocop:enable RSpec/InstanceVariable
+
+    context 'with a catalog_number' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_release_eaten_back_to_life)
+                .blueprint
+                .label_infos[0]
+      end
+
+      let(:release_company) do
+        described_class.call(
+          blueprint:    blueprint,
+          import_order: FactoryBot.create(:brainz_release_import_order),
+          proxy:        FakeProxy.new,
+          release:      FactoryBot.create(:release)
+        ).release_companies.first
+      end
+
+      it 'has the expected ReleaseCatalogNumber' do
+        expect(release_company.catalog_numbers.first.code).to eq('CAROL CD 1900')
+      end
+    end
+
+    context 'without a catalog_number' do
+      let(:blueprint) do
+        TestData.by_name(:brainz_release_eaten_back_to_life)
+                .blueprint
+                .label_infos[1]
+      end
+
+      let(:release_company) do
+        described_class.call(
+          blueprint:    blueprint,
+          import_order: FactoryBot.create(:brainz_release_import_order),
+          proxy:        FakeProxy.new,
+          release:      FactoryBot.create(:release)
+        ).release_companies.first
+      end
+
+      it 'has no ReleaseCatalogNumber' do
+        expect(release_company.catalog_numbers.length).to eq(0)
+      end
+    end
   end
 end
