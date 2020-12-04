@@ -90,6 +90,10 @@ module TestData
           kind: :release
         }
       },
+      brainz_release_eaten_back_to_life:       {
+        class_name: 'TestData::BrainzService',
+        arguments:  { code: 'ebcfbbf1-0625-4a29-8c06-320755277e6d', kind: :release }
+      },
       brainz_release_powerslave_enhanced_cd:   {
         class_name: 'TestData::BrainzService',
         arguments:  {
