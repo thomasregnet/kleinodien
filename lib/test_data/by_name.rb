@@ -5,7 +5,7 @@ require 'test_data/brainz_service'
 module TestData
   # Get test-data by name
   class ByName
-    CLASS_AND_ARTUMENTS_FOR = {
+    CLASS_AND_ARGUMENTS_FOR = {
       brainz_area_germany:                     {
         class_name: 'TestData::BrainzService',
         arguments:  {
@@ -52,6 +52,13 @@ module TestData
         class_name: 'TestData::BrainzService',
         arguments:  {
           code: 'f1273178-651b-4d02-8f21-4ab1ec5a689a',
+          kind: :label
+        }
+      },
+      brainz_label_noise:                      {
+        class_name: 'TestData::BrainzService',
+        arguments:  {
+          code: 'f83683d7-15d7-4f87-9b1d-d3870d64ec16',
           kind: :label
         }
       },
@@ -118,17 +125,17 @@ module TestData
 
     def call
       raise ArgumentError, "can't get instructions for #{name}" \
-        unless CLASS_AND_ARTUMENTS_FOR[name]
+        unless CLASS_AND_ARGUMENTS_FOR[name]
 
       class_name.call(arguments)
     end
 
     def class_name
-      CLASS_AND_ARTUMENTS_FOR[name][:class_name].constantize
+      CLASS_AND_ARGUMENTS_FOR[name][:class_name].constantize
     end
 
     def arguments
-      CLASS_AND_ARTUMENTS_FOR[name][:arguments]
+      CLASS_AND_ARGUMENTS_FOR[name][:arguments]
     end
   end
 end

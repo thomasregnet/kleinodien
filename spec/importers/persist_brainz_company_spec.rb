@@ -37,4 +37,26 @@ RSpec.describe PersistBrainzCompany do
       expect(Area.find_by(name: 'San Francisco')).not_to be_nil
     end
   end
+
+  context 'when the Company has no area' do
+    let(:brainz_label) do
+      TestData.by_name(:brainz_label_noise).blueprint
+    end
+    let(:import_order) { FactoryBot.build(:brainz_release_import_order) }
+    let(:proxy) { FakeProxy.new }
+
+    before do
+      brainz_label.delete :area
+      described_class.call(
+        code:         brainz_label.brainz_code,
+        import_order: import_order,
+        proxy:        proxy
+      )
+    end
+
+    it 'has persisted the company' do
+      expect(Company.find_by(name: 'Noise'))
+        .to be_instance_of(Company)
+    end
+  end
 end
