@@ -7,7 +7,7 @@ class ReleaseHead < ApplicationRecord
 
   has_many :releases, class_name: 'Release', foreign_key: :release_head_id
 
-  validates :title, presence: true, blank: false
+  validates :title, presence: true
 
   has_one_attached :front_cover
 end

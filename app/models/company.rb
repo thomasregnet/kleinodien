@@ -9,6 +9,6 @@ class Company < ActiveRecord::Base
 
   validates :name,
             presence:   true,
-            blank:      false,
+            # blank:      false,
             uniqueness: { case_sensitive: false }
 end

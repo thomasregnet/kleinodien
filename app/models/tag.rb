@@ -4,8 +4,7 @@
 class Tag < ApplicationRecord
   validates(
     :name,
-    presence:   true,
-    blank:      false,
+    presence:   { message: "name can't be blank" },
     uniqueness: { case_sensitive: false }
   )
 

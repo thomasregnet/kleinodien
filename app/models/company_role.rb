@@ -4,8 +4,5 @@
 class CompanyRole < ActiveRecord::Base
   has_many :release_companies
 
-  validates :name,
-            presence:   true,
-            blank:      false,
-            uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 end

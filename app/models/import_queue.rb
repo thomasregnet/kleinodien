@@ -7,7 +7,6 @@ class ImportQueue < ApplicationRecord
   validates(
     :name,
     presence:   true,
-    blank:      false,
     uniqueness: true,
     format:     {
       with:    /\A[a-z0-9_]+\z/,
