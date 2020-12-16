@@ -10,8 +10,11 @@ class ImportRequest < ApplicationRecord
            class_name: 'ImportRequestAttempt',
            inverse_of: :import_request
 
-  validates :code, :state, :type, presence: true
-  validates :state, inclusion: { in: %w[pending running done failed] }
+  validates :code, presence: true
+  validates :state,
+            presence:  true,
+            inclusion: { in: %w[pending running done failed] }
+  validates :type, presence: true
 
   before_save :ensure_uri_has_a_value
 

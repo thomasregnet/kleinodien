@@ -5,5 +5,5 @@ class ReleaseSubset < ApplicationRecord
 
   has_many :tracks, class_name: 'ReleaseTrack'
 
-  validates :no, presence: true, blank: false
+  validates :no, presence: true
 end

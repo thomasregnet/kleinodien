@@ -41,5 +41,5 @@ class Language < ApplicationRecord
     }
   )
 
-  validates :name, presence: true, blank: false
+  validates :name, presence: true
 end

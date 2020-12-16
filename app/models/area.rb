@@ -26,13 +26,11 @@ class Area < ApplicationRecord
 
   validates(
     :name,
-    blank:      false,
     presence:   true,
     uniqueness: { case_sensitive: false }
   )
   validates(
     :sort_name,
-    blank:      false,
     presence:   true,
     uniqueness: { case_sensitive: false }
   )

@@ -16,7 +16,6 @@ class ArtistCredit < ActiveRecord::Base
 
   validates :name,
             presence:   true,
-            blank:      false,
             uniqueness: { case_sensitive: false }
 
   before_save { self.name = forced_name }

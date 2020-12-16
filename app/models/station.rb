@@ -5,7 +5,7 @@ class Station < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :ratings
   validates :name,
-            presence:   true,
+            presence:   { message: "name can't be blank" },
             uniqueness: {
               scope:          :disambiguation,
               case_sensitive: false

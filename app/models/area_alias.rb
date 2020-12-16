@@ -19,16 +19,7 @@ class AreaAlias < ApplicationRecord
 
   before_validation :ensure_sort_name_has_a_value
 
-  validates(
-    :name,
-    blank:    false,
-    presence: true
-  )
-  validates(
-    :sort_name,
-    blank:    false,
-    presence: true
-  )
+  validates :name, :sort_name, presence: true
 
   private
 

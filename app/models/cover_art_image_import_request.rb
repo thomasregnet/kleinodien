@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoverArtImageImportRequest < CoverArtImportRequest
-  validates :uri, presence: true
+  validates :uri, presence: { message: "uri can't be blank" }
 
   before_validation :ensure_code_has_a_value
 
