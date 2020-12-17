@@ -6,7 +6,6 @@ module Iso3166
   include ActiveModel::Validations
 
   included do
-    # validates :code, blank: false, presence: { message: "code can't be blank" }
     validates :code, presence: true
   end
 end

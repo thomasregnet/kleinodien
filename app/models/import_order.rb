@@ -20,10 +20,10 @@ class ImportOrder < ApplicationRecord
   has_many :release_tracks
   has_many :releases
 
-  validates :code, presence: { message: "code can't be blank" }
+  validates :code, presence: true
   validates(
     :state,
-    presence:  { message: "state can't be blank" },
+    presence:  true,
     inclusion: { in: %w[pending preparing persisting done failed] }
   )
 

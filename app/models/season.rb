@@ -9,5 +9,5 @@ class Season < ActiveRecord::Base
   has_many :episodes, class_name: 'EpisodeHead', inverse_of: :season
   has_many :ratings
 
-  validates :position, presence: { message: "position can't be blank" }
+  validates :position, presence: true
 end

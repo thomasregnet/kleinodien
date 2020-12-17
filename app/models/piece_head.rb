@@ -12,11 +12,11 @@ class PieceHead < ActiveRecord::Base
 
   validates(
     :title,
-    presence:   { message: "title can't be blank" },
+    presence:   true,
     uniqueness: {
       scope:          %i[type disambiguation artist_credit_id],
       case_sensitive: false
     }
   )
-  validates :type, presence: { message: "type can't be blank" }
+  validates :type, presence: true
 end

@@ -4,7 +4,7 @@
 class Tag < ApplicationRecord
   validates(
     :name,
-    presence:   { message: "name can't be blank" },
+    presence:   true,
     uniqueness: { case_sensitive: false }
   )
 
@@ -13,7 +13,6 @@ class Tag < ApplicationRecord
   has_and_belongs_to_many :compilation_heads, required: false
   has_and_belongs_to_many :compilation_releases, required: false
   has_and_belongs_to_many :piece_heads, required: false
-  # has_and_belongs_to_many :piece_releases, required: false
   has_and_belongs_to_many :pieces, required: false
   has_and_belongs_to_many :seasons, required: false
   has_and_belongs_to_many :serials, required: false
