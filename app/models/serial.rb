@@ -9,6 +9,6 @@ class Serial < ActiveRecord::Base
   has_many :ratings
 
   validates :title,
-            presence:   { message: "title can't be blank" },
+            presence:   true,
             uniqueness: { scope: :disambiguation, case_sensitive: false }
 end

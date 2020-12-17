@@ -21,7 +21,7 @@ class Artist < ActiveRecord::Base
   validates :discogs_code, uniqueness: { allow_blank: true }
   validates :wikidata_code, uniqueness: { allow_blank: true }
 
-  validates :name, presence: { message: "name can't be blank" }
+  validates :name, presence: true
   validates :name, uniqueness: { scope: :disambiguation, case_sensitive: false }
 
   delegate :name, to: :source, prefix: :source
