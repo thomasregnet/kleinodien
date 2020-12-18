@@ -8,7 +8,7 @@ RSpec.shared_examples 'for ImportOrders' do |model|
       expect(described_class.model_name).to be_instance_of(ActiveModel::Name)
     end
 
-    it 'returns an instance wich #name id "ImportOrder"' do
+    it 'returns an instance which #name id "ImportOrder"' do
       expect(described_class.model_name.name).to eq('ImportOrder')
     end
   end
