@@ -27,7 +27,7 @@ RSpec.describe BrainzReleaseImportOrder, type: :model do
     end
 
     describe '#item_designation' do
-      it 'returns the release.title' do
+      it 'returns the title of the release' do
         expect(import_order.item_designation).to eq('seven of nine')
       end
     end
