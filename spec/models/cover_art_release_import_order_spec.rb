@@ -16,10 +16,6 @@ RSpec.describe CoverArtReleaseImportOrder, type: :model do
       import_order = described_class.new(state: state)
 
       context "when #{state}" do
-        it 'returns nil' do
-          expect(import_order.item).to be_nil
-        end
-
         it 'does not try to find a Release' do
           allow(Release).to receive(:find_by)
           import_order.item
