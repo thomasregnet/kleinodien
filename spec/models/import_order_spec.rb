@@ -18,7 +18,7 @@ class OtherFakeImportOrder < ImportOrder
 end
 
 RSpec.describe ImportOrder, type: :model do
-  include_examples 'for ImportOrders', :import_order
+  include_examples 'an ImportOrder', :import_order
 
   it { should have_many(:areas) }
   it { should have_many(:artist_credits) }

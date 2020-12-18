@@ -2,7 +2,7 @@
 
 require 'aasm/rspec'
 
-RSpec.shared_examples 'for ImportOrders' do |model|
+RSpec.shared_examples 'an ImportOrder' do |model|
   describe '.model_name' do
     it 'returns an instance of ActiveModel::Name' do
       expect(described_class.model_name).to be_instance_of(ActiveModel::Name)

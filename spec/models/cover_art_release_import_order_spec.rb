@@ -9,7 +9,7 @@ RSpec.describe CoverArtReleaseImportOrder, type: :model do
 
   it_behaves_like 'an active ImportOrder', :cover_art_release_import_order
 
-  it_behaves_like 'for ImportOrders', :cover_art_release_import_order
+  it_behaves_like 'an ImportOrder', :cover_art_release_import_order
 
   context 'with valid attributes' do
     let(:import_order) { FactoryBot.create(:cover_art_release_import_order) }
