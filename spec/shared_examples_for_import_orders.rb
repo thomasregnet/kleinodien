@@ -2,7 +2,7 @@
 
 require 'aasm/rspec'
 
-RSpec.shared_examples 'an ImportOrder' do |model|
+RSpec.shared_examples 'an ImportOrder' do |factory|
   describe '.model_name' do
     it 'returns an instance of ActiveModel::Name' do
       expect(described_class.model_name).to be_instance_of(ActiveModel::Name)
@@ -15,7 +15,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
 
   describe '#active?' do
     context 'when in pending state' do
-      let(:import_order) { FactoryBot.build(model, state: :pending) }
+      let(:import_order) { FactoryBot.build(factory, state: :pending) }
 
       it 'is active' do
         expect(import_order).to be_active
@@ -23,7 +23,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'when in preparing state' do
-      let(:import_order) { FactoryBot.build(model, state: :preparing) }
+      let(:import_order) { FactoryBot.build(factory, state: :preparing) }
 
       it 'is active' do
         expect(import_order).to be_active
@@ -31,7 +31,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'when in persisting state' do
-      let(:import_order) { FactoryBot.build(model, state: :persisting) }
+      let(:import_order) { FactoryBot.build(factory, state: :persisting) }
 
       it 'is active' do
         expect(import_order).to be_active
@@ -39,7 +39,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'when in done state' do
-      let(:import_order) { FactoryBot.build(model, state: :done) }
+      let(:import_order) { FactoryBot.build(factory, state: :done) }
 
       it 'is not active' do
         expect(import_order).not_to be_active
@@ -47,7 +47,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'when in failed state' do
-      let(:import_order) { FactoryBot.build(model, state: :failed) }
+      let(:import_order) { FactoryBot.build(factory, state: :failed) }
 
       it 'is not active' do
         expect(import_order).not_to be_active
@@ -56,7 +56,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
   end
 
   context 'with valid parameters' do
-    let(:import_order) { FactoryBot.build(model) }
+    let(:import_order) { FactoryBot.build(factory) }
 
     it 'is valid' do
       expect(import_order).to be_valid
@@ -64,7 +64,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
   end
 
   context 'without a code' do
-    let(:import_order) { FactoryBot.build(model, code: nil) }
+    let(:import_order) { FactoryBot.build(factory, code: nil) }
 
     it 'is not valid' do
       expect(import_order).not_to be_valid
@@ -73,7 +73,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
 
   describe '#state' do
     context 'when pending, preparing, persisting, done, failed' do
-      let(:import_order) { FactoryBot.build(model) }
+      let(:import_order) { FactoryBot.build(factory) }
       let(:valid_states) { %w[pending preparing persisting done failed] }
 
       it 'is valid' do
@@ -83,7 +83,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'with an invalid value' do
-      let(:import_order) { FactoryBot.build(model, state: 'invalid') }
+      let(:import_order) { FactoryBot.build(factory, state: 'invalid') }
 
       it 'is not valid' do
         expect(import_order).not_to be_valid
@@ -91,7 +91,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
     end
 
     context 'when nil' do
-      let(:import_order) { FactoryBot.build(model, state: nil) }
+      let(:import_order) { FactoryBot.build(factory, state: nil) }
 
       it 'is not valid' do
         expect(import_order).not_to be_valid
@@ -100,7 +100,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
   end
 
   describe 'state transitions' do
-    let(:import_order) { FactoryBot.create(model) }
+    let(:import_order) { FactoryBot.create(factory) }
 
     context 'when pending' do
       it 'transits to :preparing' do
@@ -111,7 +111,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
 
     context 'when preparing' do
       let(:import_order) do
-        FactoryBot.create(model, state: :preparing)
+        FactoryBot.create(factory, state: :preparing)
       end
 
       it 'transits to persisting' do
@@ -122,7 +122,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
 
     context 'when persisting' do
       let(:import_order) do
-        FactoryBot.create(model, state: :preparing)
+        FactoryBot.create(factory, state: :preparing)
       end
 
       it 'transits to done' do
@@ -133,7 +133,7 @@ RSpec.shared_examples 'an ImportOrder' do |model|
   end
 
   context 'without a user' do
-    let(:import_order) { FactoryBot.build(model, user: nil) }
+    let(:import_order) { FactoryBot.build(factory, user: nil) }
 
     it 'is not valid' do
       expect(import_order).not_to be_valid
