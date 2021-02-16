@@ -33,6 +33,6 @@ COPY Gemfile.lock Gemfile.lock
 
 COPY . .
 
-RUN bundle install
+RUN bundle install --jobs=4
 
 CMD [ "config/containers/app_cmd.sh" ]
