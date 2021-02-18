@@ -3,7 +3,7 @@
 # Prepare a ReleaseEvent of a Release
 class PrepareBrainzReleaseEvent < PrepareBrainzBase
   def initialize(blueprint:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
   end
 

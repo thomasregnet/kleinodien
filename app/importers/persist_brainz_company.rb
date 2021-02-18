@@ -3,7 +3,7 @@
 # Persist a Company from MusicBrainz
 class PersistBrainzCompany < PersistBrainzBase
   def initialize(code:, name: nil, **args)
-    super(args)
+    super(**args)
     @code = code
     @name = name
   end

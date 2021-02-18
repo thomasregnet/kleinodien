@@ -29,7 +29,7 @@ RSpec.describe FindByCodesService do
     let(:args) { default_args }
 
     it 'returns nil' do
-      expect(described_class.call(args)).to be_nil
+      expect(described_class.call(**args)).to be_nil
     end
   end
 
@@ -44,7 +44,7 @@ RSpec.describe FindByCodesService do
     let(:args) { default_args }
 
     it 'returns the model' do
-      expect(described_class.call(args)).to be_instance_of(Artist)
+      expect(described_class.call(**args)).to be_instance_of(Artist)
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe FindByCodesService do
     end
 
     it 'returns nil' do
-      expect(described_class.call(args)).to be_nil
+      expect(described_class.call(**args)).to be_nil
     end
   end
 end

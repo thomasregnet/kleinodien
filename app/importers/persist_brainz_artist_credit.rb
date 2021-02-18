@@ -3,7 +3,7 @@
 # Persist an ArtistCredit from MusicBrainz
 class PersistBrainzArtistCredit < PersistBrainzBase
   def initialize(blueprint:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
   end
 

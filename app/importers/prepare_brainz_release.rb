@@ -3,7 +3,7 @@
 # Prepare a MusicBrainz release for import
 class PrepareBrainzRelease < PrepareBrainzBase
   def initialize(stub:, **args)
-    super(args)
+    super(**args)
     @code = stub.brainz_code
     @stub = stub
   end

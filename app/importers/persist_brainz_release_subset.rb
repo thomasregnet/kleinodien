@@ -3,7 +3,8 @@
 # Persist a MusicBrainz medium
 class PersistBrainzReleaseSubset < PersistBrainzBase
   def initialize(blueprint:, release:, **args)
-    super(args)
+    # super(blueprint: blueprint, release: release) #, **args)
+    super(**args)
     @blueprint = blueprint
     @release   = release
   end

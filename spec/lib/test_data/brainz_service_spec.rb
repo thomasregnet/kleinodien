@@ -9,12 +9,7 @@ RSpec.describe TestData::BrainzService do
 
   describe '.call' do
     it 'returns a BrainzBlueprint' do
-      # code = 'bdacc37b-8633-4bf8-9dd5-4662ee651aec'
-      args = {
-        code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec',
-        kind: :artist
-      }
-      expect(described_class.call(args))
+      expect(described_class.call(code: 'bdacc37b-8633-4bf8-9dd5-4662ee651aec', kind: :artist))
         .to be_instance_of(TestData::BrainzResult)
     end
   end

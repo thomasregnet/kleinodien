@@ -18,7 +18,7 @@ RSpec.describe ReduceBrainzReleaseMediaService do
           blueprint:    blueprint,
           import_order: FactoryBot.create(:brainz_import_order)
         }
-        described_class.call(args)
+        described_class.call(**args)
       end
 
       it 'returns a list' do

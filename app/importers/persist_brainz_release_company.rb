@@ -3,7 +3,7 @@
 # Persist a Release-Company with data fetched from MusicBrainz
 class PersistBrainzReleaseCompany < PersistBrainzBase
   def initialize(blueprint:, release:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
     @code      = blueprint.label.brainz_code
     @release   = release

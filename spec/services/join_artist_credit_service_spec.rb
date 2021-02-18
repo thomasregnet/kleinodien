@@ -27,7 +27,7 @@ RSpec.describe JoinArtistCreditService do
         ]
         args = { candidates: candidates, name_method: :title }
 
-        expect(described_class.call(args)).to eq('A and B')
+        expect(described_class.call(**args)).to eq('A and B')
       end
     end
 

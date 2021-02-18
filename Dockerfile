@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-buster
+FROM ruby:3.0.0-buster
 
 # RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 RUN apt-get update -qq && apt-get install -y \

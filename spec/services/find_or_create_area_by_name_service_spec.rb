@@ -35,12 +35,8 @@ RSpec.describe FindOrCreateAreaByNameService do
       )
     end
 
-    let(:args) do
-      { import_order: import_order, name: 'Lost Kingdom' }
-    end
-
     it 'creates the area with the ImportOrder' do
-      expect(described_class.call(args).import_order)
+      expect(described_class.call(import_order: import_order, name: 'Lost Kingdom').import_order)
         .to be_instance_of(ImportOrder)
     end
   end

@@ -3,7 +3,7 @@
 # Prepares a MusicBrainz Recording for import.
 class PrepareBrainzRecording < PrepareBrainzBase
   def initialize(stub:, **args)
-    super(args)
+    super(**args)
     @code = stub.brainz_code
     @stub = stub
   end

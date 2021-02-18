@@ -22,7 +22,7 @@ RSpec.describe PersistBrainzReleaseSubset do
         proxy:        FakeProxy.new
       }
       allow(PersistBrainzReleaseTrack).to receive(:call)
-      expect(described_class.call(args).new_record?).to be false
+      expect(described_class.call(**args).new_record?).to be false
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe PersistBrainzReleaseSubset do
       end
 
       it 'returns that title' do
-        subset = described_class.new(args)
+        subset = described_class.new(**args)
         expect(subset.title).to eq('fake title')
       end
     end
@@ -59,7 +59,7 @@ RSpec.describe PersistBrainzReleaseSubset do
       end
 
       it 'returns a generic title' do
-        subset = described_class.new(args)
+        subset = described_class.new(**args)
         expect(subset.title).to eq('Vinyl 3')
       end
     end

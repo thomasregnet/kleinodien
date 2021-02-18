@@ -9,7 +9,7 @@ class PersistBrainzAreaAlias < PersistPrepareBase
   }.freeze
 
   def initialize(area:, blueprint:, **args)
-    super(args)
+    super(**args)
     @area      = area
     @blueprint = blueprint
   end

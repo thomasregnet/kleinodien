@@ -3,7 +3,7 @@
 # Import from external sources
 class ImportWorker
   def self.run(args)
-    new(args).run
+    new(**args).run
   end
 
   def initialize(import_queue_name:, subscription_timeout:)

@@ -3,7 +3,7 @@
 # Base class for persist and prepare classes
 class PersistPrepareBase
   def self.call(args)
-    new(args).call
+    new(**args).call
   end
 
   def initialize(import_order:, proxy:)

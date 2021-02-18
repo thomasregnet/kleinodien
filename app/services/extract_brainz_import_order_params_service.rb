@@ -2,7 +2,12 @@
 
 # Extract code (id) and kind from a MusicBrainz uri
 class ExtractBrainzImportOrderParamsService < ServiceBase
+  def self.call(uri)
+    new(uri).call
+  end
+
   def initialize(uri)
+    super()
     @uri = uri
   end
 
