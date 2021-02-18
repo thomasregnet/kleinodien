@@ -2,9 +2,10 @@
 
 # Return an Array of Objects of a given class
 class ForceArrayOfObjectsService < ServiceBase
-  def initialize(args)
-    @klass = args[:klass]
-    @value = args[:value]
+  def initialize(klass:, value:)
+    super()
+    @klass = klass
+    @value = value
   end
 
   attr_reader :klass, :value

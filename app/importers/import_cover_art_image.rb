@@ -3,7 +3,7 @@
 # Import an image from coverartarchive.org
 class ImportCoverArtImage < ImportCoverArtBase
   def initialize(metadata:, target_object:, **args)
-    super(args)
+    super(**args)
     @metadata      = metadata
     @target_object = target_object
   end

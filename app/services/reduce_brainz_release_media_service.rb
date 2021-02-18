@@ -2,9 +2,16 @@
 
 # Reduce Media to it's formats
 class ReduceBrainzReleaseMediaService < ServiceBase
-  def initialize(args)
-    @blueprint    = args[:blueprint]
-    @import_order = args[:import_order]
+  # def initialize(**args)
+  #   @blueprint    = args[:blueprint]
+  #   @import_order = args[:import_order]
+  #   @last_code    = ''
+  #   @result       = []
+  # end
+
+  def initialize(blueprint:, import_order:)
+    @blueprint    = blueprint
+    @import_order = import_order
     @last_code    = ''
     @result       = []
   end

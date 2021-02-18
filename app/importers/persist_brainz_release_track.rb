@@ -3,7 +3,7 @@
 # Persist a MusicBrainz Track
 class PersistBrainzReleaseTrack < PersistBrainzBase
   def initialize(blueprint:, no:, subset:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
     @no        = no
     @subset    = subset

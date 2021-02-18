@@ -3,7 +3,7 @@
 # Find a Company in the database or get it from MusicBrainz
 class PrepareBrainzLabel < PrepareBrainzBase
   def initialize(stub:, **args)
-    super(args)
+    super(**args)
     @code = stub.brainz_code
     @stub = stub
   end

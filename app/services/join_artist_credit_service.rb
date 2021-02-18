@@ -2,10 +2,12 @@
 
 # Join names with join-phrases
 class JoinArtistCreditService < ServiceBase
-  def initialize(args)
-    @candidates         = args[:candidates]
-    @name_method        = args[:name_method]        || :name
-    @join_phrase_method = args[:join_phrase_method] || :join_phrase
+  # def initialize(**args)
+  def initialize(candidates:, name_method: :name, join_phrase_method: :join_phrase)
+    super()
+    @candidates         = candidates
+    @name_method        = name_method
+    @join_phrase_method = join_phrase_method
   end
 
   attr_reader :candidates, :join_phrase_method, :name_method

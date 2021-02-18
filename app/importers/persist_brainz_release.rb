@@ -3,7 +3,7 @@
 # Persist a CompilationRelease using data retrieved from MusicBrainz
 class PersistBrainzRelease < PersistBrainzBase
   def initialize(code:, **args)
-    super(args)
+    super(**args)
     # @blueprint = blueprint
     @code = code
   end

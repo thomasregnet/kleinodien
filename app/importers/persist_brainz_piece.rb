@@ -3,7 +3,7 @@
 # Persist a MusicBrainz recording
 class PersistBrainzPiece < PersistBrainzBase
   def initialize(code:, **args)
-    super(args)
+    super(**args)
     @code = code
   end
 

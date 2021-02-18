@@ -3,7 +3,7 @@
 # Peisist a MusicBrainz release-event
 class PersistBrainzReleaseEvent < PersistBrainzBase
   def initialize(blueprint:, release:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
     @release   = release
   end

@@ -4,8 +4,8 @@
 class CoverArtFetcher
   DEFAULT_MAX_TRIES = 5
 
-  def self.call(*args)
-    new(*args).call
+  def self.call(args)
+    new(**args).call
   end
 
   def initialize(import_request:)

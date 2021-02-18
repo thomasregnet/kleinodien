@@ -3,7 +3,7 @@
 # Persist a CompilationHead using data from MusicBrainz
 class PersistBrainzReleaseHead < PersistBrainzBase
   def initialize(code:, **args)
-    super(args)
+    super(**args)
     @code = code
   end
 

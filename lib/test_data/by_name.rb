@@ -131,7 +131,7 @@ module TestData
       raise ArgumentError, "can't get instructions for #{name}" \
         unless CLASS_AND_ARGUMENTS_FOR[name]
 
-      class_name.call(arguments)
+      class_name.call(**arguments)
     end
 
     def class_name

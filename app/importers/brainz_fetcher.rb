@@ -3,7 +3,7 @@
 # Fetch data from the MusicBrainz web-service
 class BrainzFetcher
   def self.call(args)
-    new(args).call
+    new(**args).call
   end
 
   def initialize(import_request:)

@@ -3,7 +3,7 @@
 # Persist an Area retrieved from MusicBrainz
 class PersistBrainzArea < PersistBrainzBase
   def initialize(code:, name: nil, **args)
-    super(args)
+    super(**args)
     @code = code
     @name = name
   end

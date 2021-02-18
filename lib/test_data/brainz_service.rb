@@ -6,8 +6,8 @@ require 'test_data/path_service'
 module TestData
   # Get MusicBrainz test-data
   class BrainzService
-    def self.call(args)
-      new(args).call
+    def self.call(**args)
+      new(**args).call
     end
 
     def initialize(code:, kind:)

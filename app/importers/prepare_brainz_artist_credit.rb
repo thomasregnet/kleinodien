@@ -3,7 +3,7 @@
 # Prepare a MusicBrainz Artist for import
 class PrepareBrainzArtistCredit < PrepareBrainzBase
   def initialize(blueprint:, **args)
-    super(args)
+    super(**args)
     @blueprint = blueprint
   end
 
@@ -19,7 +19,6 @@ class PrepareBrainzArtistCredit < PrepareBrainzBase
 
   def prepare_siblings
     blueprint.name_credits.each do |name_credit|
-      # prepare_brainz_artist(stub: name_credit.artist)
       prepare_artist(stub: name_credit.artist)
     end
   end

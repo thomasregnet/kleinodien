@@ -3,7 +3,7 @@
 # Prepare an Area
 class PrepareBrainzArea < PrepareBrainzBase
   def initialize(stub:, **args)
-    super(args)
+    super(**args)
     @stub = stub
   end
 
