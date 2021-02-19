@@ -18,8 +18,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - RAILS_ENV=$RAILS_ENV
 
-    expose:
-      - "3000"
+    ports:
+      - "8888:3000"
     depends_on:
       - db
       - redis
@@ -43,15 +43,6 @@ services:
     environment:
       - IMPORT_QUEUE_NAME=brainz
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-
-  web:
-    build:
-      context: .
-      dockerfile: config/containers/nginx/Dockerfile
-    links:
-      - app
-    ports:
-      - "8888:80"
 
 volumes:
   postgresql_data: {}
