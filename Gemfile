@@ -21,12 +21,12 @@ gem 'kaminari'
 gem 'multi_xml', '~> 0.6'
 gem 'nokogiri', '>= 1.10.8'
 gem 'pg', '~> 1.0'
+gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.0'
 gem 'redis', '~> 4.0'
 gem 'sdoc', '~> 1.1', group: :doc
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'unicorn', '~> 5.4'
 gem 'webpacker'
 
 group :development, :test do
@@ -54,6 +54,6 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', require: false
-  gem 'sinatra', '~> 2.0'
+  gem 'sinatra', '~> 2.1'
   gem 'webmock', '~> 3.0'
 end

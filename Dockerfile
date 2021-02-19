@@ -35,4 +35,5 @@ COPY . .
 
 RUN bundle install --jobs=4
 
-CMD [ "config/containers/app_cmd.sh" ]
+# CMD [ "config/containers/app_cmd.sh" ]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
