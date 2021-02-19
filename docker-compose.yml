@@ -16,7 +16,7 @@ services:
     build: .
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - RAILS_ENV=$RAILS_ENV
+      - RAILS_ENV=${RAILS_ENV}
 
     ports:
       - "8888:3000"
