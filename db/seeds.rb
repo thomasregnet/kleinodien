@@ -19,9 +19,9 @@ read_json(:formats).each do |format_attr|
   Format.create!(format_attr)
 end
 
-read_json(:format_details).each do |detail_attr|
-  FormatDetail.create!(detail_attr)
-end
+# read_json(:format_details).each do |detail_attr|
+#   FormatDetail.create!(detail_attr)
+# end
 
 read_json(:medium_formats).each do |format_attr|
   MediumFormat.create!(format_attr)
