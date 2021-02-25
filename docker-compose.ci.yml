@@ -18,6 +18,7 @@ x-ci-app: &ci-app
     dockerfile: Dockerfile
     target: development
   environment:
+    DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
     DATABASE_URL: postgres://postgres:postgres@postgres:5432/
     RAILS_ENV: test
     RACK_ENV: test
