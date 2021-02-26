@@ -25,6 +25,7 @@ gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.0'
 gem 'redis', '~> 4.0'
 gem 'sdoc', '~> 1.1', group: :doc
+gem 'sidekiq', '~> 6.1'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
@@ -54,6 +55,6 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', require: false
-  gem 'sinatra', '~> 2.1'
+  gem 'sinatra', '~> 2.1', require: false
   gem 'webmock', '~> 3.0'
 end
