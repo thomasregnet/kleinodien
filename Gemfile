@@ -25,6 +25,7 @@ gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.0'
 gem 'redis', '~> 4.0'
 gem 'sdoc', '~> 1.1', group: :doc
+gem 'sidekiq', '~> 6.1'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
