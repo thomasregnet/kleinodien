@@ -91,6 +91,58 @@ services:
     ports:
       - "127.0.0.1:3035:3035"
 
+  cover_art_import_worker:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    command: rails runner 'InitImportWorker.call'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      IMPORT_QUEUE_NAME: cover_art
+      REDIS_URL: redis://@redis:6379/1
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+    volumes:
+      - .:/usr/src/app:cached
+      - bundler:/usr/local/bundle:delegated
+      - bootsnap_cache:/usr/src/bootsnap:delegated
+      - rails_cache:/usr/src/app/tmp/cache:delegated
+      - packs:/usr/src/app/public/packs:delegated
+      - node_modules:/usr/src/app/node_modules:delegated
+      - yarn_cache:/usr/src/yarn:delegated
+      - letter_opener:/usr/src/app/tmp/letter_opener:delegated
+
+  brainz_import_worker:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    command: rails runner 'InitImportWorker.call'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      IMPORT_QUEUE_NAME: brainz
+      REDIS_URL: redis://@redis:6379/1
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+    volumes:
+      - .:/usr/src/app:cached
+      - bundler:/usr/local/bundle:delegated
+      - bootsnap_cache:/usr/src/bootsnap:delegated
+      - rails_cache:/usr/src/app/tmp/cache:delegated
+      - packs:/usr/src/app/public/packs:delegated
+      - node_modules:/usr/src/app/node_modules:delegated
+      - yarn_cache:/usr/src/yarn:delegated
+      - letter_opener:/usr/src/app/tmp/letter_opener:delegated
+  
 volumes:
   postgresql:
   redis:

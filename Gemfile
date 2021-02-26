@@ -54,6 +54,6 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'simplecov', require: false
-  gem 'sinatra', '~> 2.1'
+  gem 'sinatra', '~> 2.1', require: false
   gem 'webmock', '~> 3.0'
 end
