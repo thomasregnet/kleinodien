@@ -43,6 +43,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner[:active_record].strategy = :transaction
+    DatabaseCleaner.allow_remote_database_url = true
     # DatabaseCleaner.strategy = :transaction
   end
 
