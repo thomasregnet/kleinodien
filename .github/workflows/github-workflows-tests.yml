@@ -2,7 +2,8 @@
 name: Tests
 
 on:
-  push:
+  release:
+    types: [published]
 
 jobs:
   test:
