@@ -4,7 +4,7 @@
     <h1 class="title">
       <%= title %>
     </h1>
-    <% if subtitle %>
+    <% unless local_assigns[:subtitle].nil? %>
       <p class="subtitle is-5">
         <%= subtitle %>
       </p>
