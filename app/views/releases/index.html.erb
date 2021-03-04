@@ -1,12 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-body">
-      <h1 class="title">Releases</h1>
-    </div>
-  </div>
-</section>
+<%= render partial: 'shared/banner', locals: { title: 'Releases'} %>
 
 <div class="container">
   <% @releases.each do |release| %>

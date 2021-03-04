@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module ReleaseCopiesHelper
+  def release_copy_subtitle_for(release_copy)
+    artist_credit = release_copy.artist_credit
+    subtitle      = release_copy.title
+    return subtitle unless artist_credit
+
+    "#{subtitle} by #{artist_credit.name}"
+  end
+
   def release_copy_title_for(params)
     release_copy_of_for(params)&.title
   end

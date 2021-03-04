@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<%= render partial: 'shared/banner', locals: { title: 'Artists'} %>
+
+<section>
+  <div class="content">
+    <ul>
+      <% @artists.each do |artist| %>
+        <li>
+          <%= link_to artist.name, artist %>
+          <% if artist.disambiguation %>
+            - <span has-text-grey><%= artist.disambiguation %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+
+<p>
+  <%= paginate @artists %>
+</p>
+<%= link_to 'New Artist', new_artist_path %>

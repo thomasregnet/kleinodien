@@ -1,0 +1,82 @@
+<%= form_with(model: artist) do |form| %>
+  <% if artist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+      <ul>
+        <% artist.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_area :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sort_name %>
+    <%= form.text_area :sort_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disambiguation %>
+    <%= form.text_area :disambiguation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :begin_date %>
+    <%= form.date_select :begin_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :begin_date_mask %>
+    <%= form.text_field :begin_date_mask %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date_mask %>
+    <%= form.number_field :end_date_mask %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brainz_code %>
+    <%= form.text_field :brainz_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discogs_code %>
+    <%= form.number_field :discogs_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :imdb_code %>
+    <%= form.number_field :imdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tmdb_code %>
+    <%= form.number_field :tmdb_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wikidata_code %>
+    <%= form.number_field :wikidata_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :import_order_id %>
+    <%= form.number_field :import_order_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

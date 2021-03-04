@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<%= render partial: 'shared/banner', locals: { title: @artist.name, subtitle: @artist.disambiguation } %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @artist.name %>
+</p>
+
+<p>
+  <strong>Sort name:</strong>
+  <%= @artist.sort_name %>
+</p>
+
+<p>
+  <strong>Disambiguation:</strong>
+  <%= @artist.disambiguation %>
+</p>
+
+<p>
+  <strong>Begin date:</strong>
+  <%= @artist.begin_date %>
+</p>
+
+<p>
+  <strong>Begin date mask:</strong>
+  <%= @artist.begin_date_mask %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @artist.end_date %>
+</p>
+
+<p>
+  <strong>End date mask:</strong>
+  <%= @artist.end_date_mask %>
+</p>
+
+<p>
+  <strong>Brainz code:</strong>
+  <%= @artist.brainz_code %>
+</p>
+
+<p>
+  <strong>Discogs code:</strong>
+  <%= @artist.discogs_code %>
+</p>
+
+<p>
+  <strong>Imdb code:</strong>
+  <%= @artist.imdb_code %>
+</p>
+
+<p>
+  <strong>Tmdb code:</strong>
+  <%= @artist.tmdb_code %>
+</p>
+
+<p>
+  <strong>Wikidata code:</strong>
+  <%= @artist.wikidata_code %>
+</p>
+
+<p>
+  <strong>Import order:</strong>
+  <%= @artist.import_order_id %>
+</p>
+
+<%= link_to 'Edit', edit_artist_path(@artist) %> |
+<%= link_to 'Back', artists_path %>

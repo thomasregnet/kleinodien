@@ -16,6 +16,7 @@ class IncompleteDate < Delegator
     new(date, mask)
   end
 
+  # rubocop:disable Lint/MissingSuper
   def initialize(date, mask)
     raise(ArgumentError, "invalid mask: #{mask}") \
       unless VALID_MASKS.include?(mask)
@@ -23,6 +24,7 @@ class IncompleteDate < Delegator
     @date = date
     @mask = mask
   end
+  # rubocop:enable Lint/MissingSuper
 
   def to_s
     case mask

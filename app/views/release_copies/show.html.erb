@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title"><%= @release_copy.designation %></h1>
-      <h2 class="subtitle">
-        <%= @release_copy.title %>
-        <% if @release_copy.artist_credit %>
-        <span class="has-text-weight-light">
-          by <%= @release_copy.artist_credit.name %><% end %>
-        </span>
-        </h2>
-        <div class="columns">
-          <div class="column">
-            <%= @release_copy.type %>
-          </div> 
-          <div class="column">
-            <% if @release_copy.with_release? %>
-              <%= link_to @release_copy.title, @release_copy.release %>
-            <% else %>
-              <%= link_to @release_copy.title, @release_copy.release_head %>
-            <% end %>
-          </div>
-        </div>
-    </div> 
+<%= render partial: 'shared/banner',
+    locals: { title: @release_copy.designation, subtitle: release_copy_subtitle_for(@release_copy) } %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <span class="tag is-primary">
+          <%= @release_copy.type %> 
+        </span>    
+      </div>
+      <div class="column">
+        <% if @release_copy.with_release? %>
+          <%= link_to @release_copy.title, @release_copy.release %>
+        <% else %>
+          <%= link_to @release_copy.title, @release_copy.release_head %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </section>
 

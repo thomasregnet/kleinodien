@@ -31,6 +31,6 @@ RSpec.describe 'release_copies/show', type: :view do
   it 'renders the #title as subtitle' do
     allow(release_copy).to receive(:title).and_return('my title')
     render
-    expect(rendered).to match(/<h2 class="subtitle">\s*my title/)
+    expect(rendered).to match(/class="subtitle is-5">.+my title/m)
   end
 end
