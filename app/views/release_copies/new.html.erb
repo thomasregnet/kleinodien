@@ -1,12 +1,7 @@
-<section class="hero is-medium">
-  <div class="container">
-    <div class="hero-body">
-      Create a new copy of
-      <h1 class="title"><%= release_copy_title_for(params) %></h1>
-      <h2 class="subtitle"><%= release_copy_artist_credit_for(params) %></h2>
-    </div>
-  </div>
-</section>
+<%= render partial: 'shared/banner', locals: {
+   title: %Q|Create a copy of "#{release_copy_title_for(params)}"|,
+   subtitle: release_copy_artist_credit_for(params)
+} %>
 
 <section>
   <div class="container">
