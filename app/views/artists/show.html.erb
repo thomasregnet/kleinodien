@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= render partial: 'shared/banner', locals: { title: @artist.name, subtitle: @artist.disambiguation } %>
+
 <p>
   <strong>Name:</strong>
   <%= @artist.name %>
