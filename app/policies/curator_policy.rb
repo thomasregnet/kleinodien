@@ -3,7 +3,7 @@
 # A curator is allowed to create and edit common resources
 class CuratorPolicy < ApplicationPolicy
   def create?
-    user.curator?
+    user&.curator?
   end
 
   def destroy?

@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[create destroy edit new update]
+  before_action :set_artist, only: %i[show edit update destroy]
 
   # GET /artists or /artists.json
   def index
@@ -12,7 +13,10 @@ class ArtistsController < ApplicationController
 
   # GET /artists/new
   def new
-    @artist = Artist.new
+    # authenticate_user!
+    # @artist = Artist.new
+    # authorize @artist
+    @artist = authorize Artist.new
   end
 
   # GET /artists/1/edit
