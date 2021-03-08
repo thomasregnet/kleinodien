@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe CuratorPolicy, type: :policy do
+RSpec.describe ArtistPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }

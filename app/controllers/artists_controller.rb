@@ -17,11 +17,13 @@ class ArtistsController < ApplicationController
 
   # GET /artists/1/edit
   def edit
+    authorize @artist
   end
 
   # POST /artists or /artists.json
   def create
     @artist = Artist.new(artist_params)
+    authorize @artist
 
     respond_to do |format|
       if @artist.save
