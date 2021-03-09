@@ -26,8 +26,8 @@ class ArtistsController < ApplicationController
 
   # POST /artists or /artists.json
   def create
+    authorize Artist
     @artist = Artist.new(artist_params)
-    authorize @artist
 
     respond_to do |format|
       if @artist.save
@@ -42,6 +42,8 @@ class ArtistsController < ApplicationController
 
   # PATCH/PUT /artists/1 or /artists/1.json
   def update
+    authorize Artist
+
     respond_to do |format|
       if @artist.update(artist_params)
         format.html { redirect_to @artist, notice: "Artist was successfully updated." }
@@ -55,6 +57,7 @@ class ArtistsController < ApplicationController
 
   # DELETE /artists/1 or /artists/1.json
   def destroy
+    authorize Artist
     @artist.destroy
     respond_to do |format|
       format.html { redirect_to artists_url, notice: "Artist was successfully destroyed." }
