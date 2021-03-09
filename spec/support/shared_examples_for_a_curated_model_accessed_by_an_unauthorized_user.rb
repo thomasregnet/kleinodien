@@ -40,9 +40,7 @@ RSpec.shared_examples 'a curated model accessed by an unauthorized user' do |kin
     end
 
     describe 'DELETE /destroy' do
-      let(:url) { send "#{kind}_url", instance }
-
-      before { instance.save! }
+      let!(:url) { send "#{kind}_url", instance }
 
       it "does not destroy the #{kind}" do
         expect { delete url }.not_to change(model_class, :count)
