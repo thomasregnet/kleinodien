@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.shared_examples 'non user attempt to access a curated model' do |kind|
+RSpec.shared_examples 'a curated model accessed by an unauthorized user' do |kind|
   let(:instance) { FactoryBot.create(kind) }
   let(:model_class) { kind.camelize.constantize }
 
