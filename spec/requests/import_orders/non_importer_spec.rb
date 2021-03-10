@@ -5,11 +5,6 @@ require 'rails_helper'
 RSpec.describe '/import_orders with non-importer user', type: :request do
   let(:import_order) { FactoryBot.create(:import_order, user: user) }
   let(:user) { FactoryBot.create(:user) } # User has no "importer" rights
-  let(:valid_attributes) do
-    FactoryBot.attributes_for(:import_order).merge(
-      import_queue: FactoryBot.create(:import_queue)
-    )
-  end
 
   before { sign_in user }
 
@@ -58,7 +53,7 @@ RSpec.describe '/import_orders with non-importer user', type: :request do
     end
 
     it 'redirects to the root_url' do
-      patch import_order_url(import_order), params: { import_order: new_attributes }
+      patch import_order_url(import_order), params: {}
       import_order.reload
       expect(response).to redirect_to(root_url)
     end

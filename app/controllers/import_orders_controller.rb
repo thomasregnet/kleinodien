@@ -20,8 +20,8 @@ class ImportOrdersController < ApplicationController
 
   # GET /import_orders/new
   def new
+    authorize ImportOrder
     @import_order = ImportOrder.new
-    authorize(@import_order)
   end
 
   # GET /import_orders/1/edit
@@ -32,8 +32,8 @@ class ImportOrdersController < ApplicationController
   # POST /import_orders
   # POST /import_orders.json
   def create
+    authorize ImportOrder
     @import_order = ImportOrder.new(import_order_params.merge(user: current_user))
-    authorize @import_order
 
     respond_to do |format|
       if @import_order.save
@@ -50,6 +50,7 @@ class ImportOrdersController < ApplicationController
   # PATCH/PUT /import_orders/1.json
   def update
     authorize @import_order
+
     respond_to do |format|
       if @import_order.update(import_order_params)
         format.html { redirect_to @import_order, notice: 'Import order was successfully updated.' }

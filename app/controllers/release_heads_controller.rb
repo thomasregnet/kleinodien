@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class ReleaseHeadsController < ApplicationController
-  before_action :set_release_head, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[create destroy edit new update]
+  before_action :set_release_head, only: %i[show edit update destroy]
 
   # GET /release_heads
   # GET /release_heads.json
@@ -9,21 +12,22 @@ class ReleaseHeadsController < ApplicationController
 
   # GET /release_heads/1
   # GET /release_heads/1.json
-  def show
-  end
+  def show; end
 
   # GET /release_heads/new
   def new
-    @release_head = ReleaseHead.new
+    @release_head = authorize ReleaseHead.new
   end
 
   # GET /release_heads/1/edit
   def edit
+    authorize @release_head
   end
 
   # POST /release_heads
   # POST /release_heads.json
   def create
+    authorize ReleaseHead
     @release_head = ReleaseHead.new(release_head_params)
 
     respond_to do |format|
@@ -40,6 +44,8 @@ class ReleaseHeadsController < ApplicationController
   # PATCH/PUT /release_heads/1
   # PATCH/PUT /release_heads/1.json
   def update
+    authorize ReleaseHead
+
     respond_to do |format|
       if @release_head.update(release_head_params)
         format.html { redirect_to @release_head, notice: 'Release head was successfully updated.' }
@@ -54,6 +60,8 @@ class ReleaseHeadsController < ApplicationController
   # DELETE /release_heads/1
   # DELETE /release_heads/1.json
   def destroy
+    authorize ReleaseHead
+
     @release_head.destroy
     respond_to do |format|
       format.html { redirect_to release_heads_url, notice: 'Release head was successfully destroyed.' }
@@ -62,13 +70,15 @@ class ReleaseHeadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_release_head
-      @release_head = ReleaseHead.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def release_head_params
-      params.require(:release_head).permit(:title, :disambiguation, :type, :brainz_code, :imdb_code, :tmdb_code, :wikidata_code, :artist_credit_id, :import_order_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_release_head
+    @release_head = ReleaseHead.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def release_head_params
+    params.require(:release_head).permit(:title, :disambiguation, :type, :brainz_code, :imdb_code, :tmdb_code,
+                                         :wikidata_code, :artist_credit_id, :import_order_id)
+  end
 end

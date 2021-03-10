@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.feature 'create an artist' do
   before do
-    login_as(FactoryBot.create(:user))
+    login_as(FactoryBot.create(:user, curator: true))
     visit new_artist_path
   end
 
