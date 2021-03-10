@@ -34,7 +34,7 @@ class ArtistsController < ApplicationController
         format.html { redirect_to @artist, notice: "Artist was successfully created." }
         format.json { render :show, status: :created, location: @artist }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @artist.errors, status: :unprocessable_entity }
       end
     end

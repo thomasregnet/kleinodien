@@ -48,9 +48,9 @@ RSpec.shared_examples 'a curated model accessed by a curator' do |kind|
         expect { post url, params: invalid_params }.to change(model_class, :count).by(0)
       end
 
-      it 'renders an unprocessable response' do
+      it 'renders a successful response' do
         post url, params: invalid_params
-        expect(response).to be_unprocessable
+        expect(response).to be_successful
       end
     end
   end

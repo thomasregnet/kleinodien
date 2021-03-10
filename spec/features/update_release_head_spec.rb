@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.feature 'update a ReleaseHead' do
   before do
-    login_as(FactoryBot.create(:user))
+    login_as(FactoryBot.create(:user, curator: true))
     release_head = FactoryBot.create(:release_head)
     visit edit_release_head_path(release_head)
   end
