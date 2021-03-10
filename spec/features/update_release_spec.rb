@@ -3,22 +3,22 @@
 require 'rails_helper'
 
 RSpec.feature 'create a release' do
-  let(:release_head) { FactoryBot.create(:release_head) }
-
   before do
     login_as(FactoryBot.create(:user, curator: true))
-    visit new_release_path
+    release = FactoryBot.create(:release)
+    visit edit_release_path(release)
   end
 
   scenario 'with valid inputs' do
-    fill_in 'Release head', with: release_head.id
-    click_on 'Create Release'
+    fill_in 'Title', with: 'Aftershock'
+    click_on 'Update Release'
 
-    expect(page).to have_content('Release was successfully created.')
+    expect(page).to have_content('Release was successfully updated')
   end
 
   scenario 'with invalid inputs' do
-    click_on 'Create Release'
+    fill_in 'Release head', with: ''
+    click_on 'Update Release'
 
     expect(page).to have_content('Head must exist')
   end
