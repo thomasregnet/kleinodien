@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ReleaseHeadsController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy edit new update]
-  before_action :set_release_head, only: [:show, :edit, :update, :destroy]
+  before_action :set_release_head, only: %i[show edit update destroy]
 
   # GET /release_heads
   # GET /release_heads.json
@@ -10,8 +12,7 @@ class ReleaseHeadsController < ApplicationController
 
   # GET /release_heads/1
   # GET /release_heads/1.json
-  def show
-  end
+  def show; end
 
   # GET /release_heads/new
   def new
@@ -69,13 +70,15 @@ class ReleaseHeadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_release_head
-      @release_head = ReleaseHead.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def release_head_params
-      params.require(:release_head).permit(:title, :disambiguation, :type, :brainz_code, :imdb_code, :tmdb_code, :wikidata_code, :artist_credit_id, :import_order_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_release_head
+    @release_head = ReleaseHead.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def release_head_params
+    params.require(:release_head).permit(:title, :disambiguation, :type, :brainz_code, :imdb_code, :tmdb_code,
+                                         :wikidata_code, :artist_credit_id, :import_order_id)
+  end
 end
