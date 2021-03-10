@@ -25,4 +25,24 @@ RSpec.describe '/releases', type: :request do
       expect(response).to be_successful
     end
   end
+
+  describe 'POST /create' do
+    let(:release_head) { FactoryBot.create(:release_head) }
+    let(:valid_params) do
+      { release: FactoryBot.attributes_for(:release).merge(release_head_id: release_head.id) }
+    end
+
+    before { login_as(FactoryBot.create(:user, curator: true)) }
+
+    context 'with valid parameters' do
+      it 'creates a new release' do
+        expect { post releases_url, params: valid_params }.to change(Release, :count).by(1)
+      end
+
+      it 'redirects to the created release' do
+        post releases_url valid_params
+        expect(response).to redirect_to(release_url(Release.last))
+      end
+    end
+  end
 end
