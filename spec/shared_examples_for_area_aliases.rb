@@ -2,7 +2,6 @@
 
 require 'shared_examples_for_incomplete_dates'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'an area alias' do
   subject do
     described_class.new(
@@ -48,31 +47,31 @@ RSpec.shared_examples 'an area alias' do
     end
   end
 
-  describe '#begin_date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate) do
-        described_class.new(
-          area: FactoryBot.create(:area),
-          name: 'test area'
-        )
-      end
+  # describe '#begin_date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate) do
+  #       described_class.new(
+  #         area: FactoryBot.create(:area),
+  #         name: 'test area'
+  #       )
+  #     end
 
-      let(:date_naming) { 'begin_date' }
-    end
-  end
+  #     let(:date_naming) { 'begin_date' }
+  #   end
+  # end
 
-  describe '#end_date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate) do
-        described_class.new(
-          area: FactoryBot.create(:area),
-          name: 'test area'
-        )
-      end
+  # describe '#end_date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate) do
+  #       described_class.new(
+  #         area: FactoryBot.create(:area),
+  #         name: 'test area'
+  #       )
+  #     end
 
-      let(:date_naming) { 'end_date' }
-    end
-  end
+  #     let(:date_naming) { 'end_date' }
+  #   end
+  # end
 
   describe '#sort_name' do
     context 'when blank' do
@@ -93,4 +92,3 @@ RSpec.shared_examples 'an area alias' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

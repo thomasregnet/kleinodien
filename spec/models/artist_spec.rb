@@ -75,19 +75,19 @@ RSpec.describe Artist, type: :model do
     let(:rateable) { FactoryBot.build(:artist) }
   end
 
-  context 'with a begin date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate)     { FactoryBot.build(:artist) }
-      let(:date_naming) { 'begin_date' }
-    end
-  end
+  # context 'with a begin date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate)     { FactoryBot.build(:artist) }
+  #     let(:date_naming) { 'begin_date' }
+  #   end
+  # end
 
-  context 'with an end date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate)     { FactoryBot.build(:artist) }
-      let(:date_naming) { 'end_date' }
-    end
-  end
+  # context 'with an end date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate)     { FactoryBot.build(:artist) }
+  #     let(:date_naming) { 'end_date' }
+  #   end
+  # end
 
   it_behaves_like 'a tagable model' do
     let(:tagable) { FactoryBot.build(:artist) }

@@ -19,10 +19,10 @@ RSpec.describe ReleaseEvent, type: :model do
     end
   end
 
-  describe '#date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate) { FactoryBot.build(:release_event) }
-      let(:date_naming) { 'date' }
-    end
-  end
+  # describe '#date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate) { FactoryBot.build(:release_event) }
+  #     let(:date_naming) { 'date' }
+  #   end
+  # end
 end

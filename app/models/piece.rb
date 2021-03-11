@@ -4,9 +4,9 @@
 class Piece < ActiveRecord::Base
   include CodeFindable
 
-  composed_of :date,
-              class_name: 'IncompleteDate',
-              mapping:    [%w[date date], %w[date_mask mask]]
+  # composed_of :date,
+  #             class_name: 'IncompleteDate',
+  #             mapping:    [%w[date date], %w[date_mask mask]]
 
   composed_of :duration,
               class_name: 'Duration',

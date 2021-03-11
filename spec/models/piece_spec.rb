@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'shared_examples_for_code_findable'
 require 'shared_examples_for_models_with_duration'
-require 'shared_examples_for_incomplete_dates'
+# require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
 
@@ -37,8 +37,8 @@ RSpec.describe Piece, type: :model do
     end
   end
 
-  it_behaves_like 'a model with an IncompleteDate' do
-    let(:candidate) { FactoryBot.create(:piece) }
-    let(:date_naming) { 'date' }
-  end
+  # it_behaves_like 'a model with an IncompleteDate' do
+  #   let(:candidate) { FactoryBot.create(:piece) }
+  #   let(:date_naming) { 'date' }
+  # end
 end

@@ -6,14 +6,14 @@ class Artist < ActiveRecord::Base
 
   belongs_to :import_order, required: false
 
-  composed_of :begin_date,
-              class_name: 'IncompleteDate',
-              mapping:    [%w[begin_date date], %w[begin_date_mask mask]],
-              allow_nil:  true
-  composed_of :end_date,
-              class_name: 'IncompleteDate',
-              mapping:    [%w[end_date date], %w[end_date_mask mask]],
-              allow_nil:  true
+  # composed_of :begin_date,
+  #             class_name: 'IncompleteDate',
+  #             mapping:    [%w[begin_date date], %w[begin_date_mask mask]],
+  #             allow_nil:  true
+  # composed_of :end_date,
+  #             class_name: 'IncompleteDate',
+  #             mapping:    [%w[end_date date], %w[end_date_mask mask]],
+  #             allow_nil:  true
 
   has_and_belongs_to_many :tags
   has_many :participants, inverse_of: :artist

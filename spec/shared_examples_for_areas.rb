@@ -47,19 +47,19 @@ RSpec.shared_examples 'an area' do
     end
   end
 
-  describe '#begin_date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate) { described_class.new(FactoryBot.attributes_for(:area)) }
-      let(:date_naming) { 'begin_date' }
-    end
-  end
+  # describe '#begin_date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate) { described_class.new(FactoryBot.attributes_for(:area)) }
+  #     let(:date_naming) { 'begin_date' }
+  #   end
+  # end
 
-  describe '#end_date' do
-    it_behaves_like 'a model with an IncompleteDate' do
-      let(:candidate) { described_class.new(FactoryBot.attributes_for(:area)) }
-      let(:date_naming) { 'end_date' }
-    end
-  end
+  # describe '#end_date' do
+  #   it_behaves_like 'a model with an IncompleteDate' do
+  #     let(:candidate) { described_class.new(FactoryBot.attributes_for(:area)) }
+  #     let(:date_naming) { 'end_date' }
+  #   end
+  # end
 
   describe '#sort_name' do
     context 'when blank' do
