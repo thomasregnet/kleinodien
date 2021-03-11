@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_123230) do
+ActiveRecord::Schema.define(version: 2021_03_11_103938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -47,16 +47,18 @@ ActiveRecord::Schema.define(version: 2021_03_05_123230) do
   create_table "area_aliases", force: :cascade do |t|
     t.string "name", null: false
     t.string "sort_name", null: false
-    t.date "begin_date"
-    t.integer "begin_date_mask", limit: 2
-    t.date "end_date"
-    t.integer "end_date_mask", limit: 2
     t.boolean "gone"
     t.string "locale"
     t.string "type"
     t.bigint "area_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "begin_date_year", limit: 2
+    t.integer "begin_date_month", limit: 2
+    t.integer "begin_date_day", limit: 2
+    t.integer "end_date_year", limit: 2
+    t.integer "end_date_month", limit: 2
+    t.integer "end_date_day", limit: 2
     t.index ["area_id"], name: "index_area_aliases_on_area_id"
   end
 

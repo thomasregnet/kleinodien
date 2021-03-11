@@ -2,6 +2,7 @@
 
 # Aliases for areas
 class AreaAlias < ApplicationRecord
+  include IncompletePeriodable
   belongs_to :area
 
   # composed_of(
