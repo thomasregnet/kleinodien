@@ -150,4 +150,50 @@ RSpec.describe IncompleteDate, type: :model do
       end
     end
   end
+
+  describe '<=>' do
+    context 'when accuracies differ' do
+      it 'compares the smallest common dominator' do
+        incomplete_date_1 = described_class.new(2021, 3, 11)
+        incomplete_date_2 = described_class.new(2021)
+
+        expect(incomplete_date_1 == incomplete_date_2).to be_truthy
+      end
+    end
+
+    context 'with equal accuracies' do
+      it 'compares full dates (YYYY-mm-dd)' do
+        expect(described_class.new(2021, 3, 11) > described_class.new(2021, 3, 10)).to be_truthy
+      end
+
+      it 'compares YYYY-mm' do
+        expect(described_class.new(2021, 2) < described_class.new(2021, 3)).to be_truthy
+      end
+
+      it 'compares YYYY' do
+        expect(described_class.new(2021) > described_class.new(2020)).to be_truthy
+      end
+    end
+
+    context 'when one date is nil' do
+      it 'raises an exception' do
+        expect { described_class.new(2021, 3) < described_class.new }
+          .to raise_error(ArgumentError, /comparison of IncompleteDate with IncompleteDate failed/)
+      end
+    end
+  end
+
+  describe '#year_month_day' do
+    context 'with a full date' do
+      it 'returns an array with that date' do
+        expect(described_class.new(2021, 3, 11).year_month_day).to eq([2021, 3, 11])
+      end
+    end
+
+    context 'when only the year is set' do
+      it 'returns an array with the year and two nil values' do
+        expect(described_class.new(2021).year_month_day).to eq([2021, nil, nil])
+      end
+    end
+  end
 end

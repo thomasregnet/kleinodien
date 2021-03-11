@@ -6,6 +6,8 @@ require 'date'
 # parameters year, month and day.
 # class IncompleteDate < Delegator
 class IncompleteDate
+  include Comparable
+
   def self.from_string(date_string)
     year, month, day = date_string.split('-').map(&:to_i)
     new(year, month, day)
@@ -22,6 +24,11 @@ class IncompleteDate
   end
 
   attr_reader :year, :month, :day
+
+  def <=>(other)
+    rank = comparable_rank(other)
+    year_month_day[0..rank] <=> other.year_month_day[0..rank] 
+  end
 
   def accuracy
     return unless year
@@ -49,6 +56,10 @@ class IncompleteDate
     date ? true : false
   end
 
+  def year_month_day
+    [year, month, day]
+  end
+
   private
 
   attr_reader :date
@@ -62,5 +73,11 @@ class IncompleteDate
 
   def date_for(year, month, day)
     Date.new(year || 1, month || 1, day || 1)
+  end
+
+  def comparable_rank(other)
+    return 2 if day   && other.day
+    return 1 if month && other.month
+    return 0 if year  && other.year
   end
 end
