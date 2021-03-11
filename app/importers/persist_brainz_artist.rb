@@ -24,8 +24,8 @@ class PersistBrainzArtist < PersistBrainzBase
       import_order:   import_order
     }
 
-    args[:begin_date] = begin_date if begin_date
-    args[:end_date]   = end_date if end_date
+    # args[:begin_date] = begin_date if begin_date
+    # args[:end_date]   = end_date if end_date
 
     Artist.create!(args)
   end
@@ -43,11 +43,11 @@ class PersistBrainzArtist < PersistBrainzBase
     )
   end
 
-  def begin_date
-    blueprint.incomplete_begin_date
-  end
+  # def begin_date
+  #   blueprint.incomplete_begin_date
+  # end
 
-  def end_date
-    blueprint.incomplete_end_date
-  end
+  # def end_date
+  #   blueprint.incomplete_end_date
+  # end
 end

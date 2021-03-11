@@ -20,8 +20,8 @@ class PersistBrainzAreaAlias < PersistPrepareBase
     AreaAlias.create!(
       area:       area,
       name:       blueprint.__content__,
-      begin_date: blueprint.incomplete_begin_date,
-      end_date:   blueprint.incomplete_end_date,
+      # begin_date: blueprint.incomplete_begin_date,
+      # end_date:   blueprint.incomplete_end_date,
       sort_name:  blueprint.sort_name,
       locale:     blueprint.locale,
       type:       alias_type

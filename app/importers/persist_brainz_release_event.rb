@@ -14,7 +14,7 @@ class PersistBrainzReleaseEvent < PersistBrainzBase
     Rails.logger.info('persisting Brainz Release Event')
     ReleaseEvent.create!(
       area:    area,
-      date:    date,
+      # date:    date,
       release: release
     )
   end
