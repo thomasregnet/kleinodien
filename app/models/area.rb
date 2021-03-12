@@ -2,6 +2,8 @@
 
 # An area or a country
 class Area < ApplicationRecord
+  include IncompletePeriodable
+
   belongs_to :import_order, required: false
 
   has_many :companies
@@ -10,17 +12,6 @@ class Area < ApplicationRecord
   has_many :iso3166_part3_countries
   has_many :release_events
   has_many :releases
-
-  # composed_of(
-  #   :begin_date,
-  #   class_name: 'IncompleteDate',
-  #   mapping:    [%w[begin_date date], %w[begin_date_mask mask]]
-  # )
-  # composed_of(
-  #   :end_date,
-  #   class_name: 'IncompleteDate',
-  #   mapping:    [%w[end_date date], %w[end_date_mask mask]]
-  # )
 
   before_validation :ensure_sort_name_has_a_value
 

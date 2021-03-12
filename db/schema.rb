@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_103938) do
+ActiveRecord::Schema.define(version: 2021_03_12_092910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -68,13 +68,15 @@ ActiveRecord::Schema.define(version: 2021_03_11_103938) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "begin_date"
-    t.integer "begin_date_mask", limit: 2
-    t.date "end_date"
-    t.integer "end_date_mask", limit: 2
     t.uuid "brainz_code"
     t.boolean "gone"
     t.bigint "import_order_id"
+    t.integer "begin_date_year", limit: 2
+    t.integer "begin_date_month", limit: 2
+    t.integer "begin_date_day", limit: 2
+    t.integer "end_date_year", limit: 2
+    t.integer "end_date_month", limit: 2
+    t.integer "end_date_day", limit: 2
     t.index "lower((name)::text)", name: "index_areas_on_lower_name", unique: true
     t.index "lower((sort_name)::text)", name: "index_areas_on_lower_sort_name", unique: true
     t.index ["import_order_id"], name: "index_areas_on_import_order_id"
