@@ -27,11 +27,13 @@ RSpec.shared_examples 'a periodable model' do
     end
   end
 
-  # context 'with a begin_date more recent than the end_date' do
-  #   it 'is not valid' do
-  #     subject.begin_date_year = 2021
-  #     subject.end_date_year = 1860
-  #     expect(subject).not_to be_valid
-  #   end
-  # end
+  context 'with a begin_date newer than the end_date' do
+    it 'is not valid' do
+      subject.begin_date_year = 2021
+      subject.end_date_year = 1860
+      subject.end_date_month = 5
+      subject.end_date_day = 17
+      expect(subject).not_to be_valid
+    end
+  end
 end

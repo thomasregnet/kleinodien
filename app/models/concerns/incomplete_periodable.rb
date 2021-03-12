@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# To be included in models using begin_date and end_date
 module IncompletePeriodable
   extend ActiveSupport::Concern
   include ActiveModel::Validations
@@ -18,17 +19,26 @@ module IncompletePeriodable
       mapping:    [%w[end_date_year year], %(end_date_month month), %w[end_date_day day]]
     )
 
-    validate :validate_period
+    validate :period_must_be_valid
+  end
 
-    private
+  private
 
-    def validate_period
-      errors.add :begin_date, 'begin_date is invalid' if begin_date && !begin_date.valid?
-      errors.add :end_date, 'end_date is invalid' if end_date && !end_date.valid?
+  def period_must_be_valid
+    date_must_be_valid(:begin, begin_date)
+    date_must_be_valid(:end, end_date)
+    begin_date_must_not_be_newer_than_end_date
+  end
 
-      return unless begin_date && end_date
+  def date_must_be_valid(what_date, date)
+    return unless date
 
-      errors.add :base, 'begin_date is newer than end_date' if begin_date > end_date
-    end
+    errors.add what_date, "#{what_date} is not valid" unless date.valid?
+  end
+
+  def begin_date_must_not_be_newer_than_end_date
+    return unless begin_date&.any? && end_date&.any?
+
+    errors.add :base, 'begin_date is newer than end_date' if begin_date > end_date
   end
 end
