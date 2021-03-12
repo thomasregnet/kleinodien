@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_093756) do
+ActiveRecord::Schema.define(version: 2021_03_12_104949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -368,8 +368,6 @@ ActiveRecord::Schema.define(version: 2021_03_12_093756) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date"
-    t.integer "date_mask", limit: 2
     t.bigint "artist_credit_id"
     t.uuid "brainz_code"
     t.bigint "discogs_code"
@@ -381,6 +379,9 @@ ActiveRecord::Schema.define(version: 2021_03_12_093756) do
     t.bigint "import_order_id"
     t.integer "milliseconds"
     t.text "accuracy"
+    t.integer "date_year", limit: 2
+    t.integer "date_month", limit: 2
+    t.integer "date_day", limit: 2
     t.index ["artist_credit_id"], name: "index_pieces_on_artist_credit_id"
     t.index ["import_order_id"], name: "index_pieces_on_import_order_id"
     t.index ["piece_head_id"], name: "index_on_pieces_piece_head_id"

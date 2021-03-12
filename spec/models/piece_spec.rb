@@ -6,8 +6,13 @@ require 'shared_examples_for_models_with_duration'
 # require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_rateable_models'
 require 'shared_examples_for_tagable_models'
+require 'support/shared_examples_for_dateable_models'
 
 RSpec.describe Piece, type: :model do
+  subject { FactoryBot.build(:piece) }
+
+  it_behaves_like 'a dateable model'
+
   it { is_expected.to belong_to(:import_order).without_validating_presence }
   it { is_expected.to have_many(:release_tracks) }
   it { is_expected.to have_many(:piece_tracks) }
