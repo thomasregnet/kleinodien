@@ -21,6 +21,8 @@ class IncompleteDate
     @day   = day
   rescue Date::Error => e
     Rails.logger.error("Bad value for IncompleteDate: #{e.message}")
+  rescue TypeError => e
+    Rails.logger.error("IncompleteDate TypeError: #{e.message}")
   end
 
   attr_reader :year, :month, :day
@@ -37,6 +39,10 @@ class IncompleteDate
     return :month if month
 
     :year
+  end
+
+  def any?
+    year_month_day.compact.any?
   end
 
   def to_s

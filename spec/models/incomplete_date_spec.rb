@@ -93,6 +93,12 @@ RSpec.describe IncompleteDate, type: :model do
         expect(incomplete_date).to be_valid
       end
     end
+
+    context 'with wrong values' do
+      it 'is not valid' do
+        expect(described_class.new('Bad', 'value')).not_to be_valid
+      end
+    end
   end
 
   describe '#accuracy' do
@@ -116,7 +122,39 @@ RSpec.describe IncompleteDate, type: :model do
 
     context 'without values' do
       it 'returns nil' do
-        expect(described_class.new().accuracy).to be_nil
+        expect(described_class.new.accuracy).to be_nil
+      end
+    end
+  end
+
+  describe '#any?' do
+    context 'with a year' do
+      it 'returns true' do
+        expect(described_class.new(2021)).to be_any
+      end
+    end
+
+    context 'with year and month' do
+      it 'returns true' do
+        expect(described_class.new(2021, 3)).to be_any
+      end
+    end
+
+    context 'with year, month and day' do
+      it 'returns true' do
+        expect(described_class.new(2021, 3, 11)).to be_any
+      end
+    end
+
+    context 'without any values' do
+      it 'returns true' do
+        expect(described_class.new).not_to be_any
+      end
+    end
+
+    context 'with invalid values' do
+      it 'returns true' do
+        expect(described_class.new('Zeke', 'evil', :dead)).not_to be_any
       end
     end
   end
