@@ -10,13 +10,13 @@ module IncompletePeriodable
       :begin_date,
       allow_nil:  true,
       class_name: 'IncompleteDate',
-      mapping:    [%w[begin_date_year year], %(begin_date_month month), %w[begin_date_day day]]
+      mapping:    [%w[begin_date_year year], %w[begin_date_month month], %w[begin_date_day day]]
     )
     composed_of(
       :end_date,
       allow_nil:  true,
       class_name: 'IncompleteDate',
-      mapping:    [%w[end_date_year year], %(end_date_month month), %w[end_date_day day]]
+      mapping:    [%w[end_date_year year], %w[end_date_month month], %w[end_date_day day]]
     )
 
     validate :period_must_be_valid
