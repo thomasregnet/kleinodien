@@ -17,17 +17,14 @@ class PersistBrainzArtist < PersistBrainzBase
   end
 
   def persist
-    args = {
+    Artist.create(
       name:           blueprint.name,
       sort_name:      blueprint.sort_name,
       disambiguation: blueprint.disambiguation,
-      import_order:   import_order
-    }
-
-    # args[:begin_date] = begin_date if begin_date
-    # args[:end_date]   = end_date if end_date
-
-    Artist.create!(args)
+      import_order:   import_order,
+      begin_date:     blueprint.begin_date,
+      end_date:       blueprint.end_date
+    )
   end
 
   private
@@ -42,12 +39,4 @@ class PersistBrainzArtist < PersistBrainzBase
       codes_hash:  blueprint.codes_hash
     )
   end
-
-  # def begin_date
-  #   blueprint.incomplete_begin_date
-  # end
-
-  # def end_date
-  #   blueprint.incomplete_end_date
-  # end
 end
