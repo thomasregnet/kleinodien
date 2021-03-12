@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_104949) do
+ActiveRecord::Schema.define(version: 2021_03_12_114013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -465,10 +465,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_104949) do
   create_table "release_events", force: :cascade do |t|
     t.bigint "release_id", null: false
     t.bigint "area_id", null: false
-    t.date "date"
-    t.integer "date_mask", limit: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "date_year", limit: 2
+    t.integer "date_month", limit: 2
+    t.integer "date_day", limit: 2
     t.index ["area_id"], name: "index_release_events_on_area_id"
     t.index ["release_id"], name: "index_release_events_on_release_id"
   end

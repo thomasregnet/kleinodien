@@ -2,10 +2,15 @@
 
 require 'rails_helper'
 require 'shared_examples_for_incomplete_dates'
+require 'support/shared_examples_for_dateable_models'
 
 RSpec.describe ReleaseEvent, type: :model do
+  subject { FactoryBot.build(:release_event) }
+
   it { should belong_to(:area) }
   it { should belong_to(:release) }
+
+  it_behaves_like 'a dateable model'
 
   describe 'with valid parameters' do
     let(:release_event) { FactoryBot.build(:release_event) }
