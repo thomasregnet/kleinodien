@@ -3,6 +3,7 @@
 # The artist related to an ArtistCredit
 class Artist < ActiveRecord::Base
   include CodeFindable
+  include IncompletePeriodable
 
   belongs_to :import_order, required: false
 

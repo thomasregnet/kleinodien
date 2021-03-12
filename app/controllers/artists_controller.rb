@@ -72,7 +72,13 @@ class ArtistsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def artist_params
-    params.require(:artist).permit(:name, :sort_name, :disambiguation, :begin_date, :begin_date_mask, :end_date,
-                                   :end_date_mask, :brainz_code, :discogs_code, :imdb_code, :tmdb_code, :wikidata_code, :import_order_id)
+    # params.require(:artist).permit(:name, :sort_name, :disambiguation, :begin_date, :begin_date_mask, :end_date,
+    #                                :end_date_mask, :brainz_code, :discogs_code, :imdb_code, :tmdb_code, :wikidata_code, :import_order_id)
+
+    params.require(:artist).permit(:name, :sort_name, :disambiguation,
+                                   :begin_date_year, :begin_date_month, :begin_date_day,
+                                   :end_date_year, :end_date_month, :end_date_day,
+                                   :brainz_code, :discogs_code, :imdb_code, :tmdb_code, :wikidata_code,
+                                   :import_order_id)
   end
 end

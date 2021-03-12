@@ -6,10 +6,15 @@ require 'shared_examples_for_code_findable'
 require 'shared_examples_for_disambiguations'
 require 'shared_examples_for_incomplete_dates'
 require 'shared_examples_for_tagable_models'
+require 'support/shared_examples_for_periodable_models'
 
 RSpec.describe Artist, type: :model do
+  subject { FactoryBot.build(:artist) }
+
   it { is_expected.to belong_to(:import_order).without_validating_presence }
   it { is_expected.to respond_to(:sort_name) }
+
+  it_behaves_like 'a periodable model'
 
   it 'is valid with valid attributes' do
     expect(FactoryBot.build(:artist)).to be_valid

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_092910) do
+ActiveRecord::Schema.define(version: 2021_03_12_093756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -102,10 +102,6 @@ ActiveRecord::Schema.define(version: 2021_03_12_092910) do
     t.datetime "updated_at", null: false
     t.citext "name", null: false
     t.citext "disambiguation"
-    t.date "begin_date"
-    t.integer "begin_date_mask", limit: 2
-    t.date "end_date"
-    t.integer "end_date_mask", limit: 2
     t.citext "sort_name"
     t.uuid "brainz_code"
     t.bigint "discogs_code"
@@ -113,6 +109,12 @@ ActiveRecord::Schema.define(version: 2021_03_12_092910) do
     t.bigint "imdb_code"
     t.bigint "tmdb_code"
     t.bigint "import_order_id"
+    t.integer "begin_date_year", limit: 2
+    t.integer "begin_date_month", limit: 2
+    t.integer "begin_date_day", limit: 2
+    t.integer "end_date_year", limit: 2
+    t.integer "end_date_month", limit: 2
+    t.integer "end_date_day", limit: 2
     t.index ["brainz_code"], name: "index_on_artists_brainz_code", unique: true
     t.index ["discogs_code"], name: "index_on_artists_discogs_code", unique: true
     t.index ["import_order_id"], name: "index_artists_on_import_order_id"
