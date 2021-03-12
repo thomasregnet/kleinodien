@@ -3,10 +3,7 @@
 # A release of a song, movie ...
 class Piece < ActiveRecord::Base
   include CodeFindable
-
-  # composed_of :date,
-  #             class_name: 'IncompleteDate',
-  #             mapping:    [%w[date date], %w[date_mask mask]]
+  include IncompleteDateable
 
   composed_of :duration,
               class_name: 'Duration',
