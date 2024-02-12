@@ -11,8 +11,7 @@ class Import::ImportParticipantFromMusicbrainzTest < ActiveSupport::TestCase
   end
 
   test "import an Participant" do
-    # adapter = Import::MusicBrainzArtistCreditAdapter.new(@session, data: @artist_credit)
-
+    # adapter = Import::MusicbrainzArtistCreditAdapter.new(@session, data: @artist_credit)
     assert true
   end
 end
