@@ -11,7 +11,9 @@ class Import::ImportAnArtistCreditFromMusicbrainzTest < ActiveSupport::TestCase
   end
 
   test "import an Participant" do
-    # adapter = Import::MusicbrainzArtistCreditAdapter.new(@session, data: @artist_credit)
-    assert true
+    Import::MusicbrainzArtistCreditAdapter.new(@session, data: @artist_credit).prepare
+    artist_credit = Import::MusicbrainzArtistCreditAdapter.new(@session, data: @artist_credit).persist!
+
+    assert_equal artist_credit.name, "Jello Biafra With NoMeansNo"
   end
 end
