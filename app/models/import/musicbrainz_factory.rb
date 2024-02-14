@@ -35,6 +35,10 @@ module Import
       @config ||= Rails.configuration.import[:musicbrainz]
     end
 
+    def transform_response(response)
+      Import::Json.parse(response.body)
+    end
+
     private
 
     def build_adapter(model_class, code)

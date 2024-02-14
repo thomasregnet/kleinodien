@@ -7,7 +7,9 @@ module Import
     def get(uri_string)
       interrupt
       @response = connection.get(uri_string)
-      response if analyze?
+      return unless analyze?
+
+      response
     end
 
     private

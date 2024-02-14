@@ -31,7 +31,7 @@ module Import
     end
 
     def find_by_all_codes
-      relations = Import::MusicbrainzRelationsCode.extract(data.relations)
+      # relations = Import::MusicbrainzRelationsCode.extract(data.relations)
 
       codes_hash = {
         discogs_code: relations.dig("discogs", "artist"),
@@ -44,6 +44,15 @@ module Import
       end
 
       query.load&.first
+    end
+
+    def relations
+      @relations ||= extract_relations
+    end
+
+    def extract_relations
+      rels = data.relations || session.musicbrainz.get(:artist, code).relations
+      Import::MusicbrainzRelationsCode.extract(rels)
     end
   end
 end

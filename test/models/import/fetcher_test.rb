@@ -11,13 +11,14 @@ class Import::FetcherTest < ActiveSupport::TestCase
 
   test "attempt.get returns a response" do
     response = Minitest::Mock.new
-    response.expect :body, "response body"
+    response.expect :==, true, [response]
 
     attempt = Minitest::Mock.new
     attempt.expect :get, response, ["https://example.com"]
 
     @factory.expect :build_attempt, attempt
-    assert_equal @fetcher.get, "response body" # response
+    @factory.expect :transform_response, response, [response]
+    assert_equal @fetcher.get, response
 
     attempt.verify
     response.verify
